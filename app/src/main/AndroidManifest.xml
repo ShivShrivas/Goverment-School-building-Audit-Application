@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.buildingaudit">
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.BuildingAudit">
+        <activity
+            android:name=".Activies.UpdateDetailsTypeFour"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdatedetailsTypeThree"
+            android:exported="false"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Activies.SplashScreen"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activies.UpdateDetailsTypeTwo"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailTypeOne"
+            android:exported="false" />
+        <activity
+            android:name=".DashBoard"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

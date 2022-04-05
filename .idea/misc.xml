@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/cardbg.xml" value="0.2165" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/cross_buton.xml" value="0.148" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/dashboard_recview_itemcard.xml" value="0.2165" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_highlight_off_24.xml" value="0.1965" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_lock_password.xml" value="0.2165" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_userid.xml" value="0.2165" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dash_board.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_splash_screen.xml" value="0.16" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_detail_type_one.xml" value="0.1376241013351592" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_four.xml" value="0.2" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_two.xml" value="0.2" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_updatedetails_type_three.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/cross_buton.xml" value="0.209375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/custom_text_spiiner.xml" value="0.209375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.42613636363636365" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/image_card_layout.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/update_details_three_item_card.xml" value="0.33" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

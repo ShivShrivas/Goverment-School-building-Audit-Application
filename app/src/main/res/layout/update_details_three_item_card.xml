@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/linearLayout9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+            <TextView
+                android:id="@+id/subjectTxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="15dp"
+                android:gravity="center_vertical"
+                android:paddingStart="4dp"
+                android:text="Physics"
+                android:textColor="?attr/colorPrimary" />
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                    <Spinner
+                        android:layout_weight="1"
+                        android:id="@+id/spinnerRoomAvailabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp" />
+
+
+
+            </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner
+                android:id="@+id/spinnerRoomStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Spinner
+                android:id="@+id/spinnerRoomCondition"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="4dp" />
+        </androidx.cardview.widget.CardView>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
+
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

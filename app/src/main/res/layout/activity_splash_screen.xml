@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/splash"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/_layout_splashone"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView_companylogo"
+        android:layout_width="250dp"
+        android:layout_height="210dp"
+        android:src="@drawable/mainicon"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        android:textColor="?attr/colorPrimary"
+        android:text="Department of  Secondary Education
+\n Govermnment of Uttar Pradesh"/>
+</LinearLayout>
