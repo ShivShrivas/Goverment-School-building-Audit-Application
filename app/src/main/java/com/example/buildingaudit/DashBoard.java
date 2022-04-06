@@ -17,7 +17,7 @@ public class DashBoard extends AppCompatActivity {
     RecyclerView dashboardRecview;
     dashboardRecviewAdapter adapter;
     ArrayList<RecModel> arrayList=new ArrayList<>();
-    String[] arrayListRoomType= {"Classroom Details","Practical Lab","Principal Room","Staff Room","Practical Lab","Principal Room","Staff Room","Practical Lab","Principal Room","Staff Room","Principal Room","Staff Room"};
+    String[] arrayListRoomType= {"Classroom Details","Staff Room","Practical Labs","Library Room","Gym","Playground","Drinking Water","Smart Class","Computer Lab","Furnitures","Class Room","Staff Room"};
     String[] UpdatedOn= {"12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM",};
     @Override
     protected void onCreate(Bundle savedInstanceState) {

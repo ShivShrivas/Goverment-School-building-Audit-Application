@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuildingAudit">
         <activity
+            android:name=".Activies.UpdateDetailsFurnitures"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsComputerlab"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsDrinkingWater"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsSmartClass"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsGym"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsPlayground"
+            android:exported="false" />
+        <activity
             android:name=".Activies.UpdateDetailsTypeFour"
             android:exported="false" />
         <activity
