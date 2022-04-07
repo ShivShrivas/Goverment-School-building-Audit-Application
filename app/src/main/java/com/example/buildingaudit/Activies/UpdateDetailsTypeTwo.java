@@ -16,6 +16,8 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_two);
+        getSupportActionBar().setTitle("Staff Room");
+
         spinnerRoomAvailabel=findViewById(R.id.spinnerRoomAvailabel);
         spinnerRoomStatus=findViewById(R.id.spinnerRoomStatus);
         ArrayList<String> arrayListSpinner = new ArrayList<>();

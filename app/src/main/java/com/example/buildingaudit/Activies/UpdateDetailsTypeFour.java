@@ -16,6 +16,8 @@ Spinner spinnerPhysicalStatus,spinnerNewsPaperAndMzin,spinnerGrantUnderScheme,sp
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_four);
+        getSupportActionBar().setTitle("Library");
+
         spinnerPhysicalStatus=findViewById(R.id.spinnerPhysicalStatus);
         spinnerReadingCorner=findViewById(R.id.spinnerReadingCorner);
         spinnerNewsPaperAndMzin=findViewById(R.id.spinnerNewsPaperAndMzin);

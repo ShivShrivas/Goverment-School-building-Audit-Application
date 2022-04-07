@@ -62,6 +62,7 @@ int cameraType;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_detail_type_one);
+        getSupportActionBar().setTitle("Class Room");
 
         recyclerViewFourTypeOne=findViewById(R.id.recyclerViewFourTypeOne);
         recyclerViewTwoTypeOne=findViewById(R.id.recyclerViewTwoTypeOne);

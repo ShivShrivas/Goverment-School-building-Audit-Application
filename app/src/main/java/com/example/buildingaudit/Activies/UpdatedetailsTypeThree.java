@@ -29,6 +29,8 @@ String[] subjectUpdateDetailsThree={"Physics","Chemistry","Biology","Vocational"
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setTitle("Practical Lab");
+
         setContentView(R.layout.activity_updatedetails_type_three);
         recyclerviewOfupdatedetailsTypeThree=findViewById(R.id.recyclerviewOfupdatedetailsTypeThree);
         recyclerviewOfupdatedetailsTypeThree.setLayoutManager(new LinearLayoutManager(this));

@@ -5,8 +5,9 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_marginStart="5dp"
         android:padding="8dp"
         android:background="@drawable/cardbg"
@@ -24,7 +25,7 @@
             android:layout_weight="1"
             android:text="Classroom details"
             android:textColor="?attr/colorPrimary"
-            android:textSize="14dp" />
+            android:textSize="17dp" />
 
         <TextView
             android:id="@+id/updateOntxt"
@@ -34,7 +35,7 @@
             android:text="20 Mar 2022"
             android:textAlignment="textEnd"
             android:textColor="@color/black"
-            android:textSize="14dp" />
+            android:textSize="17dp" />
 
     </LinearLayout>
 
