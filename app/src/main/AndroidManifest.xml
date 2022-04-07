@@ -12,6 +12,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuildingAudit">
         <activity
+            android:name=".Activies.UpdateDetailsGirlsToilet"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsBoysToilet"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsSolarPanelAndBoundryWall"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsRainHarvestAndCWSN"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsFireFighting"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsElectricityArrangment"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsBioMetric"
+            android:exported="false" />
+        <activity
             android:name=".Activies.UpdateDetailsFurnitures"
             android:exported="false" />
         <activity

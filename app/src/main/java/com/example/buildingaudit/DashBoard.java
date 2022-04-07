@@ -17,8 +17,14 @@ public class DashBoard extends AppCompatActivity {
     RecyclerView dashboardRecview;
     dashboardRecviewAdapter adapter;
     ArrayList<RecModel> arrayList=new ArrayList<>();
-    String[] arrayListRoomType= {"Classroom Details","Staff Room","Practical Labs","Library Room","Gym","Playground","Drinking Water","Smart Class","Computer Lab","Furnitures","Class Room","Staff Room"};
-    String[] UpdatedOn= {"12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM",};
+    String[] arrayListRoomType= {"Classroom Details","Staff Room","Practical Labs","Library Room","Playground","Gym",
+            "Drinking Water","Smart Class","Computer Lab","Furnitures","Bio Metric And CCTV",
+            "Electricity Arrangement","Fire Fighting","Rain Harvesting And CWSN Ramp","Solar Panel And Boundary Wall","Boys Toilet","Girls Toilet"};
+    String[] UpdatedOn= {"12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM",
+            "13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM",
+            "12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM",
+            "12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM",
+            "13 Mar 2022 02:42 PM","12 mar 2022 02:42 PM","13 Mar 2022 02:42 PM","13 Mar 2022 02:42 PM","13 Mar 2022 02:42 PM"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

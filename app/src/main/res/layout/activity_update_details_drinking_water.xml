@@ -90,7 +90,7 @@
 
 
             <Spinner
-                android:id="@+id/spinnerComputeLabAvailabelty"
+                android:id="@+id/spinnerDeparmentDW"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
@@ -716,7 +716,7 @@ android:layout_margin="7dp">
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
-        android:text="Submit Gym Details"
+        android:text="Submit Drinking Water Details"
         android:textColor="@color/white"
         android:textSize="17dp"
         app:layout_constraintEnd_toEndOf="parent"
