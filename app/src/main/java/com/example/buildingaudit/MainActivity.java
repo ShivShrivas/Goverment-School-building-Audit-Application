@@ -14,7 +14,7 @@ Button SubmitBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().setTitle("School Inspection");
         SubmitBtn=findViewById(R.id.loginBtn);
         SubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override

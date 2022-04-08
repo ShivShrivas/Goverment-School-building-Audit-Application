@@ -11,11 +11,18 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsGym extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerGymAvailabelty,gymWorkingStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_gym);
+        getSupportActionBar().setTitle("Gym");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerGymAvailabelty=findViewById(R.id.spinnerGymAvailabelty);
         gymWorkingStatus=findViewById(R.id.gymWorkingStatus);
 

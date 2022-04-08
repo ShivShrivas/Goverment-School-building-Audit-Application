@@ -11,6 +11,11 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsBioMetric extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
         spinnerCCTVAvailabelty,spinneruserbiometricStudent,
         spinnerBiometricWorkingStatus,spinneruserbiometricStaff,spinnerBioMetricInstallationYear,
@@ -20,6 +25,9 @@ Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_bio_metric);
+        getSupportActionBar().setTitle("Biometric and CCTV");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         spinnerCCTVWorkingStatus=findViewById(R.id.spinnerCCTVWorkingStatus);
         spinnerCCTVInstallationYear=findViewById(R.id.spinnerCCTVInstallationYear);
         spinnerCCTVAvailabelty=findViewById(R.id.spinnerCCTVAvailabelty);

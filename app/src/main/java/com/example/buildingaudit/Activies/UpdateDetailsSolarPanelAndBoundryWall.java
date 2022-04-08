@@ -11,6 +11,11 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsSolarPanelAndBoundryWall extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerWallCondition,spinnerWhiteWash,spinnerTypeBoundaryWall,spinnerBoundaryWallAvail,
         spinnerSolarPaneltWorkingStatus,spinnerSolraPanelInstallationYear,spinnerSolarPanel;
 
@@ -18,6 +23,8 @@ Spinner spinnerWallCondition,spinnerWhiteWash,spinnerTypeBoundaryWall,spinnerBou
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_solar_panel_and_boundry_wall);
+        getSupportActionBar().setTitle("Solar Panel and Boundary Wall");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinnerWallCondition=findViewById(R.id.spinnerWallCondition);
         spinnerWhiteWash=findViewById(R.id.spinnerWhiteWash);

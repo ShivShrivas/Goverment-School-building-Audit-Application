@@ -11,13 +11,18 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
-Spinner spinnerElectricStatus,spinnerSource,spinnerInternalElectrification,spinnerElectricityAvailabelty;
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }Spinner spinnerElectricStatus,spinnerSource,spinnerInternalElectrification,spinnerElectricityAvailabelty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_electricity_arrangment);
-
+getSupportActionBar().setTitle("Electricity Arrangement");
+getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerElectricStatus=findViewById(R.id.spinnerElectricStatus);
         spinnerSource=findViewById(R.id.spinnerSource);
         spinnerInternalElectrification=findViewById(R.id.spinnerInternalElectrification);

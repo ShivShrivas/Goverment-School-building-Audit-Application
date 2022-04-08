@@ -40,7 +40,6 @@ public class ImageAdapter4 extends RecyclerView.Adapter<ImageAdapter4.ImageViewH
             public void onClick(View view) {
                 UpdateDetailTypeOne updateDetailTypeOne=new UpdateDetailTypeOne();
                 arrayList.remove(position);
-                updateDetailTypeOne.arrayListImages1=arrayList;
                 notifyDataSetChanged();
             }
         });

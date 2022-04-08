@@ -11,11 +11,18 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsPlayground extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_five);
+        getSupportActionBar().setTitle("Playground");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerLevelingStatus=findViewById(R.id.spinnerLevellingStatus);
         spinnerRoomAvailabelty=findViewById(R.id.spinnerPlaygroundAvailabelty);
         spinnertrackAvalabiltyStatus=findViewById(R.id.spinnertrackAvalabiltyStatus);

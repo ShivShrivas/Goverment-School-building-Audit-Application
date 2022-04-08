@@ -11,11 +11,18 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsGirlsToilet extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerGirlsIncinerator,spinnerGirlsDustbin,spinnerGirlsDoorFacility,spinnerCWSNGirlstoiletAvalabilty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_girls_toilet);
+        getSupportActionBar().setTitle("Girls Toilet");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerGirlsIncinerator=findViewById(R.id.spinnerGirlsIncinerator);
         spinnerGirlsDustbin=findViewById(R.id.spinnerGirlsDustbin);
         spinnerGirlsDoorFacility=findViewById(R.id.spinnerGirlsDoorFacility);

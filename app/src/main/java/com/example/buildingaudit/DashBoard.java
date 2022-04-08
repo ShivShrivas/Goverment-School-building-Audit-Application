@@ -57,7 +57,7 @@ public class DashBoard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-        getSupportActionBar().setTitle("Dashboard");
+        getSupportActionBar().setTitle("School Dashboard");
       //  dashboardRecview=findViewById(R.id.dashboardRecview);
         dashBoardGirlsToilet=findViewById(R.id.dashBoardGirlsToilet);
         dashBoardBoysToilet=findViewById(R.id.dashBoardBoysToilet);

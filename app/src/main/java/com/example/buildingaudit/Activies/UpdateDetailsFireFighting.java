@@ -11,6 +11,11 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsFireFighting extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     Spinner spinnerFireFightTraining,spinnerFireFightRenewalStatus,spinnerFireFightWorkingStatus,spinnerFireFightingInstallationYear,spinnerFireFightAvailabelty;
 
@@ -18,6 +23,8 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_fire_fighting);
+        getSupportActionBar().setTitle("Fire fighting");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerFireFightTraining=findViewById(R.id.spinnerFireFightTraining);
         spinnerFireFightRenewalStatus=findViewById(R.id.spinnerFireFightRenewalStatus);
         spinnerFireFightWorkingStatus=findViewById(R.id.spinnerFireFightWorkingStatus);

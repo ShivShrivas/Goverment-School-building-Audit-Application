@@ -11,12 +11,19 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsRainHarvestAndCWSN extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerCWSNWorkingStatus,spinnerCWSNAvailabilty,spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_rain_harvest_and_cwsn);
+        getSupportActionBar().setTitle("Rain Harvesting and CWSN Ramp");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerRainharvestingAvailabilty=findViewById(R.id.spinnerRainharvestingAvailabilty);
         spinnerRainHavestingWorkStatus=findViewById(R.id.spinnerRainHavestingWorkStatus);
         spinnerCWSNAvailabilty=findViewById(R.id.spinnerCWSNAvailabilty);

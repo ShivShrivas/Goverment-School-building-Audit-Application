@@ -11,6 +11,11 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsBoysToilet extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerCWSNBoysAvailability,spinnerBoysDoors,spinnerBoysDustbin,spinnerBoysIncinerator;
 
     @Override
@@ -20,8 +25,8 @@ Spinner spinnerCWSNBoysAvailability,spinnerBoysDoors,spinnerBoysDustbin,spinnerB
         spinnerCWSNBoysAvailability=findViewById(R.id.spinnerCWSNBoysAvailability);
         spinnerBoysDoors=findViewById(R.id.spinnerBoysDoors);
         spinnerBoysDustbin=findViewById(R.id.spinnerBoysDustbin);
-        spinnerBoysIncinerator=findViewById(R.id.spinnerBoysIncinerator);
-
+        getSupportActionBar().setTitle("Boys Toilet");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");

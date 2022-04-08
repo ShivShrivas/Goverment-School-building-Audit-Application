@@ -11,6 +11,11 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsDrinkingWater extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         spinnerROInstallationAvailabiltyDW,spinnerOverheadTankWorkStatsyDW,
         spinnerOverheadTankAvailabiltyDW,spinnerWaterSupplyWorkStatsyDW,
@@ -22,7 +27,8 @@ Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_drinking_water);
-
+        getSupportActionBar().setTitle("Drinking Water");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerROInstallationScheme=findViewById(R.id.spinnerROInstallationScheme);
         spinnerROInstallationWokingStatus=findViewById(R.id.spinnerROInstallationWokingStatus);
         spinnerROInstallationAvailabiltyDW=findViewById(R.id.spinnerROInstallationAvailabiltyDW);

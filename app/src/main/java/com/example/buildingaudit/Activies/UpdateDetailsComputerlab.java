@@ -11,12 +11,18 @@ import com.example.buildingaudit.R;
 import java.util.ArrayList;
 
 public class UpdateDetailsComputerlab extends AppCompatActivity {
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 Spinner spinnerComputeLabAvailabelty,spinnerInstallationYear,spinnerGrantUnderScheme,spinnerinternet,spinnerPowerBackup,spinnerFurniture,spinnerComputerOperator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_computerlab);
-
+        getSupportActionBar().setTitle("Computer Lab");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerComputeLabAvailabelty=findViewById(R.id.spinnerComputeLabAvailabelty);
         spinnerInstallationYear=findViewById(R.id.spinnerInstallationYear);
         spinnerGrantUnderScheme=findViewById(R.id.spinnerGrantUnderScheme);

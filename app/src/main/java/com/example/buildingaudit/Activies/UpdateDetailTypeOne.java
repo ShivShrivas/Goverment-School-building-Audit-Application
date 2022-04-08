@@ -28,7 +28,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.ArrayList;
 
 public class UpdateDetailTypeOne extends AppCompatActivity {
-RecyclerView recyclerViewTwoTypeOne,recyclerViewThreeTypeOne,recyclerViewFourTypeOne,recyclerViewOneTypeOne;
+RecyclerView recyclerViewTwoTypeOne,recyclerViewThreeTypeOne,recyclerViewFourTypeOne;
 ImageView totalRoomImageUploadBtn,goodConditionImageUploadBtn,minorRepairingUploadImageBtn,majorRepairingUploadImageBtn;
 int cameraType;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
@@ -43,7 +43,7 @@ int cameraType;
     @Override
     protected void onStart() {
         super.onStart();
-        adapter.notifyDataSetChanged();
+
         adapter2.notifyDataSetChanged();
         adapter3.notifyDataSetChanged();
         adapter4.notifyDataSetChanged();
@@ -52,10 +52,16 @@ int cameraType;
     @Override
     protected void onStop() {
         super.onStop();
-        adapter.notifyDataSetChanged();
+
         adapter2.notifyDataSetChanged();
         adapter3.notifyDataSetChanged();
         adapter4.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+     onBackPressed();
+     return true;
     }
 
     @Override
@@ -63,11 +69,10 @@ int cameraType;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_detail_type_one);
         getSupportActionBar().setTitle("Class Room");
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerViewFourTypeOne=findViewById(R.id.recyclerViewFourTypeOne);
         recyclerViewTwoTypeOne=findViewById(R.id.recyclerViewTwoTypeOne);
         recyclerViewThreeTypeOne=findViewById(R.id.recyclerViewThreeTypeOne);
-        recyclerViewOneTypeOne=findViewById(R.id.recyclerViewOnetypeOne);
         totalRoomImageUploadBtn=findViewById(R.id.totalRoomImageUploadBtn);
         goodConditionImageUploadBtn=findViewById(R.id.goodConditionImageUploadBtn);
         minorRepairingUploadImageBtn=findViewById(R.id.minorRepairingUploadImageBtn);
@@ -212,10 +217,7 @@ int cameraType;
                         }).check();
             }
         });
-        recyclerViewOneTypeOne.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter = new ImageAdapter(this, arrayListImages1);
-        recyclerViewOneTypeOne.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+
         recyclerViewTwoTypeOne.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapter2 = new ImageAdapter2(this, arrayListImages2);
         recyclerViewTwoTypeOne.setAdapter(adapter2);
