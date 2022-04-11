@@ -1,12 +1,29 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.buildingaudit.Adapters.ImageAdapter3;
+import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.R;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
@@ -16,6 +33,30 @@ public class UpdateDetailsSolarPanelAndBoundryWall extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapter1.notifyDataSetChanged();
+        adapter2.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter1.notifyDataSetChanged();
+        adapter2.notifyDataSetChanged();
+    }
+
+
+    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
+    public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
+    int btnType;
+    ImageAdapter4 adapter1;
+    ImageAdapter3 adapter2;
+  RecyclerView recyclerViewTwoTypeSolarpanelAnd,recyclerViewTwoTypeBoundarywall;
+  ImageView solarPanelImageUploadBtn,boundaryWallImageUploadBtn;
 Spinner spinnerWallCondition,spinnerWhiteWash,spinnerTypeBoundaryWall,spinnerBoundaryWallAvail,
         spinnerSolarPaneltWorkingStatus,spinnerSolraPanelInstallationYear,spinnerSolarPanel;
 
@@ -30,7 +71,11 @@ Spinner spinnerWallCondition,spinnerWhiteWash,spinnerTypeBoundaryWall,spinnerBou
         spinnerWhiteWash=findViewById(R.id.spinnerWhiteWash);
         spinnerTypeBoundaryWall=findViewById(R.id.spinnerTypeBoundaryWall);
         spinnerBoundaryWallAvail=findViewById(R.id.spinnerBoundaryWallAvail);
+        recyclerViewTwoTypeSolarpanelAnd=findViewById(R.id.recyclerViewTwoTypeSolarpanelAnd);
+        recyclerViewTwoTypeBoundarywall=findViewById(R.id.recyclerViewTwoTypeBoundarywall);
         spinnerSolarPaneltWorkingStatus=findViewById(R.id.spinnerSolarPaneltWorkingStatus);
+        boundaryWallImageUploadBtn=findViewById(R.id.boundaryWallImageUploadBtn);
+        solarPanelImageUploadBtn=findViewById(R.id.solarPanelImageUploadBtn);
         spinnerSolraPanelInstallationYear=findViewById(R.id.spinnerSolraPanelInstallationYear);
         spinnerSolarPanel=findViewById(R.id.spinnerSolarPanel);
 
@@ -91,5 +136,98 @@ Spinner spinnerWallCondition,spinnerWhiteWash,spinnerTypeBoundaryWall,spinnerBou
         arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerTypeBoundaryWall.setAdapter(arrayAdapter4);
 
+
+        boundaryWallImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnType=2;
+                Dexter.withActivity(UpdateDetailsSolarPanelAndBoundryWall.this)
+                        .withPermission(Manifest.permission.CAMERA)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse response) {
+                                // permission is granted, open the camera
+
+                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, 7);
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse response) {
+                                // check for permanent denial of permission
+                                if (response.isPermanentlyDenied()) {
+
+                                    // navigate user to app settings
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                    intent.setData(uri);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                                token.continuePermissionRequest();
+                            }
+                        }).check();
+            }
+        });
+        solarPanelImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnType=1;
+                Dexter.withActivity(UpdateDetailsSolarPanelAndBoundryWall.this)
+                        .withPermission(Manifest.permission.CAMERA)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse response) {
+                                // permission is granted, open the camera
+
+                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, 7);
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse response) {
+                                // check for permanent denial of permission
+                                if (response.isPermanentlyDenied()) {
+
+                                    // navigate user to app settings
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                    intent.setData(uri);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                                token.continuePermissionRequest();
+                            }
+                        }).check();
+            }
+        });
+        recyclerViewTwoTypeSolarpanelAnd.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        adapter1 = new ImageAdapter4(this, arrayListImages1);
+        recyclerViewTwoTypeSolarpanelAnd.setAdapter(adapter1);
+        adapter1.notifyDataSetChanged();
+        recyclerViewTwoTypeBoundarywall.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        adapter2= new ImageAdapter3(this, arrayListImages2);
+        recyclerViewTwoTypeBoundarywall.setAdapter(adapter2);
+        adapter2.notifyDataSetChanged();
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 7 && resultCode == RESULT_OK ) {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+
+            if (btnType==1){
+                arrayListImages1.add(bitmap);
+            }else  arrayListImages2.add(bitmap);
+
+
+        }
     }
 }

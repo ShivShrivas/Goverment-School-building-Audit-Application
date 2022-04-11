@@ -113,27 +113,19 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerTeacherAvailbilitySmartClass.setAdapter(arrayAdapter);
+        spinnerTeacherAvailbilitySmartClass.setAdapter(arrayAdapter);
+        spinnerProjectorSmartClass.setAdapter(arrayAdapter);
+        spinnerLearningContentSmartClass.setAdapter(arrayAdapter);
+        ArrayList<String> arrayListboard=new ArrayList<>();
+        arrayListboard.add("White Board");
+        arrayListboard.add("Black Board");
+        arrayListboard.add("Green Board");
 
-        ArrayList<String> arrayListProjector=new ArrayList<>();
-        arrayListAvailbilty.add("Yes");
-        arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter4=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListProjector);
-        arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerProjectorSmartClass.setAdapter(arrayAdapter4);
 
-        ArrayList<String> arrayListLearningContent=new ArrayList<>();
-        arrayListAvailbilty.add("Yes");
-        arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter5=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLearningContent);
+        ArrayAdapter<String> arrayAdapter5=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListboard);
         arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerLearningContentSmartClass.setAdapter(arrayAdapter5);
+        spinnerDigitalBoardSmartClass.setAdapter(arrayAdapter5);
 
-        ArrayList<String> arrayListDigitalBoard=new ArrayList<>();
-        arrayListAvailbilty.add("Yes");
-        arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter6=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListDigitalBoard);
-        arrayAdapter6.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerLearningContentSmartClass.setAdapter(arrayAdapter6);
         smartClassImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,13 +12,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter;
 import com.example.buildingaudit.Adapters.ImageAdapter2;
 import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -29,6 +36,7 @@ import java.util.ArrayList;
 
 public class UpdateDetailTypeOne extends AppCompatActivity {
 RecyclerView recyclerViewTwoTypeOne,recyclerViewThreeTypeOne,recyclerViewFourTypeOne;
+Spinner spinnerPodiumClass,spinnerBoardClass;
 ImageView totalRoomImageUploadBtn,goodConditionImageUploadBtn,minorRepairingUploadImageBtn,majorRepairingUploadImageBtn;
 int cameraType;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
@@ -39,7 +47,9 @@ int cameraType;
     ImageAdapter2 adapter2;
     ImageAdapter3 adapter3;
     ImageAdapter4 adapter4;
-
+    ConstraintLayout constratinflayout;
+    EditText majorRepairingClassroom,minorRepairingClassroom,goodCondtionClassroom,totalClassRooms;
+    Button classRoomSubmitbtn;
     @Override
     protected void onStart() {
         super.onStart();
@@ -72,11 +82,40 @@ int cameraType;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerViewFourTypeOne=findViewById(R.id.recyclerViewFourTypeOne);
         recyclerViewTwoTypeOne=findViewById(R.id.recyclerViewTwoTypeOne);
+        constratinflayout=findViewById(R.id.constratinflayout);
+        spinnerBoardClass=findViewById(R.id.spinnerBoardClass);
+        spinnerPodiumClass=findViewById(R.id.spinnerPodiumClass);
         recyclerViewThreeTypeOne=findViewById(R.id.recyclerViewThreeTypeOne);
+        majorRepairingClassroom=findViewById(R.id.majorRepairingClassroom);
+        minorRepairingClassroom=findViewById(R.id.minorRepairingClassroom);
+        goodCondtionClassroom=findViewById(R.id.goodCondtionClassroom);
+        totalClassRooms=findViewById(R.id.totalClassRooms);
         totalRoomImageUploadBtn=findViewById(R.id.totalRoomImageUploadBtn);
+        classRoomSubmitbtn=findViewById(R.id.classRoomSubmitbtn);
         goodConditionImageUploadBtn=findViewById(R.id.goodConditionImageUploadBtn);
         minorRepairingUploadImageBtn=findViewById(R.id.minorRepairingUploadImageBtn);
         majorRepairingUploadImageBtn=findViewById(R.id.majorRepairingUploadImageBtn);
+        classRoomSubmitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    int totalClassRoom=Integer.parseInt(goodCondtionClassroom.getText().toString())+Integer.parseInt(minorRepairingClassroom.getText().toString())+Integer.parseInt(majorRepairingClassroom.getText().toString());
+                    if (totalClassRoom!=Integer.parseInt(totalClassRooms.getText().toString().trim())){
+                        Snackbar.make(constratinflayout, "Please provide correct number of rooms", Snackbar.LENGTH_INDEFINITE)
+                                .setAction("Ok", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                    }
+                                })
+                                .show();
+                    }
+                }catch (Exception e){
+                    Toast.makeText(UpdateDetailTypeOne.this, "please fill all room count properly", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
         totalRoomImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -230,6 +269,25 @@ int cameraType;
         adapter4 = new ImageAdapter4(this, arrayListImages4);
         recyclerViewFourTypeOne.setAdapter(adapter4);
         adapter4.notifyDataSetChanged();
+
+        ArrayList<String> arrayListAvailbilty=new ArrayList<>();
+        arrayListAvailbilty.add("Yes");
+        arrayListAvailbilty.add("No");
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+        arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
+
+
+        spinnerPodiumClass.setAdapter(arrayAdapter);
+
+        ArrayList<String> arrayListBoard=new ArrayList<>();
+        arrayListBoard.add("White Board");
+        arrayListBoard.add("Green Board");
+        arrayListBoard.add("Black Board");
+        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListBoard);
+        arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
+
+
+        spinnerBoardClass.setAdapter(arrayAdapter1);
 
     }
     @Override

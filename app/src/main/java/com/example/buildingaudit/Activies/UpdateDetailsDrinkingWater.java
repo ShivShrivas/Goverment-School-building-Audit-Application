@@ -1,12 +1,28 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.R;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
@@ -16,6 +32,26 @@ public class UpdateDetailsDrinkingWater extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        adapter6.notifyDataSetChanged();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        adapter6.notifyDataSetChanged();
+
+    }
+    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
+    ImageAdapter4 adapter6;
+
+    ImageView drinkingWaterImageUploadBtn;
+    RecyclerView recyclerViewDrinkingWater;
 Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         spinnerROInstallationAvailabiltyDW,spinnerOverheadTankWorkStatsyDW,
         spinnerOverheadTankAvailabiltyDW,spinnerWaterSupplyWorkStatsyDW,
@@ -31,6 +67,8 @@ Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerROInstallationScheme=findViewById(R.id.spinnerROInstallationScheme);
         spinnerROInstallationWokingStatus=findViewById(R.id.spinnerROInstallationWokingStatus);
+        drinkingWaterImageUploadBtn=findViewById(R.id.drinkingWaterImageUploadBtn);
+        recyclerViewDrinkingWater=findViewById(R.id.recyclerViewDrinkingWater);
         spinnerROInstallationAvailabiltyDW=findViewById(R.id.spinnerROInstallationAvailabiltyDW);
         spinnerOverheadTankWorkStatsyDW=findViewById(R.id.spinnerOverheadTankWorkStatsyDW);
         spinnerOverheadTankAvailabiltyDW=findViewById(R.id.spinnerOverheadTankAvailabiltyDW);
@@ -40,7 +78,7 @@ Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         spinnerSubmersibleAvailabiltyDW=findViewById(R.id.spinnerSubmersibleAvailabiltyDW);
         spinnerHandPumpWorkStatsyDW=findViewById(R.id.spinnerHandPumpWorkStatsyDW);
         spinnerHandPumpAvailabiltyDW=findViewById(R.id.spinnerHandPumpAvailabiltyDW);
-        spinnerDeparmentDW=findViewById(R.id.spinnerDeparmentDW);
+
 
 
         ArrayList<String> arrayList1=new ArrayList<>();
@@ -82,14 +120,58 @@ Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         spinnerROInstallationScheme.setAdapter(arrayAdapter1);
 
 
-        ArrayList<String> arrayListDeparment=new ArrayList<>();
-        arrayListDeparment.add("Madhyamik Secondary Education");
 
-        ArrayAdapter<String> arrayAdapter4=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListDeparment);
-        arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerDeparmentDW.setAdapter(arrayAdapter4);
+        drinkingWaterImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Dexter.withActivity(UpdateDetailsDrinkingWater.this)
+                        .withPermission(Manifest.permission.CAMERA)
+                        .withListener(new PermissionListener() {
+                            @Override
+                            public void onPermissionGranted(PermissionGrantedResponse response) {
+                                // permission is granted, open the camera
+
+                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                                startActivityForResult(intent, 7);
+                            }
+
+                            @Override
+                            public void onPermissionDenied(PermissionDeniedResponse response) {
+                                // check for permanent denial of permission
+                                if (response.isPermanentlyDenied()) {
+
+                                    // navigate user to app settings
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                    intent.setData(uri);
+                                    startActivity(intent);
+                                }
+                            }
+
+                            @Override
+                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+                                token.continuePermissionRequest();
+                            }
+                        }).check();
+            }
+        });
+        recyclerViewDrinkingWater.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        adapter6 = new ImageAdapter4(this, arrayListImages1);
+        recyclerViewDrinkingWater.setAdapter(adapter6);
+        adapter6.notifyDataSetChanged();
 
 
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 7 && resultCode == RESULT_OK ) {
+            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
+            arrayListImages1.add(bitmap);
+
+
+        }
     }
 }
