@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuildingAudit">
         <activity
+            android:name=".Activies.UpdateDetailsOfExtraThings"
+            android:exported="false" />
+        <activity
             android:name=".Activies.UpdateDetailsGirlsToilet"
             android:exported="false" />
         <activity
@@ -77,8 +80,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
     </application>
 
 </manifest>

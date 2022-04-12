@@ -20,6 +20,7 @@ import com.example.buildingaudit.Activies.UpdateDetailsFireFighting;
 import com.example.buildingaudit.Activies.UpdateDetailsFurnitures;
 import com.example.buildingaudit.Activies.UpdateDetailsGirlsToilet;
 import com.example.buildingaudit.Activies.UpdateDetailsGym;
+import com.example.buildingaudit.Activies.UpdateDetailsOfExtraThings;
 import com.example.buildingaudit.Activies.UpdateDetailsPlayground;
 import com.example.buildingaudit.Activies.UpdateDetailsRainHarvestAndCWSN;
 import com.example.buildingaudit.Activies.UpdateDetailsSmartClass;
@@ -36,7 +37,7 @@ import java.util.List;
 
 public class DashBoard extends AppCompatActivity {
     RecyclerView dashboardRecview;
-    LinearLayout dashBoardDrinkingWater,dashBoardGym,dashBoardPlayground,dashBoardLibrary,dashBoardPracticalLabs,staffRoom,dashboardClassRoom,
+    LinearLayout dashBoardExtraThings,dashBoardDrinkingWater,dashBoardGym,dashBoardPlayground,dashBoardLibrary,dashBoardPracticalLabs,staffRoom,dashboardClassRoom,
             dashBoardSmartClass,dashBoardComputerLab,dashBoardFurnitures,dashBoardBioMetric,dashBoardElectricityArrangement,
             dashBoardFireFighting,dashBoardRainHarvestingAndRamp,dashBoardSolarPanelandBoundaryWall,dashBoardBoysToilet,dashBoardGirlsToilet;
 
@@ -76,12 +77,19 @@ public class DashBoard extends AppCompatActivity {
         dashBoardPlayground=findViewById(R.id.dashBoardPlayground);
         dashBoardGym=findViewById(R.id.dashBoardGym);
         dashBoardDrinkingWater=findViewById(R.id.dashBoardDrinkingWater);
+        dashBoardExtraThings=findViewById(R.id.dashBoardExtraThings);
 
 
         dashBoardGirlsToilet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(DashBoard.this, UpdateDetailsGirlsToilet.class));
+            }
+        });
+        dashBoardExtraThings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(DashBoard.this, UpdateDetailsOfExtraThings.class));
             }
         });
                 dashBoardBoysToilet.setOnClickListener(new View.OnClickListener() {
