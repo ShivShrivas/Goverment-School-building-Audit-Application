@@ -341,7 +341,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-            android:text="Traing on Fire fighting"
+            android:text="Training on Fire fighting"
             android:textColor="?attr/colorPrimary"
             android:textSize="15dp" />
 

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
@@ -26,51 +27,64 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
-public class UpdateDetailsSmartClass extends AppCompatActivity {
+public class UpdateDetailsSolarPanel extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+
     @Override
     protected void onStart() {
         super.onStart();
-
-        adapter.notifyDataSetChanged();
+        adapter1.notifyDataSetChanged();
 
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-
-        adapter.notifyDataSetChanged();
+        adapter1.notifyDataSetChanged();
 
     }
+
+
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    ImageAdapter4 adapter;
-    ImageView smartClassImageUploadBtn;
-    RecyclerView recyclerViewSmartClass;
-Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWorkingStatusSmartClass,
-        spinnerTeacherAvailbilitySmartClass,spinnerProjectorSmartClass,spinnerLearningContentSmartClass,
-        spinnerDigitalBoardSmartClass,smartClassAvailabilty;
+    public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
+    int btnType;
+    ImageAdapter4 adapter1;
+  RecyclerView recyclerViewTwoTypeSolarpanelAnd;
+  ImageView solarPanelImageUploadBtn;
+Spinner
+        spinnerSolarPaneltWorkingStatus,spinnerSolraPanelInstallationYear,spinnerSolarPanel,spinnerTypeOfSolarPanel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_update_details_smart_class);
-        getSupportActionBar().setTitle("Smart Class");
+        setContentView(R.layout.activity_update_details_solar_panel);
+        getSupportActionBar().setTitle("Solar Panel and Boundary Wall");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerInstallationYearSmartClass=findViewById(R.id.spinnerInstallationYearSmartClass);
-        spinnerUnderSchemeSmartClass=findViewById(R.id.spinnerUnderSchemeSmartClass);
-        spinnerWorkingStatusSmartClass=findViewById(R.id.spinnerWorkingStatusSmartClass);
-        spinnerTeacherAvailbilitySmartClass=findViewById(R.id.spinnerTeacherAvailbilitySmartClass);
-        spinnerProjectorSmartClass=findViewById(R.id.spinnerProjectorSmartClass);
-        spinnerLearningContentSmartClass=findViewById(R.id.spinnerLearningContentSmartClass);
-        spinnerDigitalBoardSmartClass=findViewById(R.id.spinnerDigitalBoardSmartClass);
-        smartClassAvailabilty=findViewById(R.id.smartClassAvailabilty);
-        smartClassImageUploadBtn=findViewById(R.id.smartClassImageUploadBtn);
-        recyclerViewSmartClass=findViewById(R.id.recyclerViewSmartClass);
+
+
+        recyclerViewTwoTypeSolarpanelAnd=findViewById(R.id.recyclerViewTwoTypeSolarpanelAnd);
+
+        spinnerSolarPaneltWorkingStatus=findViewById(R.id.spinnerSolarPaneltWorkingStatus);
+        spinnerTypeOfSolarPanel=findViewById(R.id.spinnerTypeOfSolarPanel);
+
+        solarPanelImageUploadBtn=findViewById(R.id.solarPanelImageUploadBtn);
+        spinnerSolraPanelInstallationYear=findViewById(R.id.spinnerSolraPanelInstallationYear);
+        spinnerSolarPanel=findViewById(R.id.spinnerSolarPanel);
+
+
+        ArrayList<String> arrayList1=new ArrayList<>();
+        arrayList1.add("Yes");
+        arrayList1.add("No");
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
+        adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerSolarPanel.setAdapter(adapter);
+
+
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
         arrayListInstallationYear.add("2015");
@@ -82,55 +96,32 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         arrayListInstallationYear.add("2021");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerInstallationYearSmartClass.setAdapter(arrayAdapter1);
+        spinnerSolraPanelInstallationYear.setAdapter(arrayAdapter1);
 
 
-        ArrayList<String> arrayListUnderScheme=new ArrayList<>();
-        arrayListUnderScheme.add("RMSA");
-        arrayListUnderScheme.add("CSr");
-        arrayListUnderScheme.add("MSDP");
-        arrayListUnderScheme.add("PM Jan");
-        arrayListUnderScheme.add("Vikas");
-        arrayListUnderScheme.add("Others");
-
-        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListUnderScheme);
+        ArrayList<String> arrayListWorkingStatus=new ArrayList<>();
+        arrayListWorkingStatus.add("Functional");
+        arrayListWorkingStatus.add("Non Functional");
+        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerUnderSchemeSmartClass.setAdapter(arrayAdapter2);
+        spinnerSolarPaneltWorkingStatus.setAdapter(arrayAdapter2);
+        ArrayList<String> arrayListSpinner = new ArrayList<>();
+
+        arrayListSpinner.add("Off Grid");
+        arrayListSpinner.add("On Grid");
 
 
-
-        ArrayList<String> arrayListLevellingStatus=new ArrayList<>();
-        arrayListLevellingStatus.add("Functional");
-        arrayListLevellingStatus.add("Non Functional");
-
-        ArrayAdapter<String> arrayAdapter3=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLevellingStatus);
-        arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerWorkingStatusSmartClass.setAdapter(arrayAdapter3);
-
-
-        ArrayList<String> arrayListAvailbilty=new ArrayList<>();
-        arrayListAvailbilty.add("Yes");
-        arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerTeacherAvailbilitySmartClass.setAdapter(arrayAdapter);
-        smartClassAvailabilty.setAdapter(arrayAdapter);
-        spinnerProjectorSmartClass.setAdapter(arrayAdapter);
-        spinnerLearningContentSmartClass.setAdapter(arrayAdapter);
-        ArrayList<String> arrayListboard=new ArrayList<>();
-        arrayListboard.add("Yes");
-        arrayListboard.add("No");
+        spinnerTypeOfSolarPanel.setAdapter(arrayAdapter);
 
 
-        ArrayAdapter<String> arrayAdapter5=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListboard);
-        arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerDigitalBoardSmartClass.setAdapter(arrayAdapter5);
 
-        smartClassImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+        solarPanelImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Dexter.withActivity(UpdateDetailsSmartClass.this)
+                btnType=1;
+                Dexter.withActivity(UpdateDetailsSolarPanel.this)
                         .withPermission(Manifest.permission.CAMERA)
                         .withListener(new PermissionListener() {
                             @Override
@@ -161,10 +152,12 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                         }).check();
             }
         });
-        recyclerViewSmartClass.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter = new ImageAdapter4(this, arrayListImages1);
-        recyclerViewSmartClass.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        recyclerViewTwoTypeSolarpanelAnd.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        adapter1 = new ImageAdapter4(this, arrayListImages1);
+        recyclerViewTwoTypeSolarpanelAnd.setAdapter(adapter1);
+        adapter1.notifyDataSetChanged();
+
+
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -172,7 +165,9 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         if (requestCode == 7 && resultCode == RESULT_OK ) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
-            arrayListImages1.add(bitmap);
+
+                arrayListImages1.add(bitmap);
+
 
 
         }

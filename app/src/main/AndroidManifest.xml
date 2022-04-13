@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuildingAudit">
         <activity
+            android:name=".Activies.UpdateDetailsCycleStand"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsMultipurposeHall"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsSoundSystem"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsBoundryWall"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.AfterSubmitClassromDetails"
+            android:exported="false" />
+        <activity
             android:name=".Activies.UpdateDetailsOfExtraThings"
             android:exported="false" />
         <activity
@@ -21,7 +36,7 @@
             android:name=".Activies.UpdateDetailsBoysToilet"
             android:exported="false" />
         <activity
-            android:name=".Activies.UpdateDetailsSolarPanelAndBoundryWall"
+            android:name=".Activies.UpdateDetailsSolarPanel"
             android:exported="false" />
         <activity
             android:name=".Activies.UpdateDetailsRainHarvestAndCWSN"
@@ -80,7 +95,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>

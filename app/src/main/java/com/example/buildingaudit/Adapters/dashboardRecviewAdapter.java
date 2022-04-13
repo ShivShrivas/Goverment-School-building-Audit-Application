@@ -3,7 +3,6 @@ package com.example.buildingaudit.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.text.style.UpdateLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +24,10 @@ import com.example.buildingaudit.Activies.UpdateDetailsGym;
 import com.example.buildingaudit.Activies.UpdateDetailsPlayground;
 import com.example.buildingaudit.Activies.UpdateDetailsRainHarvestAndCWSN;
 import com.example.buildingaudit.Activies.UpdateDetailsSmartClass;
-import com.example.buildingaudit.Activies.UpdateDetailsSolarPanelAndBoundryWall;
+import com.example.buildingaudit.Activies.UpdateDetailsSolarPanel;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeFour;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.example.buildingaudit.Activies.UpdatedetailsTypeThree;
-import com.example.buildingaudit.DashBoard;
 import com.example.buildingaudit.Model.RecModel;
 import com.example.buildingaudit.R;
 
@@ -88,7 +86,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(new Intent(context, UpdateDetailsRainHarvestAndCWSN.class));
                 }else  if(position%17==14){
 
-                    context.startActivity(new Intent(context, UpdateDetailsSolarPanelAndBoundryWall.class));
+                    context.startActivity(new Intent(context, UpdateDetailsSolarPanel.class));
                 } else if(position%17==15){
 
                     context.startActivity(new Intent(context, UpdateDetailsBoysToilet.class));

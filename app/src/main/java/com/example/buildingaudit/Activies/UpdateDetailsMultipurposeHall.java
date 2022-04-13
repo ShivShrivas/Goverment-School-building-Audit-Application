@@ -26,8 +26,11 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
-public class UpdateDetailsOfExtraThings extends AppCompatActivity {
-    @Override
+public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
+
+    ImageView multipurposeHallImageUploadBtn;
+    RecyclerView recyclerViewMultipurposeHall;
+    Spinner spinnerMultipurposeHall;
     protected void onStart() {
         super.onStart();
 
@@ -44,29 +47,28 @@ public class UpdateDetailsOfExtraThings extends AppCompatActivity {
     }
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
-    ImageView extraThingsImageUploadBtn;
-    RecyclerView recyclerViewExtraThings;
-Spinner spinnerWifiPresent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_details_of_extra_things);
-        spinnerWifiPresent=findViewById(R.id.spinnerWifiPresent);
-        recyclerViewExtraThings=findViewById(R.id.recyclerViewExtraThings);
-        extraThingsImageUploadBtn=findViewById(R.id.extraThingsImageUploadBtn);
+        setContentView(R.layout.activity_update_details_multipurpose_hall);
+        spinnerMultipurposeHall=findViewById(R.id.spinnerMultipurposeHall);
+        multipurposeHallImageUploadBtn=findViewById(R.id.multipurposeHallImageUploadBtn);
+        recyclerViewMultipurposeHall=findViewById(R.id.recyclerViewMultipurposeHall);
+
+
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerWifiPresent.setAdapter(arrayAdapter);
+        spinnerMultipurposeHall.setAdapter(arrayAdapter);
 
 
-        extraThingsImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+        multipurposeHallImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsOfExtraThings.this)
+                Dexter.withActivity(UpdateDetailsMultipurposeHall.this)
                         .withPermission(Manifest.permission.CAMERA)
                         .withListener(new PermissionListener() {
                             @Override
@@ -97,12 +99,12 @@ Spinner spinnerWifiPresent;
                         }).check();
             }
         });
-        recyclerViewExtraThings.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewMultipurposeHall.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapter6 = new ImageAdapter4(this, arrayListImages1);
-        recyclerViewExtraThings.setAdapter(adapter6);
+        recyclerViewMultipurposeHall.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
-    }
 
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -48,7 +48,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
 
     }
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-Spinner spinnerRoomAvailabel,spinnerRoomStatus;
+Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,spinnerFurnitureAvailabilty;
     ImageAdapter4 adapter;
     ImageView staffRoomImageUploadBtn;
     RecyclerView recyclerViewTwoTypetwo;
@@ -60,6 +60,8 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus;
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         spinnerRoomAvailabel=findViewById(R.id.spinnerRoomAvailabel);
+        spinnerAlmiraAndRacksAvailabilty=findViewById(R.id.spinnerAlmiraAndRacksAvailabilty);
+        spinnerFurnitureAvailabilty=findViewById(R.id.spinnerFurnitureAvailabilty);
         spinnerRoomStatus=findViewById(R.id.spinnerRoomStatus);
         staffRoomImageUploadBtn=findViewById(R.id.staffRoomImageUploadBtn);
         recyclerViewTwoTypetwo=findViewById(R.id.recyclerViewTwoTypetwo);
@@ -71,6 +73,8 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus;
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerRoomAvailabel.setAdapter(arrayAdapter);
+        spinnerFurnitureAvailabilty.setAdapter(arrayAdapter);
+        spinnerAlmiraAndRacksAvailabilty.setAdapter(arrayAdapter);
         ArrayList<String> arrayListSpinner2 = new ArrayList<>();
         arrayListSpinner2.add("Good Condition");
         arrayListSpinner2.add("Minor Repairing");

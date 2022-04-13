@@ -36,7 +36,8 @@ import java.util.ArrayList;
 
 public class UpdateDetailTypeOne extends AppCompatActivity {
 RecyclerView recyclerViewTwoTypeOne,recyclerViewThreeTypeOne,recyclerViewFourTypeOne;
-Spinner spinnerPodiumClass,spinnerBoardClass;
+Spinner spinnerBoardClass;
+EditText edtPodiumClass;
 ImageView totalRoomImageUploadBtn,goodConditionImageUploadBtn,minorRepairingUploadImageBtn,majorRepairingUploadImageBtn;
 int cameraType;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
@@ -83,8 +84,7 @@ int cameraType;
         recyclerViewFourTypeOne=findViewById(R.id.recyclerViewFourTypeOne);
         recyclerViewTwoTypeOne=findViewById(R.id.recyclerViewTwoTypeOne);
         constratinflayout=findViewById(R.id.constratinflayout);
-        spinnerBoardClass=findViewById(R.id.spinnerBoardClass);
-        spinnerPodiumClass=findViewById(R.id.spinnerPodiumClass);
+        edtPodiumClass =findViewById(R.id.edtPodiumClass);
         recyclerViewThreeTypeOne=findViewById(R.id.recyclerViewThreeTypeOne);
         majorRepairingClassroom=findViewById(R.id.majorRepairingClassroom);
         minorRepairingClassroom=findViewById(R.id.minorRepairingClassroom);
@@ -277,7 +277,6 @@ int cameraType;
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
 
 
-        spinnerPodiumClass.setAdapter(arrayAdapter);
 
         ArrayList<String> arrayListBoard=new ArrayList<>();
         arrayListBoard.add("White Board");
@@ -287,7 +286,7 @@ int cameraType;
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
 
 
-        spinnerBoardClass.setAdapter(arrayAdapter1);
+
 
     }
     @Override

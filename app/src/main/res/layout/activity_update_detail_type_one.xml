@@ -395,7 +395,9 @@
                 android:id="@+id/linearLayout54"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
+                android:layout_marginBottom="4dp"
                 android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout55"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
@@ -411,7 +413,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Podium in Classroom"
+                        android:text="Number of Classrooms with Podium"
                         android:textAlignment="textStart"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp" />
@@ -427,8 +429,11 @@
                         app:layout_constraintTop_toTopOf="parent">
 
 
-                        <Spinner
-                            android:id="@+id/spinnerPodiumClass"
+                        <EditText
+                            android:inputType="number"
+                            android:textAlignment="center"
+                            android:maxLength="4"
+                            android:id="@+id/edtPodiumClass"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent" />
                     </androidx.cardview.widget.CardView>
@@ -440,47 +445,220 @@
             <LinearLayout
                 android:id="@+id/linearLayout55"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/cardbg"
                 android:orientation="vertical"
+                android:padding="4dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout54">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:paddingStart="20dp"
-                    android:paddingEnd="20dp">
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text="Board in Classroom"
-                        android:textAlignment="textStart"
+                        android:textAlignment="center"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp" />
 
-                    <androidx.cardview.widget.CardView
-
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:foreground="@drawable/cardbg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        android:orientation="vertical">
 
+                        <LinearLayout
 
-                        <Spinner
-                            android:id="@+id/spinnerBoardClass"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </androidx.cardview.widget.CardView>
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:text="Board Type"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_horizontal|center_vertical"
+                                    android:text="Available in Rooms"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textSize="16dp"
+                                    android:textStyle="bold" />
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:text="Black Board"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <androidx.cardview.widget.CardView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:foreground="@drawable/cardbg"
+                                    android:padding="3dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+
+                                    <EditText
+                                        android:inputType="number"
+                                        android:textAlignment="center"
+                                        android:maxLength="4"
+                                        android:layout_width="80dp"
+                                        android:layout_height="40dp" />
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:text="White Board"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <androidx.cardview.widget.CardView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:foreground="@drawable/cardbg"
+                                    android:padding="3dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+
+                                    <EditText
+                                        android:inputType="number"
+                                        android:textAlignment="center"
+                                        android:maxLength="4"
+                                        android:layout_width="80dp"
+                                        android:layout_height="40dp" />
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:text="Green Board"
+                                    android:textColor="?attr/colorPrimary"
+                                    android:textSize="15dp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <androidx.cardview.widget.CardView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:foreground="@drawable/cardbg"
+                                    android:padding="3dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent">
+
+
+                                    <EditText
+                                        android:inputType="number"
+                                        android:textAlignment="center"
+                                        android:maxLength="4"
+                                        android:layout_width="80dp"
+                                        android:layout_height="40dp" />
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
 
                 </LinearLayout>
+
 
             </LinearLayout>
 
@@ -503,7 +681,6 @@
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text="**your Location will also be captured"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
@@ -511,8 +688,7 @@
                 android:textStyle="italic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
+                app:layout_constraintStart_toStartOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -527,5 +703,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

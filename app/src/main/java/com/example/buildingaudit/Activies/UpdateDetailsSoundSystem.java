@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -26,8 +27,10 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
-public class UpdateDetailsOfExtraThings extends AppCompatActivity {
-    @Override
+public class UpdateDetailsSoundSystem extends AppCompatActivity {
+Spinner spinnerSoundSystem;
+        ImageView soundSystemImageUploadBtn;
+RecyclerView recyclerViewSoundSystm;
     protected void onStart() {
         super.onStart();
 
@@ -44,29 +47,28 @@ public class UpdateDetailsOfExtraThings extends AppCompatActivity {
     }
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
-    ImageView extraThingsImageUploadBtn;
-    RecyclerView recyclerViewExtraThings;
-Spinner spinnerWifiPresent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_details_of_extra_things);
-        spinnerWifiPresent=findViewById(R.id.spinnerWifiPresent);
-        recyclerViewExtraThings=findViewById(R.id.recyclerViewExtraThings);
-        extraThingsImageUploadBtn=findViewById(R.id.extraThingsImageUploadBtn);
+        setContentView(R.layout.activity_update_details_sound_system);
+
+        recyclerViewSoundSystm=findViewById(R.id.recyclerViewSoundSystm);
+        soundSystemImageUploadBtn=findViewById(R.id.soundSystemImageUploadBtn);
+        spinnerSoundSystem=findViewById(R.id.spinnerSoundSystem);
+
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerWifiPresent.setAdapter(arrayAdapter);
+        spinnerSoundSystem.setAdapter(arrayAdapter);
 
 
-        extraThingsImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+        soundSystemImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsOfExtraThings.this)
+                Dexter.withActivity(UpdateDetailsSoundSystem.this)
                         .withPermission(Manifest.permission.CAMERA)
                         .withListener(new PermissionListener() {
                             @Override
@@ -97,12 +99,12 @@ Spinner spinnerWifiPresent;
                         }).check();
             }
         });
-        recyclerViewExtraThings.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewSoundSystm.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapter6 = new ImageAdapter4(this, arrayListImages1);
-        recyclerViewExtraThings.setAdapter(adapter6);
+        recyclerViewSoundSystm.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
-    }
 
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

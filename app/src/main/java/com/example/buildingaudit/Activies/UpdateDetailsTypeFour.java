@@ -51,7 +51,7 @@ public class UpdateDetailsTypeFour extends AppCompatActivity {
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageView typeFourImageUploadBtn;
     ImageAdapter4 adapter;
-Spinner spinnerPhysicalStatus,spinnerNewsPaperAndMzin,spinnerGrantUnderScheme,spinnerRoomAvailabelty,spinnerWorkingStatus,spinnerReadingCorner;
+Spinner spinnerFurnitureAvailabiltyInLibrary,spinnerPhysicalStatus,spinnerNewsPaperAndMzin,spinnerGrantUnderScheme,spinnerRoomAvailabelty,spinnerWorkingStatus,spinnerReadingCorner;
 RecyclerView recyclerViewTwoTypeFour;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +66,7 @@ RecyclerView recyclerViewTwoTypeFour;
         spinnerRoomAvailabelty=findViewById(R.id.spinnerRoomAvailabelty);
         spinnerWorkingStatus=findViewById(R.id.spinnerWorkingStatus);
         spinnerGrantUnderScheme=findViewById(R.id.spinnerGrantUnderScheme);
+        spinnerFurnitureAvailabiltyInLibrary=findViewById(R.id.spinnerFurnitureAvailabiltyInLibrary);
         typeFourImageUploadBtn=findViewById(R.id.typeFourImageUploadBtn);
         recyclerViewTwoTypeFour=findViewById(R.id.recyclerViewTwoTypeFour);
 
@@ -85,6 +86,7 @@ RecyclerView recyclerViewTwoTypeFour;
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrayListspinnerRoomAvailabelty);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerRoomAvailabelty.setAdapter(arrayAdapter1);
+        spinnerFurnitureAvailabiltyInLibrary.setAdapter(arrayAdapter1);
         ArrayList<String> arrayListWorkingStatus =new ArrayList<>();
         arrayListWorkingStatus.add("Functional");
         arrayListWorkingStatus.add("Non-Functional");
