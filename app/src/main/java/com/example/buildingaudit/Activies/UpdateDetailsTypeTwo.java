@@ -59,7 +59,7 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         getSupportActionBar().setTitle("Staff Room");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        spinnerRoomAvailabel=findViewById(R.id.spinnerRoomAvailabel);
+        spinnerRoomAvailabel=findViewById(R.id.spinnerPhysicslabAvailability);
         spinnerAlmiraAndRacksAvailabilty=findViewById(R.id.spinnerAlmiraAndRacksAvailabilty);
         spinnerFurnitureAvailabilty=findViewById(R.id.spinnerFurnitureAvailabilty);
         spinnerRoomStatus=findViewById(R.id.spinnerRoomStatus);

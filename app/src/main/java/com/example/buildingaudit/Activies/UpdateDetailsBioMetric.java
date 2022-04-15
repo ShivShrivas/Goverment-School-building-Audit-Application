@@ -34,49 +34,45 @@ public class UpdateDetailsBioMetric extends AppCompatActivity {
         return true;
     }
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
+
     int btnType;
     ImageAdapter4 adapter1;
-    ImageAdapter3 adapter2;
-Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
-        spinnerCCTVAvailabelty,spinneruserbiometricStudent,
+
+Spinner spinneruserbiometricStudent,
         spinnerBiometricWorkingStatus,spinneruserbiometricStaff,spinnerBioMetricInstallationYear,
         spinnerBioMetricMachineAvailabelty;
-    ImageView CCTVImageUploadBtn,bioMetricImageUploadBtn;
-    RecyclerView recyclerViewBioMetric,recyclerViewCCTV;
+    ImageView bioMetricImageUploadBtn;
+    RecyclerView recyclerViewBioMetric;
 
     @Override
     protected void onStart() {
         super.onStart();
         adapter1.notifyDataSetChanged();
-        adapter2.notifyDataSetChanged();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         adapter1.notifyDataSetChanged();
-        adapter2.notifyDataSetChanged();
+
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_bio_metric);
-        getSupportActionBar().setTitle("Biometric and CCTV");
+        getSupportActionBar().setTitle("Biometric");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        spinnerCCTVWorkingStatus=findViewById(R.id.spinnerCCTVWorkingStatus);
-        spinnerCCTVInstallationYear=findViewById(R.id.spinnerCCTVInstallationYear);
-        spinnerCCTVAvailabelty=findViewById(R.id.spinnerCCTVAvailabelty);
-        CCTVImageUploadBtn=findViewById(R.id.CCTVImageUploadBtn);
+
         bioMetricImageUploadBtn=findViewById(R.id.bioMetricImageUploadBtn);
         spinneruserbiometricStudent=findViewById(R.id.spinneruserbiometricStudent);
         spinnerBiometricWorkingStatus=findViewById(R.id.spinnerBiometricWorkingStatus);
         spinneruserbiometricStaff=findViewById(R.id.spinneruserbiometricStaff);
         spinnerBioMetricInstallationYear=findViewById(R.id.spinnerBioMetricInstallationYear);
         spinnerBioMetricMachineAvailabelty=findViewById(R.id.spinnerBioMetricMachineAvailabelty);
-        recyclerViewCCTV=findViewById(R.id.recyclerViewCCTV);
+
         recyclerViewBioMetric=findViewById(R.id.recyclerViewBioMetric);
 
         ArrayList<String> arrayList1=new ArrayList<>();
@@ -86,7 +82,7 @@ Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
         adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
 
 
-        spinnerCCTVAvailabelty.setAdapter(adapter);
+
        spinneruserbiometricStudent.setAdapter(adapter);
 
         spinneruserbiometricStaff.setAdapter(adapter);
@@ -105,7 +101,7 @@ Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
         arrayListInstallationYear.add("2021");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerCCTVInstallationYear.setAdapter(arrayAdapter1);
+
         spinnerBioMetricInstallationYear.setAdapter(arrayAdapter1);
 
 
@@ -120,41 +116,6 @@ Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
         spinnerBiometricWorkingStatus.setAdapter(arrayAdapter2);
 
 
-        CCTVImageUploadBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                btnType=2;
-                Dexter.withActivity(UpdateDetailsBioMetric.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
-                            @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
-
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
-
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
-
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
-                                }
-                            }
-
-                            @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
-                            }
-                        }).check();
-            }
-        });
         bioMetricImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -194,10 +155,7 @@ Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
         adapter1 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewBioMetric.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();
-        recyclerViewCCTV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter2= new ImageAdapter3(this, arrayListImages2);
-        recyclerViewCCTV.setAdapter(adapter2);
-        adapter2.notifyDataSetChanged();
+
 
     }
     @Override
@@ -206,10 +164,7 @@ Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,
         if (requestCode == 7 && resultCode == RESULT_OK ) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
-            if (btnType==1){
                 arrayListImages1.add(bitmap);
-            }else  arrayListImages2.add(bitmap);
-
 
         }
     }

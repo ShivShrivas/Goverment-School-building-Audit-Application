@@ -31,6 +31,11 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
     ImageView multipurposeHallImageUploadBtn;
     RecyclerView recyclerViewMultipurposeHall;
     Spinner spinnerMultipurposeHall;
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     protected void onStart() {
         super.onStart();
 
@@ -51,6 +56,7 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_multipurpose_hall);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerMultipurposeHall=findViewById(R.id.spinnerMultipurposeHall);
         multipurposeHallImageUploadBtn=findViewById(R.id.multipurposeHallImageUploadBtn);
         recyclerViewMultipurposeHall=findViewById(R.id.recyclerViewMultipurposeHall);

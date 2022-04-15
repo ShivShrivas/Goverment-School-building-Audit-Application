@@ -28,9 +28,15 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.ArrayList;
 
 public class UpdateDetailsSoundSystem extends AppCompatActivity {
-Spinner spinnerSoundSystem;
+Spinner spinnerSoundSystem,spinnerSchoolBand;
         ImageView soundSystemImageUploadBtn;
 RecyclerView recyclerViewSoundSystm;
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     protected void onStart() {
         super.onStart();
 
@@ -51,10 +57,11 @@ RecyclerView recyclerViewSoundSystm;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_sound_system);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         recyclerViewSoundSystm=findViewById(R.id.recyclerViewSoundSystm);
         soundSystemImageUploadBtn=findViewById(R.id.soundSystemImageUploadBtn);
         spinnerSoundSystem=findViewById(R.id.spinnerSoundSystem);
+        spinnerSchoolBand=findViewById(R.id.spinnerSchoolBand);
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
@@ -62,6 +69,7 @@ RecyclerView recyclerViewSoundSystm;
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSoundSystem.setAdapter(arrayAdapter);
+        spinnerSchoolBand.setAdapter(arrayAdapter);
 
 
         soundSystemImageUploadBtn.setOnClickListener(new View.OnClickListener() {

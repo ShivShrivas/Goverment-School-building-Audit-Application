@@ -11,6 +11,8 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -95,6 +97,22 @@ int cameraType;
         goodConditionImageUploadBtn=findViewById(R.id.goodConditionImageUploadBtn);
         minorRepairingUploadImageBtn=findViewById(R.id.minorRepairingUploadImageBtn);
         majorRepairingUploadImageBtn=findViewById(R.id.majorRepairingUploadImageBtn);
+        goodCondtionClassroom.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         classRoomSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

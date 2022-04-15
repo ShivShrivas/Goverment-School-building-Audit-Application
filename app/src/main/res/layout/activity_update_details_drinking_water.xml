@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/drinkingwaterLayout"
     tools:context=".Activies.UpdateDetailsDrinkingWater">
 
 
@@ -500,7 +501,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="14dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="center_horizontal|bottom"
                 android:text="No. of Taps"
                 android:textColor="?attr/colorPrimary"
@@ -518,7 +519,7 @@ android:layout_margin="7dp">
 
                 android:layout_width="match_parent"
 
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:foreground="@drawable/cardbg"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -526,6 +527,10 @@ android:layout_margin="7dp">
 
 
                 <EditText
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:id="@+id/edtTotalDrinkingwaterTaps"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </androidx.cardview.widget.CardView>
@@ -541,6 +546,7 @@ android:layout_margin="7dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_margin="2dp"
                 android:layout_weight="1">
 
                 <androidx.cardview.widget.CardView
@@ -566,8 +572,13 @@ android:layout_margin="7dp">
                             android:textSize="8dp" />
 
                         <EditText
+                            android:maxLength="3"
+                            android:inputType="number"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:id="@+id/edtWorkingDrinkingwaterTaps"
                             android:layout_width="match_parent"
-                            android:layout_height="32dp"
+                            android:layout_height="wrap_content"
                             android:layout_margin="3dp"
                              />
                     </LinearLayout>
@@ -579,6 +590,7 @@ android:layout_margin="7dp">
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_margin="2dp"
                 android:background="@drawable/cardbg"
                 android:orientation="vertical">
 
@@ -591,8 +603,13 @@ android:layout_margin="7dp">
                     android:textSize="8dp" />
 
                 <EditText
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="@color/black"
+                    android:maxLength="3"
+                    android:id="@+id/edtNotWorkingDrinkingwaterTaps"
                     android:layout_width="match_parent"
-                    android:layout_height="32dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="3dp"
                    />
             </LinearLayout>
@@ -764,7 +781,7 @@ android:layout_margin="7dp">
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonSubmitDrinkinwaterDetails"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

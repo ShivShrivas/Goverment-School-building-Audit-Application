@@ -126,10 +126,10 @@
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:background="?attr/colorPrimary"
                 android:padding="4dp"
-                android:text="Solar Panel"
+
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"

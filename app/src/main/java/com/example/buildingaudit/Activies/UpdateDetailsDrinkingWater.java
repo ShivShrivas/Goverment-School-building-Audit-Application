@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,11 +13,14 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.R;
+import com.google.android.material.snackbar.Snackbar;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -49,7 +53,7 @@ public class UpdateDetailsDrinkingWater extends AppCompatActivity {
     }
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
-
+    EditText edtNotWorkingDrinkingwaterTaps,edtWorkingDrinkingwaterTaps,edtTotalDrinkingwaterTaps;
     ImageView drinkingWaterImageUploadBtn;
     RecyclerView recyclerViewDrinkingWater;
 Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
@@ -59,12 +63,20 @@ Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         spinnerSubmersibleAvailabiltyDW,spinnerHandPumpWorkStatsyDW,
         spinnerHandPumpAvailabiltyDW,spinnerDeparmentDW;
 
+ConstraintLayout drinkingwaterLayout;
+Button buttonSubmitDrinkinwaterDetails;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_drinking_water);
         getSupportActionBar().setTitle("Drinking Water");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        drinkingwaterLayout=findViewById(R.id.drinkingwaterLayout);
+        buttonSubmitDrinkinwaterDetails=findViewById(R.id.buttonSubmitDrinkinwaterDetails);
+        edtTotalDrinkingwaterTaps=findViewById(R.id.edtTotalDrinkingwaterTaps);
+        edtWorkingDrinkingwaterTaps=findViewById(R.id.edtWorkingDrinkingwaterTaps);
+        edtNotWorkingDrinkingwaterTaps=findViewById(R.id.edtNotWorkingDrinkingwaterTaps);
         spinnerROInstallationScheme=findViewById(R.id.spinnerROInstallationScheme);
         spinnerROInstallationWokingStatus=findViewById(R.id.spinnerROInstallationWokingStatus);
         drinkingWaterImageUploadBtn=findViewById(R.id.drinkingWaterImageUploadBtn);
@@ -161,6 +173,39 @@ Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         recyclerViewDrinkingWater.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
 
+        buttonSubmitDrinkinwaterDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int totalNumberOfWorkingTaps=0;
+                int totalNumberOfTaps=0;
+                int totalNumberOfNotWorkingTaps=0;
+                try {
+                    totalNumberOfTaps=Integer.parseInt(edtTotalDrinkingwaterTaps.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    totalNumberOfWorkingTaps=Integer.parseInt(edtWorkingDrinkingwaterTaps.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    totalNumberOfNotWorkingTaps=Integer.parseInt(edtNotWorkingDrinkingwaterTaps.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                if (totalNumberOfTaps!=totalNumberOfWorkingTaps+totalNumberOfNotWorkingTaps){
+                    Snackbar.make(drinkingwaterLayout, "Please provide correct number of Taps", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            })
+                            .show();
+                }
+            }
+        });
 
     }
     @Override

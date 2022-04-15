@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -12,8 +13,12 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.R;
@@ -47,9 +52,12 @@ public class UpdateDetailsSmartClass extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
+    int smartClassNumber=1;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter;
-    ImageView smartClassImageUploadBtn;
+    ImageView smartClassImageUploadBtn,deleteRoomBtn;
+    Button buttonForAddRooms;
+    LinearLayout layoutForAddRooms;
     RecyclerView recyclerViewSmartClass;
 Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWorkingStatusSmartClass,
         spinnerTeacherAvailbilitySmartClass,spinnerProjectorSmartClass,spinnerLearningContentSmartClass,
@@ -57,12 +65,13 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_update_details_smart_class);
         getSupportActionBar().setTitle("Smart Class");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerInstallationYearSmartClass=findViewById(R.id.spinnerInstallationYearSmartClass);
+        layoutForAddRooms=findViewById(R.id.layoutForAddRooms);
         spinnerUnderSchemeSmartClass=findViewById(R.id.spinnerUnderSchemeSmartClass);
+        buttonForAddRooms=findViewById(R.id.buttonForAddRooms);
         spinnerWorkingStatusSmartClass=findViewById(R.id.spinnerWorkingStatusSmartClass);
         spinnerTeacherAvailbilitySmartClass=findViewById(R.id.spinnerTeacherAvailbilitySmartClass);
         spinnerProjectorSmartClass=findViewById(R.id.spinnerProjectorSmartClass);
@@ -165,7 +174,40 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         adapter = new ImageAdapter4(this, arrayListImages1);
         recyclerViewSmartClass.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        buttonForAddRooms.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                smartClassNumber=smartClassNumber+1;
+                final View addClsss=getLayoutInflater().inflate(R.layout.new_smart_class,null,false);
+                Spinner spinnerWorkingStatusSmartClassAdd=addClsss.findViewById(R.id.spinnerWorkingStatusSmartClassAdd);
+                ImageView deleteRoomBtn=addClsss.findViewById(R.id.deleteRoomBtn);
+                TextView txtSmartRoomName=addClsss.findViewById(R.id.txtSmartRoomName);
+                txtSmartRoomName.setText("Smart Classoom "+smartClassNumber);
+                Spinner spinnerUnderSchemeSmartClassAdd=addClsss.findViewById(R.id.spinnerUnderSchemeSmartClassAdd);
+                EditText edtSmartClassCompanyNameAdd=addClsss.findViewById(R.id.edtSmartClassCompanyNameAdd);
+                Spinner spinnerInstallationYearSmartClassAdd=addClsss.findViewById(R.id.spinnerInstallationYearSmartClassAdd);
+                spinnerInstallationYearSmartClassAdd.setAdapter(arrayAdapter1);
+                spinnerUnderSchemeSmartClassAdd.setAdapter(arrayAdapter2);
+                spinnerWorkingStatusSmartClassAdd.setAdapter(arrayAdapter3);
+                deleteRoomBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        layoutForAddRooms.removeView(addClsss);
+                       
+                    }
+                });
+                layoutForAddRooms.addView(addClsss);
+            }
+        });
     }
+
+    private void addAnotherSmartClass() {
+
+
+
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

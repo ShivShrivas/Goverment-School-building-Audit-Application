@@ -10,8 +10,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.R;
@@ -50,6 +54,8 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
     ImageAdapter4 adapter6;
     ImageView furniutresImageUploadBtn;
     RecyclerView recyclerViewFurnitures;
+    EditText edtTrippelSeated,edtDoubleSeated,edtSingleSeated;
+    TextView edtTotalFurnirtureStrenght;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +64,126 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         furniutresImageUploadBtn=findViewById(R.id.furniutresImageUploadBtn);
         recyclerViewFurnitures=findViewById(R.id.recyclerViewFurnitures);
+        edtTotalFurnirtureStrenght=findViewById(R.id.edtTotalFurnirtureStrenght);
+        edtTrippelSeated=findViewById(R.id.edtTrippelSeated);
+        edtDoubleSeated=findViewById(R.id.edtDoubleSeated);
+        edtSingleSeated=findViewById(R.id.edtSingleSeated);
+        edtSingleSeated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int singleSeated=0;
+                int tripleSeated=0;
+                int doubleSeated=0;
+
+                try {
+                     singleSeated=Integer.parseInt(edtSingleSeated.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    tripleSeated=Integer.parseInt(edtTrippelSeated.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    doubleSeated=Integer.parseInt(edtDoubleSeated.getText().toString().trim());
+
+                }catch (Exception e){
+
+                }
+
+                edtTotalFurnirtureStrenght.setText(String.valueOf(singleSeated+(tripleSeated*3)+(doubleSeated*2)));
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        edtDoubleSeated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int singleSeated=0;
+                int tripleSeated=0;
+                int doubleSeated=0;
+
+                try {
+                     singleSeated=Integer.parseInt(edtSingleSeated.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    tripleSeated=Integer.parseInt(edtTrippelSeated.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    doubleSeated=Integer.parseInt(edtDoubleSeated.getText().toString().trim());
+
+                }catch (Exception e){
+
+                }
+
+                edtTotalFurnirtureStrenght.setText(String.valueOf(singleSeated+(tripleSeated*3)+(doubleSeated*2)));
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        edtTrippelSeated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int singleSeated=0;
+                int tripleSeated=0;
+                int doubleSeated=0;
+
+                try {
+                     singleSeated=Integer.parseInt(edtSingleSeated.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    tripleSeated=Integer.parseInt(edtTrippelSeated.getText().toString().trim());
+                }catch (Exception e){
+
+                }
+                try {
+                    doubleSeated=Integer.parseInt(edtDoubleSeated.getText().toString().trim());
+
+                }catch (Exception e){
+
+                }
+
+                edtTotalFurnirtureStrenght.setText(String.valueOf(singleSeated+(tripleSeated*3)+(doubleSeated*2)));
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         furniutresImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

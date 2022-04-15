@@ -394,7 +394,7 @@
             <LinearLayout
                 android:id="@+id/linearLayout54"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toTopOf="@+id/linearLayout55"
@@ -404,7 +404,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:paddingStart="20dp"
                     android:paddingEnd="20dp">
@@ -420,10 +420,9 @@
 
                     <androidx.cardview.widget.CardView
 
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
-                        android:layout_weight="1"
                         android:foreground="@drawable/cardbg"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
@@ -597,11 +596,11 @@
 
 
                                     <EditText
-                                        android:inputType="number"
-                                        android:textAlignment="center"
-                                        android:maxLength="4"
                                         android:layout_width="80dp"
-                                        android:layout_height="40dp" />
+                                        android:layout_height="40dp"
+                                        android:inputType="number"
+                                        android:maxLength="4"
+                                        android:textAlignment="center" />
                                 </androidx.cardview.widget.CardView>
 
 

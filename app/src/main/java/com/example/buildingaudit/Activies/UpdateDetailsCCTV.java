@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -26,54 +26,70 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
-public class UpdateDetailsCycleStand extends AppCompatActivity {
-    ImageView cycleStandImageUploadBtn;
-    RecyclerView recyclerCycleStand;
-    Spinner spinnerCycleStand;
+public class UpdateDetailsCCTV extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+    @Override
     protected void onStart() {
         super.onStart();
 
-        adapter6.notifyDataSetChanged();
-
+        adapter2.notifyDataSetChanged();
     }
 
     @Override
     protected void onStop() {
         super.onStop();
 
-        adapter6.notifyDataSetChanged();
-
+        adapter2.notifyDataSetChanged();
     }
-    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    ImageAdapter4 adapter6;
+    public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
+    ImageAdapter3 adapter2;
+    Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,spinnerCCTVAvailabelty;
+    ImageView CCTVImageUploadBtn;
+    RecyclerView recyclerViewCCTV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_details_cycle_stand);
+        setContentView(R.layout.activity_update_details_cctv);
+        getSupportActionBar().setTitle("CCTV");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerCycleStand=findViewById(R.id.spinnerCycleStand);
-        cycleStandImageUploadBtn=findViewById(R.id.cycleStandImageUploadBtn);
-        recyclerCycleStand=findViewById(R.id.recyclerCycleStand);
+        spinnerCCTVWorkingStatus=findViewById(R.id.spinnerCCTVWorkingStatus);
+        spinnerCCTVInstallationYear=findViewById(R.id.spinnerCCTVInstallationYear);
+        spinnerCCTVAvailabelty=findViewById(R.id.spinnerCCTVAvailabelty);
+        CCTVImageUploadBtn=findViewById(R.id.CCTVImageUploadBtn);
+        recyclerViewCCTV=findViewById(R.id.recyclerViewCCTV);
+
+        ArrayList<String> arrayList1=new ArrayList<>();
+        arrayList1.add("Yes");
+        arrayList1.add("No");
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
+        adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
 
 
-        ArrayList<String> arrayListAvailbilty=new ArrayList<>();
-        arrayListAvailbilty.add("Yes");
-        arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
-        arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerCycleStand.setAdapter(arrayAdapter);
+        spinnerCCTVAvailabelty.setAdapter(adapter);
 
 
-        cycleStandImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+        ArrayList<String> arrayListInstallationYear=new ArrayList<>();
+        arrayListInstallationYear.add("2015");
+        arrayListInstallationYear.add("2016");
+        arrayListInstallationYear.add("2017");
+        arrayListInstallationYear.add("2018");
+        arrayListInstallationYear.add("2019");
+        arrayListInstallationYear.add("2020");
+        arrayListInstallationYear.add("2021");
+        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
+        arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerCCTVInstallationYear.setAdapter(arrayAdapter1);
+
+
+        CCTVImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsCycleStand.this)
+                Dexter.withActivity(UpdateDetailsCCTV.this)
                         .withPermission(Manifest.permission.CAMERA)
                         .withListener(new PermissionListener() {
                             @Override
@@ -104,11 +120,11 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
                         }).check();
             }
         });
-        recyclerCycleStand.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter6 = new ImageAdapter4(this, arrayListImages1);
-        recyclerCycleStand.setAdapter(adapter6);
-        adapter6.notifyDataSetChanged();
 
+        recyclerViewCCTV.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        adapter2= new ImageAdapter3(this, arrayListImages2);
+        recyclerViewCCTV.setAdapter(adapter2);
+        adapter2.notifyDataSetChanged();
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -116,7 +132,9 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         if (requestCode == 7 && resultCode == RESULT_OK ) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
-            arrayListImages1.add(bitmap);
+
+            arrayListImages2.add(bitmap);
+
 
 
         }

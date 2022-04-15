@@ -22,7 +22,7 @@ import com.example.buildingaudit.Activies.UpdateDetailsFurnitures;
 import com.example.buildingaudit.Activies.UpdateDetailsGirlsToilet;
 import com.example.buildingaudit.Activies.UpdateDetailsGym;
 import com.example.buildingaudit.Activies.UpdateDetailsPlayground;
-import com.example.buildingaudit.Activies.UpdateDetailsRainHarvestAndCWSN;
+import com.example.buildingaudit.Activies.UpdateDetailsRainHarvest;
 import com.example.buildingaudit.Activies.UpdateDetailsSmartClass;
 import com.example.buildingaudit.Activies.UpdateDetailsSolarPanel;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeFour;
@@ -83,7 +83,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else  if(position%17==12){
                     context.startActivity(new Intent(context, UpdateDetailsFireFighting.class));
                 }else  if(position%17==13){
-                    context.startActivity(new Intent(context, UpdateDetailsRainHarvestAndCWSN.class));
+                    context.startActivity(new Intent(context, UpdateDetailsRainHarvest.class));
                 }else  if(position%17==14){
 
                     context.startActivity(new Intent(context, UpdateDetailsSolarPanel.class));

@@ -57,7 +57,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_gym);
-        getSupportActionBar().setTitle("Gym");
+        getSupportActionBar().setTitle("Open Gym");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerGymAvailabelty=findViewById(R.id.spinnerGymAvailabelty);
         gymWorkingStatus=findViewById(R.id.gymWorkingStatus);

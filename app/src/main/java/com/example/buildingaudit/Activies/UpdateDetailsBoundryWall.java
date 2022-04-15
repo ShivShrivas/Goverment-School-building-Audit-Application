@@ -30,7 +30,11 @@ import java.util.ArrayList;
 public class UpdateDetailsBoundryWall extends AppCompatActivity {
 Spinner spinnerWallCondition,spinnerWhiteWash,spinnerTypeBoundaryWall,spinnerBoundaryWallAvail;
 ImageView boundaryWallImageUploadBtn;
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 
     @Override
     protected void onStart() {
@@ -56,7 +60,7 @@ ImageView boundaryWallImageUploadBtn;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_boundry_wall);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         spinnerWallCondition=findViewById(R.id.spinnerWallCondition);
         spinnerWhiteWash=findViewById(R.id.spinnerWhiteWash);
         spinnerTypeBoundaryWall=findViewById(R.id.spinnerTypeBoundaryWall);

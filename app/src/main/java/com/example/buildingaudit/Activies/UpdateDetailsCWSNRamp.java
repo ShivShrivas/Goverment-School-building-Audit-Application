@@ -26,15 +26,14 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.util.ArrayList;
 
-public class UpdateDetailsCycleStand extends AppCompatActivity {
-    ImageView cycleStandImageUploadBtn;
-    RecyclerView recyclerCycleStand;
-    Spinner spinnerCycleStand;
+public class UpdateDetailsCWSNRamp extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+    @Override
     protected void onStart() {
         super.onStart();
 
@@ -49,31 +48,46 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
+
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
+    ImageView CSWNRampImageUploadBtn;
+    RecyclerView recyclerViewCWSNRamp;
+    Spinner spinnerCWSNWorkingStatus, spinnerCWSNAvailabilty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_details_cycle_stand);
+        setContentView(R.layout.activity_update_details_cwsnramp);
+        getSupportActionBar().setTitle("CWSN Ramp");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerCycleStand=findViewById(R.id.spinnerCycleStand);
-        cycleStandImageUploadBtn=findViewById(R.id.cycleStandImageUploadBtn);
-        recyclerCycleStand=findViewById(R.id.recyclerCycleStand);
+
+        spinnerCWSNAvailabilty = findViewById(R.id.spinnerCWSNAvailabilty);
+        spinnerCWSNWorkingStatus = findViewById(R.id.spinnerCWSNWorkingStatus);
+        recyclerViewCWSNRamp = findViewById(R.id.recyclerViewCWSNRamp);
+        CSWNRampImageUploadBtn = findViewById(R.id.CSWNRampImageUploadBtn);
+
+        ArrayList<String> arrayList1 = new ArrayList<>();
+        arrayList1.add("Yes");
+        arrayList1.add("No");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, arrayList1);
+        adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerCWSNAvailabilty.setAdapter(adapter);
 
 
-        ArrayList<String> arrayListAvailbilty=new ArrayList<>();
-        arrayListAvailbilty.add("Yes");
-        arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
-        arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerCycleStand.setAdapter(arrayAdapter);
+        ArrayList<String> arrayListWorkingStatus = new ArrayList<>();
+        arrayListWorkingStatus.add("Functional");
+        arrayListWorkingStatus.add("Non Functional");
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayListWorkingStatus);
+        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerCWSNWorkingStatus.setAdapter(arrayAdapter2);
 
 
-        cycleStandImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+        CSWNRampImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsCycleStand.this)
+                Dexter.withActivity(UpdateDetailsCWSNRamp.this)
                         .withPermission(Manifest.permission.CAMERA)
                         .withListener(new PermissionListener() {
                             @Override
@@ -104,16 +118,16 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
                         }).check();
             }
         });
-        recyclerCycleStand.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCWSNRamp.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapter6 = new ImageAdapter4(this, arrayListImages1);
-        recyclerCycleStand.setAdapter(adapter6);
+        recyclerViewCWSNRamp.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
-
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 7 && resultCode == RESULT_OK ) {
+        if (requestCode == 7 && resultCode == RESULT_OK) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
             arrayListImages1.add(bitmap);

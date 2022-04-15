@@ -145,7 +145,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <Spinner
-                android:id="@+id/spinnerRoomAvailabel"
+                android:id="@+id/spinnerPhysicslabAvailability"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp" />

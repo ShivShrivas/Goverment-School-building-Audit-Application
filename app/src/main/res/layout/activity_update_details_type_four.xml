@@ -314,7 +314,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Book Bank"
+                    android:text="Number of Books"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 
@@ -566,7 +566,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Library grant in rupee"
+                    android:text="Library grant(Rs.)\n In current F.Y."
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 
@@ -608,7 +608,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Expenditure Amount in F.Y."
+                    android:text="Expenditure(Rs.)\n In current F.Y."
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 
