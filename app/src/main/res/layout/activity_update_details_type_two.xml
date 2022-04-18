@@ -124,13 +124,14 @@
 
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:text="Saparate Room Available"
             android:textColor="?attr/colorPrimary"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@+id/cardView23"
+            app:layout_constraintEnd_toStartOf="@+id/cardView23"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/cardView23" />
 
@@ -208,7 +209,7 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
@@ -217,6 +218,7 @@
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardView1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -252,15 +254,17 @@
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
+                android:layout_marginEnd="2dp"
                 android:layout_marginBottom="4dp"
-                android:text="Almira/Racks Available"
+                android:text="Almirah/Racks Available"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/cardView3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
