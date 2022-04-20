@@ -7,11 +7,12 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable-v24/card_bg7.xml" value="0.196" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable-v24/card_bg8.xml" value="0.196" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.196" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/arrow_back.xml" value="0.2055" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/background.xml" value="0.1195" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/card_bg.xml" value="0.196" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/card_bg1.xml" value="0.196" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/card_bg2.xml" value="0.196" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/card_bg3.xml" value="0.196" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/card_bg3.xml" value="0.13" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/card_bg4.xml" value="0.196" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/card_bg5.xml" value="0.196" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/cardbg.xml" value="0.2165" />
@@ -19,6 +20,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/dashboard_recview_itemcard.xml" value="0.2165" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_add.xml" value="0.186" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_highlight_off_24.xml" value="0.1965" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.15" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.186" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_lock_password.xml" value="0.2165" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_userid.xml" value="0.2165" />
@@ -31,11 +33,11 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_bio_metric.xml" value="0.16" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boundry_wall.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boys_toilet.xml" value="0.22" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cctv.xml" value="0.17760416666666667" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cctv.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_computerlab.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cwsnramp.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cycle_stand.xml" value="0.209375" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_drinking_water.xml" value="0.721830985915493" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_drinking_water.xml" value="0.35376044568245124" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_electricity_arrangment.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_fire_fighting.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_furnitures.xml" value="0.33" />
@@ -56,6 +58,9 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/custom_text_spiiner.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/image_card_layout.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_activity_layout.xml" value="0.18" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_dashboard_layout.xml" value="1.3571428571428572" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/nav_header_main_activity__admin.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/new_smart_class.xml" value="0.5" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/update_details_three_item_card.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1585" />
