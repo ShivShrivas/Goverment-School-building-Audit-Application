@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,8 +63,14 @@ RecyclerView recyclerViewBoysToilet;
         boysToiletImageUploadBtn=findViewById(R.id.boysToiletImageUploadBtn);
         recyclerViewBoysToilet=findViewById(R.id.recyclerViewBoysToilet);
         spinnerBoysDustbin=findViewById(R.id.spinnerBoysDustbin);
-        getSupportActionBar().setTitle("Boys Toilet");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");

@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,9 +60,14 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_fire_fighting);
-        getSupportActionBar().setTitle("Fire fighting");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerFireFightTraining=findViewById(R.id.spinnerFireFightTraining);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerFireFightTraining=findViewById(R.id.spinnerFireFightTraining);
         recyclerViewFireFightning=findViewById(R.id.recyclerViewFireFightning);
         firefightingImageUploadBtn=findViewById(R.id.firefightingImageUploadBtn);
         spinnerFireFightRenewalStatus=findViewById(R.id.spinnerFireFightRenewalStatus);

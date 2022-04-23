@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,9 +57,14 @@ Spinner spinnerGirlsSanetoryNapkin,spinnerGirlsIncinerator,spinnerGirlsDustbin,s
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_girls_toilet);
-        getSupportActionBar().setTitle("Girls Toilet");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerGirlsIncinerator=findViewById(R.id.spinnerGirlsIncinerator);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerGirlsIncinerator=findViewById(R.id.spinnerGirlsIncinerator);
         spinnerGirlsDustbin=findViewById(R.id.spinnerGirlsDustbin);
         spinnerGirlsSanetoryNapkin=findViewById(R.id.spinnerGirlsSanetoryNapkin);
         spinnerGirlsDoorFacility=findViewById(R.id.spinnerGirlsDoorFacility);

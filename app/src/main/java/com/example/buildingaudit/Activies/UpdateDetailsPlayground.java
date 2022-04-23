@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,9 +58,14 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_five);
-        getSupportActionBar().setTitle("Playground");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerLevelingStatus=findViewById(R.id.spinnerLevellingStatus);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerLevelingStatus=findViewById(R.id.spinnerLevellingStatus);
         playGroundImageUploadBtn=findViewById(R.id.playGroundImageUploadBtn);
         spinnerRoomAvailabelty=findViewById(R.id.spinnerPlaygroundAvailabelty);
         recyclerViewPlayground=findViewById(R.id.recyclerViewPlayground);

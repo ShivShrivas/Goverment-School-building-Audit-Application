@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,9 +67,14 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_smart_class);
-        getSupportActionBar().setTitle("Smart Class");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerInstallationYearSmartClass=findViewById(R.id.spinnerInstallationYearSmartClass);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerInstallationYearSmartClass=findViewById(R.id.spinnerInstallationYearSmartClass);
         layoutForAddRooms=findViewById(R.id.layoutForAddRooms);
         spinnerUnderSchemeSmartClass=findViewById(R.id.spinnerUnderSchemeSmartClass);
         buttonForAddRooms=findViewById(R.id.buttonForAddRooms);

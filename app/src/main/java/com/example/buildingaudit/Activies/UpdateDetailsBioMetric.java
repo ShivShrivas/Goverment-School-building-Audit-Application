@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -62,10 +63,16 @@ Spinner spinneruserbiometricStudent,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_bio_metric);
-        getSupportActionBar().setTitle("Biometric");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         bioMetricImageUploadBtn=findViewById(R.id.bioMetricImageUploadBtn);
         spinneruserbiometricStudent=findViewById(R.id.spinneruserbiometricStudent);
         spinnerBiometricWorkingStatus=findViewById(R.id.spinnerBiometricWorkingStatus);

@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -70,9 +71,14 @@ Button buttonSubmitDrinkinwaterDetails;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_drinking_water);
-        getSupportActionBar().setTitle("Drinking Water");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        drinkingwaterLayout=findViewById(R.id.drinkingwaterLayout);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        drinkingwaterLayout=findViewById(R.id.drinkingwaterLayout);
         buttonSubmitDrinkinwaterDetails=findViewById(R.id.buttonSubmitDrinkinwaterDetails);
         edtTotalDrinkingwaterTaps=findViewById(R.id.edtTotalDrinkingwaterTaps);
         edtWorkingDrinkingwaterTaps=findViewById(R.id.edtWorkingDrinkingwaterTaps);

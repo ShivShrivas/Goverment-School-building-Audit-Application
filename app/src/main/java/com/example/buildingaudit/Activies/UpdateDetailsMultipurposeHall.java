@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,8 +57,14 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_multipurpose_hall);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerMultipurposeHall=findViewById(R.id.spinnerMultipurposeHall);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerMultipurposeHall=findViewById(R.id.spinnerMultipurposeHall);
         multipurposeHallImageUploadBtn=findViewById(R.id.multipurposeHallImageUploadBtn);
         recyclerViewMultipurposeHall=findViewById(R.id.recyclerViewMultipurposeHall);
 

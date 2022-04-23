@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,8 +58,14 @@ RecyclerView recyclerViewSoundSystm;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_sound_system);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        recyclerViewSoundSystm=findViewById(R.id.recyclerViewSoundSystm);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        recyclerViewSoundSystm=findViewById(R.id.recyclerViewSoundSystm);
         soundSystemImageUploadBtn=findViewById(R.id.soundSystemImageUploadBtn);
         spinnerSoundSystem=findViewById(R.id.spinnerSoundSystem);
         spinnerSchoolBand=findViewById(R.id.spinnerSchoolBand);

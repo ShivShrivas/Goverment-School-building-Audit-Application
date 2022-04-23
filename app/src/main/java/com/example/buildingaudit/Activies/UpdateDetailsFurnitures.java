@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -60,9 +61,14 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_furnitures);
-        getSupportActionBar().setTitle("Furnitures");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        furniutresImageUploadBtn=findViewById(R.id.furniutresImageUploadBtn);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        furniutresImageUploadBtn=findViewById(R.id.furniutresImageUploadBtn);
         recyclerViewFurnitures=findViewById(R.id.recyclerViewFurnitures);
         edtTotalFurnirtureStrenght=findViewById(R.id.edtTotalFurnirtureStrenght);
         edtTrippelSeated=findViewById(R.id.edtTrippelSeated);

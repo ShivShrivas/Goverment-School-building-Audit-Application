@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -56,9 +57,15 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_two);
-        getSupportActionBar().setTitle("Staff Room");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("Staff Room");
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         spinnerRoomAvailabel=findViewById(R.id.spinnerPhysicslabAvailability);
         spinnerAlmiraAndRacksAvailabilty=findViewById(R.id.spinnerAlmiraAndRacksAvailabilty);
         spinnerFurnitureAvailabilty=findViewById(R.id.spinnerFurnitureAvailabilty);

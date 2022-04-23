@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -55,8 +56,14 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_cycle_stand);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerCycleStand=findViewById(R.id.spinnerCycleStand);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerCycleStand=findViewById(R.id.spinnerCycleStand);
         cycleStandImageUploadBtn=findViewById(R.id.cycleStandImageUploadBtn);
         recyclerCycleStand=findViewById(R.id.recyclerCycleStand);
 

@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,7 +52,14 @@ Spinner spinnerWifiPresent;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_of_extra_things);
-        spinnerWifiPresent=findViewById(R.id.spinnerWifiPresent);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerWifiPresent=findViewById(R.id.spinnerWifiPresent);
         recyclerViewExtraThings=findViewById(R.id.recyclerViewExtraThings);
         extraThingsImageUploadBtn=findViewById(R.id.extraThingsImageUploadBtn);
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();

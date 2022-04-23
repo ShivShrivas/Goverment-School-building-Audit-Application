@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,9 +58,14 @@ RecyclerView recyclerViewTwoTypeFour;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_four);
-        getSupportActionBar().setTitle("Library");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         spinnerPhysicalStatus=findViewById(R.id.spinnerPhysicalStatus);
         spinnerReadingCorner=findViewById(R.id.spinnerReadingCorner);
         spinnerNewsPaperAndMzin=findViewById(R.id.spinnerNewsPaperAndMzin);

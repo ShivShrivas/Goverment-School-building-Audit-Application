@@ -1,11 +1,16 @@
 package com.example.buildingaudit;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
@@ -44,7 +49,7 @@ public class DashBoard extends AppCompatActivity {
             dashBoardFireFighting,dashBoardRainHarvestingAndRamp, dashBoardSolarPanel,dashBoardBoysToilet,dashBoardGirlsToilet,dashBoardBoundaryWall;
 
 
-
+DrawerLayout mainDrawerLayout;
 
     dashboardRecviewAdapter adapter;
     ArrayList<RecModel> arrayList=new ArrayList<>();
@@ -60,10 +65,13 @@ public class DashBoard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-        getSupportActionBar().setTitle("School Dashboard");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle("School Dashboard");
       //  dashboardRecview=findViewById(R.id.dashboardRecview);
         dashBoardGirlsToilet=findViewById(R.id.dashBoardGirlsToilet);
         dashBoardCCTV=findViewById(R.id.dashBoardCCTV);
+        mainDrawerLayout=findViewById(R.id.mainDrawerLayout);
         dashBoardSoundSystem=findViewById(R.id.dashBoardSoundSystem);
         dashBoardMultipurposeHall=findViewById(R.id.dashBoardMultipurposeHall);
         dashBoardCycleStand=findViewById(R.id.dashBoardCycleStand);
@@ -86,6 +94,9 @@ public class DashBoard extends AppCompatActivity {
         dashBoardGym=findViewById(R.id.dashBoardGym);
         dashBoardDrinkingWater=findViewById(R.id.dashBoardDrinkingWater);
         dashBoardExtraThings=findViewById(R.id.dashBoardWifi);
+        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mainDrawerLayout,toolbar,R.string.opneToggel,R.string.close);
+        mainDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
 
 
         dashBoardMultipurposeHall.setOnClickListener(new View.OnClickListener() {

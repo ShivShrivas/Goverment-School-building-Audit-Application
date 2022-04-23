@@ -1,13 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.BuildingAudit" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.BuildingAudit" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_200</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#000000</item>
-        <item name="colorSecondaryVariant">@color/black</item>
+        <item name="colorSecondary">#a7c0cd</item>
+        <item name="colorSecondaryVariant">#4b636e</item>
         <item name="colorOnSecondary">@color/black</item>
         <item name="android:fontFamily">@font/anti_corona</item>
         <item name="fontFamily">@font/anti_corona</item>

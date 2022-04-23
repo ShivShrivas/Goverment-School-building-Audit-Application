@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -61,10 +62,15 @@ ImageView imageUpoadMusicLab,imageUpoadHomeScienceLab,imageUpoadGeographyLab
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Practical Lab");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setContentView(R.layout.activity_updatedetails_type_three);
-        spinnerHomeMusiclabAvailability=findViewById(R.id.spinnerHomeMusiclabAvailability);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerHomeMusiclabAvailability=findViewById(R.id.spinnerHomeMusiclabAvailability);
         spinnerChemistrylabAvailability=findViewById(R.id.spinnerChemistrylabAvailability);
         spinnerHomeSciencelabAvailability=findViewById(R.id.spinnerHomeSciencelabAvailability);
         spinnerGeographylabAvailability=findViewById(R.id.spinnerGeographylabAvailability);

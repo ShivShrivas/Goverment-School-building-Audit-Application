@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,8 +55,14 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_cctv);
-        getSupportActionBar().setTitle("CCTV");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         spinnerCCTVWorkingStatus=findViewById(R.id.spinnerCCTVWorkingStatus);
         spinnerCCTVInstallationYear=findViewById(R.id.spinnerCCTVInstallationYear);
         spinnerCCTVAvailabelty=findViewById(R.id.spinnerCCTVAvailabelty);

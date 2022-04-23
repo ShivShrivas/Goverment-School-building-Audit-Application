@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,8 +58,14 @@ Spinner spinnerComputeLabAvailabelty,spinnerInstallationYear,spinnerGrantUnderSc
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_computerlab);
-        getSupportActionBar().setTitle("Computer Lab");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         spinnerComputeLabAvailabelty=findViewById(R.id.spinnerComputeLabAvailabelty);
         ComputerLabImageUploadBtn=findViewById(R.id.ComputerLabImageUploadBtn);
         recyclerViewComputerLab=findViewById(R.id.recyclerViewComputerLab);

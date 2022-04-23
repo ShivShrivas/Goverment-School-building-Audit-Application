@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -58,9 +59,14 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_rain_harvest_and_cwsn);
-        getSupportActionBar().setTitle("Rain Harvesting");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        spinnerRainharvestingAvailabilty=findViewById(R.id.spinnerRainharvestingAvailabilty);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });        spinnerRainharvestingAvailabilty=findViewById(R.id.spinnerRainharvestingAvailabilty);
         spinnerRainHavestingWorkStatus=findViewById(R.id.spinnerRainHavestingWorkStatus);
 
         recyclerViewRAinHarvestandCWSNRamp=findViewById(R.id.recyclerViewRAinHarvestandCWSNRamp);

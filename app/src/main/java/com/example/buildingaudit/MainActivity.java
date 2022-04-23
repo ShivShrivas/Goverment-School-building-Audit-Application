@@ -30,7 +30,6 @@ CheckBox check_showpassword,check_remember;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("School Grading");
         sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         SubmitBtn=findViewById(R.id.loginBtn);
