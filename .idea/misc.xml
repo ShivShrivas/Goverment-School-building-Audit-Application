@@ -21,14 +21,17 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_add.xml" value="0.186" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_highlight_off_24.xml" value="0.1965" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.15" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1825" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.186" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_lock_password.xml" value="0.2165" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_menu.xml" value="0.1825" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_notifications.xml" value="0.1825" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_userid.xml" value="0.2165" />
         <entry key="..\:/BuildingAudit/app/src/main/res/font/anti_corona.xml" value="1.3214285714285714" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_after_submit_classrom_details.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dash_board.xml" value="0.25" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_main.xml" value="0.2" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_splash_screen.xml" value="0.16" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_splash_screen.xml" value="0.67" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_detail_type_one.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_bio_metric.xml" value="0.16" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boundry_wall.xml" value="0.209375" />
@@ -36,29 +39,29 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cctv.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_computerlab.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cwsnramp.xml" value="0.209375" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cycle_stand.xml" value="0.209375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cycle_stand.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_drinking_water.xml" value="0.35376044568245124" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_electricity_arrangment.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_fire_fighting.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_furnitures.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_girls_toilet.xml" value="0.14" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_gym.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_gym.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_multipurpose_hall.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_of_extra_things.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_rain_harvest_and_cwsn.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_smart_class.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_solar_panel.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_solar_panel_and_boundry_wall.xml" value="0.18" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_sound_system.xml" value="0.209375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_sound_system.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_five.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_four.xml" value="0.25" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_two.xml" value="0.18" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_two.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_updatedetails_type_three.xml" value="0.12" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/cross_buton.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/custom_text_spiiner.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/image_card_layout.xml" value="0.33" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_activity_layout.xml" value="0.18" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_activity_layout.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_dashboard_layout.xml" value="1.3571428571428572" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/nav_header_main_activity__admin.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/new_smart_class.xml" value="0.5" />

@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Department of  Secondary Education
-\n Govermnment of Uttar Pradesh"
+\n Government of Uttar Pradesh"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimary"
         android:textSize="18dp"
@@ -48,4 +48,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView22"
         app:layout_constraintVertical_bias="0.050000012" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="version:1.1.2"
+        android:textColor="#393939"
+        android:textSize="11dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

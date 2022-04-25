@@ -31,7 +31,7 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
 
     ImageView multipurposeHallImageUploadBtn;
     RecyclerView recyclerViewMultipurposeHall;
-    Spinner spinnerMultipurposeHall;
+    Spinner spinnerMultipurposeHall,spinnerMultiPurposeHallStatus;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -66,6 +66,7 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
             }
         });        spinnerMultipurposeHall=findViewById(R.id.spinnerMultipurposeHall);
         multipurposeHallImageUploadBtn=findViewById(R.id.multipurposeHallImageUploadBtn);
+        spinnerMultiPurposeHallStatus=findViewById(R.id.spinnerMultiPurposeHallStatus);
         recyclerViewMultipurposeHall=findViewById(R.id.recyclerViewMultipurposeHall);
 
 
@@ -76,6 +77,15 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerMultipurposeHall.setAdapter(arrayAdapter);
 
+        ArrayList<String> arrayListSpinner2 = new ArrayList<>();
+        arrayListSpinner2.add("Good Condition");
+        arrayListSpinner2.add("Minor Repairing");
+        arrayListSpinner2.add("Major repairing");
+
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner2);
+        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
+
+        spinnerMultiPurposeHallStatus.setAdapter(arrayAdapter2);
 
         multipurposeHallImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override

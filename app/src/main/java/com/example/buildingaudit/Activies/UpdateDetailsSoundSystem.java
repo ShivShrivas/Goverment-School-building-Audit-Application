@@ -29,7 +29,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.ArrayList;
 
 public class UpdateDetailsSoundSystem extends AppCompatActivity {
-Spinner spinnerSoundSystem,spinnerSchoolBand;
+Spinner spinnerSoundSystem,spinnerSchoolBand,spinnerSchoolBandForGirls,spinnerSoundSystemforGirls;
         ImageView soundSystemImageUploadBtn;
 RecyclerView recyclerViewSoundSystm;
 
@@ -69,6 +69,8 @@ RecyclerView recyclerViewSoundSystm;
         soundSystemImageUploadBtn=findViewById(R.id.soundSystemImageUploadBtn);
         spinnerSoundSystem=findViewById(R.id.spinnerSoundSystem);
         spinnerSchoolBand=findViewById(R.id.spinnerSchoolBand);
+        spinnerSoundSystemforGirls=findViewById(R.id.spinnerSoundSystemforGirls);
+        spinnerSchoolBandForGirls=findViewById(R.id.spinnerSchoolBandForGirls);
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
@@ -77,6 +79,8 @@ RecyclerView recyclerViewSoundSystm;
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSoundSystem.setAdapter(arrayAdapter);
         spinnerSchoolBand.setAdapter(arrayAdapter);
+        spinnerSchoolBandForGirls.setAdapter(arrayAdapter);
+        spinnerSoundSystemforGirls.setAdapter(arrayAdapter);
 
 
         soundSystemImageUploadBtn.setOnClickListener(new View.OnClickListener() {

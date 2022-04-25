@@ -3,14 +3,17 @@ package com.example.buildingaudit;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
@@ -50,6 +53,7 @@ public class DashBoard extends AppCompatActivity {
 
 
 DrawerLayout mainDrawerLayout;
+ImageView hamMenu;
 
     dashboardRecviewAdapter adapter;
     ArrayList<RecModel> arrayList=new ArrayList<>();
@@ -65,14 +69,15 @@ DrawerLayout mainDrawerLayout;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        toolbar.setTitle("School Dashboard");
+
+
       //  dashboardRecview=findViewById(R.id.dashboardRecview);
         dashBoardGirlsToilet=findViewById(R.id.dashBoardGirlsToilet);
         dashBoardCCTV=findViewById(R.id.dashBoardCCTV);
         mainDrawerLayout=findViewById(R.id.mainDrawerLayout);
         dashBoardSoundSystem=findViewById(R.id.dashBoardSoundSystem);
+        hamMenu=findViewById(R.id.hamMenu);
+        DrawerLayout navDrawer = findViewById(R.id.mainDrawerLayout);
         dashBoardMultipurposeHall=findViewById(R.id.dashBoardMultipurposeHall);
         dashBoardCycleStand=findViewById(R.id.dashBoardCycleStand);
         dashBoardBoysToilet=findViewById(R.id.dashBoardBoysToilet);
@@ -94,9 +99,6 @@ DrawerLayout mainDrawerLayout;
         dashBoardGym=findViewById(R.id.dashBoardGym);
         dashBoardDrinkingWater=findViewById(R.id.dashBoardDrinkingWater);
         dashBoardExtraThings=findViewById(R.id.dashBoardWifi);
-        ActionBarDrawerToggle toggle=new ActionBarDrawerToggle(this,mainDrawerLayout,toolbar,R.string.opneToggel,R.string.close);
-        mainDrawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
 
 
         dashBoardMultipurposeHall.setOnClickListener(new View.OnClickListener() {
@@ -105,7 +107,15 @@ DrawerLayout mainDrawerLayout;
                 startActivity(new Intent(DashBoard.this, UpdateDetailsMultipurposeHall.class));
             }
         });
+        hamMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                // If navigation drawer is not open yet, open it else close it.
+                if(!navDrawer.isDrawerOpen(GravityCompat.START)) navDrawer.openDrawer(Gravity.LEFT );
+                else navDrawer.closeDrawer(GravityCompat.END);
+            }
+        });
         dashBoardSoundSystem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/loginLayout"
-    android:background="@drawable/bgmain"
+    android:background="@drawable/splash"
+    android:backgroundTint="#77D6D6D6"
+    android:backgroundTintMode="screen"
     tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
@@ -14,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
         app:cardCornerRadius="80dp"
-        app:cardElevation="10dp"
+        app:cardElevation="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
