@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
 import com.example.buildingaudit.Activies.UpdateDetailsBioMetric;
@@ -42,15 +44,24 @@ import com.example.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.example.buildingaudit.Activies.UpdatedetailsTypeThree;
 import com.example.buildingaudit.Adapters.dashboardRecviewAdapter;
 import com.example.buildingaudit.Model.RecModel;
+import com.example.buildingaudit.RetrofitApi.ApiService;
+import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class DashBoard extends AppCompatActivity {
     RecyclerView dashboardRecview;
+    TextView userName,schoolAddress,schoolName;
     LinearLayout dashBoardCWSNRamp,dashBoardCCTV,dashBoardSoundSystem, dashBoardMultipurposeHall,dashBoardCycleStand,dashBoardExtraThings,dashBoardDrinkingWater,dashBoardGym,dashBoardPlayground,dashBoardLibrary,dashBoardPracticalLabs,staffRoom,dashboardClassRoom,
             dashBoardSmartClass,dashBoardComputerLab,dashBoardFurnitures,dashBoardBioMetric,dashBoardElectricityArrangement,
             dashBoardFireFighting,dashBoardRainHarvestingAndRamp, dashBoardSolarPanel,dashBoardBoysToilet,dashBoardGirlsToilet,dashBoardBoundaryWall;
-
+ApplicationController applicationController;
 
 DrawerLayout mainDrawerLayout;
 ImageView hamMenu;
@@ -69,15 +80,19 @@ ImageView hamMenu;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dash_board);
-
+        applicationController= (ApplicationController) getApplication();
 
       //  dashboardRecview=findViewById(R.id.dashboardRecview);
         dashBoardGirlsToilet=findViewById(R.id.dashBoardGirlsToilet);
         dashBoardCCTV=findViewById(R.id.dashBoardCCTV);
+        userName=findViewById(R.id.userName);
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
         mainDrawerLayout=findViewById(R.id.mainDrawerLayout);
         dashBoardSoundSystem=findViewById(R.id.dashBoardSoundSystem);
         hamMenu=findViewById(R.id.hamMenu);
         DrawerLayout navDrawer = findViewById(R.id.mainDrawerLayout);
+
         dashBoardMultipurposeHall=findViewById(R.id.dashBoardMultipurposeHall);
         dashBoardCycleStand=findViewById(R.id.dashBoardCycleStand);
         dashBoardBoysToilet=findViewById(R.id.dashBoardBoysToilet);
@@ -99,8 +114,10 @@ ImageView hamMenu;
         dashBoardGym=findViewById(R.id.dashBoardGym);
         dashBoardDrinkingWater=findViewById(R.id.dashBoardDrinkingWater);
         dashBoardExtraThings=findViewById(R.id.dashBoardWifi);
-
-
+        Log.d("TAG", "onCreate: "+applicationController.getUsername()+applicationController.getSchoolName());
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        userName.setText(applicationController.getUsername());
         dashBoardMultipurposeHall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -255,5 +272,7 @@ ImageView hamMenu;
             }
         });
     }
+
+
 
 }

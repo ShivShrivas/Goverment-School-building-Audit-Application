@@ -12,8 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
     <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-
+        android:layout_width="240dp"
+        app:menu="@menu/nav_menu"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
@@ -30,42 +30,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="2dp"
-                    android:background="?attr/colorPrimary"
-
-                    android:layout_weight="1">
-
-                    <ImageButton
-                        android:id="@+id/imageButton1"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:layout_marginTop="3dp"
-                        android:background="?attr/colorPrimary"
-                        android:src="@drawable/ic_baseline_home_24"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/colorPrimary"
-                        android:text="Home"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageButton1" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="2dp"
                     android:background="?attr/colorPrimary"
-
                     android:layout_weight="1">
 
                     <ImageButton

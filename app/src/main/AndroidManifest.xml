@@ -3,6 +3,7 @@
     package="com.example.buildingaudit" >
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -10,6 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".ApplicationController"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.BuildingAudit" >
         <activity
             android:name=".Activies.UpdateDetailsCWSNRamp"

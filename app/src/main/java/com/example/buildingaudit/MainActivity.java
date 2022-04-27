@@ -1,46 +1,85 @@
 package com.example.buildingaudit;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.buildingaudit.Adapters.QuaterTypeAdapter;
+import com.example.buildingaudit.Adapters.UserTyepAdapter;
+import com.example.buildingaudit.Model.GetQuaterType;
+import com.example.buildingaudit.Model.GetSchoolDetails;
+import com.example.buildingaudit.Model.GetUserType;
+import com.example.buildingaudit.RetrofitApi.ApiService;
+import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 Button SubmitBtn;
+ApplicationController applicationController;
     SharedPreferences sharedpreferences;
 EditText password,username;
+Spinner spinnerUserType,spinnerFinancialQuarter;
+RestClient restClient;
+ApiService apiService;
 ConstraintLayout loginLayout;
+List<GetSchoolDetails> getSchoolDetails=new ArrayList<>();
     SharedPreferences.Editor editor;
 CheckBox check_showpassword,check_remember;
+    List<GetQuaterType> arrayListQuater =new ArrayList<>();
+    List<GetUserType> arrayListUserType =new ArrayList<>();
+    GetUserType getUserType;
+    GetQuaterType getQuaterType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         SubmitBtn=findViewById(R.id.loginBtn);
+        applicationController= (ApplicationController) getApplication();
         username=findViewById(R.id.username);
         password=findViewById(R.id.password);
+        spinnerFinancialQuarter=findViewById(R.id.spinnerFinancialQuarter);
+        spinnerUserType=findViewById(R.id.spinnerUserType);
         loginLayout=findViewById(R.id.loginLayout);
         check_showpassword=findViewById(R.id.check_showpassword);
         check_remember=findViewById(R.id.check_remember);
+        restClient=new RestClient();
+        apiService=restClient.getApiService();
         String userId_save=sharedpreferences.getString("userId_save","");
         String Password_save=sharedpreferences.getString("Password_save","");
         boolean check_box=sharedpreferences.getBoolean("checkbox",false);
+        setDataInUserTypeSpinner();
+        setQuaterTypeInSpinner();
         if(userId_save.length()>2){
             username.setText(userId_save);
             password.setText(Password_save);
@@ -60,6 +99,12 @@ CheckBox check_showpassword,check_remember;
                 }
             }
         });
+
+
+
+
+
+
         check_remember.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -99,17 +144,158 @@ CheckBox check_showpassword,check_remember;
             public void onClick(View view) {
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
-                    if (username.getText().toString().equals("Admin") && password.getText().toString().equals("Admin1")){
-                        startActivity(new Intent(MainActivity.this,DashBoard.class));
-                        finish();
-                    }else {
-                        Toast.makeText(MainActivity.this, "Please enter correct username and password", Toast.LENGTH_SHORT).show();
-                    }
+                        RestClient restClient=new RestClient();
+                        ApiService apiService=restClient.getApiService();
+                        Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
+                        Call<List<JsonObject>> call=apiService.getLogin(paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
+                        call.enqueue(new Callback<List<JsonObject>>() {
+                            @Override
+                            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                                Log.d("TAG", "onResponse: "+response.body());
+                                if (response.body().size()!=0){
+                                    try {
+                                        if (response.body().get(0).get("pswd").getAsString().equals("0")){
+                                            Toast.makeText(MainActivity.this, "Please Enter Correct Username And Password!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+                                    if(response.body().get(0).get("userid")!=null) {
+
+                                        applicationController.setUsername(response.body().get(0).get("username").getAsString());
+                                        applicationController.setSchoolId(response.body().get(0).get("schoolid").getAsString());
+                                        getSchoolDetails();
+
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                                Log.d("TAG", "onFailure: "+t);
+                            }
+                        });
+
+
                 }else Toast.makeText(MainActivity.this, "Please enter username and password properly", Toast.LENGTH_SHORT).show();
 
 
             }
         });
 
+    }
+    private void getSchoolDetails() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "getSchoolDetails: "+paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
+        Call<List<GetSchoolDetails>> call=apiService.getSchoolDetails(paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
+        call.enqueue(new Callback<List<GetSchoolDetails>>() {
+            @Override
+            public void onResponse(Call<List<GetSchoolDetails>> call, Response<List<GetSchoolDetails>> response) {
+                getSchoolDetails=response.body();
+                Log.d("TAG", "onResponse: "+response.body());
+                applicationController.setSchoolName(getSchoolDetails.get(0).getSCHOOL_NAME());
+                applicationController.setSchoolAddress(getSchoolDetails.get(0).getADDRESS());
+                applicationController.setUsername(getSchoolDetails.get(0).getDESIGNATION());
+                startActivity(new Intent(MainActivity.this,DashBoard.class));
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<List<GetSchoolDetails>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private JsonObject paraSchoolDetails(String s, String periodID, String schoolId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",s);
+        jsonObject.addProperty("PeriodID",periodID);
+        jsonObject.addProperty("SchoolId",schoolId);
+        return  jsonObject;
+    }
+    private JsonObject paraLogin(String username, String usertype, String  password) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("LoginName",username);
+        jsonObject.addProperty("Usertype",usertype);
+        jsonObject.addProperty("Password",password);
+        return jsonObject;
+    }
+
+    private void setQuaterTypeInSpinner() {
+        RestClient restClient=new RestClient();
+        ApiService service= restClient.getApiService();
+        Call<List<GetQuaterType>> call=service.getPeriodList(paraGetActionObject("3"));
+        call.enqueue(new Callback<List<GetQuaterType>>() {
+            @Override
+            public void onResponse(Call<List<GetQuaterType>> call, Response<List<GetQuaterType>> response) {
+                arrayListQuater=response.body();
+                Resources res=getResources();
+
+                QuaterTypeAdapter adapter=new QuaterTypeAdapter(MainActivity.this,R.layout.spinner_card_orange,arrayListQuater,res);
+                spinnerFinancialQuarter.setAdapter(adapter);
+                spinnerFinancialQuarter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        getQuaterType= (GetQuaterType) adapterView.getSelectedItem();
+                        applicationController.setPeriodID(getQuaterType.getPeriodId());
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<GetQuaterType>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void setDataInUserTypeSpinner() {
+        RestClient restClient=new RestClient();
+        ApiService service= restClient.getApiService();
+        Call<List<GetUserType>> call=service.getUserType(paraGetActionObject("4"));
+        call.enqueue(new Callback<List<GetUserType>>() {
+            @Override
+            public void onResponse(Call<List<GetUserType>> call, Response<List<GetUserType>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                arrayListUserType=response.body();
+                Resources res=getResources();
+                UserTyepAdapter userTyepAdapter=new UserTyepAdapter(MainActivity.this,R.layout.spinner_card_orange,arrayListUserType,res);
+                spinnerUserType.setAdapter(userTyepAdapter);
+                spinnerUserType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            getUserType= (GetUserType) adapterView.getSelectedItem();
+                            applicationController.setUsertype(getUserType.getTypevalue());
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(Call<List<GetUserType>> call, Throwable t) {
+                Log.d("TAG", "onFailure: "+t);
+            }
+        });
+
+    }
+
+    private JsonObject paraGetActionObject(String s) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",s);
+        return jsonObject;
     }
 }

@@ -44,7 +44,7 @@
         android:layout_marginBottom="4dp"
         android:fontFamily="@font/montserrat_regular"
         android:text="Department of Secondary Education
- Govermnment of Uttar Pradesh"
+ Government of Uttar Pradesh"
         android:textAlignment="center"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
