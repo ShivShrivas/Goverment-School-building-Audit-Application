@@ -1,5 +1,7 @@
 package com.example.buildingaudit.RetrofitApi;
 
+import com.example.buildingaudit.Model.ClassDetailsResponse;
+import com.example.buildingaudit.Model.GetAllRoomsList;
 import com.example.buildingaudit.Model.GetQuaterType;
 import com.example.buildingaudit.Model.GetSchoolDetails;
 import com.example.buildingaudit.Model.GetUserType;
@@ -34,6 +36,18 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("Login/GetSchoolDetails")
     Call<List<GetSchoolDetails>> getSchoolDetails(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("Login/GetPhysicalParamList")
+    Call<List<GetAllRoomsList>> getRoomList(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SClassRoomDetails")
+    Call<List<ClassDetailsResponse>> uploadClassRoomDetails(@Body JsonObject object);
 
 
 }

@@ -5,16 +5,22 @@ import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Application;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,6 +30,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.buildingaudit.Activies.NoInternetConnection;
 import com.example.buildingaudit.Adapters.QuaterTypeAdapter;
 import com.example.buildingaudit.Adapters.UserTyepAdapter;
 import com.example.buildingaudit.Model.GetQuaterType;
@@ -31,6 +38,7 @@ import com.example.buildingaudit.Model.GetSchoolDetails;
 import com.example.buildingaudit.Model.GetUserType;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 
@@ -44,11 +52,13 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
 Button SubmitBtn;
 ApplicationController applicationController;
+
     SharedPreferences sharedpreferences;
 EditText password,username;
 Spinner spinnerUserType,spinnerFinancialQuarter;
 RestClient restClient;
 ApiService apiService;
+Dialog dialog;
 ConstraintLayout loginLayout;
 List<GetSchoolDetails> getSchoolDetails=new ArrayList<>();
     SharedPreferences.Editor editor;
@@ -57,11 +67,65 @@ CheckBox check_showpassword,check_remember;
     List<GetUserType> arrayListUserType =new ArrayList<>();
     GetUserType getUserType;
     GetQuaterType getQuaterType;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d("TAG", "onStart: runn");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("TAG", "onStop: runn");
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.d("TAG", "onRestart: runn");
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.d("TAG", "onPostResume: runnn");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d("TAG", "onPause: runn");
+    }
+    public boolean isConnected() {
+        boolean connected = false;
+        try {
+            ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo nInfo = cm.getActiveNetworkInfo();
+            WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            // wifi is enabled
+
+            connected = (nInfo != null && nInfo.isAvailable() && nInfo.isConnected()) ||wifiManager.isWifiEnabled();
+            return connected;
+        } catch (Exception e) {
+            Log.e("Connectivity Exception", e.getMessage());
+        }
+        return connected;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (isConnected()==false){
+            startActivity(new Intent(MainActivity.this, NoInternetConnection.class));
+        }
+        dialog = new Dialog(this);
 
+        dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog.setContentView (R.layout.progress_dialog);
+        dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog.setCancelable(false);
         sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         SubmitBtn=findViewById(R.id.loginBtn);
@@ -143,6 +207,8 @@ CheckBox check_showpassword,check_remember;
             @Override
             public void onClick(View view) {
 
+                dialog.show();
+
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
@@ -161,7 +227,7 @@ CheckBox check_showpassword,check_remember;
 
                                     }
                                     if(response.body().get(0).get("userid")!=null) {
-
+                                        applicationController.setUserid(response.body().get(0).get("userid").getAsString());
                                         applicationController.setUsername(response.body().get(0).get("username").getAsString());
                                         applicationController.setSchoolId(response.body().get(0).get("schoolid").getAsString());
                                         getSchoolDetails();
@@ -173,13 +239,22 @@ CheckBox check_showpassword,check_remember;
                             @Override
                             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
                                 Log.d("TAG", "onFailure: "+t);
+                                Snackbar.make(loginLayout,"Restart App or Check your internet Connection", BaseTransientBottomBar.LENGTH_INDEFINITE)
+                                        .setAction("Retry", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                setDataInUserTypeSpinner();
+                                                setQuaterTypeInSpinner();
+                                            }
+                                        });
                             }
                         });
 
 
-                }else Toast.makeText(MainActivity.this, "Please enter username and password properly", Toast.LENGTH_SHORT).show();
-
-
+                }else {
+                    Toast.makeText(MainActivity.this, "Please enter username and password properly", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
+                }
             }
         });
 
@@ -199,11 +274,13 @@ CheckBox check_showpassword,check_remember;
                 applicationController.setUsername(getSchoolDetails.get(0).getDESIGNATION());
                 startActivity(new Intent(MainActivity.this,DashBoard.class));
                 finish();
+                dialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<GetSchoolDetails>> call, Throwable t) {
-
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+              
             }
         });
 
@@ -225,6 +302,8 @@ CheckBox check_showpassword,check_remember;
     }
 
     private void setQuaterTypeInSpinner() {
+        dialog.show();
+
         RestClient restClient=new RestClient();
         ApiService service= restClient.getApiService();
         Call<List<GetQuaterType>> call=service.getPeriodList(paraGetActionObject("3"));
@@ -236,11 +315,13 @@ CheckBox check_showpassword,check_remember;
 
                 QuaterTypeAdapter adapter=new QuaterTypeAdapter(MainActivity.this,R.layout.spinner_card_orange,arrayListQuater,res);
                 spinnerFinancialQuarter.setAdapter(adapter);
+                dialog.dismiss();
                 spinnerFinancialQuarter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         getQuaterType= (GetQuaterType) adapterView.getSelectedItem();
                         applicationController.setPeriodID(getQuaterType.getPeriodId());
+
 
                     }
 
@@ -253,12 +334,21 @@ CheckBox check_showpassword,check_remember;
 
             @Override
             public void onFailure(Call<List<GetQuaterType>> call, Throwable t) {
+                dialog.dismiss();
 
+                Snackbar.make(loginLayout,"Please check internet and restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
+                        .setAction("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                onRestart();
+                            }
+                        });
             }
         });
     }
 
     private void setDataInUserTypeSpinner() {
+        dialog.show();
         RestClient restClient=new RestClient();
         ApiService service= restClient.getApiService();
         Call<List<GetUserType>> call=service.getUserType(paraGetActionObject("4"));
@@ -270,11 +360,13 @@ CheckBox check_showpassword,check_remember;
                 Resources res=getResources();
                 UserTyepAdapter userTyepAdapter=new UserTyepAdapter(MainActivity.this,R.layout.spinner_card_orange,arrayListUserType,res);
                 spinnerUserType.setAdapter(userTyepAdapter);
+                dialog.dismiss();
                 spinnerUserType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             getUserType= (GetUserType) adapterView.getSelectedItem();
                             applicationController.setUsertype(getUserType.getTypevalue());
+                        applicationController.setUsertypeid(getUserType.getUsertypeid());
 
                     }
 
@@ -288,7 +380,14 @@ CheckBox check_showpassword,check_remember;
             @Override
             public void onFailure(Call<List<GetUserType>> call, Throwable t) {
                 Log.d("TAG", "onFailure: "+t);
-            }
+
+                Snackbar.make(loginLayout,"Please check internet and restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
+                        .setAction("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                onRestart();
+                            }
+                        });            }
         });
 
     }

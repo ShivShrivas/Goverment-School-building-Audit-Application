@@ -12,7 +12,9 @@ public class ApplicationController extends Application {
         super.attachBaseContext(base);
         MultiDex.install(base);
     }
-
+    String longitude;
+    String Usertypeid;
+    String latitude;
     String Usertype;
 String PeriodID;
 String SchoolId;
@@ -23,6 +25,30 @@ String distid;
 String blockid;
 String  schoolName;
 String schoolAddress;
+
+    public String getUsertypeid() {
+        return Usertypeid;
+    }
+
+    public void setUsertypeid(String usertypeid) {
+        Usertypeid = usertypeid;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
 
     public String getUsertype() {
         return Usertype;

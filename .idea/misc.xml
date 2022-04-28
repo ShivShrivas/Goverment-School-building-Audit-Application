@@ -33,8 +33,10 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_after_submit_classrom_details.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dash_board.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_no_internet_connection.xml" value="0.19791666666666666" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_class_room_page.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_splash_screen.xml" value="0.67" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_detail_type_one.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_detail_type_one.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_bio_metric.xml" value="0.16" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boundry_wall.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boys_toilet.xml" value="0.22" />
@@ -61,12 +63,13 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_updatedetails_type_three.xml" value="0.12" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/cross_buton.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/custom_text_spiiner.xml" value="0.209375" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.18421052631578946" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/image_card_layout.xml" value="0.33" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_activity_layout.xml" value="0.44516129032258067" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_activity_layout.xml" value="0.24126984126984127" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_dashboard_layout.xml" value="1.3571428571428572" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/nav_header_main_activity__admin.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/new_smart_class.xml" value="0.5" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/progress_dialog.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/spinner_card_orange.xml" value="0.22003474232773595" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/update_details_three_item_card.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/menu/nav_menu.xml" value="0.1" />
