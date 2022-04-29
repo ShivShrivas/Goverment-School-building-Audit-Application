@@ -175,7 +175,7 @@ int cameraType;
                             @Override
                             public void onResponse(Call<List<ClassDetailsResponse>> call, Response<List<ClassDetailsResponse>> response) {
                                 Log.d("TAG", "onResponse: "+response.body());
-                                if (response.body().size()==1){
+                                if (response.body().size()==0){
                                     Toast.makeText(UpdateDetailTypeOne.this, "Data For this module is already uploaded", Toast.LENGTH_SHORT).show();
                                 }else{
                                     Intent i=new Intent(UpdateDetailTypeOne.this,OnSubmitClassRoomPage.class);

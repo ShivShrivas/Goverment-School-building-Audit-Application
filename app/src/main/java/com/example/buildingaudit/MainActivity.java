@@ -1,12 +1,9 @@
 package com.example.buildingaudit;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.app.Application;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,7 +19,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -128,7 +124,7 @@ CheckBox check_showpassword,check_remember;
         dialog.setCancelable(false);
         sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
-        SubmitBtn=findViewById(R.id.loginBtn);
+        SubmitBtn=findViewById(R.id.SubmitBtnStaffRoom);
         applicationController= (ApplicationController) getApplication();
         username=findViewById(R.id.username);
         password=findViewById(R.id.password);

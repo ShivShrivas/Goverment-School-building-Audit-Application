@@ -59,7 +59,7 @@ String schoolAddress;
     }
 
     public String getPeriodID() {
-        return PeriodID;
+        return "26";
     }
 
     public void setPeriodID(String periodID) {

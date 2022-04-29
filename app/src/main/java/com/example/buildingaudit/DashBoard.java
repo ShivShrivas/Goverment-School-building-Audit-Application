@@ -156,7 +156,7 @@ public class DashBoard extends AppCompatActivity {
 
                 dashboardRecview.setLayoutManager(new LinearLayoutManager(DashBoard.this));
 
-                adapter=new dashboardRecviewAdapter(DashBoard.this,arrayList);
+                adapter=new dashboardRecviewAdapter(DashBoard.this,arrayList,applicationController.getSchoolId(),applicationController.getPeriodID());
 
                 dashboardRecview.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

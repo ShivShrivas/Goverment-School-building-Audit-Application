@@ -50,4 +50,27 @@ public  interface ApiService {
     Call<List<ClassDetailsResponse>> uploadClassRoomDetails(@Body JsonObject object);
 
 
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewClassRoomDetails")
+    Call<List<JsonObject>> checkDetailsOfRooms(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewStaffRoomDetails")
+    Call<List<JsonObject>> checkStaffRoomDetails(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SStaffRoomDetails")
+    Call<List<JsonObject>> uploadStaffRoomDetails(@Body JsonObject object);
+
+
+
+
+
+
+
+
 }

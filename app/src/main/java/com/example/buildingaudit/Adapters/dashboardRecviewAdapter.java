@@ -3,15 +3,17 @@ package com.example.buildingaudit.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.buildingaudit.Activies.OnSubmitClassRoomPage;
+import com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails;
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
 import com.example.buildingaudit.Activies.UpdateDetailsBioMetric;
 import com.example.buildingaudit.Activies.UpdateDetailsBoundryWall;
@@ -36,16 +38,27 @@ import com.example.buildingaudit.Activies.UpdateDetailsTypeFour;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.example.buildingaudit.Activies.UpdatedetailsTypeThree;
 import com.example.buildingaudit.Model.GetAllRoomsList;
-import com.example.buildingaudit.Model.RecModel;
 import com.example.buildingaudit.R;
+import com.example.buildingaudit.RetrofitApi.ApiService;
+import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecviewAdapter.dashboardRecViewHolder> {
     Context context;
+    RestClient restClient=new RestClient();
+    ApiService apiService=restClient.getApiService();
+    String schoolId,periodId;
     List<GetAllRoomsList> arrayList=new ArrayList();
-    public dashboardRecviewAdapter(Context context, List<GetAllRoomsList> arrayList) {
+    public dashboardRecviewAdapter(Context context, List<GetAllRoomsList> arrayList,String schoolId,String periodId) {
+        this.periodId=periodId;
+        this.schoolId=schoolId;
    this.context=context;
    this.arrayList=arrayList;
     }
@@ -60,6 +73,8 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
 
     @Override
     public void onBindViewHolder(@NonNull dashboardRecViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+
         holder.roomTypetxt.setText(arrayList.get(position).getParamName());
         if (arrayList.get(position).getLastUpdateDateTime().toString().equals("0")){
             holder.updateOntxt.setText("Not Available");
@@ -72,10 +87,12 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
             public void onClick(View view) {
                 switch (arrayList.get(position).getParamId().toString()){
                     case "1":
-                        context.startActivity(new Intent(context, UpdateDetailTypeOne.class));
+                        checkDataOfClassRoom();
+
                         break;
                         case "2":
-                        context.startActivity(new Intent(context, UpdateDetailsTypeTwo.class));
+                            checkStaffRoomData();
+
                         break;
                         case "3":
                         context.startActivity(new Intent(context, UpdatedetailsTypeThree.class));
@@ -153,6 +170,61 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }
             }
         });
+    }
+
+    private void checkStaffRoomData() {
+        Log.d("TAG", "checkData: "+paraGetDetails("2",schoolId, periodId));
+        Call<List<JsonObject>> call=apiService.checkStaffRoomDetails(paraGetDetails("2",schoolId, periodId));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsTypeTwo.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_StaffRoomDetails.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkDataOfClassRoom() {
+        Log.d("TAG", "checkData: "+paraGetDetails("2",schoolId, periodId));
+        Call<List<JsonObject>> call=apiService.checkDetailsOfRooms(paraGetDetails("2",schoolId, periodId));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailTypeOne.class));
+                }else {
+                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+
+                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private JsonObject paraGetDetails(String action, String schoolId, String periodId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
     }
 
     @Override

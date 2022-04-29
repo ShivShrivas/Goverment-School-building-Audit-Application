@@ -178,17 +178,18 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView23"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="8dp"
             android:foreground="@drawable/cardbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <Spinner
-                android:id="@+id/spinnerStaffRoomAvailability"
+            <EditText
+                android:id="@+id/edtStaffRoomAvailabilityOnSubmit"
                 android:layout_width="match_parent"
+                android:textColor="@color/black"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp" />
         </androidx.cardview.widget.CardView>
@@ -220,8 +221,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
@@ -230,10 +231,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <Spinner
-                    android:id="@+id/spinnerStaffRoomStatus"
+                <EditText
+                    android:id="@+id/edtStaffRoomStatusOnSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="@color/black"
+
                     android:layout_margin="4dp" />
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -265,8 +268,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView1"
-                android:layout_width="220dp"
-                android:layout_height="wrap_content"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="4dp"
@@ -275,10 +278,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <Spinner
-                    android:id="@+id/spinnerFurnitureAvailabilty"
+                <EditText
+                    android:id="@+id/edtFurnitureAvailabiltyOnSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="@color/black"
+
                     android:layout_margin="4dp" />
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -311,7 +316,7 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView3"
-                android:layout_width="220dp"
+                android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="8dp"
@@ -321,10 +326,12 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <Spinner
-                    android:id="@+id/spinnerAlmiraAndRacksAvailabilty"
+                <EditText
+                    android:id="@+id/edtAlmiraAndRacksAvailabiltyOnSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="@color/black"
+
                     android:layout_margin="4dp" />
             </androidx.cardview.widget.CardView>
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -346,6 +353,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
+                android:padding="2dp"
                 android:text="Upload Images"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="17dp" />
@@ -356,12 +364,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:visibility="invisible"
                 android:padding="2dp"
                 android:src="@drawable/uplodimg" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewTwoTypetwo"
+            android:id="@+id/recyclerViewStafroomtwoOnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -374,14 +383,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:text="Submit"
+            android:visibility="invisible"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewTwoTypetwo" />
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewStafroomtwoOnSubmit" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
