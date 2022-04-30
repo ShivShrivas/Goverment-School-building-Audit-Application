@@ -203,7 +203,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/physicsLabBodyCard"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -303,7 +303,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/submitLabBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

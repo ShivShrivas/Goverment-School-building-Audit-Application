@@ -306,26 +306,30 @@ CheckBox check_showpassword,check_remember;
         call.enqueue(new Callback<List<GetQuaterType>>() {
             @Override
             public void onResponse(Call<List<GetQuaterType>> call, Response<List<GetQuaterType>> response) {
-                arrayListQuater=response.body();
-                Resources res=getResources();
-
-                QuaterTypeAdapter adapter=new QuaterTypeAdapter(MainActivity.this,R.layout.spinner_card_orange,arrayListQuater,res);
-                spinnerFinancialQuarter.setAdapter(adapter);
-                dialog.dismiss();
-                spinnerFinancialQuarter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        getQuaterType= (GetQuaterType) adapterView.getSelectedItem();
-                        applicationController.setPeriodID(getQuaterType.getPeriodId());
+                if (response.body()!=null) {
 
 
-                    }
+                    arrayListQuater = response.body();
+                    Resources res = getResources();
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
+                    QuaterTypeAdapter adapter = new QuaterTypeAdapter(MainActivity.this, R.layout.spinner_card_orange, arrayListQuater, res);
+                    spinnerFinancialQuarter.setAdapter(adapter);
+                    dialog.dismiss();
+                    spinnerFinancialQuarter.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            getQuaterType = (GetQuaterType) adapterView.getSelectedItem();
+                            applicationController.setPeriodID(getQuaterType.getPeriodId());
 
-                    }
-                });
+
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+                }
             }
 
             @Override

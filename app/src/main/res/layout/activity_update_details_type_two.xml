@@ -126,14 +126,6 @@
                     android:backgroundTint="#292929"
                     android:src="@drawable/ic_notifications" />
 
-                <ImageView
-                    android:id="@+id/hamMenu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/black"
-                    android:src="@drawable/ic_menu" />
 
 
             </LinearLayout>
@@ -219,7 +211,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+                android:id="@+id/physicsLabBodyCard"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -305,12 +297,12 @@
                 android:textColor="?attr/colorPrimary"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cardView3"
+                app:layout_constraintEnd_toStartOf="@+id/chemistryLabBodyCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
+                android:id="@+id/chemistryLabBodyCard"
                 android:layout_width="220dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

@@ -140,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Practical Labs"
+        android:text="Practical Labs Details"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -249,10 +249,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerSciencelabAvailability"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtSciencelabAvailability"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -313,10 +316,14 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerScienceEquipmentStatus"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+
+
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtScienceEquipmentStatus"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -355,10 +362,14 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerScienceLabCondition"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+
+
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtScienceLabCondition"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -381,6 +392,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/scienceLabImageCard"
                     android:layout_width="60dp"
+                    android:visibility="gone"
                     android:layout_height="60dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
@@ -488,10 +500,12 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerPhysicslabAvailability"
+                                      <EditText
+                                          android:textAlignment="center"
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtPhysicslabAvailability"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -550,10 +564,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerPhysicsEquipmentStatus"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtPhysicsEquipmentStatus"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                   
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -592,10 +609,12 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerPhysicsLabCondition"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtPhysicsLabCondition"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -621,6 +640,8 @@
                     android:layout_height="60dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
+                    android:visibility="gone"
+
                     android:backgroundTint="?attr/colorPrimary"
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
@@ -713,10 +734,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerChemistrylabAvailability"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtChemistrylabAvailability"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                  
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -775,10 +799,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerChemistryEquipmentStatus"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtChemistryEquipmentStatus"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                  
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -817,10 +844,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerChemistryLabCondition"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtChemistryLabCondition"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                             
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -848,6 +878,8 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="?attr/colorPrimary"
                     app:cardCornerRadius="50dp"
+                    android:visibility="gone"
+
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/chemistryLabBodyCard">
@@ -938,10 +970,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerBiologylabAvailability"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtBiologylabAvailability"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                             
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1000,10 +1035,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerBilogyEquipmentStatus"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtBilogyEquipmentStatus"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                             
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1042,10 +1080,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerBiologyLabCondition"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtBiologyLabCondition"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                            
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1073,6 +1114,8 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="?attr/colorPrimary"
                     app:cardCornerRadius="50dp"
+                    android:visibility="gone"
+
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/bioloyLabBodyCard">
@@ -1161,10 +1204,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerGeographylabAvailability"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtGeographyAvaialabilty"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                          
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1223,10 +1269,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerGeographyEquipmentStatus"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtGeographyEquipmentStatus"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                             
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1265,10 +1314,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerGeographyLabCondition"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtGeographyLabCondition"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                         
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1299,6 +1351,8 @@
                     android:backgroundTint="?attr/colorPrimary"
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
+                    android:visibility="gone"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/geoGraphyLabBodyCard">
 
@@ -1387,10 +1441,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerHomeSciencelabAvailability"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtHomeSciencelabAvailability"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                                 
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1449,10 +1506,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerHomeScienceEquipmentStatus"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtHomeScienceEquipmentStatus"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1491,10 +1551,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerHomeScienceLabCondition"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtHomeScienceLabCondition"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                            
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1521,6 +1584,8 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="?attr/colorPrimary"
+                    android:visibility="gone"
+
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -1611,10 +1676,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerHomeMusiclabAvailability"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtHomeMusiclabAvailability"
                                     android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
+                              
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1673,10 +1741,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerMusicEquipmentStatus"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtMusicEquipmentStatus"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                               
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1715,10 +1786,13 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                <Spinner
-                                    android:id="@+id/spinnerMusicLabCondition"
+                                   <EditText                                      android:textAlignment="center"
+
+                                    android:layout_height="30dp"
+                                    android:background="@drawable/cardbg"
+                                    android:id="@+id/edtMusicLabCondition"
                                     android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
+                                 
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -1748,6 +1822,8 @@
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="?attr/colorPrimary"
                     app:cardCornerRadius="50dp"
+                    android:visibility="gone"
+
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/musicLabBodyCard">
@@ -1766,6 +1842,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
+                android:visibility="gone"
                 android:background="?attr/colorPrimary"
                 android:text="Submit Details"
                 android:textColor="@color/white"

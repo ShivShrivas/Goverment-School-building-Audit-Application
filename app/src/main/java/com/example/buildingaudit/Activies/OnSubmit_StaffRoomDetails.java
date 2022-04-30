@@ -67,11 +67,10 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                 edtAlmiraAndRacksAvailabiltyOnSubmit.setText(response.body().get(0).get("AlmirahRacksAvl").getAsString());
                 edtFurnitureAvailabiltyOnSubmit.setText(response.body().get(0).get("FurnitureAvl").getAsString());
                 edtStaffRoomStatusOnSubmit.setText(response.body().get(0).get("Status").getAsString());
-                String goodRoomsList=response.body().get(0).get("StaffPhotoPath").getAsString();
-                String[] StaffPhotoPathList=goodRoomsList.split(",");
+                String[] StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_StaffRoomDetails.this,StaffPhotoPathList);
                 recyclerViewStafroomtwoOnSubmit.setAdapter(onlineImageRecViewAdapter);
-                onlineImageRecViewAdapter.notifyDataSetChanged();
+
             }
 
             @Override

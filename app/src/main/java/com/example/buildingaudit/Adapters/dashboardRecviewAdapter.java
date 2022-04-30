@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildingaudit.Activies.OnSubmitClassRoomPage;
+import com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails;
 import com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails;
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
 import com.example.buildingaudit.Activies.UpdateDetailsBioMetric;
@@ -38,6 +39,7 @@ import com.example.buildingaudit.Activies.UpdateDetailsTypeFour;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.example.buildingaudit.Activies.UpdatedetailsTypeThree;
 import com.example.buildingaudit.Model.GetAllRoomsList;
+import com.example.buildingaudit.Model.LabDetailsResponse;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -76,11 +78,18 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
 
 
         holder.roomTypetxt.setText(arrayList.get(position).getParamName());
-        if (arrayList.get(position).getLastUpdateDateTime().toString().equals("0")){
+        try {
+            if (arrayList.get(position).getLastUpdateDateTime().toString().equals("0")){
+                holder.updateOntxt.setText("Not Available");
+
+            }else {
+                holder.updateOntxt.setText(arrayList.get(position).getLastUpdateDateTime());
+
+            }
+        }catch (Exception e){
             holder.updateOntxt.setText("Not Available");
-        }else {
-            holder.updateOntxt.setText(arrayList.get(position).getLastUpdateDateTime());
         }
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +104,8 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
 
                         break;
                         case "3":
-                        context.startActivity(new Intent(context, UpdatedetailsTypeThree.class));
+                            checkPracticalLab();
+
                         break;
                         case "4":
                         context.startActivity(new Intent(context, UpdateDetailsTypeFour.class));
@@ -172,9 +182,33 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
         });
     }
 
-    private void checkStaffRoomData() {
+    private void checkPracticalLab() {
         Log.d("TAG", "checkData: "+paraGetDetails("2",schoolId, periodId));
-        Call<List<JsonObject>> call=apiService.checkStaffRoomDetails(paraGetDetails("2",schoolId, periodId));
+        Call<List<LabDetailsResponse>> call=apiService.checkLabDetails(paraGetDetails("2",schoolId, periodId));
+        call.enqueue(new Callback<List<LabDetailsResponse>>() {
+            @Override
+            public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdatedetailsTypeThree.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_PracticalLabsDetails.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<LabDetailsResponse>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkStaffRoomData() {
+        Log.d("TAG", "checkData: "+paraGetDetails2("2",schoolId, periodId,"2"));
+        Call<List<JsonObject>> call=apiService.checkStaffRoomDetails(paraGetDetails2("2",schoolId, periodId,"2"));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -222,6 +256,14 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
     private JsonObject paraGetDetails(String action, String schoolId, String periodId) {
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
         jsonObject.addProperty("SchoolId",schoolId);
         jsonObject.addProperty("PeriodID",periodId);
         return jsonObject;

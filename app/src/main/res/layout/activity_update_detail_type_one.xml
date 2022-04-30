@@ -126,14 +126,6 @@
                     android:backgroundTint="#292929"
                     android:src="@drawable/ic_notifications" />
 
-                <ImageView
-                    android:id="@+id/hamMenu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/black"
-                    android:src="@drawable/ic_menu" />
 
 
             </LinearLayout>

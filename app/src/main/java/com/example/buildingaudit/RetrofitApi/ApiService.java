@@ -5,6 +5,7 @@ import com.example.buildingaudit.Model.GetAllRoomsList;
 import com.example.buildingaudit.Model.GetQuaterType;
 import com.example.buildingaudit.Model.GetSchoolDetails;
 import com.example.buildingaudit.Model.GetUserType;
+import com.example.buildingaudit.Model.LabDetailsResponse;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -65,6 +66,20 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SStaffRoomDetails")
     Call<List<JsonObject>> uploadStaffRoomDetails(@Body JsonObject object);
+
+
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParamLabs/SPracticalLabDetails")
+    Call<List<JsonObject>> uploadLabDetails(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParamLabs/ViewPracticalLabDetails")
+    Call<List<LabDetailsResponse>> checkLabDetails(@Body JsonObject object);
 
 
 

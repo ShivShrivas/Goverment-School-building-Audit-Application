@@ -74,9 +74,9 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
         recyclerViewTwoTypeOneAfterSubmit=findViewById(R.id.recyclerViewTwoTypeOneAfterSubmit);
         recyclerViewThreeTypeOneAfterSubmit=findViewById(R.id.recyclerViewThreeTypeOneAfterSubmit);
         recyclerViewFourTypeOneAfterSubmit=findViewById(R.id.recyclerViewFourTypeOneAfterSubmit);
-        recyclerViewTwoTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        recyclerViewThreeTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        recyclerViewFourTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        recyclerViewTwoTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewThreeTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerViewFourTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
@@ -129,6 +129,14 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
                 String[] minorRepairingList=minorRepairing.split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,goodConditionsList);
                 recyclerViewTwoTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter);
+
+
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,minorRepairingList);
+                recyclerViewThreeTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter2);
+
+
+              OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,majorRepairingList);
+                recyclerViewFourTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter3);
                 onlineImageRecViewAdapter.notifyDataSetChanged();
 
 

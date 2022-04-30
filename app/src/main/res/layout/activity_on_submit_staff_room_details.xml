@@ -169,7 +169,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="Saparate Room Available"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="@color/black"
             android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="@+id/cardView23"
             app:layout_constraintEnd_toStartOf="@+id/cardView23"
@@ -213,14 +213,14 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:text="Status"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView"
+                android:id="@+id/physicsLabBodyCard"
                 android:layout_width="170dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="4dp"
@@ -259,7 +259,7 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
                 android:text="Furniture Available"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/cardView1"
@@ -307,15 +307,15 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginBottom="4dp"
                 android:text="Almirah/Racks Available"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/black"
                 android:textSize="14dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/cardView3"
+                app:layout_constraintEnd_toStartOf="@+id/chemistryLabBodyCard"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView3"
+                android:id="@+id/chemistryLabBodyCard"
                 android:layout_width="170dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
@@ -355,7 +355,7 @@
                 android:layout_weight="1"
                 android:padding="2dp"
                 android:text="Upload Images"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="@color/black"
                 android:textSize="17dp" />
 
 

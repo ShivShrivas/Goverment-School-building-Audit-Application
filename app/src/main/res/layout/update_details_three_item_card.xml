@@ -79,7 +79,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
+            android:id="@+id/physicsLabBodyCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -201,7 +201,7 @@
             app:cardCornerRadius="50dp"
             app:cardElevation="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/cardView">
+            app:layout_constraintEnd_toEndOf="@+id/physicsLabBodyCard">
 
             <ImageView
                 android:id="@+id/imageUpoadPracticalSubjectWise"
