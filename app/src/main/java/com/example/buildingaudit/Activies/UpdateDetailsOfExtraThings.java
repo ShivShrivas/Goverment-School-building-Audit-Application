@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -48,13 +50,20 @@ public class UpdateDetailsOfExtraThings extends AppCompatActivity {
     ImageView extraThingsImageUploadBtn;
     RecyclerView recyclerViewExtraThings;
 Spinner spinnerWifiPresent;
+
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_of_extra_things);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

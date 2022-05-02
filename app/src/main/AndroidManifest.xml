@@ -21,6 +21,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Activies.OnSubmit_BioMetricDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_DrinkingWaterDetails"
+            android:exported="false" />
+        <activity
             android:name=".Activies.OnSubmit_LibraryDetails"
             android:exported="false" />
         <activity

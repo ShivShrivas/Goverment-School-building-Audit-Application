@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -32,6 +34,8 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
     ImageView multipurposeHallImageUploadBtn;
     RecyclerView recyclerViewMultipurposeHall;
     Spinner spinnerMultipurposeHall,spinnerMultiPurposeHallStatus;
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -59,6 +63,11 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
         setContentView(R.layout.activity_update_details_multipurpose_hall);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

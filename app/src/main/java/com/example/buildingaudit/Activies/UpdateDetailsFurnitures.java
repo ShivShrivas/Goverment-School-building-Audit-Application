@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -57,6 +58,8 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
     RecyclerView recyclerViewFurnitures;
     EditText edtTrippelSeated,edtDoubleSeated,edtSingleSeated;
     TextView edtTotalFurnirtureStrenght;
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,13 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
             }
-        });        furniutresImageUploadBtn=findViewById(R.id.furniutresImageUploadBtn);
+        });
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        furniutresImageUploadBtn=findViewById(R.id.furniutresImageUploadBtn);
         recyclerViewFurnitures=findViewById(R.id.recyclerViewFurnitures);
         edtTotalFurnirtureStrenght=findViewById(R.id.edtTotalFurnirtureStrenght);
         edtTrippelSeated=findViewById(R.id.edtTrippelSeated);

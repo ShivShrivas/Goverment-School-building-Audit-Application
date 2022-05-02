@@ -121,8 +121,8 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
         arrayListSpinner.add("Good Condition");
-        arrayListSpinner.add("Minor repairing requored");
-        arrayListSpinner.add("major repairing required");
+        arrayListSpinner.add("Minor repairing");
+        arrayListSpinner.add("major repairing");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);

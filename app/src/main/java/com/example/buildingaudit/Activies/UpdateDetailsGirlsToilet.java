@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -53,6 +55,8 @@ public class UpdateDetailsGirlsToilet extends AppCompatActivity {
     ImageView girlsToiletImageUploadBtn;
     RecyclerView recyclerViewGirlsToilet;
 Spinner spinnerGirlsSanetoryNapkin,spinnerGirlsIncinerator,spinnerGirlsDustbin,spinnerGirlsDoorFacility,spinnerCWSNGirlstoiletAvalabilty;
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +68,14 @@ Spinner spinnerGirlsSanetoryNapkin,spinnerGirlsIncinerator,spinnerGirlsDustbin,s
             public void onClick(View view) {
                 onBackPressed();
             }
-        });        spinnerGirlsIncinerator=findViewById(R.id.spinnerGirlsIncinerator);
+        });        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+
+
+        spinnerGirlsIncinerator=findViewById(R.id.spinnerGirlsIncinerator);
         spinnerGirlsDustbin=findViewById(R.id.spinnerGirlsDustbin);
         spinnerGirlsSanetoryNapkin=findViewById(R.id.spinnerGirlsSanetoryNapkin);
         spinnerGirlsDoorFacility=findViewById(R.id.spinnerGirlsDoorFacility);

@@ -16,8 +16,10 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -54,6 +56,8 @@ RecyclerView recyclerViewSoundSystm;
     }
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +69,13 @@ RecyclerView recyclerViewSoundSystm;
             public void onClick(View view) {
                 onBackPressed();
             }
-        });        recyclerViewSoundSystm=findViewById(R.id.recyclerViewSoundSystm);
+        });
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        recyclerViewSoundSystm=findViewById(R.id.recyclerViewSoundSystm);
         soundSystemImageUploadBtn=findViewById(R.id.soundSystemImageUploadBtn);
         spinnerSoundSystem=findViewById(R.id.spinnerSoundSystem);
         spinnerSchoolBand=findViewById(R.id.spinnerSchoolBand);

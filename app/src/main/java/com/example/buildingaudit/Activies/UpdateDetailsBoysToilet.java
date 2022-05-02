@@ -16,8 +16,10 @@ import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -54,10 +56,17 @@ public class UpdateDetailsBoysToilet extends AppCompatActivity {
 Spinner spinnerCWSNBoysAvailability,spinnerBoysDoors,spinnerBoysDustbin,spinnerBoysIncinerator;
 ImageView boysToiletImageUploadBtn;
 RecyclerView recyclerViewBoysToilet;
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_boys_toilet);
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
         spinnerCWSNBoysAvailability=findViewById(R.id.spinnerCWSNBoysAvailability);
         spinnerBoysDoors=findViewById(R.id.spinnerBoysDoors);
         boysToiletImageUploadBtn=findViewById(R.id.boysToiletImageUploadBtn);

@@ -20,8 +20,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -63,6 +65,11 @@ public class UpdateDetailsSmartClass extends AppCompatActivity {
 Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWorkingStatusSmartClass,
         spinnerTeacherAvailbilitySmartClass,spinnerProjectorSmartClass,spinnerLearningContentSmartClass,
         spinnerDigitalBoardSmartClass,smartClassAvailabilty;
+    ApplicationController applicationController;
+    TextView userName,schoolAddress,schoolName;
+    Button submitSmartClassBtn;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +81,17 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
             public void onClick(View view) {
                 onBackPressed();
             }
-        });        spinnerInstallationYearSmartClass=findViewById(R.id.spinnerInstallationYearSmartClass);
+        });
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        spinnerInstallationYearSmartClass=findViewById(R.id.spinnerInstallationYearSmartClass);
         layoutForAddRooms=findViewById(R.id.layoutForAddRooms);
         spinnerUnderSchemeSmartClass=findViewById(R.id.spinnerUnderSchemeSmartClass);
         buttonForAddRooms=findViewById(R.id.buttonForAddRooms);
+        submitSmartClassBtn=findViewById(R.id.submitSmartClassBtn);
         spinnerWorkingStatusSmartClass=findViewById(R.id.spinnerWorkingStatusSmartClass);
         spinnerTeacherAvailbilitySmartClass=findViewById(R.id.spinnerTeacherAvailbilitySmartClass);
         spinnerProjectorSmartClass=findViewById(R.id.spinnerProjectorSmartClass);
@@ -181,6 +195,18 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         recyclerViewSmartClass.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+        submitSmartClassBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(UpdateDetailsSmartClass.this, "room count: "+layoutForAddRooms.getChildCount(), Toast.LENGTH_SHORT).show();
+//                String[] array = new String[container.getChildCount()];
+//
+//                for (int i=0; i < container.getChildCount(); i++){
+//                    EditText editText = (EditText)container.getChildAt(i);
+//                    array[i] = editText.getText().toString();
+//                }
+            }
+        });
         buttonForAddRooms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -189,7 +215,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                 Spinner spinnerWorkingStatusSmartClassAdd=addClsss.findViewById(R.id.spinnerWorkingStatusSmartClassAdd);
                 ImageView deleteRoomBtn=addClsss.findViewById(R.id.deleteRoomBtn);
                 TextView txtSmartRoomName=addClsss.findViewById(R.id.txtSmartRoomName);
-                txtSmartRoomName.setText("Smart Classoom "+smartClassNumber);
+                txtSmartRoomName.setText("Smart Classoom");
                 Spinner spinnerUnderSchemeSmartClassAdd=addClsss.findViewById(R.id.spinnerUnderSchemeSmartClassAdd);
                 EditText edtSmartClassCompanyNameAdd=addClsss.findViewById(R.id.edtSmartClassCompanyNameAdd);
                 Spinner spinnerInstallationYearSmartClassAdd=addClsss.findViewById(R.id.spinnerInstallationYearSmartClassAdd);
@@ -204,6 +230,8 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                     }
                 });
                 layoutForAddRooms.addView(addClsss);
+
+
             }
         });
     }

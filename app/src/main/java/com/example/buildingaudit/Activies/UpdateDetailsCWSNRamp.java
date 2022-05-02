@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -55,7 +57,8 @@ public class UpdateDetailsCWSNRamp extends AppCompatActivity {
     ImageView CSWNRampImageUploadBtn;
     RecyclerView recyclerViewCWSNRamp;
     Spinner spinnerCWSNWorkingStatus, spinnerCWSNAvailabilty;
-
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +71,11 @@ public class UpdateDetailsCWSNRamp extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
         spinnerCWSNAvailabilty = findViewById(R.id.spinnerCWSNAvailabilty);
         spinnerCWSNWorkingStatus = findViewById(R.id.spinnerCWSNWorkingStatus);
         recyclerViewCWSNRamp = findViewById(R.id.recyclerViewCWSNRamp);

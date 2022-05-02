@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -53,7 +55,8 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
     ImageAdapter4 adapter6;
     ImageView firefightingImageUploadBtn;
     RecyclerView recyclerViewFireFightning;
-
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     Spinner spinnerFireFightTraining,spinnerFireFightRenewalStatus,spinnerFireFightWorkingStatus,spinnerFireFightingInstallationYear,spinnerFireFightAvailabelty;
 
     @Override
@@ -67,7 +70,13 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
             }
-        });        spinnerFireFightTraining=findViewById(R.id.spinnerFireFightTraining);
+        });
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        spinnerFireFightTraining=findViewById(R.id.spinnerFireFightTraining);
         recyclerViewFireFightning=findViewById(R.id.recyclerViewFireFightning);
         firefightingImageUploadBtn=findViewById(R.id.firefightingImageUploadBtn);
         spinnerFireFightRenewalStatus=findViewById(R.id.spinnerFireFightRenewalStatus);

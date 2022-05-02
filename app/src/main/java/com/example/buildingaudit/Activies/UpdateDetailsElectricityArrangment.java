@@ -15,8 +15,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -54,6 +56,9 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
     Spinner spinnerElectricStatus,spinnerSource,spinnerInternalElectrification,spinnerElectricityAvailabelty;
         ImageView electricityArrangementImageUploadBtn;
         RecyclerView recyclerViewElectricityArrangment;
+
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +70,13 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
             public void onClick(View view) {
                 onBackPressed();
             }
-        });        spinnerElectricStatus=findViewById(R.id.spinnerElectricStatus);
+        });
+        applicationController= (ApplicationController) getApplication();
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        spinnerElectricStatus=findViewById(R.id.spinnerElectricStatus);
         spinnerSource=findViewById(R.id.spinnerSource);
         recyclerViewElectricityArrangment=findViewById(R.id.recyclerViewElectricityArrangment);
         electricityArrangementImageUploadBtn=findViewById(R.id.electricityArrangementImageUploadBtn);

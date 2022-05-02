@@ -109,16 +109,40 @@ public  interface ApiService {
     Call<List<JsonObject>> checkPlayGroundDetails(@Body JsonObject object);
 
 
-
-
-
-
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SLibraryDetails")
     Call<List<JsonObject>> uploadLibraryDetails(@Body JsonObject object);
 
 
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewLibraryDetails")
+    Call<List<JsonObject>> checkLibraryDetails(@Body JsonObject object);
 
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SDrinkingWaterDetails")
+    Call<List<JsonObject>> uploadDrinkingWater(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewDrinkingWaterDetails")
+    Call<List<JsonObject>> checkDrinkingWater(@Body JsonObject object);
+
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SBiometricDetails")
+    Call<List<JsonObject>> uploadBioMetricDetails(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewBiometricDetails")
+    Call<List<JsonObject>> checkBioMetricDetails(@Body JsonObject object);
 
 
 
