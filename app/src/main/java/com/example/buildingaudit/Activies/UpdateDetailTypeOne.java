@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,6 +18,7 @@ import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +69,8 @@ int cameraType;
     public ArrayList<Bitmap> arrayListImages4 = new ArrayList<>();
     ImageAdapter adapter;
     ImageAdapter2 adapter2;
+    Dialog dialog;
+
     ImageAdapter3 adapter3;
     ApplicationController applicationController;
     ImageAdapter4 adapter4;
@@ -102,7 +106,12 @@ int cameraType;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_detail_type_one);
         applicationController= (ApplicationController) getApplication();
+        dialog = new Dialog(this);
+        dialog.setCancelable(false);
 
+        dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog.setContentView (R.layout.respons_dialog);
+        dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -169,23 +178,34 @@ int cameraType;
                         ApiService apiService=restClient.getApiService();
                         Log.d("TAG", "onClick: "+paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
                                 blackBoardCount.getText().toString(),whiteBoardCont.getText().toString(),greenBoardCount.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),"GoodConditionPhotos",arrayListImages2,"MajorRepairingPhotos",arrayListImages3,"MinorRepairingPhotos",arrayListImages4));
-                        Call<List<ClassDetailsResponse>> call=apiService.uploadClassRoomDetails(paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
+                        Call<List<JsonObject>> call=apiService.uploadClassRoomDetails(paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
                               blackBoardCount.getText().toString(),whiteBoardCont.getText().toString(),greenBoardCount.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),"GoodConditionPhotos",arrayListImages2,"MajorRepairingPhotos",arrayListImages3,"MinorRepairingPhotos",arrayListImages4));
-                        call.enqueue(new Callback<List<ClassDetailsResponse>>() {
+                        call.enqueue(new Callback<List<JsonObject>>() {
                             @Override
-                            public void onResponse(Call<List<ClassDetailsResponse>> call, Response<List<ClassDetailsResponse>> response) {
+                            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                                 Log.d("TAG", "onResponse: "+response.body());
-                                if (response.body().size()==0){
-                                    Toast.makeText(UpdateDetailTypeOne.this, "Data For this module is already uploaded", Toast.LENGTH_SHORT).show();
-                                }else{
-                                    Intent i=new Intent(UpdateDetailTypeOne.this,OnSubmitClassRoomPage.class);
-                                    i.putExtra("ClassDetailsResponse",response.body().toString());
-                                    startActivity(i);
+
+                                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+
+                                if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                    textView.setText("You already uploaded details ");
+
+                                }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                    textView.setText("Your details Submitted successfully ");
                                 }
+                                dialog.show();
+                                button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        onBackPressed();
+                                        dialog.dismiss();
+                                    }
+                                });
                             }
 
                             @Override
-                            public void onFailure(Call<List<ClassDetailsResponse>> call, Throwable t) {
+                            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
 
                             }
                         });

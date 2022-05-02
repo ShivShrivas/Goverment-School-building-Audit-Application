@@ -218,6 +218,7 @@ CheckBox check_showpassword,check_remember;
                                     try {
                                         if (response.body().get(0).get("pswd").getAsString().equals("0")){
                                             Toast.makeText(MainActivity.this, "Please Enter Correct Username And Password!!", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
                                         }
                                     }catch (Exception e){
 
@@ -229,18 +230,24 @@ CheckBox check_showpassword,check_remember;
                                         getSchoolDetails();
 
                                     }
+                                    else {
+                                        Toast.makeText(MainActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
                                 Log.d("TAG", "onFailure: "+t);
+                                dialog.dismiss();
                                 Snackbar.make(loginLayout,"Restart App or Check your internet Connection", BaseTransientBottomBar.LENGTH_INDEFINITE)
                                         .setAction("Retry", new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
                                                 setDataInUserTypeSpinner();
                                                 setQuaterTypeInSpinner();
+                                                dialog.show();
                                             }
                                         });
                             }

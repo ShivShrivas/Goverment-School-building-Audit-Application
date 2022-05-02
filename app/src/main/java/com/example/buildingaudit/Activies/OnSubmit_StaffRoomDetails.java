@@ -91,6 +91,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
     private JsonObject paraGetDetails(String action, String schoolId, String periodId) {
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId","2");
         jsonObject.addProperty("SchoolId",schoolId);
         jsonObject.addProperty("PeriodID",periodId);
         return jsonObject;

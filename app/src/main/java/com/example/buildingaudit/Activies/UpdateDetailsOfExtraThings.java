@@ -54,6 +54,7 @@ Spinner spinnerWifiPresent;
         setContentView(R.layout.activity_update_details_of_extra_things);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

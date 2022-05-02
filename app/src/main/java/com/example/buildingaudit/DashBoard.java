@@ -96,6 +96,7 @@ public class DashBoard extends AppCompatActivity {
     ApplicationController applicationController;
     DrawerLayout mainDrawerLayout;
     Dialog dialog;
+    LinearLayout logOutBtn;
     ImageView hamMenu;
     dashboardRecviewAdapter adapter;
 
@@ -115,6 +116,7 @@ public class DashBoard extends AppCompatActivity {
         }
         return connected;
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +135,15 @@ public class DashBoard extends AppCompatActivity {
         dashboardRecview = findViewById(R.id.recViewDashboard);
         userName = findViewById(R.id.userName);
         schoolAddress = findViewById(R.id.schoolAddress);
+        logOutBtn = findViewById(R.id.logOutBtn);
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(DashBoard.this,MainActivity.class));
+                finish();
+            }
+        });
         schoolName = findViewById(R.id.schoolName);
         mainDrawerLayout = findViewById(R.id.mainDrawerLayout);
         hamMenu = findViewById(R.id.hamMenu);
@@ -228,6 +239,32 @@ public class DashBoard extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         }
+
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<GetAllRoomsList>> call=apiService.getRoomList(paraRoom("1",applicationController.getSchoolId(),applicationController.getPeriodID()));
+        call.enqueue(new Callback<List<GetAllRoomsList>>() {
+            @Override
+            public void onResponse(Call<List<GetAllRoomsList>> call, Response<List<GetAllRoomsList>> response) {
+                Log.d("TAG", "onResponse: getAllrooms "+response.body());
+                arrayList=response.body();
+
+                dashboardRecview.setLayoutManager(new LinearLayoutManager(DashBoard.this));
+
+                adapter=new dashboardRecviewAdapter(DashBoard.this,arrayList,applicationController.getSchoolId(),applicationController.getPeriodID());
+
+                dashboardRecview.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<List<GetAllRoomsList>> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
     private void getLocations() {

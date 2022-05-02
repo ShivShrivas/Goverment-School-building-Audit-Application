@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activies.UpdateDetailsPlayground">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
@@ -16,10 +17,10 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Open Gym"
+            app:title="Playground"
 
+            android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
@@ -137,8 +138,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Open Gym"
+        android:text="Playground"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,10 +179,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <Spinner
-                android:id="@+id/spinnerGymAvailabelty"
+            <EditText
+
+                android:layout_height="30dp"
+                android:background="@drawable/cardbg"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:id="@+id/EditTextPlaygroundAvailabelty"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1" />
         </androidx.cardview.widget.CardView>
@@ -208,7 +212,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-            android:text="Working Status"
+            android:text="Levelling Status"
             android:textColor="@color/textColor1"
             android:textSize="15dp" />
 
@@ -216,17 +220,21 @@
 
             android:layout_width="match_parent"
 
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:foreground="@drawable/cardbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <EditText
 
-            <Spinner
-                android:id="@+id/gymWorkingStatus"
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:background="@drawable/cardbg"
+                android:id="@+id/EditTextLevellingStatus"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+
                 android:layout_margin="4dp"
                 android:layout_weight="1" />
         </androidx.cardview.widget.CardView>
@@ -268,12 +276,63 @@
 
 
             <EditText
-                android:id="@+id/edtGymArea"
+
+                android:layout_height="30dp"
+                android:background="@drawable/cardbg"
+                android:id="@+id/edtAreaOfPlayGround"
+                android:inputType="number"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_margin="4dp"
+                android:maxLength="4"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
-                android:maxLines="1"
-                android:maxLength="9"
-                android:layout_height="match_parent" />
+           />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+
+
+            android:text="Availability of Standard Track"
+            android:textColor="@color/textColor1"
+            android:textSize="15dp" />
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <EditText
+
+                android:layout_height="30dp"
+                android:background="@drawable/cardbg"
+                android:id="@+id/EditTexttrackAvalabiltyStatus"
+                android:layout_width="match_parent"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:layout_margin="4dp"
+                android:layout_weight="1" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
@@ -287,7 +346,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
 
         <TextView
             android:layout_width="match_parent"
@@ -300,36 +359,39 @@
 
 
         <ImageView
-            android:id="@+id/gymImageUploadBtn"
+            android:id="@+id/playGroundImageUploadBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:visibility="invisible"
             android:padding="2dp"
             android:src="@drawable/uplodimg" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewGym"
+        android:id="@+id/recyclerViewPlayground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/GymsubmitLabBtn"
+        android:id="@+id/submitPlayGroundBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:visibility="gone"
         android:background="?attr/colorPrimary"
-        android:text="Submit"
+        android:text="Submit Details"
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewGym" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPlayground" />
 </androidx.constraintlayout.widget.ConstraintLayout>

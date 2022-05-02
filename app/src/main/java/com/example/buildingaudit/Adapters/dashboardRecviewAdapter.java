@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildingaudit.Activies.OnSubmitClassRoomPage;
+import com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails;
+import com.example.buildingaudit.Activies.OnSubmit_PlaygroundDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails;
 import com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails;
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
@@ -111,10 +113,11 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         context.startActivity(new Intent(context, UpdateDetailsTypeFour.class));
                         break;
                         case "5":
-                        context.startActivity(new Intent(context, UpdateDetailsPlayground.class));
+                            checkPlayGroundData();
                         break;
                         case "6":
-                        context.startActivity(new Intent(context, UpdateDetailsGym.class));
+                            checkGymmData();
+
                         break;
                         case "7":
                         context.startActivity(new Intent(context, UpdateDetailsDrinkingWater.class));
@@ -182,6 +185,30 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
         });
     }
 
+    private void checkPlayGroundData() {
+        Log.d("TAG", "checkData: "+paraGetDetails2("2",schoolId, periodId,"5"));
+        Call<List<JsonObject>> call=apiService.checkPlayGroundDetails(paraGetDetails2("2",schoolId, periodId,"5"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsPlayground.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_PlaygroundDetails.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
     private void checkPracticalLab() {
         Log.d("TAG", "checkData: "+paraGetDetails("2",schoolId, periodId));
         Call<List<LabDetailsResponse>> call=apiService.checkLabDetails(paraGetDetails("2",schoolId, periodId));
@@ -217,6 +244,31 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(new Intent(context, UpdateDetailsTypeTwo.class));
                 }else {
                     context.startActivity(new Intent(context, OnSubmit_StaffRoomDetails.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+
+    private void checkGymmData() {
+        Log.d("TAG", "checkData: "+paraGetDetails2("2",schoolId, periodId,"6"));
+        Call<List<JsonObject>> call=apiService.checkGymDetails(paraGetDetails2("2",schoolId, periodId,"6"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsGym.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_OpenGYmDetails.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 //
 //                    context.startActivity(i);

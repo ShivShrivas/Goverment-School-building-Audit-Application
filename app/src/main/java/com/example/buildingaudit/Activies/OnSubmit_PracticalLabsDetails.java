@@ -105,6 +105,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
         edtPhysicslabAvailability=findViewById(R.id.edtPhysicslabAvailability);
                 edtScienceLabCondition=findViewById(R.id.edtScienceLabCondition);
                 edtScienceEquipmentStatus=findViewById(R.id.edtScienceEquipmentStatus);
+        setAllEditTextDisabled();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Call<List<LabDetailsResponse>> call=apiService.checkLabDetails(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
@@ -374,22 +375,26 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
     }
 
     private void setAllEditTextDisabled() {
-        edtHomeSciencelabAvailability.setEnabled(false);
-        edtGeographyLabConditionedt.setEnabled(false);
-        GeographyEquipmentStatus.setEnabled(false);
-        edtGeographylabAvailability.setEnabled(false);
-        edtBiologyLabCondition.setEnabled(false);
-        edtBiologylabAvailability.setEnabled(false);
-        edtBilogyEquipmentStatus.setEnabled(false);
-        edtChemistryLabCondition.setEnabled(false);
-        edtChemistryEquipmentStatus.setEnabled(false);
-        edtChemistrylabAvailability.setEnabled(false);
-        edtPhysicsLabCondition.setEnabled(false);
-        edtPhysicsEquipmentStatus.setEnabled(false);
-        edtPhysicslabAvailability.setEnabled(false);
-        edtScienceLabCondition.setEnabled(false);
+        edtHomeMusiclabAvailability.setEnabled(false);
+                edtMusicLabCondition.setEnabled(false);
         edtSciencelabAvailability.setEnabled(false);
-        edtScienceEquipmentStatus.setEnabled(false);
+                edtHomeScienceLabCondition.setEnabled(false);
+        edtHomeScienceEquipmentStatus.setEnabled(false);
+                edtSciencelabAvailability.setEnabled(false);
+        edtGeographyLabConditionedt.setEnabled(false);
+                GeographyEquipmentStatus.setEnabled(false);
+        edtGeographylabAvailability.setEnabled(false);
+                edtBiologyLabCondition.setEnabled(false);
+        edtBiologylabAvailability.setEnabled(false);
+                edtBilogyEquipmentStatus.setEnabled(false);
+        edtChemistryLabCondition.setEnabled(false);
+                edtChemistryEquipmentStatus.setEnabled(false);
+        edtChemistrylabAvailability.setEnabled(false);
+                edtPhysicsLabCondition.setEnabled(false);
+        edtPhysicsEquipmentStatus.setEnabled(false);
+                edtPhysicslabAvailability.setEnabled(false);
+        edtScienceLabCondition.setEnabled(false);
+                edtScienceEquipmentStatus.setEnabled(false);
     }
 
     private JsonObject paraGetDetails(String action, String schoolId, String periodId) {

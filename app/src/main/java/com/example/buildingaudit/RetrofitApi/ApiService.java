@@ -48,7 +48,7 @@ public  interface ApiService {
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SClassRoomDetails")
-    Call<List<ClassDetailsResponse>> uploadClassRoomDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadClassRoomDetails(@Body JsonObject object);
 
 
 
@@ -80,6 +80,42 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParamLabs/ViewPracticalLabDetails")
     Call<List<LabDetailsResponse>> checkLabDetails(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewOpenGYMDetails")
+    Call<List<JsonObject>> checkGymDetails(@Body JsonObject object);
+
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SOpenGYMDetails")
+    Call<List<JsonObject>> uploadGymDetails(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SPlayGroundDetails")
+    Call<List<JsonObject>> uploadPlaygroundDetails(@Body JsonObject object);
+
+
+
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewPlayGroundDetails")
+    Call<List<JsonObject>> checkPlayGroundDetails(@Body JsonObject object);
+
+
+
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SLibraryDetails")
+    Call<List<JsonObject>> uploadLibraryDetails(@Body JsonObject object);
 
 
 

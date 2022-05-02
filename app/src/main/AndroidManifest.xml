@@ -21,6 +21,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Activies.OnSubmit_LibraryDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_PlaygroundDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_OpenGYmDetails"
+            android:exported="false" />
+        <activity
             android:name=".Activies.OnSubmit_PracticalLabsDetails"
             android:exported="false" />
         <activity

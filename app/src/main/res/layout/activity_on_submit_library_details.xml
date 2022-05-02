@@ -179,7 +179,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Availability"
-                               android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
                 <androidx.cardview.widget.CardView
@@ -266,7 +266,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Furniture Availability"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -354,7 +354,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Number of Books"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -398,7 +398,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Working Status"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -442,7 +442,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Reading Corner"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -487,7 +487,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Does the school subscribe to newspapers/ magazines?"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -530,7 +530,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Grant Under Scheme"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -574,7 +574,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Total Library Grant"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -618,7 +618,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Library grant(Rs.)\n In current F.Y."
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -664,7 +664,7 @@
                     android:gravity="center_vertical"
 
                     android:text="Expenditure(Rs.)\n In current F.Y."
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
@@ -708,7 +708,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:text="Upload Images"
-                                        android:textColor="@color/textColor1"
+                    android:textColor="@color/textColor1"
 
                     android:textSize="15dp" />
 
