@@ -262,61 +262,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout11" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout62"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView15">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Sound System Availability"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <Spinner
-                android:id="@+id/spinnerSoundSystemforGirls"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout62">
+        app:layout_constraintTop_toBottomOf="@+id/textView15">
 
         <TextView
             android:layout_width="match_parent"
@@ -390,14 +347,14 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/submitLabBtn"
+        android:id="@+id/submitSoundSystemBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="56dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
-        android:text="Submit Details"
+        android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"

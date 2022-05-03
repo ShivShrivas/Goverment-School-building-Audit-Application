@@ -35,29 +35,37 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_no_internet_connection.xml" value="0.19791666666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_bio_metric_details.xml" value="0.2" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_cctvdetails.xml" value="0.19791666666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_class_room_page.xml" value="0.22" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_computer_lab_details.xml" value="0.1" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_cycle_stand.xml" value="0.19791666666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_drinking_water_details.xml" value="0.16" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_library_details.xml" value="0.22" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_multipurpose_hall_details.xml" value="0.19791666666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_open_gym_details.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_playground_details.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_practical_labs_details.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_rain_harvesting.xml" value="0.18" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_smart_class_details.xml" value="0.18" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_sound_system_details.xml" value="0.19791666666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_staff_room_details.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_wifi_details.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_splash_screen.xml" value="0.67" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_detail_type_one.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_bio_metric.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boundry_wall.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boys_toilet.xml" value="0.14" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cctv.xml" value="0.22" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_computerlab.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_computerlab.xml" value="0.14" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cwsnramp.xml" value="0.209375" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cycle_stand.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cycle_stand.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_drinking_water.xml" value="0.12" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_electricity_arrangment.xml" value="0.209375" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_fire_fighting.xml" value="0.22" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_fire_fighting.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_furnitures.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_girls_toilet.xml" value="0.14" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_gym.xml" value="0.25" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_multipurpose_hall.xml" value="0.209375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_multipurpose_hall.xml" value="0.14" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_of_extra_things.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_rain_harvest_and_cwsn.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_smart_class.xml" value="0.18" />

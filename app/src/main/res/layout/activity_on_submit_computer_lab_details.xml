@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activies.UpdateDetailsSmartClass">
-
+    tools:context=".Activies.UpdateDetailsComputerlab">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
@@ -17,16 +16,15 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:navigationIcon="@drawable/arrow_back"
-            app:title="Smart Class"
-
             android:layout_width="match_parent"
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="Computer Lab"
+
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView25"
@@ -138,8 +136,7 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="Smart Class"
+        android:text="Computer Lab"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,23 +153,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout6"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/constraintLayout10"
+                android:id="@+id/linearLayout11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -184,7 +176,7 @@
 
                     android:text="Availability"
                     android:textColor="@color/textColor1"
-                    android:textSize="15dp"  />
+                    android:textSize="15dp" />
 
                 <androidx.cardview.widget.CardView
 
@@ -196,248 +188,32 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <Spinner
-                        android:id="@+id/smartClassAvailabilty"
+
+                    <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+
+                        android:id="@+id/edtComputeLabAvailabelty"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp" />
+                        android:layout_margin="4dp"
+                        android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
-
-                <TextView
-                    android:id="@+id/txtSmartRoomName"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
-                    android:padding="8dp"
-                    android:text="Smart Classoom 1"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout12"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtSmartRoomName">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-
-                        android:text="Year Of Installation"
-                        android:textColor="@color/textColor1"
-                        android:textSize="15dp" />
-
-                    <androidx.cardview.widget.CardView
-
-                        android:layout_width="match_parent"
-
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:foreground="@drawable/cardbg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <Spinner
-                            android:id="@+id/spinnerInstallationYearSmartClass"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="4dp"
-                            android:layout_weight="1" />
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout13"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-
-                        android:text="Company Name"
-                        android:textColor="@color/textColor1"
-                        android:textSize="15dp" />
-
-                    <androidx.cardview.widget.CardView
-
-                        android:layout_width="match_parent"
-
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:foreground="@drawable/cardbg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <EditText
-                            android:id="@+id/companyName1"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-
-                        android:text="Under Scheme"
-                        android:textColor="@color/textColor1"
-                        android:textSize="15dp" />
-
-                    <androidx.cardview.widget.CardView
-
-                        android:layout_width="match_parent"
-
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:foreground="@drawable/cardbg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <Spinner
-                            android:id="@+id/spinnerUnderSchemeSmartClass"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="4dp"
-                            android:layout_weight="1" />
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/linearLayout15"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-
-                        android:text="Working Status"
-                        android:textColor="@color/textColor1"
-                        android:textSize="15dp" />
-
-                    <androidx.cardview.widget.CardView
-
-                        android:layout_width="match_parent"
-
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:foreground="@drawable/cardbg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <Spinner
-                            android:id="@+id/spinnerWorkingStatusSmartClass"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_margin="4dp"
-                            android:layout_weight="1" />
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutForAddRooms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/buttonForAddRooms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:drawableEnd="@drawable/ic_add"
-                android:text="Add Another Room"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutForAddRooms" />
-
             <LinearLayout
-                android:id="@+id/linearLayout16"
+                android:id="@+id/linearLayout12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonForAddRooms">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -445,7 +221,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Teacher Availability"
+                    android:text="Year Of Installation"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -460,15 +236,114 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinnerTeacherAvailbilitySmartClass"
-                        android:layout_width="184dp"
-                        android:layout_height="wrap_content"
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtInstallationYear"
+                        android:layout_width="match_parent"
+       
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+
+
+                    android:text="No. of Computers"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <EditText
+
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtNoOfComputer"
+                        android:textColor="@color/textColor1"
+                        android:textAlignment="center"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                    />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+
+
+                    android:text="No. of working Computers"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <EditText
+                        android:id="@+id/edtNoOfWorkingComputer"
+                        android:textColor="@color/textColor1"
+                        android:textAlignment="center"
+                        android:inputType="number"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"/>
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
 
             <LinearLayout
                 android:id="@+id/linearLayout17"
@@ -480,15 +355,14 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout16">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-
-                    android:text="Projector"
+                    android:text="Under Scheme"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -503,10 +377,14 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinnerProjectorSmartClass"
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtGrantUnderScheme"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
@@ -530,8 +408,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-
-                    android:text="Learning Content"
+                    android:text="Internet"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -546,10 +423,14 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinnerLearningContentSmartClass"
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtinternet"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+           
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
@@ -573,8 +454,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-
-                    android:text="Digital Board"
+                    android:text="Power Backup"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -589,12 +469,243 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinnerDigitalBoardSmartClass"
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtPowerBackup"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout20"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout19">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Furnitures"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtFurniture"
+                        android:layout_width="match_parent"
+                   
+                        android:layout_margin="4dp"
+                        android:layout_weight="1" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout20">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Computer Operator"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtComputerOperator"
+                        android:layout_width="match_parent"
+                     
+                        android:layout_margin="4dp"
+                        android:layout_weight="1" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout233"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout21">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Printer Availability"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtPrinterAvailable"
+                        android:layout_width="match_parent"
+            
+                        android:layout_margin="4dp"
+                        android:layout_weight="1" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2343"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout233">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Scanner Availability"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                     <EditText
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1"
+                        android:layout_height="30dp"
+                        android:background="@drawable/cardbg"
+                        android:id="@+id/edtScannerAvailable"
+                        android:layout_width="match_parent"
+         
+                        android:layout_margin="4dp"
+                        android:layout_weight="1" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout2343">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="No. of Computer Lab"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <EditText
+                        android:id="@+id/edtNoOfLab"
+                        android:layout_width="189dp"
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
@@ -608,7 +719,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout19">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout22">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -621,16 +732,17 @@
 
 
                 <ImageView
-                    android:id="@+id/smartClassImageUploadBtn"
+                    android:id="@+id/ComputerLabImageUploadBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:padding="2dp"
                     android:src="@drawable/uplodimg" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewSmartClass"
+                android:id="@+id/recyclerViewComputerLabOnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -639,11 +751,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
             <Button
-                android:id="@+id/submitSmartClassBtn"
+                android:id="@+id/submitComputerLabBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
                 android:text="Submit"
@@ -652,10 +764,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewSmartClass" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewComputerLab" />
 
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

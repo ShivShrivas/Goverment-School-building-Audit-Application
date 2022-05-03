@@ -264,9 +264,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-
+                android:id="@+id/EdtNoOfCCTV"
+                android:textColor="@color/textColor1"
+                android:background="@drawable/cardbg"
+                android:textAlignment="center"
+                android:inputType="number"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="30dp" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
@@ -355,6 +359,7 @@
 
 
     <Button
+        android:id="@+id/submitBtnCCTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -1,6 +1,5 @@
 package com.example.buildingaudit.RetrofitApi;
 
-import com.example.buildingaudit.Model.ClassDetailsResponse;
 import com.example.buildingaudit.Model.GetAllRoomsList;
 import com.example.buildingaudit.Model.GetQuaterType;
 import com.example.buildingaudit.Model.GetSchoolDetails;
@@ -144,6 +143,94 @@ public  interface ApiService {
     @POST("PhysicalParam/ViewBiometricDetails")
     Call<List<JsonObject>> checkBioMetricDetails(@Body JsonObject object);
 
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SSmartClassDetails")
+    Call<List<JsonObject>> uploadSmartClassDetails(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewSmartClassDetails")
+    Call<List<JsonObject>> checkSmartClassDetails(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SMultiPurposeHallDetail")
+    Call<List<JsonObject>> uploadMultiPurposeHall(@Body JsonObject object);
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewMultiPurposeHallDetails")
+    Call<List<JsonObject>> checkMultiPurposeHall(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SSoundSystemBandDetailDetail")
+    Call<List<JsonObject>> uploadSoundSystem(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewSoundSystemBandDetails")
+    Call<List<JsonObject>> checkSoundSystem(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SCycleStandDetails")
+    Call<List<JsonObject>> uploadCycleStand(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewCycleStandDetails")
+    Call<List<JsonObject>> checkCycleStand(@Body JsonObject object);
+
+
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SWifiDetails")
+    Call<List<JsonObject>> uploadWifiDetails(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewWifiDetails")
+    Call<List<JsonObject>> checkWifiDetails(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParamLabs/SComputerLabDetails")
+    Call<List<JsonObject>> uploadComputerLab(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParamLabs/ViewComputerLabDetails")
+    Call<List<JsonObject>> checkComputerLab(@Body JsonObject object);
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SCctvDetails")
+    Call<List<JsonObject>> uploadCCTVDetails(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewCctvDetails")
+    Call<List<JsonObject>> checkCCTVDetails(@Body JsonObject object);
+
+ @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SRainHarvestingDetails")
+    Call<List<JsonObject>> uploadRainHarvest(@Body JsonObject object);
+
+
+ @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewRainHarvestingDetails")
+    Call<List<JsonObject>> checkRainHarvest(@Body JsonObject object);
+
+
+ @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SFireFightingDetails")
+    Call<List<JsonObject>> uploadFireFighting(@Body JsonObject object);
 
 
 

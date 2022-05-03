@@ -233,10 +233,14 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <Spinner
-                    android:id="@+id/spinnerRainharvestingAvailabilty"
+                <EditText
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1"
+                    android:background="@drawable/cardbg"
+                    android:layout_height="30dp"
+
+                    android:id="@+id/edtRainharvestingAvailabilty"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1" />
             </androidx.cardview.widget.CardView>
@@ -260,10 +264,15 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <Spinner
-                    android:id="@+id/spinnerRainHavestingWorkStatus"
+                <EditText
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1"
+                    android:background="@drawable/cardbg"
+                    android:layout_height="30dp"
+
+                    android:id="@+id/edtRainHavestingWorkStatus"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+
                     android:layout_margin="4dp"
                     android:layout_weight="1" />
             </androidx.cardview.widget.CardView>
@@ -297,13 +306,14 @@
             android:id="@+id/rainHarvestingImageUploadBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_weight="1"
             android:padding="2dp"
             android:src="@drawable/uplodimg" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewRAinHarvestandCWSNRamp"
+        android:id="@+id/recyclerViewRAinHarveOnSub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -318,6 +328,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
+        android:visibility="gone"
         android:layout_marginEnd="8dp"
         android:text="Submit"
         android:textColor="@color/white"

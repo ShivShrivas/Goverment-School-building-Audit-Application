@@ -349,10 +349,17 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+            <TextView
+                android:id="@+id/edtrenewalDate"
+                android:inputType="datetime"
+                android:textSize="14dp"
+                android:paddingStart="4dp"
+                android:gravity="center_vertical"
+                android:textColor="@color/textColor1"
 
-            <EditText
+                android:background="@drawable/cardbg"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="35dp" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
@@ -440,7 +447,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/btnUpdateFireFighting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

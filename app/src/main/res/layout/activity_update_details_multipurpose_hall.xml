@@ -267,6 +267,11 @@
 
 
             <EditText
+                android:id="@+id/edtMHsittingCapacity"
+                android:inputType="number"
+                android:textColor="@color/textColor1"
+                android:textAlignment="center"
+                android:maxLength="4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </androidx.cardview.widget.CardView>
@@ -315,14 +320,14 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/submitLabBtn"
+        android:id="@+id/submitMHBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
-        android:text="Submit Details"
+        android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"

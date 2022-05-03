@@ -21,6 +21,30 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Activies.OnSubmit_RainHarvesting"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_CCTVDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_ComputerLabDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_WifiDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_CycleStand"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_SoundSystemDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_MultipurposeHallDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_SmartClassDetails"
+            android:exported="false" />
+        <activity
             android:name=".Activies.OnSubmit_BioMetricDetails"
             android:exported="false" />
         <activity

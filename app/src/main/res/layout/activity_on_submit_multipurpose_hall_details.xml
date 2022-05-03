@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activies.UpdateDetailsRainHarvest">
+    tools:context=".Activies.UpdateDetailsPlayground">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Rain Harvesting"
+            app:title="Multipurpose Hall"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Rain Harvesting"
+        android:text="Multipurpose Hall"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,128 +147,144 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView25" />
 
     <LinearLayout
-        android:id="@+id/linearLayout37"
+        android:id="@+id/linearLayout11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="?attr/colorPrimary"
-        android:padding="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Type"
-            android:textAlignment="textStart"
-            android:textColor="@color/white"
-            android:textSize="17dp" />
+            android:gravity="center_vertical"
 
-        <TextView
+            android:text="Availability"
+            android:textColor="@color/textColor1"
+            android:textSize="15dp" />
+
+        <androidx.cardview.widget.CardView
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:text="Availabilty"
-            android:textAlignment="textEnd"
-            android:textColor="@color/white"
-            android:textSize="17dp" />
 
-        <TextView
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Working Status"
-            android:textAlignment="textEnd"
-            android:textColor="@color/white"
-            android:textSize="17dp" />
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+
+            <EditText
+                android:layout_height="30dp"
+                android:background="@drawable/cardbg"
+                android:textAlignment="center"
+                android:textColor="@color/textColor1"
+                android:id="@+id/edtMultipurposeHall"
+                android:layout_width="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1" />
+        </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
+
     <LinearLayout
-        android:id="@+id/linearLayout24"
+        android:id="@+id/constraintLayout9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+
+            android:text="Physical Status"
+            android:textColor="@color/textColor1"            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/physicsLabBodyCard"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+              <EditText
+                android:layout_height="30dp"
+                android:background="@drawable/cardbg"
+                android:textAlignment="center"
+                android:textColor="@color/textColor1"
+                android:id="@+id/edtMultiPurposeHallStatus"
+                android:layout_width="match_parent"
+                android:layout_margin="4dp" />
+        </androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout37">
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout9">
 
-        <LinearLayout
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center_vertical"
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="Rain Harvesting"
+
+            android:text="Sitting Capacity"
+            android:textColor="@color/textColor1"            android:textSize="15dp" />
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <EditText
+                android:background="@drawable/cardbg"
+
+android:layout_margin="4dp"
+                android:id="@+id/edtMHsittingCapacityOnSub"
+                android:inputType="number"
                 android:textColor="@color/textColor1"
-                android:textSize="15dp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-
-            android:padding="4dp">
-
-            <androidx.cardview.widget.CardView
-
+                android:textAlignment="center"
+                android:maxLength="4"
                 android:layout_width="match_parent"
+                android:layout_height="30dp" />
+        </androidx.cardview.widget.CardView>
 
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:foreground="@drawable/cardbg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <Spinner
-                    android:id="@+id/spinnerRainharvestingAvailabilty"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1" />
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="4dp">
-
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:foreground="@drawable/cardbg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <Spinner
-                    android:id="@+id/spinnerRainHavestingWorkStatus"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1" />
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
     </LinearLayout>
 
 
@@ -276,17 +292,17 @@
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:gravity="center_vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout24">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:text="Upload Images"
             android:textColor="?attr/colorPrimary"
@@ -294,36 +310,39 @@
 
 
         <ImageView
-            android:id="@+id/rainHarvestingImageUploadBtn"
+            android:id="@+id/multipurposeHallImageUploadBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:visibility="gone"
             android:padding="2dp"
             android:src="@drawable/uplodimg" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewRAinHarvestandCWSNRamp"
+        android:id="@+id/recyclerViewMultipurposeHallOnSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/submitBtnRainHarvest"
+        android:id="@+id/submitMHBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        android:background="?attr/colorPrimary"
         android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewRAinHarvestandCWSNRamp" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewMultipurposeHallOnSubmit" />
 </androidx.constraintlayout.widget.ConstraintLayout>
