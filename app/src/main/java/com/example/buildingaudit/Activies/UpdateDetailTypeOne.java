@@ -216,7 +216,6 @@ int cameraType;
         classRoomSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog2.show();
                 try {
                     int totalClassRoom=Integer.parseInt(goodCondtionClassroom.getText().toString())+Integer.parseInt(minorRepairingClassroom.getText().toString())+Integer.parseInt(majorRepairingClassroom.getText().toString());
                     if (totalClassRoom!=Integer.parseInt(totalClassRooms.getText().toString().trim())){
@@ -243,7 +242,6 @@ int cameraType;
                         call.enqueue(new Callback<List<JsonObject>>() {
                             @Override
                             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                                dialog2.dismiss();
                                 Log.d("TAG", "onResponse: "+response.body());
                                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
@@ -269,7 +267,7 @@ int cameraType;
 
                             @Override
                             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                                dialog2.dismiss();
+
                             }
                         });
 
@@ -277,7 +275,6 @@ int cameraType;
                     }
                 }catch (Exception e){
                     Toast.makeText(UpdateDetailTypeOne.this, "please fill all room count properly", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
                 }
 
             }

@@ -217,7 +217,6 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         buttonSubmitLibraryDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog2.show();
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
@@ -234,7 +233,6 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        dialog2.dismiss();
                         Log.d("TAG", "onResponse: "+response.body());
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
@@ -255,13 +253,12 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-dialog2.dismiss();
+
                     }
                 });
             }

@@ -178,7 +178,6 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         SubmitBtnStaffRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog2.show();
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
@@ -192,7 +191,6 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        dialog2.dismiss();
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                         try {
@@ -212,16 +210,12 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                        dialog2.dismiss();
-
 
                     }
                 });

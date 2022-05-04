@@ -218,7 +218,6 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         buttonSolarePanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog2.show();
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsSolarPanel.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
@@ -231,7 +230,6 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        dialog2.dismiss();
                         Toast.makeText(UpdateDetailsSolarPanel.this, ""+response.body(), Toast.LENGTH_SHORT).show();
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
@@ -252,14 +250,13 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
                         }
 
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-dialog2.dismiss();
+
                     }
                 });
 

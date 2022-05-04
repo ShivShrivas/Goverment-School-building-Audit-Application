@@ -105,12 +105,6 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
-
-        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
-        dialog2.setContentView (R.layout.progress_dialog);
-        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -238,9 +232,10 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                     Spinner spinnerUnderSchemeSmartClassAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.spinnerUnderSchemeSmartClassAdd);
                     EditText edtSmartClassCompanyNameAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.edtSmartClassCompanyNameAdd);
                     Spinner spinnerInstallationYearSmartClassAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.spinnerInstallationYearSmartClassAdd);
-                    spinnerInstallationYearSmartClassAdd.setAdapter(arrayAdapter1);
-                    spinnerUnderSchemeSmartClassAdd.setAdapter(arrayAdapter2);
-                    spinnerWorkingStatusSmartClassAdd.setAdapter(arrayAdapter3);
+//                    spinnerInstallationYearSmartClassAdd.setAdapter(arrayAdapter1);
+//                    spinnerUnderSchemeSmartClassAdd.setAdapter(arrayAdapter2);
+//                    spinnerWorkingStatusSmartClassAdd.setAdapter(arrayAdapter3);
+
 
                     SmartClassesCard smartClassesCard=new SmartClassesCard(spinnerInstallationYearSmartClassAdd.getSelectedItem().toString(),
                             edtSmartClassCompanyNameAdd.getText().toString(),spinnerUnderSchemeSmartClassAdd.getSelectedItem().toString(),String.valueOf(i+2),"SmartClass"+(i+2),spinnerWorkingStatusSmartClassAdd.getSelectedItem().toString());
@@ -332,7 +327,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
             jsonObject1.addProperty("Scheme",array[i].getScheme());
             jsonObject1.addProperty("Srno",array[i].getSrno());
             jsonObject1.addProperty("Name",array[i].getName());
-            if (array[i].getWorkingStatus().toString().equals("Not Functional")){
+            if (array[i].getWorkingStatus().toString().equals("Non Functional")){
                 jsonObject1.addProperty("WorkingStatus","NF");
             }else if (array[i].getWorkingStatus().toString().equals("Functional")){
                 jsonObject1.addProperty("WorkingStatus","F");

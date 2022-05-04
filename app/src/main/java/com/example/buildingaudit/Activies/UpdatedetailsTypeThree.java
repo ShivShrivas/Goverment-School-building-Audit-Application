@@ -445,7 +445,6 @@ ApplicationController applicationController;
         submitLabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialog2.show();
 
                 LabCondition scienceLabCondition=new LabCondition();
                 scienceLabCondition.setLabName("ScienceLab");
@@ -522,8 +521,6 @@ ApplicationController applicationController;
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        dialog2.dismiss();
-
                         Log.d("TAG", "onResponse: "+response.body());
 //                        Toast.makeText(UpdatedetailsTypeThree.this, ""+response.body(), Toast.LENGTH_SHORT).show();
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
@@ -545,8 +542,6 @@ ApplicationController applicationController;
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
                         }
 
                     }
@@ -555,7 +550,6 @@ ApplicationController applicationController;
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        dialog2.dismiss();
 
 
                             textView.setText("Something went wrong please try again!! ");
