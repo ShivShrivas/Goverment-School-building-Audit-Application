@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.ApplicationController;
@@ -168,6 +169,10 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
         submitMHBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsMultipurposeHall.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraMultipurposeHAll("1","23","MultiPurposeHallDetails",spinnerMultipurposeHall.getSelectedItem().toString(),spinnerMultiPurposeHallStatus.getSelectedItem().toString(),edtMHsittingCapacity.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
@@ -178,21 +183,24 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
                         Log.d("TAG", "onResponse: "+response+response.body());
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -200,6 +208,7 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
 
                     }
                 });
+            }
             }
         });
     }
@@ -210,7 +219,15 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
         jsonObject.addProperty("ParamId",paramId);
         jsonObject.addProperty("ParamName",multiPurposeHallDetails);
         jsonObject.addProperty("Availability",availability);
-        jsonObject.addProperty("PhysicalStatus",physicalStatus);
+        if (physicalStatus.equals("Good Condition")){
+            jsonObject.addProperty("PhysicalStatus","Good");
+        }else if (physicalStatus.equals("Major repairing")){
+            jsonObject.addProperty("PhysicalStatus","Major");
+
+        }else if (physicalStatus.equals("Minor Repairing")){
+            jsonObject.addProperty("PhysicalStatus","Minor");
+
+        }
         jsonObject.addProperty("SittingCapacity",sittingCapacity);
         jsonObject.addProperty("Lat",latitude);
         jsonObject.addProperty("Long",longitude);

@@ -14,11 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildingaudit.Activies.OnSubmitClassRoomPage;
 import com.example.buildingaudit.Activies.OnSubmit_BioMetricDetails;
+import com.example.buildingaudit.Activies.OnSubmit_BoundryWalls;
+import com.example.buildingaudit.Activies.OnSubmit_BoysToiletDetails;
 import com.example.buildingaudit.Activies.OnSubmit_CCTVDetails;
 import com.example.buildingaudit.Activies.OnSubmit_ComputerLabDetails;
 import com.example.buildingaudit.Activies.OnSubmit_CycleStand;
 import com.example.buildingaudit.Activies.OnSubmit_DrinkingWaterDetails;
+import com.example.buildingaudit.Activies.OnSubmit_ElectricityArrangment;
 import com.example.buildingaudit.Activies.OnSubmit_FireFighting;
+import com.example.buildingaudit.Activies.OnSubmit_FurnitureDetails;
+import com.example.buildingaudit.Activies.OnSubmit_GirlsToiletDetails;
 import com.example.buildingaudit.Activies.OnSubmit_LibraryDetails;
 import com.example.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails;
 import com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails;
@@ -26,6 +31,7 @@ import com.example.buildingaudit.Activies.OnSubmit_PlaygroundDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails;
 import com.example.buildingaudit.Activies.OnSubmit_RainHarvesting;
 import com.example.buildingaudit.Activies.OnSubmit_SmartClassDetails;
+import com.example.buildingaudit.Activies.OnSubmit_SolarPanel;
 import com.example.buildingaudit.Activies.OnSubmit_SoundSystemDetails;
 import com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails;
 import com.example.buildingaudit.Activies.OnSubmit_WifiDetails;
@@ -138,7 +144,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         break;
                         case "8":
                             checkSmartClass();
-                        context.startActivity(new Intent(context, UpdateDetailsSmartClass.class));
+
                         break;
                         case "9":
                             checkBiometricDetails();
@@ -149,7 +155,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
 
                         break;
                         case "11":
-                        context.startActivity(new Intent(context, UpdateDetailsElectricityArrangment.class));
+                            checkElectricity();
                         break;
                         case "12":
                             checkFirefighting();
@@ -159,23 +165,29 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                             checkRainHarvest();
                         break;
                         case "14":
-                        context.startActivity(new Intent(context, UpdateDetailsSolarPanel.class));
+                            checkSolarPanel();
+
                         break;
 
                         case "15":
-                        context.startActivity(new Intent(context, UpdateDetailsBoundryWall.class));
+                            checkBoundry();
+
                         break;
 
                         case "16":
-                        context.startActivity(new Intent(context, UpdateDetailsBoysToilet.class));
+                            chechBoysToilet();
+
+
                         break;
 
                         case "17":
-                        context.startActivity(new Intent(context, UpdateDetailsGirlsToilet.class));
+                            checkGirlToilet();
+
                         break;
 
                         case "18":
-                        context.startActivity(new Intent(context, UpdateDetailsFurnitures.class));
+                            checkFurniture();
+
                         break;
 
                         case "19":
@@ -203,6 +215,144 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         break;
 
                 }
+            }
+        });
+    }
+
+    private void checkFurniture() {
+        Call<List<JsonObject>> call=apiService.checkFurniture(paraGetDetails2("2",schoolId, periodId,"18"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsFurnitures.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_FurnitureDetails.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkGirlToilet() {
+        Call<List<JsonObject>> call=apiService.checkGirlsToilet(paraGetDetails2("2",schoolId, periodId,"17"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsGirlsToilet.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_GirlsToiletDetails.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void chechBoysToilet() {
+        Call<List<JsonObject>> call=apiService.checkBoysToilet(paraGetDetails2("2",schoolId, periodId,"16"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsBoysToilet.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_BoysToiletDetails.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkBoundry() {
+        Call<List<JsonObject>> call=apiService.checkBoundryWall(paraGetDetails2("2",schoolId, periodId,"15"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsBoundryWall.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_BoundryWalls.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkSolarPanel() {
+        Call<List<JsonObject>> call=apiService.viewSolarPanelDetails(paraGetDetails2("2",schoolId, periodId,"14"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsSolarPanel.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_SolarPanel.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkElectricity() {
+        Call<List<JsonObject>> call=apiService.checkElectricityArrangement(paraGetDetails2("2",schoolId, periodId,"11"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsElectricityArrangment.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_ElectricityArrangment.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
             }
         });
     }
@@ -415,11 +565,12 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
     }
 
     private void checkBiometricDetails() {
+        Log.d("TAG", "checkBiometricDetails: "+paraGetDetails2("2",schoolId, periodId,"9"));
         Call<List<JsonObject>> call=apiService.checkBioMetricDetails(paraGetDetails2("2",schoolId, periodId,"9"));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body()+"///////"+response);
                 if (response.body().size()==0){
                     context.startActivity(new Intent(context, UpdateDetailsBioMetric.class));
                 }else {

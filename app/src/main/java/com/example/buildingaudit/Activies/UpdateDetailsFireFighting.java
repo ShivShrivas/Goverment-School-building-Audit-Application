@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.ApplicationController;
@@ -241,6 +242,10 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         btnUpdateFireFighting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraFireFight("1","12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
@@ -253,21 +258,24 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                         Log.d("TAG", "onResponse: "+response.body()+response);
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -275,6 +283,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
 
                     }
                 });
+            }
             }
         });
     }

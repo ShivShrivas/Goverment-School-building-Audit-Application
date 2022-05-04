@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activies.UpdateDetailsPlayground">
-
+    tools:context=".Activies.UpdateDetailsElectricityArrangment">
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
@@ -18,7 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Playground"
+            app:title="Electricity Arrangement"
 
             android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
@@ -133,12 +132,12 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Playground"
+        android:layout_marginTop="4dp"
+        android:text="Electricity Arrangement"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -146,12 +145,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView25" />
 
+
     <LinearLayout
         android:id="@+id/linearLayout11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,10 +179,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <Spinner
-                android:id="@+id/spinnerPlaygroundAvailabelty"
+            <EditText
+                android:background="@drawable/cardbg"
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:id="@+id/edtElectricityAvailabelty"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1" />
         </androidx.cardview.widget.CardView>
@@ -191,7 +193,7 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout12"
+        android:id="@+id/linearLayout31"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -208,51 +210,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-            android:text="Levelling Status"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <Spinner
-                android:id="@+id/spinnerLevellingStatus"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-
-            android:text="Area in sq. mtr."
+            android:text="Intrenal Electrification"
             android:textColor="@color/textColor1"
             android:textSize="15dp" />
 
@@ -268,17 +226,19 @@
 
 
             <EditText
-                android:id="@+id/edtAreaOfPlayGround"
-                android:inputType="number"
-                android:maxLength="4"
+                android:background="@drawable/cardbg"
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:id="@+id/edtInternalElectrification"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_margin="4dp"
+                android:layout_weight="1" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout14"
+        android:id="@+id/linearLayout32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -287,16 +247,15 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout31">
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-
-            android:text="Availability of Standard Track"
+            android:text="Other options/Source"
             android:textColor="@color/textColor1"
             android:textSize="15dp" />
 
@@ -309,12 +268,152 @@
             android:foreground="@drawable/cardbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-            <Spinner
-                android:id="@+id/spinnertrackAvalabiltyStatus"
+
+
+            <EditText
+                android:background="@drawable/cardbg"
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:id="@+id/edtSource"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
                 android:layout_margin="4dp"
                 android:layout_weight="1" />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout33"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout32">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+
+            android:text="Working Status"
+            android:textColor="@color/textColor1"
+            android:textSize="15dp" />
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <EditText
+                android:background="@drawable/cardbg"
+                android:layout_height="30dp"
+                android:textAlignment="center"
+                android:id="@+id/edtElectricStatus"
+                android:layout_width="match_parent"
+                android:layout_margin="4dp"
+                android:layout_weight="1" />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout34"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+
+            android:text="No. Bulbs/Tube Light"
+            android:textColor="@color/textColor1"
+            android:textSize="15dp" />
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:layout_margin="4dp"
+                android:background="@drawable/cardbg"
+                android:textColor="@color/textColor1"
+                android:id="@+id/edtnoOfTubeLight"
+                android:paddingStart="5dp"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout35"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout34">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+
+            android:text="No. of Fans"
+            android:textColor="@color/textColor1"
+            android:textSize="15dp" />
+
+        <androidx.cardview.widget.CardView
+
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:foreground="@drawable/cardbg"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:layout_margin="4dp"
+                android:background="@drawable/cardbg"
+                android:textColor="@color/textColor1"
+                android:id="@+id/edtnoOfFans"
+                android:inputType="number"
+                android:paddingStart="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="35dp" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
@@ -328,7 +427,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout35">
 
         <TextView
             android:layout_width="match_parent"
@@ -341,37 +440,38 @@
 
 
         <ImageView
-            android:id="@+id/playGroundImageUploadBtn"
+            android:id="@+id/electricityArrangementImageUploadBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:visibility="gone"
             android:padding="2dp"
             android:src="@drawable/uplodimg" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewPlayground"
+        android:id="@+id/recyclerViewElectricityArrangmentOnSub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
     <Button
-        android:id="@+id/submitPlayGroundBtn"
+        android:id="@+id/submitBtnElectricityArrangeOnSub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:visibility="gone"
         android:layout_marginEnd="16dp"
-        android:background="?attr/colorPrimary"
         android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewPlayground" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewElectricityArrangment" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

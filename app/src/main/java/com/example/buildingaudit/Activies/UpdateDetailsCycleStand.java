@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.ApplicationController;
@@ -114,8 +115,21 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerCycleStand.setAdapter(arrayAdapter);
-        spinnerCycleStandFunctionalStatus.setAdapter(arrayAdapter);
-        spinnerCycleStandRepairingStatus.setAdapter(arrayAdapter);
+        ArrayList<String> arrayListAvailbilty2=new ArrayList<>();
+        arrayListAvailbilty2.add("Functional");
+        arrayListAvailbilty2.add("Non Functional");
+        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty2);
+        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerCycleStandFunctionalStatus.setAdapter(arrayAdapter2);
+
+
+        ArrayList<String> arrayListAvailbilty3=new ArrayList<>();
+        arrayListAvailbilty3.add("Good Condition");
+        arrayListAvailbilty3.add("Major Repairing");
+        arrayListAvailbilty3.add("Minor Repairing");
+        ArrayAdapter<String> arrayAdapter3=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty3);
+        arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerCycleStandRepairingStatus.setAdapter(arrayAdapter3);
 
 
         cycleStandImageUploadBtn.setOnClickListener(new View.OnClickListener() {
@@ -160,6 +174,10 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         submitCycleStandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsCycleStand.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraCycle("1","21","CycleStandPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCycleStand.getSelectedItem().toString(),edtCycyleStandCapacity.getText().toString(),spinnerCycleStandFunctionalStatus.getSelectedItem().toString(),spinnerCycleStandRepairingStatus.getSelectedItem().toString(),arrayListImages1));
@@ -170,21 +188,24 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
                         Log.d("TAG", "onResponse: "+response.body()+response);
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -193,6 +214,7 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
                     }
                 });
 
+            }
             }
         });
     }

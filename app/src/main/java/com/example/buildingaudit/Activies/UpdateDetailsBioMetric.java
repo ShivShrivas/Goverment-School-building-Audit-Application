@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
@@ -155,7 +156,7 @@ Spinner spinneruserbiometricStudent,
         ArrayAdapter<String> arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerBiometricWorkingStatus.setAdapter(arrayAdapter2);
-        spinnerBiometricWorkingStatus.setAdapter(arrayAdapter2);
+
 
 
         bioMetricImageUploadBtn.setOnClickListener(new View.OnClickListener() {
@@ -201,39 +202,51 @@ Spinner spinneruserbiometricStudent,
         buttonBiometricSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+ paraBioMetric("1","9","BiometricPhoto",spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(),spinnerBioMetricInstallationYear.getSelectedItem().toString(),spinnerBiometricWorkingStatus.getSelectedItem().toString(),spinneruserbiometricStaff.getSelectedItem().toString(),spinneruserbiometricStudent.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtBioMetricMachineCount.getText().toString(),arrayListImages1));
-            Call<List<JsonObject>> call=apiService.uploadBioMetricDetails(    paraBioMetric("1","9","BiometricPhoto",spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(),spinnerBioMetricInstallationYear.getSelectedItem().toString(),spinnerBiometricWorkingStatus.getSelectedItem().toString(),spinneruserbiometricStaff.getSelectedItem().toString(),spinneruserbiometricStudent.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtBioMetricMachineCount.getText().toString(),arrayListImages1));
-            call.enqueue(new Callback<List<JsonObject>>() {
-                @Override
-                public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                    TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                    Button button=dialog.findViewById(R.id.BtnResponseDialoge);
 
-                    if (response.body().get(0).get("Status").getAsString().equals("E")){
-                        textView.setText("You already uploaded details ");
+                if (edtBioMetricMachineCount.length() == 0) {
+                    Toast.makeText(UpdateDetailsBioMetric.this, "Please fill all details properly!!", Toast.LENGTH_SHORT).show();
+                } else {
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsBioMetric.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
-                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                        textView.setText("Your details Submitted successfully ");
-                    }
-                    dialog.show();
-                    button.setOnClickListener(new View.OnClickListener() {
+                        }else {
+                    RestClient restClient = new RestClient();
+                    ApiService apiService = restClient.getApiService();
+                    Log.d("TAG", "onClick: " + paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
+                    Call<List<JsonObject>> call = apiService.uploadBioMetricDetails(paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
+                    call.enqueue(new Callback<List<JsonObject>>() {
                         @Override
-                        public void onClick(View view) {
-                            onBackPressed();
-                            dialog.dismiss();
+                        public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                            TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                            Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                            try {
+                                if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                    textView.setText("You already uploaded details ");
+
+                                }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                    textView.setText("Your details Submitted successfully ");
+                                }
+                                dialog.show();
+                                button.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        onBackPressed();
+                                        dialog.dismiss();
+                                    }
+                                });
+                            }catch (Exception e){
+                                Toast.makeText(UpdateDetailsBioMetric.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
                         }
                     });
                 }
-
-                @Override
-                public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-
-                }
-            });
             }
-
+            }
         });
     }
 
@@ -249,13 +262,7 @@ Spinner spinneruserbiometricStudent,
         jsonObject.addProperty("CreatedBy",usertypeid);
         jsonObject.addProperty("UserCode",userid);
         jsonObject.addProperty("InstallationYear",yearOfInstallation);
-        if (workingStatis.equals("Functional")){
-
-            jsonObject.addProperty("WorkingStatus","F");
-        }else if (workingStatis.equals("Not Functional")){
-
-            jsonObject.addProperty("WorkingStatus","NF");
-        }
+        jsonObject.addProperty("WorkingStatus",workingStatis);
         jsonObject.addProperty("BiometricUseStaff",biometricForStaff);
         jsonObject.addProperty("BiometricUseStudent",biometricForStudent);
         jsonObject.addProperty("Availabilty",availabilty);

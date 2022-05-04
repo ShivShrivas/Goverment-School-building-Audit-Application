@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -67,6 +69,8 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
+    Dialog dialog;
+
     EditText noOfFans,noOfTubeLight;
     Button submitBtnElectricityArrange;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
@@ -89,6 +93,12 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        dialog = new Dialog(this);
+        dialog.setCancelable(false);
+
+        dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog.setContentView (R.layout.respons_dialog);
+        dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -169,6 +179,10 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         submitBtnElectricityArrange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paramElectricityDetails("1","11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
@@ -176,24 +190,26 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Toast.makeText(UpdateDetailsElectricityArrangment.this, ""+response.body(), Toast.LENGTH_SHORT).show();
-//                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-//                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-//
-//                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-//                            textView.setText("You already uploaded details ");
-//
-//                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-//                            textView.setText("Your details Submitted successfully ");
-//                        }
-//                        dialog.show();
-//                        button.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View view) {
-//                                onBackPressed();
-//                                dialog.dismiss();
-//                            }
-//                        });
+                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
+
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
+                            }
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
 
                     }
 
@@ -203,6 +219,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                     }
                 });
 
+            }
             }
         });
     }

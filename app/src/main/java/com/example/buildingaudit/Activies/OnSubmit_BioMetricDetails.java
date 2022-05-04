@@ -74,13 +74,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
                 edtuserbiometricStaff.setText(response.body().get(0).get("BiometricUseStaff").getAsString());
                         edtuserbiometricStudent.setText(response.body().get(0).get("BiometricUseStudent").getAsString());
                 edtBioMetricMachinecountOnSubmit.setText(response.body().get(0).get("NoOfMachines").getAsString());
-                if(response.body().get(0).get("WorkingStatus").getAsString().equals("F")){
-
-                    edtBiometricWorkingStatus.setText("Functional");
-                }else  if(response.body().get(0).get("WorkingStatus").getAsString().equals("NF")){
-
-                    edtBiometricWorkingStatus.setText("Not Functional");
-                }
+                    edtBiometricWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BioMetricDetails.this,StaffPhotoPathList);
                 recyclerViewBioMetricOnSubmit.setAdapter(onlineImageRecViewAdapter);

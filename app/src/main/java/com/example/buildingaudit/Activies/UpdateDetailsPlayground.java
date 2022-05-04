@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.ApplicationController;
@@ -175,6 +176,10 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
         submitPlayGroundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsPlayground.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Call<List<JsonObject>> call=apiService.uploadPlaygroundDetails(paraPlayGroundDetails("1","5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
@@ -184,21 +189,24 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
                         Log.d("TAG", "onResponse: "+response.body());
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -207,6 +215,7 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
                     }
                 });
 
+            }
             }
         });
     }

@@ -132,9 +132,9 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                 if (list.get(0).getLabCondition().toString().equals("Major")){
                     edtScienceLabCondition.setText("Major Repairing");
                 }else  if (list.get(0).getLabCondition().toString().equals("Minor")){
-                    edtScienceEquipmentStatus.setText("Minor Repairing");
+                    edtScienceLabCondition.setText("Minor Repairing");
                 }if (list.get(0).getLabCondition().toString().equals("Good")){
-                    edtScienceEquipmentStatus.setText("Good Condition");
+                    edtScienceLabCondition.setText("Good Condition");
                 }
 
 
@@ -184,7 +184,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                     edtChemistryLabCondition.setText("Good Condition");
                 }
 
-                if (list.get(2).getLabYN().toString().equals("Yes")){
+                if (list.get(3).getLabYN().toString().equals("Yes")){
                     edtBiologylabAvailability.setText(list.get(3).getLabYN());
                 }else {
                     hidecards(bioloyLabBodyCard,bioloyLabImageCard);
@@ -375,6 +375,8 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
     }
 
     private void setAllEditTextDisabled() {
+       edtHomeMusiclabAvailability.setEnabled(false);
+       edtMusicEquipmentStatus.setEnabled(false);
         edtHomeMusiclabAvailability.setEnabled(false);
                 edtMusicLabCondition.setEnabled(false);
         edtSciencelabAvailability.setEnabled(false);

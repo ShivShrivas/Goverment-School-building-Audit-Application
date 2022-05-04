@@ -477,15 +477,16 @@ android:textColor="@color/textColor1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
                 android:text="Submit details"
                 android:textColor="@color/white"
+                android:visibility="gone"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewBioMetric" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewBioMetricOnSubmit" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

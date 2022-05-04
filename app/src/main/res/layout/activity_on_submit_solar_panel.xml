@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activies.UpdateDetailsBioMetric">
+    tools:context=".Activies.UpdateDetailsSolarPanel">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -17,15 +17,16 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Bio Metric"
+            app:title="Solar Panel"
 
+            android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView25"
         android:layout_width="match_parent"
@@ -132,41 +133,57 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Solar Panel"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView25" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView25">
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textView56"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Biometric"
-                android:textColor="?attr/colorPrimary"
-                android:textSize="24dp"
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:background="?attr/colorPrimary"
+                android:padding="4dp"
+
+                android:textColor="@color/white"
+                android:textSize="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <LinearLayout
                 android:id="@+id/linearLayout11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView56">
+                app:layout_constraintTop_toBottomOf="@+id/textView6">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -189,56 +206,14 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinnerBioMetricMachineAvailabelty"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout133"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="No. of Machines"
-                    android:textColor="@color/textColor1"
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
                     <EditText
-                        android:id="@+id/edtBioMetricMachineCount"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1"
+                    android:background="@drawable/cardbg"
+                    android:layout_height="30dp"
+                        android:id="@+id/edtSolarPanel"
                         android:layout_width="match_parent"
-                        android:textAlignment="center"
-                        android:layout_height="35dp"
-                        android:background="@drawable/cardbg"
-                        android:inputType="number"
-                        android:maxLength="3"
+                        android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
 
@@ -254,7 +229,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout133">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -277,10 +252,13 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinnerBioMetricInstallationYear"
+                    <EditText
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1"
+                    android:background="@drawable/cardbg"
+                    android:layout_height="30dp"
+                        android:id="@+id/edtSolraPanelInstallationYear"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
@@ -320,10 +298,13 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinnerBiometricWorkingStatus"
+                    <EditText
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1"
+                    android:background="@drawable/cardbg"
+                    android:layout_height="30dp"
+                        android:id="@+id/edtSolarPaneltWorkingStatus"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
@@ -331,7 +312,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout32"
+                android:id="@+id/linearLayout341"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -348,7 +329,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Use of Biometric for Staff"
+                    android:text="Grant Under Scheme"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -363,10 +344,13 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinneruserbiometricStaff"
+                    <EditText
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1"
+                    android:background="@drawable/cardbg"
+                    android:layout_height="30dp"
+                        android:id="@+id/edtSolarPanelScheme"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
@@ -374,7 +358,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linearLayout33"
+                android:id="@+id/linearLayout53"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -383,7 +367,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout32">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout341">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -391,7 +375,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Use of Biometric for Student"
+                    android:text="Kilowatt of Solar Panel"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -406,35 +390,76 @@
                     app:layout_constraintTop_toTopOf="parent">
 
 
-                    <Spinner
-                        android:id="@+id/spinneruserbiometricStudent"
+                    <EditText
+                        android:id="@+id/edtcapacityOfSolarPanel"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cardbg"
+                        android:inputType="number"
+                        android:textAlignment="center"
+                        android:textColor="@color/textColor1" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout54"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout53">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+
+                    android:text="Type of Solar Panel"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+
+                    <EditText
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1"
+                    android:background="@drawable/cardbg"
+                    android:layout_height="30dp"
+                        android:id="@+id/edtTypeOfSolarPanel"
+                        android:layout_width="match_parent"
                         android:layout_margin="4dp"
                         android:layout_weight="1" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewBioMetric"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
-
             <LinearLayout
                 android:id="@+id/linearLayout5"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:gravity="center_vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout54">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -447,30 +472,41 @@
 
 
                 <ImageView
-                    android:id="@+id/bioMetricImageUploadBtn"
+                    android:id="@+id/solarPanelImageUploadBtn"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:padding="2dp"
                     android:src="@drawable/uplodimg" />
             </LinearLayout>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewTwoTypeSolarpanelAndOnSub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
 
             <Button
-                android:id="@+id/buttonBiometricSubmit"
+                android:id="@+id/buttonSolarePanelOnSub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Submit"
+                android:visibility="gone"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewBioMetric" />
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewTwoTypeSolarpanelAndOnSub" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

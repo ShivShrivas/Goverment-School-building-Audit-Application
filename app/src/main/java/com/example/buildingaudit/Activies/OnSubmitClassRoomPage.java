@@ -111,6 +111,17 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
                 Log.d("TAG", "onResponse: "+response.body()+"///////"+response.body().get(0).get("TotalRooms"));
                 totalClassRooms.setText(response.body().get(0).get("TotalRooms").toString());
                 minorRepairingClassroomAfterSubmit.setText(response.body().get(0).get("MinorRepairing").toString());
+                if (response.body().get(0).get("MinorRepairing").toString().equals("0")){
+                    recyclerViewThreeTypeOneAfterSubmit.setVisibility(View.GONE);
+                }
+
+                if (response.body().get(0).get("MajorRepairing").toString().equals("0")){
+                    recyclerViewFourTypeOneAfterSubmit.setVisibility(View.GONE);
+                }
+
+                if (response.body().get(0).get("GoodCondition").toString().equals("0")){
+                    recyclerViewTwoTypeOneAfterSubmit.setVisibility(View.GONE);
+                }
                 majorRepairingClassroom.setText(response.body().get(0).get("MajorRepairing").toString());
                 minorRepairingClassroomAfterSubmit.setText(response.body().get(0).get("MinorRepairing").toString());
                 edtPodiumClassAfterSubmit.setText(response.body().get(0).get("ClassRoomsWithPodium").toString());
@@ -131,11 +142,11 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
                 recyclerViewTwoTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter);
 
 
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,minorRepairingList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,majorRepairingList);
                 recyclerViewThreeTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter2);
 
 
-              OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,majorRepairingList);
+              OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,minorRepairingList);
                 recyclerViewFourTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter3);
                 onlineImageRecViewAdapter.notifyDataSetChanged();
 

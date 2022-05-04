@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.ApplicationController;
@@ -108,6 +109,13 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         submitBtnCCTV=findViewById(R.id.submitBtnCCTV);
 
 
+        ArrayList<String> arrayListWorkingStatus=new ArrayList<>();
+        arrayListWorkingStatus.add("Functional");
+        arrayListWorkingStatus.add("Non Functional");
+
+        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
+        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerCCTVWorkingStatus.setAdapter(arrayAdapter2);
 
         ArrayList<String> arrayList1=new ArrayList<>();
         arrayList1.add("Yes");
@@ -117,7 +125,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
 
         spinnerCCTVAvailabelty.setAdapter(adapter);
-        spinnerCCTVWorkingStatus.setAdapter(adapter);
+
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
@@ -177,6 +185,10 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         submitBtnCCTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (arrayListImages2.size()==0){
+                    Toast.makeText(UpdateDetailsCCTV.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient =new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Call<List<JsonObject>> call=apiService.uploadCCTVDetails(paraCCTV("1","10","CCTV",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCCTVInstallationYear.getSelectedItem().toString(),EdtNoOfCCTV.getText().toString(),spinnerCCTVWorkingStatus.getSelectedItem().toString(),spinnerCCTVAvailabelty.getSelectedItem().toString(),arrayListImages2));
@@ -187,21 +199,27 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
+                            } 
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(UpdateDetailsCCTV.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
                         }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
-                            }
-                        });
+
+                       
+                      
                     }
 
                     @Override
@@ -212,6 +230,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
 
 
+            }
             }
         });
     }

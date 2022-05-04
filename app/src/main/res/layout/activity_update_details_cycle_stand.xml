@@ -252,7 +252,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-            android:text="Functional Status"
+            android:text="Working Status"
             android:textColor="@color/textColor1"
             android:textSize="15dp" />
 
@@ -295,7 +295,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-            android:text="Repairing Status"
+            android:text="Physical Status"
             android:textColor="@color/textColor1"
             android:textSize="15dp" />
 

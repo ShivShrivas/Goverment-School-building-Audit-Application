@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.ApplicationController;
@@ -148,6 +149,10 @@ Button submitWIFIBtn;
         submitWIFIBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsOfExtraThings.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraWifi("1","20","WifiPhoto",spinnerWifiPresent.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
@@ -158,21 +163,24 @@ Button submitWIFIBtn;
                         Log.d("TAG", "onResponse: "+response+response.body());
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -180,6 +188,7 @@ Button submitWIFIBtn;
 
                     }
                 });
+            }
             }
         });
     }
@@ -202,7 +211,7 @@ Button submitWIFIBtn;
             jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
         }
-        jsonObject.add("MultiPurposeHallPhoto", (JsonElement) jsonArray2);
+        jsonObject.add("WifiPhoto", (JsonElement) jsonArray2);
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

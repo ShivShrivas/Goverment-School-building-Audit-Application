@@ -12,12 +12,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
+import com.example.buildingaudit.Adapters.SmartClassAdapter;
 import com.example.buildingaudit.ApplicationController;
+import com.example.buildingaudit.Model.SmartClassesCard;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -55,6 +58,7 @@ RecyclerView recyclerViewSmartClassONSubmit;
         edtLearningContentSmartClass=findViewById(R.id.edtLearningContentSmartClass);
         edtProjectorSmartClass=findViewById(R.id.edtProjectorSmartClass);
         edtTeacherAvailbilitySmartClass=findViewById(R.id.edtTeacherAvailbilitySmartClass);
+        smartClassONSubmitRecView=findViewById(R.id.smartClassONSubmitRecView);
         recyclerViewSmartClassONSubmit=findViewById(R.id.recyclerViewSmartClassONSubmit);
 
         recyclerViewSmartClassONSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -63,23 +67,40 @@ RecyclerView recyclerViewSmartClassONSubmit;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
-        Call<List<JsonObject>> call=apiService.checkSmartClassDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"5"));
+        Call<List<JsonObject>> call=apiService.checkSmartClassDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"8"));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
-            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                edtsmartClassAvailabilty.setText(response.body().get(0).get("").getAsString());
-                        edtDigitalBoardSmartClass.setText(response.body().get(0).get("").getAsString());
-                edtLearningContentSmartClass.setText(response.body().get(0).get("").getAsString());
-                        edtProjectorSmartClass.setText(response.body().get(0).get("").getAsString());
-                edtTeacherAvailbilitySmartClass.setText(response.body().get(0).get("").getAsString());
+                public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                    Log.d("TAG", "onResponse: "+response.body()+"///////");
+                    ArrayList<SmartClassesCard> smartClassesCards=new ArrayList<>();
+                    edtsmartClassAvailabilty.setText(response.body().get(0).get("Availablity").getAsString());
+                    edtDigitalBoardSmartClass.setText(response.body().get(0).get("DigitalBoard").getAsString());
+                    edtLearningContentSmartClass.setText(response.body().get(0).get("LearningContent").getAsString());
+                    edtProjectorSmartClass.setText(response.body().get(0).get("Projector").getAsString());
+                    edtTeacherAvailbilitySmartClass.setText(response.body().get(0).get("TeacherAvl").getAsString());
+                    for (int i=0;i<response.body().size();i++){
+                        SmartClassesCard smartClassesCard=new SmartClassesCard();
+
+                        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList);
+                        recyclerViewSmartClassONSubmit.setAdapter(onlineImageRecViewAdapter);
+                        smartClassesCard.setCompanyName(response.body().get(i).get("CompanyName").getAsString());
+                        smartClassesCard.setName(response.body().get(i).get("Name").getAsString());
+                        smartClassesCard.setScheme(response.body().get(i).get("Scheme").getAsString());
+                        smartClassesCard.setInstallationYear(response.body().get(i).get("InstallationYear").getAsString());
+                        smartClassesCard.setWorkingStatus(response.body().get(i).get("WorkingStatus").getAsString());
+                        smartClassesCard.setSrno(response.body().get(i).get("Srno").getAsString());
+                        smartClassesCards.add(smartClassesCard);
+
+                    }
+                smartClassONSubmitRecView.setLayoutManager(new LinearLayoutManager(OnSubmit_SmartClassDetails.this,RecyclerView.HORIZONTAL,false));
+                    smartClassONSubmitRecView.setAdapter(new SmartClassAdapter(OnSubmit_SmartClassDetails.this,smartClassesCards));
+                (new SmartClassAdapter(OnSubmit_SmartClassDetails.this,smartClassesCards)).notifyDataSetChanged();
+
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList);
                 recyclerViewSmartClassONSubmit.setAdapter(onlineImageRecViewAdapter);
-
-
-
-            }
+                }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {

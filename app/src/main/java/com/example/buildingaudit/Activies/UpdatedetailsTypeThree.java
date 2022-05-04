@@ -60,7 +60,7 @@ public class UpdatedetailsTypeThree extends AppCompatActivity {
         return true;
     }
     int BtnType;
-    Dialog dialog;
+    Dialog dialog,dialog2;
 Spinner spinnerSciencelabAvailability,spinnerBiologylabAvailability,spinnerHomeMusiclabAvailability,spinnerHomeSciencelabAvailability,spinnerGeographylabAvailability,spinnerChemistrylabAvailability,spinnerPhysicslabAvailability;
 Spinner spinnerMusicEquipmentStatus,spinnerHomeScienceEquipmentStatus
         ,spinnerScienceEquipmentStatus,spinnerBilogyEquipmentStatus,spinnerGeographyEquipmentStatus,spinnerChemistryEquipmentStatus
@@ -116,6 +116,12 @@ ApplicationController applicationController;
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -439,6 +445,7 @@ ApplicationController applicationController;
         submitLabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
 
                 LabCondition scienceLabCondition=new LabCondition();
                 scienceLabCondition.setLabName("ScienceLab");
@@ -502,7 +509,10 @@ ApplicationController applicationController;
                geographyLabCondition.setEquipmentStatus(spinnerGeographyEquipmentStatus.getSelectedItem().toString());
 
 
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
+                }else {
 
 
                 RestClient restClient=new RestClient();
@@ -512,25 +522,32 @@ ApplicationController applicationController;
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                        dialog2.dismiss();
+
                         Log.d("TAG", "onResponse: "+response.body());
 //                        Toast.makeText(UpdatedetailsTypeThree.this, ""+response.body(), Toast.LENGTH_SHORT).show();
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }
 
                     }
 
@@ -538,6 +555,7 @@ ApplicationController applicationController;
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        dialog2.dismiss();
 
 
                             textView.setText("Something went wrong please try again!! ");
@@ -552,6 +570,7 @@ ApplicationController applicationController;
                         });
                     }
                 });
+            }
             }
         });
 

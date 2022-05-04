@@ -72,7 +72,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
 Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,spinnerFurnitureAvailabilty;
     ImageAdapter4 adapter;
-    Dialog dialog;
+    Dialog dialog,dialog2;
     ImageView staffRoomImageUploadBtn;
     RecyclerView recyclerViewTwoTypetwo;
     TextView userName,schoolAddress,schoolName;
@@ -87,7 +87,13 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        super.onCreate(savedInstanceState);
+
+        dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_two);
         applicationController= (ApplicationController) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -172,6 +178,11 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         SubmitBtnStaffRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
@@ -181,33 +192,41 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Toast.makeText(UpdateDetailsTypeTwo.this, ""+response.body(), Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }
 
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
+
 
                     }
                 });
 
+            }
             }
         });
     }
@@ -218,7 +237,15 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         jsonObject.addProperty("ParamId",paramId);
         jsonObject.addProperty("ParamName",staffRoomDetails);
         jsonObject.addProperty("SeperateRoomsAvl",roomAvail);
-        jsonObject.addProperty("Status",Status);
+        if (Status.equals("Good Condition")){
+            jsonObject.addProperty("Status","Good");
+        }else if (Status.equals("Major repairing")){
+            jsonObject.addProperty("Status","Major");
+
+        }else if (Status.equals("Minor Repairing")){
+            jsonObject.addProperty("Status","Minor");
+
+        }
         jsonObject.addProperty("FurnitureAvl",FurnitureAvl);
         jsonObject.addProperty("AlmirahRacksAvl",AlmirahRacksAvl);
         jsonObject.addProperty("Lat",latitude);

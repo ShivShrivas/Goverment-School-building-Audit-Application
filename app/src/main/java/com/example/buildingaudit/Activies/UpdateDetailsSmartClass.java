@@ -105,6 +105,12 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -222,7 +228,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         submitSmartClassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(UpdateDetailsSmartClass.this, "room count: "+layoutForAddRooms.getChildCount(), Toast.LENGTH_SHORT).show();
+
                 SmartClassesCard[] array = new SmartClassesCard[layoutForAddRooms.getChildCount()+1];
                     SmartClassesCard smartClassesCard1=new SmartClassesCard(spinnerInstallationYearSmartClass.getSelectedItem().toString(),
                             companyName1.getText().toString(),spinnerUnderSchemeSmartClass.getSelectedItem().toString(),"1","SmartClass"+1,spinnerWorkingStatusSmartClass.getSelectedItem().toString());
@@ -241,7 +247,10 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
 
                     array[i+1]=smartClassesCard;
                 }
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsSmartClass.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraSmartClass("1","8","SmartClass",array, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
@@ -253,21 +262,24 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
 
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
                     }
 
                     @Override
@@ -276,6 +288,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                     }
                 });
 
+            }
             }
         });
         buttonForAddRooms.setOnClickListener(new View.OnClickListener() {

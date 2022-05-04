@@ -206,7 +206,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
-                            android:hint="Enter Count"
+
                             android:paddingStart="5dp" />
                     </androidx.cardview.widget.CardView>
 
@@ -248,10 +248,11 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <Spinner
-                            android:id="@+id/spinnersingleSeatesStatus"
+                        <EditText
+                            android:id="@+id/edtsingleSeatesStatus"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="30dp"
+                            android:textColor="@color/textColor1"
                             android:layout_margin="4dp" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
@@ -316,7 +317,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
-                            android:hint="Enter Count"
+
                             android:paddingStart="5dp" />
                     </androidx.cardview.widget.CardView>
 
@@ -357,10 +358,12 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <Spinner
-                            android:id="@+id/spinnerDoubleSeatesStatus"
+                        <EditText
+                            android:id="@+id/edtDoubleSeatesStatus"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:background="@drawable/cardbg"
+                            android:layout_height="30dp"
+                            android:textColor="@color/textColor1"
                             android:layout_margin="4dp" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
@@ -424,7 +427,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
-                            android:hint="Enter Count"
+
                             android:paddingStart="5dp" />
                     </androidx.cardview.widget.CardView>
 
@@ -466,10 +469,12 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <Spinner
-                            android:id="@+id/spinnerTripleSeatesStatus"
+                        <EditText
+                            android:id="@+id/edtTripleSeatesStatus"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:background="@drawable/cardbg"
+                            android:layout_height="30dp"
+                            android:textColor="@color/textColor1"
                             android:layout_margin="4dp" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
@@ -587,12 +592,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:visibility="gone"
                     android:padding="2dp"
                     android:src="@drawable/uplodimg" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewFurnitures"
+                android:id="@+id/recyclerViewFurnituresOnSub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -609,6 +615,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="Submit"
+                android:visibility="gone"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

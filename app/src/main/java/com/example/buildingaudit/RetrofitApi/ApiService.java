@@ -244,6 +244,62 @@ public  interface ApiService {
     Call<List<JsonObject>> uploadElectricityArrangement(@Body JsonObject object);
 
 
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewElectricityArrDetails")
+    Call<List<JsonObject>> checkElectricityArrangement(@Body JsonObject object);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SSolarPanelDetails")
+    Call<List<JsonObject>> uploadSolarPanelDetails(@Body JsonObject object);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewSolarPanelDetails")
+    Call<List<JsonObject>> viewSolarPanelDetails(@Body JsonObject object);
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SBoundaryWallDetails")
+    Call<List<JsonObject>> uploadBoundryWall(@Body JsonObject object);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewBoundaryWallDetails")
+    Call<List<JsonObject>> checkBoundryWall(@Body JsonObject object);
+
+
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SBoysToiletDetails")
+    Call<List<JsonObject>> uploadBoysToilet(@Body JsonObject object);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewBoysToiletDetails")
+    Call<List<JsonObject>> checkBoysToilet(@Body JsonObject object);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SGirlsToiletDetails")
+    Call<List<JsonObject>> uploadGirlsToilet(@Body JsonObject object);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewGirlsToiletDetail")
+    Call<List<JsonObject>> checkGirlsToilet(@Body JsonObject object);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SFurniturecDetails")
+    Call<List<JsonObject>> uploadFurniture(@Body JsonObject object);
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewFurnitureDetails")
+    Call<List<JsonObject>> checkFurniture(@Body JsonObject object);
+
+
 
 
 }

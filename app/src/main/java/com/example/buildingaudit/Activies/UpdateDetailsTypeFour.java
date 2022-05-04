@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.ApplicationController;
@@ -97,6 +98,12 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         edtTotalLibraryGrant=findViewById(R.id.edtTotalLibraryGrant);
         edtLibraryGrantInFY=findViewById(R.id.edtLibraryGrantInFY);
         numberOfAlmira=findViewById(R.id.numberOfAlmira);
@@ -210,6 +217,11 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         buttonSubmitLibraryDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
+                if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
@@ -222,31 +234,37 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                        dialog2.dismiss();
                         Log.d("TAG", "onResponse: "+response.body());
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
 
-                        if (response.body().get(0).get("Status").getAsString().equals("E")){
-                            textView.setText("You already uploaded details ");
-
-                        }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                            textView.setText("Your details Submitted successfully ");
-                        }
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
                             }
-                        });
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-
+dialog2.dismiss();
                     }
                 });
+            }
             }
         });
 

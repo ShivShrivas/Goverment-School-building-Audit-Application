@@ -21,6 +21,24 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Activies.OnSubmit_FurnitureDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_GirlsToiletDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_BoysToiletDetails"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_BoundryWalls"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_SolarPanel"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_ElectricityArrangment"
+            android:exported="false" />
+        <activity
             android:name=".Activies.OnSubmit_FireFighting"
             android:exported="false" />
         <activity

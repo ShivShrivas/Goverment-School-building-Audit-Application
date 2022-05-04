@@ -69,7 +69,7 @@ int cameraType;
     public ArrayList<Bitmap> arrayListImages4 = new ArrayList<>();
     ImageAdapter adapter;
     ImageAdapter2 adapter2;
-    Dialog dialog;
+    Dialog dialog,dialog2;
 
     ImageAdapter3 adapter3;
     ApplicationController applicationController;
@@ -112,6 +112,12 @@ int cameraType;
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -150,7 +156,56 @@ int cameraType;
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (goodCondtionClassroom.getText().toString().equals("0")){
+                    goodConditionImageUploadBtn.setVisibility(View.GONE);
+                }else
+                {
+                    goodConditionImageUploadBtn.setVisibility(View.VISIBLE);
 
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        majorRepairingClassroom.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (majorRepairingClassroom.getText().toString().equals("0")){
+                    majorRepairingUploadImageBtn.setVisibility(View.GONE);
+                }else {
+                    majorRepairingUploadImageBtn.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        minorRepairingClassroom.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (minorRepairingClassroom.getText().toString().equals("0")){
+                    minorRepairingUploadImageBtn.setVisibility(View.GONE);
+                }else {
+                    minorRepairingUploadImageBtn.setVisibility(View.VISIBLE);
+
+                }
             }
 
             @Override
@@ -161,6 +216,7 @@ int cameraType;
         classRoomSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 try {
                     int totalClassRoom=Integer.parseInt(goodCondtionClassroom.getText().toString())+Integer.parseInt(minorRepairingClassroom.getText().toString())+Integer.parseInt(majorRepairingClassroom.getText().toString());
                     if (totalClassRoom!=Integer.parseInt(totalClassRooms.getText().toString().trim())){
@@ -174,6 +230,10 @@ int cameraType;
                                 .show();
 
                     }else {
+                        if (arrayListImages3.size()==0 && arrayListImages2.size()==0 && arrayListImages4.size()==0){
+                            Toast.makeText(UpdateDetailTypeOne.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                        }else {
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
                         Log.d("TAG", "onClick: "+paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
@@ -183,36 +243,41 @@ int cameraType;
                         call.enqueue(new Callback<List<JsonObject>>() {
                             @Override
                             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                                dialog2.dismiss();
                                 Log.d("TAG", "onResponse: "+response.body());
-
                                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                                try {
+                                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                        textView.setText("You already uploaded details ");
 
-                                if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                    textView.setText("You already uploaded details ");
-
-                                }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                    textView.setText("Your details Submitted successfully ");
-                                }
-                                dialog.show();
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        onBackPressed();
-                                        dialog.dismiss();
+                                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                        textView.setText("Your details Submitted successfully ");
                                     }
-                                });
+                                    dialog.show();
+                                    button.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            onBackPressed();
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                }catch (Exception e){
+                                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                                }
                             }
 
                             @Override
                             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-
+                                dialog2.dismiss();
                             }
                         });
 
                     }
+                    }
                 }catch (Exception e){
                     Toast.makeText(UpdateDetailTypeOne.this, "please fill all room count properly", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
                 }
 
             }
