@@ -103,6 +103,12 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -374,43 +380,21 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         JsonArray jsonArray=new JsonArray();
             JsonObject jsonObject1=new JsonObject();
             jsonObject1.addProperty("FurnitureType","Single");
-            if (spinnersingleSeatesStatus.getSelectedItem().toString().equals("Good Condition")){
-                jsonObject1.addProperty("Condition","Good");
-            }else if (spinnersingleSeatesStatus.getSelectedItem().toString().equals("Major repairing")){
-                jsonObject1.addProperty("Condition","Major");
-
-            }else if (spinnersingleSeatesStatus.getSelectedItem().toString().equals("Minor Repairing")){
-                jsonObject1.addProperty("Condition","Minor");
-
-            }
+                jsonObject1.addProperty("Condition",spinnersingleSeatesStatus.getSelectedItem().toString());
             jsonObject1.addProperty("TotalCnt",edtSingleSeated.getText().toString());
             jsonObject1.addProperty("Srno","1");
 
             JsonObject jsonObject2=new JsonObject();
             jsonObject2.addProperty("FurnitureType","Double");
-            if (spinnerDoubleSeatesStatus.getSelectedItem().toString().equals("Good Condition")){
-                jsonObject2.addProperty("Condition","Good");
-            }else if (spinnerDoubleSeatesStatus.getSelectedItem().toString().equals("Major repairing")){
-                jsonObject2.addProperty("Condition","Major");
 
-            }else if (spinnerDoubleSeatesStatus.getSelectedItem().toString().equals("Minor Repairing")){
-                jsonObject2.addProperty("Condition","Minor");
-
-            }
+                jsonObject2.addProperty("Condition",spinnerDoubleSeatesStatus.getSelectedItem().toString());
             jsonObject2.addProperty("TotalCnt",edtDoubleSeated.getText().toString());
             jsonObject2.addProperty("Srno","2");
 
         JsonObject jsonObject3=new JsonObject();
         jsonObject3.addProperty("FurnitureType","Tripple");
-        if (spinnerTripleSeatesStatus.getSelectedItem().toString().equals("Good Condition")){
-            jsonObject3.addProperty("Condition","Good");
-        }else if (spinnerTripleSeatesStatus.getSelectedItem().toString().equals("Major repairing")){
-            jsonObject3.addProperty("Condition","Major");
 
-        }else if (spinnerTripleSeatesStatus.getSelectedItem().toString().equals("Minor Repairing")){
-            jsonObject3.addProperty("Condition","Minor");
-
-        }
+            jsonObject3.addProperty("Condition",spinnerTripleSeatesStatus.getSelectedItem().toString());
         jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
         jsonObject3.addProperty("Srno","3");
 

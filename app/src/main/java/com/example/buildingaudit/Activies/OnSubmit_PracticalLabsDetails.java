@@ -6,10 +6,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -58,6 +60,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         schoolName=findViewById(R.id.schoolName);
         schoolAddress=findViewById(R.id.schoolAddress);
         scienceLabBodyCard=findViewById(R.id.scienceLabBodyCard);
@@ -122,20 +130,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
                    hidecards(scienceLabBodyCard,scienceLanImageCard);
                }
-                if (list.get(0).getEquipmentStatus().toString().equals("PE")){
-                    edtScienceEquipmentStatus.setText("Partially Equipped");
-                }else  if (list.get(0).getEquipmentStatus().toString().equals("FE")){
-                    edtScienceEquipmentStatus.setText("Fully Equipped");
-                }if (list.get(0).getEquipmentStatus().toString().equals("NE")){
-                    edtScienceEquipmentStatus.setText("Not Equipped");
-                }
-                if (list.get(0).getLabCondition().toString().equals("Major")){
-                    edtScienceLabCondition.setText("Major Repairing");
-                }else  if (list.get(0).getLabCondition().toString().equals("Minor")){
-                    edtScienceLabCondition.setText("Minor Repairing");
-                }if (list.get(0).getLabCondition().toString().equals("Good")){
-                    edtScienceLabCondition.setText("Good Condition");
-                }
+
+                    edtScienceEquipmentStatus.setText(list.get(0).getEquipmentStatus());
+
+
+                    edtScienceLabCondition.setText(list.get(0).getLabCondition());
+
 
 
                 if (list.get(1).getLabYN().toString().equals("Yes")){
@@ -146,20 +146,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
                 }
 
-                if (list.get(1).getEquipmentStatus().toString().equals("PE")){
-                    edtPhysicsEquipmentStatus.setText("Partially Equipped");
-                }else  if (list.get(1).getEquipmentStatus().toString().equals("FE")){
-                    edtPhysicsEquipmentStatus.setText("Fully Equipped");
-                }if (list.get(1).getEquipmentStatus().toString().equals("NE")){
-                    edtPhysicsEquipmentStatus.setText("Not Equipped");
-                }
-                if (list.get(1).getLabCondition().toString().equals("Major")){
-                    edtPhysicsLabCondition.setText("Major Repairing");
-                }else  if (list.get(1).getLabCondition().toString().equals("Minor")){
-                    edtPhysicsLabCondition.setText("Minor Repairing");
-                }if (list.get(1).getLabCondition().toString().equals("Good")){
-                    edtPhysicsLabCondition.setText("Good Condition");
-                }
+
+                    edtPhysicsEquipmentStatus.setText(list.get(1).getEquipmentStatus());
+
+
+                    edtPhysicsLabCondition.setText(list.get(1).getLabCondition().toString());
+
 
                 if (list.get(2).getLabYN().toString().equals("Yes")){
                     edtChemistrylabAvailability.setText(list.get(1).getLabYN());
@@ -169,20 +161,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
                 }
 
-                if (list.get(2).getEquipmentStatus().toString().equals("PE")){
-                    edtChemistryEquipmentStatus.setText("Partially Equipped");
-                }else  if (list.get(2).getEquipmentStatus().toString().equals("FE")){
-                    edtChemistryEquipmentStatus.setText("Fully Equipped");
-                }if (list.get(2).getEquipmentStatus().toString().equals("NE")){
-                    edtChemistryEquipmentStatus.setText("Not Equipped");
-                }
-                if (list.get(2).getLabCondition().toString().equals("Major")){
-                    edtChemistryLabCondition.setText("Major Repairing");
-                }else  if (list.get(2).getLabCondition().toString().equals("Minor")){
-                    edtChemistryLabCondition.setText("Minor Repairing");
-                }if (list.get(2).getLabCondition().toString().equals("Good")){
-                    edtChemistryLabCondition.setText("Good Condition");
-                }
+
+                    edtChemistryEquipmentStatus.setText(list.get(2).getEquipmentStatus());
+
+
+                    edtChemistryLabCondition.setText(list.get(2).getLabCondition());
+
 
                 if (list.get(3).getLabYN().toString().equals("Yes")){
                     edtBiologylabAvailability.setText(list.get(3).getLabYN());
@@ -192,20 +176,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
                 }
 
-                if (list.get(3).getEquipmentStatus().toString().equals("PE")){
-                    edtBilogyEquipmentStatus.setText("Partially Equipped");
-                }else  if (list.get(3).getEquipmentStatus().toString().equals("FE")){
-                    edtBilogyEquipmentStatus.setText("Fully Equipped");
-                }if (list.get(3).getEquipmentStatus().toString().equals("NE")){
-                    edtBilogyEquipmentStatus.setText("Not Equipped");
-                }
-                if (list.get(3).getLabCondition().toString().equals("Major")){
-                    edtBiologyLabCondition.setText("Major Repairing");
-                }else  if (list.get(3).getLabCondition().toString().equals("Minor")){
-                    edtBiologyLabCondition.setText("Minor Repairing");
-                }if (list.get(3).getLabCondition().toString().equals("Good")){
-                    edtBiologyLabCondition.setText("Good Condition");
-                }
+
+                    edtBilogyEquipmentStatus.setText(list.get(3).getEquipmentStatus());
+
+
+                    edtBiologyLabCondition.setText(list.get(3).getLabCondition());
+
 
                 if (list.get(4).getLabYN().toString().equals("Yes")){
                     edtHomeSciencelabAvailability.setText(list.get(4).getLabYN());
@@ -216,20 +192,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                 }
 
 
-                if (list.get(4).getEquipmentStatus().toString().equals("PE")){
-                    edtHomeScienceEquipmentStatus.setText("Partially Equipped");
-                }else  if (list.get(4).getEquipmentStatus().toString().equals("FE")){
-                    edtHomeScienceEquipmentStatus.setText("Fully Equipped");
-                }if (list.get(4).getEquipmentStatus().toString().equals("NE")){
-                    edtHomeScienceEquipmentStatus.setText("Not Equipped");
-                }
-                if (list.get(4).getLabCondition().toString().equals("Major")){
-                    edtHomeScienceLabCondition.setText("Major Repairing");
-                }else  if (list.get(4).getLabCondition().toString().equals("Minor")){
-                    edtHomeScienceLabCondition.setText("Minor Repairing");
-                }if (list.get(4).getLabCondition().toString().equals("Good")){
-                    edtHomeScienceLabCondition.setText("Good Condition");
-                }
+
+                    edtHomeScienceEquipmentStatus.setText(list.get(4).getEquipmentStatus());
+
+
+                    edtHomeScienceLabCondition.setText(list.get(4).getLabCondition());
+
 
                 if (list.get(5).getLabYN().toString().equals("Yes")){
                     edtHomeMusiclabAvailability.setText(list.get(5).getLabYN());
@@ -240,20 +208,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                 }
 
 
-                if (list.get(5).getEquipmentStatus().toString().equals("PE")){
-                    edtMusicEquipmentStatus.setText("Partially Equipped");
-                }else  if (list.get(5).getEquipmentStatus().toString().equals("FE")){
-                    edtMusicEquipmentStatus.setText("Fully Equipped");
-                }if (list.get(5).getEquipmentStatus().toString().equals("NE")){
-                    edtMusicEquipmentStatus.setText("Not Equipped");
-                }
-                if (list.get(5).getLabCondition().toString().equals("Major")){
-                    edtMusicLabCondition.setText("Major Repairing");
-                }else  if (list.get(5).getLabCondition().toString().equals("Minor")){
-                    edtMusicLabCondition.setText("Minor Repairing");
-                }if (list.get(5).getLabCondition().toString().equals("Good")){
-                    edtMusicLabCondition.setText("Good Condition");
-                }
+
+                    edtMusicEquipmentStatus.setText(list.get(5).getEquipmentStatus());
+
+
+                    edtMusicLabCondition.setText(list.get(5).getLabCondition());
+
 
 
                 if (list.get(6).getLabYN().toString().equals("Yes")){
@@ -266,20 +226,12 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
 
 
-                if (list.get(6).getEquipmentStatus().toString().equals("PE")){
-                    GeographyEquipmentStatus.setText("Partially Equipped");
-                }else  if (list.get(6).getEquipmentStatus().toString().equals("FE")){
-                    GeographyEquipmentStatus.setText("Fully Equipped");
-                }if (list.get(6).getEquipmentStatus().toString().equals("NE")){
-                    GeographyEquipmentStatus.setText("Not Equipped");
-                }
-                if (list.get(6).getLabCondition().toString().equals("Major")){
-                    edtGeographyLabConditionedt.setText("Major Repairing");
-                }else  if (list.get(6).getLabCondition().toString().equals("Minor")){
-                    edtGeographyLabConditionedt.setText("Minor Repairing");
-                }if (list.get(6).getLabCondition().toString().equals("Good")){
-                    edtGeographyLabConditionedt.setText("Good Condition");
-                }
+
+                    GeographyEquipmentStatus.setText(list.get(6).getEquipmentStatus());
+
+
+                    edtGeographyLabConditionedt.setText(list.get(6).getLabCondition());
+
                 recyclerViewScienceLab.setLayoutManager(new LinearLayoutManager(OnSubmit_PracticalLabsDetails.this,LinearLayoutManager.HORIZONTAL,false));
                 recyclerViewPhysicsLab.setLayoutManager(new LinearLayoutManager(OnSubmit_PracticalLabsDetails.this,LinearLayoutManager.HORIZONTAL,false));
                 recyclerViewChemistryLab.setLayoutManager(new LinearLayoutManager(OnSubmit_PracticalLabsDetails.this,LinearLayoutManager.HORIZONTAL,false));

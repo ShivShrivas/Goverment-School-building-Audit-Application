@@ -105,6 +105,12 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -327,11 +333,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
             jsonObject1.addProperty("Scheme",array[i].getScheme());
             jsonObject1.addProperty("Srno",array[i].getSrno());
             jsonObject1.addProperty("Name",array[i].getName());
-            if (array[i].getWorkingStatus().toString().equals("Non Functional")){
-                jsonObject1.addProperty("WorkingStatus","NF");
-            }else if (array[i].getWorkingStatus().toString().equals("Functional")){
-                jsonObject1.addProperty("WorkingStatus","F");
-            }
+                jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());
             jsonArray.add(jsonObject1);
         }
         jsonObject.add("SmartClassData",(JsonElement)jsonArray);

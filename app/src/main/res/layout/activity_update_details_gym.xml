@@ -270,9 +270,9 @@
             <EditText
                 android:id="@+id/edtGymArea"
                 android:layout_width="match_parent"
-                android:inputType="numberDecimal"
+                android:inputType="number"
                 android:maxLines="1"
-                android:maxLength="9"
+                android:maxLength="5"
                 android:layout_height="match_parent" />
         </androidx.cardview.widget.CardView>
 

@@ -258,6 +258,7 @@
                         android:textColor="@color/textColor1"
                         android:background="@drawable/cardbg"
                         android:paddingStart="5dp"
+                        android:maxLength="5"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="35dp" />
@@ -303,6 +304,7 @@
                         android:textColor="@color/textColor1"
                         android:background="@drawable/cardbg"
                         android:paddingStart="5dp"
+                        android:maxLength="5"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="35dp" />

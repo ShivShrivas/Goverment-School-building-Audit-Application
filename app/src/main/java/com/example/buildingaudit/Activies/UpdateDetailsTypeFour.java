@@ -144,7 +144,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         spinnerFurnitureAvailabiltyInLibrary.setAdapter(arrayAdapter1);
         ArrayList<String> arrayListWorkingStatus =new ArrayList<>();
         arrayListWorkingStatus.add("Functional");
-        arrayListWorkingStatus.add("Non-Functional");
+        arrayListWorkingStatus.add("Non Functional");
 
         ArrayAdapter<String> arrayAdapter2=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
@@ -273,25 +273,11 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         jsonObject.addProperty("ParamId",paramId);
         jsonObject.addProperty("ParamName",libraryDetails);
         jsonObject.addProperty("Availabilty",availabilty);
-        if (physicalStatus.equals("Good Condition")){
-            jsonObject.addProperty("PhysicalStatus","Good");
-        }else if (physicalStatus.equals("Major repairing")) {
-            jsonObject.addProperty("PhysicalStatus", "Major");
-        }
-        else if (physicalStatus.equals("Minor repairing")) {
-            jsonObject.addProperty("PhysicalStatus", "Minor");
-        }
-
+        jsonObject.addProperty("PhysicalStatus", physicalStatus);
         jsonObject.addProperty("FurnitureAvl",furnitureAvl);
         jsonObject.addProperty("NoOfAlmirah",noOfAlmirah);
         jsonObject.addProperty("NoOfBooks",noOfBooks);
-
-        if (workingStatus.equals("Functional")){
-            jsonObject.addProperty("WorkingStatus","F");
-        }else if (workingStatus.equals("Not Functional")) {
-            jsonObject.addProperty("WorkingStatus", "NF");
-        }
-
+        jsonObject.addProperty("WorkingStatus", workingStatus);
         jsonObject.addProperty("ReadingCorner",readingCorner);
         jsonObject.addProperty("SubscribeNewsMagazines",subscribeNewsMagazines);
         jsonObject.addProperty("GrantScheme",grantScheme);

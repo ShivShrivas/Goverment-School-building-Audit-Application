@@ -304,6 +304,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:maxLength="3"
+
                         android:background="@drawable/cardbg"
                         android:inputType="number"
 
@@ -374,6 +376,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:maxLength="3"
+
                         android:background="@drawable/cardbg"
                         android:inputType="number"
 
@@ -444,6 +448,7 @@
                         android:layout_weight="1"
                         android:background="@drawable/cardbg"
                         android:inputType="number"
+                        android:maxLength="3"
 
                         android:textAlignment="center" />
 

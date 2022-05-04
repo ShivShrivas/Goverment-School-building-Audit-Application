@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EdgeEffect;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -42,6 +44,12 @@ ApplicationController applicationController;
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -81,13 +89,10 @@ ApplicationController applicationController;
                         edtGrantUnderScheme.setText(response.body().get(0).get("GrantScheme").getAsString());
                 edtNewsPaperAndMzin.setText(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
                 edtReadingCorner.setText(response.body().get(0).get("ReadingCorner").getAsString());
-                    if(response.body().get(0).get("WorkingStatus").getAsString().equals("F")){
 
-                        edtWorkingStatus.setText("Functional");
-                    }else  if(response.body().get(0).get("WorkingStatus").getAsString().equals("NF")){
 
-                        edtWorkingStatus.setText("Not Functional");
-                    }
+                        edtWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+
                         edtNumberOfBooksLibrary.setText(response.body().get(0).get("NoOfBooks").getAsString());
                 numberOfAlmira.setText(response.body().get(0).get("NoOfAlmirah").getAsString());
                 edtFurnitureAvailabiltyInLibrary.setText(response.body().get(0).get("FurnitureAvl").getAsString());

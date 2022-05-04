@@ -357,6 +357,7 @@
                 android:textColor="@color/textColor1"
                 android:id="@+id/noOfTubeLight"
                 android:paddingStart="5dp"
+                android:maxLength="4"
                 android:inputType="number"
                 android:layout_width="match_parent"
                 android:layout_height="35dp" />
@@ -401,6 +402,7 @@
                 android:textColor="@color/textColor1"
                 android:id="@+id/noOfFans"
                 android:inputType="number"
+                android:maxLength="3"
                 android:paddingStart="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp" />

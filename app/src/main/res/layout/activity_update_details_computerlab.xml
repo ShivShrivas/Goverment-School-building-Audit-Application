@@ -281,6 +281,7 @@
                         android:textColor="@color/textColor1"
                         android:textAlignment="center"
                         android:inputType="number"
+                        android:maxLength="5"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </androidx.cardview.widget.CardView>
@@ -326,6 +327,8 @@
                         android:textColor="@color/textColor1"
                         android:textAlignment="center"
                         android:inputType="number"
+                        android:maxLength="5"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </androidx.cardview.widget.CardView>
@@ -664,6 +667,8 @@
                         android:layout_width="189dp"
                         android:layout_height="match_parent"
                         android:inputType="number"
+                        android:maxLength="5"
+
                         android:textAlignment="center"
                         android:textColor="@color/textColor1" />
                 </androidx.cardview.widget.CardView>

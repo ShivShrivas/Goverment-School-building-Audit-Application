@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,6 +47,14 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
+        dialog2.show();
+
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -73,13 +83,10 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
                  edtInternalElectrification.setText(response.body().get(0).get("InternalElectrification").getAsString());
                 edtSource.setText(response.body().get(0).get("Source").getAsString());
 
-                if(response.body().get(0).get("WorkingStatus").getAsString().equals("F")){
 
-                    edtElectricStatus.setText("Functional");
-                }else  if(response.body().get(0).get("WorkingStatus").getAsString().equals("NF")){
 
-                    edtElectricStatus.setText("Not Functional");
-                }
+                    edtElectricStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+
                 edtnoOfTubeLight.setText(response.body().get(0).get("NoOfBulbsTLight").getAsString());
                   edtnoOfFans.setText(response.body().get(0).get("NoOfFans").getAsString());
 
@@ -87,11 +94,13 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ElectricityArrangment.this,StaffPhotoPathList);
                 recyclerViewElectricityArrangmentOnSub.setAdapter(onlineImageRecViewAdapter);
 
+                dialog2.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

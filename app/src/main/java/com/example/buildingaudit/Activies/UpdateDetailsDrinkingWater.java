@@ -106,6 +106,12 @@ Button buttonSubmitDrinkinwaterDetails;
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         applicationController= (ApplicationController) getApplication();
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
@@ -300,43 +306,32 @@ Button buttonSubmitDrinkinwaterDetails;
         jsonObject.addProperty("ParamId",paramId);
         jsonObject.addProperty("ParamName",drinkingWater);
         jsonObject.addProperty("HandPumpAvl",handPumpAvl);
-        if (handPumpWorkingStatus.equals("Functional")){
-            jsonObject.addProperty("HandPumpWorkingStatus","F");
-        }else if (handPumpWorkingStatus.equals("Not Functional")) {
-            jsonObject.addProperty("HandPumpWorkingStatus","NF");
-        }
+
+            jsonObject.addProperty("HandPumpWorkingStatus",handPumpWorkingStatus);
+
 
         jsonObject.addProperty("SubmersibleAvl",submersibleAvl);
 
-        if (submersibleWorkingStatus.equals("Functional")){
-            jsonObject.addProperty("SubmersibleWorkingStatus","F");
-        }else if (submersibleWorkingStatus.equals("Not Functional")) {
-            jsonObject.addProperty("SubmersibleWorkingStatus","NF");
-        }
+
+            jsonObject.addProperty("SubmersibleWorkingStatus",submersibleWorkingStatus);
 
 
         jsonObject.addProperty("NNPalikaWaterSupplyAvl",nnPalikaWaterSupplyAvl);
-        if (nnPalikaWaterSupplyWorkingStatus.equals("Functional")){
-            jsonObject.addProperty("NNPalikaWaterSupplyWorkingStatus","F");
-        }else if (nnPalikaWaterSupplyWorkingStatus.equals("Not Functional")) {
-            jsonObject.addProperty("NNPalikaWaterSupplyWorkingStatus","NF");
-        }
+
+            jsonObject.addProperty("NNPalikaWaterSupplyWorkingStatus",nnPalikaWaterSupplyWorkingStatus);
+
 
         jsonObject.addProperty("OverHeadTankAvl",overHeadTankAvl);
 
-        if (overHeadTankWorkingStatus.equals("Functional")){
-            jsonObject.addProperty("OverHeadTankWorkingStatus","F");
-        }else if (overHeadTankWorkingStatus.equals("Not Functional")) {
-            jsonObject.addProperty("OverHeadTankWorkingStatus","NF");
-        }
+
+            jsonObject.addProperty("OverHeadTankWorkingStatus",overHeadTankWorkingStatus);
+
 
         jsonObject.addProperty("ROInsAvl",roInsAvl);
 
-        if (roInsWorkingStatus.equals("Functional")){
-            jsonObject.addProperty("ROInsWorkingStatus","F");
-        }else if (roInsWorkingStatus.equals("Not Functional")) {
-            jsonObject.addProperty("ROInsWorkingStatus","NF");
-        }
+
+            jsonObject.addProperty("ROInsWorkingStatus",roInsWorkingStatus);
+
 
         jsonObject.addProperty("NoOfTaps",noOfTaps);
         jsonObject.addProperty("WorkingTaps",workingTaps);

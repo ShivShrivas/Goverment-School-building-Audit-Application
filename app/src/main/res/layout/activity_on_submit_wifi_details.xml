@@ -179,7 +179,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-            <EditText
+             <EditText
                 android:id="@+id/edtWifiPresent"
                 android:background="@drawable/cardbg"
                 android:textAlignment="center"

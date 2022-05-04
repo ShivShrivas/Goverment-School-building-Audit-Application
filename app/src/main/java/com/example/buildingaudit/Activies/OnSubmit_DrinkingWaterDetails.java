@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -47,6 +49,13 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
+        dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -81,41 +90,24 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
                 Log.d("TAG", "onResponse: "+response.body());
 
                 edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme").getAsString());
-                if(response.body().get(0).get("ROInsWorkingStatus").getAsString().equals("F")){
 
-                    edtROInstallationWokingStatus.setText("Functional");
-                }else  if(response.body().get(0).get("ROInsWorkingStatus").getAsString().equals("NF")){
 
-                    edtROInstallationWokingStatus.setText("Not Functional");
-                }
-                if(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString().equals("F")){
+                    edtROInstallationWokingStatus.setText(response.body().get(0).get("ROInsWorkingStatus").getAsString());
 
-                    edtOverheadTankWorkStatsyDW.setText("Functional");
-                }else  if(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString().equals("NF")){
 
-                    edtOverheadTankWorkStatsyDW.setText("Not Functional");
-                }
-  if(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString().equals("F")){
 
-      edtWaterSupplyWorkStatsyDW.setText("Functional");
-                }else  if(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString().equals("NF")){
+                    edtOverheadTankWorkStatsyDW.setText(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString());
 
-      edtWaterSupplyWorkStatsyDW.setText("Not Functional");
-                }
- if(response.body().get(0).get("SubmersibleWorkingStatus").getAsString().equals("F")){
 
-     edtSubmersibleWorkStatsyDW.setText("Functional");
-                }else  if(response.body().get(0).get("SubmersibleWorkingStatus").getAsString().equals("NF")){
 
-     edtSubmersibleWorkStatsyDW.setText("Not Functional");
-                }
-if(response.body().get(0).get("HandPumpWorkingStatus").getAsString().equals("F")){
+      edtWaterSupplyWorkStatsyDW.setText(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString());
 
-    edtHandPumpWorkStatsyDW.setText("Functional");
-                }else  if(response.body().get(0).get("HandPumpWorkingStatus").getAsString().equals("NF")){
 
-    edtHandPumpWorkStatsyDW.setText("Not Functional");
-                }
+     edtSubmersibleWorkStatsyDW.setText(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
+
+
+    edtHandPumpWorkStatsyDW.setText(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
+
 
 
                         edtROInstallationAvailabiltyDW.setText(response.body().get(0).get("ROInsAvl").getAsString());
@@ -133,13 +125,13 @@ if(response.body().get(0).get("HandPumpWorkingStatus").getAsString().equals("F")
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_DrinkingWaterDetails.this,StaffPhotoPathList);
                 recyclerViewDrinkingWater.setAdapter(onlineImageRecViewAdapter);
-
+dialog2.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-
+dialog2.dismiss();
             }
         });
 

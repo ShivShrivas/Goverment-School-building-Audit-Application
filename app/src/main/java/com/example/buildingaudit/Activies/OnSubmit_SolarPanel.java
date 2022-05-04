@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -45,6 +47,12 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -72,14 +80,7 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
                 edtTypeOfSolarPanel.setText(response.body().get(0).get("SolarPanelType").getAsString());
                         edtcapacityOfSolarPanel.setText(response.body().get(0).get("Kilowatt").getAsString());
                 edtSolarPanelScheme.setText(response.body().get(0).get("Scheme").getAsString());
-                if(response.body().get(0).get("WorkingStatus").getAsString().equals("F")){
-
-                    edtSolarPaneltWorkingStatus.setText("Functional");
-                }else  if(response.body().get(0).get("WorkingStatus").getAsString().equals("NF")){
-
-                    edtSolarPaneltWorkingStatus.setText("Not Functional");
-                }
-
+                    edtSolarPaneltWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
                 edtSolraPanelInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
                         edtSolarPanel.setText(response.body().get(0).get("Availabilty").getAsString());
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");

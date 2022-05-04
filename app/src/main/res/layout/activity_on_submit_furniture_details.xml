@@ -204,6 +204,7 @@
                             android:inputType="number"
                             android:textAlignment="center"
                             android:layout_width="match_parent"
+                            android:textColor="@color/textColor1"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
 
@@ -251,9 +252,11 @@
                         <EditText
                             android:id="@+id/edtsingleSeatesStatus"
                             android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:textColor="@color/textColor1"
-                            android:layout_margin="4dp" />
+                            android:layout_height="wrap_content"
+                            android:layout_margin="4dp"
+                            android:textAlignment="center"
+                            android:background="@drawable/cardbg"
+                            android:textColor="@color/textColor1" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </LinearLayout>
@@ -315,6 +318,8 @@
                             android:inputType="number"
                             android:textAlignment="center"
                             android:layout_width="match_parent"
+                            android:textColor="@color/textColor1"
+
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
 
@@ -363,6 +368,7 @@
                             android:layout_width="match_parent"
                             android:background="@drawable/cardbg"
                             android:layout_height="30dp"
+                            android:textAlignment="center"
                             android:textColor="@color/textColor1"
                             android:layout_margin="4dp" />
                     </androidx.cardview.widget.CardView>
@@ -424,6 +430,8 @@
                             android:id="@+id/edtTrippelSeated"
                             android:inputType="number"
                             android:textAlignment="center"
+                            android:textColor="@color/textColor1"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
@@ -474,6 +482,7 @@
                             android:layout_width="match_parent"
                             android:background="@drawable/cardbg"
                             android:layout_height="30dp"
+                            android:textAlignment="center"
                             android:textColor="@color/textColor1"
                             android:layout_margin="4dp" />
                     </androidx.cardview.widget.CardView>

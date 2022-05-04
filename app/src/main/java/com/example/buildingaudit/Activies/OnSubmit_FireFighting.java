@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -44,6 +46,13 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
+        dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -69,15 +78,14 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
 
-                if(response.body().get(0).get("WorkingStatus").getAsString().equals("F")){
 
-                    edtFireFightWorkingStatus.setText("Functional");
-                }else  if(response.body().get(0).get("WorkingStatus").getAsString().equals("NF")){
 
-                    edtFireFightWorkingStatus.setText("Not Functional");
-                }
+                    edtFireFightWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+
                 edtFireFightTraining.setText(response.body().get(0).get("Training").getAsString());
-                        edtrenewalDate.setText(response.body().get(0).get("RenewalDateStatus").getAsString());
+                String[] time=(response.body().get(0).get("RenewalDateStatus").getAsString()).split("T");
+
+                edtrenewalDate.setText(time[0]);
                 edtFireFightRenewalStatus.setText(response.body().get(0).get("RenewalStatus").getAsString());
                 edtFireFightAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
                         edtFireFightingInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
@@ -85,12 +93,14 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FireFighting.this,StaffPhotoPathList);
                 recyclerViewFireFightningoNsUB.setAdapter(onlineImageRecViewAdapter);
+                dialog2.dismiss();
 
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

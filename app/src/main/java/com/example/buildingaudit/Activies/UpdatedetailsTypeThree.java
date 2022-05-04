@@ -507,8 +507,13 @@ ApplicationController applicationController;
                geographyLabCondition.setSrno("7");
                geographyLabCondition.setEquipmentStatus(spinnerGeographyEquipmentStatus.getSelectedItem().toString());
 
+                    if (spinnerSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerPhysicslabAvailability.getSelectedItem().toString().equals("Yes") ||
+                            spinnerChemistrylabAvailability.getSelectedItem().toString().equals("Yes") || spinnerHomeMusiclabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")||
+                            spinnerHomeSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")
+                    ){
 
-                if (arrayListImages1.size()==0){
+
+                if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0 ){
                     Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
                 }else {
@@ -517,53 +522,54 @@ ApplicationController applicationController;
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUsertype(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
-                Call<List<JsonObject>> call=apiService.uploadLabDetails(paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body());
-//                        Toast.makeText(UpdatedetailsTypeThree.this, ""+response.body(), Toast.LENGTH_SHORT).show();
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-
-
-                            textView.setText("Something went wrong please try again!! ");
-
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
-                            }
-                        });
-                    }
-                });
+//                Call<List<JsonObject>> call=apiService.uploadLabDetails(paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
+//                call.enqueue(new Callback<List<JsonObject>>() {
+//                    @Override
+//                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+//                        Log.d("TAG", "onResponse: "+response.body());
+////                        Toast.makeText(UpdatedetailsTypeThree.this, ""+response.body(), Toast.LENGTH_SHORT).show();
+//                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+//                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+//                        try {
+//                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+//                                textView.setText("You already uploaded details ");
+//
+//                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+//                                textView.setText("Your details Submitted successfully ");
+//                            }
+//                            dialog.show();
+//                            button.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    onBackPressed();
+//                                    dialog.dismiss();
+//                                }
+//                            });
+//                        }catch (Exception e){
+//                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+//                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+//                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+//
+//
+//                            textView.setText("Something went wrong please try again!! ");
+//
+//                        dialog.show();
+//                        button.setOnClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View view) {
+//                                onBackPressed();
+//                                dialog.dismiss();
+//                            }
+//                        });
+//                    }
+//                });
+            }
             }
             }
         });

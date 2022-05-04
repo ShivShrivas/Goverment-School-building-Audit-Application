@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -46,6 +48,14 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
+        dialog2.show();
+
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -73,58 +83,42 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
                 edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture").getAsString());
                         edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength").getAsString());
 
-                if (response.body().get(2).get("Condition").getAsString().equals("Good")){
 
-                    edtTripleSeatesStatus.setText("Good Condition");
-                }else if (response.body().get(2).get("Condition").getAsString().equals("Minor")){
 
-                    edtTripleSeatesStatus.setText("Minor Repairing");
-                }else if (response.body().get(2).get("Condition").getAsString().equals("Major")){
-
-                    edtTripleSeatesStatus.setText("Major Repairing");
-                }
+                    edtTripleSeatesStatus.setText(response.body().get(2).get("Condition").getAsString());
 
 
 
-                if (response.body().get(1).get("Condition").getAsString().equals("Good")){
-
-                    edtDoubleSeatesStatus.setText("Good Condition");
-                }else if (response.body().get(1).get("Condition").getAsString().equals("Minor")){
-
-                    edtDoubleSeatesStatus.setText("Minor Repairing");
-                }else if (response.body().get(1).get("Condition").getAsString().equals("Major")){
-
-                    edtDoubleSeatesStatus.setText("Major Repairing");
-                }
 
 
 
-                if (response.body().get(0).get("Condition").getAsString().equals("Good")){
+                    edtDoubleSeatesStatus.setText(response.body().get(1).get("Condition").getAsString());
 
-                    edtSingleSeated.setText("Good Condition");
-                }else if (response.body().get(0).get("Condition").getAsString().equals("Minor")){
 
-                    edtSingleSeated.setText("Minor Repairing");
-                }else if (response.body().get(0).get("Condition").getAsString().equals("Major")){
 
-                    edtSingleSeated.setText("Major Repairing");
-                }
+
+
+
+                    edtsingleSeatesStatus.setText(response.body().get(0).get("Condition").getAsString());
+
 
                         edtTrippelSeated.setText(response.body().get(2).get("TotalCnt").getAsString());
                 edtDoubleSeated.setText(response.body().get(1).get("TotalCnt").getAsString());
 
 
-                        edtsingleSeatesStatus.setText(response.body().get(0).get("TotalCnt").getAsString());
+                        edtSingleSeated.setText(response.body().get(0).get("TotalCnt").getAsString());
 
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FurnitureDetails.this,StaffPhotoPathList);
                 recyclerViewFurnituresOnSub.setAdapter(onlineImageRecViewAdapter);
 
+                dialog2.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

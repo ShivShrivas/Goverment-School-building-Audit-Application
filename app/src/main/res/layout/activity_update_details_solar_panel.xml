@@ -384,6 +384,7 @@
                         android:layout_height="35dp"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
+                        android:maxLength="6"
                         android:background="@drawable/cardbg"
                         android:inputType="number"
                         android:textAlignment="center"

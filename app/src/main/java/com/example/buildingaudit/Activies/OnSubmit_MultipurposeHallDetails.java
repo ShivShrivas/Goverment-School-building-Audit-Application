@@ -5,9 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -42,6 +44,12 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -62,13 +70,9 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
                 edtMultipurposeHall.setText(response.body().get(0).get("Availability").getAsString());
-                if (response.body().get(0).get("PhysicalStatus").getAsString().equals("Major")){
-                    edtMultiPurposeHallStatus.setText("Major Repairing");
-                }else  if (response.body().get(0).get("PhysicalStatus").getAsString().equals("Minor")){
-                    edtMultiPurposeHallStatus.setText("Minor Repairing");
-                }if (response.body().get(0).get("PhysicalStatus").getAsString().equals("Good")){
-                    edtMultiPurposeHallStatus.setText("Good Condition");
-                }
+
+                    edtMultiPurposeHallStatus.setText(response.body().get(0).get("PhysicalStatus").getAsString());
+
 
                 edtSittingCapacity.setText(response.body().get(0).get("SittingCapacity").getAsString());
 

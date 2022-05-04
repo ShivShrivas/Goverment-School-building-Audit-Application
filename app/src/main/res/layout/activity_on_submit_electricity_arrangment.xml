@@ -183,6 +183,8 @@
                 android:background="@drawable/cardbg"
                 android:layout_height="30dp"
                 android:textAlignment="center"
+                android:textColor="@color/textColor1"
+
                 android:id="@+id/edtElectricityAvailabelty"
                 android:layout_width="match_parent"
                 android:layout_margin="4dp"
@@ -229,6 +231,8 @@
                 android:background="@drawable/cardbg"
                 android:layout_height="30dp"
                 android:textAlignment="center"
+                android:textColor="@color/textColor1"
+
                 android:id="@+id/edtInternalElectrification"
                 android:layout_width="match_parent"
                 android:layout_margin="4dp"
@@ -274,6 +278,8 @@
                 android:background="@drawable/cardbg"
                 android:layout_height="30dp"
                 android:textAlignment="center"
+                android:textColor="@color/textColor1"
+
                 android:id="@+id/edtSource"
                 android:layout_width="match_parent"
                 android:layout_margin="4dp"
@@ -320,6 +326,7 @@
                 android:background="@drawable/cardbg"
                 android:layout_height="30dp"
                 android:textAlignment="center"
+                android:textColor="@color/textColor1"
                 android:id="@+id/edtElectricStatus"
                 android:layout_width="match_parent"
                 android:layout_margin="4dp"
@@ -364,6 +371,7 @@
                 android:layout_margin="4dp"
                 android:background="@drawable/cardbg"
                 android:textColor="@color/textColor1"
+                android:textAlignment="center"
                 android:id="@+id/edtnoOfTubeLight"
                 android:paddingStart="5dp"
                 android:inputType="number"
@@ -411,6 +419,7 @@
                 android:textColor="@color/textColor1"
                 android:id="@+id/edtnoOfFans"
                 android:inputType="number"
+                android:textAlignment="center"
                 android:paddingStart="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp" />

@@ -99,6 +99,12 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
@@ -300,13 +306,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         jsonObject.addProperty("RenewalStatus",toString1);
         jsonObject.addProperty("RenewalDateStatus",toString2);
         jsonObject.addProperty("Training",toString3);
-        if (toString.equals("Functional")){
-            jsonObject.addProperty("WorkingStatus","F");
-
-        }else  if (toString.equals("Not Functional")){
-            jsonObject.addProperty("WorkingStatus","NF");
-
-        }
+        jsonObject.addProperty("WorkingStatus",toString);
         jsonObject.addProperty("Availabilty",toString5);
         jsonObject.addProperty("Lat",latitude);
         jsonObject.addProperty("Long",longitude);

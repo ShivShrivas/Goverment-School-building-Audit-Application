@@ -374,6 +374,7 @@
                 android:layout_margin="4dp"
                 android:paddingStart="4dp"
                 android:gravity="center_vertical"
+                android:textAlignment="center"
                 android:textColor="@color/textColor1"
 
                 android:background="@drawable/cardbg"

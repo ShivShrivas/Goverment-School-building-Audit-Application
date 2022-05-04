@@ -216,6 +216,7 @@
                         android:background="@drawable/cardbg"
                         android:paddingStart="5dp"
                         android:layout_margin="4dp"
+                        android:textAlignment="center"
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="30dp"/>
@@ -263,6 +264,8 @@
                         android:paddingStart="5dp"
                         android:layout_margin="4dp"
                         android:inputType="number"
+                        android:textAlignment="center"
+
                         android:layout_width="match_parent"
                         android:layout_height="30dp" />
                 </androidx.cardview.widget.CardView>
@@ -308,6 +311,8 @@
                         android:background="@drawable/cardbg"
                         android:paddingStart="5dp"
                         android:layout_margin="4dp"
+                        android:textAlignment="center"
+
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="30dp" />
@@ -357,6 +362,8 @@
                         android:paddingStart="5dp"
                         android:layout_margin="4dp"
                         android:inputType="number"
+                        android:textAlignment="center"
+
                         android:layout_width="match_parent"
                         android:layout_height="30dp" />
                 </androidx.cardview.widget.CardView>
@@ -405,6 +412,8 @@
                         android:paddingStart="5dp"
                         android:layout_margin="4dp"
                         android:inputType="number"
+                        android:textAlignment="center"
+
                         android:layout_width="match_parent"
                         android:layout_height="30dp"/>
                 </androidx.cardview.widget.CardView>
@@ -450,6 +459,8 @@
                         android:background="@drawable/cardbg"
                         android:paddingStart="5dp"
                         android:layout_margin="4dp"
+                        android:textAlignment="center"
+
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="30dp" />
@@ -496,6 +507,8 @@
                         android:background="@drawable/cardbg"
                         android:paddingStart="5dp"
                         android:layout_margin="4dp"
+                        android:textAlignment="center"
+
                         android:inputType="number"
                         android:layout_width="match_parent"
                         android:layout_height="30dp" />

@@ -5,11 +5,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.example.buildingaudit.ApplicationController;
@@ -43,6 +46,13 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
                 onBackPressed();
             }
         });
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
+        dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -66,16 +76,10 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-                if (response.body().get(0).get("Condition").getAsString().equals("Good")){
 
-                    edtWallCondition.setText("Good Condition");
-                }else if (response.body().get(0).get("Condition").getAsString().equals("Minor")){
 
-                    edtWallCondition.setText("Minor Repairing");
-                }else if (response.body().get(0).get("Condition").getAsString().equals("Major")){
+                    edtWallCondition.setText(response.body().get(0).get("Condition").getAsString());
 
-                    edtWallCondition.setText("Major Repairing");
-                }
                         edtBoundryScheme.setText(response.body().get(0).get("Scheme").getAsString());
                 edtWhiteWash.setText(response.body().get(0).get("WhiteWashStatus").getAsString());
                         edtTypeBoundaryWall.setText(response.body().get(0).get("BoundaryWallType").getAsString());
@@ -86,11 +90,13 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BoundryWalls.this,StaffPhotoPathList);
                 recyclerViewTwoTypeBoundarywallOnSub.setAdapter(onlineImageRecViewAdapter);
 
-
+            dialog2.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+                Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
 
             }
         });

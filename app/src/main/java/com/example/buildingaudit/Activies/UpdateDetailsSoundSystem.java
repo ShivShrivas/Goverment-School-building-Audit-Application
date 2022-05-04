@@ -172,7 +172,7 @@ Button submitSoundSystemBtn;
                 }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
-                    Call<List<JsonObject>> call=apiService.uploadSoundSystem(paraSoundSystem("1","22","SoundSystemDetails",spinnerSoundSystem.getSelectedItem().toString(),spinnerSoundSystem.getSelectedItem().toString(),spinnerSchoolBandForGirls.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                    Call<List<JsonObject>> call=apiService.uploadSoundSystem(paraSoundSystem("1","22","SoundSystemDetails",spinnerSoundSystem.getSelectedItem().toString(),spinnerSchoolBand.getSelectedItem().toString(),spinnerSchoolBandForGirls.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
                     call.enqueue(new Callback<List<JsonObject>>() {
                         @Override
                         public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

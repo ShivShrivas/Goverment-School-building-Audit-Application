@@ -269,6 +269,7 @@
                 android:background="@drawable/cardbg"
                 android:textAlignment="center"
                 android:inputType="number"
+                android:maxLength="5"
                 android:layout_width="match_parent"
                 android:layout_height="30dp" />
         </androidx.cardview.widget.CardView>

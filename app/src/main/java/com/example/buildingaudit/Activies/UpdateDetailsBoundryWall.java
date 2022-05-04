@@ -101,6 +101,12 @@ Dialog dialog;
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        Dialog dialog2 = new Dialog(this);
+
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.progress_dialog);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -276,14 +282,7 @@ Dialog dialog;
         jsonObject.addProperty("BoundaryWallLength",toString2);
         jsonObject.addProperty("BoundaryWallType",toString3);
         jsonObject.addProperty("WhiteWashStatus",toString4);
-        if (toString5.equals("Good Condition")){
-            jsonObject.addProperty("Condition","Good");
-        }else if (toString5.equals("Major repairing")) {
-            jsonObject.addProperty("Condition", "Major");
-        }
-        else if (toString5.equals("Minor repairing")) {
-            jsonObject.addProperty("Condition", "Minor");
-        }
+        jsonObject.addProperty("Condition",toString5);
         jsonObject.addProperty("Scheme",toString6);
 
         JsonArray jsonArray2 = new JsonArray();
