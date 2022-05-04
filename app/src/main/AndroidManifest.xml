@@ -21,6 +21,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Activies.OnSubmit_FireFighting"
+            android:exported="false" />
+        <activity
             android:name=".Activies.OnSubmit_RainHarvesting"
             android:exported="false" />
         <activity

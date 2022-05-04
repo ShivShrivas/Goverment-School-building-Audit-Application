@@ -18,6 +18,7 @@ import com.example.buildingaudit.Activies.OnSubmit_CCTVDetails;
 import com.example.buildingaudit.Activies.OnSubmit_ComputerLabDetails;
 import com.example.buildingaudit.Activies.OnSubmit_CycleStand;
 import com.example.buildingaudit.Activies.OnSubmit_DrinkingWaterDetails;
+import com.example.buildingaudit.Activies.OnSubmit_FireFighting;
 import com.example.buildingaudit.Activies.OnSubmit_LibraryDetails;
 import com.example.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails;
 import com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails;
@@ -145,13 +146,14 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         break;
                         case "10":
                             checkCCTVDetails();
-                        context.startActivity(new Intent(context, UpdateDetailsCCTV.class));
+
                         break;
                         case "11":
                         context.startActivity(new Intent(context, UpdateDetailsElectricityArrangment.class));
                         break;
                         case "12":
-                        context.startActivity(new Intent(context, UpdateDetailsFireFighting.class));
+                            checkFirefighting();
+
                         break;
                         case "13":
                             checkRainHarvest();
@@ -201,6 +203,29 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         break;
 
                 }
+            }
+        });
+    }
+
+    private void checkFirefighting() {
+        Call<List<JsonObject>> call=apiService.checkFireFighting(paraGetDetails2("2",schoolId, periodId,"12"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsFireFighting.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_FireFighting.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
             }
         });
     }
