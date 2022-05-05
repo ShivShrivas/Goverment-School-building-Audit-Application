@@ -519,65 +519,72 @@ dialog2.show();
                     Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
                 }else {
-
-
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUsertype(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
-                Call<List<JsonObject>> call=apiService.uploadLabDetails(paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body());
-//                        Toast.makeText(UpdatedetailsTypeThree.this, ""+response.body(), Toast.LENGTH_SHORT).show();
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
+                        runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
+            }
+            }else {
+                        runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
 
                     }
+            }
+        });
 
+    }
+
+    private void runService(LabCondition scienceLabCondition, LabCondition physicsLabCondition, LabCondition chemistryLabCondition, LabCondition biologyLabCondition, LabCondition homeScienceLabCondition, LabCondition musicLabCondition, LabCondition geographyLabCondition) {
+
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUsertype(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
+        Call<List<JsonObject>> call=apiService.uploadLabDetails(paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+//                        Toast.makeText(UpdatedetailsTypeThree.this, ""+response.body(), Toast.LENGTH_SHORT).show();
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+
+
+                textView.setText("Something went wrong please try again!! ");
+                dialog2.dismiss();
+
+                dialog.show();
+                button.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-
-
-                            textView.setText("Something went wrong please try again!! ");
-                        dialog2.dismiss();
-
-                        dialog.show();
-                        button.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                onBackPressed();
-                                dialog.dismiss();
-                            }
-                        });
+                    public void onClick(View view) {
+                        onBackPressed();
+                        dialog.dismiss();
                     }
                 });
-            }
-            }
             }
         });
 
@@ -719,8 +726,8 @@ dialog2.show();
         jsonObject.addProperty("LabName",lab.getLabName());
         jsonObject.addProperty("LabYN",lab.getLabYN());
         if (lab.getLabYN().toString().equals("No")){
-            jsonObject.addProperty("EquipmentStatus","null");
-            jsonObject.addProperty("LabCondition","null");
+            jsonObject.addProperty("EquipmentStatus","");
+            jsonObject.addProperty("LabCondition","");
         }else {
 
                 jsonObject.addProperty("EquipmentStatus",lab.getEquipmentStatus());

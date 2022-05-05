@@ -193,279 +193,289 @@
 
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/linearLayout31"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:id="@+id/constraintLayoutEA"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Intrenal Electrification"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <EditText
-                android:background="@drawable/cardbg"
-                android:layout_height="30dp"
-                android:textAlignment="center"
-                android:textColor="@color/textColor1"
-
-                android:id="@+id/edtInternalElectrification"
-                android:layout_width="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout32"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout31">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Other options/Source"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <EditText
-                android:background="@drawable/cardbg"
-                android:layout_height="30dp"
-                android:textAlignment="center"
-                android:textColor="@color/textColor1"
-
-                android:id="@+id/edtSource"
-                android:layout_width="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout33"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout32">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Working Status"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <EditText
-                android:background="@drawable/cardbg"
-                android:layout_height="30dp"
-                android:textAlignment="center"
-                android:textColor="@color/textColor1"
-                android:id="@+id/edtElectricStatus"
-                android:layout_width="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout34"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="No. Bulbs/Tube Light"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:layout_margin="4dp"
-                android:background="@drawable/cardbg"
-                android:textColor="@color/textColor1"
-                android:textAlignment="center"
-                android:id="@+id/edtnoOfTubeLight"
-                android:paddingStart="5dp"
-                android:inputType="number"
-                android:layout_width="match_parent"
-                android:layout_height="35dp" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout35"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout34">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="No. of Fans"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:layout_margin="4dp"
-                android:background="@drawable/cardbg"
-                android:textColor="@color/textColor1"
-                android:id="@+id/edtnoOfFans"
-                android:inputType="number"
-                android:textAlignment="center"
-                android:paddingStart="5dp"
-                android:layout_width="match_parent"
-                android:layout_height="35dp" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout35">
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayout31"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="Uploaded Images"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="15dp" />
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Intrenal Electrification"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
-            android:id="@+id/electricityArrangementImageUploadBtn"
+                <EditText
+                    android:id="@+id/edtInternalElectrification"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+
+                    android:layout_weight="1"
+                    android:background="@drawable/cardbg"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout32"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:visibility="gone"
-            android:padding="2dp"
-            android:src="@drawable/uplodimg" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout31">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewElectricityArrangmentOnSub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Other options/Source"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <EditText
+                    android:id="@+id/edtSource"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+
+                    android:layout_weight="1"
+                    android:background="@drawable/cardbg"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout33"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout32">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Working Status"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <EditText
+                    android:id="@+id/edtElectricStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cardbg"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout34"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="No. Bulbs/Tube Light"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/edtnoOfTubeLight"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/cardbg"
+                    android:inputType="number"
+                    android:paddingStart="5dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout35"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout34">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="No. of Fans"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/edtnoOfFans"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/cardbg"
+                    android:inputType="number"
+                    android:paddingStart="5dp"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout35">
+
+            <TextView
+                android:id="@+id/uploadImageTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Uploaded Images"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="15dp" />
+
+
+            <ImageView
+                android:id="@+id/electricityArrangementImageUploadBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/uplodimg"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewElectricityArrangmentOnSub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <Button
         android:id="@+id/submitBtnElectricityArrangeOnSub"

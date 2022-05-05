@@ -29,6 +29,7 @@ import retrofit2.Response;
 public class OnSubmit_WifiDetails extends AppCompatActivity {
 EditText edtWifiPresent;
 RecyclerView recyclerViewExtraThingsOnSub;
+TextView wifiUploadImageTxt;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     @Override
@@ -56,6 +57,7 @@ RecyclerView recyclerViewExtraThingsOnSub;
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtWifiPresent=findViewById(R.id.edtWifiPresent);
+        wifiUploadImageTxt=findViewById(R.id.wifiUploadImageTxt);
         recyclerViewExtraThingsOnSub=findViewById(R.id.recyclerViewExtraThingsOnSub);
         edtWifiPresent.setEnabled(false);
         recyclerViewExtraThingsOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -67,13 +69,22 @@ RecyclerView recyclerViewExtraThingsOnSub;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
-                edtWifiPresent.setText(response.body().get(0).get("WiFiInternetAvl").getAsString());
+                if (response.body().get(0).get("WiFiInternetAvl").getAsString().equals("No")){
+                    edtWifiPresent.setText(response.body().get(0).get("WiFiInternetAvl").getAsString());
+
+                    wifiUploadImageTxt.setVisibility(View.GONE);
+                    dialog2.dismiss();
+                }else {
+
+                    edtWifiPresent.setText(response.body().get(0).get("WiFiInternetAvl").getAsString());
 
 
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_WifiDetails.this,StaffPhotoPathList);
-                recyclerViewExtraThingsOnSub.setAdapter(onlineImageRecViewAdapter);
-                dialog2.dismiss();
+                    String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_WifiDetails.this,StaffPhotoPathList);
+                    recyclerViewExtraThingsOnSub.setAdapter(onlineImageRecViewAdapter);
+                    dialog2.dismiss();
+
+                }
 
             }
 

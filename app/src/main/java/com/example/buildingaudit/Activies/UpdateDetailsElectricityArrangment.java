@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -72,13 +74,14 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
     Dialog dialog;
 
     EditText noOfFans,noOfTubeLight;
+    ConstraintLayout constraintLayout31;
     Button submitBtnElectricityArrange;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
     Spinner spinnerElectricStatus,spinnerSource,spinnerInternalElectrification,spinnerElectricityAvailabelty;
         ImageView electricityArrangementImageUploadBtn;
         RecyclerView recyclerViewElectricityArrangment;
-
+    Dialog dialog2;
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
     @Override
@@ -99,7 +102,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
+        dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -118,6 +121,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         spinnerInternalElectrification=findViewById(R.id.spinnerInternalElectrification);
         spinnerElectricityAvailabelty=findViewById(R.id.spinnerElectricityAvailabelty);
         noOfTubeLight=findViewById(R.id.noOfTubeLight);
+        constraintLayout31=findViewById(R.id.constraintLayout31);
         noOfFans=findViewById(R.id.noOfFans);
 
         ArrayList<String> arrayList1=new ArrayList<>();
@@ -182,59 +186,84 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         adapter6 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewElectricityArrangment.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
+        spinnerElectricityAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
+                    constraintLayout31.setVisibility(View.GONE);
+                }else {
+                    constraintLayout31.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         submitBtnElectricityArrange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-
-                Log.d("TAG", "onClick: "+paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
+                    if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
+                    }else {
+                        runSpinner();
+
+
                     }
-                });
+                }else {
+                   runSpinner();
+                }
 
             }
+        });
+    }
+
+    private void runSpinner() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+
+        Log.d("TAG", "onClick: "+paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
     }

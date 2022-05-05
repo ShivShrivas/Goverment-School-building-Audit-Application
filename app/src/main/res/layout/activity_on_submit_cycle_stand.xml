@@ -192,53 +192,59 @@
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout13"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayout13"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-
-            android:text="Cycles Capacity Count"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <EditText
-                android:id="@+id/edtCycyleStandCapacity"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:background="@drawable/cardbg"
-                android:textColor="@color/textColor1"
-                android:layout_margin="4dp"
-                android:textAlignment="center"
-               />
-        </androidx.cardview.widget.CardView>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
 
-    </LinearLayout>
+
+                android:text="Cycles Capacity Count"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <EditText
+                    android:id="@+id/edtCycyleStandCapacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/cardbg"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout133"
@@ -345,6 +351,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout153">
 
         <TextView
+            android:id="@+id/uploadCYcleStand"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -373,7 +380,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
     <Button
         android:id="@+id/submitCycleStandBtn"
         android:layout_width="match_parent"

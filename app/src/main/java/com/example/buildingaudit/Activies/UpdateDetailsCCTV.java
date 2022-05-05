@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,6 +43,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -69,14 +72,16 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
     public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
     ImageAdapter3 adapter2;
     EditText EdtNoOfCCTV;
-    Dialog dialog;
+    Dialog dialog,dialog2;
 
     Spinner spinnerCCTVWorkingStatus,spinnerCCTVInstallationYear,spinnerCCTVAvailabelty;
     ImageView CCTVImageUploadBtn;
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
     RecyclerView recyclerViewCCTV;
+    ConstraintLayout constraintLayout33;
     Button submitBtnCCTV;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,7 +105,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -113,6 +118,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         CCTVImageUploadBtn=findViewById(R.id.CCTVImageUploadBtn);
         recyclerViewCCTV=findViewById(R.id.recyclerViewCCTV);
         submitBtnCCTV=findViewById(R.id.submitBtnCCTV);
+        constraintLayout33=findViewById(R.id.constraintLayout33);
 
 
         ArrayList<String> arrayListWorkingStatus=new ArrayList<>();
@@ -187,63 +193,87 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         adapter2= new ImageAdapter3(this, arrayListImages2);
         recyclerViewCCTV.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
+        spinnerCCTVAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerCCTVAvailabelty.getSelectedItem().toString().equals("No")){
+                    constraintLayout33.setVisibility(View.GONE);
+                }else {
+                    constraintLayout33.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         submitBtnCCTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages2.size()==0){
-                    Toast.makeText(UpdateDetailsCCTV.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (!spinnerCCTVAvailabelty.getSelectedItem().toString().equals("No")){
+                    if (arrayListImages2.size()==0){
+                        Toast.makeText(UpdateDetailsCCTV.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
 
+                    }else {
+                        runService();
+
+
+                    }
                 }else {
-                RestClient restClient =new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Call<List<JsonObject>> call=apiService.uploadCCTVDetails(paraCCTV("1","10","CCTV",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCCTVInstallationYear.getSelectedItem().toString(),EdtNoOfCCTV.getText().toString(),spinnerCCTVWorkingStatus.getSelectedItem().toString(),spinnerCCTVAvailabelty.getSelectedItem().toString(),arrayListImages2));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body());
+                    runService();
+                }
 
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-
-
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(UpdateDetailsCCTV.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                        }
-
-                       
-                      
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-
-                    }
-                });
-
-
-
-            }
             }
         });
+    }
+
+    private void runService() {
+        RestClient restClient =new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.uploadCCTVDetails(paraCCTV("1","10","CCTV",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCCTVInstallationYear.getSelectedItem().toString(),EdtNoOfCCTV.getText().toString(),spinnerCCTVWorkingStatus.getSelectedItem().toString(),spinnerCCTVAvailabelty.getSelectedItem().toString(),arrayListImages2));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+
+
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(UpdateDetailsCCTV.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                }
+
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+
+
     }
 
     private JsonObject paraCCTV(String s, String s1, String cctv, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String installationYear, String nOOFcctv, String workingStatus, String availabilty, ArrayList<Bitmap> arrayListImages2) {

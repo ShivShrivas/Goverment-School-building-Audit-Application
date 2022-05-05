@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,6 +33,8 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     RecyclerView recyclerViewTwoTypeBoundarywallOnSub;
+    ConstraintLayout layoutBoundry;
+    TextView uploadBoundary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,8 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
         schoolAddress.setText(applicationController.getSchoolAddress());
 
         edtWallCondition=findViewById(R.id.edtWallCondition);
+        uploadBoundary=findViewById(R.id.uploadBoundary);
+        layoutBoundry=findViewById(R.id.layoutBoundry);
         edtBoundryScheme=findViewById(R.id.edtBoundryScheme);
         edtWhiteWash=findViewById(R.id.edtWhiteWash);
         edtTypeBoundaryWall=findViewById(R.id.edtTypeBoundaryWall);
@@ -77,20 +82,33 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
 
-
+                if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    edtBoundaryWallAvail.setText(response.body().get(0).get("Availabilty").getAsString());
+                    layoutBoundry.setVisibility(View.GONE);
+                    dialog2.dismiss();
+                }else {
                     edtWallCondition.setText(response.body().get(0).get("Condition").getAsString());
 
-                        edtBoundryScheme.setText(response.body().get(0).get("Scheme").getAsString());
-                edtWhiteWash.setText(response.body().get(0).get("WhiteWashStatus").getAsString());
-                        edtTypeBoundaryWall.setText(response.body().get(0).get("BoundaryWallType").getAsString());
-                edtLengthofWall.setText(response.body().get(0).get("BoundaryWallLength").getAsString());
-                        edtAreaofSchool.setText(response.body().get(0).get("SchoolArea").getAsString());
-                edtBoundaryWallAvail.setText(response.body().get(0).get("Availabilty").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BoundryWalls.this,StaffPhotoPathList);
-                recyclerViewTwoTypeBoundarywallOnSub.setAdapter(onlineImageRecViewAdapter);
+                    edtBoundryScheme.setText(response.body().get(0).get("Scheme").getAsString());
+                    edtWhiteWash.setText(response.body().get(0).get("WhiteWashStatus").getAsString());
+                    edtTypeBoundaryWall.setText(response.body().get(0).get("BoundaryWallType").getAsString());
+                    edtLengthofWall.setText(response.body().get(0).get("BoundaryWallLength").getAsString());
+                    edtAreaofSchool.setText(response.body().get(0).get("SchoolArea").getAsString());
+                    edtBoundaryWallAvail.setText(response.body().get(0).get("Availabilty").getAsString());
+                    try {
+                        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BoundryWalls.this,StaffPhotoPathList);
+                        recyclerViewTwoTypeBoundarywallOnSub.setAdapter(onlineImageRecViewAdapter);
+                    }catch (Exception e){
+                        recyclerViewTwoTypeBoundarywallOnSub.setVisibility(View.GONE);
+                        uploadBoundary.setVisibility(View.GONE);
+                    }
 
-            dialog2.dismiss();
+
+                    dialog2.dismiss();
+                }
+
+
             }
 
             @Override

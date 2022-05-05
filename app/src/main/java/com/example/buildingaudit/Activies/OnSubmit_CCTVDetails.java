@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,8 @@ public class OnSubmit_CCTVDetails extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     RecyclerView recyclerViewCCTVOnSubmit;
+    ConstraintLayout layoutCCTV;
+    TextView uploadCCTV;
 EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailabelty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,8 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
         schoolAddress.setText(applicationController.getSchoolAddress());
 
         edtCCTVAvailabelty=findViewById(R.id.edtCCTVAvailabelty);
+        uploadCCTV=findViewById(R.id.uploadCCTV);
+        layoutCCTV=findViewById(R.id.layoutCCTV);
         edtCCTVInstallationYear=findViewById(R.id.edtCCTVInstallationYear);
         EdtNoOfCCTV=findViewById(R.id.EdtNoOfCCTV);
         edtCCTVWorkingStatus=findViewById(R.id.edtCCTVWorkingStatus);
@@ -72,14 +77,29 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
-                edtCCTVAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
-                edtCCTVInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
-                EdtNoOfCCTV.setText(response.body().get(0).get("NoOfCCTV").getAsString());
-                edtCCTVWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CCTVDetails.this,StaffPhotoPathList);
-                recyclerViewCCTVOnSubmit.setAdapter(onlineImageRecViewAdapter);
-dialog2.dismiss();
+                if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    layoutCCTV.setVisibility(View.GONE);
+                    edtCCTVAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+
+                    dialog2.dismiss();
+                }else
+                {
+                    edtCCTVAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    edtCCTVInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
+                    EdtNoOfCCTV.setText(response.body().get(0).get("NoOfCCTV").getAsString());
+                    edtCCTVWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+                    try {
+                        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CCTVDetails.this,StaffPhotoPathList);
+                        recyclerViewCCTVOnSubmit.setAdapter(onlineImageRecViewAdapter);
+                    }catch (Exception e){
+                        recyclerViewCCTVOnSubmit.setVisibility(View.GONE);
+                        uploadCCTV.setVisibility(View.GONE);
+                    }
+
+                    dialog2.dismiss();
+                }
+
             }
 
             @Override

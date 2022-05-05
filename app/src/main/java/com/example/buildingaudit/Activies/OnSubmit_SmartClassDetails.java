@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,7 @@ RecyclerView smartClassONSubmitRecView;
 RecyclerView recyclerViewSmartClassONSubmit;
     ApplicationController applicationController;
     private TextView schoolAddress,schoolName;
+    ConstraintLayout layoutSmartClass;
 
     EditText edtsmartClassAvailabilty,edtDigitalBoardSmartClass,edtLearningContentSmartClass,edtProjectorSmartClass,edtTeacherAvailbilitySmartClass;
     @Override
@@ -68,6 +70,7 @@ RecyclerView recyclerViewSmartClassONSubmit;
         edtTeacherAvailbilitySmartClass=findViewById(R.id.edtTeacherAvailbilitySmartClass);
         smartClassONSubmitRecView=findViewById(R.id.smartClassONSubmitRecView);
         recyclerViewSmartClassONSubmit=findViewById(R.id.recyclerViewSmartClassONSubmit);
+        layoutSmartClass=findViewById(R.id.layoutSmartClass);
 
         recyclerViewSmartClassONSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
@@ -80,35 +83,45 @@ RecyclerView recyclerViewSmartClassONSubmit;
             @Override
                 public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                     Log.d("TAG", "onResponse: "+response.body()+"///////");
-                    ArrayList<SmartClassesCard> smartClassesCards=new ArrayList<>();
-                    edtsmartClassAvailabilty.setText(response.body().get(0).get("Availablity").getAsString());
-                    edtDigitalBoardSmartClass.setText(response.body().get(0).get("DigitalBoard").getAsString());
-                    edtLearningContentSmartClass.setText(response.body().get(0).get("LearningContent").getAsString());
-                    edtProjectorSmartClass.setText(response.body().get(0).get("Projector").getAsString());
-                    edtTeacherAvailbilitySmartClass.setText(response.body().get(0).get("TeacherAvl").getAsString());
-                    for (int i=0;i<response.body().size();i++){
-                        SmartClassesCard smartClassesCard=new SmartClassesCard();
+                    if (response.body().get(0).get("Availablity").getAsString().equals("No")){
+                        edtsmartClassAvailabilty.setText(response.body().get(0).get("Availablity").getAsString());
+
+                        layoutSmartClass.setVisibility(View.GONE);
+                        dialog2.dismiss();
+
+                    }else{
+
+                        ArrayList<SmartClassesCard> smartClassesCards=new ArrayList<>();
+                        edtsmartClassAvailabilty.setText(response.body().get(0).get("Availablity").getAsString());
+                        edtDigitalBoardSmartClass.setText(response.body().get(0).get("DigitalBoard").getAsString());
+                        edtLearningContentSmartClass.setText(response.body().get(0).get("LearningContent").getAsString());
+                        edtProjectorSmartClass.setText(response.body().get(0).get("Projector").getAsString());
+                        edtTeacherAvailbilitySmartClass.setText(response.body().get(0).get("TeacherAvl").getAsString());
+                        for (int i=0;i<response.body().size();i++){
+                            SmartClassesCard smartClassesCard=new SmartClassesCard();
+
+                            String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                            OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList);
+                            recyclerViewSmartClassONSubmit.setAdapter(onlineImageRecViewAdapter);
+                            smartClassesCard.setCompanyName(response.body().get(i).get("CompanyName").getAsString());
+                            smartClassesCard.setName(response.body().get(i).get("Name").getAsString());
+                            smartClassesCard.setScheme(response.body().get(i).get("Scheme").getAsString());
+                            smartClassesCard.setInstallationYear(response.body().get(i).get("InstallationYear").getAsString());
+                            smartClassesCard.setWorkingStatus(response.body().get(i).get("WorkingStatus").getAsString());
+                            smartClassesCard.setSrno(response.body().get(i).get("Srno").getAsString());
+                            smartClassesCards.add(smartClassesCard);
+
+                        }
+                        smartClassONSubmitRecView.setLayoutManager(new LinearLayoutManager(OnSubmit_SmartClassDetails.this,RecyclerView.HORIZONTAL,false));
+                        smartClassONSubmitRecView.setAdapter(new SmartClassAdapter(OnSubmit_SmartClassDetails.this,smartClassesCards));
+                        (new SmartClassAdapter(OnSubmit_SmartClassDetails.this,smartClassesCards)).notifyDataSetChanged();
 
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                         OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList);
                         recyclerViewSmartClassONSubmit.setAdapter(onlineImageRecViewAdapter);
-                        smartClassesCard.setCompanyName(response.body().get(i).get("CompanyName").getAsString());
-                        smartClassesCard.setName(response.body().get(i).get("Name").getAsString());
-                        smartClassesCard.setScheme(response.body().get(i).get("Scheme").getAsString());
-                        smartClassesCard.setInstallationYear(response.body().get(i).get("InstallationYear").getAsString());
-                        smartClassesCard.setWorkingStatus(response.body().get(i).get("WorkingStatus").getAsString());
-                        smartClassesCard.setSrno(response.body().get(i).get("Srno").getAsString());
-                        smartClassesCards.add(smartClassesCard);
+                        dialog2.dismiss();
 
                     }
-                smartClassONSubmitRecView.setLayoutManager(new LinearLayoutManager(OnSubmit_SmartClassDetails.this,RecyclerView.HORIZONTAL,false));
-                    smartClassONSubmitRecView.setAdapter(new SmartClassAdapter(OnSubmit_SmartClassDetails.this,smartClassesCards));
-                (new SmartClassAdapter(OnSubmit_SmartClassDetails.this,smartClassesCards)).notifyDataSetChanged();
-
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList);
-                recyclerViewSmartClassONSubmit.setAdapter(onlineImageRecViewAdapter);
-                dialog2.dismiss();
 
             }
 

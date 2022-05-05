@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,9 +17,11 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,10 +71,14 @@ public class UpdateDetailsRainHarvest extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
+    Dialog dialog2;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
     Button submitBtnRainHarvest;
     ImageView rainHarvestingImageUploadBtn;
+    LinearLayout workingStatus;
+    ConstraintLayout constraintLayout26;
+    TextView workingStatusHeader;
     RecyclerView recyclerViewRAinHarvestandCWSNRamp;
 Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
     TextView userName,schoolAddress,schoolName;
@@ -95,8 +102,8 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -109,7 +116,9 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
         spinnerRainharvestingAvailabilty=findViewById(R.id.spinnerRainharvestingAvailabilty);
         spinnerRainHavestingWorkStatus=findViewById(R.id.spinnerRainHavestingWorkStatus);
         submitBtnRainHarvest=findViewById(R.id.submitBtnRainHarvest);
-
+        workingStatus=findViewById(R.id.workingStatus);
+                constraintLayout26=findViewById(R.id.constraintLayout26);
+        workingStatusHeader=findViewById(R.id.workingStatusHeader);
         recyclerViewRAinHarvestandCWSNRamp=findViewById(R.id.recyclerViewRAinHarvestandCWSNRamp);
         rainHarvestingImageUploadBtn=findViewById(R.id.rainHarvestingImageUploadBtn);
 
@@ -169,59 +178,88 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
         adapter6 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewRAinHarvestandCWSNRamp.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
+        spinnerRainharvestingAvailabilty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerRainharvestingAvailabilty.getSelectedItem().toString().equals("No")){
+                    workingStatus.setVisibility(View.GONE);
+                            constraintLayout26.setVisibility(View.GONE);
+                    workingStatusHeader.setVisibility(View.GONE);
+                }else {
+                    workingStatus.setVisibility(View.VISIBLE);
+                            constraintLayout26.setVisibility(View.VISIBLE);
+                    workingStatusHeader.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         submitBtnRainHarvest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsRainHarvest.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraRainHarvest("1","13","RainHarvesting",spinnerRainharvestingAvailabilty.getSelectedItem().toString(),spinnerRainHavestingWorkStatus.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadRainHarvest(paraRainHarvest("1","13","RainHarvesting",spinnerRainharvestingAvailabilty.getSelectedItem().toString(),spinnerRainHavestingWorkStatus.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response+response.body());
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerRainharvestingAvailabilty.getSelectedItem().toString().equals("No")){
+                    if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsRainHarvest.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
+                    }else {
+                        runService();
+
                     }
-                });
-            }
+                }else {
+                    runService();
+                }
+
             }
         });
 
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraRainHarvest("1","13","RainHarvesting",spinnerRainharvestingAvailabilty.getSelectedItem().toString(),spinnerRainHavestingWorkStatus.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadRainHarvest(paraRainHarvest("1","13","RainHarvesting",spinnerRainharvestingAvailabilty.getSelectedItem().toString(),spinnerRainHavestingWorkStatus.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response+response.body());
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
+            }
+        });
     }
 
     private JsonObject paraRainHarvest(String s, String s1, String rainHarvesting, String toString, String toString1, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {

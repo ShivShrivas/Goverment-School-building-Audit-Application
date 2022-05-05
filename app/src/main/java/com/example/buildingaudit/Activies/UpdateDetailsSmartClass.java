@@ -17,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -84,9 +85,10 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
     ApplicationController applicationController;
     EditText companyName1;
     TextView userName,schoolAddress,schoolName;
+    ConstraintLayout constraintLayout24;
     Button submitSmartClassBtn;
     Dialog dialog;
-
+    Dialog dialog2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,8 +107,8 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -130,6 +132,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         smartClassAvailabilty=findViewById(R.id.smartClassAvailabilty);
         smartClassImageUploadBtn=findViewById(R.id.smartClassImageUploadBtn);
         recyclerViewSmartClass=findViewById(R.id.recyclerViewSmartClass);
+        constraintLayout24=findViewById(R.id.constraintLayout24);
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
         arrayListInstallationYear.add("2015");
@@ -224,7 +227,21 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         adapter = new ImageAdapter4(this, arrayListImages1);
         recyclerViewSmartClass.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        smartClassAvailabilty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (smartClassAvailabilty.getSelectedItem().equals("No")){
+                    constraintLayout24.setVisibility(View.GONE);
+                }else {
+                    constraintLayout24.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         submitSmartClassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -248,54 +265,20 @@ dialog2.show();
 
                     array[i+1]=smartClassesCard;
                 }
-                if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsSmartClass.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (!smartClassAvailabilty.getSelectedItem().toString().equals("No")){
 
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraSmartClass("1","8","SmartClass",array, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadSmartClassDetails(paraSmartClass("1","8","SmartClass",array, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body()+response);
-
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                    if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsSmartClass.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
-                    }
-                });
+                    }else {
+                      runService(array);
 
-            }
+                    }
+                }else{
+                    runService(array);
+                }
+
             }
         });
         buttonForAddRooms.setOnClickListener(new View.OnClickListener() {
@@ -321,6 +304,50 @@ dialog2.show();
                 });
                 layoutForAddRooms.addView(addClsss);
 
+
+            }
+        });
+    }
+
+    private void runService(SmartClassesCard[] array) {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraSmartClass("1","8","SmartClass",array, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadSmartClassDetails(paraSmartClass("1","8","SmartClass",array, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+response);
+
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -76,12 +79,15 @@ Button buttonSolarePanel;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
     int btnType;
+    Dialog dialog2;
+    ConstraintLayout constraintLayout23;
     Dialog dialog;
     ImageAdapter4 adapter1;
   RecyclerView recyclerViewTwoTypeSolarpanelAnd;
   ImageView solarPanelImageUploadBtn;
 Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPanelInstallationYear,spinnerSolarPanel,spinnerTypeOfSolarPanel;
     TextView userName,schoolAddress,schoolName;
+
     ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +107,8 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -113,6 +119,7 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewTwoTypeSolarpanelAnd=findViewById(R.id.recyclerViewTwoTypeSolarpanelAnd);
+        constraintLayout23=findViewById(R.id.constraintLayout23);
 
         spinnerSolarPaneltWorkingStatus=findViewById(R.id.spinnerSolarPaneltWorkingStatus);
         spinnerTypeOfSolarPanel=findViewById(R.id.spinnerTypeOfSolarPanel);
@@ -215,80 +222,124 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         adapter1 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewTwoTypeSolarpanelAnd.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();
+        spinnerSolarPanel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerSolarPanel.getSelectedItem().toString().toString().equals("No")){
+                    constraintLayout23.setVisibility(View.GONE);
+                }else{
+                    constraintLayout23.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         buttonSolarePanel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsSolarPanel.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),
-                        spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(),spinnerSolarPanelScheme.getSelectedItem().toString(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadSolarPanelDetails(paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(),spinnerSolarPanelScheme.getSelectedItem().toString(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerSolarPanel.getSelectedItem().equals("No")){
+                    if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsSolarPanel.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
+                    }else {
+                        runService();
+
                     }
-                });
+                }else{
+                    runService();
+                }
 
             }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),
+                spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(),spinnerSolarPanelScheme.getSelectedItem().toString(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadSolarPanelDetails(paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(),spinnerSolarPanelScheme.getSelectedItem().toString(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+response);
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
     }
 
     private JsonObject paramSolarDetails(String s, String s1, String solarPanelPhoto, String schoolId, String periodID, String latitude, String longitude, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",s);
-        jsonObject.addProperty("ParamId",s1);
-        jsonObject.addProperty("ParamName", solarPanelPhoto);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        jsonObject.addProperty("Availabilty",toString);
-        jsonObject.addProperty("InstallationYear",toString1);
-        jsonObject.addProperty("WorkingStatus",toString2);
-        jsonObject.addProperty("Kilowatt",toString3);
-        jsonObject.addProperty("SolarPanelType",toString4);
-        jsonObject.addProperty("Scheme",toString5);
+        if (toString.equals("No")){
+            jsonObject.addProperty("Action",s);
+            jsonObject.addProperty("ParamId",s1);
+            jsonObject.addProperty("ParamName", solarPanelPhoto);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("Availabilty",toString);
+            jsonObject.addProperty("InstallationYear","0");
+            jsonObject.addProperty("WorkingStatus","");
+            jsonObject.addProperty("Kilowatt","");
+            jsonObject.addProperty("SolarPanelType","");
+            jsonObject.addProperty("Scheme","");
+
+        }else{
+            jsonObject.addProperty("Action",s);
+            jsonObject.addProperty("ParamId",s1);
+            jsonObject.addProperty("ParamName", solarPanelPhoto);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("Availabilty",toString);
+            jsonObject.addProperty("InstallationYear",toString1);
+            jsonObject.addProperty("WorkingStatus",toString2);
+            jsonObject.addProperty("Kilowatt",toString3);
+            jsonObject.addProperty("SolarPanelType",toString4);
+            jsonObject.addProperty("Scheme",toString5);
+        }
+
         JsonArray jsonArray = new JsonArray();
         for (int i = 0; i < arrayListImages1.size(); i++) {
             jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));

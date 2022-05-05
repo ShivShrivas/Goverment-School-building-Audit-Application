@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,7 @@ import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
 import java.util.List;
+import java.util.jar.JarEntry;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +32,7 @@ public class OnSubmit_ComputerLabDetails extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
 RecyclerView recyclerViewComputerLabOnSubmit;
+ConstraintLayout layOutComputerLab;
         EditText edtNoOfLab,edtScannerAvailable,edtPrinterAvailable,edtComputerOperator
                 ,edtPowerBackup,edtFurniture,edtinternet,edtGrantUnderScheme,edtNoOfWorkingComputer,edtNoOfComputer
                 ,edtInstallationYear,edtComputeLabAvailabelty;
@@ -66,6 +69,7 @@ RecyclerView recyclerViewComputerLabOnSubmit;
         edtComputerOperator=findViewById(R.id.edtComputerOperator);
         edtPowerBackup=findViewById(R.id.edtPowerBackup);
         edtFurniture=findViewById(R.id.edtFurniture);
+        layOutComputerLab=findViewById(R.id.layOutComputerLab);
         edtinternet=findViewById(R.id.edtinternet);
         edtGrantUnderScheme=findViewById(R.id.edtGrantUnderScheme);
         edtNoOfWorkingComputer=findViewById(R.id.edtNoOfWorkingComputer);
@@ -83,22 +87,34 @@ RecyclerView recyclerViewComputerLabOnSubmit;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
-                edtNoOfLab.setText(response.body().get(0).get("NoOfComputerLab").getAsString());
-                        edtScannerAvailable.setText(response.body().get(0).get("ScannerAvl").getAsString());
-                edtPrinterAvailable.setText(response.body().get(0).get("PrinterStatus").getAsString());
-                        edtComputerOperator.setText(response.body().get(0).get("ComputerOperator").getAsString());
-                edtPowerBackup.setText(response.body().get(0).get("PowerBackUp").getAsString());
-                        edtFurniture.setText(response.body().get(0).get("Furnitures").getAsString());
-                edtinternet.setText(response.body().get(0).get("Internet").getAsString());
-                        edtGrantUnderScheme.setText(response.body().get(0).get("Scheme").getAsString());
-                edtNoOfWorkingComputer.setText(response.body().get(0).get("NoOfWorkingComputers").getAsString());
-                        edtNoOfComputer.setText(response.body().get(0).get("NoOfComputers").getAsString());
-                edtInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
-                        edtComputeLabAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ComputerLabDetails.this,StaffPhotoPathList);
-                recyclerViewComputerLabOnSubmit.setAdapter(onlineImageRecViewAdapter);
-dialog2.dismiss();
+                if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    layOutComputerLab.setVisibility(View.GONE);
+                    edtComputeLabAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    dialog2.dismiss();
+                }else{
+                    edtNoOfLab.setText(response.body().get(0).get("NoOfComputerLab").getAsString());
+                    edtScannerAvailable.setText(response.body().get(0).get("ScannerAvl").getAsString());
+                    edtPrinterAvailable.setText(response.body().get(0).get("PrinterStatus").getAsString());
+                    edtComputerOperator.setText(response.body().get(0).get("ComputerOperator").getAsString());
+                    edtPowerBackup.setText(response.body().get(0).get("PowerBackUp").getAsString());
+                    edtFurniture.setText(response.body().get(0).get("Furnitures").getAsString());
+                    edtinternet.setText(response.body().get(0).get("Internet").getAsString());
+                    edtGrantUnderScheme.setText(response.body().get(0).get("Scheme").getAsString());
+                    edtNoOfWorkingComputer.setText(response.body().get(0).get("NoOfWorkingComputers").getAsString());
+                    edtNoOfComputer.setText(response.body().get(0).get("NoOfComputers").getAsString());
+                    edtInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
+                    edtComputeLabAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    try{
+                    String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ComputerLabDetails.this,StaffPhotoPathList);
+                    recyclerViewComputerLabOnSubmit.setAdapter(onlineImageRecViewAdapter);
+
+                }catch (Exception e){
+                        recyclerViewComputerLabOnSubmit.setVisibility(View.GONE);
+                    }
+                    dialog2.dismiss();
+                }
+
             }
 
             @Override

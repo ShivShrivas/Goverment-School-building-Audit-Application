@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
     RecyclerView recyclerViewBioMetricOnSubmit;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
+    ConstraintLayout layoutBioMetric;
     EditText edtBioMetricMachinecountOnSubmit,edtBioMetricMachineAvailabelty,edtBioMetricInstallationYear,edtuserbiometricStaff,edtuserbiometricStudent,edtBiometricWorkingStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +60,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewBioMetricOnSubmit=findViewById(R.id.recyclerViewBioMetricOnSubmit);
+        layoutBioMetric=findViewById(R.id.layoutBioMetric);
         edtBioMetricMachinecountOnSubmit=findViewById(R.id.edtBioMetricMachinecountOnSubmit);
 
         edtBioMetricMachineAvailabelty=findViewById(R.id.edtBioMetricMachineAvailabelty);
@@ -78,17 +81,32 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
+                if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    layoutBioMetric.setVisibility(View.GONE);
+                    dialog2.dismiss();
+                    edtBioMetricMachineAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
 
-                edtBioMetricMachineAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
-                        edtBioMetricInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
-                edtuserbiometricStaff.setText(response.body().get(0).get("BiometricUseStaff").getAsString());
-                        edtuserbiometricStudent.setText(response.body().get(0).get("BiometricUseStudent").getAsString());
-                edtBioMetricMachinecountOnSubmit.setText(response.body().get(0).get("NoOfMachines").getAsString());
+
+                }else {
+                    edtBioMetricMachineAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    edtBioMetricInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
+                    edtuserbiometricStaff.setText(response.body().get(0).get("BiometricUseStaff").getAsString());
+                    edtuserbiometricStudent.setText(response.body().get(0).get("BiometricUseStudent").getAsString());
+                    edtBioMetricMachinecountOnSubmit.setText(response.body().get(0).get("NoOfMachines").getAsString());
                     edtBiometricWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BioMetricDetails.this,StaffPhotoPathList);
-                recyclerViewBioMetricOnSubmit.setAdapter(onlineImageRecViewAdapter);
-dialog2.dismiss();
+                    try {
+                        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BioMetricDetails.this,StaffPhotoPathList);
+                        recyclerViewBioMetricOnSubmit.setAdapter(onlineImageRecViewAdapter);
+
+                    }catch (Exception e){
+                        recyclerViewBioMetricOnSubmit.setVisibility(View.GONE);
+                    }
+                    dialog2.dismiss();
+
+
+                }
+
 
             }
 

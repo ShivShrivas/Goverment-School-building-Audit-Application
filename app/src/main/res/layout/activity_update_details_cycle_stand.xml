@@ -189,184 +189,194 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout13"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout32"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-
-            android:text="Cycles Capacity Count"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <EditText
-                android:id="@+id/edtCycyleStandCapacity"
-                android:background="@drawable/cardbg"
-                android:layout_width="match_parent"
-                android:textColor="@color/textColor1"
-                android:inputType="number"
-                android:maxLength="6"
-                android:textAlignment="center"
-                android:layout_height="35dp" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout133"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Working Status"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <Spinner
-                android:id="@+id/spinnerCycleStandFunctionalStatus"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout153"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout133">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Physical Status"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-            <Spinner
-                android:id="@+id/spinnerCycleStandRepairingStatus"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout153">
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayout13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="Upload Images"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="15dp" />
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
 
 
-        <ImageView
-            android:id="@+id/cycleStandImageUploadBtn"
+                android:text="Cycles Capacity Count"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <EditText
+                    android:id="@+id/edtCycyleStandCapacity"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:background="@drawable/cardbg"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout133"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:src="@drawable/uplodimg" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerCycleStand"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Working Status"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <Spinner
+                    android:id="@+id/spinnerCycleStandFunctionalStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout153"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout133">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Physical Status"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <Spinner
+                    android:id="@+id/spinnerCycleStandRepairingStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout153">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Upload Images"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="15dp" />
+
+
+            <ImageView
+                android:id="@+id/cycleStandImageUploadBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/uplodimg" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerCycleStand"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/submitCycleStandBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
         android:text="Submit"
@@ -375,5 +385,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerCycleStand" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout32" />
 </androidx.constraintlayout.widget.ConstraintLayout>

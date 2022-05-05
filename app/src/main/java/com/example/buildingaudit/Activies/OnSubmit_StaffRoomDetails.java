@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
 
     EditText edtAlmiraAndRacksAvailabiltyOnSubmit,edtFurnitureAvailabiltyOnSubmit,edtStaffRoomStatusOnSubmit,edtStaffRoomAvailabilityOnSubmit;
     RecyclerView recyclerViewStafroomtwoOnSubmit;
+    ConstraintLayout constraintLayout22;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +48,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         edtFurnitureAvailabiltyOnSubmit=findViewById(R.id.edtFurnitureAvailabiltyOnSubmit);
         edtStaffRoomStatusOnSubmit=findViewById(R.id.edtStaffRoomStatusOnSubmit);
         edtStaffRoomAvailabilityOnSubmit=findViewById(R.id.edtStaffRoomAvailabilityOnSubmit);
+        constraintLayout22=findViewById(R.id.constraintLayout22);
         recyclerViewStafroomtwoOnSubmit=findViewById(R.id.recyclerViewStafroomtwoOnSubmit);
         applicationController= (ApplicationController) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,14 +75,21 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 setAllEditTextDisabled();
-                edtStaffRoomAvailabilityOnSubmit.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
-                edtAlmiraAndRacksAvailabiltyOnSubmit.setText(response.body().get(0).get("AlmirahRacksAvl").getAsString());
-                edtFurnitureAvailabiltyOnSubmit.setText(response.body().get(0).get("FurnitureAvl").getAsString());
-                edtStaffRoomStatusOnSubmit.setText(response.body().get(0).get("Status").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_StaffRoomDetails.this,StaffPhotoPathList);
-                recyclerViewStafroomtwoOnSubmit.setAdapter(onlineImageRecViewAdapter);
-                dialog2.dismiss();
+                if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
+                    constraintLayout22.setVisibility(View.GONE);
+                    edtStaffRoomAvailabilityOnSubmit.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                    dialog2.dismiss();
+                }else {
+                    edtStaffRoomAvailabilityOnSubmit.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                    edtAlmiraAndRacksAvailabiltyOnSubmit.setText(response.body().get(0).get("AlmirahRacksAvl").getAsString());
+                    edtFurnitureAvailabiltyOnSubmit.setText(response.body().get(0).get("FurnitureAvl").getAsString());
+                    edtStaffRoomStatusOnSubmit.setText(response.body().get(0).get("Status").getAsString());
+                    String[] StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_StaffRoomDetails.this,StaffPhotoPathList);
+                    recyclerViewStafroomtwoOnSubmit.setAdapter(onlineImageRecViewAdapter);
+                    dialog2.dismiss();
+                }
+
 
             }
 

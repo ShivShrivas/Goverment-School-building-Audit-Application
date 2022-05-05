@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -75,6 +77,7 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
     Dialog dialog,dialog2;
     ImageView staffRoomImageUploadBtn;
     RecyclerView recyclerViewTwoTypetwo;
+    ConstraintLayout constraintLayout22;
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
     Button SubmitBtnStaffRoom;
@@ -114,6 +117,7 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         SubmitBtnStaffRoom=findViewById(R.id.SubmitBtnStaffRoom);
         staffRoomImageUploadBtn=findViewById(R.id.staffRoomImageUploadBtn);
         recyclerViewTwoTypetwo=findViewById(R.id.recyclerViewTwoTypetwo);
+        constraintLayout22=findViewById(R.id.constraintLayout22);
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
         arrayListSpinner.add("Yes");
@@ -174,94 +178,129 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         adapter = new ImageAdapter4(this, arrayListImages1);
         recyclerViewTwoTypetwo.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        spinnerRoomAvailabel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerRoomAvailabel.getSelectedItem().toString().equals("No")){
+                    constraintLayout22.setVisibility(View.GONE);
+                }else {
+                    constraintLayout22.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         SubmitBtnStaffRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    dialog2.dismiss();
-
-                    Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
-                        applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadStaffRoomDetails(paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
-                        applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerRoomAvailabel.getSelectedItem().toString().equals("No") ){
+                    if (arrayListImages1.size()==0){
                         dialog2.dismiss();
-
+                        Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    }else {
+                        runService();
                     }
-                });
 
-            }
+                }else
+                {
+                    runService();
+
+                }
             }
         });
     }
 
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
+                applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadStaffRoomDetails(paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
+                applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
+            }
+        });
+
+    }
+
     private JsonObject paramStaffDetails(String action, String paramId, String staffRoomDetails, String roomAvail, String Status, String FurnitureAvl, String AlmirahRacksAvl, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",staffRoomDetails);
-        jsonObject.addProperty("SeperateRoomsAvl",roomAvail);
-        if (Status.equals("Good Condition")){
-            jsonObject.addProperty("Status","Good");
-        }else if (Status.equals("Major repairing")){
-            jsonObject.addProperty("Status","Major");
+            if (roomAvail.equals("No")){
+                jsonObject.addProperty("Action",action);
+                jsonObject.addProperty("ParamId",paramId);
+                jsonObject.addProperty("ParamName",staffRoomDetails);
+                jsonObject.addProperty("SeperateRoomsAvl",roomAvail);
+                jsonObject.addProperty("Status","");
+                jsonObject.addProperty("FurnitureAvl","");
+                jsonObject.addProperty("AlmirahRacksAvl","");
+                jsonObject.addProperty("Lat",latitude);
+                jsonObject.addProperty("Long",longitude);
+                jsonObject.addProperty("SchoolId",schoolId);
+                jsonObject.addProperty("PeriodID",periodID);
+                jsonObject.addProperty("CreatedBy",usertypeid);
+                jsonObject.addProperty("UserCode",userid);
+            }else{
+                jsonObject.addProperty("Action",action);
+                jsonObject.addProperty("ParamId",paramId);
+                jsonObject.addProperty("ParamName",staffRoomDetails);
+                jsonObject.addProperty("SeperateRoomsAvl",roomAvail);
+                jsonObject.addProperty("Status",Status);
+                jsonObject.addProperty("FurnitureAvl",FurnitureAvl);
+                jsonObject.addProperty("AlmirahRacksAvl",AlmirahRacksAvl);
+                jsonObject.addProperty("Lat",latitude);
+                jsonObject.addProperty("Long",longitude);
+                jsonObject.addProperty("SchoolId",schoolId);
+                jsonObject.addProperty("PeriodID",periodID);
+                jsonObject.addProperty("CreatedBy",usertypeid);
+                jsonObject.addProperty("UserCode",userid);
+            }
 
-        }else if (Status.equals("Minor Repairing")){
-            jsonObject.addProperty("Status","Minor");
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
-        }
-        jsonObject.addProperty("FurnitureAvl",FurnitureAvl);
-        jsonObject.addProperty("AlmirahRacksAvl",AlmirahRacksAvl);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        JsonArray jsonArray = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+            }
+            jsonObject.add("StaffPhotos", (JsonElement) jsonArray);
 
-        }
-        jsonObject.add("StaffPhotos", (JsonElement) jsonArray);
+
         return jsonObject;
     }
 

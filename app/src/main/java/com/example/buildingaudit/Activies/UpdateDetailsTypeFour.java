@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -79,6 +81,7 @@ Dialog dialog;
 RecyclerView recyclerViewTwoTypeFour;
     TextView userName,schoolAddress,schoolName;
 Button buttonSubmitLibraryDetails;
+ConstraintLayout constraintLayout21;
 EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantInFY,edtTotalLibraryGrant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +127,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         spinnerFurnitureAvailabiltyInLibrary=findViewById(R.id.spinnerFurnitureAvailabiltyInLibrary);
         typeFourImageUploadBtn=findViewById(R.id.typeFourImageUploadBtn);
         recyclerViewTwoTypeFour=findViewById(R.id.recyclerViewTwoTypeFour);
+        constraintLayout21=findViewById(R.id.constraintLayout21);
 
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
@@ -174,6 +178,21 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         ArrayAdapter<String> arrayAdapter5=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListGrantUnderScheme);
         arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerGrantUnderScheme.setAdapter(arrayAdapter5);
+
+        spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                    constraintLayout21.setVisibility(View.GONE);
+                }else {constraintLayout21.setVisibility(View.VISIBLE);}
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         typeFourImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -218,7 +237,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
+                if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No") && arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                     dialog2.dismiss();
 
@@ -228,46 +247,46 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                 Log.d("TAG", "onClick: "+paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
                         ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
                         spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadLibraryDetails(paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
-                ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
-                        spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body());
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                        dialog2.dismiss();
-
-                    }
-                });
+//                Call<List<JsonObject>> call=apiService.uploadLibraryDetails(paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
+//                ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
+//                        spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+//
+//                call.enqueue(new Callback<List<JsonObject>>() {
+//                    @Override
+//                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+//                        Log.d("TAG", "onResponse: "+response.body());
+//                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+//                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+//                        try {
+//                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+//                                textView.setText("You already uploaded details ");
+//
+//                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+//                                textView.setText("Your details Submitted successfully ");
+//                            }
+//                            dialog2.dismiss();
+//
+//                            dialog.show();
+//                            button.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    onBackPressed();
+//                                    dialog.dismiss();
+//                                }
+//                            });
+//                        }catch (Exception e){
+//                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+//                            dialog2.dismiss();
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+//                        dialog2.dismiss();
+//
+//                    }
+//                });
             }
             }
         });
@@ -276,35 +295,60 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
 
     private JsonObject paraLibraryDetails(String action, String paramId, String libraryDetails, String availabilty, String physicalStatus, String furnitureAvl, String noOfAlmirah, String noOfBooks, String workingStatus, String readingCorner, String subscribeNewsMagazines, String grantScheme, String totalLibGrant, String librarygrantRsCFY, String expenditureRsCFY, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",libraryDetails);
-        jsonObject.addProperty("Availabilty",availabilty);
-        jsonObject.addProperty("PhysicalStatus", physicalStatus);
-        jsonObject.addProperty("FurnitureAvl",furnitureAvl);
-        jsonObject.addProperty("NoOfAlmirah",noOfAlmirah);
-        jsonObject.addProperty("NoOfBooks",noOfBooks);
-        jsonObject.addProperty("WorkingStatus", workingStatus);
-        jsonObject.addProperty("ReadingCorner",readingCorner);
-        jsonObject.addProperty("SubscribeNewsMagazines",subscribeNewsMagazines);
-        jsonObject.addProperty("GrantScheme",grantScheme);
-        jsonObject.addProperty("TotalLibGrant",totalLibGrant);
-        jsonObject.addProperty("LibrarygrantRsCFY",librarygrantRsCFY);
-        jsonObject.addProperty("ExpenditureRsCFY",expenditureRsCFY);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
+if (availabilty.equals("No")){
+    jsonObject.addProperty("Action",action);
+    jsonObject.addProperty("ParamId",paramId);
+    jsonObject.addProperty("ParamName",libraryDetails);
+    jsonObject.addProperty("Availabilty",availabilty);
+    jsonObject.addProperty("PhysicalStatus", "");
+    jsonObject.addProperty("FurnitureAvl","");
+    jsonObject.addProperty("NoOfAlmirah","");
+    jsonObject.addProperty("NoOfBooks","");
+    jsonObject.addProperty("WorkingStatus", "");
+    jsonObject.addProperty("ReadingCorner","");
+    jsonObject.addProperty("SubscribeNewsMagazines","");
+    jsonObject.addProperty("GrantScheme","");
+    jsonObject.addProperty("TotalLibGrant","");
+    jsonObject.addProperty("LibrarygrantRsCFY","");
+    jsonObject.addProperty("ExpenditureRsCFY","");
+    jsonObject.addProperty("Lat",latitude);
+    jsonObject.addProperty("Long",longitude);
+    jsonObject.addProperty("SchoolId",schoolId);
+    jsonObject.addProperty("PeriodID",periodID);
+    jsonObject.addProperty("CreatedBy",usertypeid);
+    jsonObject.addProperty("UserCode",userid);
+}else{
 
-        JsonArray jsonArray = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+    jsonObject.addProperty("Action",action);
+    jsonObject.addProperty("ParamId",paramId);
+    jsonObject.addProperty("ParamName",libraryDetails);
+    jsonObject.addProperty("Availabilty",availabilty);
+    jsonObject.addProperty("PhysicalStatus", physicalStatus);
+    jsonObject.addProperty("FurnitureAvl",furnitureAvl);
+    jsonObject.addProperty("NoOfAlmirah",noOfAlmirah);
+    jsonObject.addProperty("NoOfBooks",noOfBooks);
+    jsonObject.addProperty("WorkingStatus", workingStatus);
+    jsonObject.addProperty("ReadingCorner",readingCorner);
+    jsonObject.addProperty("SubscribeNewsMagazines",subscribeNewsMagazines);
+    jsonObject.addProperty("GrantScheme",grantScheme);
+    jsonObject.addProperty("TotalLibGrant",totalLibGrant);
+    jsonObject.addProperty("LibrarygrantRsCFY",librarygrantRsCFY);
+    jsonObject.addProperty("ExpenditureRsCFY",expenditureRsCFY);
+    jsonObject.addProperty("Lat",latitude);
+    jsonObject.addProperty("Long",longitude);
+    jsonObject.addProperty("SchoolId",schoolId);
+    jsonObject.addProperty("PeriodID",periodID);
+    jsonObject.addProperty("CreatedBy",usertypeid);
+    jsonObject.addProperty("UserCode",userid);
+}
 
-        }
-        jsonObject.add("LibraryPhotos", (JsonElement) jsonArray);
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+            }
+            jsonObject.add("LibraryPhotos", (JsonElement) jsonArray);
         return jsonObject;
+
     }
 
 

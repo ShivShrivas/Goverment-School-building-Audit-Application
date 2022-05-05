@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,6 +54,7 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
     RecyclerView recyclerCycleStand;
     EditText edtCycyleStandCapacity;
     Dialog dialog;
+    ConstraintLayout constraintLayout32;
     Button submitCycleStandBtn;
     Spinner spinnerCycleStand,spinnerCycleStandRepairingStatus,spinnerCycleStandFunctionalStatus;
     @Override
@@ -73,6 +76,7 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
+    Dialog dialog2;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
     TextView userName,schoolAddress,schoolName;
@@ -96,8 +100,8 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         applicationController= (ApplicationController) getApplication();
-        Dialog dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -113,6 +117,7 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         recyclerCycleStand=findViewById(R.id.recyclerCycleStand);
         spinnerCycleStandRepairingStatus=findViewById(R.id.spinnerCycleStandRepairingStatus);
         spinnerCycleStandFunctionalStatus=findViewById(R.id.spinnerCycleStandFunctionalStatus);
+        constraintLayout32=findViewById(R.id.constraintLayout32);
 
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
@@ -177,57 +182,83 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         adapter6 = new ImageAdapter4(this, arrayListImages1);
         recyclerCycleStand.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
+
+        spinnerCycleStand.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerCycleStand.getSelectedItem().toString().equals("No")){
+                    constraintLayout32.setVisibility(View.GONE);
+                }else {
+                    constraintLayout32.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         submitCycleStandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsCycleStand.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraCycle("1","21","CycleStandPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCycleStand.getSelectedItem().toString(),edtCycyleStandCapacity.getText().toString(),spinnerCycleStandFunctionalStatus.getSelectedItem().toString(),spinnerCycleStandRepairingStatus.getSelectedItem().toString(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadCycleStand(paraCycle("1","21","CycleStandPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCycleStand.getSelectedItem().toString(),edtCycyleStandCapacity.getText().toString(),spinnerCycleStandFunctionalStatus.getSelectedItem().toString(),spinnerCycleStandRepairingStatus.getSelectedItem().toString(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body()+response);
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerCycleStand.getSelectedItem().toString().equals("No")){
+                    if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsCycleStand.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
+                    }else {
+                        runService();
+
+
                     }
-                });
+                }else {
+                  runService();
+                }
 
             }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraCycle("1","21","CycleStandPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCycleStand.getSelectedItem().toString(),edtCycyleStandCapacity.getText().toString(),spinnerCycleStandFunctionalStatus.getSelectedItem().toString(),spinnerCycleStandRepairingStatus.getSelectedItem().toString(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadCycleStand(paraCycle("1","21","CycleStandPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerCycleStand.getSelectedItem().toString(),edtCycyleStandCapacity.getText().toString(),spinnerCycleStandFunctionalStatus.getSelectedItem().toString(),spinnerCycleStandRepairingStatus.getSelectedItem().toString(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+response);
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
     }

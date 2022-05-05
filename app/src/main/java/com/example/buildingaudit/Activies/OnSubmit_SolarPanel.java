@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,7 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
 
     EditText edtTypeOfSolarPanel,edtcapacityOfSolarPanel,edtSolarPanelScheme,edtSolarPaneltWorkingStatus,edtSolraPanelInstallationYear,edtSolarPanel;
     RecyclerView recyclerViewTwoTypeSolarpanelAndOnSub;
+    ConstraintLayout constraintLayout23;
     Button buttonSolarePanelOnSub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
 
         edtTypeOfSolarPanel=findViewById(R.id.edtTypeOfSolarPanel);
         edtcapacityOfSolarPanel=findViewById(R.id.edtcapacityOfSolarPanel);
+        constraintLayout23=findViewById(R.id.constraintLayout23);
         edtSolarPanelScheme=findViewById(R.id.edtSolarPanelScheme);
         edtSolarPaneltWorkingStatus=findViewById(R.id.edtSolarPaneltWorkingStatus);
         edtSolraPanelInstallationYear=findViewById(R.id.edtSolraPanelInstallationYear);
@@ -78,17 +81,26 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
-                edtTypeOfSolarPanel.setText(response.body().get(0).get("SolarPanelType").getAsString());
-                        edtcapacityOfSolarPanel.setText(response.body().get(0).get("Kilowatt").getAsString());
-                edtSolarPanelScheme.setText(response.body().get(0).get("Scheme").getAsString());
-                    edtSolarPaneltWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
-                edtSolraPanelInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
-                        edtSolarPanel.setText(response.body().get(0).get("Availabilty").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SolarPanel.this,StaffPhotoPathList);
-                recyclerViewTwoTypeSolarpanelAndOnSub.setAdapter(onlineImageRecViewAdapter);
-                dialog2.dismiss();
+                if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    edtSolarPanel.setText(response.body().get(0).get("Availabilty").getAsString());
+                    constraintLayout23.setVisibility(View.GONE);
+                    dialog2.dismiss();
 
+
+                }else{
+                    edtTypeOfSolarPanel.setText(response.body().get(0).get("SolarPanelType").getAsString());
+                    edtcapacityOfSolarPanel.setText(response.body().get(0).get("Kilowatt").getAsString());
+                    edtSolarPanelScheme.setText(response.body().get(0).get("Scheme").getAsString());
+                    edtSolarPaneltWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+                    edtSolraPanelInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
+                    edtSolarPanel.setText(response.body().get(0).get("Availabilty").getAsString());
+                    String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SolarPanel.this,StaffPhotoPathList);
+                    recyclerViewTwoTypeSolarpanelAndOnSub.setAdapter(onlineImageRecViewAdapter);
+                    dialog2.dismiss();
+
+
+                }
 
 
             }

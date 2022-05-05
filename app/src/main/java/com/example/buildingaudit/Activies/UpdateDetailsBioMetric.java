@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -62,6 +64,7 @@ public class UpdateDetailsBioMetric extends AppCompatActivity {
 Spinner spinneruserbiometricStudent,
         spinnerBiometricWorkingStatus,spinneruserbiometricStaff,spinnerBioMetricInstallationYear,
         spinnerBioMetricMachineAvailabelty;
+ConstraintLayout constraintLayout35;
     ImageView bioMetricImageUploadBtn;
     EditText edtBioMetricMachineCount;
     RecyclerView recyclerViewBioMetric;
@@ -69,6 +72,7 @@ Spinner spinneruserbiometricStudent,
     ApplicationController applicationController;
     Button buttonBiometricSubmit;
     Dialog dialog;
+    Dialog dialog2;
     @Override
     protected void onStart() {
         super.onStart();
@@ -108,7 +112,7 @@ Spinner spinneruserbiometricStudent,
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -122,6 +126,7 @@ Spinner spinneruserbiometricStudent,
         spinnerBioMetricInstallationYear=findViewById(R.id.spinnerBioMetricInstallationYear);
         spinnerBioMetricMachineAvailabelty=findViewById(R.id.spinnerBioMetricMachineAvailabelty);
         edtBioMetricMachineCount=findViewById(R.id.edtBioMetricMachineCount);
+        constraintLayout35=findViewById(R.id.constraintLayout35);
 
         recyclerViewBioMetric=findViewById(R.id.recyclerViewBioMetric);
 
@@ -205,63 +210,87 @@ Spinner spinneruserbiometricStudent,
         adapter1 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewBioMetric.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();
+        spinnerBioMetricMachineAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            if (spinnerBioMetricMachineAvailabelty.getSelectedItem().toString().equals("No")){
+                    constraintLayout35.setVisibility(View.GONE);
+                }else {
+                constraintLayout35.setVisibility(View.VISIBLE);
+            }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         buttonBiometricSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (edtBioMetricMachineCount.length() == 0) {
-                    Toast.makeText(UpdateDetailsBioMetric.this, "Please fill all details properly!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (!spinnerBioMetricMachineAvailabelty.getSelectedItem().toString().equals("No")){
+                    if (edtBioMetricMachineCount.length() == 0) {
+                        Toast.makeText(UpdateDetailsBioMetric.this, "Please fill all details properly!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
 
-                } else {
+                    } else {
                         if (arrayListImages1.size()==0){
                             Toast.makeText(UpdateDetailsBioMetric.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
 
                         }else {
-                    RestClient restClient = new RestClient();
-                    ApiService apiService = restClient.getApiService();
-                    Log.d("TAG", "onClick: " + paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
-                    Call<List<JsonObject>> call = apiService.uploadBioMetricDetails(paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
-                    call.enqueue(new Callback<List<JsonObject>>() {
-                        @Override
-                        public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                            TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                            Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                            try {
-                                if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                    textView.setText("You already uploaded details ");
+                            runService();
 
-                                }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                    textView.setText("Your details Submitted successfully ");
-                                }
-                                dialog2.dismiss();
-                                dialog.show();
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        onBackPressed();
-                                        dialog.dismiss();
-
-
-                                    }
-                                });
-                            }catch (Exception e){
-                                Toast.makeText(UpdateDetailsBioMetric.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                                dialog2.dismiss();
-
-                            }
                         }
+                    }
+                }else {
+                   runService();
+                }
 
+            }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient = new RestClient();
+        ApiService apiService = restClient.getApiService();
+        Log.d("TAG", "onClick: " + paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
+        Call<List<JsonObject>> call = apiService.uploadBioMetricDetails(paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                            dialog2.dismiss();
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+
 
                         }
                     });
+                }catch (Exception e){
+                    Toast.makeText(UpdateDetailsBioMetric.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
                 }
             }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
     }

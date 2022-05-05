@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,8 +32,9 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
     ApplicationController applicationController;
         EditText edtFireFightTraining,edtFireFightRenewalStatus,edtFireFightWorkingStatus,edtFireFightingInstallationYear,edtFireFightAvailabelty;
         TextView edtrenewalDate;
+        ConstraintLayout constraintLayout30;
         RecyclerView recyclerViewFireFightningoNsUB;
-
+TextView uploadtextFireFighting;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +62,14 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
         schoolAddress.setText(applicationController.getSchoolAddress());
 
         edtFireFightTraining=findViewById(R.id.edtFireFightTraining);
+        uploadtextFireFighting=findViewById(R.id.uploadtextFireFighting);
         edtrenewalDate=findViewById(R.id.edtrenewalDateOnSub);
         edtFireFightRenewalStatus=findViewById(R.id.edtFireFightRenewalStatus);
         edtFireFightWorkingStatus=findViewById(R.id.edtFireFightWorkingStatus);
         edtFireFightAvailabelty=findViewById(R.id.edtFireFightAvailabelty);
         edtFireFightingInstallationYear=findViewById(R.id.edtFireFightingInstallationYear);
         recyclerViewFireFightningoNsUB=findViewById(R.id.recyclerViewFireFightningoNsUB);
+        constraintLayout30=findViewById(R.id.constraintLayout30);
 
         disableEditbox();
         recyclerViewFireFightningoNsUB.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -77,23 +81,36 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
+                if(response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    constraintLayout30.setVisibility(View.GONE);
+                    edtFireFightAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
 
-
-
+                    dialog2.dismiss();
+                }else{
                     edtFireFightWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
 
-                edtFireFightTraining.setText(response.body().get(0).get("Training").getAsString());
-                String[] time=(response.body().get(0).get("RenewalDateStatus").getAsString()).split("T");
+                    edtFireFightTraining.setText(response.body().get(0).get("Training").getAsString());
+                    String[] time=(response.body().get(0).get("RenewalDateStatus").getAsString()).split("T");
 
-                edtrenewalDate.setText(time[0]);
-                edtFireFightRenewalStatus.setText(response.body().get(0).get("RenewalStatus").getAsString());
-                edtFireFightAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
-                        edtFireFightingInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
+                    edtrenewalDate.setText(time[0]);
+                    edtFireFightRenewalStatus.setText(response.body().get(0).get("RenewalStatus").getAsString());
+                    edtFireFightAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    edtFireFightingInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
+try {
+    String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FireFighting.this,StaffPhotoPathList);
+    recyclerViewFireFightningoNsUB.setAdapter(onlineImageRecViewAdapter);
+}catch (Exception e){
+    recyclerViewFireFightningoNsUB.setVisibility(View.GONE);
+    uploadtextFireFighting.setVisibility(View.GONE);
+}
 
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FireFighting.this,StaffPhotoPathList);
-                recyclerViewFireFightningoNsUB.setAdapter(onlineImageRecViewAdapter);
-                dialog2.dismiss();
+                    dialog2.dismiss();
+
+                }
+
+
+
 
 
             }

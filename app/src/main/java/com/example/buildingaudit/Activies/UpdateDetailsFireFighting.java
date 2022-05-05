@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -83,10 +85,12 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     String todayDate,fromdate;
     Dialog dialog;
+    ConstraintLayout constraintLayout30;
     Button btnUpdateFireFighting;
     ApplicationController applicationController;
     Spinner spinnerFireFightTraining,spinnerFireFightRenewalStatus,spinnerFireFightWorkingStatus,spinnerFireFightingInstallationYear,spinnerFireFightAvailabelty;
     TextView edtrenewalDate;
+    Dialog dialog2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,8 +103,8 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        Dialog dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -124,6 +128,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         spinnerFireFightingInstallationYear=findViewById(R.id.spinnerFireFightingInstallationYear);
         spinnerFireFightAvailabelty=findViewById(R.id.spinnerFireFightAvailabelty);
         btnUpdateFireFighting=findViewById(R.id.btnUpdateFireFighting);
+        constraintLayout30=findViewById(R.id.constraintLayout30);
         edtrenewalDate=findViewById(R.id.edtrenewalDate);
 
 
@@ -244,60 +249,84 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         adapter6 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewFireFightning.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
+            spinnerFireFightAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
+                        constraintLayout30.setVisibility(View.GONE);
+                    }else {
+                        constraintLayout30.setVisibility(View.VISIBLE);
+                    }
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
         btnUpdateFireFighting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    dialog2.dismiss();
-
-                    Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraFireFight("1","12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
-                        spinnerFireFightRenewalStatus.getSelectedItem().toString(),fromdate,spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadFireFighting(paraFireFight("1","12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
-                        spinnerFireFightRenewalStatus.getSelectedItem().toString(),fromdate,spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body()+response);
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
+                    if (arrayListImages1.size()==0){
                         dialog2.dismiss();
 
+                        Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        runService();
+
                     }
-                });
+                }else{
+                    runService();
+                }
+
             }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraFireFight("1","12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
+                spinnerFireFightRenewalStatus.getSelectedItem().toString(),fromdate,spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadFireFighting(paraFireFight("1","12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
+                spinnerFireFightRenewalStatus.getSelectedItem().toString(),fromdate,spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+response);
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
     }

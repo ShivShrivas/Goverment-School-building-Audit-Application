@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +31,9 @@ public class OnSubmit_PlaygroundDetails extends AppCompatActivity {
 EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGround,EditTexttrackAvalabiltyStatus;
     ApplicationController applicationController;
     RecyclerView recyclerViewPlayground;
+ConstraintLayout playGroundlayout;
+TextView PGImageUploadTxt;
+
     TextView userName,schoolAddress,schoolName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +60,10 @@ EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGrou
         edtAreaOfPlayGround=findViewById(R.id.edtAreaOfPlayGround);
         EditTexttrackAvalabiltyStatus=findViewById(R.id.EditTexttrackAvalabiltyStatus);
         recyclerViewPlayground=findViewById(R.id.recyclerViewPlayground);
+        playGroundlayout=findViewById(R.id.playGroundlayout);
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
+        PGImageUploadTxt=findViewById(R.id.PGImageUploadTxt);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewPlayground.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -71,15 +77,27 @@ EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGrou
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    playGroundlayout.setVisibility(View.GONE);
+                    EditTextPlaygroundAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    dialog2.dismiss();
+                }else {
+                    edtAreaOfPlayGround.setText(response.body().get(0).get("Areainsqmtr").getAsString());
+                    EditTextPlaygroundAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    EditTextLevellingStatus.setText(response.body().get(0).get("LevellingStatus").getAsString());
+                    EditTexttrackAvalabiltyStatus.setText(response.body().get(0).get("AvailabiltyStandardTrack").getAsString());
+                    try {
+                        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PlaygroundDetails.this,StaffPhotoPathList);
+                        recyclerViewPlayground.setAdapter(onlineImageRecViewAdapter);
+                    }catch (Exception e){
+                        PGImageUploadTxt.setVisibility(View.GONE);
+                        recyclerViewPlayground.setVisibility(View.GONE);
+                    }
 
-                edtAreaOfPlayGround.setText(response.body().get(0).get("Areainsqmtr").getAsString());
-                EditTextPlaygroundAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
-                EditTextLevellingStatus.setText(response.body().get(0).get("LevellingStatus").getAsString());
-                EditTexttrackAvalabiltyStatus.setText(response.body().get(0).get("AvailabiltyStandardTrack").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PlaygroundDetails.this,StaffPhotoPathList);
-                recyclerViewPlayground.setAdapter(onlineImageRecViewAdapter);
-                dialog2.dismiss();
+                    dialog2.dismiss();
+                }
+
 
 
 

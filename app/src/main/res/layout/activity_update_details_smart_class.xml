@@ -205,41 +205,248 @@
             </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout12"
+                android:id="@+id/constraintLayout24"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout10">
 
-                <TextView
-                    android:id="@+id/txtSmartRoomName"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout12"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
-                    android:padding="8dp"
-                    android:text="Smart Classoom 1"
-                    android:textAlignment="textStart"
-                    android:textColor="@color/white"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtSmartRoomName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/colorPrimary"
+                        android:padding="8dp"
+                        android:text="Smart Classoom 1"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/txtSmartRoomName">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+
+                            android:text="Year Of Installation"
+                            android:textColor="@color/textColor1"
+                            android:textSize="15dp" />
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:foreground="@drawable/cardbg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <Spinner
+                                android:id="@+id/spinnerInstallationYearSmartClass"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1" />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+
+                            android:text="Company Name"
+                            android:textColor="@color/textColor1"
+                            android:textSize="15dp" />
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:foreground="@drawable/cardbg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <EditText
+                                android:id="@+id/companyName1"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:maxLength="20" />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout14"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+
+                            android:text="Under Scheme"
+                            android:textColor="@color/textColor1"
+                            android:textSize="15dp" />
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:foreground="@drawable/cardbg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <Spinner
+                                android:id="@+id/spinnerUnderSchemeSmartClass"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1" />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout15"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+
+                            android:text="Working Status"
+                            android:textColor="@color/textColor1"
+                            android:textSize="15dp" />
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:foreground="@drawable/cardbg"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+
+                            <Spinner
+                                android:id="@+id/spinnerWorkingStatusSmartClass"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="4dp"
+                                android:layout_weight="1" />
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout12"
+                    android:id="@+id/layoutForAddRooms"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/buttonForAddRooms"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
+                    android:drawableEnd="@drawable/ic_add"
+                    android:text="Add Another Room"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/layoutForAddRooms" />
+
+                <LinearLayout
+                    android:id="@+id/linearLayout16"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
                     android:layout_marginEnd="16dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtSmartRoomName">
+                    app:layout_constraintTop_toBottomOf="@+id/buttonForAddRooms">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -247,7 +454,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Year Of Installation"
+                        android:text="Teacher Availability"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -263,9 +470,9 @@
 
 
                         <Spinner
-                            android:id="@+id/spinnerInstallationYearSmartClass"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:id="@+id/spinnerTeacherAvailbilitySmartClass"
+                            android:layout_width="184dp"
+                            android:layout_height="wrap_content"
                             android:layout_margin="4dp"
                             android:layout_weight="1" />
                     </androidx.cardview.widget.CardView>
@@ -273,7 +480,7 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/linearLayout13"
+                    android:id="@+id/linearLayout17"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -282,7 +489,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout16">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -290,49 +497,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Company Name"
-                        android:textColor="@color/textColor1"
-                        android:textSize="15dp" />
-
-                    <androidx.cardview.widget.CardView
-
-                        android:layout_width="match_parent"
-
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:foreground="@drawable/cardbg"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-
-                        <EditText
-                            android:id="@+id/companyName1"
-                            android:maxLength="20"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent" />
-                    </androidx.cardview.widget.CardView>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-
-                        android:text="Under Scheme"
+                        android:text="Projector"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -348,7 +513,7 @@
 
 
                         <Spinner
-                            android:id="@+id/spinnerUnderSchemeSmartClass"
+                            android:id="@+id/spinnerProjectorSmartClass"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="4dp"
@@ -357,9 +522,8 @@
 
                 </LinearLayout>
 
-
                 <LinearLayout
-                    android:id="@+id/linearLayout15"
+                    android:id="@+id/linearLayout18"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -368,7 +532,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -376,7 +540,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Working Status"
+                        android:text="Learning Content"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -392,7 +556,7 @@
 
 
                         <Spinner
-                            android:id="@+id/spinnerWorkingStatusSmartClass"
+                            android:id="@+id/spinnerLearningContentSmartClass"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_margin="4dp"
@@ -400,251 +564,97 @@
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Digital Board"
+                        android:textColor="@color/textColor1"
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <Spinner
+                            android:id="@+id/spinnerDigitalBoardSmartClass"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout19">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Upload Images"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="15dp" />
+
+
+                    <ImageView
+                        android:id="@+id/smartClassImageUploadBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="2dp"
+                        android:src="@drawable/uplodimg" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewSmartClass"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutForAddRooms"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout12">
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/buttonForAddRooms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:drawableEnd="@drawable/ic_add"
-                android:text="Add Another Room"
-                android:textAlignment="center"
-                android:textColor="@color/white"
-                android:textSize="15dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/layoutForAddRooms" />
-
-            <LinearLayout
-                android:id="@+id/linearLayout16"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/buttonForAddRooms">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Teacher Availability"
-                    android:textColor="@color/textColor1"
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <Spinner
-                        android:id="@+id/spinnerTeacherAvailbilitySmartClass"
-                        android:layout_width="184dp"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout16">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Projector"
-                    android:textColor="@color/textColor1"
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <Spinner
-                        android:id="@+id/spinnerProjectorSmartClass"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Learning Content"
-                    android:textColor="@color/textColor1"
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <Spinner
-                        android:id="@+id/spinnerLearningContentSmartClass"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout19"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Digital Board"
-                    android:textColor="@color/textColor1"
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <Spinner
-                        android:id="@+id/spinnerDigitalBoardSmartClass"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout19">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Upload Images"
-                    android:textColor="?attr/colorPrimary"
-                    android:textSize="15dp" />
-
-
-                <ImageView
-                    android:id="@+id/smartClassImageUploadBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="2dp"
-                    android:src="@drawable/uplodimg" />
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewSmartClass"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
 
             <Button
                 android:id="@+id/submitSmartClassBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
                 android:text="Submit"
@@ -653,7 +663,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewSmartClass" />
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout24" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

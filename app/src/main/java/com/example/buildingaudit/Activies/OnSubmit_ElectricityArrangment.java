@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +34,8 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
     EditText edtElectricityAvailabelty,edtInternalElectrification,edtSource,edtElectricStatus,edtnoOfTubeLight,
             edtnoOfFans;
     RecyclerView recyclerViewElectricityArrangmentOnSub;
+    ConstraintLayout constraintLayoutEA;
+    TextView uploadImageTxt;
     Button submitBtnElectricityArrangeOnSub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
         schoolAddress.setText(applicationController.getSchoolAddress());
 
         edtElectricityAvailabelty=findViewById(R.id.edtElectricityAvailabelty);
+        uploadImageTxt=findViewById(R.id.uploadImageTxt);
         edtInternalElectrification=findViewById(R.id.edtInternalElectrification);
         edtSource=findViewById(R.id.edtSource);
         edtElectricStatus=findViewById(R.id.edtElectricStatus);
@@ -69,6 +73,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
         edtnoOfFans=findViewById(R.id.edtnoOfFans);
         recyclerViewElectricityArrangmentOnSub=findViewById(R.id.recyclerViewElectricityArrangmentOnSub);
         submitBtnElectricityArrangeOnSub=findViewById(R.id.submitBtnElectricityArrangeOnSub);
+        constraintLayoutEA=findViewById(R.id.constraintLayoutEA);
         disableEditbox();
         recyclerViewElectricityArrangmentOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
@@ -79,22 +84,34 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-                edtElectricityAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
-                 edtInternalElectrification.setText(response.body().get(0).get("InternalElectrification").getAsString());
-                edtSource.setText(response.body().get(0).get("Source").getAsString());
+                if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                    constraintLayoutEA.setVisibility(View.GONE);
+                    edtElectricityAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+            dialog2.dismiss();
+                }else{
+                    edtElectricityAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    edtInternalElectrification.setText(response.body().get(0).get("InternalElectrification").getAsString());
+                    edtSource.setText(response.body().get(0).get("Source").getAsString());
 
 
 
                     edtElectricStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
 
-                edtnoOfTubeLight.setText(response.body().get(0).get("NoOfBulbsTLight").getAsString());
-                  edtnoOfFans.setText(response.body().get(0).get("NoOfFans").getAsString());
+                    edtnoOfTubeLight.setText(response.body().get(0).get("NoOfBulbsTLight").getAsString());
+                    edtnoOfFans.setText(response.body().get(0).get("NoOfFans").getAsString());
+try{
+    String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ElectricityArrangment.this,StaffPhotoPathList);
+    recyclerViewElectricityArrangmentOnSub.setAdapter(onlineImageRecViewAdapter);
+}catch (Exception e){
+    recyclerViewElectricityArrangmentOnSub.setVisibility(View.GONE);
+    uploadImageTxt.setVisibility(View.GONE);
+}
 
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ElectricityArrangment.this,StaffPhotoPathList);
-                recyclerViewElectricityArrangmentOnSub.setAdapter(onlineImageRecViewAdapter);
 
-                dialog2.dismiss();
+                    dialog2.dismiss();
+                }
+
 
             }
 

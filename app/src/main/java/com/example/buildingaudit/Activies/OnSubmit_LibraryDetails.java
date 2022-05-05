@@ -118,6 +118,9 @@ ApplicationController applicationController;
 
     private void disableEditing() {
         edtExpenditure.setEnabled(false);
+        numberOfAlmira.setEnabled(false);
+        edtPhysicalStatus.setEnabled(false);
+        edtLibraryAvailabelty.setEnabled(false);
                 edtLibraryGrantInFY.setEnabled(false);
         edtTotalLibraryGrant.setEnabled(false);
                 edtGrantUnderScheme.setEnabled(false);

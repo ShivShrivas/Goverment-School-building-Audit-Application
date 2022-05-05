@@ -178,6 +178,7 @@
             android:textSize="17dp" />
 
         <TextView
+            android:id="@+id/workingStatusHearOnSub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -248,6 +249,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/workingStatusLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"

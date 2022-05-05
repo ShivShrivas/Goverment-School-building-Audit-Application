@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -78,8 +80,10 @@ Dialog dialog;
     public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
     int btnType;
     ImageAdapter4 adapter1;
+    Dialog dialog2;
     ImageAdapter3 adapter2;
-    RecyclerView recyclerViewTwoTypeBoundarywall;
+    ConstraintLayout constraintLayout34;
+        RecyclerView recyclerViewTwoTypeBoundarywall;
 
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
@@ -101,7 +105,7 @@ Dialog dialog;
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -123,6 +127,7 @@ Dialog dialog;
         edtAreaofSchool=findViewById(R.id.edtAreaofSchool);
         bntBoundaryWallUpload=findViewById(R.id.bntBoundaryWallUpload);
         spinnerBoundryScheme=findViewById(R.id.spinnerBoundryScheme);
+        constraintLayout34=findViewById(R.id.constraintLayout34);
         ArrayList<String> arrayList1=new ArrayList<>();
         arrayList1.add("Yes");
         arrayList1.add("No");
@@ -210,66 +215,91 @@ Dialog dialog;
         adapter2= new ImageAdapter3(this, arrayListImages2);
         recyclerViewTwoTypeBoundarywall.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
+        spinnerBoundaryWallAvail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerBoundaryWallAvail.getSelectedItem().toString().equals("No")){
+                    constraintLayout34.setVisibility(View.GONE);
+                }else {
+                    constraintLayout34.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         bntBoundaryWallUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (edtLengthofWall.length() == 0 || edtAreaofSchool.length()==0) {
-                    Toast.makeText(UpdateDetailsBoundryWall.this, "Please fill all details properly!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-                } else {
-                    if (arrayListImages2.size()==0){
-                        Toast.makeText(UpdateDetailsBoundryWall.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-dialog2.dismiss();
-                    }else {
-                    RestClient restClient = new RestClient();
-                    ApiService apiService = restClient.getApiService();
-                    Log.d("TAG", "onClick: " + paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), spinnerBoundryScheme.getSelectedItem().toString(), arrayListImages2));
-                    Call<List<JsonObject>> call = apiService.uploadBoundryWall(paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), spinnerBoundryScheme.getSelectedItem().toString(), arrayListImages2));
-                    call.enqueue(new Callback<List<JsonObject>>() {
-                        @Override
-                        public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                            Log.d("TAG", "onResponse: " + response.body());
-
-                            TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                            Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                            try {
-                                if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                    textView.setText("You already uploaded details ");
-
-                                }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                    textView.setText("Your details Submitted successfully ");
-                                }
-                                dialog2.dismiss();
-                                dialog.show();
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        onBackPressed();
-                                        dialog.dismiss();
-
-                                    }
-                                });
-                            }catch (Exception e){
-                                Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                                dialog2.dismiss();
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerBoundaryWallAvail.getSelectedItem().toString().equals("No")){
+                    if (edtLengthofWall.length() == 0 || edtAreaofSchool.length()==0) {
+                        Toast.makeText(UpdateDetailsBoundryWall.this, "Please fill all details properly!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
+                    } else {
+                        if (arrayListImages2.size()==0){
+                            Toast.makeText(UpdateDetailsBoundryWall.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
+                        }else {
+                            runService();
+
+
+
+                        }
+                    }
+                }else {
+                  runService();
+                }
+
+            }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient = new RestClient();
+        ApiService apiService = restClient.getApiService();
+        Log.d("TAG", "onClick: " + paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), spinnerBoundryScheme.getSelectedItem().toString(), arrayListImages2));
+        Call<List<JsonObject>> call = apiService.uploadBoundryWall(paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), spinnerBoundryScheme.getSelectedItem().toString(), arrayListImages2));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: " + response.body());
+
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
 
                         }
                     });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
-
-                }
                 }
             }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
+            }
         });
+
     }
 
     private JsonObject paraBoundry(String s, String s1, String boundaryWallPhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6, ArrayList<Bitmap> arrayListImages2) {

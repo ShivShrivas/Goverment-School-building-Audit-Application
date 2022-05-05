@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
@@ -31,7 +32,7 @@ EditText edtMultipurposeHall,edtMultiPurposeHallStatus,edtSittingCapacity;
 RecyclerView recyclerViewMultipurposeHallOnSubmit;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
-
+    LinearLayout linearLayout5,linearLayout13,constraintLayout9;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +54,9 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
         dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        linearLayout5=findViewById(R.id.linearLayout5);
+        constraintLayout9=findViewById(R.id.constraintLayout9);
+        linearLayout13=findViewById(R.id.linearLayout13);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
@@ -70,17 +74,31 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
-                edtMultipurposeHall.setText(response.body().get(0).get("Availability").getAsString());
+                if (response.body().get(0).get("Availability").getAsString().equals("No")){
+                    linearLayout5.setVisibility(View.GONE);
+                            constraintLayout9.setVisibility(View.GONE);
+                    linearLayout13.setVisibility(View.GONE);
+                    edtMultipurposeHall.setText(response.body().get(0).get("Availability").getAsString());
+                    dialog2.dismiss();
+                }else{
+                    edtMultipurposeHall.setText(response.body().get(0).get("Availability").getAsString());
 
                     edtMultiPurposeHallStatus.setText(response.body().get(0).get("PhysicalStatus").getAsString());
 
 
-                edtSittingCapacity.setText(response.body().get(0).get("SittingCapacity").getAsString());
+                    edtSittingCapacity.setText(response.body().get(0).get("SittingCapacity").getAsString());
+                    try {String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_MultipurposeHallDetails.this,StaffPhotoPathList);
+                        recyclerViewMultipurposeHallOnSubmit.setAdapter(onlineImageRecViewAdapter);
 
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_MultipurposeHallDetails.this,StaffPhotoPathList);
-                recyclerViewMultipurposeHallOnSubmit.setAdapter(onlineImageRecViewAdapter);
-                dialog2.dismiss();
+                    }catch (Exception e){
+                        recyclerViewMultipurposeHallOnSubmit.setVisibility(View.GONE);
+                        linearLayout5.setVisibility(View.GONE);
+                    }
+
+                    dialog2.dismiss();
+                }
+
 
             }
 

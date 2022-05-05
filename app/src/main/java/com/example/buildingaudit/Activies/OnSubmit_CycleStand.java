@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,7 +31,8 @@ public class OnSubmit_CycleStand extends AppCompatActivity {
 EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleStandCapacity,edtCycleStand;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
-
+    ConstraintLayout constraintLayout32;
+    TextView uploadCYcleStand;
     RecyclerView recyclerCycleStandOnSub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,8 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
         edtCycleStandFunctionalStatus=findViewById(R.id.edtCycleStandFunctionalStatus);
         edtCycyleStandCapacity=findViewById(R.id.edtCycyleStandCapacity);
         recyclerCycleStandOnSub=findViewById(R.id.recyclerCycleStandOnSub);
+        uploadCYcleStand=findViewById(R.id.uploadCYcleStand);
+        constraintLayout32=findViewById(R.id.constraintLayout32);
         edtCycleStand=findViewById(R.id.edtCycleStand);
         disableEdiBox();
         recyclerCycleStandOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -71,14 +75,28 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
-                edtCycleStandRepairingStatus.setText(response.body().get(0).get("RepairingStatus").getAsString());
-                        edtCycleStandFunctionalStatus.setText(response.body().get(0).get("FunctionalStatus").getAsString());
-                edtCycyleStandCapacity.setText(response.body().get(0).get("CycleCapacity").getAsString());
-                        edtCycleStand.setText(response.body().get(0).get("Availability").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CycleStand.this,StaffPhotoPathList);
-                recyclerCycleStandOnSub.setAdapter(onlineImageRecViewAdapter);
-dialog2.dismiss();
+                if (response.body().get(0).get("Availability").getAsString().equals("No")){
+                    edtCycleStand.setText(response.body().get(0).get("Availability").getAsString());
+                    constraintLayout32.setVisibility(View.GONE);
+                    dialog2.dismiss();
+                }else{
+                    edtCycleStandRepairingStatus.setText(response.body().get(0).get("RepairingStatus").getAsString());
+                    edtCycleStandFunctionalStatus.setText(response.body().get(0).get("FunctionalStatus").getAsString());
+                    edtCycyleStandCapacity.setText(response.body().get(0).get("CycleCapacity").getAsString());
+                    edtCycleStand.setText(response.body().get(0).get("Availability").getAsString());
+                    try{
+                        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CycleStand.this,StaffPhotoPathList);
+                        recyclerCycleStandOnSub.setAdapter(onlineImageRecViewAdapter);
+                    }catch (Exception e){
+                        recyclerCycleStandOnSub.setVisibility(View.GONE);
+                        uploadCYcleStand.setVisibility(View.GONE);
+                    }
+
+
+                    dialog2.dismiss();
+                }
+
             }
 
             @Override

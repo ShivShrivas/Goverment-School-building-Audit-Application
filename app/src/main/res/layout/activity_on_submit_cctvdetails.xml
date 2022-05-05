@@ -193,187 +193,196 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout27"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutCCTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout26">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Year Of Installation"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-          
-                     <EditText
-                        android:textAlignment="center"
-                        android:textColor="@color/textColor1"
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                android:id="@+id/edtCCTVInstallationYear"
-                android:layout_width="match_parent"
-
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout28"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout27">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="No. of CCTV"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <EditText
-                android:id="@+id/EdtNoOfCCTV"
-                android:textColor="@color/textColor1"
-                android:background="@drawable/cardbg"
-                android:textAlignment="center"
-                android:inputType="number"
-                android:layout_margin="4dp"
-                android:layout_width="match_parent"
-                android:layout_height="30dp" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout29"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout28">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-
-            android:text="Working Status"
-            android:textColor="@color/textColor1"
-            android:textSize="15dp" />
-
-        <androidx.cardview.widget.CardView
-
-            android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:foreground="@drawable/cardbg"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-
-          
-                     <EditText
-                        android:textAlignment="center"
-                        android:textColor="@color/textColor1"
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                android:id="@+id/edtCCTVWorkingStatus"
-                android:layout_width="match_parent"
-       
-                android:layout_margin="4dp"
-                android:layout_weight="1" />
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout52"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:gravity="center_vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout29">
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/linearLayout27"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="Uploaded Images"
-            android:textColor="?attr/colorPrimary"
-            android:textSize="15dp" />
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Year Of Installation"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
 
-        <ImageView
-            android:id="@+id/CCTVImageUploadBtn"
+                <EditText
+                    android:id="@+id/edtCCTVInstallationYear"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cardbg"
+
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout28"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="2dp"
-            android:visibility="gone"
-            android:src="@drawable/uplodimg" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout27">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewCCTVOnSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout52" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
 
+                android:text="No. of CCTV"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/EdtNoOfCCTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/cardbg"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout29"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout28">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+
+                android:text="Working Status"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <EditText
+                    android:id="@+id/edtCCTVWorkingStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cardbg"
+
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout52"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout29">
+
+            <TextView
+                android:id="@+id/uploadCCTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:text="Uploaded Images"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="15dp" />
+
+
+            <ImageView
+                android:id="@+id/CCTVImageUploadBtn"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="2dp"
+                android:src="@drawable/uplodimg"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewCCTVOnSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout52" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
         android:id="@+id/submitBtnCCTV"

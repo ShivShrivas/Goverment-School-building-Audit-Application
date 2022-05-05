@@ -224,340 +224,350 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout40"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutBoundry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout39">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Area of School in Sq. mtr."
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <EditText
-                        android:id="@+id/edtAreaofSchool"
-                        android:textColor="@color/textColor1"
-                        android:background="@drawable/cardbg"
-                        android:paddingStart="5dp"
-                        android:layout_margin="4dp"
-                        android:inputType="number"
-                        android:textAlignment="center"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout41"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout40">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Length of Boundary Wall in mtr."
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <EditText
-                        android:id="@+id/edtLengthofWall"
-                        android:textColor="@color/textColor1"
-                        android:background="@drawable/cardbg"
-                        android:paddingStart="5dp"
-                        android:layout_margin="4dp"
-                        android:textAlignment="center"
-
-                        android:inputType="number"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/linearLayout42"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout41">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Type of Boundary Wall"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtTypeBoundaryWall"
-                        android:textColor="@color/textColor1"
-                        android:background="@drawable/cardbg"
-                        android:paddingStart="5dp"
-                        android:layout_margin="4dp"
-                        android:inputType="number"
-                        android:textAlignment="center"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/linearLayout43"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout42">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="White Wash Status"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtWhiteWash"
-                        android:textColor="@color/textColor1"
-                        android:background="@drawable/cardbg"
-                        android:paddingStart="5dp"
-                        android:layout_margin="4dp"
-                        android:inputType="number"
-                        android:textAlignment="center"
-
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"/>
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout341"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout43">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Grant Under Scheme"
-                    android:textColor="@color/textColor1"
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtBoundryScheme"
-                        android:textColor="@color/textColor1"
-                        android:background="@drawable/cardbg"
-                        android:paddingStart="5dp"
-                        android:layout_margin="4dp"
-                        android:textAlignment="center"
-
-                        android:inputType="number"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout44"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout341">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="Condition"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtWallCondition"
-                        android:textColor="@color/textColor1"
-                        android:background="@drawable/cardbg"
-                        android:paddingStart="5dp"
-                        android:layout_margin="4dp"
-                        android:textAlignment="center"
-
-                        android:inputType="number"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:id="@+id/linearLayout50"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout44">
-
-                <TextView
+                <LinearLayout
+                    android:id="@+id/linearLayout40"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Uploaded Images"
-                    android:textColor="?attr/colorPrimary"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
 
+                        android:text="Area of School in Sq. mtr."
+                        android:textColor="@color/textColor1"
 
-                <ImageView
-                    android:id="@+id/boundaryWallImageUploadBtn"
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <EditText
+                            android:id="@+id/edtAreaofSchool"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:paddingStart="5dp"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout41"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:padding="2dp"
-                    android:visibility="gone"
-                    android:src="@drawable/uplodimg" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout40">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewTwoTypeBoundarywallOnSub"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout50" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Length of Boundary Wall in mtr."
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <EditText
+                            android:id="@+id/edtLengthofWall"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+
+                            android:paddingStart="5dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout42"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout41">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Type of Boundary Wall"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtTypeBoundaryWall"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:paddingStart="5dp"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout43"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout42">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="White Wash Status"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtWhiteWash"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:paddingStart="5dp"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout341"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout43">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Grant Under Scheme"
+                        android:textColor="@color/textColor1"
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtBoundryScheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+
+                            android:paddingStart="5dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout44"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout341">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Condition"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtWallCondition"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+
+                            android:paddingStart="5dp"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linearLayout50"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout44">
+
+                    <TextView
+                        android:id="@+id/uploadBoundary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Uploaded Images"
+                        android:textColor="?attr/colorPrimary"
+
+                        android:textSize="15dp" />
+
+
+                    <ImageView
+                        android:id="@+id/boundaryWallImageUploadBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="2dp"
+                        android:src="@drawable/uplodimg"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewTwoTypeBoundarywallOnSub"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout50" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/bntBoundaryWallUpload"

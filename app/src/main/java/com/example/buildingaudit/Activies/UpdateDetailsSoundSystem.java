@@ -53,7 +53,7 @@ Spinner spinnerSoundSystem,spinnerSchoolBand,spinnerSchoolBandForGirls;
 RecyclerView recyclerViewSoundSystm;
 Button submitSoundSystemBtn;
     Dialog dialog;
-
+    Dialog dialog2;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -89,8 +89,8 @@ Button submitSoundSystemBtn;
                 onBackPressed();
             }
         });
-        Dialog dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -167,56 +167,63 @@ Button submitSoundSystemBtn;
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
+
+                if (!spinnerSchoolBand.getSelectedItem().toString().equals("No") &&!spinnerSoundSystem.getSelectedItem().toString().equals("No") &&!spinnerSchoolBandForGirls.getSelectedItem().toString().equals("No") && arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsSoundSystem.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                     dialog2.dismiss();
 
                 }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                    Call<List<JsonObject>> call=apiService.uploadSoundSystem(paraSoundSystem("1","22","SoundSystemDetails",spinnerSoundSystem.getSelectedItem().toString(),spinnerSchoolBand.getSelectedItem().toString(),spinnerSchoolBandForGirls.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                    call.enqueue(new Callback<List<JsonObject>>() {
+                    runService();
+
+            }
+            }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.uploadSoundSystem(paraSoundSystem("1","22","SoundSystemDetails",spinnerSoundSystem.getSelectedItem().toString(),spinnerSchoolBand.getSelectedItem().toString(),spinnerSchoolBandForGirls.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                            Log.d("TAG", "onResponse: "+response.body());
-                            TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                            Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                            try {
-                                if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                    textView.setText("You already uploaded details ");
-
-                                }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                    textView.setText("Your details Submitted successfully ");
-                                }
-                                dialog2.dismiss();
-
-                                dialog.show();
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        onBackPressed();
-                                        dialog.dismiss();
-                                    }
-                                });
-                            }catch (Exception e){
-                                Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                                dialog2.dismiss();
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                            dialog2.dismiss();
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
                         }
                     });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
             }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
             }
         });
     }
 
     private JsonObject paraSoundSystem(String action, String paramid, String paramName, String soundSysAvailability, String schoolBandInstAvlBoys, String schoolBandInstAvlGirls, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
+
         jsonObject.addProperty("Action",action);
         jsonObject.addProperty("ParamId",paramid);
         jsonObject.addProperty("ParamName",paramName);

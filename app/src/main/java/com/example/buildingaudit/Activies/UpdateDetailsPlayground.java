@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ import java.io.ByteArrayOutputStream;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,11 +76,12 @@ public class UpdateDetailsPlayground extends AppCompatActivity {
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter6;
     TextView userName,schoolAddress,schoolName;
-
+ConstraintLayout constraintLayout25;
     ImageView playGroundImageUploadBtn;
     ApplicationController applicationController;
     EditText edtAreaOfPlayGround;
     Dialog dialog;
+    Dialog dialog2;
     RecyclerView recyclerViewPlayground;
     Button submitPlayGroundBtn;
 Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatus;
@@ -101,8 +105,8 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -112,6 +116,7 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         spinnerLevelingStatus=findViewById(R.id.spinnerLevellingStatus);
+        constraintLayout25=findViewById(R.id.constraintLayout25);
         playGroundImageUploadBtn=findViewById(R.id.playGroundImageUploadBtn);
         spinnerRoomAvailabelty=findViewById(R.id.spinnerPlaygroundAvailabelty);
         edtAreaOfPlayGround=findViewById(R.id.edtAreaOfPlayGround);
@@ -178,82 +183,129 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
         adapter6 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewPlayground.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
+spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        if (spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+            constraintLayout25.setVisibility(View.GONE);
+        }else
+        {
+            constraintLayout25.setVisibility(View.VISIBLE);
+        }
+    }
 
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+});
         submitPlayGroundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsPlayground.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Call<List<JsonObject>> call=apiService.uploadPlaygroundDetails(paraPlayGroundDetails("1","5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body());
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                    if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsPlayground.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
+                    }else {
+                        runService();
                     }
-                });
+                }else
+                {
+                    runService();
+                }
 
             }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "runService: "+paraPlayGroundDetails("1","5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadPlaygroundDetails(paraPlayGroundDetails("1","5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
     }
 
     private JsonObject paraPlayGroundDetails(String action, String paramId, String playGroundDetails, String availabilty, String levelingStatus, String area, String standardTrack, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",playGroundDetails);
-        jsonObject.addProperty("Availabilty",availabilty);
-            jsonObject.addProperty("LevellingStatus",levelingStatus);
-        jsonObject.addProperty("Areainsqmtr",area);
-        jsonObject.addProperty("AvailabiltyStandardTrack",standardTrack);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        JsonArray jsonArray = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+        if (availabilty.equals("No")){
+            jsonObject.addProperty("Action", action);
+            jsonObject.addProperty("ParamId", paramId);
+            jsonObject.addProperty("ParamName", playGroundDetails);
+            jsonObject.addProperty("Availabilty", availabilty);
+            jsonObject.addProperty("LevellingStatus","" );
+            jsonObject.addProperty("Areainsqmtr", "");
+            jsonObject.addProperty("AvailabiltyStandardTrack", "");
+            jsonObject.addProperty("Lat", latitude);
+            jsonObject.addProperty("Long", longitude);
+            jsonObject.addProperty("SchoolId", schoolId);
+            jsonObject.addProperty("PeriodID", periodID);
+            jsonObject.addProperty("CreatedBy", usertypeid);
+            jsonObject.addProperty("UserCode", userid);
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64(arrayListImages1.get(i), i));
 
+            }
+            jsonObject.add("PlayGroundPhotos", (JsonElement) jsonArray);
+        }else {
+            jsonObject.addProperty("Action", action);
+            jsonObject.addProperty("ParamId", paramId);
+            jsonObject.addProperty("ParamName", playGroundDetails);
+            jsonObject.addProperty("Availabilty", availabilty);
+            jsonObject.addProperty("LevellingStatus", levelingStatus);
+            jsonObject.addProperty("Areainsqmtr", area);
+            jsonObject.addProperty("AvailabiltyStandardTrack", standardTrack);
+            jsonObject.addProperty("Lat", latitude);
+            jsonObject.addProperty("Long", longitude);
+            jsonObject.addProperty("SchoolId", schoolId);
+            jsonObject.addProperty("PeriodID", periodID);
+            jsonObject.addProperty("CreatedBy", usertypeid);
+            jsonObject.addProperty("UserCode", userid);
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64(arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("PlayGroundPhotos", (JsonElement) jsonArray);
         }
-        jsonObject.add("PlayGroundPhotos", (JsonElement) jsonArray);
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
@@ -31,7 +32,9 @@ EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     RecyclerView recyclerViewRAinHarveOnSub;
+    LinearLayout workingStatusLayout,linearLayout5;
 
+TextView workingStatusHearOnSub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,9 @@ EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
         edtRainharvestingAvailabilty=findViewById(R.id.edtRainharvestingAvailabilty);
         edtRainHavestingWorkStatus=findViewById(R.id.edtRainHavestingWorkStatus);
         recyclerViewRAinHarveOnSub=findViewById(R.id.recyclerViewRAinHarveOnSub);
+        workingStatusLayout=findViewById(R.id.workingStatusLayout);
+        workingStatusHearOnSub=findViewById(R.id.workingStatusHearOnSub);
+        linearLayout5=findViewById(R.id.linearLayout5);
         edtRainharvestingAvailabilty.setEnabled(false);
         edtRainHavestingWorkStatus.setEnabled(false);
         recyclerViewRAinHarveOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -72,8 +78,20 @@ EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
-                edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
+                if (response.body().get(0).get("RainHarvestingAvl").getAsString().equals("No")){
+                    edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
+                    recyclerViewRAinHarveOnSub.setVisibility(View.GONE);
+                    linearLayout5.setVisibility(View.GONE);
+                    workingStatusHearOnSub.setVisibility(View.GONE);
+                    dialog2.dismiss();
+
+
+                }else{
+
+
+
                 edtRainHavestingWorkStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+                    edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
 
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_RainHarvesting.this,StaffPhotoPathList);
@@ -81,7 +99,7 @@ EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
 
                 dialog2.dismiss();
 
-
+                }
             }
 
             @Override

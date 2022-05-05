@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,7 +22,9 @@ import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
+import java.lang.invoke.ConstantCallSite;
 import java.util.List;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +34,8 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     EditText edtGymAvailabelty,gymWorkingStatus,edtGymArea;
     RecyclerView recyclerViewGymOnSubmit;
+    TextView gymUploadtxt;
+    ConstraintLayout gymLayout;
     ApplicationController applicationController;
 
 
@@ -60,6 +65,8 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtGymAvailabelty=findViewById(R.id.edtGymAvailabelty);
         gymWorkingStatus=findViewById(R.id.gymWorkingStatus);
+        gymLayout=findViewById(R.id.gymLayout);
+        gymUploadtxt=findViewById(R.id.gymUploadtxt);
         edtGymArea=findViewById(R.id.edtGymArea);
         recyclerViewGymOnSubmit=findViewById(R.id.recyclerViewGymOnSubmit);
         recyclerViewGymOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -73,14 +80,27 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                     Log.d("TAG", "onResponse: "+response.body()+"///////");
 
-                    edtGymArea.setText(response.body().get(0).get("Areainsqmtr").getAsString());
-                    edtGymAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                    if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                        edtGymAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+                            gymLayout.setVisibility(View.GONE);
+                            gymUploadtxt.setVisibility(View.GONE);
+                            dialog2.dismiss();
+                    }else {
+                        edtGymArea.setText(response.body().get(0).get("Areainsqmtr").getAsString());
+                        edtGymAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
 
                         gymWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+                        try {
+                            String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                            OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_OpenGYmDetails.this,StaffPhotoPathList);
+                            recyclerViewGymOnSubmit.setAdapter(onlineImageRecViewAdapter);
+                        }catch (Exception e){
+                            recyclerViewGymOnSubmit.setVisibility(View.GONE);
+                            gymUploadtxt.setVisibility(View.GONE);
+                        }
 
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_OpenGYmDetails.this,StaffPhotoPathList);
-                recyclerViewGymOnSubmit.setAdapter(onlineImageRecViewAdapter);
+                    }
+
                 dialog2.dismiss();
 
 

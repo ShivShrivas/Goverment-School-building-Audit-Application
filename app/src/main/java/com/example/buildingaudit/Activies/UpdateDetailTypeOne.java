@@ -497,6 +497,7 @@ int cameraType;
             jsonArray2.add(paraGetImageBase64( arrayListImages3.get(i), i));
 
         }
+
         jsonObject.add("MajorRepairingPhotos", (JsonElement) jsonArray2);
 
         JsonArray jsonArray3 = new JsonArray();

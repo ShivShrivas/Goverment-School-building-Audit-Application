@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,6 +17,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,8 +76,10 @@ public class UpdateDetailsComputerlab extends AppCompatActivity {
 Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailabelty,spinnerInstallationYear,spinnerGrantUnderScheme,spinnerinternet,spinnerPowerBackup,spinnerFurniture,spinnerComputerOperator;
     ImageView ComputerLabImageUploadBtn;
     RecyclerView recyclerViewComputerLab;
+    Dialog dialog2;
     TextView userName,schoolAddress,schoolName;
     Button submitComputerLabBtn;
+    ConstraintLayout constraintLayout36;
     EditText edtNoOfLab,edtNoOfWorkingComputer,edtNoOfComputer;
     ApplicationController applicationController;
     @Override
@@ -95,7 +99,9 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
 
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
-        dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);Dialog dialog2 = new Dialog(this);
+        dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -122,6 +128,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         spinnerFurniture=findViewById(R.id.spinnerFurniture);
         submitComputerLabBtn=findViewById(R.id.submitComputerLabBtn);
         spinnerComputerOperator=findViewById(R.id.spinnerComputerOperator);
+        constraintLayout36=findViewById(R.id.constraintLayout36);
 
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
@@ -226,61 +233,88 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         adapter = new ImageAdapter4(this, arrayListImages1);
         recyclerViewComputerLab.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        spinnerComputeLabAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
+                        constraintLayout36.setVisibility(View.GONE);
+                    }else{
+                    constraintLayout36.setVisibility(View.VISIBLE);
+                }
+
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         submitComputerLabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    dialog2.dismiss();
-                    Toast.makeText(UpdateDetailsComputerlab.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),spinnerGrantUnderScheme.getSelectedItem().toString(),spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadComputerLab(paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),spinnerGrantUnderScheme.getSelectedItem().toString(),spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response.body()+response);
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if (!spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
+                    if (arrayListImages1.size()==0){
                         dialog2.dismiss();
+                        Toast.makeText(UpdateDetailsComputerlab.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        runService();
+
 
                     }
-                });
+                }else{
+                  runService();
+                }
 
-            }
             }
         });
 
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),spinnerGrantUnderScheme.getSelectedItem().toString(),spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadComputerLab(paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),spinnerGrantUnderScheme.getSelectedItem().toString(),spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+response);
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
+            }
+        });
     }
 
     private JsonObject paraComputerLab(String action,String paramId,String paramName,String lat,String longt,String schoolId,String periodId,String Usertypeid,String getUserid,String InstallationYear,String NoOfComputer, String NoOfWorkingComputer,String GrantUnderScheme,String internet,String PowerBackup, String Furniture,String computerOperator ,String NoOfLab,String PrinterAvailable, String ScannerAvailable,String availabale ,ArrayList<Bitmap> arrayListImages1 ){
