@@ -182,8 +182,10 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
         submitPlayGroundBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsPlayground.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
                 }else {
                 RestClient restClient=new RestClient();
@@ -202,6 +204,8 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
                             }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                 textView.setText("Your details Submitted successfully ");
                             }
+                            dialog2.dismiss();
+
                             dialog.show();
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -212,11 +216,14 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
 
                     }
                 });

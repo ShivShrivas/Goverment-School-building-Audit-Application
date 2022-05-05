@@ -52,6 +52,7 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -109,13 +110,13 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_GirlsToiletDetails.this,StaffPhotoPathList);
                 recyclerViewBoysToiletOnSub.setAdapter(onlineImageRecViewAdapter);
-
+                dialog2.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-
+dialog2.dismiss();
             }
         });
 

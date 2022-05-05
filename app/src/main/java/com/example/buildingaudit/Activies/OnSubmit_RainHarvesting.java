@@ -51,6 +51,7 @@ EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -78,12 +79,14 @@ EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_RainHarvesting.this,StaffPhotoPathList);
                 recyclerViewRAinHarveOnSub.setAdapter(onlineImageRecViewAdapter);
 
+                dialog2.dismiss();
 
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

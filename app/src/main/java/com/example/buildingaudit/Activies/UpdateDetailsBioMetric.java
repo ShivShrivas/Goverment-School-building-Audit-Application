@@ -114,6 +114,7 @@ Spinner spinneruserbiometricStudent,
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+
         bioMetricImageUploadBtn=findViewById(R.id.bioMetricImageUploadBtn);
         spinneruserbiometricStudent=findViewById(R.id.spinneruserbiometricStudent);
         spinnerBiometricWorkingStatus=findViewById(R.id.spinnerBiometricWorkingStatus);
@@ -208,12 +209,15 @@ Spinner spinneruserbiometricStudent,
         buttonBiometricSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                dialog2.show();
                 if (edtBioMetricMachineCount.length() == 0) {
                     Toast.makeText(UpdateDetailsBioMetric.this, "Please fill all details properly!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
                 } else {
                         if (arrayListImages1.size()==0){
                             Toast.makeText(UpdateDetailsBioMetric.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
                         }else {
                     RestClient restClient = new RestClient();
@@ -232,21 +236,27 @@ Spinner spinneruserbiometricStudent,
                                 }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                     textView.setText("Your details Submitted successfully ");
                                 }
+                                dialog2.dismiss();
                                 dialog.show();
                                 button.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         onBackPressed();
                                         dialog.dismiss();
+
+
                                     }
                                 });
                             }catch (Exception e){
                                 Toast.makeText(UpdateDetailsBioMetric.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
+
                             }
                         }
 
                         @Override
                         public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                            dialog2.dismiss();
 
                         }
                     });

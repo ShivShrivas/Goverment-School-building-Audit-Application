@@ -66,6 +66,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         schoolName=findViewById(R.id.schoolName);
         schoolAddress=findViewById(R.id.schoolAddress);
         scienceLabBodyCard=findViewById(R.id.scienceLabBodyCard);
@@ -305,12 +306,14 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
               }
 
+                dialog2.dismiss();
 
 
             }
 
             @Override
             public void onFailure(Call<List<LabDetailsResponse>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

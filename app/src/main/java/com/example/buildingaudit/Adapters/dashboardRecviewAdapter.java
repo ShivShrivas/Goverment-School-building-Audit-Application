@@ -741,7 +741,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 if (response.body().size()==0){
                     context.startActivity(new Intent(context, UpdateDetailTypeOne.class));
                 }else {
-                    Intent i=new Intent(context, UpdateDetailTypeOne.class);
+                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 
                     context.startActivity(i);
                 }

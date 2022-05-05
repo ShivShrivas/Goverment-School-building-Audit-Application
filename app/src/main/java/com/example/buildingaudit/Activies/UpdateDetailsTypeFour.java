@@ -217,8 +217,10 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         buttonSubmitLibraryDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
                 }else {
                 RestClient restClient=new RestClient();
@@ -243,6 +245,8 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                             }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                 textView.setText("Your details Submitted successfully ");
                             }
+                            dialog2.dismiss();
+
                             dialog.show();
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -253,11 +257,14 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
 
                     }
                 });

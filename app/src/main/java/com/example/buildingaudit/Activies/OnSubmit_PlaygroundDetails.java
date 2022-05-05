@@ -50,6 +50,7 @@ EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGrou
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         EditTextPlaygroundAvailabelty=findViewById(R.id.EditTextPlaygroundAvailabelty);
         EditTextLevellingStatus=findViewById(R.id.EditTextLevellingStatus);
         edtAreaOfPlayGround=findViewById(R.id.edtAreaOfPlayGround);
@@ -78,6 +79,7 @@ EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGrou
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PlaygroundDetails.this,StaffPhotoPathList);
                 recyclerViewPlayground.setAdapter(onlineImageRecViewAdapter);
+                dialog2.dismiss();
 
 
 
@@ -85,6 +87,7 @@ EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGrou
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

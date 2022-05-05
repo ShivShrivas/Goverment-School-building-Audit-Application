@@ -312,7 +312,7 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         submitBtnFurniture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+dialog2.show();
 
 
 
@@ -322,6 +322,8 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
 
                 Log.d("TAG", "onClick: "+   arrayList.get(1).getFurnitureType());
                 if (arrayListImages1.size()==0){
+                    dialog2.dismiss();
+
                     Toast.makeText(UpdateDetailsFurnitures.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
                 }else {
@@ -342,6 +344,8 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
                             }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                 textView.setText("Your details Submitted successfully ");
                             }
+                            dialog2.dismiss();
+
                             dialog.show();
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -352,11 +356,14 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
 
                     }
                 });

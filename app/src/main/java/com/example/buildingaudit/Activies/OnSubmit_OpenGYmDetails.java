@@ -53,6 +53,7 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
@@ -80,6 +81,7 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_OpenGYmDetails.this,StaffPhotoPathList);
                 recyclerViewGymOnSubmit.setAdapter(onlineImageRecViewAdapter);
+                dialog2.dismiss();
 
 
 
@@ -87,6 +89,7 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

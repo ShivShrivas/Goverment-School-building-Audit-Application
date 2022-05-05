@@ -41,6 +41,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         edtAlmiraAndRacksAvailabiltyOnSubmit=findViewById(R.id.edtAlmiraAndRacksAvailabiltyOnSubmit);
         edtFurnitureAvailabiltyOnSubmit=findViewById(R.id.edtFurnitureAvailabiltyOnSubmit);
         edtStaffRoomStatusOnSubmit=findViewById(R.id.edtStaffRoomStatusOnSubmit);
@@ -78,11 +79,13 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                 String[] StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_StaffRoomDetails.this,StaffPhotoPathList);
                 recyclerViewStafroomtwoOnSubmit.setAdapter(onlineImageRecViewAdapter);
+                dialog2.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

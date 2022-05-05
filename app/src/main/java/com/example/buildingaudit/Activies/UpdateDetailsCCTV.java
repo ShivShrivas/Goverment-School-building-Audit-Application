@@ -191,8 +191,10 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         submitBtnCCTV.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 if (arrayListImages2.size()==0){
                     Toast.makeText(UpdateDetailsCCTV.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
                 }else {
                 RestClient restClient =new RestClient();
@@ -211,13 +213,16 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
                             }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                 textView.setText("Your details Submitted successfully ");
-                            } 
+                            }
+                            dialog2.dismiss();
                             dialog.show();
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
                                     onBackPressed();
                                     dialog.dismiss();
+
+
                                 }
                             });
                         }catch (Exception e){

@@ -219,6 +219,7 @@ Button buttonSubmitDrinkinwaterDetails;
         buttonSubmitDrinkinwaterDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 int totalNumberOfWorkingTaps=0;
                 int totalNumberOfTaps=0;
                 int totalNumberOfNotWorkingTaps=0;
@@ -238,6 +239,8 @@ Button buttonSubmitDrinkinwaterDetails;
 
                 }
                 if (totalNumberOfTaps!=totalNumberOfWorkingTaps+totalNumberOfNotWorkingTaps){
+                    dialog2.dismiss();
+
                     Snackbar.make(drinkingwaterLayout, "Please provide correct number of Taps", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Ok", new View.OnClickListener() {
                                 @Override
@@ -249,6 +252,7 @@ Button buttonSubmitDrinkinwaterDetails;
                 }else {
                     if (arrayListImages1.size()==0){
                         Toast.makeText(UpdateDetailsDrinkingWater.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
 
                     }else {
                     RestClient restClient=new RestClient();
@@ -275,6 +279,8 @@ Button buttonSubmitDrinkinwaterDetails;
                                 }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                     textView.setText("Your details Submitted successfully ");
                                 }
+                                dialog2.dismiss();
+
                                 dialog.show();
                                 button.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -285,11 +291,14 @@ Button buttonSubmitDrinkinwaterDetails;
                                 });
                             }catch (Exception e){
                                 Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
+
                             }
                         }
 
                         @Override
                         public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                            dialog2.dismiss();
 
                         }
                     });

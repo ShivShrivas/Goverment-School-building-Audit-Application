@@ -248,7 +248,10 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         btnUpdateFireFighting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 if (arrayListImages1.size()==0){
+                    dialog2.dismiss();
+
                     Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
                 }else {
@@ -271,6 +274,8 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                             }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                 textView.setText("Your details Submitted successfully ");
                             }
+                            dialog2.dismiss();
+
                             dialog.show();
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -281,11 +286,14 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
 
                     }
                 });

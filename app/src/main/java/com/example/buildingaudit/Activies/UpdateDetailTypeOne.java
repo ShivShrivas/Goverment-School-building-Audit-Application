@@ -216,9 +216,12 @@ int cameraType;
         classRoomSubmitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 try {
                     int totalClassRoom=Integer.parseInt(goodCondtionClassroom.getText().toString())+Integer.parseInt(minorRepairingClassroom.getText().toString())+Integer.parseInt(majorRepairingClassroom.getText().toString());
                     if (totalClassRoom!=Integer.parseInt(totalClassRooms.getText().toString().trim())){
+                        dialog2.dismiss();
+
                         Snackbar.make(constratinflayout, "Please provide correct number of rooms", Snackbar.LENGTH_INDEFINITE)
                                 .setAction("Ok", new View.OnClickListener() {
                                     @Override
@@ -230,6 +233,8 @@ int cameraType;
 
                     }else {
                         if (arrayListImages3.size()==0 && arrayListImages2.size()==0 && arrayListImages4.size()==0){
+                            dialog2.dismiss();
+
                             Toast.makeText(UpdateDetailTypeOne.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
                         }else {
@@ -252,6 +257,8 @@ int cameraType;
                                     }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                         textView.setText("Your details Submitted successfully ");
                                     }
+                                    dialog2.dismiss();
+
                                     dialog.show();
                                     button.setOnClickListener(new View.OnClickListener() {
                                         @Override
@@ -261,12 +268,15 @@ int cameraType;
                                         }
                                     });
                                 }catch (Exception e){
+                                    dialog2.dismiss();
+
                                     Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
                                 }
                             }
 
                             @Override
                             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                                dialog2.dismiss();
 
                             }
                         });
@@ -275,6 +285,8 @@ int cameraType;
                     }
                 }catch (Exception e){
                     Toast.makeText(UpdateDetailTypeOne.this, "please fill all room count properly", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
                 }
 
             }

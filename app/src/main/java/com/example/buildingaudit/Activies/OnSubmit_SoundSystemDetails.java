@@ -49,6 +49,7 @@ RecyclerView recyclerViewSoundSystmOnSub;
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -74,11 +75,13 @@ RecyclerView recyclerViewSoundSystmOnSub;
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SoundSystemDetails.this,StaffPhotoPathList);
                 recyclerViewSoundSystmOnSub.setAdapter(onlineImageRecViewAdapter);
+                dialog2.dismiss();
 
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

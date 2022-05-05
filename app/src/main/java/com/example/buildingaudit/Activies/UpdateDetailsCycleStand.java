@@ -180,8 +180,10 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         submitCycleStandBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsCycleStand.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
                 }else {
                 RestClient restClient=new RestClient();
@@ -201,6 +203,8 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
                             }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                 textView.setText("Your details Submitted successfully ");
                             }
+                            dialog2.dismiss();
+
                             dialog.show();
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -211,11 +215,14 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
 
                     }
                 });

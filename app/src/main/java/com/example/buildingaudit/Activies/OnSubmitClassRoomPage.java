@@ -66,6 +66,7 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        dialog2.show();
         schoolName=findViewById(R.id.schoolName);
         editClassRoomDetails=findViewById(R.id.editClassRoomDetails);
         schoolAddress=findViewById(R.id.schoolAddress);
@@ -156,6 +157,7 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
                 recyclerViewFourTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter3);
                 onlineImageRecViewAdapter.notifyDataSetChanged();
 
+                dialog2.dismiss();
 
 
 
@@ -165,6 +167,7 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
 
             }
         });

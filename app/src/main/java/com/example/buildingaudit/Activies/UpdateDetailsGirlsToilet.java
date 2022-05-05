@@ -392,45 +392,52 @@ Spinner spinnerGirlsSanetoryNapkin,spinnerGirlsIncinerator,spinnerGirlsDustbin,s
         submitBtnGirlsToilet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                dialog2.show();
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsGirlsToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
                 }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onClick: "+paraGirlsToilet("1","17","GirlsToiletPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtWithFlushClean.getText().toString(),edtWithoutFlushClean.getText().toString(),edtwithflushTotal.getText().toString(),spinnerCWSNGirlstoiletAvalabilty.getSelectedItem().toString(),edtCSWNfriendlyB.getText().toString(),edtCSWNwithoutfriendlyB.getText().toString(),edtCSWNfriendlyTotalB.getText().toString(),edtUrinalWithFlushB.getText().toString(),edtUrinalWithoutFlushB.getText().toString(),edtUrinalWithFlushTotalB.getText().toString(),spinnerGirlsDoorFacility.getSelectedItem().toString(),spinnerGirlsDustbin.getSelectedItem().toString(),spinnerGirlsIncinerator.getSelectedItem().toString(),spinnerGirlsSanetoryNapkin.getSelectedItem().toString(),arrayListImages1));
-//                Call<List<JsonObject>> call=apiService.uploadGirlsToilet(paraGirlsToilet("1","17","GirlsToiletPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtWithFlushClean.getText().toString(),edtWithoutFlushClean.getText().toString(),edtwithflushTotal.getText().toString(),spinnerCWSNGirlstoiletAvalabilty.getSelectedItem().toString(),edtCSWNfriendlyB.getText().toString(),edtCSWNwithoutfriendlyB.getText().toString(),edtCSWNfriendlyTotalB.getText().toString(),edtUrinalWithFlushB.getText().toString(),edtUrinalWithoutFlushB.getText().toString(),edtUrinalWithFlushTotalB.getText().toString(),spinnerGirlsDoorFacility.getSelectedItem().toString(),spinnerGirlsDustbin.getSelectedItem().toString(),spinnerGirlsIncinerator.getSelectedItem().toString(),spinnerGirlsSanetoryNapkin.getSelectedItem().toString(),arrayListImages1));
-//                call.enqueue(new Callback<List<JsonObject>>() {
-//                    @Override
-//                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-//                        Log.d("TAG", "onResponse: "+response.body()+response);
-//                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-//                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-//                        try {
-//                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-//                                textView.setText("You already uploaded details ");
-//
-//                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-//                                textView.setText("Your details Submitted successfully ");
-//                            }
-//                            dialog.show();
-//                            button.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    onBackPressed();
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                        }catch (Exception e){
-//                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-//
-//                    }
-//                });
+                Call<List<JsonObject>> call=apiService.uploadGirlsToilet(paraGirlsToilet("1","17","GirlsToiletPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtWithFlushClean.getText().toString(),edtWithoutFlushClean.getText().toString(),edtwithflushTotal.getText().toString(),spinnerCWSNGirlstoiletAvalabilty.getSelectedItem().toString(),edtCSWNfriendlyB.getText().toString(),edtCSWNwithoutfriendlyB.getText().toString(),edtCSWNfriendlyTotalB.getText().toString(),edtUrinalWithFlushB.getText().toString(),edtUrinalWithoutFlushB.getText().toString(),edtUrinalWithFlushTotalB.getText().toString(),spinnerGirlsDoorFacility.getSelectedItem().toString(),spinnerGirlsDustbin.getSelectedItem().toString(),spinnerGirlsIncinerator.getSelectedItem().toString(),spinnerGirlsSanetoryNapkin.getSelectedItem().toString(),arrayListImages1));
+                call.enqueue(new Callback<List<JsonObject>>() {
+                    @Override
+                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                        Log.d("TAG", "onResponse: "+response.body()+response);
+                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            if (response.body().get(0).get("Status").getAsString().equals("E")){
+                                textView.setText("You already uploaded details ");
+
+                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                                textView.setText("Your details Submitted successfully ");
+                            }
+                            dialog2.dismiss();
+
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        }catch (Exception e){
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
+
+                    }
+                });
             }
             }
         });

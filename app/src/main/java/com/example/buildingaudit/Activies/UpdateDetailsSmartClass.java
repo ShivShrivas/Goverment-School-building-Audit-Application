@@ -228,7 +228,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         submitSmartClassBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+dialog2.show();
                 SmartClassesCard[] array = new SmartClassesCard[layoutForAddRooms.getChildCount()+1];
                     SmartClassesCard smartClassesCard1=new SmartClassesCard(spinnerInstallationYearSmartClass.getSelectedItem().toString(),
                             companyName1.getText().toString(),spinnerUnderSchemeSmartClass.getSelectedItem().toString(),"1","SmartClass"+1,spinnerWorkingStatusSmartClass.getSelectedItem().toString());
@@ -250,6 +250,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                 }
                 if (arrayListImages1.size()==0){
                     Toast.makeText(UpdateDetailsSmartClass.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
                 }else {
                 RestClient restClient=new RestClient();
@@ -270,6 +271,8 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                             }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                                 textView.setText("Your details Submitted successfully ");
                             }
+                            dialog2.dismiss();
+
                             dialog.show();
                             button.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -280,11 +283,14 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
                             });
                         }catch (Exception e){
                             Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
                         }
                     }
 
                     @Override
                     public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                        dialog2.dismiss();
 
                     }
                 });
