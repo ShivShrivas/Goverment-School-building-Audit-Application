@@ -722,22 +722,12 @@ dialog2.show();
             jsonObject.addProperty("EquipmentStatus","null");
             jsonObject.addProperty("LabCondition","null");
         }else {
-            if (lab.getEquipmentStatus().toString().equals("Fully Equipped")){
-                jsonObject.addProperty("EquipmentStatus","FE");
-            }else if (lab.getEquipmentStatus().toString().equals("Partially Equipped")){
-                jsonObject.addProperty("EquipmentStatus","PE");
-            }else if (lab.getEquipmentStatus().toString().equals("Not Equipped")){
-                jsonObject.addProperty("EquipmentStatus","NE");
-            }
-            if (lab.getLabCondition().toString().equals("Good Condition")){
-                jsonObject.addProperty("LabCondition","Good");
-            }else if (lab.getLabCondition().toString().equals("Major repairing")){
-                jsonObject.addProperty("LabCondition","Major");
 
-            }else if (lab.getLabCondition().toString().equals("Minor Repairing")){
-                jsonObject.addProperty("LabCondition","Minor");
+                jsonObject.addProperty("EquipmentStatus",lab.getEquipmentStatus());
 
-            }
+
+                jsonObject.addProperty("LabCondition",lab.getLabCondition());
+
         }
 
 

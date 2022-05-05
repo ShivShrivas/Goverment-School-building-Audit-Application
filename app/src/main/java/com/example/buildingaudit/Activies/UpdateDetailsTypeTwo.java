@@ -127,7 +127,7 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         ArrayList<String> arrayListSpinner2 = new ArrayList<>();
         arrayListSpinner2.add("Good Condition");
         arrayListSpinner2.add("Minor Repairing");
-        arrayListSpinner2.add("Major repairing");
+        arrayListSpinner2.add("Major Repairing");
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner2);

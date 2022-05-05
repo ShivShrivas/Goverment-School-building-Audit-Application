@@ -99,6 +99,7 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
 
                     edtCWSNBoysAvailability.setText(response.body().get(0).get("AvailabilityCWSN").getAsString());
                     linearLayoutCWSNfriendlyToilet.setVisibility(View.GONE);
+
                 }else {
                     edtCWSNBoysAvailability.setText(response.body().get(0).get("AvailabilityCWSN").getAsString());
                     edtCSWNfriendlyTotalB.setText(response.body().get(0).get("TotalCWSN").getAsString());

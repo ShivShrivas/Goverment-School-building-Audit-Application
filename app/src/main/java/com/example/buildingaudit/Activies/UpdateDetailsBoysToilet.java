@@ -458,9 +458,11 @@ RecyclerView recyclerViewBoysToilet;
         jsonObject.addProperty("NoOfSeatsExcludingCWSNWithOutFlush",noOfSeatsExcludingCWSNWithOutFlush);
         jsonObject.addProperty("TotalExcludingCWSN",totalExcludingCWSN);
         if (availabilityCWSN.equals("No")){
-            jsonObject.addProperty("NoOfSeatsCWSNWithFlush","null");
-            jsonObject.addProperty("NoOfSeatsCWSNWithOutFlush","null");
-            jsonObject.addProperty("TotalCWSN","null");
+            jsonObject.addProperty("AvailabilityCWSN",availabilityCWSN);
+
+            jsonObject.addProperty("NoOfSeatsCWSNWithFlush",  "0");
+            jsonObject.addProperty("NoOfSeatsCWSNWithOutFlush","0");
+            jsonObject.addProperty("TotalCWSN","0");
         }else if(availabilityCWSN.equals("Yes")){
             jsonObject.addProperty("AvailabilityCWSN",availabilityCWSN);
             jsonObject.addProperty("NoOfSeatsCWSNWithFlush",noOfSeatsCWSNWithFlush);

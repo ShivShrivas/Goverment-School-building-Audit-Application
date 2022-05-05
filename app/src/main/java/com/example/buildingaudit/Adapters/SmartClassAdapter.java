@@ -40,11 +40,9 @@ public class SmartClassAdapter extends RecyclerView.Adapter<SmartClassAdapter.Sm
         holder.edtCompanyName.setText(smartClassesCards.get(position).getCompanyName());
         holder.edtSmartInstalltionYear.setText(smartClassesCards.get(position).getInstallationYear());
 
-        if (smartClassesCards.get(position).getWorkingStatus().equals("F")){
-            holder.edtWorkingStatus.setText("Functional");
-        }else if (smartClassesCards.get(position).getWorkingStatus().equals("NF")){
-            holder.edtWorkingStatus.setText("Not Functional");
-        }
+
+            holder.edtWorkingStatus.setText(smartClassesCards.get(position).getWorkingStatus());
+
         holder.edtUnderScheme.setText(smartClassesCards.get(position).getScheme());
         holder.txtSmartRoomName.setText("Smart Class"+smartClassesCards.get(position).getSrno());
     }

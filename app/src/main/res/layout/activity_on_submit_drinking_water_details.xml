@@ -850,7 +850,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Upload Images"
+                    android:text="Uploaded Images"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 

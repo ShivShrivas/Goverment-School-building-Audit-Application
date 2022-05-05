@@ -156,7 +156,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         spinnerGrantUnderScheme.setAdapter(arrayAdapter2);
 
         ArrayList<String> arrayListInternet =new ArrayList<>();
-        arrayListInternet.add("yes");
+        arrayListInternet.add("Yes");
         arrayListInternet.add("No");
         ArrayAdapter<String> arrayAdapter3=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListInternet);
         arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);

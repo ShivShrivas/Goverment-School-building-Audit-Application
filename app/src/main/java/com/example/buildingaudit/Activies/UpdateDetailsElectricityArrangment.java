@@ -193,8 +193,10 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 }else {
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paramElectricityDetails("1","11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(paramElectricityDetails("1","11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+
+                Log.d("TAG", "onClick: "+paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -237,9 +239,9 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         });
     }
 
-    private JsonObject paramElectricityDetails(String s, String s1, String electricityArrangement, String schoolId, String periodID, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String latitude, String longitude, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+    private JsonObject paramElectricityDetails(int s, String s1, String electricityArrangement, String schoolId, String periodID, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String latitude, String longitude, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",s);
+        jsonObject.addProperty("Action",1);
         jsonObject.addProperty("ParamId",s1);
         jsonObject.addProperty("ParamName",electricityArrangement);
         jsonObject.addProperty("SchoolId",schoolId);

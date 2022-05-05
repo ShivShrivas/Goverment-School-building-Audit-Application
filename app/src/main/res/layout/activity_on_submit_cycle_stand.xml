@@ -349,7 +349,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:text="Upload Images"
+            android:text="Uploaded Images"
             android:textColor="?attr/colorPrimary"
             android:textSize="15dp" />
 
@@ -379,14 +379,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
         android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerCycleStand" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerCycleStandOnSub" />
 </androidx.constraintlayout.widget.ConstraintLayout>

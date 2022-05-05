@@ -219,7 +219,7 @@ Dialog dialog;
                     Toast.makeText(UpdateDetailsBoundryWall.this, "Please fill all details properly!!", Toast.LENGTH_SHORT).show();
                     dialog2.dismiss();
                 } else {
-                    if (arrayListImages1.size()==0){
+                    if (arrayListImages2.size()==0){
                         Toast.makeText(UpdateDetailsBoundryWall.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 dialog2.dismiss();
                     }else {

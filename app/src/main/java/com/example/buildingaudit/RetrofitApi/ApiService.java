@@ -240,7 +240,7 @@ public  interface ApiService {
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
-    @POST("PhysicalParam/ViewFireFightingDetails")
+    @POST("PhysicalParam/SElectricityArrDetails")
     Call<List<JsonObject>> uploadElectricityArrangement(@Body JsonObject object);
 
 

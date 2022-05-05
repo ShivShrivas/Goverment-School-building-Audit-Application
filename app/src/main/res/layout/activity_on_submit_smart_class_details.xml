@@ -278,7 +278,7 @@
 
                     <EditText
                         android:id="@+id/edtTeacherAvailbilitySmartClass"
-                        android:layout_width="184dp"
+                        android:layout_width="match_parent"
                         android:layout_height="30dp"
                         android:layout_margin="4dp"
 
@@ -450,7 +450,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Upload Images"
+                    android:text="Uploaded Images"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 

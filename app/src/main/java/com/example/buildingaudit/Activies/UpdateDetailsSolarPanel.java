@@ -156,12 +156,13 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSolraPanelInstallationYear.setAdapter(arrayAdapter1);
 
+        ArrayList<String> arrayListFunctional=new ArrayList<>();
 
-        ArrayList<String> arrayListWorkingStatus=new ArrayList<>();
-        arrayListWorkingStatus.add("Functional");
-        arrayListWorkingStatus.add("Non Functional");
-        ArrayAdapter<String> arrayAdapter3=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
-        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
+        arrayListFunctional.add("Functional");
+        arrayListFunctional.add("Non Functional");
+
+        ArrayAdapter<String> arrayAdapter3=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListFunctional);
+        arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSolarPaneltWorkingStatus.setAdapter(arrayAdapter3);
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
@@ -232,7 +233,6 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
                 call.enqueue(new Callback<List<JsonObject>>() {
                     @Override
                     public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Toast.makeText(UpdateDetailsSolarPanel.this, ""+response.body(), Toast.LENGTH_SHORT).show();
                         TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                         Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                         try {
@@ -284,7 +284,7 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         jsonObject.addProperty("CreatedBy",usertypeid);
         jsonObject.addProperty("UserCode",userid);
         jsonObject.addProperty("Availabilty",toString);
-        jsonObject.addProperty("InternalElectrification",toString1);
+        jsonObject.addProperty("InstallationYear",toString1);
         jsonObject.addProperty("WorkingStatus",toString2);
         jsonObject.addProperty("Kilowatt",toString3);
         jsonObject.addProperty("SolarPanelType",toString4);

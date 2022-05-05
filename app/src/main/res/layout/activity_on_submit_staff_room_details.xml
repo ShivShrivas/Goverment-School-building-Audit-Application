@@ -126,14 +126,7 @@
                     android:backgroundTint="#292929"
                     android:src="@drawable/ic_notifications" />
 
-                <ImageView
-                    android:id="@+id/hamMenu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_weight="1"
-                    android:backgroundTint="@color/black"
-                    android:src="@drawable/ic_menu" />
+
 
 
             </LinearLayout>
@@ -354,8 +347,8 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:padding="2dp"
-                android:text="Upload Images"
-                android:textColor="@color/black"
+                android:text="Uploaded Images"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="17dp" />
 
 
