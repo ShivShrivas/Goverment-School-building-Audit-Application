@@ -256,25 +256,48 @@ runSrvice();
 
     private JsonObject paraMultipurposeHAll(String action, String paramId, String multiPurposeHallDetails, String availability, String physicalStatus, String sittingCapacity, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",multiPurposeHallDetails);
-        jsonObject.addProperty("Availability",availability);
-        jsonObject.addProperty("PhysicalStatus",physicalStatus);
-        jsonObject.addProperty("SittingCapacity",sittingCapacity);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
+        if (availability.equals("No")){
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",multiPurposeHallDetails);
+            jsonObject.addProperty("Availability",availability);
+            jsonObject.addProperty("PhysicalStatus","");
+            jsonObject.addProperty("SittingCapacity","0");
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
 
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
+            }
+            jsonObject.add("MultiPurposeHallPhoto", (JsonElement) jsonArray2);
+        }else{
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",multiPurposeHallDetails);
+            jsonObject.addProperty("Availability",availability);
+            jsonObject.addProperty("PhysicalStatus",physicalStatus);
+            jsonObject.addProperty("SittingCapacity",sittingCapacity);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("MultiPurposeHallPhoto", (JsonElement) jsonArray2);
         }
-        jsonObject.add("MultiPurposeHallPhoto", (JsonElement) jsonArray2);
+
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

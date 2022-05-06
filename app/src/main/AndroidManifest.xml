@@ -21,6 +21,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".Activies.OnSubmit_ArtAndCraft"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsArtAndCraft"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.OnSubmit_PrincipalRoom"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetailsPrincipalRoom"
+            android:exported="false" />
+        <activity
             android:name=".Activies.OnSubmit_FurnitureDetails"
             android:exported="false" />
         <activity

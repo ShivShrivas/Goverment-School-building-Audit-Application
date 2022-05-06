@@ -34,6 +34,7 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
         edtWaterSupplyWorkStatsyDW,edtWaterSupplyAvailabiltyDW,
         edtSubmersibleWorkStatsyDW,edtSubmersibleAvailabiltyDW,
         edtHandPumpWorkStatsyDW,edtHandPumpAvailabiltyDW;
+TextView uploadDW;
     RecyclerView recyclerViewDrinkingWater;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
@@ -76,6 +77,7 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
         edtWaterSupplyAvailabiltyDW=findViewById(R.id.edtWaterSupplyAvailabiltyDW);
         edtSubmersibleAvailabiltyDW=findViewById(R.id.edtSubmersibleAvailabiltyDW);
         edtHandPumpAvailabiltyDW=findViewById(R.id.edtHandPumpAvailabiltyDW);
+        uploadDW=findViewById(R.id.uploadDW);
 
         disableEditBox();
 
@@ -89,43 +91,88 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
 
-                edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme").getAsString());
-
-
-                    edtROInstallationWokingStatus.setText(response.body().get(0).get("ROInsWorkingStatus").getAsString());
-
-
-
-                    edtOverheadTankWorkStatsyDW.setText(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString());
-
-
-
-      edtWaterSupplyWorkStatsyDW.setText(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString());
-
-
-     edtSubmersibleWorkStatsyDW.setText(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
-
-
-    edtHandPumpWorkStatsyDW.setText(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
-
-
-
-                        edtROInstallationAvailabiltyDW.setText(response.body().get(0).get("ROInsAvl").getAsString());
-                edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps").getAsString());
 
 
 
 
-                edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps").getAsString());
-                        edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps").getAsString());
-                edtOverheadTankAvailabiltyDW.setText(response.body().get(0).get("OverHeadTankAvl").getAsString());
-                        edtWaterSupplyAvailabiltyDW.setText(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
-                edtSubmersibleAvailabiltyDW.setText(response.body().get(0).get("SubmersibleAvl").getAsString());
-                        edtHandPumpAvailabiltyDW.setText(response.body().get(0).get("HandPumpAvl").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_DrinkingWaterDetails.this,StaffPhotoPathList);
-                recyclerViewDrinkingWater.setAdapter(onlineImageRecViewAdapter);
-dialog2.dismiss();
+
+
+
+
+                        if (response.body().get(0).get("ROInsAvl").getAsString().equals("No")){
+
+                            edtROInstallationAvailabiltyDW.setText(response.body().get(0).get("ROInsAvl").getAsString());
+
+                            edtROInstallationScheme.setVisibility(View.GONE);
+                            edtROInstallationWokingStatus.setVisibility(View.GONE);
+                        }else{
+
+                            edtROInstallationAvailabiltyDW.setText(response.body().get(0).get("ROInsAvl").getAsString());
+                            edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme").getAsString());
+                            edtROInstallationWokingStatus.setText(response.body().get(0).get("ROInsWorkingStatus").getAsString());
+                        }
+
+
+
+                        if (response.body().get(0).get("NoOfTaps").getAsString().equals("0") || response.body().get(0).get("NoOfTaps").getAsString().equals("00") || response.body().get(0).get("NoOfTaps").getAsString().equals("000")){
+                            edtWorkingDrinkingwaterTaps.setText("0");
+                            edtNotWorkingDrinkingwaterTaps.setText("0");
+                            edtTotalDrinkingwaterTaps.setText("0");
+
+                        }else{
+                            edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps").getAsString());
+                            edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps").getAsString());
+                            edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps").getAsString());
+                        }
+                        if (response.body().get(0).get("OverHeadTankAvl").getAsString().equals("No")){
+                            edtOverheadTankAvailabiltyDW.setText(response.body().get(0).get("OverHeadTankAvl").getAsString());
+                            edtOverheadTankWorkStatsyDW.setVisibility(View.GONE);
+
+                        }else{
+                            edtOverheadTankWorkStatsyDW.setText(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString());
+                            edtOverheadTankAvailabiltyDW.setText(response.body().get(0).get("OverHeadTankAvl").getAsString());
+                        }
+
+                        if (response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString().equals("No")){
+
+                            edtWaterSupplyAvailabiltyDW.setText(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
+                            edtWaterSupplyWorkStatsyDW.setVisibility(View.GONE);
+
+                        }else{
+                            edtWaterSupplyAvailabiltyDW.setText(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
+                            edtWaterSupplyWorkStatsyDW.setText(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString());
+
+                        }
+
+                        if (response.body().get(0).get("SubmersibleAvl").getAsString().equals("No")){
+
+                            edtSubmersibleAvailabiltyDW.setText(response.body().get(0).get("SubmersibleAvl").getAsString());
+                            edtSubmersibleWorkStatsyDW.setVisibility(View.GONE);
+                        }else{
+                            edtSubmersibleWorkStatsyDW.setText(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
+
+                            edtSubmersibleAvailabiltyDW.setText(response.body().get(0).get("SubmersibleAvl").getAsString());
+                        }
+                        if (response.body().get(0).get("HandPumpAvl").getAsString().equals("No")){
+
+                            edtHandPumpAvailabiltyDW.setText(response.body().get(0).get("HandPumpAvl").getAsString());
+                            edtHandPumpWorkStatsyDW.setVisibility(View.GONE);
+
+                        }else{
+                            edtHandPumpWorkStatsyDW.setText(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
+
+                            edtHandPumpAvailabiltyDW.setText(response.body().get(0).get("HandPumpAvl").getAsString());
+                        }
+                       try {
+                           String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                           OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_DrinkingWaterDetails.this,StaffPhotoPathList);
+                           recyclerViewDrinkingWater.setAdapter(onlineImageRecViewAdapter);
+                       }catch (Exception e){
+                           recyclerViewDrinkingWater.setVisibility(View.GONE);
+                           uploadDW.setVisibility(View.GONE);
+                       }
+
+                dialog2.dismiss();
 
             }
 

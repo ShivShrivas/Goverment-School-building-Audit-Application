@@ -204,6 +204,8 @@
                             android:inputType="number"
                             android:textAlignment="center"
                             android:layout_width="match_parent"
+                            android:text="0"
+
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
                             android:hint="Enter Count"
@@ -314,6 +316,8 @@
                             android:inputType="number"
                             android:textAlignment="center"
                             android:layout_width="match_parent"
+                            android:text="0"
+
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
                             android:hint="Enter Count"
@@ -421,6 +425,8 @@
                             android:id="@+id/edtTrippelSeated"
                             android:inputType="number"
                             android:textAlignment="center"
+                            android:text="0"
+
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
@@ -522,6 +528,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="2"
+                    android:text="0"
 
                     android:textColor="@color/black"
                     android:background="@drawable/cardbg" />
@@ -558,6 +565,8 @@
                     android:maxLength="4"
                     android:textColor="@color/black"
                     android:textAlignment="center"
+                    android:text="0"
+
                     android:background="@drawable/cardbg" />
             </LinearLayout>
 

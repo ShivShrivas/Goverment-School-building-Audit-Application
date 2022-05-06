@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
@@ -32,6 +33,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
 
     EditText edtFurnitureRequired,edtTripleSeatesStatus,edtTrippelSeated,edtDoubleSeatesStatus,edtDoubleSeated
             ,edtSingleSeated,edtsingleSeatesStatus;
+    LinearLayout constraintLayout9,constraintLayout59,constraintLayout49;
     TextView edtTotalFurnirtureStrenght;
     RecyclerView recyclerViewFurnituresOnSub;
     @Override
@@ -61,6 +63,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
+
         edtFurnitureRequired=findViewById(R.id.edtFurnitureRequired);
         edtTotalFurnirtureStrenght=findViewById(R.id.edtTotalFurnirtureStrenght);
         edtTripleSeatesStatus=findViewById(R.id.edtTripleSeatesStatus);
@@ -70,6 +73,9 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         edtSingleSeated=findViewById(R.id.edtSingleSeated);
         edtsingleSeatesStatus=findViewById(R.id.edtsingleSeatesStatus);
         recyclerViewFurnituresOnSub=findViewById(R.id.recyclerViewFurnituresOnSub);
+        constraintLayout49=findViewById(R.id.constraintLayout49);
+        constraintLayout59=findViewById(R.id.constraintLayout59);
+        constraintLayout9=findViewById(R.id.constraintLayout9);
 
         disableEditText();
         recyclerViewFurnituresOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -85,28 +91,37 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
 
 
 
-                    edtTripleSeatesStatus.setText(response.body().get(2).get("Condition").getAsString());
 
-
-
-
-
-
-                    edtDoubleSeatesStatus.setText(response.body().get(1).get("Condition").getAsString());
-
-
-
-
-
-
-                    edtsingleSeatesStatus.setText(response.body().get(0).get("Condition").getAsString());
-
-
-                        edtTrippelSeated.setText(response.body().get(2).get("TotalCnt").getAsString());
-                edtDoubleSeated.setText(response.body().get(1).get("TotalCnt").getAsString());
-
-
+                    if (response.body().get(0).get("TotalCnt").getAsString().equals("0")){
+                        constraintLayout9.setVisibility(View.GONE);
                         edtSingleSeated.setText(response.body().get(0).get("TotalCnt").getAsString());
+
+                    }else {
+                        edtsingleSeatesStatus.setText(response.body().get(0).get("Condition").getAsString());
+                        edtSingleSeated.setText(response.body().get(0).get("TotalCnt").getAsString());
+
+                    }
+  if (response.body().get(1).get("TotalCnt").getAsString().equals("0")){
+                        constraintLayout59.setVisibility(View.GONE);
+                        edtDoubleSeated.setText(response.body().get(1).get("TotalCnt").getAsString());
+
+                    }else {
+                        edtDoubleSeatesStatus.setText(response.body().get(1).get("Condition").getAsString());
+                        edtDoubleSeated.setText(response.body().get(1).get("TotalCnt").getAsString());
+
+                    }
+  if (response.body().get(2).get("TotalCnt").getAsString().equals("0")){
+                        constraintLayout49.setVisibility(View.GONE);
+                        edtTrippelSeated.setText(response.body().get(2).get("TotalCnt").getAsString());
+
+                    }else {
+                        edtTripleSeatesStatus.setText(response.body().get(2).get("Condition").getAsString());
+                        edtTrippelSeated.setText(response.body().get(2).get("TotalCnt").getAsString());
+
+                    }
+
+
+
 
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FurnitureDetails.this,StaffPhotoPathList);

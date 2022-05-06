@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Open Gym"
+            app:title="Principal Room"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Open Gym"
+        android:text="Principal Room"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -178,9 +178,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-
-            <Spinner
-                android:id="@+id/spinnerGymAvailabelty"
+<EditText
+            android:textColor="@color/textColor1"
+            android:textAlignment="center"
+            android:background="@drawable/cardbg"
+                android:id="@+id/edtPrincipalRoomAvailabelty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
@@ -190,7 +192,7 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout29"
+        android:id="@+id/constraintLayoutAC"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -230,75 +232,33 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <Spinner
-                    android:id="@+id/gymWorkingStatus"
+                <EditText
+                    android:textColor="@color/textColor1"
+                    android:textAlignment="center"
+                    android:background="@drawable/cardbg"
+                    android:id="@+id/edtRoomWorkingStatus"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="30dp"
                     android:layout_margin="4dp"
                     android:layout_weight="1" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout13"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-
-
-                android:text="Area in sq. mtr."
-                android:textColor="@color/textColor1"
-                android:textSize="15dp" />
-
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:foreground="@drawable/cardbg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-
-                <EditText
-                    android:id="@+id/edtGymArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:maxLength="5"
-                    android:text="0"
-
-                    android:maxLines="1" />
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout5"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:gravity="center_vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
 
             <TextView
+                android:id="@+id/uploadPrincipal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -309,16 +269,17 @@
 
 
             <ImageView
-                android:id="@+id/gymImageUploadBtn"
+                android:id="@+id/principalImageUploadBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:padding="2dp"
                 android:src="@drawable/uplodimg" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewGym"
+            android:id="@+id/recyclerViewprincipalOnSub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -330,18 +291,19 @@
 
 
     <Button
-        android:id="@+id/GymsubmitLabBtn"
+        android:id="@+id/principasubmitLabBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
         android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout29" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPR" />
 </androidx.constraintlayout.widget.ConstraintLayout>

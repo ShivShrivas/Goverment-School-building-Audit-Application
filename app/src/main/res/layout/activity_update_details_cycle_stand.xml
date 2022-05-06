@@ -236,6 +236,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="35dp"
                     android:background="@drawable/cardbg"
+                    android:text="0"
+
                     android:inputType="number"
                     android:maxLength="6"
                     android:textAlignment="center"

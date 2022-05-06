@@ -299,7 +299,20 @@ public  interface ApiService {
     @POST("PhysicalParam/ViewFurnitureDetails")
     Call<List<JsonObject>> checkFurniture(@Body JsonObject object);
 
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewPrincipalRoomDetails")
+    Call<List<JsonObject>> checkPrincipal(@Body JsonObject object);
+
+  @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SPrincipalRoomDetails")
+    Call<List<JsonObject>> uploadPrincipal(@Body JsonObject object);
 
 
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SArtCraftRoomDetails")
+    Call<List<JsonObject>> uploadArtAndCraft(@Body JsonObject object);
 
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/ViewArtCraftRoomDetails")
+    Call<List<JsonObject>> checkArtAndCraft(@Body JsonObject paraGetDetails2);
 }

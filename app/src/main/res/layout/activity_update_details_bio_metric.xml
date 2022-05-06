@@ -241,6 +241,8 @@
 
                         <EditText
                             android:id="@+id/edtBioMetricMachineCount"
+                            android:text="0"
+
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:layout_weight="1"

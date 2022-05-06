@@ -148,6 +148,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         arrayListInstallationYear.add("2019");
         arrayListInstallationYear.add("2020");
         arrayListInstallationYear.add("2021");
+        arrayListInstallationYear.add("2022");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerFireFightingInstallationYear.setAdapter(arrayAdapter1);
@@ -334,28 +335,54 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
     private JsonObject paraFireFight(String s, String s1, String fireFighting, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
 
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",s);
-        jsonObject.addProperty("ParamId",s1);
-        jsonObject.addProperty("ParamName",fireFighting);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("InstallationYear",toString4);
-        jsonObject.addProperty("RenewalStatus",toString1);
-        jsonObject.addProperty("RenewalDateStatus",toString2);
-        jsonObject.addProperty("Training",toString3);
-        jsonObject.addProperty("WorkingStatus",toString);
-        jsonObject.addProperty("Availabilty",toString5);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
+        if (toString5.equals("No")){
+            jsonObject.addProperty("Action",s);
+            jsonObject.addProperty("ParamId",s1);
+            jsonObject.addProperty("ParamName",fireFighting);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("InstallationYear","0");
+            jsonObject.addProperty("RenewalStatus","");
+            jsonObject.addProperty("RenewalDateStatus","1800-08-08");
+            jsonObject.addProperty("Training","");
+            jsonObject.addProperty("WorkingStatus","");
+            jsonObject.addProperty("Availabilty",toString5);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
 
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
+            }
+            jsonObject.add("FireFightingPhoto", (JsonElement) jsonArray2);
+        }else{
+            jsonObject.addProperty("Action",s);
+            jsonObject.addProperty("ParamId",s1);
+            jsonObject.addProperty("ParamName",fireFighting);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("InstallationYear",toString4);
+            jsonObject.addProperty("RenewalStatus",toString1);
+            jsonObject.addProperty("RenewalDateStatus",toString2);
+            jsonObject.addProperty("Training",toString3);
+            jsonObject.addProperty("WorkingStatus",toString);
+            jsonObject.addProperty("Availabilty",toString5);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("FireFightingPhoto", (JsonElement) jsonArray2);
         }
-        jsonObject.add("FireFightingPhoto", (JsonElement) jsonArray2);
+
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

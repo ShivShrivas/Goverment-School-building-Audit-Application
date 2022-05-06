@@ -267,6 +267,8 @@
                             android:layout_height="35dp"
                             android:background="@drawable/cardbg"
                             android:inputType="number"
+                            android:text="0"
+
                             android:maxLength="5"
                             android:paddingStart="5dp"
                             android:textColor="@color/textColor1" />
@@ -312,6 +314,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="35dp"
                             android:background="@drawable/cardbg"
+                            android:text="0"
+
                             android:inputType="number"
                             android:maxLength="5"
                             android:paddingStart="5dp"

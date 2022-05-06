@@ -278,6 +278,8 @@
                     android:background="@drawable/cardbg"
                     android:inputType="number"
                     android:maxLength="5"
+                    android:text="0"
+
                     android:textAlignment="center"
                     android:textColor="@color/textColor1" />
             </androidx.cardview.widget.CardView>

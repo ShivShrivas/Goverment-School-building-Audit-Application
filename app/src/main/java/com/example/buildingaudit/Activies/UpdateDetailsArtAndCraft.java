@@ -20,7 +20,6 @@ import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -49,12 +48,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+public class UpdateDetailsArtAndCraft extends AppCompatActivity {
+    TextView userName,schoolAddress,schoolName;
+    ApplicationController applicationController;
+    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
+    Dialog dialog,dialog2;
+    ImageAdapter4 adapter6;
+    Spinner ArtAndCraftRoomWorkingStatus,spinnerArtAndCraftRoomAvailabelty,ArtAndCraftRoomPhysicalStatus;
+    ConstraintLayout constraintLayoutPR;
+    ImageView ArtAndCraftImageUploadBtn;
+    RecyclerView recyclerViewArtAndCraft;
+    Button ArtAndCraftsubmitLabBtn;
 
     @Override
     protected void onStart() {
@@ -71,23 +75,10 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
-    Dialog dialog;
-
-    EditText noOfFans,noOfTubeLight;
-    ConstraintLayout constraintLayout31;
-    Button submitBtnElectricityArrange;
-    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    ImageAdapter4 adapter6;
-    Spinner spinnerElectricStatus,spinnerSource,spinnerInternalElectrification,spinnerElectricityAvailabelty;
-        ImageView electricityArrangementImageUploadBtn;
-        RecyclerView recyclerViewElectricityArrangment;
-    Dialog dialog2;
-    TextView userName,schoolAddress,schoolName;
-    ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_details_electricity_arrangment);
+        setContentView(R.layout.activity_update_details_art_and_craft);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -102,8 +93,8 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        dialog2 = new Dialog(this);
 
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -113,46 +104,59 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
-        spinnerElectricStatus=findViewById(R.id.spinnerElectricStatus);
-        spinnerSource=findViewById(R.id.spinnerSource);
-        submitBtnElectricityArrange=findViewById(R.id.submitBtnElectricityArrange);
-        recyclerViewElectricityArrangment=findViewById(R.id.recyclerViewElectricityArrangment);
-        electricityArrangementImageUploadBtn=findViewById(R.id.electricityArrangementImageUploadBtn);
-        spinnerInternalElectrification=findViewById(R.id.spinnerInternalElectrification);
-        spinnerElectricityAvailabelty=findViewById(R.id.spinnerElectricityAvailabelty);
-        noOfTubeLight=findViewById(R.id.noOfTubeLight);
-        constraintLayout31=findViewById(R.id.constraintLayout31);
-        noOfFans=findViewById(R.id.noOfFans);
+        spinnerArtAndCraftRoomAvailabelty=findViewById(R.id.spinnerArtAndCraftRoomAvailabelty);
+        ArtAndCraftRoomWorkingStatus=findViewById(R.id.ArtAndCraftRoomWorkingStatus);
+        constraintLayoutPR=findViewById(R.id.constraintLayoutPR);
+        ArtAndCraftsubmitLabBtn=findViewById(R.id.ArtAndCraftsubmitLabBtn);
+        ArtAndCraftImageUploadBtn=findViewById(R.id.ArtAndCraftImageUploadBtn);
+        recyclerViewArtAndCraft=findViewById(R.id.recyclerViewArtAndCraft);
+        ArtAndCraftRoomPhysicalStatus=findViewById(R.id.ArtAndCraftRoomPhysicalStatus);
+        ArrayList<String> arrayListAvailbilty=new ArrayList<>();
+        arrayListAvailbilty.add("Yes");
+        arrayListAvailbilty.add("No");
+        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+        arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerArtAndCraftRoomAvailabelty.setAdapter(arrayAdapter);
 
-        ArrayList<String> arrayList1=new ArrayList<>();
-        arrayList1.add("Yes");
-        arrayList1.add("No");
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
-        adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerElectricityAvailabelty.setAdapter(adapter);
-        spinnerInternalElectrification.setAdapter(adapter);
+        ArrayList<String> arrayListSpinner2 = new ArrayList<>();
+        arrayListSpinner2.add("Good Condition");
+        arrayListSpinner2.add("Minor Repairing");
+        arrayListSpinner2.add("Major repairing");
 
-        ArrayList<String> arrayListPowerbackup =new ArrayList<>();
-        arrayListPowerbackup.add("Generator");
-        arrayListPowerbackup.add("Invertor");
-        arrayListPowerbackup.add("None");
-        ArrayAdapter<String> arrayAdapter4=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListPowerbackup);
-        arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerSource.setAdapter(arrayAdapter4);
+        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner2);
+        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
+        ArtAndCraftRoomPhysicalStatus.setAdapter(arrayAdapter2);
+
+
 
         ArrayList<String> arrayListWorkingStatus=new ArrayList<>();
         arrayListWorkingStatus.add("Functional");
         arrayListWorkingStatus.add("Non Functional");
+        ArrayAdapter<String> arrayAdapter3=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
+        arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
+        ArtAndCraftRoomWorkingStatus.setAdapter(arrayAdapter3);
+        spinnerArtAndCraftRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerArtAndCraftRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                    constraintLayoutPR.setVisibility(View.GONE);
+                }else{
+                    constraintLayoutPR.setVisibility(View.VISIBLE);
+                }
+            }
 
-        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
-        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerElectricStatus.setAdapter(arrayAdapter2);
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-        electricityArrangementImageUploadBtn.setOnClickListener(new View.OnClickListener() {
+            }
+        });
+
+
+        ArtAndCraftImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsElectricityArrangment.this)
+                Dexter.withActivity(UpdateDetailsArtAndCraft.this)
                         .withPermission(Manifest.permission.CAMERA)
                         .withListener(new PermissionListener() {
                             @Override
@@ -183,57 +187,39 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                         }).check();
             }
         });
-        recyclerViewElectricityArrangment.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+
+        recyclerViewArtAndCraft.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapter6 = new ImageAdapter4(this, arrayListImages1);
-        recyclerViewElectricityArrangment.setAdapter(adapter6);
+        recyclerViewArtAndCraft.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
-        spinnerElectricityAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
-                    constraintLayout31.setVisibility(View.GONE);
-                }else {
-                    constraintLayout31.setVisibility(View.VISIBLE);
-                }
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
-        submitBtnElectricityArrange.setOnClickListener(new View.OnClickListener() {
+        ArtAndCraftsubmitLabBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                if (!spinnerArtAndCraftRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0){
+                    Toast.makeText(UpdateDetailsArtAndCraft.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
 
-                    }else {
-                        runSpinner();
-
-
-                    }
                 }else {
-                   runSpinner();
-                }
+                    runService();
 
+                }}else {
+                    runService();
+                }
             }
         });
     }
 
-    private void runSpinner() {
+    private void runService() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-
-        Log.d("TAG", "onClick: "+paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-
+        Log.d("TAG", "onClick: "+paraArtAndCraft("1","25","ArtCraftRoomDetails",spinnerArtAndCraftRoomAvailabelty.getSelectedItem().toString(),ArtAndCraftRoomWorkingStatus.getSelectedItem().toString(),ArtAndCraftRoomPhysicalStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadArtAndCraft(paraArtAndCraft("1","25","ArtCraftRoomDetails",spinnerArtAndCraftRoomAvailabelty.getSelectedItem().toString(),ArtAndCraftRoomWorkingStatus.getSelectedItem().toString(),ArtAndCraftRoomPhysicalStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -258,7 +244,6 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                     dialog2.dismiss();
 
                 }
-
             }
 
             @Override
@@ -269,44 +254,19 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         });
     }
 
-    private JsonObject paramElectricityDetails(int s, String s1, String electricityArrangement, String schoolId, String periodID, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String latitude, String longitude, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+    private JsonObject paraArtAndCraft(String s, String s1, String ArtAndCraftRoomDetails, String toString, String toString1,String toString2, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        if (toString5.equals("No")){
-            jsonObject.addProperty("Action",1);
+        if (toString.equals("no")){
+            jsonObject.addProperty("Action",s);
             jsonObject.addProperty("ParamId",s1);
-            jsonObject.addProperty("ParamName",electricityArrangement);
-            jsonObject.addProperty("SchoolId",schoolId);
-            jsonObject.addProperty("PeriodID",periodID);
-            jsonObject.addProperty("InternalElectrification","");
-            jsonObject.addProperty("Source","");
+            jsonObject.addProperty("ParamName",ArtAndCraftRoomDetails);
+            jsonObject.addProperty("SeperateRoomsAvl",toString);
             jsonObject.addProperty("WorkingStatus","");
-            jsonObject.addProperty("NoOfBulbsTLight","0");
-            jsonObject.addProperty("NoOfFans","0");
-            jsonObject.addProperty("Availabilty",toString5);
+            jsonObject.addProperty("PhysicalStatus","");
             jsonObject.addProperty("Lat",latitude);
             jsonObject.addProperty("Long",longitude);
-            jsonObject.addProperty("CreatedBy",usertypeid);
-            jsonObject.addProperty("UserCode",userid);
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
-
-            }
-            jsonObject.add("ElectricityArrPhoto", (JsonElement) jsonArray);
-        }else{
-            jsonObject.addProperty("Action",1);
-            jsonObject.addProperty("ParamId",s1);
-            jsonObject.addProperty("ParamName",electricityArrangement);
             jsonObject.addProperty("SchoolId",schoolId);
             jsonObject.addProperty("PeriodID",periodID);
-            jsonObject.addProperty("InternalElectrification",toString);
-            jsonObject.addProperty("Source",toString1);
-            jsonObject.addProperty("WorkingStatus",toString2);
-            jsonObject.addProperty("NoOfBulbsTLight",toString3);
-            jsonObject.addProperty("NoOfFans",toString4);
-            jsonObject.addProperty("Availabilty",toString5);
-            jsonObject.addProperty("Lat",latitude);
-            jsonObject.addProperty("Long",longitude);
             jsonObject.addProperty("CreatedBy",usertypeid);
             jsonObject.addProperty("UserCode",userid);
             JsonArray jsonArray = new JsonArray();
@@ -314,13 +274,30 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
             }
-            jsonObject.add("ElectricityArrPhoto", (JsonElement) jsonArray);
+            jsonObject.add("ArtCraftPhotos", (JsonElement) jsonArray);
+        }else{
+            jsonObject.addProperty("Action",s);
+            jsonObject.addProperty("ParamId",s1);
+            jsonObject.addProperty("ParamName",ArtAndCraftRoomDetails);
+            jsonObject.addProperty("SeperateRoomsAvl",toString);
+            jsonObject.addProperty("WorkingStatus",toString1);
+            jsonObject.addProperty("PhysicalStatus",toString2);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("ArtCraftPhotos", (JsonElement) jsonArray);
         }
 
         return jsonObject;
     }
-
-
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();

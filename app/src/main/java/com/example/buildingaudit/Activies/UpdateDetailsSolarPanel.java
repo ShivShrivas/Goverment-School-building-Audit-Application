@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.strictmode.SqliteObjectLeakedViolation;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -23,11 +22,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
@@ -45,7 +44,6 @@ import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -83,11 +81,13 @@ Button buttonSolarePanel;
     ConstraintLayout constraintLayout23;
     Dialog dialog;
     ImageAdapter4 adapter1;
+    String sheme;
   RecyclerView recyclerViewTwoTypeSolarpanelAnd;
   ImageView solarPanelImageUploadBtn;
 Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPanelInstallationYear,spinnerSolarPanel,spinnerTypeOfSolarPanel;
     TextView userName,schoolAddress,schoolName;
-
+LinearLayout linearLayout362;
+EditText edtSolarPanelOtherScheme;
     ApplicationController applicationController;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,6 +130,8 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         edtcapacityOfSolarPanel=findViewById(R.id.edtcapacityOfSolarPanel);
         buttonSolarePanel=findViewById(R.id.buttonSolarePanel);
         spinnerSolarPanelScheme=findViewById(R.id.spinnerSolarPanelScheme);
+        linearLayout362=findViewById(R.id.linearLayout362);
+        edtSolarPanelOtherScheme=findViewById(R.id.edtSolarPanelOtherScheme);
         ArrayList<String> arrayListUnderScheme=new ArrayList<>();
         arrayListUnderScheme.add("RMSA");
         arrayListUnderScheme.add("CSr");
@@ -141,7 +143,21 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         ArrayAdapter<String> arrayAdapter2=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListUnderScheme);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSolarPanelScheme.setAdapter(arrayAdapter2);
+        spinnerSolarPanelScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerSolarPanelScheme.getSelectedItem().toString().equals("Others")){
+                    linearLayout362.setVisibility(View.VISIBLE);
+                }else {
+                    linearLayout362.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         ArrayList<String> arrayList1=new ArrayList<>();
         arrayList1.add("Yes");
         arrayList1.add("No");
@@ -159,6 +175,7 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
         arrayListInstallationYear.add("2019");
         arrayListInstallationYear.add("2020");
         arrayListInstallationYear.add("2021");
+        arrayListInstallationYear.add("2022");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSolraPanelInstallationYear.setAdapter(arrayAdapter1);
@@ -259,11 +276,17 @@ Spinner spinnerSolarPanelScheme,spinnerSolarPaneltWorkingStatus,spinnerSolraPane
     }
 
     private void runService() {
+        if (spinnerSolarPanelScheme.getSelectedItem().toString().equals("Others")){
+             sheme=edtSolarPanelOtherScheme.getText().toString();
+        }else {
+            sheme=spinnerSolarPanelScheme.getSelectedItem().toString();
+        }
+        String scheme =spinnerSolarPanelScheme.getSelectedItem().toString();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Log.d("TAG", "onClick: "+paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),
-                spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(),spinnerSolarPanelScheme.getSelectedItem().toString(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadSolarPanelDetails(paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(),spinnerSolarPanelScheme.getSelectedItem().toString(),arrayListImages1));
+                spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(), scheme,arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadSolarPanelDetails(paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(), scheme,arrayListImages1));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

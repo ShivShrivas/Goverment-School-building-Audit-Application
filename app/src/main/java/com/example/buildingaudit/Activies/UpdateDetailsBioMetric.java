@@ -154,6 +154,7 @@ ConstraintLayout constraintLayout35;
         arrayListInstallationYear.add("2019");
         arrayListInstallationYear.add("2020");
         arrayListInstallationYear.add("2021");
+        arrayListInstallationYear.add("2022");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
 
@@ -297,28 +298,54 @@ ConstraintLayout constraintLayout35;
 
     private JsonObject paraBioMetric(String action, String paramId, String bioMetricDetails, String availabilty, String yearOfInstallation, String workingStatis, String biometricForStaff, String biometricForStudent, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid,String noOfMachines, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",bioMetricDetails);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        jsonObject.addProperty("InstallationYear",yearOfInstallation);
-        jsonObject.addProperty("WorkingStatus",workingStatis);
-        jsonObject.addProperty("BiometricUseStaff",biometricForStaff);
-        jsonObject.addProperty("BiometricUseStudent",biometricForStudent);
-        jsonObject.addProperty("Availabilty",availabilty);
-        jsonObject.addProperty("NoOfMachines",noOfMachines);
+        if (availabilty.equals("No")){
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",bioMetricDetails);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("InstallationYear","0");
+            jsonObject.addProperty("WorkingStatus","");
+            jsonObject.addProperty("BiometricUseStaff","");
+            jsonObject.addProperty("BiometricUseStudent","");
+            jsonObject.addProperty("Availabilty",availabilty);
+            jsonObject.addProperty("NoOfMachines","0");
 
-        JsonArray jsonArray = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
+            }
+            jsonObject.add("BiometricPhoto", (JsonElement) jsonArray);
+        }else{
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",bioMetricDetails);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("InstallationYear",yearOfInstallation);
+            jsonObject.addProperty("WorkingStatus",workingStatis);
+            jsonObject.addProperty("BiometricUseStaff",biometricForStaff);
+            jsonObject.addProperty("BiometricUseStudent",biometricForStudent);
+            jsonObject.addProperty("Availabilty",availabilty);
+            jsonObject.addProperty("NoOfMachines",noOfMachines);
+
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("BiometricPhoto", (JsonElement) jsonArray);
         }
-        jsonObject.add("BiometricPhoto", (JsonElement) jsonArray);
+
         return jsonObject;
 
     }

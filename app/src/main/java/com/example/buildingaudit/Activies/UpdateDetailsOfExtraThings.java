@@ -238,6 +238,7 @@ Button submitWIFIBtn;
 
     private JsonObject paraWifi(String s, String s1, String wifiPhoto, String toString, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
+
         jsonObject.addProperty("Action",s);
         jsonObject.addProperty("ParamId",s1);
         jsonObject.addProperty("ParamName",wifiPhoto);

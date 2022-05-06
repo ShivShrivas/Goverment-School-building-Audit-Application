@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildingaudit.Activies.OnSubmitClassRoomPage;
+import com.example.buildingaudit.Activies.OnSubmit_ArtAndCraft;
 import com.example.buildingaudit.Activies.OnSubmit_BioMetricDetails;
 import com.example.buildingaudit.Activies.OnSubmit_BoundryWalls;
 import com.example.buildingaudit.Activies.OnSubmit_BoysToiletDetails;
@@ -29,6 +30,7 @@ import com.example.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails;
 import com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PlaygroundDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails;
+import com.example.buildingaudit.Activies.OnSubmit_PrincipalRoom;
 import com.example.buildingaudit.Activies.OnSubmit_RainHarvesting;
 import com.example.buildingaudit.Activies.OnSubmit_SmartClassDetails;
 import com.example.buildingaudit.Activies.OnSubmit_SolarPanel;
@@ -36,6 +38,7 @@ import com.example.buildingaudit.Activies.OnSubmit_SoundSystemDetails;
 import com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails;
 import com.example.buildingaudit.Activies.OnSubmit_WifiDetails;
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
+import com.example.buildingaudit.Activies.UpdateDetailsArtAndCraft;
 import com.example.buildingaudit.Activies.UpdateDetailsBioMetric;
 import com.example.buildingaudit.Activies.UpdateDetailsBoundryWall;
 import com.example.buildingaudit.Activies.UpdateDetailsBoysToilet;
@@ -51,6 +54,7 @@ import com.example.buildingaudit.Activies.UpdateDetailsGym;
 import com.example.buildingaudit.Activies.UpdateDetailsMultipurposeHall;
 import com.example.buildingaudit.Activies.UpdateDetailsOfExtraThings;
 import com.example.buildingaudit.Activies.UpdateDetailsPlayground;
+import com.example.buildingaudit.Activies.UpdateDetailsPrincipalRoom;
 import com.example.buildingaudit.Activies.UpdateDetailsRainHarvest;
 import com.example.buildingaudit.Activies.UpdateDetailsSmartClass;
 import com.example.buildingaudit.Activies.UpdateDetailsSolarPanel;
@@ -210,11 +214,65 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         break;
 
                         case "23":
-                            checkMultipurposeHall();
+//                            checkMultipurposeHall();
+                            checkArtAndCraft();
+                        break;
 
+                        case "24":
+                            checkPrincipal();
+                        break;
+
+                        case "25":
+                            checkArtAndCraft();
                         break;
 
                 }
+            }
+        });
+    }
+
+    private void checkArtAndCraft() {
+        Call<List<JsonObject>> call=apiService.checkArtAndCraft(paraGetDetails2("2",schoolId, periodId,"25"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsArtAndCraft.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_ArtAndCraft.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkPrincipal() {
+        Call<List<JsonObject>> call=apiService.checkPrincipal(paraGetDetails2("2",schoolId, periodId,"24"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    context.startActivity(new Intent(context, UpdateDetailsPrincipalRoom.class));
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_PrincipalRoom.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
             }
         });
     }

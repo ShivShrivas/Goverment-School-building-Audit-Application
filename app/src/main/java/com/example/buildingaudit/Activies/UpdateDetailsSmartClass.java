@@ -33,6 +33,7 @@ import com.example.buildingaudit.Model.SmartClassesCard;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -87,8 +88,10 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
     TextView userName,schoolAddress,schoolName;
     ConstraintLayout constraintLayout24;
     Button submitSmartClassBtn;
+    EditText edtSmartOtherScheme;
     Dialog dialog;
     Dialog dialog2;
+    String otherSchemeOnCard,otherScheme;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,6 +136,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         smartClassImageUploadBtn=findViewById(R.id.smartClassImageUploadBtn);
         recyclerViewSmartClass=findViewById(R.id.recyclerViewSmartClass);
         constraintLayout24=findViewById(R.id.constraintLayout24);
+        edtSmartOtherScheme=findViewById(R.id.edtSmartOtherScheme);
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
         arrayListInstallationYear.add("2015");
@@ -142,6 +146,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         arrayListInstallationYear.add("2019");
         arrayListInstallationYear.add("2020");
         arrayListInstallationYear.add("2021");
+        arrayListInstallationYear.add("2022");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerInstallationYearSmartClass.setAdapter(arrayAdapter1);
@@ -159,7 +164,21 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerUnderSchemeSmartClass.setAdapter(arrayAdapter2);
 
+        spinnerUnderSchemeSmartClass.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerUnderSchemeSmartClass.getSelectedItem().toString().equals("Others")){
+                    edtSmartOtherScheme.setVisibility(View.VISIBLE);
+                }else{
+                    edtSmartOtherScheme.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         ArrayList<String> arrayListLevellingStatus=new ArrayList<>();
         arrayListLevellingStatus.add("Functional");
@@ -246,24 +265,45 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
             @Override
             public void onClick(View view) {
 dialog2.show();
+                if (spinnerUnderSchemeSmartClass.getSelectedItem().toString().equals("Others")){
+                    otherScheme=edtSmartOtherScheme.getText().toString();
+                }else{
+                otherScheme=spinnerUnderSchemeSmartClass.getSelectedItem().toString();
+                }
                 SmartClassesCard[] array = new SmartClassesCard[layoutForAddRooms.getChildCount()+1];
                     SmartClassesCard smartClassesCard1=new SmartClassesCard(spinnerInstallationYearSmartClass.getSelectedItem().toString(),
-                            companyName1.getText().toString(),spinnerUnderSchemeSmartClass.getSelectedItem().toString(),"1","SmartClass"+1,spinnerWorkingStatusSmartClass.getSelectedItem().toString());
-                    array[0]=smartClassesCard1;
+                            companyName1.getText().toString(),otherScheme,"1","SmartClass"+1,spinnerWorkingStatusSmartClass.getSelectedItem().toString());
+                    if(smartClassAvailabilty.getSelectedItem().toString().equals("No")){
+
+                    }else{
+
+                        array[0]=smartClassesCard1;
+                    }
+
                 for (int i=0; i < layoutForAddRooms.getChildCount(); i++){
                     Spinner spinnerWorkingStatusSmartClassAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.spinnerWorkingStatusSmartClassAdd);
                     Spinner spinnerUnderSchemeSmartClassAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.spinnerUnderSchemeSmartClassAdd);
                     EditText edtSmartClassCompanyNameAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.edtSmartClassCompanyNameAdd);
                     Spinner spinnerInstallationYearSmartClassAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.spinnerInstallationYearSmartClassAdd);
+                    EditText edtOtherSchemeSmartClassAdd=layoutForAddRooms.getChildAt(i).findViewById(R.id.edtSolarPanelOtherSchemeCard);
 //                    spinnerInstallationYearSmartClassAdd.setAdapter(arrayAdapter1);
 //                    spinnerUnderSchemeSmartClassAdd.setAdapter(arrayAdapter2);
 //                    spinnerWorkingStatusSmartClassAdd.setAdapter(arrayAdapter3);
+                    if (spinnerUnderSchemeSmartClassAdd.getSelectedItem().toString().equals("Others")){
+                        otherSchemeOnCard =edtSmartClassCompanyNameAdd.getText().toString();
+                    }else{
+                        otherSchemeOnCard =spinnerUnderSchemeSmartClassAdd.getSelectedItem().toString();
+                    }
 
 
                     SmartClassesCard smartClassesCard=new SmartClassesCard(spinnerInstallationYearSmartClassAdd.getSelectedItem().toString(),
-                            edtSmartClassCompanyNameAdd.getText().toString(),spinnerUnderSchemeSmartClassAdd.getSelectedItem().toString(),String.valueOf(i+2),"SmartClass"+(i+2),spinnerWorkingStatusSmartClassAdd.getSelectedItem().toString());
+                            edtSmartClassCompanyNameAdd.getText().toString(), otherSchemeOnCard,String.valueOf(i+2),"SmartClass"+(i+2),spinnerWorkingStatusSmartClassAdd.getSelectedItem().toString());
+                    if (smartClassAvailabilty.getSelectedItem().toString().equals("No")){
 
-                    array[i+1]=smartClassesCard;
+                    }else{
+
+                        array[i+1]=smartClassesCard;
+                    }
                 }
                 if (!smartClassAvailabilty.getSelectedItem().toString().equals("No")){
 
@@ -292,9 +332,28 @@ dialog2.show();
                 Spinner spinnerInstallationYearSmartClassAdd=addClsss.findViewById(R.id.spinnerInstallationYearSmartClassAdd);
                 Spinner spinnerWorkingStatusSmartClassAdd=addClsss.findViewById(R.id.spinnerWorkingStatusSmartClassAdd);
                 Spinner spinnerUnderSchemeSmartClassAdd=addClsss.findViewById(R.id.spinnerUnderSchemeSmartClassAdd);
-                spinnerInstallationYearSmartClassAdd.setAdapter(arrayAdapter1);
+                EditText edtSmartClassCompanyNameAdd=addClsss.findViewById(R.id.edtSmartClassCompanyNameAdd);
+                EditText edtOtherSchemeSmartClassAdd=addClsss.findViewById(R.id.edtSolarPanelOtherSchemeCard);
+
+                spinnerInstallationYearSmartClassAdd.  setAdapter(arrayAdapter1);
                 spinnerUnderSchemeSmartClassAdd.setAdapter(arrayAdapter2);
                 spinnerWorkingStatusSmartClassAdd.setAdapter(arrayAdapter3);
+                        spinnerUnderSchemeSmartClassAdd.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                if (spinnerUnderSchemeSmartClassAdd.getSelectedItem().toString().equals("Others")){
+                                    edtOtherSchemeSmartClassAdd.setVisibility(View.VISIBLE);
+                                }else{
+                                    edtOtherSchemeSmartClassAdd.setVisibility(View.GONE);
+
+                                }
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
                 deleteRoomBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -354,39 +413,88 @@ dialog2.show();
     }
 
     private JsonObject paraSmartClass(String action, String paramId, String smartClass, SmartClassesCard[] array, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String teacherAvailabilty, String projector, String learningContent, String digitalBoard, String avaiabilty, ArrayList<Bitmap> arrayListImages1) {
-        JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",smartClass);
-        JsonArray jsonArray=new JsonArray();
-        for ( int i=0;i<array.length;i++){
-            JsonObject jsonObject1=new JsonObject();
-            jsonObject1.addProperty("InstallationYear",array[i].getInstallationYear());
-            jsonObject1.addProperty("CompanyName",array[i].getCompanyName());
-            jsonObject1.addProperty("Scheme",array[i].getScheme());
-            jsonObject1.addProperty("Srno",array[i].getSrno());
-            jsonObject1.addProperty("Name",array[i].getName());
-                jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());
-            jsonArray.add(jsonObject1);
-        }
-        jsonObject.add("SmartClassData",(JsonElement)jsonArray);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        jsonObject.addProperty("TeacherAvl",teacherAvailabilty);
-        jsonObject.addProperty("Projector",projector);
-        jsonObject.addProperty("LearningContent",learningContent);
-        jsonObject.addProperty("DigitalBoard",digitalBoard);
-        jsonObject.addProperty("Availablity",avaiabilty);
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
+        JsonObject jsonObject=new JsonObject();
+        if (avaiabilty.equals("No")){
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",smartClass);
+            JsonArray jsonArray=new JsonArray();
+            try{
+                for ( int i=0;i<array.length;i++){
+                    JsonObject jsonObject1=new JsonObject();
+                    jsonObject1.addProperty("InstallationYear",array[i].getInstallationYear());
+                    jsonObject1.addProperty("CompanyName",array[i].getCompanyName());
+                    jsonObject1.addProperty("Scheme",array[i].getScheme());
+                    jsonObject1.addProperty("Srno",array[i].getSrno());
+                    jsonObject1.addProperty("Name",array[i].getName());
+                    jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());
+                    jsonArray.add(jsonObject1);
+                }
+            }catch (Exception e){
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InstallationYear","0");
+                jsonObject1.addProperty("CompanyName","");
+                jsonObject1.addProperty("Scheme","");
+                jsonObject1.addProperty("Srno","0");
+                jsonObject1.addProperty("Name","");
+                jsonObject1.addProperty("WorkingStatus","");
+                jsonArray.add(jsonObject1);
+            }
+
+            jsonObject.add("SmartClassData",(JsonElement)jsonArray);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("TeacherAvl","");
+            jsonObject.addProperty("Projector","");
+            jsonObject.addProperty("LearningContent","");
+            jsonObject.addProperty("DigitalBoard","");
+            jsonObject.addProperty("Availablity",avaiabilty);
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("SmartClassPhoto", (JsonElement) jsonArray2);
+        }else{
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",smartClass);
+            JsonArray jsonArray=new JsonArray();
+            for ( int i=0;i<array.length;i++){
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InstallationYear",array[i].getInstallationYear());
+                jsonObject1.addProperty("CompanyName",array[i].getCompanyName());
+                jsonObject1.addProperty("Scheme",array[i].getScheme());
+                jsonObject1.addProperty("Srno",array[i].getSrno());
+                jsonObject1.addProperty("Name",array[i].getName());
+                jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());
+                jsonArray.add(jsonObject1);
+            }
+            jsonObject.add("SmartClassData",(JsonElement)jsonArray);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("TeacherAvl",teacherAvailabilty);
+            jsonObject.addProperty("Projector",projector);
+            jsonObject.addProperty("LearningContent",learningContent);
+            jsonObject.addProperty("DigitalBoard",digitalBoard);
+            jsonObject.addProperty("Availablity",avaiabilty);
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("SmartClassPhoto", (JsonElement) jsonArray2);
         }
-        jsonObject.add("SmartClassPhoto", (JsonElement) jsonArray2);
+
         return jsonObject;
 
     }

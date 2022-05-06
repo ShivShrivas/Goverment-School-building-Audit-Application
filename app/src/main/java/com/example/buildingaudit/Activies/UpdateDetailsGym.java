@@ -257,23 +257,44 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
 
     private JsonObject paraGymDetails(String action, String paramId, String opneGym, String availabilty, String workingstatus, String area, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("Availabilty",availabilty);
-        jsonObject.addProperty("WorkingStatus",workingstatus);
-        jsonObject.addProperty("Areainsqmtr",area);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        JsonArray jsonArray = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+        if (availabilty.equals("no")){
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("Availabilty",availabilty);
+            jsonObject.addProperty("WorkingStatus","");
+            jsonObject.addProperty("Areainsqmtr","0");
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
+            }
+            jsonObject.add("OpenGYMPhotos", (JsonElement) jsonArray);
+        }else{
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("Availabilty",availabilty);
+            jsonObject.addProperty("WorkingStatus",workingstatus);
+            jsonObject.addProperty("Areainsqmtr",area);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            JsonArray jsonArray = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("OpenGYMPhotos", (JsonElement) jsonArray);
         }
-        jsonObject.add("OpenGYMPhotos", (JsonElement) jsonArray);
+
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

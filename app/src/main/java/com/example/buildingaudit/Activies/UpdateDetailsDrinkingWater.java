@@ -17,10 +17,12 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,6 +88,8 @@ public class UpdateDetailsDrinkingWater extends AppCompatActivity {
 ApplicationController applicationController;
 ConstraintLayout drinkingwaterLayout;
 Button buttonSubmitDrinkinwaterDetails;
+LinearLayout linearLayout31;
+    Dialog dialog2;
     Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +110,7 @@ Button buttonSubmitDrinkinwaterDetails;
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         applicationController= (ApplicationController) getApplication();
-        Dialog dialog2 = new Dialog(this);
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -134,6 +138,7 @@ Button buttonSubmitDrinkinwaterDetails;
         spinnerSubmersibleAvailabiltyDW=findViewById(R.id.spinnerSubmersibleAvailabiltyDW);
         spinnerHandPumpWorkStatsyDW=findViewById(R.id.spinnerHandPumpWorkStatsyDW);
         spinnerHandPumpAvailabiltyDW=findViewById(R.id.spinnerHandPumpAvailabiltyDW);
+        linearLayout31=findViewById(R.id.linearLayout31);
 
 
 
@@ -174,7 +179,89 @@ Button buttonSubmitDrinkinwaterDetails;
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListUnderScheme);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerROInstallationScheme.setAdapter(arrayAdapter1);
+        spinnerHandPumpAvailabiltyDW.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerHandPumpAvailabiltyDW.getSelectedItem().toString().equals("No")){
+                    spinnerHandPumpWorkStatsyDW.setVisibility(View.GONE);
+                }else{
+                    spinnerHandPumpWorkStatsyDW.setVisibility(View.VISIBLE);}
+            }
 
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        spinnerWaterSupplyAvailabiltyDW.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString().equals("No")){
+                    spinnerWaterSupplyWorkStatsyDW.setVisibility(View.GONE);
+                }else{
+                    spinnerWaterSupplyWorkStatsyDW.setVisibility(View.VISIBLE);}
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerSubmersibleAvailabiltyDW.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString().equals("No")){
+                    spinnerSubmersibleWorkStatsyDW.setVisibility(View.GONE);
+                }else{
+                    spinnerSubmersibleWorkStatsyDW.setVisibility(View.VISIBLE);}
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerOverheadTankAvailabiltyDW.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString().equals("No")){
+                    spinnerOverheadTankWorkStatsyDW.setVisibility(View.GONE);
+                }else{
+                    spinnerOverheadTankWorkStatsyDW.setVisibility(View.VISIBLE);}
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        spinnerROInstallationAvailabiltyDW.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerROInstallationAvailabiltyDW.getSelectedItem().toString().equals("No")){
+                    spinnerROInstallationWokingStatus.setVisibility(View.GONE);
+                    spinnerROInstallationScheme.setVisibility(View.GONE);
+                    linearLayout31.setVisibility(View.GONE);
+                }else{
+                    spinnerROInstallationWokingStatus.setVisibility(View.VISIBLE);
+                    spinnerROInstallationScheme.setVisibility(View.VISIBLE);
+                    linearLayout31.setVisibility(View.VISIBLE);
+
+                }
+            }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         drinkingWaterImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,63 +337,82 @@ Button buttonSubmitDrinkinwaterDetails;
                             })
                             .show();
                 }else {
-                    if (arrayListImages1.size()==0){
+                    int total=0;
+                    try{
+                        total=Integer.parseInt(edtTotalDrinkingwaterTaps.getText().toString().trim());
+                    }catch (Exception e){
+                        total=0;
+                    }
+
+
+                    if (spinnerHandPumpAvailabiltyDW.getSelectedItem().toString().equals("No") && spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString().equals("No") && spinnerOverheadTankAvailabiltyDW.getSelectedItem().equals("No") && spinnerROInstallationAvailabiltyDW.getSelectedItem().toString().equals("No") && spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString().equals("No") && total==0){
+                        Log.d("TAG", "onClick: all no and 0");
+                        runService();
+                    }else{
+                        if (arrayListImages1.size()==0){
                         Toast.makeText(UpdateDetailsDrinkingWater.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
                     }else {
-                    RestClient restClient=new RestClient();
-                    ApiService apiService=restClient.getApiService();
-                    Log.d("TAG", "onClick: "+paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),spinnerROInstallationScheme.getSelectedItem().toString() ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                    Call<List<JsonObject>> call=apiService.uploadDrinkingWater(paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
-                            spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),spinnerROInstallationScheme.getSelectedItem().toString() ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-                    call.enqueue(new Callback<List<JsonObject>>() {
-                        @Override
-                        public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                            TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                            Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                            try {
-                                if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                    textView.setText("You already uploaded details ");
+                        runService();
 
-                                }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                    textView.setText("Your details Submitted successfully ");
-                                }
-                                dialog2.dismiss();
+                    }
+                    }
 
-                                dialog.show();
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        onBackPressed();
-                                        dialog.dismiss();
-                                    }
-                                });
-                            }catch (Exception e){
-                                Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                                dialog2.dismiss();
-
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                            dialog2.dismiss();
-
-                        }
-                    });
-                }
                 }
             }
         });
 
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
+                spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
+                spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
+                spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
+                spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),spinnerROInstallationScheme.getSelectedItem().toString() ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadDrinkingWater(paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
+                spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
+                spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
+                spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
+                spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),spinnerROInstallationScheme.getSelectedItem().toString() ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
+            }
+        });
     }
 
     private JsonObject paraDrinkingWater(String action, String paramId, String drinkingWater, String handPumpAvl, String handPumpWorkingStatus, String submersibleAvl, String submersibleWorkingStatus, String nnPalikaWaterSupplyAvl, String nnPalikaWaterSupplyWorkingStatus, String overHeadTankAvl, String overHeadTankWorkingStatus, String roInsAvl, String roInsWorkingStatus, String noOfTaps, String workingTaps, String nonWorkingTaps, String roInsScheme, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
@@ -314,38 +420,72 @@ Button buttonSubmitDrinkinwaterDetails;
         jsonObject.addProperty("Action",action);
         jsonObject.addProperty("ParamId",paramId);
         jsonObject.addProperty("ParamName",drinkingWater);
-        jsonObject.addProperty("HandPumpAvl",handPumpAvl);
+        if (handPumpAvl.equals("No")){
+            jsonObject.addProperty("HandPumpAvl",handPumpAvl);
+
+            jsonObject.addProperty("HandPumpWorkingStatus","");
+        }else{
+            jsonObject.addProperty("HandPumpAvl",handPumpAvl);
 
             jsonObject.addProperty("HandPumpWorkingStatus",handPumpWorkingStatus);
+        }
 
 
-        jsonObject.addProperty("SubmersibleAvl",submersibleAvl);
+if (submersibleAvl.equals("No")){
+    jsonObject.addProperty("SubmersibleAvl",submersibleAvl);
 
 
-            jsonObject.addProperty("SubmersibleWorkingStatus",submersibleWorkingStatus);
+    jsonObject.addProperty("SubmersibleWorkingStatus","");
+}else{
+    jsonObject.addProperty("SubmersibleAvl",submersibleAvl);
 
 
-        jsonObject.addProperty("NNPalikaWaterSupplyAvl",nnPalikaWaterSupplyAvl);
-
-            jsonObject.addProperty("NNPalikaWaterSupplyWorkingStatus",nnPalikaWaterSupplyWorkingStatus);
-
-
-        jsonObject.addProperty("OverHeadTankAvl",overHeadTankAvl);
+    jsonObject.addProperty("SubmersibleWorkingStatus",submersibleWorkingStatus);
+}
 
 
-            jsonObject.addProperty("OverHeadTankWorkingStatus",overHeadTankWorkingStatus);
+if (nnPalikaWaterSupplyAvl.equals("No")){
+    jsonObject.addProperty("NNPalikaWaterSupplyAvl",nnPalikaWaterSupplyAvl);
+
+    jsonObject.addProperty("NNPalikaWaterSupplyWorkingStatus","");
 
 
-        jsonObject.addProperty("ROInsAvl",roInsAvl);
+}else{
+    jsonObject.addProperty("NNPalikaWaterSupplyAvl",nnPalikaWaterSupplyAvl);
+
+    jsonObject.addProperty("NNPalikaWaterSupplyWorkingStatus",nnPalikaWaterSupplyWorkingStatus);
+
+}
+      if (overHeadTankAvl.equals("No")){
+          jsonObject.addProperty("OverHeadTankAvl",overHeadTankAvl);
 
 
-            jsonObject.addProperty("ROInsWorkingStatus",roInsWorkingStatus);
+          jsonObject.addProperty("OverHeadTankWorkingStatus","");
+      }else{
+          jsonObject.addProperty("OverHeadTankAvl",overHeadTankAvl);
+
+
+          jsonObject.addProperty("OverHeadTankWorkingStatus",overHeadTankWorkingStatus);
+      }
+
+
+if (roInsAvl.equals("No")){
+    jsonObject.addProperty("ROInsAvl",roInsAvl);
+    jsonObject.addProperty("ROInsWorkingStatus","");
+    jsonObject.addProperty("ROInsScheme","");
+
+
+}else {
+    jsonObject.addProperty("ROInsAvl",roInsAvl);
+    jsonObject.addProperty("ROInsWorkingStatus",roInsWorkingStatus);
+    jsonObject.addProperty("ROInsScheme",roInsScheme);
+
+}
 
 
         jsonObject.addProperty("NoOfTaps",noOfTaps);
         jsonObject.addProperty("WorkingTaps",workingTaps);
         jsonObject.addProperty("NonWorkingTaps",nonWorkingTaps);
-        jsonObject.addProperty("ROInsScheme",roInsScheme);
 
         jsonObject.addProperty("Lat",latitude);
         jsonObject.addProperty("Long",longitude);

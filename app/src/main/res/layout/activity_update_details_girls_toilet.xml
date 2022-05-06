@@ -230,6 +230,8 @@
                                 android:background="@drawable/cardbg"
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
+                                android:text="0"
+
                                 android:inputType="number"
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
@@ -272,6 +274,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/GedtWithoutFlushClean"/>
@@ -312,6 +316,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/GedtwithflushTotal"/>
@@ -437,6 +443,8 @@
                                 android:textAlignment="center"
                                 android:inputType="number"
                                 android:maxLength="3"
+                                android:text="0"
+
 
                                 android:layout_width="match_parent"
                                 android:id="@+id/GedtCSWNfriendlyB"/>
@@ -478,6 +486,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/GedtCSWNwithoutfriendlyB"/>
@@ -520,6 +530,8 @@
                                 android:textAlignment="center"
                                 android:inputType="number"
                                 android:maxLength="3"
+                                android:text="0"
+
                                 android:layout_width="match_parent"
                                 android:id="@+id/GedtCSWNfriendlyTotalB"/>
                         </androidx.cardview.widget.CardView>
@@ -602,6 +614,8 @@
                                 android:textAlignment="center"
                                 android:inputType="number"
                                 android:maxLength="3"
+                                android:text="0"
+
                                 android:layout_width="match_parent"
                                 android:id="@+id/GedtUrinalWithFlushB"/>
 
@@ -641,6 +655,8 @@
                                 android:background="@drawable/cardbg"
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
+                                android:text="0"
+
                                 android:inputType="number"
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
@@ -684,6 +700,8 @@
                                 android:textAlignment="center"
                                 android:inputType="number"
                                 android:maxLength="3"
+                                android:text="0"
+
                                 android:layout_width="match_parent"
                                 android:id="@+id/GedtUrinalWithFlushTotalB"/>
                         </androidx.cardview.widget.CardView>

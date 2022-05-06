@@ -230,6 +230,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtWithFlushClean"
@@ -271,6 +273,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtWithoutFlushClean"/>
@@ -311,6 +315,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtwithflushTotal"/>
@@ -436,6 +442,7 @@
                                 android:textAlignment="center"
                                 android:inputType="number"
                                 android:maxLength="3"
+                                android:text="0"
 
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtCSWNfriendlyB"/>
@@ -477,6 +484,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtCSWNwithoutfriendlyB"/>
@@ -518,6 +527,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtCSWNfriendlyTotalB"/>
@@ -601,6 +612,8 @@
                                 android:textAlignment="center"
                                 android:inputType="number"
                                 android:maxLength="3"
+                                android:text="0"
+
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtUrinalWithFlushB"/>
 
@@ -641,6 +654,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtUrinalWithoutFlushB"/>
@@ -682,6 +697,8 @@
                                 android:textColor="@color/textColor1"
                                 android:textAlignment="center"
                                 android:inputType="number"
+                                android:text="0"
+
                                 android:maxLength="3"
                                 android:layout_width="match_parent"
                                 android:id="@+id/edtUrinalWithFlushTotalB"/>

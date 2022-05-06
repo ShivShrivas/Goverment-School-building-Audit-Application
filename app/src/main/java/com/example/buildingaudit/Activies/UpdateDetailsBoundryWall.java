@@ -304,30 +304,56 @@ Dialog dialog;
 
     private JsonObject paraBoundry(String s, String s1, String boundaryWallPhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6, ArrayList<Bitmap> arrayListImages2) {
         JsonObject jsonObject=new JsonObject();
+        if (toString.equals("No")){
+            jsonObject.addProperty("Action",s);
+            jsonObject.addProperty("ParamId",s1);
+            jsonObject.addProperty("ParamName",boundaryWallPhoto);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("Availabilty",toString);
+            jsonObject.addProperty("SchoolArea","0");
+            jsonObject.addProperty("BoundaryWallLength","0");
+            jsonObject.addProperty("BoundaryWallType","");
+            jsonObject.addProperty("WhiteWashStatus","");
+            jsonObject.addProperty("Condition","");
+            jsonObject.addProperty("Scheme","");
 
-        jsonObject.addProperty("Action",s);
-        jsonObject.addProperty("ParamId",s1);
-        jsonObject.addProperty("ParamName",boundaryWallPhoto);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        jsonObject.addProperty("Availabilty",toString);
-        jsonObject.addProperty("SchoolArea",toString1);
-        jsonObject.addProperty("BoundaryWallLength",toString2);
-        jsonObject.addProperty("BoundaryWallType",toString3);
-        jsonObject.addProperty("WhiteWashStatus",toString4);
-        jsonObject.addProperty("Condition",toString5);
-        jsonObject.addProperty("Scheme",toString6);
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages2.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
 
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages2.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
+            }
+            jsonObject.add("BoundaryWallPhoto", (JsonElement) jsonArray2);
+        }else{
+            jsonObject.addProperty("Action",s);
+            jsonObject.addProperty("ParamId",s1);
+            jsonObject.addProperty("ParamName",boundaryWallPhoto);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("Availabilty",toString);
+            jsonObject.addProperty("SchoolArea",toString1);
+            jsonObject.addProperty("BoundaryWallLength",toString2);
+            jsonObject.addProperty("BoundaryWallType",toString3);
+            jsonObject.addProperty("WhiteWashStatus",toString4);
+            jsonObject.addProperty("Condition",toString5);
+            jsonObject.addProperty("Scheme",toString6);
 
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages2.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
+
+            }
+            jsonObject.add("BoundaryWallPhoto", (JsonElement) jsonArray2);
         }
-        jsonObject.add("BoundaryWallPhoto", (JsonElement) jsonArray2);
+
         return jsonObject;
     }
 

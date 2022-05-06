@@ -376,6 +376,8 @@
                             android:layout_height="35dp"
                             android:background="@drawable/cardbg"
                             android:gravity="center_vertical"
+                            android:text="01-01-1790"
+
                             android:inputType="datetime"
 
                             android:paddingStart="4dp"

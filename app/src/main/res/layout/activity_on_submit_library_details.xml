@@ -208,577 +208,584 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout62"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/libraryLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout10">
+                app:layout_constraintTop_toBottomOf="@+id/buttonSubmitLibraryDetails">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Physical Status"
-                    android:textColor="@color/textColor1"
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                     <EditText
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                         android:textColor="@color/textColor1"
-                         android:textAlignment="center"
-                        android:id="@+id/edtPhysicalStatus"
-                        android:layout_width="match_parent"
-
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout11"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout62">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Furniture Availability"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                     <EditText
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                         android:textColor="@color/textColor1"
-                         android:textAlignment="center"
-                        android:id="@+id/edtFurnitureAvailabiltyInLibrary"
-                        android:layout_width="match_parent"
-
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout61"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="Number of Almira"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/numberOfAlmira"
-                        android:layout_width="match_parent"
-                        android:maxLength="3"
-                        android:textColor="@color/textColor1"
-                        android:textAlignment="center"
-                        android:inputType="number"
-                        android:layout_height="30dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/cardbg"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout61">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Number of Books"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtNumberOfBooksLibrary"
-                        android:maxLength="5"
-                        android:inputType="number"
-                        android:textColor="@color/textColor1"
-                        android:textAlignment="center"
-                        android:background="@drawable/cardbg"
-                        android:layout_margin="4dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Working Status"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                     <EditText
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                         android:textColor="@color/textColor1"
-                         android:textAlignment="center"
-                        android:id="@+id/edtWorkingStatus"
-                        android:layout_width="match_parent"
-
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Reading Corner"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                     <EditText
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                         android:textColor="@color/textColor1"
-                         android:textAlignment="center"
-                        android:id="@+id/edtReadingCorner"
-                        android:layout_width="match_parent"
-
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout16"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Does the school subscribe to newspapers/ magazines?"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                     <EditText
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                         android:textColor="@color/textColor1"
-                         android:textAlignment="center"
-                        android:id="@+id/edtNewsPaperAndMzin"
-                        android:layout_width="match_parent"
-
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout17"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout16">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-                    android:text="Grant Under Scheme"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                     <EditText
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-                         android:textColor="@color/textColor1"
-                         android:textAlignment="center"
-                        android:id="@+id/edtGrantUnderScheme"
-                        android:layout_width="match_parent"
-
-                        android:layout_margin="4dp"
-                        android:layout_weight="1" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout18"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Total Library Grant"
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtTotalLibraryGrant"
-                        android:maxLength="9"
-                        android:inputType="number"
-                        android:layout_width="match_parent"
-                        android:textColor="@color/textColor1"
-                        android:textAlignment="center"
-                        android:background="@drawable/cardbg"
-                        android:layout_margin="4dp"
-                        android:layout_height="30dp" />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout19"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Library grant(Rs.)\n In current F.Y."
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtLibraryGrantInFY"
-                        android:maxLength="9"
-                        android:inputType="number"
-                        android:textColor="@color/textColor1"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/cardbg"
-                        />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout56"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout19">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical"
-
-                    android:text="Expenditure(Rs.)\n In current F.Y."
-                    android:textColor="@color/textColor1"
-
-                    android:textSize="15dp" />
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:foreground="@drawable/cardbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-
-                    <EditText
-                        android:id="@+id/edtExpenditure"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:textColor="@color/textColor1"
-                        android:textAlignment="center"
-                        android:layout_margin="4dp"
-                        android:background="@drawable/cardbg"
-                        android:maxLength="7"
-                        android:inputType="number"
-
-                        />
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout5"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginTop="4dp"
-                android:gravity="center_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout56">
-
-                <TextView
+                <LinearLayout
+                    android:id="@+id/linearLayout62"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_weight="1"
-                    android:text="Uploaded Images"
-                    android:textColor="?attr/colorPrimary"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                    android:textSize="15dp" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Physical Status"
+                        android:textColor="@color/textColor1"
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
 
 
-                <ImageView
-                    android:id="@+id/typeFourImageUploadBtn"
+                        <EditText
+                            android:id="@+id/edtPhysicalStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout11"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:visibility="invisible"
-                    android:padding="2dp"
-                    android:src="@drawable/uplodimg" />
-            </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout62">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerViewTwoTypeFourOnSubmit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Furniture Availability"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtFurnitureAvailabiltyInLibrary"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout61"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout11">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Number of Almira"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/numberOfAlmira"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout12"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout61">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Number of Books"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtNumberOfBooksLibrary"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:maxLength="5"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Working Status"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtWorkingStatus"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout14">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Reading Corner"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtReadingCorner"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout16"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout15">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Does the school subscribe to newspapers/ magazines?"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtNewsPaperAndMzin"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout17"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout16">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="Grant Under Scheme"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtGrantUnderScheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout18"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Total Library Grant"
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtTotalLibraryGrant"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:maxLength="9"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Library grant(Rs.)\n In current F.Y."
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtLibraryGrantInFY"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:maxLength="9"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1" />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout56"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout19">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+
+                        android:text="Expenditure(Rs.)\n In current F.Y."
+                        android:textColor="@color/textColor1"
+
+                        android:textSize="15dp" />
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtExpenditure"
+                            android:layout_width="match_parent"
+                            android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
+                            android:inputType="number"
+                            android:maxLength="7"
+                            android:textAlignment="center"
+                            android:textColor="@color/textColor1"
+
+                            />
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linearLayout5"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center_vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout56">
+
+                    <TextView
+                        android:id="@+id/uploadLibrary"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:text="Uploaded Images"
+                        android:textColor="?attr/colorPrimary"
+
+                        android:textSize="15dp" />
+
+
+                    <ImageView
+                        android:id="@+id/typeFourImageUploadBtn"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:padding="2dp"
+                        android:src="@drawable/uplodimg"
+                        android:visibility="invisible" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewTwoTypeFourOnSubmit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <Button
                 android:id="@+id/buttonSubmitLibraryDetails"

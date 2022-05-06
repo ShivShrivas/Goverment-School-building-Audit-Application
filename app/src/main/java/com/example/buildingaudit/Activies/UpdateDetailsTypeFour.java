@@ -77,6 +77,7 @@ public class UpdateDetailsTypeFour extends AppCompatActivity {
     ImageAdapter4 adapter;
     ApplicationController applicationController;
 Dialog dialog;
+    Dialog dialog2;
     Spinner spinnerFurnitureAvailabiltyInLibrary,spinnerPhysicalStatus,spinnerNewsPaperAndMzin,spinnerGrantUnderScheme,spinnerRoomAvailabelty,spinnerWorkingStatus,spinnerReadingCorner;
 RecyclerView recyclerViewTwoTypeFour;
     TextView userName,schoolAddress,schoolName;
@@ -101,7 +102,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -237,60 +238,69 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No") && arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                    if ( arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
 
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
-                        ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
-                        spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-//                Call<List<JsonObject>> call=apiService.uploadLibraryDetails(paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
-//                ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
-//                        spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-//
-//                call.enqueue(new Callback<List<JsonObject>>() {
-//                    @Override
-//                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-//                        Log.d("TAG", "onResponse: "+response.body());
-//                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-//                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-//                        try {
-//                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-//                                textView.setText("You already uploaded details ");
-//
-//                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-//                                textView.setText("Your details Submitted successfully ");
-//                            }
-//                            dialog2.dismiss();
-//
-//                            dialog.show();
-//                            button.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    onBackPressed();
-//                                    dialog.dismiss();
-//                                }
-//                            });
-//                        }catch (Exception e){
-//                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-//                            dialog2.dismiss();
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-//                        dialog2.dismiss();
-//
-//                    }
-//                });
-            }
+                    }else {
+                        runService();
+                    }
+                }else{
+                    runService();
+                }
+
             }
         });
 
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
+                ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
+                spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadLibraryDetails(paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
+                ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
+                spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
+            }
+        });
     }
 
     private JsonObject paraLibraryDetails(String action, String paramId, String libraryDetails, String availabilty, String physicalStatus, String furnitureAvl, String noOfAlmirah, String noOfBooks, String workingStatus, String readingCorner, String subscribeNewsMagazines, String grantScheme, String totalLibGrant, String librarygrantRsCFY, String expenditureRsCFY, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
@@ -302,15 +312,15 @@ if (availabilty.equals("No")){
     jsonObject.addProperty("Availabilty",availabilty);
     jsonObject.addProperty("PhysicalStatus", "");
     jsonObject.addProperty("FurnitureAvl","");
-    jsonObject.addProperty("NoOfAlmirah","");
-    jsonObject.addProperty("NoOfBooks","");
+    jsonObject.addProperty("NoOfAlmirah","0");
+    jsonObject.addProperty("NoOfBooks","0");
     jsonObject.addProperty("WorkingStatus", "");
     jsonObject.addProperty("ReadingCorner","");
     jsonObject.addProperty("SubscribeNewsMagazines","");
     jsonObject.addProperty("GrantScheme","");
-    jsonObject.addProperty("TotalLibGrant","");
-    jsonObject.addProperty("LibrarygrantRsCFY","");
-    jsonObject.addProperty("ExpenditureRsCFY","");
+    jsonObject.addProperty("TotalLibGrant","0");
+    jsonObject.addProperty("LibrarygrantRsCFY","0");
+    jsonObject.addProperty("ExpenditureRsCFY","0");
     jsonObject.addProperty("Lat",latitude);
     jsonObject.addProperty("Long",longitude);
     jsonObject.addProperty("SchoolId",schoolId);

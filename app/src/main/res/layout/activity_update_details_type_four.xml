@@ -601,6 +601,7 @@
                             android:id="@+id/edtTotalLibraryGrant"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:text="0"
                             android:inputType="number"
                             android:maxLength="7" />
                     </androidx.cardview.widget.CardView>
@@ -647,6 +648,7 @@
                             android:layout_height="match_parent"
                             android:inputType="number"
                             android:maxLength="7"
+                            android:text="0"
 
                             />
                     </androidx.cardview.widget.CardView>
@@ -693,6 +695,7 @@
                             android:layout_height="match_parent"
                             android:inputType="number"
                             android:maxLength="7"
+                            android:text="0"
 
                             />
                     </androidx.cardview.widget.CardView>

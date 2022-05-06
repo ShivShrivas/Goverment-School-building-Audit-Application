@@ -148,6 +148,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         arrayListInstallationYear.add("2019");
         arrayListInstallationYear.add("2020");
         arrayListInstallationYear.add("2021");
+        arrayListInstallationYear.add("2022");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerCCTVInstallationYear.setAdapter(arrayAdapter1);
@@ -278,27 +279,50 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
     private JsonObject paraCCTV(String s, String s1, String cctv, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String installationYear, String nOOFcctv, String workingStatus, String availabilty, ArrayList<Bitmap> arrayListImages2) {
         JsonObject jsonObject=new JsonObject();
+if (availabilty.equals("No")){
+    jsonObject.addProperty("Action",s);
+    jsonObject.addProperty("ParamId",s1);
+    jsonObject.addProperty("ParamName",cctv);
+    jsonObject.addProperty("SchoolId",schoolId);
+    jsonObject.addProperty("PeriodID",periodID);
+    jsonObject.addProperty("InstallationYear","0");
+    jsonObject.addProperty("NoOfCCTV","0");
+    jsonObject.addProperty("WorkingStatus","");
+    jsonObject.addProperty("Availabilty",availabilty);
+    jsonObject.addProperty("Lat",latitude);
+    jsonObject.addProperty("Long",longitude);
+    jsonObject.addProperty("CreatedBy",usertypeid);
+    jsonObject.addProperty("UserCode",userid);
 
-        jsonObject.addProperty("Action",s);
-        jsonObject.addProperty("ParamId",s1);
-        jsonObject.addProperty("ParamName",cctv);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("InstallationYear",installationYear);
-        jsonObject.addProperty("NoOfCCTV",nOOFcctv);
-        jsonObject.addProperty("WorkingStatus",workingStatus);
-        jsonObject.addProperty("Availabilty",availabilty);
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
+    JsonArray jsonArray2 = new JsonArray();
+    for (int i = 0; i < arrayListImages2.size(); i++) {
+        jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
 
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages2.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
+    }
+    jsonObject.add("CctvPhoto", (JsonElement) jsonArray2);
+}else{
+    jsonObject.addProperty("Action",s);
+    jsonObject.addProperty("ParamId",s1);
+    jsonObject.addProperty("ParamName",cctv);
+    jsonObject.addProperty("SchoolId",schoolId);
+    jsonObject.addProperty("PeriodID",periodID);
+    jsonObject.addProperty("InstallationYear",installationYear);
+    jsonObject.addProperty("NoOfCCTV",nOOFcctv);
+    jsonObject.addProperty("WorkingStatus",workingStatus);
+    jsonObject.addProperty("Availabilty",availabilty);
+    jsonObject.addProperty("Lat",latitude);
+    jsonObject.addProperty("Long",longitude);
+    jsonObject.addProperty("CreatedBy",usertypeid);
+    jsonObject.addProperty("UserCode",userid);
 
-        }
-        jsonObject.add("CctvPhoto", (JsonElement) jsonArray2);
+    JsonArray jsonArray2 = new JsonArray();
+    for (int i = 0; i < arrayListImages2.size(); i++) {
+        jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
+
+    }
+    jsonObject.add("CctvPhoto", (JsonElement) jsonArray2);
+}
+
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

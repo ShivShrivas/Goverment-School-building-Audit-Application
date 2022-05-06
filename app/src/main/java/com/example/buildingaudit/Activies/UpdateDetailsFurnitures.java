@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -81,8 +82,10 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
     RecyclerView recyclerViewFurnitures;
     Button submitBtnFurniture;
     EditText edtTrippelSeated,edtDoubleSeated,edtSingleSeated;
+    Dialog dialog2;
     TextView edtTotalFurnirtureStrenght;
     TextView userName,schoolAddress,schoolName;
+    LinearLayout constraintLayout9;
     Dialog dialog;
     ApplicationController applicationController;
     @Override
@@ -103,7 +106,7 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -125,6 +128,7 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         spinnerTripleSeatesStatus=findViewById(R.id.spinnerTripleSeatesStatus);
         edtFurnitureRequired=findViewById(R.id.edtFurnitureRequired);
         submitBtnFurniture=findViewById(R.id.submitBtnFurniture);
+        constraintLayout9=findViewById(R.id.constraintLayout9);
 
         ArrayList<String> arrayListSpinner2 = new ArrayList<>();
         arrayListSpinner2.add("Good Condition");
@@ -206,6 +210,26 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
                 }
 
                 edtTotalFurnirtureStrenght.setText(String.valueOf(singleSeated+(tripleSeated*3)+(doubleSeated*2)));
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        edtSingleSeated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (edtSingleSeated.getText().toString().equals("0")){
+                    constraintLayout9.setVisibility(View.GONE);
+                }else {
+                    constraintLayout9.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
             }
 
@@ -321,53 +345,63 @@ dialog2.show();
                 arrayList.add(furnitureDetailsTriple);
 
                 Log.d("TAG", "onClick: "+   arrayList.get(1).getFurnitureType());
-                if (arrayListImages1.size()==0){
-                    dialog2.dismiss();
-
-                    Toast.makeText(UpdateDetailsFurnitures.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraFurniture("1","18","FurniturePhoto", applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayList,edtTotalFurnirtureStrenght.getText().toString(),edtFurnitureRequired.getText().toString(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadFurniture(paraFurniture("1","18","FurniturePhoto", applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayList,edtTotalFurnirtureStrenght.getText().toString(),edtFurnitureRequired.getText().toString(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        Log.d("TAG", "onResponse: "+response+response.body());
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
-
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                if ( Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0 && Integer.parseInt(edtTotalFurnirtureStrenght.getText().toString().trim())==0 && Integer.parseInt(edtFurnitureRequired.getText().toString().trim())==0 && Integer.parseInt(edtSingleSeated.getText().toString().trim())==0 && Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0){
+                    runService();
+                }else{
+                    if (arrayListImages1.size()==0){
                         dialog2.dismiss();
 
+                        Toast.makeText(UpdateDetailsFurnitures.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                    }else {
+                        runService();
+
                     }
-                });
+                }
+
             }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraFurniture("1","18","FurniturePhoto", applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayList,edtTotalFurnirtureStrenght.getText().toString(),edtFurnitureRequired.getText().toString(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadFurniture(paraFurniture("1","18","FurniturePhoto", applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayList,edtTotalFurnirtureStrenght.getText().toString(),edtFurnitureRequired.getText().toString(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response+response.body());
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
     }
@@ -387,22 +421,38 @@ dialog2.show();
         JsonArray jsonArray=new JsonArray();
             JsonObject jsonObject1=new JsonObject();
             jsonObject1.addProperty("FurnitureType","Single");
-                jsonObject1.addProperty("Condition",spinnersingleSeatesStatus.getSelectedItem().toString());
+        if ( Integer.parseInt(edtSingleSeated.getText().toString().trim())==0){
+            jsonObject1.addProperty("Condition","");
             jsonObject1.addProperty("TotalCnt",edtSingleSeated.getText().toString());
+        }else{
+            jsonObject1.addProperty("Condition",spinnersingleSeatesStatus.getSelectedItem().toString());
+            jsonObject1.addProperty("TotalCnt",edtSingleSeated.getText().toString());
+        }
+
             jsonObject1.addProperty("Srno","1");
 
             JsonObject jsonObject2=new JsonObject();
             jsonObject2.addProperty("FurnitureType","Double");
-
-                jsonObject2.addProperty("Condition",spinnerDoubleSeatesStatus.getSelectedItem().toString());
+        if ( Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0){
+            jsonObject2.addProperty("Condition","");
             jsonObject2.addProperty("TotalCnt",edtDoubleSeated.getText().toString());
+        }else{
+            jsonObject2.addProperty("Condition",spinnerDoubleSeatesStatus.getSelectedItem().toString());
+            jsonObject2.addProperty("TotalCnt",edtDoubleSeated.getText().toString());
+        }
+
             jsonObject2.addProperty("Srno","2");
 
         JsonObject jsonObject3=new JsonObject();
         jsonObject3.addProperty("FurnitureType","Tripple");
+            if ( Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0){
+                jsonObject3.addProperty("Condition","");
+                jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
+            }else{
+                jsonObject3.addProperty("Condition",spinnerTripleSeatesStatus.getSelectedItem().toString());
+                jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
+            }
 
-            jsonObject3.addProperty("Condition",spinnerTripleSeatesStatus.getSelectedItem().toString());
-        jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
         jsonObject3.addProperty("Srno","3");
 
 

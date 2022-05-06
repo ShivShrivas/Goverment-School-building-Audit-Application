@@ -265,27 +265,52 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
 
     private JsonObject paraCycle(String action, String paramId, String paramName, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",paramName);
+        if (toString.equals("No")){
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",paramName);
 
-        jsonObject.addProperty("Lat",latitude);
-        jsonObject.addProperty("Long",longitude);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodID);
-        jsonObject.addProperty("CreatedBy",usertypeid);
-        jsonObject.addProperty("UserCode",userid);
-        jsonObject.addProperty("Availability",toString);
-        jsonObject.addProperty("CycleCapacity",toString1);
-        jsonObject.addProperty("FunctionalStatus",toString2);
-        jsonObject.addProperty("RepairingStatus",toString3);
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("Availability",toString);
+            jsonObject.addProperty("CycleCapacity","0");
+            jsonObject.addProperty("FunctionalStatus","");
+            jsonObject.addProperty("RepairingStatus","");
 
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
+            }
+            jsonObject.add("CycleStandPhoto", (JsonElement) jsonArray2);
+        }else{
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",paramName);
+
+            jsonObject.addProperty("Lat",latitude);
+            jsonObject.addProperty("Long",longitude);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodID);
+            jsonObject.addProperty("CreatedBy",usertypeid);
+            jsonObject.addProperty("UserCode",userid);
+            jsonObject.addProperty("Availability",toString);
+            jsonObject.addProperty("CycleCapacity",toString1);
+            jsonObject.addProperty("FunctionalStatus",toString2);
+            jsonObject.addProperty("RepairingStatus",toString3);
+
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("CycleStandPhoto", (JsonElement) jsonArray2);
         }
-        jsonObject.add("CycleStandPhoto", (JsonElement) jsonArray2);
+
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

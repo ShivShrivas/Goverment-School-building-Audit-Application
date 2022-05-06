@@ -1181,7 +1181,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Geography Lab"
+                            android:text="Social Science Lab"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"

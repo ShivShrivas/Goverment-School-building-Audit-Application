@@ -2,6 +2,7 @@ package com.example.buildingaudit.Activies;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,8 @@ public class OnSubmit_LibraryDetails extends AppCompatActivity {
 EditText  edtLibraryAvailabelty,edtPhysicalStatus,numberOfAlmira,edtExpenditure,edtLibraryGrantInFY,edtTotalLibraryGrant,edtGrantUnderScheme,edtNewsPaperAndMzin,edtReadingCorner,edtWorkingStatus,edtNumberOfBooksLibrary,edtFurnitureAvailabiltyInLibrary;
 RecyclerView recyclerViewTwoTypeFourOnSubmit;
 ApplicationController applicationController;
+ConstraintLayout libraryLayout;
+TextView uploadLibrary;
     TextView userName,schoolAddress,schoolName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +74,8 @@ ApplicationController applicationController;
                 edtNumberOfBooksLibrary=findViewById(R.id.edtNumberOfBooksLibrary);
         edtFurnitureAvailabiltyInLibrary=findViewById(R.id.edtFurnitureAvailabiltyInLibrary);
         recyclerViewTwoTypeFourOnSubmit=findViewById(R.id.recyclerViewTwoTypeFourOnSubmit);
+        libraryLayout=findViewById(R.id.libraryLayout);
+        uploadLibrary=findViewById(R.id.uploadLibrary);
 
 
         disableEditing();
@@ -83,27 +88,41 @@ ApplicationController applicationController;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
+if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
+    libraryLayout.setVisibility(View.GONE);
+    edtLibraryAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+        dialog2.dismiss();
+}else{
+    edtExpenditure.setText(response.body().get(0).get("ExpenditureRsCFY").getAsString());
+    edtLibraryGrantInFY.setText(response.body().get(0).get("LibrarygrantRsCFY").getAsString());
+    edtTotalLibraryGrant.setText(response.body().get(0).get("TotalLibGrant").getAsString());
+    edtGrantUnderScheme.setText(response.body().get(0).get("GrantScheme").getAsString());
+    edtNewsPaperAndMzin.setText(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
+    edtReadingCorner.setText(response.body().get(0).get("ReadingCorner").getAsString());
 
-                edtExpenditure.setText(response.body().get(0).get("ExpenditureRsCFY").getAsString());
-                        edtLibraryGrantInFY.setText(response.body().get(0).get("LibrarygrantRsCFY").getAsString());
-                edtTotalLibraryGrant.setText(response.body().get(0).get("TotalLibGrant").getAsString());
-                        edtGrantUnderScheme.setText(response.body().get(0).get("GrantScheme").getAsString());
-                edtNewsPaperAndMzin.setText(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
-                edtReadingCorner.setText(response.body().get(0).get("ReadingCorner").getAsString());
+
+    edtWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+
+    edtNumberOfBooksLibrary.setText(response.body().get(0).get("NoOfBooks").getAsString());
+    numberOfAlmira.setText(response.body().get(0).get("NoOfAlmirah").getAsString());
+    edtFurnitureAvailabiltyInLibrary.setText(response.body().get(0).get("FurnitureAvl").getAsString());
+    edtPhysicalStatus.setText(response.body().get(0).get("PhysicalStatus").getAsString());
+    edtLibraryAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
+
+    try{
+        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_LibraryDetails.this,StaffPhotoPathList);
+        recyclerViewTwoTypeFourOnSubmit.setAdapter(onlineImageRecViewAdapter);
+    }catch (Exception e){
+        recyclerViewTwoTypeFourOnSubmit.setVisibility(View.GONE);
+        uploadLibrary.setVisibility(View.GONE);
+    }
 
 
-                        edtWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
 
-                        edtNumberOfBooksLibrary.setText(response.body().get(0).get("NoOfBooks").getAsString());
-                numberOfAlmira.setText(response.body().get(0).get("NoOfAlmirah").getAsString());
-                edtFurnitureAvailabiltyInLibrary.setText(response.body().get(0).get("FurnitureAvl").getAsString());
-                edtPhysicalStatus.setText(response.body().get(0).get("PhysicalStatus").getAsString());
-                edtLibraryAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_LibraryDetails.this,StaffPhotoPathList);
-                recyclerViewTwoTypeFourOnSubmit.setAdapter(onlineImageRecViewAdapter);
+    dialog2.dismiss();
+}
 
-                dialog2.dismiss();
 
             }
 

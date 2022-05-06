@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Open Gym"
+            app:title="Art And Craft Room"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Open Gym"
+        android:text="Art And Craft Room"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +180,7 @@
 
 
             <Spinner
-                android:id="@+id/spinnerGymAvailabelty"
+                android:id="@+id/spinnerArtAndCraftRoomAvailabelty"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="4dp"
@@ -190,7 +190,7 @@
     </LinearLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout29"
+        android:id="@+id/constraintLayoutPR"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -231,7 +231,7 @@
 
 
                 <Spinner
-                    android:id="@+id/gymWorkingStatus"
+                    android:id="@+id/ArtAndCraftRoomWorkingStatus"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="4dp"
@@ -241,7 +241,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout13"
+            android:id="@+id/linearLayout121"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -258,8 +258,7 @@
                 android:layout_weight="1"
                 android:gravity="center_vertical"
 
-
-                android:text="Area in sq. mtr."
+                android:text="Physical Status"
                 android:textColor="@color/textColor1"
                 android:textSize="15dp" />
 
@@ -274,18 +273,16 @@
                 app:layout_constraintTop_toTopOf="parent">
 
 
-                <EditText
-                    android:id="@+id/edtGymArea"
+                <Spinner
+                    android:id="@+id/ArtAndCraftRoomPhysicalStatus"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:inputType="number"
-                    android:maxLength="5"
-                    android:text="0"
-
-                    android:maxLines="1" />
+                    android:layout_margin="4dp"
+                    android:layout_weight="1" />
             </androidx.cardview.widget.CardView>
 
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/linearLayout5"
@@ -296,7 +293,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout121">
 
             <TextView
                 android:layout_width="match_parent"
@@ -309,7 +306,7 @@
 
 
             <ImageView
-                android:id="@+id/gymImageUploadBtn"
+                android:id="@+id/ArtAndCraftImageUploadBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -318,7 +315,7 @@
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewGym"
+            android:id="@+id/recyclerViewArtAndCraft"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -330,11 +327,11 @@
 
 
     <Button
-        android:id="@+id/GymsubmitLabBtn"
+        android:id="@+id/ArtAndCraftsubmitLabBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:background="?attr/colorPrimary"
         android:text="Submit"
@@ -343,5 +340,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout29" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPR" />
 </androidx.constraintlayout.widget.ConstraintLayout>

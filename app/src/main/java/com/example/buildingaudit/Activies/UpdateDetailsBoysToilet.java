@@ -77,7 +77,7 @@ public class UpdateDetailsBoysToilet extends AppCompatActivity {
             edtwithflushTotal,edtWithoutFlushClean,edtWithFlushClean;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
     ImageAdapter4 adapter;
-    Dialog dialog;
+    Dialog dialog,dialog2;
     LinearLayout linearLayoutCWSNfriendlyToilet;
 Spinner spinnerCWSNBoysAvailability,spinnerBoysDoors,spinnerBoysDustbin,spinnerBoysIncinerator;
 ImageView boysToiletImageUploadBtn;
@@ -101,7 +101,7 @@ RecyclerView recyclerViewBoysToilet;
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        Dialog dialog2 = new Dialog(this);
+         dialog2 = new Dialog(this);
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -390,55 +390,75 @@ RecyclerView recyclerViewBoysToilet;
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsBoysToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
 
-                }else {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onClick: "+paraBoysToilet("1","16","BoysToiletPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtWithFlushClean.getText().toString(),edtWithoutFlushClean.getText().toString(),edtwithflushTotal.getText().toString(),spinnerCWSNBoysAvailability.getSelectedItem().toString(),edtCSWNfriendlyB.getText().toString(),edtCSWNwithoutfriendlyB.getText().toString(),edtCSWNfriendlyTotalB.getText().toString(),edtUrinalWithFlushB.getText().toString(),edtUrinalWithoutFlushB.getText().toString(),edtUrinalWithFlushTotalB.getText().toString(),spinnerBoysDoors.getSelectedItem().toString(),spinnerBoysDustbin.getSelectedItem().toString(),arrayListImages1));
-                Call<List<JsonObject>> call=apiService.uploadBoysToilet(paraBoysToilet("1","16","BoysToiletPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtWithFlushClean.getText().toString(),edtWithoutFlushClean.getText().toString(),edtwithflushTotal.getText().toString(),spinnerCWSNBoysAvailability.getSelectedItem().toString(),edtCSWNfriendlyB.getText().toString(),edtCSWNwithoutfriendlyB.getText().toString(),edtCSWNfriendlyTotalB.getText().toString(),edtUrinalWithFlushB.getText().toString(),edtUrinalWithoutFlushB.getText().toString(),edtUrinalWithFlushTotalB.getText().toString(),spinnerBoysDoors.getSelectedItem().toString(),spinnerBoysDustbin.getSelectedItem().toString(),arrayListImages1));
-                call.enqueue(new Callback<List<JsonObject>>() {
-                    @Override
-                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                        TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                        Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                        try {
-                            if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                textView.setText("You already uploaded details ");
+                int withflushTotal=0;
+                int UrinalWithFlushTotalB=0;
+                try{
+                    withflushTotal=Integer.parseInt(edtwithflushTotal.getText().toString().trim());
+                    UrinalWithFlushTotalB=Integer.parseInt(edtUrinalWithFlushTotalB.getText().toString().trim());
+                }catch (Exception e){
 
-                            }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                textView.setText("Your details Submitted successfully ");
-                            }
-                            dialog2.dismiss();
-                            dialog.show();
-                            button.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    onBackPressed();
-                                    dialog.dismiss();
-
-
-                                }
-                            });
-                        }catch (Exception e){
-                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                }
+                if ( withflushTotal==0 && UrinalWithFlushTotalB==0 &&  spinnerCWSNBoysAvailability.getSelectedItem().toString().equals("No") && spinnerBoysDoors.getSelectedItem().toString().equals("No") && spinnerBoysDustbin.getSelectedItem().toString().equals("No")  ){
+                    runService();
+                }else{
+                    if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsBoysToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         dialog2.dismiss();
 
+                    }else {
+                        runService();
+
                     }
-                });
+                }
+
 
             }
+        });
+    }
+
+    private void runService() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onClick: "+paraBoysToilet("1","16","BoysToiletPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtWithFlushClean.getText().toString(),edtWithoutFlushClean.getText().toString(),edtwithflushTotal.getText().toString(),spinnerCWSNBoysAvailability.getSelectedItem().toString(),edtCSWNfriendlyB.getText().toString(),edtCSWNwithoutfriendlyB.getText().toString(),edtCSWNfriendlyTotalB.getText().toString(),edtUrinalWithFlushB.getText().toString(),edtUrinalWithoutFlushB.getText().toString(),edtUrinalWithFlushTotalB.getText().toString(),spinnerBoysDoors.getSelectedItem().toString(),spinnerBoysDustbin.getSelectedItem().toString(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadBoysToilet(paraBoysToilet("1","16","BoysToiletPhoto",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),edtWithFlushClean.getText().toString(),edtWithoutFlushClean.getText().toString(),edtwithflushTotal.getText().toString(),spinnerCWSNBoysAvailability.getSelectedItem().toString(),edtCSWNfriendlyB.getText().toString(),edtCSWNwithoutfriendlyB.getText().toString(),edtCSWNfriendlyTotalB.getText().toString(),edtUrinalWithFlushB.getText().toString(),edtUrinalWithoutFlushB.getText().toString(),edtUrinalWithFlushTotalB.getText().toString(),spinnerBoysDoors.getSelectedItem().toString(),spinnerBoysDustbin.getSelectedItem().toString(),arrayListImages1));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try {
+                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+                        textView.setText("You already uploaded details ");
+
+                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+                        textView.setText("Your details Submitted successfully ");
+                    }
+                    dialog2.dismiss();
+                    dialog.show();
+                    button.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialog.dismiss();
+
+
+                        }
+                    });
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                    dialog2.dismiss();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                dialog2.dismiss();
+
             }
         });
+
     }
 
     private JsonObject paraBoysToilet(String s, String s1, String boundaryWallPhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String noOfSeatsExcludingCWSNWithFlush, String noOfSeatsExcludingCWSNWithOutFlush, String totalExcludingCWSN, String availabilityCWSN, String noOfSeatsCWSNWithFlush, String noOfSeatsCWSNWithOutFlush, String totalCWSN, String noOfUrinalsWithFlush, String noOfUrinalsWithOutFlush, String totalUrinals, String door, String dustbin, ArrayList<Bitmap> arrayListImages1) {

@@ -146,6 +146,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         arrayListInstallationYear.add("2019");
         arrayListInstallationYear.add("2020");
         arrayListInstallationYear.add("2021");
+        arrayListInstallationYear.add("2022");
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerInstallationYear.setAdapter(arrayAdapter1);
@@ -173,6 +174,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         arrayListPowerbackup.add("Generator");
         arrayListPowerbackup.add("Invertor");
         arrayListPowerbackup.add("UPS");
+        arrayListPowerbackup.add("None");
         ArrayAdapter<String> arrayAdapter4=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListPowerbackup);
         arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerPowerBackup.setAdapter(arrayAdapter4);
@@ -320,36 +322,70 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
     private JsonObject paraComputerLab(String action,String paramId,String paramName,String lat,String longt,String schoolId,String periodId,String Usertypeid,String getUserid,String InstallationYear,String NoOfComputer, String NoOfWorkingComputer,String GrantUnderScheme,String internet,String PowerBackup, String Furniture,String computerOperator ,String NoOfLab,String PrinterAvailable, String ScannerAvailable,String availabale ,ArrayList<Bitmap> arrayListImages1 ){
 
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("Action",action);
-        jsonObject.addProperty("ParamId",paramId);
-        jsonObject.addProperty("ParamName",paramName);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("PeriodID",periodId);
-        jsonObject.addProperty("InstallationYear",InstallationYear);
-        jsonObject.addProperty("NoOfComputers",NoOfComputer);
-        jsonObject.addProperty("NoOfWorkingComputers",NoOfWorkingComputer);
-        jsonObject.addProperty("Scheme",GrantUnderScheme);
-        jsonObject.addProperty("Internet",internet);
-        jsonObject.addProperty("PowerBackUp",PowerBackup);
-        jsonObject.addProperty("Furnitures",Furniture);
-        jsonObject.addProperty("ComputerOperator",computerOperator);
-        jsonObject.addProperty("NoOfComputerLab",NoOfLab);
-        jsonObject.addProperty("PrinterStatus",PrinterAvailable);
-        jsonObject.addProperty("ScannerAvl",ScannerAvailable);
-        jsonObject.addProperty("Availabilty",availabale);
-        jsonObject.addProperty("Lat",lat);
-        jsonObject.addProperty("Long",longt);
-        jsonObject.addProperty("SchoolId",schoolId);
-        jsonObject.addProperty("CreatedBy",Usertypeid);
-        jsonObject.addProperty("UserCode",getUserid);
+        if (availabale.equals("No")){
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",paramName);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodId);
+            jsonObject.addProperty("InstallationYear","0");
+            jsonObject.addProperty("NoOfComputers","0");
+            jsonObject.addProperty("NoOfWorkingComputers","0");
+            jsonObject.addProperty("Scheme","");
+            jsonObject.addProperty("Internet","");
+            jsonObject.addProperty("PowerBackUp","");
+            jsonObject.addProperty("Furnitures","");
+            jsonObject.addProperty("ComputerOperator","");
+            jsonObject.addProperty("NoOfComputerLab","0");
+            jsonObject.addProperty("PrinterStatus","");
+            jsonObject.addProperty("ScannerAvl","");
+            jsonObject.addProperty("Availabilty",availabale);
+            jsonObject.addProperty("Lat",lat);
+            jsonObject.addProperty("Long",longt);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("CreatedBy",Usertypeid);
+            jsonObject.addProperty("UserCode",getUserid);
 
 
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages1.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
 
+            }
+            jsonObject.add("ComputerLabPhoto", (JsonElement) jsonArray2);
+        }else{
+            jsonObject.addProperty("Action",action);
+            jsonObject.addProperty("ParamId",paramId);
+            jsonObject.addProperty("ParamName",paramName);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("PeriodID",periodId);
+            jsonObject.addProperty("InstallationYear",InstallationYear);
+            jsonObject.addProperty("NoOfComputers",NoOfComputer);
+            jsonObject.addProperty("NoOfWorkingComputers",NoOfWorkingComputer);
+            jsonObject.addProperty("Scheme",GrantUnderScheme);
+            jsonObject.addProperty("Internet",internet);
+            jsonObject.addProperty("PowerBackUp",PowerBackup);
+            jsonObject.addProperty("Furnitures",Furniture);
+            jsonObject.addProperty("ComputerOperator",computerOperator);
+            jsonObject.addProperty("NoOfComputerLab",NoOfLab);
+            jsonObject.addProperty("PrinterStatus",PrinterAvailable);
+            jsonObject.addProperty("ScannerAvl",ScannerAvailable);
+            jsonObject.addProperty("Availabilty",availabale);
+            jsonObject.addProperty("Lat",lat);
+            jsonObject.addProperty("Long",longt);
+            jsonObject.addProperty("SchoolId",schoolId);
+            jsonObject.addProperty("CreatedBy",Usertypeid);
+            jsonObject.addProperty("UserCode",getUserid);
+
+
+            JsonArray jsonArray2 = new JsonArray();
+            for (int i = 0; i < arrayListImages1.size(); i++) {
+                jsonArray2.add(paraGetImageBase64( arrayListImages1.get(i), i));
+
+            }
+            jsonObject.add("ComputerLabPhoto", (JsonElement) jsonArray2);
         }
-        jsonObject.add("ComputerLabPhoto", (JsonElement) jsonArray2);
+
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
