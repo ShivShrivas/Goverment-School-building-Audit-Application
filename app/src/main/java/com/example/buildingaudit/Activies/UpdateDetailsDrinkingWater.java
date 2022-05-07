@@ -32,6 +32,7 @@ import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -78,7 +79,7 @@ public class UpdateDetailsDrinkingWater extends AppCompatActivity {
     ImageView drinkingWaterImageUploadBtn;
     RecyclerView recyclerViewDrinkingWater;
     TextView userName,schoolAddress,schoolName;
-
+EditText edtDrinkingWaterOtherScheme;
     Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
         spinnerROInstallationAvailabiltyDW,spinnerOverheadTankWorkStatsyDW,
         spinnerOverheadTankAvailabiltyDW,spinnerWaterSupplyWorkStatsyDW,
@@ -139,6 +140,7 @@ LinearLayout linearLayout31;
         spinnerHandPumpWorkStatsyDW=findViewById(R.id.spinnerHandPumpWorkStatsyDW);
         spinnerHandPumpAvailabiltyDW=findViewById(R.id.spinnerHandPumpAvailabiltyDW);
         linearLayout31=findViewById(R.id.linearLayout31);
+        edtDrinkingWaterOtherScheme=findViewById(R.id.edtDrinkingWaterOtherScheme);
 
 
 
@@ -248,10 +250,12 @@ LinearLayout linearLayout31;
                     spinnerROInstallationWokingStatus.setVisibility(View.GONE);
                     spinnerROInstallationScheme.setVisibility(View.GONE);
                     linearLayout31.setVisibility(View.GONE);
+                    edtDrinkingWaterOtherScheme.setVisibility(View.GONE);
                 }else{
                     spinnerROInstallationWokingStatus.setVisibility(View.VISIBLE);
                     spinnerROInstallationScheme.setVisibility(View.VISIBLE);
                     linearLayout31.setVisibility(View.VISIBLE);
+                    edtDrinkingWaterOtherScheme.setVisibility(View.VISIBLE);
 
                 }
             }
@@ -302,7 +306,21 @@ LinearLayout linearLayout31;
         adapter6 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewDrinkingWater.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
+        spinnerROInstallationScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerROInstallationScheme.getSelectedItem().toString().equals("Others")){
+                    edtDrinkingWaterOtherScheme.setVisibility(View.VISIBLE);
+                }else{
+                    edtDrinkingWaterOtherScheme.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         buttonSubmitDrinkinwaterDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -366,18 +384,30 @@ LinearLayout linearLayout31;
     }
 
     private void runService() {
+        String sheme;
+        if (spinnerROInstallationScheme.getSelectedItem().toString().equals("Others")){
+            sheme=edtDrinkingWaterOtherScheme.getText().toString();
+        }else {
+            sheme=spinnerROInstallationScheme.getSelectedItem().toString();
+        }
+        String OtherScheme;
+        if(spinnerROInstallationScheme.getSelectedItem().toString().equals("Others")){
+            OtherScheme="Y";
+        }else{
+            OtherScheme="N";
+        }
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Log.d("TAG", "onClick: "+paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
                 spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
                 spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
                 spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
-                spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),spinnerROInstallationScheme.getSelectedItem().toString() ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),sheme,OtherScheme ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         Call<List<JsonObject>> call=apiService.uploadDrinkingWater(paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
                 spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
                 spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
                 spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
-                spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),spinnerROInstallationScheme.getSelectedItem().toString() ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),sheme,OtherScheme,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -415,7 +445,7 @@ LinearLayout linearLayout31;
         });
     }
 
-    private JsonObject paraDrinkingWater(String action, String paramId, String drinkingWater, String handPumpAvl, String handPumpWorkingStatus, String submersibleAvl, String submersibleWorkingStatus, String nnPalikaWaterSupplyAvl, String nnPalikaWaterSupplyWorkingStatus, String overHeadTankAvl, String overHeadTankWorkingStatus, String roInsAvl, String roInsWorkingStatus, String noOfTaps, String workingTaps, String nonWorkingTaps, String roInsScheme, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+    private JsonObject paraDrinkingWater(String action, String paramId, String drinkingWater, String handPumpAvl, String handPumpWorkingStatus, String submersibleAvl, String submersibleWorkingStatus, String nnPalikaWaterSupplyAvl, String nnPalikaWaterSupplyWorkingStatus, String overHeadTankAvl, String overHeadTankWorkingStatus, String roInsAvl, String roInsWorkingStatus, String noOfTaps, String workingTaps, String nonWorkingTaps, String roInsScheme, String otherScheme, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("Action",action);
         jsonObject.addProperty("ParamId",paramId);
@@ -473,12 +503,14 @@ if (roInsAvl.equals("No")){
     jsonObject.addProperty("ROInsAvl",roInsAvl);
     jsonObject.addProperty("ROInsWorkingStatus","");
     jsonObject.addProperty("ROInsScheme","");
+    jsonObject.addProperty("OtherSchemeYN","");
 
 
 }else {
     jsonObject.addProperty("ROInsAvl",roInsAvl);
     jsonObject.addProperty("ROInsWorkingStatus",roInsWorkingStatus);
     jsonObject.addProperty("ROInsScheme",roInsScheme);
+    jsonObject.addProperty("OtherSchemeYN",otherScheme);
 
 }
 

@@ -77,6 +77,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
     ImageView ComputerLabImageUploadBtn;
     RecyclerView recyclerViewComputerLab;
     Dialog dialog2;
+    EditText edtComputerLabOtherScheme;
     TextView userName,schoolAddress,schoolName;
     Button submitComputerLabBtn;
     ConstraintLayout constraintLayout36;
@@ -129,6 +130,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         submitComputerLabBtn=findViewById(R.id.submitComputerLabBtn);
         spinnerComputerOperator=findViewById(R.id.spinnerComputerOperator);
         constraintLayout36=findViewById(R.id.constraintLayout36);
+        edtComputerLabOtherScheme=findViewById(R.id.edtComputerLabOtherScheme);
 
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
@@ -235,6 +237,21 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         adapter = new ImageAdapter4(this, arrayListImages1);
         recyclerViewComputerLab.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+        spinnerGrantUnderScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerGrantUnderScheme.getSelectedItem().toString().equals("Others")){
+                    edtComputerLabOtherScheme.setVisibility(View.VISIBLE);
+                }else{
+                    edtComputerLabOtherScheme.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         spinnerComputeLabAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -277,10 +294,23 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
     }
 
     private void runService() {
+        String sheme;
+        if (spinnerGrantUnderScheme.getSelectedItem().toString().equals("Others")){
+            sheme=edtComputerLabOtherScheme.getText().toString();
+        }else {
+            sheme=spinnerGrantUnderScheme.getSelectedItem().toString();
+        }
+        String OtherScheme;
+        if(spinnerGrantUnderScheme.getSelectedItem().toString().equals("Others")){
+            OtherScheme="Y";
+        }else{
+            OtherScheme="N";
+        }
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onClick: "+paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),spinnerGrantUnderScheme.getSelectedItem().toString(),spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadComputerLab(paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),spinnerGrantUnderScheme.getSelectedItem().toString(),spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
+
+        Log.d("TAG", "onClick: "+paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),sheme,OtherScheme,spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadComputerLab(paraComputerLab("1","19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),sheme,OtherScheme,spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -319,7 +349,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         });
     }
 
-    private JsonObject paraComputerLab(String action,String paramId,String paramName,String lat,String longt,String schoolId,String periodId,String Usertypeid,String getUserid,String InstallationYear,String NoOfComputer, String NoOfWorkingComputer,String GrantUnderScheme,String internet,String PowerBackup, String Furniture,String computerOperator ,String NoOfLab,String PrinterAvailable, String ScannerAvailable,String availabale ,ArrayList<Bitmap> arrayListImages1 ){
+    private JsonObject paraComputerLab(String action,String paramId,String paramName,String lat,String longt,String schoolId,String periodId,String Usertypeid,String getUserid,String InstallationYear,String NoOfComputer, String NoOfWorkingComputer,String GrantUnderScheme,String OtherString,String internet,String PowerBackup, String Furniture,String computerOperator ,String NoOfLab,String PrinterAvailable, String ScannerAvailable,String availabale ,ArrayList<Bitmap> arrayListImages1 ){
 
         JsonObject jsonObject=new JsonObject();
         if (availabale.equals("No")){
@@ -332,6 +362,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             jsonObject.addProperty("NoOfComputers","0");
             jsonObject.addProperty("NoOfWorkingComputers","0");
             jsonObject.addProperty("Scheme","");
+            jsonObject.addProperty("OtherSchemeYN","");
             jsonObject.addProperty("Internet","");
             jsonObject.addProperty("PowerBackUp","");
             jsonObject.addProperty("Furnitures","");
@@ -363,6 +394,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             jsonObject.addProperty("NoOfComputers",NoOfComputer);
             jsonObject.addProperty("NoOfWorkingComputers",NoOfWorkingComputer);
             jsonObject.addProperty("Scheme",GrantUnderScheme);
+            jsonObject.addProperty("OtherSchemeYN",OtherString);
             jsonObject.addProperty("Internet",internet);
             jsonObject.addProperty("PowerBackUp",PowerBackup);
             jsonObject.addProperty("Furnitures",Furniture);

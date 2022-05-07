@@ -271,8 +271,17 @@ dialog2.show();
                 otherScheme=spinnerUnderSchemeSmartClass.getSelectedItem().toString();
                 }
                 SmartClassesCard[] array = new SmartClassesCard[layoutForAddRooms.getChildCount()+1];
+                String OtherSchemeYN;
+                if (spinnerUnderSchemeSmartClass.getSelectedItem().toString().equals("Others")){
+                    OtherSchemeYN="Y";
+                }else{
+                    OtherSchemeYN="N";
+
+                }
                     SmartClassesCard smartClassesCard1=new SmartClassesCard(spinnerInstallationYearSmartClass.getSelectedItem().toString(),
-                            companyName1.getText().toString(),otherScheme,"1","SmartClass"+1,spinnerWorkingStatusSmartClass.getSelectedItem().toString());
+                            companyName1.getText().toString(),otherScheme,OtherSchemeYN,"1","SmartClass"+1,spinnerWorkingStatusSmartClass.getSelectedItem().toString());
+
+
                     if(smartClassAvailabilty.getSelectedItem().toString().equals("No")){
 
                     }else{
@@ -294,10 +303,16 @@ dialog2.show();
                     }else{
                         otherSchemeOnCard =spinnerUnderSchemeSmartClassAdd.getSelectedItem().toString();
                     }
+                    String OtherSchemeYNInAddCard;
+                    if (spinnerUnderSchemeSmartClassAdd.getSelectedItem().toString().equals("Others")){
+                        OtherSchemeYNInAddCard="Y";
+                    }else{
+                        OtherSchemeYNInAddCard="N";
 
+                    }
 
                     SmartClassesCard smartClassesCard=new SmartClassesCard(spinnerInstallationYearSmartClassAdd.getSelectedItem().toString(),
-                            edtSmartClassCompanyNameAdd.getText().toString(), otherSchemeOnCard,String.valueOf(i+2),"SmartClass"+(i+2),spinnerWorkingStatusSmartClassAdd.getSelectedItem().toString());
+                            edtSmartClassCompanyNameAdd.getText().toString(), otherSchemeOnCard,OtherSchemeYNInAddCard,String.valueOf(i+2),"SmartClass"+(i+2),spinnerWorkingStatusSmartClassAdd.getSelectedItem().toString());
                     if (smartClassAvailabilty.getSelectedItem().toString().equals("No")){
 
                     }else{
@@ -426,6 +441,7 @@ dialog2.show();
                     jsonObject1.addProperty("InstallationYear",array[i].getInstallationYear());
                     jsonObject1.addProperty("CompanyName",array[i].getCompanyName());
                     jsonObject1.addProperty("Scheme",array[i].getScheme());
+                    jsonObject1.addProperty("OtherSchemeYN",array[i].getOtherSchemeYN());
                     jsonObject1.addProperty("Srno",array[i].getSrno());
                     jsonObject1.addProperty("Name",array[i].getName());
                     jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());
@@ -436,6 +452,7 @@ dialog2.show();
                 jsonObject1.addProperty("InstallationYear","0");
                 jsonObject1.addProperty("CompanyName","");
                 jsonObject1.addProperty("Scheme","");
+                jsonObject1.addProperty("OtherSchemeYN","");
                 jsonObject1.addProperty("Srno","0");
                 jsonObject1.addProperty("Name","");
                 jsonObject1.addProperty("WorkingStatus","");
@@ -470,6 +487,7 @@ dialog2.show();
                 jsonObject1.addProperty("InstallationYear",array[i].getInstallationYear());
                 jsonObject1.addProperty("CompanyName",array[i].getCompanyName());
                 jsonObject1.addProperty("Scheme",array[i].getScheme());
+                jsonObject1.addProperty("OtherSchemeYN",array[i].getOtherSchemeYN());
                 jsonObject1.addProperty("Srno",array[i].getSrno());
                 jsonObject1.addProperty("Name",array[i].getName());
                 jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());

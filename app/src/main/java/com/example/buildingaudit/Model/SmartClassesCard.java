@@ -2,15 +2,16 @@ package com.example.buildingaudit.Model;
 
 public class SmartClassesCard {
 
-    String InstallationYear,CompanyName,Scheme,Srno,Name,WorkingStatus;
+    String InstallationYear,CompanyName,Scheme,OtherSchemeYN,Srno,Name,WorkingStatus;
 
     public SmartClassesCard() {
     }
 
-    public SmartClassesCard(String installationYear, String companyName, String scheme, String srno, String name, String workingStatus) {
+    public SmartClassesCard(String installationYear, String companyName, String scheme, String otherSchemeYN, String srno, String name, String workingStatus) {
         InstallationYear = installationYear;
         CompanyName = companyName;
         Scheme = scheme;
+        OtherSchemeYN = otherSchemeYN;
         Srno = srno;
         Name = name;
         WorkingStatus = workingStatus;
@@ -40,6 +41,14 @@ public class SmartClassesCard {
         Scheme = scheme;
     }
 
+    public String getOtherSchemeYN() {
+        return OtherSchemeYN;
+    }
+
+    public void setOtherSchemeYN(String otherSchemeYN) {
+        OtherSchemeYN = otherSchemeYN;
+    }
+
     public String getSrno() {
         return Srno;
     }
@@ -63,6 +72,4 @@ public class SmartClassesCard {
     public void setWorkingStatus(String workingStatus) {
         WorkingStatus = workingStatus;
     }
-
-
 }

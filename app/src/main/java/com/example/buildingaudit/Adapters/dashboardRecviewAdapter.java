@@ -214,8 +214,8 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         break;
 
                         case "23":
-//                            checkMultipurposeHall();
-                            checkArtAndCraft();
+                            checkMultipurposeHall();
+
                         break;
 
                         case "24":
@@ -632,7 +632,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 if (response.body().size()==0){
                     context.startActivity(new Intent(context, UpdateDetailsBioMetric.class));
                 }else {
-                    context.startActivity(new Intent(context, OnSubmit_BioMetricDetails.class));
+                    context.startActivity(new Intent(context, UpdateDetailsBioMetric.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 //
 //                    context.startActivity(i);

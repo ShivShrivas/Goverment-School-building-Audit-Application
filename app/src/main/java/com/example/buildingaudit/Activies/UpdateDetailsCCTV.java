@@ -10,6 +10,9 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -42,6 +45,7 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;
@@ -341,11 +345,30 @@ if (availabilty.equals("No")){
     }
 
     public static String BitMapToString(Bitmap bitmap) {
+       Bitmap bitmapNew=BITMAP_RESIZER(bitmap,330,480);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+        bitmapNew.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
         return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
     }
 
+    public static Bitmap BITMAP_RESIZER(Bitmap bitmap,int newWidth,int newHeight) {
+        Bitmap scaledBitmap = Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888);
+
+        float ratioX = newWidth / (float) bitmap.getWidth();
+        float ratioY = newHeight / (float) bitmap.getHeight();
+        float middleX = newWidth / 2.0f;
+        float middleY = newHeight / 2.0f;
+
+        Matrix scaleMatrix = new Matrix();
+        scaleMatrix.setScale(ratioX, ratioY, middleX, middleY);
+
+        Canvas canvas = new Canvas(scaledBitmap);
+        canvas.setMatrix(scaleMatrix);
+        canvas.drawBitmap(bitmap, middleX - bitmap.getWidth() / 2, middleY - bitmap.getHeight() / 2, new Paint(Paint.FILTER_BITMAP_FLAG));
+
+        return scaledBitmap;
+
+    }
 
     private JsonObject paraGetImageBase64( Bitmap bitmap, int i) {
         JsonObject jsonObject = new JsonObject();
@@ -365,7 +388,8 @@ if (availabilty.equals("No")){
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK ) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                Uri uri=data.getData();
+                Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
 
             arrayListImages2.add(bitmap);

@@ -84,7 +84,7 @@ Dialog dialog;
     ImageAdapter3 adapter2;
     ConstraintLayout constraintLayout34;
         RecyclerView recyclerViewTwoTypeBoundarywall;
-
+EditText edtBoundryWallOtherScheme;
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
     @Override
@@ -128,6 +128,7 @@ Dialog dialog;
         bntBoundaryWallUpload=findViewById(R.id.bntBoundaryWallUpload);
         spinnerBoundryScheme=findViewById(R.id.spinnerBoundryScheme);
         constraintLayout34=findViewById(R.id.constraintLayout34);
+        edtBoundryWallOtherScheme=findViewById(R.id.edtBoundryWallOtherScheme);
         ArrayList<String> arrayList1=new ArrayList<>();
         arrayList1.add("Yes");
         arrayList1.add("No");
@@ -215,6 +216,21 @@ Dialog dialog;
         adapter2= new ImageAdapter3(this, arrayListImages2);
         recyclerViewTwoTypeBoundarywall.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
+        spinnerBoundryScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerBoundryScheme.getSelectedItem().toString().equals("Others")){
+                    edtBoundryWallOtherScheme.setVisibility(View.VISIBLE);
+                }else{
+                    edtBoundryWallOtherScheme.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         spinnerBoundaryWallAvail.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -258,10 +274,22 @@ Dialog dialog;
     }
 
     private void runService() {
+        String sheme;
+        if (spinnerBoundryScheme.getSelectedItem().toString().equals("Others")){
+            sheme=edtBoundryWallOtherScheme.getText().toString();
+        }else {
+            sheme=spinnerBoundryScheme.getSelectedItem().toString();
+        }
+        String OtherScheme;
+      if(spinnerBoundryScheme.getSelectedItem().toString().equals("Others")){
+          OtherScheme="Y";
+        }else{
+          OtherScheme="N";
+      }
         RestClient restClient = new RestClient();
         ApiService apiService = restClient.getApiService();
-        Log.d("TAG", "onClick: " + paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), spinnerBoundryScheme.getSelectedItem().toString(), arrayListImages2));
-        Call<List<JsonObject>> call = apiService.uploadBoundryWall(paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), spinnerBoundryScheme.getSelectedItem().toString(), arrayListImages2));
+        Log.d("TAG", "onClick: " + paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), sheme,OtherScheme, arrayListImages2));
+        Call<List<JsonObject>> call = apiService.uploadBoundryWall(paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(),sheme, OtherScheme,arrayListImages2));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -302,7 +330,7 @@ Dialog dialog;
 
     }
 
-    private JsonObject paraBoundry(String s, String s1, String boundaryWallPhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6, ArrayList<Bitmap> arrayListImages2) {
+    private JsonObject paraBoundry(String s, String s1, String boundaryWallPhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6,String toString7, ArrayList<Bitmap> arrayListImages2) {
         JsonObject jsonObject=new JsonObject();
         if (toString.equals("No")){
             jsonObject.addProperty("Action",s);
@@ -321,6 +349,7 @@ Dialog dialog;
             jsonObject.addProperty("WhiteWashStatus","");
             jsonObject.addProperty("Condition","");
             jsonObject.addProperty("Scheme","");
+            jsonObject.addProperty("OtherSchemeYN","");
 
             JsonArray jsonArray2 = new JsonArray();
             for (int i = 0; i < arrayListImages2.size(); i++) {
@@ -345,6 +374,7 @@ Dialog dialog;
             jsonObject.addProperty("WhiteWashStatus",toString4);
             jsonObject.addProperty("Condition",toString5);
             jsonObject.addProperty("Scheme",toString6);
+            jsonObject.addProperty("OtherSchemeYN",toString7);
 
             JsonArray jsonArray2 = new JsonArray();
             for (int i = 0; i < arrayListImages2.size(); i++) {

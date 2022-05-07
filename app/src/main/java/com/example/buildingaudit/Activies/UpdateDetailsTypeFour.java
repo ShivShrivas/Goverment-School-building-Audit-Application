@@ -78,6 +78,7 @@ public class UpdateDetailsTypeFour extends AppCompatActivity {
     ApplicationController applicationController;
 Dialog dialog;
     Dialog dialog2;
+    EditText edtLibraryRoomOtherScheme;
     Spinner spinnerFurnitureAvailabiltyInLibrary,spinnerPhysicalStatus,spinnerNewsPaperAndMzin,spinnerGrantUnderScheme,spinnerRoomAvailabelty,spinnerWorkingStatus,spinnerReadingCorner;
 RecyclerView recyclerViewTwoTypeFour;
     TextView userName,schoolAddress,schoolName;
@@ -128,7 +129,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         spinnerFurnitureAvailabiltyInLibrary=findViewById(R.id.spinnerFurnitureAvailabiltyInLibrary);
         typeFourImageUploadBtn=findViewById(R.id.typeFourImageUploadBtn);
         recyclerViewTwoTypeFour=findViewById(R.id.recyclerViewTwoTypeFour);
-        constraintLayout21=findViewById(R.id.constraintLayout21);
+        edtLibraryRoomOtherScheme=findViewById(R.id.edtLibraryRoomOtherScheme);
 
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
@@ -179,7 +180,21 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         ArrayAdapter<String> arrayAdapter5=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListGrantUnderScheme);
         arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerGrantUnderScheme.setAdapter(arrayAdapter5);
+        spinnerGrantUnderScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerGrantUnderScheme.getSelectedItem().toString().equals("Others")){
+                    edtLibraryRoomOtherScheme.setVisibility(View.VISIBLE);
+                }else{
+                    edtLibraryRoomOtherScheme.setVisibility(View.GONE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -256,14 +271,26 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
     }
 
     private void runService() {
+        String sheme;
+        if (spinnerGrantUnderScheme.getSelectedItem().toString().equals("Others")){
+            sheme=edtLibraryRoomOtherScheme.getText().toString();
+        }else {
+            sheme=spinnerGrantUnderScheme.getSelectedItem().toString();
+        }
+        String OtherScheme;
+        if(spinnerGrantUnderScheme.getSelectedItem().toString().equals("Others")){
+            OtherScheme="Y";
+        }else{
+            OtherScheme="N";
+        }
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Log.d("TAG", "onClick: "+paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
                 ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
-                spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         Call<List<JsonObject>> call=apiService.uploadLibraryDetails(paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
                 ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
-                spinnerGrantUnderScheme.getSelectedItem().toString(),edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
 
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
@@ -303,7 +330,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         });
     }
 
-    private JsonObject paraLibraryDetails(String action, String paramId, String libraryDetails, String availabilty, String physicalStatus, String furnitureAvl, String noOfAlmirah, String noOfBooks, String workingStatus, String readingCorner, String subscribeNewsMagazines, String grantScheme, String totalLibGrant, String librarygrantRsCFY, String expenditureRsCFY, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+    private JsonObject paraLibraryDetails(String action, String paramId, String libraryDetails, String availabilty, String physicalStatus, String furnitureAvl, String noOfAlmirah, String noOfBooks, String workingStatus, String readingCorner, String subscribeNewsMagazines, String grantScheme,String otherScheme, String totalLibGrant, String librarygrantRsCFY, String expenditureRsCFY, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
 if (availabilty.equals("No")){
     jsonObject.addProperty("Action",action);
@@ -318,6 +345,7 @@ if (availabilty.equals("No")){
     jsonObject.addProperty("ReadingCorner","");
     jsonObject.addProperty("SubscribeNewsMagazines","");
     jsonObject.addProperty("GrantScheme","");
+    jsonObject.addProperty("OtherSchemeYN","");
     jsonObject.addProperty("TotalLibGrant","0");
     jsonObject.addProperty("LibrarygrantRsCFY","0");
     jsonObject.addProperty("ExpenditureRsCFY","0");
@@ -341,6 +369,7 @@ if (availabilty.equals("No")){
     jsonObject.addProperty("ReadingCorner",readingCorner);
     jsonObject.addProperty("SubscribeNewsMagazines",subscribeNewsMagazines);
     jsonObject.addProperty("GrantScheme",grantScheme);
+    jsonObject.addProperty("OtherSchemeYN",otherScheme);
     jsonObject.addProperty("TotalLibGrant",totalLibGrant);
     jsonObject.addProperty("LibrarygrantRsCFY",librarygrantRsCFY);
     jsonObject.addProperty("ExpenditureRsCFY",expenditureRsCFY);

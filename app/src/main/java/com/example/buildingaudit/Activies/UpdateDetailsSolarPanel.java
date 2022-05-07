@@ -32,6 +32,7 @@ import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -281,12 +282,12 @@ EditText edtSolarPanelOtherScheme;
         }else {
             sheme=spinnerSolarPanelScheme.getSelectedItem().toString();
         }
-        String scheme =spinnerSolarPanelScheme.getSelectedItem().toString();
+
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Log.d("TAG", "onClick: "+paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),
-                spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(), scheme,arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadSolarPanelDetails(paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(), scheme,arrayListImages1));
+                spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(), sheme,arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadSolarPanelDetails(paramSolarDetails("1","14","SolarPanelPhoto",applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),spinnerSolarPanel.getSelectedItem().toString(),spinnerSolraPanelInstallationYear.getSelectedItem().toString(),spinnerSolarPaneltWorkingStatus.getSelectedItem().toString(),edtcapacityOfSolarPanel.getText().toString(),spinnerTypeOfSolarPanel.getSelectedItem().toString(), sheme,arrayListImages1));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -344,6 +345,13 @@ EditText edtSolarPanelOtherScheme;
             jsonObject.addProperty("Kilowatt","");
             jsonObject.addProperty("SolarPanelType","");
             jsonObject.addProperty("Scheme","");
+            if (spinnerSolarPanelScheme.getSelectedItem().toString().equals("Others")){
+                jsonObject.addProperty("OtherSchemeYN","Y");
+            }else{
+                jsonObject.addProperty("OtherSchemeYN","N");
+            }
+
+
 
         }else{
             jsonObject.addProperty("Action",s);
@@ -361,6 +369,11 @@ EditText edtSolarPanelOtherScheme;
             jsonObject.addProperty("Kilowatt",toString3);
             jsonObject.addProperty("SolarPanelType",toString4);
             jsonObject.addProperty("Scheme",toString5);
+            if (spinnerSolarPanelScheme.getSelectedItem().toString().equals("Others")){
+                jsonObject.addProperty("OtherSchemeYN","Y");
+            }else{
+                jsonObject.addProperty("OtherSchemeYN","N");
+            }
         }
 
         JsonArray jsonArray = new JsonArray();

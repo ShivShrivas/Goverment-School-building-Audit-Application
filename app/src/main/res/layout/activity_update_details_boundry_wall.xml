@@ -369,6 +369,43 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/linearLayout442"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout42">
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <EditText
+                            android:id="@+id/edtBoundryWallOtherScheme"
+                            android:layout_width="match_parent"
+                            android:layout_height="32dp"
+                            android:layout_margin="4dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/cardbg"
+                            android:hint="Enter Other Scheme Name Here.."
+                            android:paddingStart="5dp" />
+                    </androidx.cardview.widget.CardView>
+
+
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:id="@+id/linearLayout43"
@@ -380,7 +417,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout42">
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout442">
 
                     <TextView
                         android:layout_width="match_parent"
