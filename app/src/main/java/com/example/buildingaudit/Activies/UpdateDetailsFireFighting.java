@@ -243,6 +243,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
 
                             }
                         }, mYear, mDay, cDay);
+                datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
                 datePickerDialog.show();
             }
         });

@@ -632,7 +632,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 if (response.body().size()==0){
                     context.startActivity(new Intent(context, UpdateDetailsBioMetric.class));
                 }else {
-                    context.startActivity(new Intent(context, UpdateDetailsBioMetric.class));
+                    context.startActivity(new Intent(context, OnSubmit_BioMetricDetails.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 //
 //                    context.startActivity(i);

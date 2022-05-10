@@ -249,8 +249,10 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
+                            android:layout_gravity="center_vertical"
+
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:text="Without Flushing and Cleaning facility"
@@ -459,10 +461,12 @@
 
                         <TextView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+
                             android:text="Without Flushing and Cleaning facility"
                             android:textColor="@color/black"
                             android:textSize="15dp" />

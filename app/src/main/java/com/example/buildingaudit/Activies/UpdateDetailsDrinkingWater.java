@@ -250,12 +250,12 @@ LinearLayout linearLayout31;
                     spinnerROInstallationWokingStatus.setVisibility(View.GONE);
                     spinnerROInstallationScheme.setVisibility(View.GONE);
                     linearLayout31.setVisibility(View.GONE);
-                    edtDrinkingWaterOtherScheme.setVisibility(View.GONE);
+
                 }else{
                     spinnerROInstallationWokingStatus.setVisibility(View.VISIBLE);
                     spinnerROInstallationScheme.setVisibility(View.VISIBLE);
                     linearLayout31.setVisibility(View.VISIBLE);
-                    edtDrinkingWaterOtherScheme.setVisibility(View.VISIBLE);
+
 
                 }
             }

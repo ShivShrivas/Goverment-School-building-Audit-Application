@@ -83,6 +83,7 @@ TextView workingStatusHearOnSub;
                     recyclerViewRAinHarveOnSub.setVisibility(View.GONE);
                     linearLayout5.setVisibility(View.GONE);
                     workingStatusHearOnSub.setVisibility(View.GONE);
+                    workingStatusLayout.setVisibility(View.GONE);
                     dialog2.dismiss();
 
 

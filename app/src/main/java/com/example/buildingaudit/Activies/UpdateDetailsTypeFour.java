@@ -119,6 +119,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtNumberOfBooksLibrary=findViewById(R.id.edtNumberOfBooksLibrary);
         edtExpenditure=findViewById(R.id.edtExpenditure);
+        constraintLayout21=findViewById(R.id.constraintLayout21);
         spinnerPhysicalStatus=findViewById(R.id.spinnerPhysicalStatus);
         spinnerReadingCorner=findViewById(R.id.spinnerReadingCorner);
         spinnerNewsPaperAndMzin=findViewById(R.id.spinnerNewsPaperAndMzin);
@@ -253,6 +254,9 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             @Override
             public void onClick(View view) {
                 dialog2.show();
+                if(Integer.valueOf(edtTotalLibraryGrant.getText().toString())<=Integer.valueOf(edtExpenditure.getText().toString())){
+                    edtTotalLibraryGrant.setError("total library grant is always greater and equal to expenditure");
+                }
                 if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
                     if ( arrayListImages1.size()==0){
                         Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
@@ -264,7 +268,6 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                 }else{
                     runService();
                 }
-
             }
         });
 

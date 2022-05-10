@@ -274,20 +274,26 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        dialog2.dismiss();
-                        Toast.makeText(UpdateDetailsComputerlab.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                    }else {
-                        runService();
-
-
-                    }
+                if (Integer.valueOf(edtNoOfComputer.getText().toString())<=0 || Integer.valueOf(edtNoOfComputer.getText().toString())<Integer.valueOf(edtNoOfWorkingComputer.getText().toString())){
+                    edtNoOfComputer.setError("Total computer count is always greater or equal to working computer");
+                    dialog2.dismiss();
                 }else{
-                  runService();
-                }
 
+
+                    if (!spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0){
+                            dialog2.dismiss();
+                            Toast.makeText(UpdateDetailsComputerlab.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            runService();
+
+
+                        }
+                    }else{
+                        runService();
+                    }
+                }
             }
         });
 
