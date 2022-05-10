@@ -1,20 +1,32 @@
 package com.example.buildingaudit.Activies;
 
+import static android.provider.MediaStore.Files.FileColumns.MEDIA_TYPE_VIDEO;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -31,7 +43,10 @@ import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.Adapters.ImageAdapter5;
 import com.example.buildingaudit.ApplicationController;
+import com.example.buildingaudit.BuildConfig;
+import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -39,16 +54,30 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -60,9 +89,11 @@ public class UpdateDetailsBioMetric extends AppCompatActivity {
         return true;
     }
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
+    public ArrayList<File> arrayListImages2 = new ArrayList<>();
+    public ArrayList<File> arrayListImagesForServer = new ArrayList<>();
 
     int btnType;
-    ImageAdapter4 adapter1;
+    ImageAdapter5 adapter1;
 
 Spinner spinneruserbiometricStudent,
         spinnerBiometricWorkingStatus,spinneruserbiometricStaff,spinnerBioMetricInstallationYear,
@@ -76,6 +107,13 @@ ConstraintLayout constraintLayout35;
     Button buttonBiometricSubmit;
     Dialog dialog;
     Dialog dialog2;
+    String currentImagePath=null;
+    File imageFile=null;
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    Uri fileUri;
+    public static final String IMAGE_DIRECTORY_NAME = "Android File Upload";
+    private static final int EOF = -1;
+    private static final int DEFAULT_BUFFER_SIZE = 1024 * 4;
     @Override
     protected void onStart() {
         super.onStart();
@@ -90,6 +128,13 @@ ConstraintLayout constraintLayout35;
 
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        adapter1.notifyDataSetChanged();
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,14 +195,9 @@ ConstraintLayout constraintLayout35;
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        arrayListInstallationYear.add("2015");
-        arrayListInstallationYear.add("2016");
-        arrayListInstallationYear.add("2017");
-        arrayListInstallationYear.add("2018");
-        arrayListInstallationYear.add("2019");
-        arrayListInstallationYear.add("2020");
-        arrayListInstallationYear.add("2021");
-        arrayListInstallationYear.add("2022");
+        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
+            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        }
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
 
@@ -179,39 +219,86 @@ ConstraintLayout constraintLayout35;
             @Override
             public void onClick(View view) {
                 btnType=1;
-                Dexter.withActivity(UpdateDetailsBioMetric.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailsBioMetric.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages2.add(imageFile);
+                                            Uri imageUri=FileProvider.getUriForFile(UpdateDetailsBioMetric.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailsBioMetric.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
         });
         recyclerViewBioMetric.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter1 = new ImageAdapter4(this, arrayListImages1);
+        adapter1 = new ImageAdapter5(this, arrayListImages2);
         recyclerViewBioMetric.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();
         spinnerBioMetricMachineAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -239,7 +326,7 @@ ConstraintLayout constraintLayout35;
                         dialog2.dismiss();
 
                     } else {
-                        if (arrayListImages1.size()==0){
+                        if (arrayListImages2.size()==0){
                             Toast.makeText(UpdateDetailsBioMetric.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
 
@@ -255,51 +342,60 @@ ConstraintLayout constraintLayout35;
             }
         });
     }
+    private File getImageFile() throws IOException{
+        String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String imageName="jpg+"+timeStamp+"_";
+        File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
+        currentImagePath=imageFile.getAbsolutePath();
+        Log.d("TAG", "getImageFile: "+currentImagePath);
+        return imageFile;
+    }
     private void runService() {
+
+
         RestClient restClient = new RestClient();
         ApiService apiService = restClient.getApiService();
-        Log.d("TAG", "onClick: " + paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
-        Call<List<JsonObject>> call = apiService.uploadBioMetricDetails(paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages1));
+//        RequestBody requestFile = RequestBody.create(MediaType.parse("multipart/form-data"), compressedImage);
+//        MultipartBody.Part body = MultipartBody.Part.createFormData("FileData", compressedImage.getName(), requestFile);
+        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages2.size()];
+        for (int i = 0; i < arrayListImages2.size(); i++) {
+            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages2.get(i).getPath());
+            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+                                                    .setMaxWidth(720)
+                                                    .setMaxHeight(720)
+                                                    .setQuality(75)
+                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                                                    .build()
+                                                    .compressToFile(new File(arrayListImages2.get(i).getPath()));
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                    compressedImage);
+            surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
+
+        }
+        Log.d("TAG", "onClick: "+ paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
+        Call<List<JsonObject>> call=apiService.uploadBiometricv2(surveyImagesParts,description);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                try {
-                    if (response.body().get(0).get("Status").getAsString().equals("E")){
-                        textView.setText("You already uploaded details ");
-
-                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                        textView.setText("Your details Submitted successfully ");
-                    }
-                    dialog2.dismiss();
-                    dialog.show();
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            onBackPressed();
-                            dialog.dismiss();
-
-
-                        }
-                    });
-                }catch (Exception e){
-                    Toast.makeText(UpdateDetailsBioMetric.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-
-                }
+                Log.d("TAG", "onResponse: "+response.body()+response);
+                dialog2.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
                 dialog2.dismiss();
-
             }
         });
     }
 
-    private JsonObject paraBioMetric(String action, String paramId, String bioMetricDetails, String availabilty, String yearOfInstallation, String workingStatis, String biometricForStaff, String biometricForStudent, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid,String noOfMachines, ArrayList<Bitmap> arrayListImages1) {
+    private String paraBioMetric(String action, String paramId, String bioMetricDetails, String availabilty,
+                                     String yearOfInstallation, String workingStatis, String biometricForStaff, String biometricForStudent, String latitude,
+                                     String longitude, String schoolId, String periodID, String usertypeid, String userid,String noOfMachines, ArrayList<File> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
         if (availabilty.equals("No")){
             jsonObject.addProperty("Action",action);
@@ -318,12 +414,14 @@ ConstraintLayout constraintLayout35;
             jsonObject.addProperty("Availabilty",availabilty);
             jsonObject.addProperty("NoOfMachines","0");
 
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            JsonArray jsonArray = new JsonArray();
+//            for (int i = 0; i < arrayListImages1.size(); i++) {
+//                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            }
+//            jsonObject.add("BiometricPhoto", (JsonElement) jsonArray);
 
-            }
-            jsonObject.add("BiometricPhoto", (JsonElement) jsonArray);
         }else{
             jsonObject.addProperty("Action",action);
             jsonObject.addProperty("ParamId",paramId);
@@ -341,15 +439,15 @@ ConstraintLayout constraintLayout35;
             jsonObject.addProperty("Availabilty",availabilty);
             jsonObject.addProperty("NoOfMachines",noOfMachines);
 
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
-
-            }
-            jsonObject.add("BiometricPhoto", (JsonElement) jsonArray);
+//            JsonArray jsonArray = new JsonArray();
+//            for (int i = 0; i < arrayListImages1.size(); i++) {
+//                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            }
+//            jsonObject.add("BiometricPhoto", (JsonElement) jsonArray);
         }
 
-        return jsonObject;
+        return jsonObject.toString();
 
     }
 
@@ -391,11 +489,164 @@ ConstraintLayout constraintLayout35;
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 7 && resultCode == RESULT_OK ) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+        if (requestCode == 2 && resultCode == RESULT_OK ) {
 
-                arrayListImages1.add(bitmap);
+
+             //fileUri =  FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".provider", file);
+
+
+
+
+
+
+
 
         }
+    }
+    public static File from(Context context, Uri uri) throws IOException {
+        InputStream inputStream = context.getContentResolver().openInputStream(uri);
+        String fileName = getFileName(context, uri);
+        String[] splitName = splitFileName(fileName);
+        File tempFile = File.createTempFile(splitName[0], splitName[1]);
+        tempFile = rename(tempFile, fileName);
+        tempFile.deleteOnExit();
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(tempFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (inputStream != null) {
+            copy(inputStream, out);
+            inputStream.close();
+        }
+
+        if (out != null) {
+            out.close();
+        }
+        return tempFile;
+    }
+
+    private File saveImageBitmapInGallery(Bitmap bitmap) {
+        String extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+        OutputStream outStream = null;
+        // String temp = null;
+        File file = new File(extStorageDirectory, "temp.png");
+        if (file.exists()) {
+            file.delete();
+            file = new File(extStorageDirectory, "temp.png");
+
+        }
+
+        try {
+            outStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outStream);
+            outStream.flush();
+            outStream.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+        return file;
+    }
+    private static String[] splitFileName(String fileName) {
+        String name = fileName;
+        String extension = "";
+        int i = fileName.lastIndexOf(".");
+        if (i != -1) {
+            name = fileName.substring(0, i);
+            extension = fileName.substring(i);
+        }
+
+        return new String[]{name, extension};
+    }
+
+    @SuppressLint("Range")
+    private static String getFileName(Context context, Uri uri) {
+        String result = null;
+        if (uri.getScheme().equals("content")) {
+            Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
+            try {
+                if (cursor != null && cursor.moveToFirst()) {
+                    result = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+        }
+        if (result == null) {
+            result = uri.getPath();
+            int cut = result.lastIndexOf(File.separator);
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
+        }
+        return result;
+    }
+
+    private static File rename(File file, String newName) {
+        File newFile = new File(file.getParent(), newName);
+        if (!newFile.equals(file)) {
+            if (newFile.exists() && newFile.delete()) {
+                Log.d("FileUtil", "Delete old " + newName + " file");
+            }
+            if (file.renameTo(newFile)) {
+                Log.d("FileUtil", "Rename file to " + newName);
+            }
+        }
+        return newFile;
+    }
+
+    private static long copy(InputStream input, OutputStream output) throws IOException {
+        long count = 0;
+        int n;
+        byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+        while (EOF != (n = input.read(buffer))) {
+            output.write(buffer, 0, n);
+            count += n;
+        }
+        return count;
+    }
+    public Uri getOutputMediaFileUri(int type) {
+        return Uri.fromFile(getOutputMediaFile(type));
+    }
+
+    /**
+     * returning image / video
+     */
+    private static File getOutputMediaFile(int type) {
+
+        // External sdcard location
+        File mediaStorageDir = new File(
+                Environment
+                        .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                IMAGE_DIRECTORY_NAME);
+
+        // Create the storage directory if it does not exist
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+                Log.d("TAG", "Oops! Failed create "
+                        + IMAGE_DIRECTORY_NAME + " directory");
+                return null;
+            }
+        }
+
+        // Create a media file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss",
+                Locale.getDefault()).format(new Date());
+        File mediaFile;
+        if (type == MEDIA_TYPE_IMAGE) {
+            mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                    + "IMG_" + timeStamp + ".jpg");
+        } else {
+            return null;
+        }
+
+        return mediaFile;
     }
 }

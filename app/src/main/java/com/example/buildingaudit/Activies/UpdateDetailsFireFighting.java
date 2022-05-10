@@ -141,14 +141,9 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        arrayListInstallationYear.add("2015");
-        arrayListInstallationYear.add("2016");
-        arrayListInstallationYear.add("2017");
-        arrayListInstallationYear.add("2018");
-        arrayListInstallationYear.add("2019");
-        arrayListInstallationYear.add("2020");
-        arrayListInstallationYear.add("2021");
-        arrayListInstallationYear.add("2022");
+        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
+            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        }
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerFireFightingInstallationYear.setAdapter(arrayAdapter1);
@@ -243,6 +238,8 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
 
                             }
                         }, mYear, mDay, cDay);
+                datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
+
                 datePickerDialog.show();
             }
         });

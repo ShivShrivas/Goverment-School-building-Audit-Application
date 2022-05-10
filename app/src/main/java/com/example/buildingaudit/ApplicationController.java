@@ -5,6 +5,11 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.example.buildingaudit.Model.BoundryType;
+import com.example.buildingaudit.Model.InstallationYear;
+
+import java.util.List;
+
 public class ApplicationController extends Application {
 
     @Override
@@ -12,6 +17,8 @@ public class ApplicationController extends Application {
         super.attachBaseContext(base);
         MultiDex.install(base);
     }
+    List<BoundryType> boundryTypes;
+    List<InstallationYear> installationYears;
     String longitude;
     String Usertypeid;
     String latitude;
@@ -25,6 +32,23 @@ String distid;
 String blockid;
 String  schoolName;
 String schoolAddress;
+
+    public List<BoundryType> getBoundryTypes() {
+        return boundryTypes;
+    }
+
+    public void setBoundryTypes(List<BoundryType> boundryTypes) {
+        this.boundryTypes = boundryTypes;
+    }
+
+
+    public List<InstallationYear> getInstallationYears() {
+        return installationYears;
+    }
+
+    public void setInstallationYears(List<InstallationYear> installationYears) {
+        this.installationYears = installationYears;
+    }
 
     public String getUsertypeid() {
         return Usertypeid;

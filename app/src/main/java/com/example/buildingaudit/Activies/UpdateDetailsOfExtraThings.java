@@ -30,6 +30,7 @@ import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -197,43 +198,43 @@ Button submitWIFIBtn;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Log.d("TAG", "onClick: "+paraWifi("1","20","WifiPhoto",spinnerWifiPresent.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadWifiDetails(paraWifi("1","20","WifiPhoto",spinnerWifiPresent.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        call.enqueue(new Callback<List<JsonObject>>() {
-            @Override
-            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response+response.body());
-                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                try {
-                    if (response.body().get(0).get("Status").getAsString().equals("E")){
-                        textView.setText("You already uploaded details ");
-
-                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                        textView.setText("Your details Submitted successfully ");
-                    }
-                    dialog2.dismiss();
-
-                    dialog.show();
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            onBackPressed();
-                            dialog.dismiss();
-                        }
-                    });
-                }catch (Exception e){
-                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                dialog2.dismiss();
-
-            }
-        });
+//        Call<List<JsonObject>> call=apiService.uploadWifiDetails(paraWifi("1","20","WifiPhoto",spinnerWifiPresent.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+//        call.enqueue(new Callback<List<JsonObject>>() {
+//            @Override
+//            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+//                Log.d("TAG", "onResponse: "+response+response.body());
+//                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
+//                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+//                try {
+//                    if (response.body().get(0).get("Status").getAsString().equals("E")){
+//                        textView.setText("You already uploaded details ");
+//
+//                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
+//                        textView.setText("Your details Submitted successfully ");
+//                    }
+//                    dialog2.dismiss();
+//
+//                    dialog.show();
+//                    button.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View view) {
+//                            onBackPressed();
+//                            dialog.dismiss();
+//                        }
+//                    });
+//                }catch (Exception e){
+//                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+//                    dialog2.dismiss();
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+//                dialog2.dismiss();
+//
+//            }
+//        });
     }
 
     private JsonObject paraWifi(String s, String s1, String wifiPhoto, String toString, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
@@ -256,6 +257,8 @@ Button submitWIFIBtn;
 
         }
         jsonObject.add("WifiPhoto", (JsonElement) jsonArray2);
+
+        Log.d("TAG", "paraWifi: "+  jsonObject.toString());
         return jsonObject;
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {

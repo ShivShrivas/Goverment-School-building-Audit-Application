@@ -63,7 +63,9 @@ import com.example.buildingaudit.Activies.UpdateDetailsTypeFour;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.example.buildingaudit.Activies.UpdatedetailsTypeThree;
 import com.example.buildingaudit.Adapters.dashboardRecviewAdapter;
+import com.example.buildingaudit.Model.BoundryType;
 import com.example.buildingaudit.Model.GetAllRoomsList;
+import com.example.buildingaudit.Model.InstallationYear;
 import com.example.buildingaudit.Model.RecModel;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -180,6 +182,8 @@ public class DashBoard extends AppCompatActivity {
             }
         });
 
+        setBoundryTypeDynamic();
+        setInstallationYearDynamic();
 
         hamMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,6 +193,49 @@ public class DashBoard extends AppCompatActivity {
                 if (!navDrawer.isDrawerOpen(GravityCompat.START))
                     navDrawer.openDrawer(Gravity.LEFT);
                 else navDrawer.closeDrawer(GravityCompat.END);
+            }
+        });
+    }
+
+    private void setInstallationYearDynamic() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action","6");
+        Call<List<InstallationYear>> call=apiService.getInstallationYear(jsonObject);
+        call.enqueue(new Callback<List<InstallationYear>>() {
+            @Override
+            public void onResponse(Call<List<InstallationYear>> call, Response<List<InstallationYear>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                applicationController.setInstallationYears(response.body());
+                Log.d("TAG", "onResponse: "+applicationController.getInstallationYears().get(0).getYear());
+            }
+
+            @Override
+            public void onFailure(Call<List<InstallationYear>> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void setBoundryTypeDynamic() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action","5");
+        Call<List<BoundryType>> call=apiService.getBoundryType(jsonObject);
+        call.enqueue(new Callback<List<BoundryType>>() {
+            @Override
+            public void onResponse(Call<List<BoundryType>> call, Response<List<BoundryType>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                applicationController.setBoundryTypes(response.body());
+                Log.d("TAG", "onResponse: "+applicationController.getBoundryTypes().get(0).getBWTypeName());
+            }
+
+            @Override
+            public void onFailure(Call<List<BoundryType>> call, Throwable t) {
+
             }
         });
 

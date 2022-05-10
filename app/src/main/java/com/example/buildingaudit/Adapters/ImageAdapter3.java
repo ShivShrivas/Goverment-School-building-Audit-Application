@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
 import com.example.buildingaudit.R;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ImageAdapter3 extends RecyclerView.Adapter<ImageAdapter3.ImageViewHolder3> {

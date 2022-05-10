@@ -31,6 +31,7 @@ import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -141,14 +142,9 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         spinnerComputeLabAvailabelty.setAdapter(arrayAdapter);
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        arrayListInstallationYear.add("2015");
-        arrayListInstallationYear.add("2016");
-        arrayListInstallationYear.add("2017");
-        arrayListInstallationYear.add("2018");
-        arrayListInstallationYear.add("2019");
-        arrayListInstallationYear.add("2020");
-        arrayListInstallationYear.add("2021");
-        arrayListInstallationYear.add("2022");
+        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
+            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        }
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerInstallationYear.setAdapter(arrayAdapter1);
@@ -274,6 +270,12 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             @Override
             public void onClick(View view) {
                 dialog2.show();
+                if (Integer.valueOf(edtNoOfComputer.getText().toString())<=0 || Integer.valueOf(edtNoOfComputer.getText().toString())<Integer.valueOf(edtNoOfWorkingComputer.getText().toString())){
+                    edtNoOfComputer.setError("Total computer count is always greater or equal to working computer");
+                    dialog2.dismiss();
+                }else{
+
+
                 if (!spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
                     if (arrayListImages1.size()==0){
                         dialog2.dismiss();
@@ -287,7 +289,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
                 }else{
                   runService();
                 }
-
+            }
             }
         });
 

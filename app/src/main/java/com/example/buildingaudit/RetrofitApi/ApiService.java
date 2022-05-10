@@ -1,18 +1,25 @@
 package com.example.buildingaudit.RetrofitApi;
 
+import com.example.buildingaudit.Model.BoundryType;
 import com.example.buildingaudit.Model.GetAllRoomsList;
 import com.example.buildingaudit.Model.GetQuaterType;
 import com.example.buildingaudit.Model.GetSchoolDetails;
 import com.example.buildingaudit.Model.GetUserType;
+import com.example.buildingaudit.Model.InstallationYear;
 import com.example.buildingaudit.Model.LabDetailsResponse;
 import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public  interface ApiService {
 
@@ -32,6 +39,15 @@ public  interface ApiService {
     Call<List<JsonObject>> getLogin(@Body JsonObject object);
 
 
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("Home/GetUserList")
+    Call<List<BoundryType>> getBoundryType(@Body JsonObject object);
+
+ @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("Home/GetUserList")
+    Call<List<InstallationYear>> getInstallationYear(@Body JsonObject object);
+
+
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("Login/GetSchoolDetails")
@@ -45,9 +61,13 @@ public  interface ApiService {
 
 
 
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SClassRoomDetails")
+//    Call<List<JsonObject>> uploadClassRoomDetails(@Body JsonObject object);
+
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SClassRoomDetails")
-    Call<List<JsonObject>> uploadClassRoomDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadClassRoomDetails(@Part MultipartBody.Part[] part,@Part MultipartBody.Part[] part1,@Part MultipartBody.Part[] part2,@Part("RequestData") RequestBody object);
 
 
 
@@ -315,4 +335,15 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/ViewArtCraftRoomDetails")
     Call<List<JsonObject>> checkArtAndCraft(@Body JsonObject paraGetDetails2);
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @Multipart
+    @POST("PhysicalParam/ViewArtCraftRoomDetails")
+    Call<ResponseBody> uploadImage(@Part MultipartBody.Part part, @Part("someData")RequestBody requestBody);
+
+    @Multipart
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SBiometricv2")
+    Call<List<JsonObject>> uploadBiometricv2(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object);
+
 }

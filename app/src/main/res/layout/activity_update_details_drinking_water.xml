@@ -802,6 +802,7 @@ android:layout_margin="7dp">
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textSize="15dp"
             android:gravity="center_vertical|center_horizontal"
             android:text="Ro Installation Under Scheme"
             android:textColor="@color/textColor1"

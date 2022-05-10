@@ -189,7 +189,7 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
         });
 
         recyclerViewArtAndCraft.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter6 = new ImageAdapter4(this, arrayListImages1);
+//        adapter6 = new ImageAdapter4(this, arrayListImages1);
         recyclerViewArtAndCraft.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
 

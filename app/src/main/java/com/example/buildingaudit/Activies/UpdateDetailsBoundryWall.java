@@ -140,8 +140,8 @@ EditText edtBoundryWallOtherScheme;
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
         arrayListSpinner.add("Good Condition");
-        arrayListSpinner.add("Minor repairing requored");
-        arrayListSpinner.add("major repairing required");
+        arrayListSpinner.add("Minor repairing");
+        arrayListSpinner.add("major repairing");
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
@@ -159,16 +159,11 @@ EditText edtBoundryWallOtherScheme;
         spinnerBoundryScheme.setAdapter(arrayAdapter2);
 
         ArrayList<String> arrayListWallType = new ArrayList<>();
+        for (int i=0;i<applicationController.getBoundryTypes().size();i++){
+            arrayListWallType.add(applicationController.getBoundryTypes().get(i).getBWTypeName());
+        }
 
-        arrayListWallType.add("Pucca");
-        arrayListWallType.add("Pucca but broken");
-        arrayListWallType.add("Barbed Wire");
-        arrayListWallType.add("Fencing");
-        arrayListWallType.add("Hedges");
-        arrayListWallType.add("No Boundary Walls");
-        arrayListWallType.add("Partial");
-        arrayListWallType.add("Under Construction");
-        arrayListWallType.add("Others");
+
 
 
         ArrayAdapter<String> arrayAdapter4 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListWallType);
@@ -213,7 +208,7 @@ EditText edtBoundryWallOtherScheme;
         });
 
         recyclerViewTwoTypeBoundarywall.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter2= new ImageAdapter3(this, arrayListImages2);
+    //    adapter2= new ImageAdapter3(this, arrayListImages2);
         recyclerViewTwoTypeBoundarywall.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
         spinnerBoundryScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

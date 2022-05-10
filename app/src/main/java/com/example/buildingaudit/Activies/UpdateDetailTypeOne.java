@@ -3,15 +3,20 @@ package com.example.buildingaudit.Activies;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,29 +33,36 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter;
-import com.example.buildingaudit.Adapters.ImageAdapter2;
 import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.Adapters.ImageAdapter5;
 import com.example.buildingaudit.ApplicationController;
-import com.example.buildingaudit.Model.ClassDetailsResponse;
+import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,19 +76,20 @@ EditText edtPodiumClass,greenBoardCount,whiteBoardCont,blackBoardCount;
 ImageView totalRoomImageUploadBtn,goodConditionImageUploadBtn,minorRepairingUploadImageBtn,majorRepairingUploadImageBtn;
 int cameraType;
     public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages3 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages4 = new ArrayList<>();
+    public ArrayList<File> arrayListImages2 = new ArrayList<>();
+    public ArrayList<File> arrayListImages3 = new ArrayList<>();
+    public ArrayList<File> arrayListImages4 = new ArrayList<>();
     ImageAdapter adapter;
-    ImageAdapter2 adapter2;
+    ImageAdapter5 adapter2;
     Dialog dialog,dialog2;
-
-    ImageAdapter3 adapter3;
+    String currentImagePath=null;
+    ImageAdapter5 adapter3;
     ApplicationController applicationController;
-    ImageAdapter4 adapter4;
+    ImageAdapter5 adapter4;
     ConstraintLayout constratinflayout;
     EditText majorRepairingClassroom,minorRepairingClassroom,goodCondtionClassroom,totalClassRooms;
     Button classRoomSubmitbtn;
+    File imageFile=null;
     @Override
     protected void onStart() {
         super.onStart();
@@ -240,10 +253,43 @@ int cameraType;
                         }else {
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
+
+                            MultipartBody.Part[] fileDataGood = new MultipartBody.Part[arrayListImages2.size()];
+                            for (int i = 0; i < arrayListImages2.size(); i++) {
+                                Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages2.get(i).getPath());
+                                    File compressFile=filrCompressor(arrayListImages2.get(i));
+                                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                                        compressFile);
+                                fileDataGood[i] = MultipartBody.Part.createFormData("FileDataGood",compressFile.getName(),surveyBody);
+
+                            }
+
+
+                            MultipartBody.Part[] fileDataMinor = new MultipartBody.Part[arrayListImages3.size()];
+                            for (int i = 0; i < arrayListImages3.size(); i++) {
+                                Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages3.get(i).getPath());
+                                    File compressFile=filrCompressor(arrayListImages3.get(i));
+                                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                                        compressFile);
+                                fileDataMinor[i] = MultipartBody.Part.createFormData("FileDataMinor",compressFile.getName(),surveyBody);
+
+                            }
+
+                            MultipartBody.Part[] fileDataMajor = new MultipartBody.Part[arrayListImages4.size()];
+                            for (int i = 0; i < arrayListImages4.size(); i++) {
+                                Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages4.get(i).getPath());
+                                    File compressFile=filrCompressor(arrayListImages4.get(i));
+                                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                                        compressFile);
+                                fileDataMajor[i] = MultipartBody.Part.createFormData("FileDataMajor",compressFile.getName(),surveyBody);
+
+                            }
+
+                            RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
+                                    blackBoardCount.getText().toString(),whiteBoardCont.getText().toString(),greenBoardCount.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),"GoodConditionPhotos",arrayListImages2,"MajorRepairingPhotos",arrayListImages3,"MinorRepairingPhotos",arrayListImages4));
                         Log.d("TAG", "onClick: "+paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
                                 blackBoardCount.getText().toString(),whiteBoardCont.getText().toString(),greenBoardCount.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),"GoodConditionPhotos",arrayListImages2,"MajorRepairingPhotos",arrayListImages3,"MinorRepairingPhotos",arrayListImages4));
-                        Call<List<JsonObject>> call=apiService.uploadClassRoomDetails(paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
-                              blackBoardCount.getText().toString(),whiteBoardCont.getText().toString(),greenBoardCount.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),"GoodConditionPhotos",arrayListImages2,"MajorRepairingPhotos",arrayListImages3,"MinorRepairingPhotos",arrayListImages4));
+                        Call<List<JsonObject>> call=apiService.uploadClassRoomDetails(fileDataGood,fileDataMinor,fileDataMajor,description);
                         call.enqueue(new Callback<List<JsonObject>>() {
                             @Override
                             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -330,33 +376,80 @@ int cameraType;
             @Override
             public void onClick(View view) {
                 cameraType=2;
-                Dexter.withActivity(UpdateDetailTypeOne.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailTypeOne.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages2.add(imageFile);
+                                            Uri imageUri= FileProvider.getUriForFile(UpdateDetailTypeOne.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailTypeOne.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
@@ -365,33 +458,80 @@ int cameraType;
             @Override
             public void onClick(View view) {
                 cameraType=3;
-                Dexter.withActivity(UpdateDetailTypeOne.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailTypeOne.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages3.add(imageFile);
+                                            Uri imageUri=FileProvider.getUriForFile(UpdateDetailTypeOne.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailTypeOne.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
@@ -400,48 +540,95 @@ int cameraType;
             @Override
             public void onClick(View view) {
                 cameraType=4;
-                Dexter.withActivity(UpdateDetailTypeOne.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailTypeOne.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages4.add(imageFile);
+                                            Uri imageUri=FileProvider.getUriForFile(UpdateDetailTypeOne.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailTypeOne.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
         });
 
         recyclerViewTwoTypeOne.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter2 = new ImageAdapter2(this, arrayListImages2);
+        adapter2 = new ImageAdapter5(this, arrayListImages2);
         recyclerViewTwoTypeOne.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
         recyclerViewThreeTypeOne.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter3 = new ImageAdapter3(this, arrayListImages3);
+        adapter3 = new ImageAdapter5(this, arrayListImages3);
         recyclerViewThreeTypeOne.setAdapter(adapter3);
         adapter3.notifyDataSetChanged();
         recyclerViewFourTypeOne.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter4 = new ImageAdapter4(this, arrayListImages4);
+        adapter4 = new ImageAdapter5(this, arrayListImages4);
         recyclerViewFourTypeOne.setAdapter(adapter4);
         adapter4.notifyDataSetChanged();
 
@@ -465,8 +652,31 @@ int cameraType;
 
     }
 
-    private JsonObject paraClassRoomDetails(String action, String paramId, String paramName, int totalClassRoom,String goodConRoom, String majorRooms, String minorRoom, String podium,  String blackBoard,
-                                            String whiteBoard, String greenBoard, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String goodConditionPhotos, ArrayList<Bitmap> arrayListImages2, String majorRepairingPhotos, ArrayList<Bitmap> arrayListImages3, String minorRepairingPhotos, ArrayList<Bitmap> arrayListImages4) {
+    private File filrCompressor(File file) {
+        File compressedImage = new Compressor.Builder(UpdateDetailTypeOne.this)
+                .setMaxWidth(720)
+                .setMaxHeight(720)
+                .setQuality(75)
+                .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                        Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                .build()
+                .compressToFile(new File(file.getPath()));
+        return  compressedImage;
+    }
+
+    private File getImageFile() throws IOException{
+        String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String imageName="jpg+"+timeStamp+"_";
+        File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile=File.createTempFile(imageName,".jpg",storageDir);
+
+        currentImagePath=imageFile.getAbsolutePath();
+        Log.d("TAG", "getImageFile: "+currentImagePath);
+        return imageFile;
+    }
+    private String paraClassRoomDetails(String action, String paramId, String paramName, int totalClassRoom, String goodConRoom, String majorRooms, String minorRoom, String podium, String blackBoard,
+                                            String whiteBoard, String greenBoard, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String goodConditionPhotos, ArrayList<File> arrayListImages2, String majorRepairingPhotos, ArrayList<File> arrayListImages3, String minorRepairingPhotos, ArrayList<File> arrayListImages4) {
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("Action",action);
         jsonObject.addProperty("ParamId",paramId);
@@ -485,29 +695,29 @@ int cameraType;
         jsonObject.addProperty("PeriodID",periodID);
         jsonObject.addProperty("CreatedBy",usertypeid);
         jsonObject.addProperty("UserCode",userid);
-        JsonArray jsonArray = new JsonArray();
-        for (int i = 0; i < arrayListImages2.size(); i++) {
-            jsonArray.add(paraGetImageBase64( arrayListImages2.get(i), i));
+//        JsonArray jsonArray = new JsonArray();
+//        for (int i = 0; i < arrayListImages2.size(); i++) {
+//            jsonArray.add(paraGetImageBase64( arrayListImages2.get(i), i));
+//
+//        }
+//        jsonObject.add("GoodConditionPhotos", (JsonElement) jsonArray);
+//
+//        JsonArray jsonArray2 = new JsonArray();
+//        for (int i = 0; i < arrayListImages3.size(); i++) {
+//            jsonArray2.add(paraGetImageBase64( arrayListImages3.get(i), i));
+//
+//        }
+//
+//        jsonObject.add("MajorRepairingPhotos", (JsonElement) jsonArray2);
+//
+//        JsonArray jsonArray3 = new JsonArray();
+//        for (int i = 0; i < arrayListImages4.size(); i++) {
+//            jsonArray3.add(paraGetImageBase64( arrayListImages4.get(i), i));
+//
+//        }
+//        jsonObject.add("MinorRepairingPhotos", (JsonElement) jsonArray3);
 
-        }
-        jsonObject.add("GoodConditionPhotos", (JsonElement) jsonArray);
-
-        JsonArray jsonArray2 = new JsonArray();
-        for (int i = 0; i < arrayListImages3.size(); i++) {
-            jsonArray2.add(paraGetImageBase64( arrayListImages3.get(i), i));
-
-        }
-
-        jsonObject.add("MajorRepairingPhotos", (JsonElement) jsonArray2);
-
-        JsonArray jsonArray3 = new JsonArray();
-        for (int i = 0; i < arrayListImages4.size(); i++) {
-            jsonArray3.add(paraGetImageBase64( arrayListImages4.get(i), i));
-
-        }
-        jsonObject.add("MinorRepairingPhotos", (JsonElement) jsonArray3);
-
-        return jsonObject;
+        return jsonObject.toString();
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
@@ -549,15 +759,15 @@ int cameraType;
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK ) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            if (cameraType==1){
-                arrayListImages1.add(bitmap);
-            }else if(cameraType==2){
-                arrayListImages2.add(bitmap);
-            }else if(cameraType==3){
-                arrayListImages3.add(bitmap);
-            }else if (cameraType==4){
-                arrayListImages4.add(bitmap);
-            }
+//            if (cameraType==1){
+//                arrayListImages1.add(bitmap);
+//            }else if(cameraType==2){
+//                arrayListImages2.add(bitmap);
+//            }else if(cameraType==3){
+//                arrayListImages3.add(bitmap);
+//            }else if (cameraType==4){
+//                arrayListImages4.add(bitmap);
+//            }
 
         }
     }

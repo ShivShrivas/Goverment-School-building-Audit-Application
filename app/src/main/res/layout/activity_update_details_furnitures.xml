@@ -551,7 +551,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingStart="6dp"
-                    android:text="Additional Furniture Required"
+                    android:text="Additional Furniture Required \n(mention required sitting capacity)"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 

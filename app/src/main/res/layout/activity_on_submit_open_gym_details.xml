@@ -182,7 +182,7 @@
             <EditText
                 android:id="@+id/edtGymAvailabelty"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textAlignment="center"
                 android:background="@drawable/cardbg"
@@ -236,7 +236,7 @@
                 <EditText
                     android:id="@+id/gymWorkingStatus"
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/cardbg"
@@ -293,7 +293,7 @@
                     <EditText
                         android:id="@+id/edtGymArea"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:layout_margin="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/cardbg"

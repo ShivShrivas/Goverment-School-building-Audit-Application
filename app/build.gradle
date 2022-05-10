@@ -54,4 +54,10 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:29.0.0'
+
+    //image copression
+    implementation 'io.reactivex:rxjava:1.1.6'
 }
