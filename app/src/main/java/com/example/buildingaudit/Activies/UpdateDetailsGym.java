@@ -1,18 +1,23 @@
 package com.example.buildingaudit.Activies;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -29,7 +34,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.Adapters.ImageAdapter5;
 import com.example.buildingaudit.ApplicationController;
+import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -39,10 +46,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
@@ -52,9 +61,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -81,8 +95,10 @@ public class UpdateDetailsGym extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
-    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    ImageAdapter4 adapter6;
+    String currentImagePath=null;
+    File imageFile=null;
+    public ArrayList<File> arrayListImages1 = new ArrayList<>();
+    ImageAdapter5 adapter6;
     ImageView gymImageUploadBtn;
     Dialog dialog;
     Dialog dialog2;
@@ -151,39 +167,86 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsGym.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailsGym.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages1.add(imageFile);
+                                            Uri imageUri= FileProvider.getUriForFile(UpdateDetailsGym.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailsGym.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
         });
         recyclerViewGym.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter6 = new ImageAdapter4(this, arrayListImages1);
+        adapter6 = new ImageAdapter5(this, arrayListImages1);
         recyclerViewGym.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
         spinnerGymAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -219,12 +282,41 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             }
         });
     }
+    private File getImageFile() throws IOException{
+        String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String imageName="jpg+"+timeStamp+"_";
+        File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
+        currentImagePath=imageFile.getAbsolutePath();
+        Log.d("TAG", "getImageFile: "+currentImagePath);
+        return imageFile;
+    }
     private void runService() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+
+        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
+        for (int i = 0; i < arrayListImages1.size(); i++) {
+            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+            File compressedImage = new Compressor.Builder(UpdateDetailsGym.this)
+                    .setMaxWidth(720)
+                    .setMaxHeight(720)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(new File(arrayListImages1.get(i).getPath()));
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                    compressedImage);
+            surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
+
+        }
+
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraGymDetails("1","6","OpneGym",spinnerGymAvailabelty.getSelectedItem().toString(),gymWorkingStatus.getSelectedItem().toString(), edtGymArea.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         Log.d("TAG", "onClick: "+paraGymDetails("1","6","OpneGym",spinnerGymAvailabelty.getSelectedItem().toString(),gymWorkingStatus.getSelectedItem().toString(), edtGymArea.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadGymDetails(paraGymDetails("1","6","OpneGym",spinnerGymAvailabelty.getSelectedItem().toString(),gymWorkingStatus.getSelectedItem().toString(), edtGymArea.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadGymDetails(surveyImagesParts,description);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -263,7 +355,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         });
     }
 
-    private JsonObject paraGymDetails(String action, String paramId, String opneGym, String availabilty, String workingstatus, String area, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+    private String paraGymDetails(String action, String paramId, String opneGym, String availabilty, String workingstatus, String area, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<File> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
         if (availabilty.equals("no")){
             jsonObject.addProperty("Action",action);
@@ -277,12 +369,12 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             jsonObject.addProperty("PeriodID",periodID);
             jsonObject.addProperty("CreatedBy",usertypeid);
             jsonObject.addProperty("UserCode",userid);
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
-
-            }
-            jsonObject.add("OpenGYMPhotos", (JsonElement) jsonArray);
+//            JsonArray jsonArray = new JsonArray();
+//            for (int i = 0; i < arrayListImages1.size(); i++) {
+//                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            }
+//            jsonObject.add("OpenGYMPhotos", (JsonElement) jsonArray);
         }else{
             jsonObject.addProperty("Action",action);
             jsonObject.addProperty("ParamId",paramId);
@@ -295,15 +387,15 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             jsonObject.addProperty("PeriodID",periodID);
             jsonObject.addProperty("CreatedBy",usertypeid);
             jsonObject.addProperty("UserCode",userid);
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
-
-            }
-            jsonObject.add("OpenGYMPhotos", (JsonElement) jsonArray);
+//            JsonArray jsonArray = new JsonArray();
+//            for (int i = 0; i < arrayListImages1.size(); i++) {
+//                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            }
+//            jsonObject.add("OpenGYMPhotos", (JsonElement) jsonArray);
         }
 
-        return jsonObject;
+        return jsonObject.toString();
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
@@ -362,8 +454,8 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
 
             if(resultCode != RESULT_CANCELED) {
                 if (requestCode == 7 && data!=null) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-                    arrayListImages1.add(bitmap);
+//            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//                    arrayListImages1.add(bitmap);
                 }
             }
     }

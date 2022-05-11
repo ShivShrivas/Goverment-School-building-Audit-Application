@@ -137,21 +137,34 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:text="Wifi in school"
         android:textColor="?attr/colorPrimary"
-        android:textSize="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        android:textSize="22dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView25" />
+
+    <TextView
+        android:id="@+id/editWIFIRoomDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/edit_details"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView2" />
 
     <LinearLayout
         android:id="@+id/linearLayout11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -179,16 +192,16 @@
             app:layout_constraintTop_toTopOf="parent">
 
 
-             <EditText
+            <EditText
                 android:id="@+id/edtWifiPresent"
-                android:background="@drawable/cardbg"
-                android:textAlignment="center"
-                android:textColor="@color/textColor1"
-
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_margin="4dp"
-                android:layout_weight="1" />
+
+                android:layout_weight="1"
+                android:background="@drawable/cardbg"
+                android:textAlignment="center"
+                android:textColor="@color/textColor1" />
         </androidx.cardview.widget.CardView>
 
     </LinearLayout>

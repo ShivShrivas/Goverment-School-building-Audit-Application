@@ -64,7 +64,7 @@ public  interface ApiService {
 //    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
 //    @POST("PhysicalParam/SClassRoomDetails")
 //    Call<List<JsonObject>> uploadClassRoomDetails(@Body JsonObject object);
-
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SClassRoomDetails")
     Call<List<JsonObject>> uploadClassRoomDetails(@Part MultipartBody.Part[] part,@Part MultipartBody.Part[] part1,@Part MultipartBody.Part[] part2,@Part("RequestData") RequestBody object);
@@ -81,10 +81,18 @@ public  interface ApiService {
     Call<List<JsonObject>> checkStaffRoomDetails(@Body JsonObject object);
 
 
+//
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SStaffRoomDetails")
+//    Call<List<JsonObject>> uploadStaffRoomDetails(@Body JsonObject object);
+//
+//
 
+
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SStaffRoomDetails")
-    Call<List<JsonObject>> uploadStaffRoomDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadStaffRoomDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
 
@@ -108,15 +116,25 @@ public  interface ApiService {
 
 
 
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SOpenGYMDetails")
+//    Call<List<JsonObject>> uploadGymDetails(@Body JsonObject object);
+
+        @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SOpenGYMDetails")
-    Call<List<JsonObject>> uploadGymDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadGymDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
 
 
+//
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SPlayGroundDetails")
+//    Call<List<JsonObject>> uploadPlaygroundDetails(@Body JsonObject object);
 
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SPlayGroundDetails")
-    Call<List<JsonObject>> uploadPlaygroundDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadPlaygroundDetails(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody requestBody);
 
 
 
@@ -128,9 +146,14 @@ public  interface ApiService {
     Call<List<JsonObject>> checkPlayGroundDetails(@Body JsonObject object);
 
 
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SLibraryDetails")
+//    Call<List<JsonObject>> uploadLibraryDetails(@Body JsonObject object);
+
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SLibraryDetails")
-    Call<List<JsonObject>> uploadLibraryDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadLibraryDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
@@ -140,9 +163,14 @@ public  interface ApiService {
 
 
 
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SDrinkingWaterDetails")
+//    Call<List<JsonObject>> uploadDrinkingWater(@Body JsonObject object);
+
+        @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SDrinkingWaterDetails")
-    Call<List<JsonObject>> uploadDrinkingWater(@Body JsonObject object);
+    Call<List<JsonObject>> uploadDrinkingWater(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
 
 
 
@@ -163,10 +191,16 @@ public  interface ApiService {
     @POST("PhysicalParam/ViewBiometricDetails")
     Call<List<JsonObject>> checkBioMetricDetails(@Body JsonObject object);
 
+//
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SSmartClassDetails")
+//    Call<List<JsonObject>> uploadSmartClassDetails(@Body JsonObject object);
+//
 
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SSmartClassDetails")
-    Call<List<JsonObject>> uploadSmartClassDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadSmartClassDetails(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody requestBody);
 
 
 
@@ -208,11 +242,17 @@ public  interface ApiService {
 
 
 
+//
+//
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SWifiDetails")
+//    Call<List<JsonObject>> uploadWifiDetails(@Body JsonObject object);
+//
 
-
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SWifiDetails")
-    Call<List<JsonObject>> uploadWifiDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadWifiDetails(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody body,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
@@ -270,18 +310,27 @@ public  interface ApiService {
 
 
 
+//    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SSolarPanelDetails")
+//    Call<List<JsonObject>> uploadSolarPanelDetails(@Body JsonObject object);
+
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SSolarPanelDetails")
-    Call<List<JsonObject>> uploadSolarPanelDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadSolarPanelDetails(@Part MultipartBody.Part[] part, @Part("RequestData") RequestBody requestBody);
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/ViewSolarPanelDetails")
     Call<List<JsonObject>> viewSolarPanelDetails(@Body JsonObject object);
 
+//   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SBoundaryWallDetails")
+//    Call<List<JsonObject>> uploadBoundryWall(@Body JsonObject object);
+   @Multipart
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SBoundaryWallDetails")
-    Call<List<JsonObject>> uploadBoundryWall(@Body JsonObject object);
+    Call<List<JsonObject>> uploadBoundryWall(@Part MultipartBody.Part[] parts,@Part("RequestData")RequestBody requestBody);
 
 
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
@@ -291,9 +340,15 @@ public  interface ApiService {
 
 
 
+//   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SBoysToiletDetails")
+//    Call<List<JsonObject>> uploadBoysToilet(@Body JsonObject object);
+//
+
+@Multipart
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SBoysToiletDetails")
-    Call<List<JsonObject>> uploadBoysToilet(@Body JsonObject object);
+    Call<List<JsonObject>> uploadBoysToilet(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody requestBody);
 
 
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
@@ -301,9 +356,13 @@ public  interface ApiService {
     Call<List<JsonObject>> checkBoysToilet(@Body JsonObject object);
 
 
+//   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SGirlsToiletDetails")
+//    Call<List<JsonObject>> uploadGirlsToilet(@Body JsonObject object);
+    @Multipart
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SGirlsToiletDetails")
-    Call<List<JsonObject>> uploadGirlsToilet(@Body JsonObject object);
+    Call<List<JsonObject>> uploadGirlsToilet(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
 
 
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
@@ -311,9 +370,13 @@ public  interface ApiService {
     Call<List<JsonObject>> checkGirlsToilet(@Body JsonObject object);
 
 
+//   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+//    @POST("PhysicalParam/SFurniturecDetails")
+//    Call<List<JsonObject>> uploadFurniture(@Body JsonObject object);
+
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SFurniturecDetails")
-    Call<List<JsonObject>> uploadFurniture(@Body JsonObject object);
+    Call<List<JsonObject>> uploadFurniture(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
 
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/ViewFurnitureDetails")

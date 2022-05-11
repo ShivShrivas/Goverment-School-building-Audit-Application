@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +33,7 @@ RecyclerView recyclerViewExtraThingsOnSub;
 TextView wifiUploadImageTxt;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
+    TextView editWIFIRoomDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +59,7 @@ TextView wifiUploadImageTxt;
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtWifiPresent=findViewById(R.id.edtWifiPresent);
+        editWIFIRoomDetails=findViewById(R.id.editWIFIRoomDetails);
         wifiUploadImageTxt=findViewById(R.id.wifiUploadImageTxt);
         recyclerViewExtraThingsOnSub=findViewById(R.id.recyclerViewExtraThingsOnSub);
         edtWifiPresent.setEnabled(false);
@@ -95,6 +98,15 @@ TextView wifiUploadImageTxt;
             }
         });
 
+        editWIFIRoomDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_WifiDetails.this,UpdateDetailsOfExtraThings.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+                finish();
+            }
+        });
 
 
 

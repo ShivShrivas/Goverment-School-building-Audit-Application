@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -27,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
-    private TextView schoolAddress,schoolName;
+    private TextView schoolAddress,schoolName,editStaffRoomDetails;
     ApplicationController applicationController;
 
     EditText edtAlmiraAndRacksAvailabiltyOnSubmit,edtFurnitureAvailabiltyOnSubmit,edtStaffRoomStatusOnSubmit,edtStaffRoomAvailabilityOnSubmit;
@@ -63,11 +64,20 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         });
         schoolName=findViewById(R.id.schoolName);
         schoolAddress=findViewById(R.id.schoolAddress);
+        editStaffRoomDetails=findViewById(R.id.editStaffRoomDetails);
 
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewStafroomtwoOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
+        editStaffRoomDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_StaffRoomDetails.this,UpdateDetailsTypeTwo.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+                finish();
+            }
+        });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Call<List<JsonObject>> call=apiService.checkStaffRoomDetails(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));

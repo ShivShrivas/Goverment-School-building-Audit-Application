@@ -234,7 +234,7 @@ int cameraType;
                     int totalClassRoom=Integer.parseInt(goodCondtionClassroom.getText().toString())+Integer.parseInt(minorRepairingClassroom.getText().toString())+Integer.parseInt(majorRepairingClassroom.getText().toString());
                     if (totalClassRoom!=Integer.parseInt(totalClassRooms.getText().toString().trim())){
                         dialog2.dismiss();
-
+                        Log.d("TAG", "onClick: "+totalClassRoom+"//////"+totalClassRooms.getText().toString());
                         Snackbar.make(constratinflayout, "Please provide correct number of rooms", Snackbar.LENGTH_INDEFINITE)
                                 .setAction("Ok", new View.OnClickListener() {
                                     @Override
@@ -322,6 +322,7 @@ int cameraType;
 
                             @Override
                             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                                Log.d("TAG", "onFailure: "+t.getMessage());
                                 dialog2.dismiss();
 
                             }
@@ -330,6 +331,7 @@ int cameraType;
                     }
                     }
                 }catch (Exception e){
+                    Log.d("TAG", "onClick: "+e.getMessage());
                     Toast.makeText(UpdateDetailTypeOne.this, "please fill all room count properly", Toast.LENGTH_SHORT).show();
                     dialog2.dismiss();
 

@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +19,6 @@ import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
-import com.google.android.gms.common.api.Api;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -68,7 +65,7 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
         dialog2.setCancelable(false);
         dialog2.show();
         schoolName=findViewById(R.id.schoolName);
-        editClassRoomDetails=findViewById(R.id.editClassRoomDetails);
+        editClassRoomDetails=findViewById(R.id.editWIFIRoomDetails);
         schoolAddress=findViewById(R.id.schoolAddress);
         totalClassRooms=findViewById(R.id.totalClassRoomsAfterSubmit);
         edtPodiumClassAfterSubmit=findViewById(R.id.edtPodiumClassAfterSubmit);

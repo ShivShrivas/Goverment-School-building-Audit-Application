@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.buildingaudit.Activies.OnSubmitClassRoomPage;
+import com.example.buildingaudit.ConstantValues.ConstantFile;
 import com.example.buildingaudit.R;
 import com.squareup.picasso.Picasso;
 
@@ -39,7 +40,7 @@ public class OnlineImageRecViewAdapter extends RecyclerView.Adapter<OnlineImageR
     @Override
     public void onBindViewHolder(@NonNull HistoryItemViewHolder holder, int position) {
         String dummyUrl=imageUrlString[position];
-        String newImgUrl=dummyUrl.replace(" ../wwwroot","http://schoolgradingapiservices.bsninfotech.net");
+        String newImgUrl=dummyUrl.replace(" ../wwwroot", ConstantFile.IMAGE_BASE_URL);
         String newUrl2=newImgUrl.replaceAll("\"","");
         Glide.with(holder.imageMain1).load(newUrl2).placeholder(R.drawable.background).into(holder.imageMain1);
 

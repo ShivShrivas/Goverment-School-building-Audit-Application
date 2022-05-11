@@ -1,17 +1,22 @@
 package com.example.buildingaudit.Activies;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -28,7 +33,9 @@ import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.Adapters.ImageAdapter5;
 import com.example.buildingaudit.ApplicationController;
+import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -36,16 +43,25 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,11 +91,12 @@ Dialog dialog;
         adapter2.notifyDataSetChanged();
     }
 
+    String currentImagePath=null;
+    File imageFile=null;
 
-    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
+    public ArrayList<File> arrayListImages2 = new ArrayList<>();
     int btnType;
-    ImageAdapter4 adapter1;
+    ImageAdapter5 adapter1;
     Dialog dialog2;
     ImageAdapter3 adapter2;
     ConstraintLayout constraintLayout34;
@@ -175,33 +192,80 @@ EditText edtBoundryWallOtherScheme;
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsBoundryWall.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailsBoundryWall.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages2.add(imageFile);
+                                            Uri imageUri= FileProvider.getUriForFile(UpdateDetailsBoundryWall.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailsBoundryWall.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
@@ -267,7 +331,16 @@ EditText edtBoundryWallOtherScheme;
             }
         });
     }
+    private File getImageFile() throws IOException {
+        String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String imageName="jpg+"+timeStamp+"_";
+        File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
+        currentImagePath=imageFile.getAbsolutePath();
+        Log.d("TAG", "getImageFile: "+currentImagePath);
+        return imageFile;
+    }
     private void runService() {
         String sheme;
         if (spinnerBoundryScheme.getSelectedItem().toString().equals("Others")){
@@ -283,8 +356,27 @@ EditText edtBoundryWallOtherScheme;
       }
         RestClient restClient = new RestClient();
         ApiService apiService = restClient.getApiService();
+        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages2.size()];
+        for (int i = 0; i < arrayListImages2.size(); i++) {
+            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages2.get(i).getPath());
+            File compressedImage = new Compressor.Builder(UpdateDetailsBoundryWall.this)
+                    .setMaxWidth(720)
+                    .setMaxHeight(720)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(new File(arrayListImages2.get(i).getPath()));
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                    compressedImage);
+            surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
+
+        }
+
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(),sheme, OtherScheme,arrayListImages2));
         Log.d("TAG", "onClick: " + paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(), sheme,OtherScheme, arrayListImages2));
-        Call<List<JsonObject>> call = apiService.uploadBoundryWall(paraBoundry("1", "15", "BoundaryWallPhoto", applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), spinnerBoundaryWallAvail.getSelectedItem().toString(), edtAreaofSchool.getText().toString(), edtLengthofWall.getText().toString(), spinnerTypeBoundaryWall.getSelectedItem().toString(), spinnerWhiteWash.getSelectedItem().toString(), spinnerWallCondition.getSelectedItem().toString(),sheme, OtherScheme,arrayListImages2));
+        Call<List<JsonObject>> call = apiService.uploadBoundryWall(surveyImagesParts,description);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -325,7 +417,7 @@ EditText edtBoundryWallOtherScheme;
 
     }
 
-    private JsonObject paraBoundry(String s, String s1, String boundaryWallPhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6,String toString7, ArrayList<Bitmap> arrayListImages2) {
+    private String paraBoundry(String s, String s1, String boundaryWallPhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6,String toString7, ArrayList<File> arrayListImages2) {
         JsonObject jsonObject=new JsonObject();
         if (toString.equals("No")){
             jsonObject.addProperty("Action",s);
@@ -345,13 +437,13 @@ EditText edtBoundryWallOtherScheme;
             jsonObject.addProperty("Condition","");
             jsonObject.addProperty("Scheme","");
             jsonObject.addProperty("OtherSchemeYN","");
-
-            JsonArray jsonArray2 = new JsonArray();
-            for (int i = 0; i < arrayListImages2.size(); i++) {
-                jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
-
-            }
-            jsonObject.add("BoundaryWallPhoto", (JsonElement) jsonArray2);
+//
+//            JsonArray jsonArray2 = new JsonArray();
+//            for (int i = 0; i < arrayListImages2.size(); i++) {
+//                jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
+//
+//            }
+//            jsonObject.add("BoundaryWallPhoto", (JsonElement) jsonArray2);
         }else{
             jsonObject.addProperty("Action",s);
             jsonObject.addProperty("ParamId",s1);
@@ -370,16 +462,16 @@ EditText edtBoundryWallOtherScheme;
             jsonObject.addProperty("Condition",toString5);
             jsonObject.addProperty("Scheme",toString6);
             jsonObject.addProperty("OtherSchemeYN",toString7);
-
-            JsonArray jsonArray2 = new JsonArray();
-            for (int i = 0; i < arrayListImages2.size(); i++) {
-                jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
-
-            }
-            jsonObject.add("BoundaryWallPhoto", (JsonElement) jsonArray2);
+//
+//            JsonArray jsonArray2 = new JsonArray();
+//            for (int i = 0; i < arrayListImages2.size(); i++) {
+//                jsonArray2.add(paraGetImageBase64( arrayListImages2.get(i), i));
+//
+//            }
+//            jsonObject.add("BoundaryWallPhoto", (JsonElement) jsonArray2);
         }
 
-        return jsonObject;
+        return jsonObject.toString();
     }
 
 
@@ -423,10 +515,10 @@ EditText edtBoundryWallOtherScheme;
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK ) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-
-
-            arrayListImages2.add(bitmap);
+//            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//
+//
+//            arrayListImages2.add(bitmap);
 
 
 

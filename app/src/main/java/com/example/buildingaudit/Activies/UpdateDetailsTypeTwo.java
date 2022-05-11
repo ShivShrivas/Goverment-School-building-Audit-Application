@@ -3,15 +3,20 @@ package com.example.buildingaudit.Activies;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -27,7 +32,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.example.buildingaudit.ApplicationController;
+import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -36,16 +44,26 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,12 +89,20 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
         adapter.notifyDataSetChanged();
 
     }
-    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
+    String currentImagePath=null;
+    File imageFile=null;
+    ArrayAdapter<String> arrayAdapter2;
+    ArrayAdapter<String> arrayAdapter;
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
+
+    public ArrayList<File> arrayListImages1 = new ArrayList<>();
 Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,spinnerFurnitureAvailabilty;
-    ImageAdapter4 adapter;
+    ImageAdapter5 adapter;
     Dialog dialog,dialog2;
+    String action;
     ImageView staffRoomImageUploadBtn;
-    RecyclerView recyclerViewTwoTypetwo;
+    RecyclerView recyclerViewTwoTypetwo,recyclerViewTwoTypetwoFromServer;
     ConstraintLayout constraintLayout22;
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
@@ -84,6 +110,9 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setContentView(R.layout.activity_update_details_type_two);
+        Intent i=getIntent();
+        action=i.getStringExtra("Action");
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
@@ -97,7 +126,6 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_details_type_two);
         applicationController= (ApplicationController) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -108,6 +136,9 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
                 onBackPressed();
             }
         });
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
         spinnerRoomAvailabel=findViewById(R.id.spinnerStaffRoomAvailability);
         spinnerAlmiraAndRacksAvailabilty=findViewById(R.id.spinnerAlmiraAndRacksAvailabilty);
         spinnerFurnitureAvailabilty=findViewById(R.id.spinnerFurnitureAvailabilty);
@@ -117,13 +148,14 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         SubmitBtnStaffRoom=findViewById(R.id.SubmitBtnStaffRoom);
         staffRoomImageUploadBtn=findViewById(R.id.staffRoomImageUploadBtn);
         recyclerViewTwoTypetwo=findViewById(R.id.recyclerViewTwoTypetwo);
+        recyclerViewTwoTypetwoFromServer=findViewById(R.id.recyclerViewTwoTypetwoFromServer);
         constraintLayout22=findViewById(R.id.constraintLayout22);
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
         arrayListSpinner.add("Yes");
         arrayListSpinner.add("No");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
+         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerRoomAvailabel.setAdapter(arrayAdapter);
         spinnerFurnitureAvailabilty.setAdapter(arrayAdapter);
@@ -134,7 +166,7 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         arrayListSpinner2.add("Major Repairing");
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
-        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner2);
+        arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner2);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
 
         spinnerRoomStatus.setAdapter(arrayAdapter2);
@@ -142,40 +174,86 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         staffRoomImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Dexter.withActivity(UpdateDetailsTypeTwo.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailsTypeTwo.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages1.add(imageFile);
+                                            Uri imageUri= FileProvider.getUriForFile(UpdateDetailsTypeTwo.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailsTypeTwo.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
         });
         recyclerViewTwoTypetwo.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter = new ImageAdapter4(this, arrayListImages1);
+        adapter = new ImageAdapter5(this, arrayListImages1);
         recyclerViewTwoTypetwo.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         spinnerRoomAvailabel.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -202,7 +280,14 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
                         dialog2.dismiss();
                         Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                     }else {
-                        runService();
+
+                        if (arrayListImages1.size()==0 && action.equals("3") && aList.size()==0){
+                            Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+                        }else{
+
+                            runService();
+                        }
                     }
 
                 }else
@@ -214,13 +299,90 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
         });
     }
 
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkStaffRoomDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"2"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                int spinnerPositionForFurnitureAvl = arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
+                int spinnerPositionForAlmirahRacksAvl = arrayAdapter.getPosition(response.body().get(0).get("AlmirahRacksAvl").getAsString());
+                int spinnerPositionForstatus = arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString());
+                spinnerRoomAvailabel.setSelection(spinnerPositionForSeperateRoomsAvl);
+                spinnerAlmiraAndRacksAvailabilty.setSelection(spinnerPositionForAlmirahRacksAvl);
+                spinnerFurnitureAvailabilty.setSelection(spinnerPositionForFurnitureAvl);
+                spinnerRoomStatus.setSelection(spinnerPositionForstatus);
+
+                recyclerViewTwoTypetwoFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsTypeTwo.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsTypeTwo.this,aList);
+                recyclerViewTwoTypetwoFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
+    private File getImageFile() throws IOException{
+        String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String imageName="jpg+"+timeStamp+"_";
+        File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile=File.createTempFile(imageName,".jpg",storageDir);
+
+        currentImagePath=imageFile.getAbsolutePath();
+        Log.d("TAG", "getImageFile: "+currentImagePath);
+        return imageFile;
+    }
     private void runService() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onClick: "+paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
+//        Log.d("TAG", "onClick: "+paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
+//                applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
+        for (int i = 0; i < arrayListImages1.size(); i++) {
+            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+            File compressedImage = new Compressor.Builder(UpdateDetailsTypeTwo.this)
+                    .setMaxWidth(720)
+                    .setMaxHeight(720)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(new File(arrayListImages1.get(i).getPath()));
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                    compressedImage);
+            surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
+
+        }
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paramStaffDetails(action,"2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
                 applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadStaffRoomDetails(paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
-                applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadStaffRoomDetails(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -260,7 +422,24 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
 
     }
 
-    private JsonObject paramStaffDetails(String action, String paramId, String staffRoomDetails, String roomAvail, String Status, String FurnitureAvl, String AlmirahRacksAvl, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+
+    private String paramStaffDetails(String action, String paramId, String staffRoomDetails, String roomAvail, String Status, String FurnitureAvl, String AlmirahRacksAvl, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<File> arrayListImages1) {
 
         JsonObject jsonObject=new JsonObject();
             if (roomAvail.equals("No")){
@@ -293,24 +472,22 @@ Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,
                 jsonObject.addProperty("UserCode",userid);
             }
 
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//            JsonArray jsonArray = new JsonArray();
+//            for (int i = 0; i < arrayListImages1.size(); i++) {
+//                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            }
+//            jsonObject.add("StaffPhotos", (JsonElement) jsonArray);
 
-            }
-            jsonObject.add("StaffPhotos", (JsonElement) jsonArray);
 
-
-        return jsonObject;
+        return jsonObject.toString();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK ) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
 
-                arrayListImages1.add(bitmap);
 
 
         }
