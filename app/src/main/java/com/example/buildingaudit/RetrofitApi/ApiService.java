@@ -391,9 +391,11 @@ public  interface ApiService {
     Call<List<JsonObject>> uploadPrincipal(@Body JsonObject object);
 
 
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SArtCraftRoomDetails")
-    Call<List<JsonObject>> uploadArtAndCraft(@Body JsonObject object);
+    Call<List<JsonObject>> uploadArtAndCraft(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody body,@Part("PhotoDeleteData") RequestBody deletulrs);
+
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/ViewArtCraftRoomDetails")

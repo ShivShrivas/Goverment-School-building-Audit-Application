@@ -434,6 +434,7 @@ Button submitWIFIBtn;
         Log.d("TAG", "paraWifi: "+  jsonObject.toString());
         return jsonObject.toString();
     }
+
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();

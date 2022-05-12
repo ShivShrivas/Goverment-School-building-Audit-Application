@@ -146,6 +146,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView25" />
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
+    <LinearLayout
+        android:id="@+id/layout_mainscroll"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
+
     <LinearLayout
         android:id="@+id/linearLayout11"
         android:layout_width="match_parent"
@@ -325,7 +343,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <Button
         android:id="@+id/ArtAndCraftsubmitLabBtn"
         android:layout_width="match_parent"
@@ -333,6 +350,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:background="?attr/colorPrimary"
         android:text="Submit"
         android:textColor="@color/white"
@@ -341,4 +359,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPR" />
+    </LinearLayout>
+    </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,7 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     ConstraintLayout constraintLayoutAC;
     EditText edtArtAndCraftRoomPhysicalStatus,ArtAndCraftRoomWorkingStatus,edtArtAndCraftRoomAvailabelty;
-    TextView UploadedImageAC;
+    TextView UploadedImageAC,editArtCraftDetails;
     RecyclerView recyclerViewArtAndCraftOnSub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
         ArtAndCraftRoomWorkingStatus=findViewById(R.id.ArtAndCraftRoomWorkingStatus);
         edtArtAndCraftRoomAvailabelty=findViewById(R.id.edtArtAndCraftRoomAvailabelty);
         UploadedImageAC=findViewById(R.id.UploadedImageAC);
+        editArtCraftDetails=findViewById(R.id.editArtCraftDetails);
 
         edtArtAndCraftRoomPhysicalStatus.setEnabled(false);
                 ArtAndCraftRoomWorkingStatus.setEnabled(false);
@@ -109,7 +111,15 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
         });
 
 
-
+        editArtCraftDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_ArtAndCraft.this,UpdateDetailsArtAndCraft.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+                finish();
+            }
+        });
 
 
 
