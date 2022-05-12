@@ -34,7 +34,7 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     EditText edtGymAvailabelty,gymWorkingStatus,edtGymArea;
     RecyclerView recyclerViewGymOnSubmit;
-    TextView gymUploadtxt;
+    TextView gymUploadtxt,editOpenGymDetails;
     ConstraintLayout gymLayout;
     ApplicationController applicationController;
 
@@ -67,13 +67,21 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
         gymWorkingStatus=findViewById(R.id.gymWorkingStatus);
         gymLayout=findViewById(R.id.gymLayout);
         gymUploadtxt=findViewById(R.id.gymUploadtxt);
+        editOpenGymDetails=findViewById(R.id.editOpenGymDetails);
         edtGymArea=findViewById(R.id.edtGymArea);
         recyclerViewGymOnSubmit=findViewById(R.id.recyclerViewGymOnSubmit);
         recyclerViewGymOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         disabledEdtBox();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-
+        editOpenGymDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_OpenGYmDetails.this,UpdateDetailsGym.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+            }
+        });
         Call<List<JsonObject>> call=apiService.checkGymDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"6"));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

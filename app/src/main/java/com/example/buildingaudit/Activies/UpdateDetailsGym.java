@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
@@ -63,6 +64,7 @@ import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -102,13 +104,17 @@ public class UpdateDetailsGym extends AppCompatActivity {
     ImageView gymImageUploadBtn;
     Dialog dialog;
     Dialog dialog2;
+    ArrayAdapter<String> arrayAdapter,arrayAdapter1;
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
+    String action;
     ApplicationController applicationController;
     Button GymsubmitLabBtn;
     EditText edtGymArea;
     TextView userName,schoolAddress,schoolName;
     InputStream imageStream;
     ConstraintLayout constraintLayout29;
-    RecyclerView recyclerViewGym;
+    RecyclerView recyclerViewGym,recyclerViewGymFromServer;
 Spinner spinnerGymAvailabelty,gymWorkingStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +128,9 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
                 onBackPressed();
             }
         });
+        Intent i=getIntent();
+        action=i.getStringExtra("Action");
+
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
@@ -134,6 +143,9 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
         spinnerGymAvailabelty=findViewById(R.id.spinnerGymAvailabelty);
         gymWorkingStatus=findViewById(R.id.gymWorkingStatus);
         recyclerViewGym=findViewById(R.id.recyclerViewGym);
@@ -142,6 +154,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         gymImageUploadBtn=findViewById(R.id.gymImageUploadBtn);
         constraintLayout29=findViewById(R.id.constraintLayout29);
         edtGymArea=findViewById(R.id.edtGymArea);
+        recyclerViewGymFromServer=findViewById(R.id.recyclerViewGymFromServer);
         GymsubmitLabBtn=findViewById(R.id.GymsubmitLabBtn);
         applicationController= (ApplicationController) getApplication();
         schoolName.setText(applicationController.getSchoolName());
@@ -150,7 +163,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+     arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerGymAvailabelty.setAdapter(arrayAdapter);
 
@@ -159,7 +172,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         arrayListLevellingStatus.add("Functional");
         arrayListLevellingStatus.add("Non Functional");
 
-        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLevellingStatus);
+ arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLevellingStatus);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         gymWorkingStatus.setAdapter(arrayAdapter1);
 
@@ -282,6 +295,47 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             }
         });
     }
+
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkGymDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"6"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                spinnerGymAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
+                int spinnerPositionForworkignStatus = arrayAdapter1.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                gymWorkingStatus.setSelection(spinnerPositionForworkignStatus);
+                edtGymArea.setText(response.body().get(0).get("Areainsqmtr").getAsString());
+
+
+                recyclerViewGymFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsGym.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsGym.this,aList);
+                recyclerViewGymFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
     private File getImageFile() throws IOException{
         String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String imageName="jpg+"+timeStamp+"_";
@@ -313,10 +367,16 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
 
         }
-
-        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraGymDetails("1","6","OpneGym",spinnerGymAvailabelty.getSelectedItem().toString(),gymWorkingStatus.getSelectedItem().toString(), edtGymArea.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraGymDetails("1","6","OpneGym",spinnerGymAvailabelty.getSelectedItem().toString(),gymWorkingStatus.getSelectedItem().toString(), edtGymArea.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadGymDetails(surveyImagesParts,description);
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraGymDetails(action,"6","OpneGym",spinnerGymAvailabelty.getSelectedItem().toString(),gymWorkingStatus.getSelectedItem().toString(), edtGymArea.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Log.d("TAG", "onClick: "+paraGymDetails(action,"6","OpneGym",spinnerGymAvailabelty.getSelectedItem().toString(),gymWorkingStatus.getSelectedItem().toString(), edtGymArea.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadGymDetails(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -353,6 +413,23 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
 
             }
         });
+    }
+
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
     }
 
     private String paraGymDetails(String action, String paramId, String opneGym, String availabilty, String workingstatus, String area, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<File> arrayListImages1) {

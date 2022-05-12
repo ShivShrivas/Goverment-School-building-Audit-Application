@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -65,7 +66,7 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
         dialog2.setCancelable(false);
         dialog2.show();
         schoolName=findViewById(R.id.schoolName);
-        editClassRoomDetails=findViewById(R.id.editWIFIRoomDetails);
+        editClassRoomDetails=findViewById(R.id.editClassRoomDetails);
         schoolAddress=findViewById(R.id.schoolAddress);
         totalClassRooms=findViewById(R.id.totalClassRoomsAfterSubmit);
         edtPodiumClassAfterSubmit=findViewById(R.id.edtPodiumClassAfterSubmit);
@@ -87,20 +88,10 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
         editClassRoomDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-
-
-                    textView.setText("Sorry!! \n This option is not available now");
-
-                dialog.show();
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        dialog.dismiss();
-                    }
-                });
+                Intent i=new Intent(OnSubmitClassRoomPage.this,UpdateDetailTypeOne.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+                finish();
 
             }
         });
@@ -146,11 +137,11 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
                 recyclerViewTwoTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter);
 
 
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,majorRepairingList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,minorRepairingList);
                 recyclerViewThreeTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter2);
 
 
-              OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,minorRepairingList);
+              OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,majorRepairingList);
                 recyclerViewFourTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter3);
                 onlineImageRecViewAdapter.notifyDataSetChanged();
 

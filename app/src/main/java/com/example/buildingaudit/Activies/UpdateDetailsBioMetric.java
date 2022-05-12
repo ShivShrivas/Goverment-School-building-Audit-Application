@@ -44,6 +44,7 @@ import android.widget.Toast;
 import com.example.buildingaudit.Adapters.ImageAdapter3;
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.BuildConfig;
 import com.example.buildingaudit.CompressLib.Compressor;
@@ -71,6 +72,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -94,19 +96,23 @@ public class UpdateDetailsBioMetric extends AppCompatActivity {
 
     int btnType;
     ImageAdapter5 adapter1;
-
+    String action;
 Spinner spinneruserbiometricStudent,
         spinnerBiometricWorkingStatus,spinneruserbiometricStaff,spinnerBioMetricInstallationYear,
         spinnerBioMetricMachineAvailabelty;
 ConstraintLayout constraintLayout35;
     ImageView bioMetricImageUploadBtn;
     EditText edtBioMetricMachineCount;
-    RecyclerView recyclerViewBioMetric;
+    RecyclerView recyclerViewBioMetric,recyclerViewBioMetricFromServer;
+    ArrayAdapter<String> adapter;
+    ArrayAdapter<String> arrayAdapter2,arrayAdapter1;
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
     Button buttonBiometricSubmit;
     Dialog dialog;
     Dialog dialog2;
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
     String currentImagePath=null;
     File imageFile=null;
     public static final int MEDIA_TYPE_IMAGE = 1;
@@ -144,6 +150,8 @@ ConstraintLayout constraintLayout35;
 
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        Intent i1=getIntent();
+        action=i1.getStringExtra("Action");
         buttonBiometricSubmit=findViewById(R.id.buttonBiometricSubmit);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
@@ -166,7 +174,9 @@ ConstraintLayout constraintLayout35;
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
-
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
         bioMetricImageUploadBtn=findViewById(R.id.bioMetricImageUploadBtn);
         spinneruserbiometricStudent=findViewById(R.id.spinneruserbiometricStudent);
         spinnerBiometricWorkingStatus=findViewById(R.id.spinnerBiometricWorkingStatus);
@@ -175,13 +185,14 @@ ConstraintLayout constraintLayout35;
         spinnerBioMetricMachineAvailabelty=findViewById(R.id.spinnerBioMetricMachineAvailabelty);
         edtBioMetricMachineCount=findViewById(R.id.edtBioMetricMachineCount);
         constraintLayout35=findViewById(R.id.constraintLayout35);
+        recyclerViewBioMetricFromServer=findViewById(R.id.recyclerViewBioMetricFromServer);
 
         recyclerViewBioMetric=findViewById(R.id.recyclerViewBioMetric);
 
         ArrayList<String> arrayList1=new ArrayList<>();
         arrayList1.add("Yes");
         arrayList1.add("No");
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
+        adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
         adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
 
 
@@ -198,7 +209,7 @@ ConstraintLayout constraintLayout35;
         for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
             arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
         }
-        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
+      arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
 
         spinnerBioMetricInstallationYear.setAdapter(arrayAdapter1);
@@ -209,7 +220,7 @@ ConstraintLayout constraintLayout35;
         arrayListWorkingStatus.add("Functional");
         arrayListWorkingStatus.add("Non Functional");
 
-        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
+   arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerBiometricWorkingStatus.setAdapter(arrayAdapter2);
 
@@ -342,6 +353,52 @@ ConstraintLayout constraintLayout35;
             }
         });
     }
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkBioMetricDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"9"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForSeperateRoomsAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForBioStaff = adapter.getPosition(response.body().get(0).get("BiometricUseStaff").getAsString());
+                int spinnerPositionForBioStu = adapter.getPosition(response.body().get(0).get("BiometricUseStudent").getAsString());
+                int spinnerPositionForYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+                int spinnerPositionForworkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                spinnerBioMetricMachineAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
+                spinneruserbiometricStaff.setSelection(spinnerPositionForBioStaff);
+                spinneruserbiometricStudent.setSelection(spinnerPositionForBioStu);
+                spinnerBioMetricInstallationYear.setSelection(spinnerPositionForYear);
+                spinnerBiometricWorkingStatus.setSelection(spinnerPositionForworkingStatus);
+                edtBioMetricMachineCount.setText(response.body().get(0).get("NoOfMachines").getAsString());
+
+
+                recyclerViewBioMetricFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsBioMetric.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsBioMetric.this,aList);
+                recyclerViewBioMetricFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
     private File getImageFile() throws IOException{
         String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String imageName="jpg+"+timeStamp+"_";
@@ -376,9 +433,16 @@ ConstraintLayout constraintLayout35;
             surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
 
         }
-        Log.d("TAG", "onClick: "+ paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
-        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraBioMetric("1", "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
-        Call<List<JsonObject>> call=apiService.uploadBiometricv2(surveyImagesParts,description);
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        Log.d("TAG", "onClick: "+ paraBioMetric(action, "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraBioMetric(action, "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
+        Call<List<JsonObject>> call=apiService.uploadBiometricv2(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -391,6 +455,23 @@ ConstraintLayout constraintLayout35;
                 dialog2.dismiss();
             }
         });
+    }
+
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
     }
 
     private String paraBioMetric(String action, String paramId, String bioMetricDetails, String availabilty,

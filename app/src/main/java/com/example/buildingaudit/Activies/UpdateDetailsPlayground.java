@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
@@ -56,6 +57,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -89,8 +91,11 @@ public class UpdateDetailsPlayground extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
+    String action;
     String currentImagePath=null;
     File imageFile=null;
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
     ImageAdapter5 adapter6;
     TextView userName,schoolAddress,schoolName;
@@ -99,8 +104,9 @@ ConstraintLayout constraintLayout25;
     ApplicationController applicationController;
     EditText edtAreaOfPlayGround;
     Dialog dialog;
+    ArrayAdapter<String> arrayAdapter,arrayAdapter1;
     Dialog dialog2;
-    RecyclerView recyclerViewPlayground;
+    RecyclerView recyclerViewPlayground,recyclerViewPlaygroundFromServer;
     Button submitPlayGroundBtn;
 Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatus;
     @Override
@@ -117,6 +123,8 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
                 onBackPressed();
             }
         });
+        Intent i=getIntent();
+        action=i.getStringExtra("Action");
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
@@ -139,13 +147,16 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
         spinnerRoomAvailabelty=findViewById(R.id.spinnerPlaygroundAvailabelty);
         edtAreaOfPlayGround=findViewById(R.id.edtAreaOfPlayGround);
         recyclerViewPlayground=findViewById(R.id.recyclerViewPlayground);
+        recyclerViewPlaygroundFromServer=findViewById(R.id.recyclerViewPlaygroundFromServer);
         submitPlayGroundBtn=findViewById(R.id.submitPlayGroundBtn);
         spinnertrackAvalabiltyStatus=findViewById(R.id.spinnertrackAvalabiltyStatus);
-
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+         arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerRoomAvailabelty.setAdapter(arrayAdapter);
         spinnertrackAvalabiltyStatus.setAdapter(arrayAdapter);
@@ -156,7 +167,7 @@ Spinner spinnerLevelingStatus,spinnerRoomAvailabelty,spinnertrackAvalabiltyStatu
         arrayListLevellingStatus.add("Average");
         arrayListLevellingStatus.add("Bad");
 
-        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLevellingStatus);
+         arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLevellingStatus);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerLevelingStatus.setAdapter(arrayAdapter1);
 
@@ -284,6 +295,47 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
             }
         });
     }
+
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkPlayGroundDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"5"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForStandardTrack = arrayAdapter.getPosition(response.body().get(0).get("AvailabiltyStandardTrack").getAsString());
+                int spinnerPositionForLevellingStatus = arrayAdapter1.getPosition(response.body().get(0).get("LevellingStatus").getAsString());
+                spinnerRoomAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
+                spinnertrackAvalabiltyStatus.setSelection(spinnerPositionForStandardTrack);
+                spinnerLevelingStatus.setSelection(spinnerPositionForLevellingStatus);
+
+                recyclerViewPlaygroundFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsPlayground.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsPlayground.this,aList);
+                recyclerViewPlaygroundFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
     private File getImageFile() throws IOException {
         String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String imageName="jpg+"+timeStamp+"_";
@@ -315,9 +367,16 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
             surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
 
         }
-        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraPlayGroundDetails("1","5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "runService: "+paraPlayGroundDetails("1","5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadPlaygroundDetails(surveyImagesParts,description);
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraPlayGroundDetails(action,"5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Log.d("TAG", "runService: "+paraPlayGroundDetails(action,"5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadPlaygroundDetails(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -354,6 +413,22 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
 
             }
         });
+    }
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
     }
 
     private String paraPlayGroundDetails(String action, String paramId, String playGroundDetails, String availabilty, String levelingStatus, String area, String standardTrack, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<File> arrayListImages1) {

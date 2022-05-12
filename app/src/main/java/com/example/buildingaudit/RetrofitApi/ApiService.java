@@ -67,7 +67,7 @@ public  interface ApiService {
     @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SClassRoomDetails")
-    Call<List<JsonObject>> uploadClassRoomDetails(@Part MultipartBody.Part[] part,@Part MultipartBody.Part[] part1,@Part MultipartBody.Part[] part2,@Part("RequestData") RequestBody object);
+    Call<List<JsonObject>> uploadClassRoomDetails(@Part MultipartBody.Part[] part,@Part MultipartBody.Part[] part1,@Part MultipartBody.Part[] part2,@Part("RequestData") RequestBody object,@Part("PhotoDeleteGood") RequestBody deletulrs,@Part("PhotoDeleteMajor") RequestBody deletulrs1,@Part("PhotoDeleteMinor") RequestBody deletulrs2);
 
 
 
@@ -123,7 +123,7 @@ public  interface ApiService {
         @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SOpenGYMDetails")
-    Call<List<JsonObject>> uploadGymDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
+    Call<List<JsonObject>> uploadGymDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
 //
@@ -134,7 +134,7 @@ public  interface ApiService {
     @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SPlayGroundDetails")
-    Call<List<JsonObject>> uploadPlaygroundDetails(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody requestBody);
+    Call<List<JsonObject>> uploadPlaygroundDetails(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
 
@@ -153,7 +153,7 @@ public  interface ApiService {
     @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SLibraryDetails")
-    Call<List<JsonObject>> uploadLibraryDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
+    Call<List<JsonObject>> uploadLibraryDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
@@ -406,7 +406,7 @@ public  interface ApiService {
 
     @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
-    @POST("PhysicalParam/SBiometricv2")
-    Call<List<JsonObject>> uploadBiometricv2(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object);
+    @POST("PhysicalParam/SBiometricDetails")
+    Call<List<JsonObject>> uploadBiometricv2(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 }

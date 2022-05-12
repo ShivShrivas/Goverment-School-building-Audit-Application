@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,7 @@ EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGrou
     ApplicationController applicationController;
     RecyclerView recyclerViewPlayground;
 ConstraintLayout playGroundlayout;
-TextView PGImageUploadTxt;
+TextView PGImageUploadTxt,editPlayGroundDetails;
 
     TextView userName,schoolAddress,schoolName;
     @Override
@@ -64,6 +65,7 @@ TextView PGImageUploadTxt;
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         PGImageUploadTxt=findViewById(R.id.PGImageUploadTxt);
+        editPlayGroundDetails=findViewById(R.id.editPlayGroundDetails);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewPlayground.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -110,7 +112,14 @@ TextView PGImageUploadTxt;
             }
         });
 
-
+        editPlayGroundDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_PlaygroundDetails.this,UpdateDetailsPlayground.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+            }
+        });
 
     }
 

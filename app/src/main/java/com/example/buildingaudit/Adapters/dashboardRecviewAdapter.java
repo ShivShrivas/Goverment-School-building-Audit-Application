@@ -636,9 +636,11 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////"+response);
                 if (response.body().size()==0){
-                    context.startActivity(new Intent(context, UpdateDetailsBioMetric.class));
+                    Intent i=new Intent(context,UpdateDetailsBioMetric.class);
+                    i.putExtra("Action","1");
+                    context.startActivity(i);
                 }else {
-                    context.startActivity(new Intent(context, UpdateDetailsBioMetric.class));
+                    context.startActivity(new Intent(context, OnSubmit_BioMetricDetails.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 //
 //                    context.startActivity(i);
@@ -682,7 +684,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().size()==0){
-                    context.startActivity(new Intent(context, UpdateDetailsTypeFour.class));
+                    Intent i= new Intent(context, UpdateDetailsTypeFour.class);
+                    i.putExtra("Action","1");
+                    context.startActivity(i);
                 }else {
                     context.startActivity(new Intent(context, OnSubmit_LibraryDetails.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
@@ -706,7 +710,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().size()==0){
-                    context.startActivity(new Intent(context, UpdateDetailsPlayground.class));
+                    Intent i=new Intent(context,UpdateDetailsPlayground.class);
+                    i.putExtra("Action","1");
+                    context.startActivity(i);
                 }else {
                     context.startActivity(new Intent(context, OnSubmit_PlaygroundDetails.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
@@ -781,7 +787,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().size()==0){
-                    context.startActivity(new Intent(context, UpdateDetailsGym.class));
+                    Intent i=new Intent(context,UpdateDetailsGym.class);
+                    i.putExtra("Action","1");
+                    context.startActivity(i);
                 }else {
                     context.startActivity(new Intent(context, OnSubmit_OpenGYmDetails.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
@@ -805,7 +813,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().size()==0){
-                    context.startActivity(new Intent(context, UpdateDetailTypeOne.class));
+                    Intent i= new Intent(context, UpdateDetailTypeOne.class);
+                    i.putExtra("Action","1");
+                    context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 

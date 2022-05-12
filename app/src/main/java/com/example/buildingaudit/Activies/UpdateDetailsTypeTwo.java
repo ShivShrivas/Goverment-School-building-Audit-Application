@@ -95,12 +95,12 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter;
     String[] StaffPhotoPathList;
     ArrayList<String> aList=new ArrayList<>();
+    String action;
 
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
-Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,spinnerFurnitureAvailabilty;
+    Spinner spinnerRoomAvailabel,spinnerRoomStatus,spinnerAlmiraAndRacksAvailabilty,spinnerFurnitureAvailabilty;
     ImageAdapter5 adapter;
     Dialog dialog,dialog2;
-    String action;
     ImageView staffRoomImageUploadBtn;
     RecyclerView recyclerViewTwoTypetwo,recyclerViewTwoTypetwoFromServer;
     ConstraintLayout constraintLayout22;

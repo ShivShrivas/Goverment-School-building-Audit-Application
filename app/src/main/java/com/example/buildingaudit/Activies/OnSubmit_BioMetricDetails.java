@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,7 @@ import retrofit2.Response;
 public class OnSubmit_BioMetricDetails extends AppCompatActivity {
     RecyclerView recyclerViewBioMetricOnSubmit;
     ApplicationController applicationController;
-    TextView userName,schoolAddress,schoolName;
+    TextView userName,schoolAddress,schoolName,editBioMetricDetails;
     ConstraintLayout layoutBioMetric;
     EditText edtBioMetricMachinecountOnSubmit,edtBioMetricMachineAvailabelty,edtBioMetricInstallationYear,edtuserbiometricStaff,edtuserbiometricStudent,edtBiometricWorkingStatus;
     @Override
@@ -66,12 +67,20 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
         edtBioMetricMachineAvailabelty=findViewById(R.id.edtBioMetricMachineAvailabelty);
                 edtBioMetricInstallationYear=findViewById(R.id.edtBioMetricInstallationYear);
         edtuserbiometricStaff=findViewById(R.id.edtuserbiometricStaff);
+        editBioMetricDetails=findViewById(R.id.editBioMetricDetails);
                 edtuserbiometricStudent=findViewById(R.id.edtuserbiometricStudent);
                 edtBiometricWorkingStatus=findViewById(R.id.edtBiometricWorkingStatus);
 
                 disableEditbox();
 
-
+        editBioMetricDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_BioMetricDetails.this,UpdateDetailsBioMetric.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+            }
+        });
         recyclerViewBioMetricOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
         RestClient restClient=new RestClient();

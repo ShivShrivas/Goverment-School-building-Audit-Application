@@ -33,15 +33,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter;
-import com.example.buildingaudit.Adapters.ImageAdapter3;
-import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable1;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable2;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -57,6 +59,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -68,7 +71,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdateDetailTypeOne extends AppCompatActivity {
-RecyclerView recyclerViewTwoTypeOne,recyclerViewThreeTypeOne,recyclerViewFourTypeOne;
+RecyclerView recyclerViewTwoTypeOne,recyclerViewThreeTypeOne,recyclerViewFourTypeOne,recyclerViewTwoTypeOneGoodConditionFromServer,recyclerViewMinorConditionFromServer,recyclerViewMjorRepairingFromServer;
 Spinner spinnerBoardClass;
 EditText edtPodiumClass,greenBoardCount,whiteBoardCont,blackBoardCount;
     TextView userName,schoolAddress,schoolName;
@@ -81,6 +84,7 @@ int cameraType;
     public ArrayList<File> arrayListImages4 = new ArrayList<>();
     ImageAdapter adapter;
     ImageAdapter5 adapter2;
+    String action;
     Dialog dialog,dialog2;
     String currentImagePath=null;
     ImageAdapter5 adapter3;
@@ -90,6 +94,12 @@ int cameraType;
     EditText majorRepairingClassroom,minorRepairingClassroom,goodCondtionClassroom,totalClassRooms;
     Button classRoomSubmitbtn;
     File imageFile=null;
+    ArrayAdapter<String> arrayAdapter2;
+    ArrayAdapter<String> arrayAdapter;
+    String[] goodConditionPathList,minorPhotoPath,majorPhotoPath;
+    ArrayList<String> aList=new ArrayList<>();
+    ArrayList<String> bList=new ArrayList<>();
+    ArrayList<String> cList=new ArrayList<>();
     @Override
     protected void onStart() {
         super.onStart();
@@ -126,7 +136,8 @@ int cameraType;
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2 = new Dialog(this);
-
+        Intent i=getIntent();
+        action=i.getStringExtra("Action");
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -139,8 +150,14 @@ int cameraType;
                 onBackPressed();
             }
         });
-        recyclerViewFourTypeOne=findViewById(R.id.recyclerViewFourTypeOne);
-        recyclerViewTwoTypeOne=findViewById(R.id.recyclerViewTwoTypeOne);
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
+        recyclerViewFourTypeOne=findViewById(R.id.recyclerViewMajorRepairing);
+        recyclerViewTwoTypeOne=findViewById(R.id.recyclerViewTwoTypeOneGoodCondition);
+        recyclerViewMjorRepairingFromServer=findViewById(R.id.recyclerViewMjorRepairingFromServer);
+        recyclerViewMinorConditionFromServer=findViewById(R.id.recyclerViewMinorConditionFromServer);
+        recyclerViewTwoTypeOneGoodConditionFromServer=findViewById(R.id.recyclerViewTwoTypeOneGoodConditionFromServer);
         constratinflayout=findViewById(R.id.constratinflayout);
         edtPodiumClass =findViewById(R.id.edtPodiumClass);
         blackBoardCount =findViewById(R.id.blackBoardCount);
@@ -148,7 +165,7 @@ int cameraType;
         whiteBoardCont =findViewById(R.id.whiteBoardCont);
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
-        recyclerViewThreeTypeOne=findViewById(R.id.recyclerViewThreeTypeOne);
+        recyclerViewThreeTypeOne=findViewById(R.id.recyclerViewMinorCondition);
         majorRepairingClassroom=findViewById(R.id.majorRepairingClassroom);
         minorRepairingClassroom=findViewById(R.id.minorRepairingClassroom);
         goodCondtionClassroom=findViewById(R.id.goodCondtionClassroom);
@@ -245,90 +262,106 @@ int cameraType;
                                 .show();
 
                     }else {
-                        if (arrayListImages3.size()==0 && arrayListImages2.size()==0 && arrayListImages4.size()==0){
+                        if (arrayListImages3.size() == 0 && arrayListImages2.size() == 0 && arrayListImages4.size() == 0) {
                             dialog2.dismiss();
 
                             Toast.makeText(UpdateDetailTypeOne.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
-                        }else {
-                        RestClient restClient=new RestClient();
-                        ApiService apiService=restClient.getApiService();
-
-                            MultipartBody.Part[] fileDataGood = new MultipartBody.Part[arrayListImages2.size()];
-                            for (int i = 0; i < arrayListImages2.size(); i++) {
-                                Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages2.get(i).getPath());
-                                    File compressFile=filrCompressor(arrayListImages2.get(i));
-                                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
-                                        compressFile);
-                                fileDataGood[i] = MultipartBody.Part.createFormData("FileDataGood",compressFile.getName(),surveyBody);
-
-                            }
+                        } else {
 
 
-                            MultipartBody.Part[] fileDataMinor = new MultipartBody.Part[arrayListImages3.size()];
-                            for (int i = 0; i < arrayListImages3.size(); i++) {
-                                Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages3.get(i).getPath());
-                                    File compressFile=filrCompressor(arrayListImages3.get(i));
-                                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
-                                        compressFile);
-                                fileDataMinor[i] = MultipartBody.Part.createFormData("FileDataMinor",compressFile.getName(),surveyBody);
 
-                            }
+                                RestClient restClient = new RestClient();
+                                ApiService apiService = restClient.getApiService();
 
-                            MultipartBody.Part[] fileDataMajor = new MultipartBody.Part[arrayListImages4.size()];
-                            for (int i = 0; i < arrayListImages4.size(); i++) {
-                                Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages4.get(i).getPath());
-                                    File compressFile=filrCompressor(arrayListImages4.get(i));
-                                RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
-                                        compressFile);
-                                fileDataMajor[i] = MultipartBody.Part.createFormData("FileDataMajor",compressFile.getName(),surveyBody);
+                                MultipartBody.Part[] fileDataGood = new MultipartBody.Part[arrayListImages2.size()];
+                                for (int i = 0; i < arrayListImages2.size(); i++) {
+                                    Log.d("TAG", "requestUploadSurvey: survey image " + i + "  " + arrayListImages2.get(i).getPath());
+                                    File compressFile = filrCompressor(arrayListImages2.get(i));
+                                    RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                                            compressFile);
+                                    fileDataGood[i] = MultipartBody.Part.createFormData("FileDataGood", compressFile.getName(), surveyBody);
 
-                            }
-
-                            RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
-                                    blackBoardCount.getText().toString(),whiteBoardCont.getText().toString(),greenBoardCount.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),"GoodConditionPhotos",arrayListImages2,"MajorRepairingPhotos",arrayListImages3,"MinorRepairingPhotos",arrayListImages4));
-                        Log.d("TAG", "onClick: "+paraClassRoomDetails("1","1","ClassRoomDetails",totalClassRoom,goodCondtionClassroom.getText().toString(),majorRepairingClassroom.getText().toString(),minorRepairingClassroom.getText().toString(),edtPodiumClass.getText().toString(),
-                                blackBoardCount.getText().toString(),whiteBoardCont.getText().toString(),greenBoardCount.getText().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),"GoodConditionPhotos",arrayListImages2,"MajorRepairingPhotos",arrayListImages3,"MinorRepairingPhotos",arrayListImages4));
-                        Call<List<JsonObject>> call=apiService.uploadClassRoomDetails(fileDataGood,fileDataMinor,fileDataMajor,description);
-                        call.enqueue(new Callback<List<JsonObject>>() {
-                            @Override
-                            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                                Log.d("TAG", "onResponse: "+response.body());
-                                TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                                Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-                                try {
-                                    if (response.body().get(0).get("Status").getAsString().equals("E")){
-                                        textView.setText("You already uploaded details ");
-
-                                    }else if(response.body().get(0).get("Status").getAsString().equals("S")){
-                                        textView.setText("Your details Submitted successfully ");
-                                    }
-                                    dialog2.dismiss();
-
-                                    dialog.show();
-                                    button.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View view) {
-                                            onBackPressed();
-                                            dialog.dismiss();
-                                        }
-                                    });
-                                }catch (Exception e){
-                                    dialog2.dismiss();
-
-                                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
                                 }
-                            }
 
-                            @Override
-                            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                                Log.d("TAG", "onFailure: "+t.getMessage());
-                                dialog2.dismiss();
 
-                            }
-                        });
+                                MultipartBody.Part[] fileDataMinor = new MultipartBody.Part[arrayListImages3.size()];
+                                for (int i = 0; i < arrayListImages3.size(); i++) {
+                                    Log.d("TAG", "requestUploadSurvey: survey image " + i + "  " + arrayListImages3.get(i).getPath());
+                                    File compressFile = filrCompressor(arrayListImages3.get(i));
+                                    RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                                            compressFile);
+                                    fileDataMinor[i] = MultipartBody.Part.createFormData("FileDataMinor", compressFile.getName(), surveyBody);
 
-                    }
+                                }
+
+                                MultipartBody.Part[] fileDataMajor = new MultipartBody.Part[arrayListImages4.size()];
+                                for (int i = 0; i < arrayListImages4.size(); i++) {
+                                    Log.d("TAG", "requestUploadSurvey: survey image " + i + "  " + arrayListImages4.get(i).getPath());
+                                    File compressFile = filrCompressor(arrayListImages4.get(i));
+                                    RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                                            compressFile);
+                                    fileDataMajor[i] = MultipartBody.Part.createFormData("FileDataMajor", compressFile.getName(), surveyBody);
+
+                                }
+                                RequestBody PhotoDeleteGood, PhotoDeleteMajor, PhotoDeleteMinor;
+                                if (action.equals("3")) {
+                                    Log.d("TAG", "onClick: "+paraDeletUlrs());
+                                    Log.d("TAG", "onClick: "+paraDeletUlrs1());
+                                    Log.d("TAG", "onClick: "+paraDeletUlrs2());
+                                    PhotoDeleteGood = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs());
+                                    PhotoDeleteMinor = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs1());
+                                    PhotoDeleteMajor = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs2());
+                                } else {
+                                    PhotoDeleteGood = null;
+                                    PhotoDeleteMinor = null;
+                                    PhotoDeleteMajor = null;
+                                }
+                                RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraClassRoomDetails(action, "1", "ClassRoomDetails", totalClassRoom, goodCondtionClassroom.getText().toString(), majorRepairingClassroom.getText().toString(), minorRepairingClassroom.getText().toString(), edtPodiumClass.getText().toString(),
+                                        blackBoardCount.getText().toString(), whiteBoardCont.getText().toString(), greenBoardCount.getText().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), "GoodConditionPhotos", arrayListImages2, "MajorRepairingPhotos", arrayListImages3, "MinorRepairingPhotos", arrayListImages4));
+                                Log.d("TAG", "onClick: " + paraClassRoomDetails(action, "1", "ClassRoomDetails", totalClassRoom, goodCondtionClassroom.getText().toString(), majorRepairingClassroom.getText().toString(), minorRepairingClassroom.getText().toString(), edtPodiumClass.getText().toString(),
+                                        blackBoardCount.getText().toString(), whiteBoardCont.getText().toString(), greenBoardCount.getText().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), "GoodConditionPhotos", arrayListImages2, "MajorRepairingPhotos", arrayListImages3, "MinorRepairingPhotos", arrayListImages4));
+                                Call<List<JsonObject>> call = apiService.uploadClassRoomDetails(fileDataGood, fileDataMinor, fileDataMajor, description,PhotoDeleteGood,PhotoDeleteMajor,PhotoDeleteMinor);
+                                call.enqueue(new Callback<List<JsonObject>>() {
+                                    @Override
+                                    public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                                        Log.d("TAG", "onResponse: " + response.body());
+                                        TextView textView = dialog.findViewById(R.id.dialogtextResponse);
+                                        Button button = dialog.findViewById(R.id.BtnResponseDialoge);
+                                        try {
+                                            if (response.body().get(0).get("Status").getAsString().equals("E")) {
+                                                textView.setText("You already uploaded details ");
+
+                                            } else if (response.body().get(0).get("Status").getAsString().equals("S")) {
+                                                textView.setText("Your details Submitted successfully ");
+                                            }
+                                            dialog2.dismiss();
+
+                                            dialog.show();
+                                            button.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View view) {
+                                                    onBackPressed();
+                                                    dialog.dismiss();
+                                                }
+                                            });
+                                        } catch (Exception e) {
+                                            dialog2.dismiss();
+
+                                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                                        Log.d("TAG", "onFailure: " + t.getMessage());
+                                        dialog2.dismiss();
+
+                                    }
+                                });
+
+
+                        }
                     }
                 }catch (Exception e){
                     Log.d("TAG", "onClick: "+e.getMessage());
@@ -653,7 +686,115 @@ int cameraType;
 
 
     }
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
 
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+    private String paraDeletUlrs1() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable1.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable1.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable1.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable1.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+    private String paraDeletUlrs2() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable2.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable2.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable2.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable2.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkDetailsOfRooms(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"1"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+               blackBoardCount.setText(response.body().get(0).get("BlackBoard").getAsString());
+               whiteBoardCont.setText(response.body().get(0).get("WhiteBoard").getAsString());
+               greenBoardCount.setText(response.body().get(0).get("GreenBoard").getAsString());
+               edtPodiumClass.setText(response.body().get(0).get("ClassRoomsWithPodium").getAsString());
+                majorRepairingClassroom.setText(response.body().get(0).get("MajorRepairing").getAsString());
+               minorRepairingClassroom.setText(response.body().get(0).get("MinorRepairing").getAsString());
+               goodCondtionClassroom.setText(response.body().get(0).get("GoodCondition").getAsString());
+               totalClassRooms.setText(response.body().get(0).get("TotalRooms").getAsString());
+
+
+
+
+                recyclerViewTwoTypeOneGoodConditionFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailTypeOne.this,LinearLayoutManager.HORIZONTAL,false));
+
+                goodConditionPathList=response.body().get(0).get("GoodConditionPhotos").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(goodConditionPathList));
+
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailTypeOne.this,aList);
+                recyclerViewTwoTypeOneGoodConditionFromServer.setAdapter(onlineImageRecViewAdapter);
+
+
+
+                recyclerViewMinorConditionFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailTypeOne.this,LinearLayoutManager.HORIZONTAL,false));
+                minorPhotoPath=response.body().get(0).get("MinorRepairingPhotos").toString().split(",");
+               bList = new ArrayList<String>(Arrays.asList(minorPhotoPath));
+                OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter2=new OnlineImageRecViewAdapterEditable1(UpdateDetailTypeOne.this,bList);
+                recyclerViewMinorConditionFromServer.setAdapter(onlineImageRecViewAdapter2);
+
+
+                recyclerViewMjorRepairingFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailTypeOne.this,LinearLayoutManager.HORIZONTAL,false));
+                majorPhotoPath=response.body().get(0).get("MajorRepairingPhotos").toString().split(",");
+               cList = new ArrayList<String>(Arrays.asList(majorPhotoPath));
+                OnlineImageRecViewAdapterEditable2 onlineImageRecViewAdapter3=new OnlineImageRecViewAdapterEditable2(UpdateDetailTypeOne.this,cList);
+                recyclerViewMjorRepairingFromServer.setAdapter(onlineImageRecViewAdapter3);
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
     private File filrCompressor(File file) {
         File compressedImage = new Compressor.Builder(UpdateDetailTypeOne.this)
                 .setMaxWidth(720)

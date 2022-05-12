@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,7 +35,7 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
         edtWaterSupplyWorkStatsyDW,edtWaterSupplyAvailabiltyDW,
         edtSubmersibleWorkStatsyDW,edtSubmersibleAvailabiltyDW,
         edtHandPumpWorkStatsyDW,edtHandPumpAvailabiltyDW;
-TextView uploadDW;
+TextView uploadDW,editDrinkingWaterDetails;
     RecyclerView recyclerViewDrinkingWater;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
@@ -78,7 +79,14 @@ TextView uploadDW;
         edtSubmersibleAvailabiltyDW=findViewById(R.id.edtSubmersibleAvailabiltyDW);
         edtHandPumpAvailabiltyDW=findViewById(R.id.edtHandPumpAvailabiltyDW);
         uploadDW=findViewById(R.id.uploadDW);
-
+        editDrinkingWaterDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_DrinkingWaterDetails.this,UpdateDetailsDrinkingWater.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+            }
+        });
         disableEditBox();
 
         recyclerViewDrinkingWater.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));

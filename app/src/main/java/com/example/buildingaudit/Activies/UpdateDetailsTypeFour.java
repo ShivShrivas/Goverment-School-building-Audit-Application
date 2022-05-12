@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
@@ -56,6 +57,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -92,21 +94,26 @@ public class UpdateDetailsTypeFour extends AppCompatActivity {
     File imageFile=null;
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
     ImageView typeFourImageUploadBtn;
+    ArrayAdapter<String> arrayAdapter1,arrayAdapter,arrayAdapter2,arrayAdapter5;
     ImageAdapter5 adapter;
     ApplicationController applicationController;
 Dialog dialog;
     Dialog dialog2;
     EditText edtLibraryRoomOtherScheme;
     Spinner spinnerFurnitureAvailabiltyInLibrary,spinnerPhysicalStatus,spinnerNewsPaperAndMzin,spinnerGrantUnderScheme,spinnerRoomAvailabelty,spinnerWorkingStatus,spinnerReadingCorner;
-RecyclerView recyclerViewTwoTypeFour;
+RecyclerView recyclerViewTwoTypeFour,recyclerViewLibraryFromServer;
     TextView userName,schoolAddress,schoolName;
 Button buttonSubmitLibraryDetails;
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
+    String action;
 ConstraintLayout constraintLayout21;
 EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantInFY,edtTotalLibraryGrant;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_type_four);
+        applicationController= (ApplicationController) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -115,14 +122,15 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                 onBackPressed();
             }
         });
+        Intent i=getIntent();
+        action=i.getStringExtra("Action");
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-         dialog2 = new Dialog(this);
-
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -130,7 +138,6 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         edtTotalLibraryGrant=findViewById(R.id.edtTotalLibraryGrant);
         edtLibraryGrantInFY=findViewById(R.id.edtLibraryGrantInFY);
         numberOfAlmira=findViewById(R.id.numberOfAlmira);
-        applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
@@ -148,7 +155,11 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         spinnerFurnitureAvailabiltyInLibrary=findViewById(R.id.spinnerFurnitureAvailabiltyInLibrary);
         typeFourImageUploadBtn=findViewById(R.id.typeFourImageUploadBtn);
         recyclerViewTwoTypeFour=findViewById(R.id.recyclerViewTwoTypeFour);
+        recyclerViewLibraryFromServer=findViewById(R.id.recyclerViewLibraryFromServer);
         edtLibraryRoomOtherScheme=findViewById(R.id.edtLibraryRoomOtherScheme);
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
 
         ArrayList<String> arrayListSpinner = new ArrayList<>();
 
@@ -156,22 +167,27 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         arrayListSpinner.add("Minor repairing");
         arrayListSpinner.add("major repairing");
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
+        arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerPhysicalStatus.setAdapter(arrayAdapter);
 
         ArrayList<String> arrayListspinnerRoomAvailabelty =new ArrayList<>();
         arrayListspinnerRoomAvailabelty.add("Yes");
         arrayListspinnerRoomAvailabelty.add("No");
-        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrayListspinnerRoomAvailabelty);
+         arrayAdapter1=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrayListspinnerRoomAvailabelty);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerRoomAvailabelty.setAdapter(arrayAdapter1);
+        spinnerNewsPaperAndMzin.setAdapter(arrayAdapter1);
+        spinnerReadingCorner.setAdapter(arrayAdapter1);
         spinnerFurnitureAvailabiltyInLibrary.setAdapter(arrayAdapter1);
+
+
+
         ArrayList<String> arrayListWorkingStatus =new ArrayList<>();
         arrayListWorkingStatus.add("Functional");
         arrayListWorkingStatus.add("Non Functional");
 
-        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
+       arrayAdapter2=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerWorkingStatus.setAdapter(arrayAdapter2);
 
@@ -180,14 +196,12 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         arrayListReadingCorner.add("No");
         ArrayAdapter<String> arrayAdapter3 =new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListReadingCorner);
         arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerReadingCorner.setAdapter(arrayAdapter3);
 
         ArrayList<String> arrayListnewsMgzin=new ArrayList<>();
         arrayListnewsMgzin.add("Yes");
         arrayListnewsMgzin.add("No");
         ArrayAdapter<String> arrayAdapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListnewsMgzin);
         arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerNewsPaperAndMzin.setAdapter(arrayAdapter4);
 
         ArrayList<String> arrayListGrantUnderScheme=new ArrayList<>();
         arrayListGrantUnderScheme.add("RMSA");
@@ -196,7 +210,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         arrayListGrantUnderScheme.add("PM Jan Vikas");
         arrayListGrantUnderScheme.add("Others");
 
-        ArrayAdapter<String> arrayAdapter5=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListGrantUnderScheme);
+         arrayAdapter5=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListGrantUnderScheme);
         arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerGrantUnderScheme.setAdapter(arrayAdapter5);
         spinnerGrantUnderScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -214,6 +228,9 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
 
             }
         });
+        if (!spinnerGrantUnderScheme.getSelectedItem().toString().equals("Others")){
+            edtLibraryRoomOtherScheme.setVisibility(View.GONE);
+        }
         spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -338,6 +355,78 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         });
 
     }
+
+
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkLibraryDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"4"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter1.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnNewsMagzine = arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
+                int spinnerPositionForReadingCorner = arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString());
+                int spinnerPositionForFurnitureAvl = arrayAdapter1.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
+                spinnerRoomAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
+                spinnerNewsPaperAndMzin.setSelection(spinnNewsMagzine);
+                spinnerFurnitureAvailabiltyInLibrary.setSelection(spinnerPositionForFurnitureAvl);
+                spinnerReadingCorner.setSelection(spinnerPositionForReadingCorner);
+                int spinnerPositionForworkignStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForScheme = arrayAdapter5.getPosition(response.body().get(0).get("GrantScheme").getAsString());
+                int spinnerPositionForPhysicalStatus= arrayAdapter.getPosition(response.body().get(0).get("PhysicalStatus").getAsString());
+                spinnerPhysicalStatus.setSelection(spinnerPositionForPhysicalStatus);
+                spinnerWorkingStatus.setSelection(spinnerPositionForworkignStatus);
+                spinnerGrantUnderScheme.setSelection(spinnerPositionForScheme);
+                edtExpenditure.setText(response.body().get(0).get("ExpenditureRsCFY").getAsString());
+                edtLibraryGrantInFY.setText(response.body().get(0).get("LibrarygrantRsCFY").getAsString());
+                edtTotalLibraryGrant.setText(response.body().get(0).get("TotalLibGrant").getAsString());
+                edtNumberOfBooksLibrary.setText(response.body().get(0).get("NoOfBooks").getAsString());
+                numberOfAlmira.setText(response.body().get(0).get("NoOfAlmirah").getAsString());
+
+                recyclerViewLibraryFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsTypeFour.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsTypeFour.this,aList);
+                recyclerViewLibraryFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
+
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
     private File getImageFile() throws IOException{
         String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String imageName="jpg+"+timeStamp+"_";
@@ -381,16 +470,23 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
 
         }
-        Log.d("TAG", "onClick: "+ paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        Log.d("TAG", "onClick: "+ paraLibraryDetails(action,"4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
                 ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
                 sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraLibraryDetails(action,"4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
                 ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
                 sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraLibraryDetails("1","4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
+        Log.d("TAG", "onClick: "+paraLibraryDetails(action,"4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
                 ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
                 sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadLibraryDetails(surveyImagesParts,description);
+        Call<List<JsonObject>> call=apiService.uploadLibraryDetails(surveyImagesParts,description,deletUrl);
 
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

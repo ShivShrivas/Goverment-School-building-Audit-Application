@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,7 +34,7 @@ EditText  edtLibraryAvailabelty,edtPhysicalStatus,numberOfAlmira,edtExpenditure,
 RecyclerView recyclerViewTwoTypeFourOnSubmit;
 ApplicationController applicationController;
 ConstraintLayout libraryLayout;
-TextView uploadLibrary;
+TextView uploadLibrary,editLibraryDetails;
     TextView userName,schoolAddress,schoolName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,19 +64,20 @@ TextView uploadLibrary;
         edtLibraryAvailabelty=findViewById(R.id.edtLibraryAvailabelty);
         edtPhysicalStatus=findViewById(R.id.edtPhysicalStatus);
         edtExpenditure=findViewById(R.id.edtExpenditure);
-                edtLibraryGrantInFY=findViewById(R.id.edtLibraryGrantInFY);
+        edtLibraryGrantInFY=findViewById(R.id.edtLibraryGrantInFY);
         edtTotalLibraryGrant=findViewById(R.id.edtTotalLibraryGrant);
-                edtGrantUnderScheme=findViewById(R.id.edtGrantUnderScheme);
         edtGrantUnderScheme=findViewById(R.id.edtGrantUnderScheme);
-                edtNewsPaperAndMzin=findViewById(R.id.edtNewsPaperAndMzin);
+        edtGrantUnderScheme=findViewById(R.id.edtGrantUnderScheme);
+        edtNewsPaperAndMzin=findViewById(R.id.edtNewsPaperAndMzin);
         edtReadingCorner=findViewById(R.id.edtReadingCorner);
-                edtReadingCorner=findViewById(R.id.edtReadingCorner);
+        edtReadingCorner=findViewById(R.id.edtReadingCorner);
         edtWorkingStatus=findViewById(R.id.edtWorkingStatus);
-                edtNumberOfBooksLibrary=findViewById(R.id.edtNumberOfBooksLibrary);
+        edtNumberOfBooksLibrary=findViewById(R.id.edtNumberOfBooksLibrary);
         edtFurnitureAvailabiltyInLibrary=findViewById(R.id.edtFurnitureAvailabiltyInLibrary);
         recyclerViewTwoTypeFourOnSubmit=findViewById(R.id.recyclerViewTwoTypeFourOnSubmit);
         libraryLayout=findViewById(R.id.libraryLayout);
         uploadLibrary=findViewById(R.id.uploadLibrary);
+        editLibraryDetails=findViewById(R.id.editLibraryDetails);
 
 
         disableEditing();
@@ -84,6 +86,15 @@ TextView uploadLibrary;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Call<List<JsonObject>> call=apiService.checkLibraryDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"4"));
+        editLibraryDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_LibraryDetails.this,UpdateDetailsTypeFour.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+                finish();
+            }
+        });
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
