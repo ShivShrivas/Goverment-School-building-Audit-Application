@@ -170,7 +170,7 @@ public  interface ApiService {
         @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SDrinkingWaterDetails")
-    Call<List<JsonObject>> uploadDrinkingWater(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody);
+    Call<List<JsonObject>> uploadDrinkingWater(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
 
@@ -269,9 +269,10 @@ public  interface ApiService {
     @POST("PhysicalParamLabs/ViewComputerLabDetails")
     Call<List<JsonObject>> checkComputerLab(@Body JsonObject object);
 
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SCctvDetails")
-    Call<List<JsonObject>> uploadCCTVDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadCCTVDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
@@ -287,10 +288,10 @@ public  interface ApiService {
     @POST("PhysicalParam/ViewRainHarvestingDetails")
     Call<List<JsonObject>> checkRainHarvest(@Body JsonObject object);
 
-
+@Multipart
  @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SFireFightingDetails")
-    Call<List<JsonObject>> uploadFireFighting(@Body JsonObject object);
+    Call<List<JsonObject>> uploadFireFighting(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
 
@@ -298,10 +299,10 @@ public  interface ApiService {
     @POST("PhysicalParam/ViewFireFightingDetails")
     Call<List<JsonObject>> checkFireFighting(@Body JsonObject object);
 
-
+    @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SElectricityArrDetails")
-    Call<List<JsonObject>> uploadElectricityArrangement(@Body JsonObject object);
+    Call<List<JsonObject>> uploadElectricityArrangement(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")

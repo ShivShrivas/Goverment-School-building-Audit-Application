@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,7 +32,7 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
         EditText edtFireFightTraining,edtFireFightRenewalStatus,edtFireFightWorkingStatus,edtFireFightingInstallationYear,edtFireFightAvailabelty;
-        TextView edtrenewalDate;
+        TextView edtrenewalDate,editFirefightingDetails;
         ConstraintLayout constraintLayout30;
         RecyclerView recyclerViewFireFightningoNsUB;
 TextView uploadtextFireFighting;
@@ -63,6 +64,7 @@ TextView uploadtextFireFighting;
 
         edtFireFightTraining=findViewById(R.id.edtFireFightTraining);
         uploadtextFireFighting=findViewById(R.id.uploadtextFireFighting);
+        editFirefightingDetails=findViewById(R.id.editFirefightingDetails);
         edtrenewalDate=findViewById(R.id.edtrenewalDateOnSub);
         edtFireFightRenewalStatus=findViewById(R.id.edtFireFightRenewalStatus);
         edtFireFightWorkingStatus=findViewById(R.id.edtFireFightWorkingStatus);
@@ -70,7 +72,14 @@ TextView uploadtextFireFighting;
         edtFireFightingInstallationYear=findViewById(R.id.edtFireFightingInstallationYear);
         recyclerViewFireFightningoNsUB=findViewById(R.id.recyclerViewFireFightningoNsUB);
         constraintLayout30=findViewById(R.id.constraintLayout30);
-
+        editFirefightingDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_FireFighting.this,UpdateDetailsFireFighting.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+            }
+        });
         disableEditbox();
         recyclerViewFireFightningoNsUB.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 

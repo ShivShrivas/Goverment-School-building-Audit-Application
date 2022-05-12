@@ -1,17 +1,22 @@
 package com.example.buildingaudit.Activies;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -27,7 +32,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
+import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.example.buildingaudit.ApplicationController;
+import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -35,16 +43,26 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
 import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,16 +89,22 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
-    Dialog dialog;
 
+    Dialog dialog;
+    String action;
+    String currentImagePath=null;
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
+    File imageFile=null;
+    public ArrayList<File> arrayListImages1 = new ArrayList<>();
     EditText noOfFans,noOfTubeLight;
     ConstraintLayout constraintLayout31;
     Button submitBtnElectricityArrange;
-    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    ImageAdapter4 adapter6;
+    ArrayAdapter<String> adapter,arrayAdapter4,arrayAdapter2;
+    ImageAdapter5 adapter6;
     Spinner spinnerElectricStatus,spinnerSource,spinnerInternalElectrification,spinnerElectricityAvailabelty;
         ImageView electricityArrangementImageUploadBtn;
-        RecyclerView recyclerViewElectricityArrangment;
+        RecyclerView recyclerViewElectricityArrangment,recyclerViewElectricityArrangmentFromServer;
     Dialog dialog2;
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
@@ -96,6 +120,8 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        Intent i=getIntent();
+        action=i.getStringExtra("Action");
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
@@ -120,14 +146,17 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         electricityArrangementImageUploadBtn=findViewById(R.id.electricityArrangementImageUploadBtn);
         spinnerInternalElectrification=findViewById(R.id.spinnerInternalElectrification);
         spinnerElectricityAvailabelty=findViewById(R.id.spinnerElectricityAvailabelty);
+        recyclerViewElectricityArrangmentFromServer=findViewById(R.id.recyclerViewElectricityArrangmentFromServer);
         noOfTubeLight=findViewById(R.id.noOfTubeLight);
         constraintLayout31=findViewById(R.id.constraintLayout31);
         noOfFans=findViewById(R.id.noOfFans);
-
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
         ArrayList<String> arrayList1=new ArrayList<>();
         arrayList1.add("Yes");
         arrayList1.add("No");
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
+         adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
         adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerElectricityAvailabelty.setAdapter(adapter);
         spinnerInternalElectrification.setAdapter(adapter);
@@ -136,7 +165,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         arrayListPowerbackup.add("Generator");
         arrayListPowerbackup.add("Invertor");
         arrayListPowerbackup.add("None");
-        ArrayAdapter<String> arrayAdapter4=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListPowerbackup);
+         arrayAdapter4=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListPowerbackup);
         arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSource.setAdapter(arrayAdapter4);
 
@@ -144,7 +173,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         arrayListWorkingStatus.add("Functional");
         arrayListWorkingStatus.add("Non Functional");
 
-        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
+       arrayAdapter2=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListWorkingStatus);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerElectricStatus.setAdapter(arrayAdapter2);
 
@@ -152,39 +181,86 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Dexter.withActivity(UpdateDetailsElectricityArrangment.this)
-                        .withPermission(Manifest.permission.CAMERA)
-                        .withListener(new PermissionListener() {
+                Dexter.withContext(UpdateDetailsElectricityArrangment.this)
+                        .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        .withListener(new MultiplePermissionsListener() {
                             @Override
-                            public void onPermissionGranted(PermissionGrantedResponse response) {
-                                // permission is granted, open the camera
+                            public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                                if (multiplePermissionsReport.areAllPermissionsGranted()){
+                                    Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                    if (i.resolveActivity(getPackageManager())!=null){
 
-                                Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                                startActivityForResult(intent, 7);
-                            }
+                                        try {
+                                            imageFile =getImageFile();
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                            arrayListImages1.add(imageFile);
+                                            Uri imageUri= FileProvider.getUriForFile(UpdateDetailsElectricityArrangment.this,"com.example.buildingaudit.provider",imageFile);
+                                            i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                            startActivityForResult(i,2);
+                                        }
+                                    }
 
-                            @Override
-                            public void onPermissionDenied(PermissionDeniedResponse response) {
-                                // check for permanent denial of permission
-                                if (response.isPermanentlyDenied()) {
+                                }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                                    AlertDialog.Builder builder = new AlertDialog.Builder(UpdateDetailsElectricityArrangment.this);
 
-                                    // navigate user to app settings
-                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
-                                    intent.setData(uri);
-                                    startActivity(intent);
+                                    // below line is the title
+                                    // for our alert dialog.
+                                    builder.setTitle("Need Permissions");
+
+                                    // below line is our message for our dialog
+                                    builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                                    builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called on click on positive
+                                            // button and on clicking shit button we
+                                            // are redirecting our user from our app to the
+                                            // settings page of our app.
+                                            dialog.cancel();
+                                            // below is the intent from which we
+                                            // are redirecting our user.
+                                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                            Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                            intent.setData(uri);
+                                            startActivityForResult(intent, 101);
+                                        }
+                                    });
+                                    builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            // this method is called when
+                                            // user click on negative button.
+                                            dialog.cancel();
+                                        }
+                                    });
+                                    // below line is used
+                                    // to display our dialog
+                                    builder.show();
                                 }
                             }
 
+
                             @Override
-                            public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                                token.continuePermissionRequest();
+                            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                                permissionToken.continuePermissionRequest();
                             }
                         }).check();
             }
         });
         recyclerViewElectricityArrangment.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter6 = new ImageAdapter4(this, arrayListImages1);
+        adapter6 = new ImageAdapter5(this, arrayListImages1);
         recyclerViewElectricityArrangment.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
         spinnerElectricityAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -224,12 +300,93 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         });
     }
 
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkElectricityArrangement(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"11"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnforInternalElectrification= adapter.getPosition(response.body().get(0).get("InternalElectrification").getAsString());
+                int spinnerPositionForSource = arrayAdapter2.getPosition(response.body().get(0).get("Source").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter4.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+
+                spinnerElectricityAvailabelty.setSelection(spinnerPositionForHandPumpAvl);
+                spinnerInternalElectrification.setSelection(spinnforInternalElectrification);
+                spinnerElectricStatus.setSelection(spinnerPositionForWorkingStatus);
+                spinnerSource.setSelection(spinnerPositionForSource);
+
+
+                noOfFans.setText(response.body().get(0).get("NoOfFans").getAsString());
+                noOfTubeLight.setText(response.body().get(0).get("NoOfBulbsTLight").getAsString());
+
+                recyclerViewElectricityArrangmentFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsElectricityArrangment.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsElectricityArrangment.this,aList);
+                recyclerViewElectricityArrangmentFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
+    private File getImageFile() throws IOException{
+        String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String imageName="jpg+"+timeStamp+"_";
+        File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile=File.createTempFile(imageName,".jpg",storageDir);
+
+        currentImagePath=imageFile.getAbsolutePath();
+        Log.d("TAG", "getImageFile: "+currentImagePath);
+        return imageFile;
+    }
     private void runSpinner() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
+        for (int i = 0; i < arrayListImages1.size(); i++) {
+            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+            File compressedImage = new Compressor.Builder(UpdateDetailsElectricityArrangment.this)
+                    .setMaxWidth(720)
+                    .setMaxHeight(720)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(new File(arrayListImages1.get(i).getPath()));
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                    compressedImage);
+            surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
 
-        Log.d("TAG", "onClick: "+paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(paramElectricityDetails(1,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        }
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paramElectricityDetails(action,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Log.d("TAG", "onClick: "+paramElectricityDetails(action,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+        Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(surveyImagesParts,description,deletUrl);
 
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
@@ -269,10 +426,26 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         });
     }
 
-    private JsonObject paramElectricityDetails(int s, String s1, String electricityArrangement, String schoolId, String periodID, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String latitude, String longitude, String usertypeid, String userid, ArrayList<Bitmap> arrayListImages1) {
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+    private String paramElectricityDetails(String s, String s1, String electricityArrangement, String schoolId, String periodID, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String latitude, String longitude, String usertypeid, String userid, ArrayList<File> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
         if (toString5.equals("No")){
-            jsonObject.addProperty("Action",1);
+            jsonObject.addProperty("Action",s);
             jsonObject.addProperty("ParamId",s1);
             jsonObject.addProperty("ParamName",electricityArrangement);
             jsonObject.addProperty("SchoolId",schoolId);
@@ -287,14 +460,14 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
             jsonObject.addProperty("Long",longitude);
             jsonObject.addProperty("CreatedBy",usertypeid);
             jsonObject.addProperty("UserCode",userid);
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
-
-            }
-            jsonObject.add("ElectricityArrPhoto", (JsonElement) jsonArray);
+//            JsonArray jsonArray = new JsonArray();
+//            for (int i = 0; i < arrayListImages1.size(); i++) {
+//                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            }
+//            jsonObject.add("ElectricityArrPhoto", (JsonElement) jsonArray);
         }else{
-            jsonObject.addProperty("Action",1);
+            jsonObject.addProperty("Action",s);
             jsonObject.addProperty("ParamId",s1);
             jsonObject.addProperty("ParamName",electricityArrangement);
             jsonObject.addProperty("SchoolId",schoolId);
@@ -309,15 +482,15 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
             jsonObject.addProperty("Long",longitude);
             jsonObject.addProperty("CreatedBy",usertypeid);
             jsonObject.addProperty("UserCode",userid);
-            JsonArray jsonArray = new JsonArray();
-            for (int i = 0; i < arrayListImages1.size(); i++) {
-                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
-
-            }
-            jsonObject.add("ElectricityArrPhoto", (JsonElement) jsonArray);
+//            JsonArray jsonArray = new JsonArray();
+//            for (int i = 0; i < arrayListImages1.size(); i++) {
+//                jsonArray.add(paraGetImageBase64( arrayListImages1.get(i), i));
+//
+//            }
+//            jsonObject.add("ElectricityArrPhoto", (JsonElement) jsonArray);
         }
 
-        return jsonObject;
+        return jsonObject.toString();
     }
 
 
@@ -361,9 +534,9 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK ) {
-            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-
-            arrayListImages1.add(bitmap);
+//            Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+//
+//            arrayListImages1.add(bitmap);
 
 
         }

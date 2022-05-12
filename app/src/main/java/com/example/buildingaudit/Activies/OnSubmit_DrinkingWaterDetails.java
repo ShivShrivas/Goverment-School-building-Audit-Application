@@ -78,6 +78,7 @@ TextView uploadDW,editDrinkingWaterDetails;
         edtWaterSupplyAvailabiltyDW=findViewById(R.id.edtWaterSupplyAvailabiltyDW);
         edtSubmersibleAvailabiltyDW=findViewById(R.id.edtSubmersibleAvailabiltyDW);
         edtHandPumpAvailabiltyDW=findViewById(R.id.edtHandPumpAvailabiltyDW);
+        editDrinkingWaterDetails=findViewById(R.id.editDrinkingWaterDetails);
         uploadDW=findViewById(R.id.uploadDW);
         editDrinkingWaterDetails.setOnClickListener(new View.OnClickListener() {
             @Override

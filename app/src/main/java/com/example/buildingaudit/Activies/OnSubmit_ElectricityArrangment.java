@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -35,7 +36,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
             edtnoOfFans;
     RecyclerView recyclerViewElectricityArrangmentOnSub;
     ConstraintLayout constraintLayoutEA;
-    TextView uploadImageTxt;
+    TextView uploadImageTxt,editElectricDetails;
     Button submitBtnElectricityArrangeOnSub;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
         schoolAddress.setText(applicationController.getSchoolAddress());
 
         edtElectricityAvailabelty=findViewById(R.id.edtElectricityAvailabelty);
+        editElectricDetails=findViewById(R.id.editElectricDetails);
         uploadImageTxt=findViewById(R.id.uploadImageTxt);
         edtInternalElectrification=findViewById(R.id.edtInternalElectrification);
         edtSource=findViewById(R.id.edtSource);
@@ -76,7 +78,14 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
         constraintLayoutEA=findViewById(R.id.constraintLayoutEA);
         disableEditbox();
         recyclerViewElectricityArrangmentOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
+        editElectricDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_ElectricityArrangment.this,UpdateDetailsElectricityArrangment.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+            }
+        });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Call<List<JsonObject>> call=apiService.checkElectricityArrangement(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"11"));

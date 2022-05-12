@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.example.buildingaudit.Adapters.ImageAdapter4;
 import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.R;
@@ -58,6 +59,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -89,13 +91,17 @@ public class UpdateDetailsDrinkingWater extends AppCompatActivity {
         adapter6.notifyDataSetChanged();
 
     }
+    String action;
     String currentImagePath=null;
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
+    ArrayAdapter<String> adapter;
     File imageFile=null;
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
     ImageAdapter5 adapter6;
     EditText edtNotWorkingDrinkingwaterTaps,edtWorkingDrinkingwaterTaps,edtTotalDrinkingwaterTaps;
     ImageView drinkingWaterImageUploadBtn;
-    RecyclerView recyclerViewDrinkingWater;
+    RecyclerView recyclerViewDrinkingWater,recyclerViewDrinkingWaterFromServer;
     TextView userName,schoolAddress,schoolName;
 EditText edtDrinkingWaterOtherScheme;
     Spinner spinnerROInstallationScheme,spinnerROInstallationWokingStatus,
@@ -130,7 +136,8 @@ LinearLayout linearLayout31;
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         applicationController= (ApplicationController) getApplication();
          dialog2 = new Dialog(this);
-
+        Intent i1=getIntent();
+        action=i1.getStringExtra("Action");
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -157,15 +164,18 @@ LinearLayout linearLayout31;
         spinnerSubmersibleAvailabiltyDW=findViewById(R.id.spinnerSubmersibleAvailabiltyDW);
         spinnerHandPumpWorkStatsyDW=findViewById(R.id.spinnerHandPumpWorkStatsyDW);
         spinnerHandPumpAvailabiltyDW=findViewById(R.id.spinnerHandPumpAvailabiltyDW);
+        recyclerViewDrinkingWaterFromServer=findViewById(R.id.recyclerViewDrinkingWaterFromServer);
         linearLayout31=findViewById(R.id.linearLayout31);
         edtDrinkingWaterOtherScheme=findViewById(R.id.edtDrinkingWaterOtherScheme);
-
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
 
 
         ArrayList<String> arrayList1=new ArrayList<>();
         arrayList1.add("Yes");
         arrayList1.add("No");
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
+       adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayList1);
         adapter.setDropDownViewResource(R.layout.custom_text_spiiner);
 
 
@@ -199,6 +209,10 @@ LinearLayout linearLayout31;
         ArrayAdapter<String> arrayAdapter1=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListUnderScheme);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerROInstallationScheme.setAdapter(arrayAdapter1);
+        if (!spinnerROInstallationScheme.getSelectedItem().toString().equals("Others"))
+        {
+            edtDrinkingWaterOtherScheme.setVisibility(View.GONE);
+        }
         spinnerHandPumpAvailabiltyDW.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -268,12 +282,12 @@ LinearLayout linearLayout31;
                     spinnerROInstallationWokingStatus.setVisibility(View.GONE);
                     spinnerROInstallationScheme.setVisibility(View.GONE);
                     linearLayout31.setVisibility(View.GONE);
-                    edtDrinkingWaterOtherScheme.setVisibility(View.GONE);
+
                 }else{
                     spinnerROInstallationWokingStatus.setVisibility(View.VISIBLE);
                     spinnerROInstallationScheme.setVisibility(View.VISIBLE);
                     linearLayout31.setVisibility(View.VISIBLE);
-                    edtDrinkingWaterOtherScheme.setVisibility(View.VISIBLE);
+
 
                 }
             }
@@ -447,6 +461,70 @@ LinearLayout linearLayout31;
         });
 
     }
+
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkDrinkingWater(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"7"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("HandPumpAvl").getAsString());
+                int spinnforSubmersibleAvl= adapter.getPosition(response.body().get(0).get("SubmersibleAvl").getAsString());
+                int spinnerPositionForNNPalikaWaterSupplyAvl = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
+                int spinnerPositionForOverHeadTankAvl = adapter.getPosition(response.body().get(0).get("OverHeadTankAvl").getAsString());
+                int spinnerPositionForROInsAvl = adapter.getPosition(response.body().get(0).get("ROInsAvl").getAsString());
+                spinnerHandPumpAvailabiltyDW.setSelection(spinnerPositionForHandPumpAvl);
+                spinnerSubmersibleAvailabiltyDW.setSelection(spinnforSubmersibleAvl);
+                spinnerWaterSupplyAvailabiltyDW.setSelection(spinnerPositionForNNPalikaWaterSupplyAvl);
+                spinnerOverheadTankAvailabiltyDW.setSelection(spinnerPositionForOverHeadTankAvl);
+                spinnerROInstallationAvailabiltyDW.setSelection(spinnerPositionForROInsAvl);
+                int spinnerPositionForHandPumpWorkingStatus = adapter.getPosition(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
+                int spinnforSubmersibleWorkingStatus= adapter.getPosition(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
+                int spinnerPositionForNNPalikaWaterSupplyWorkingStatus = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString());
+                int spinnerPositionForOverHeadTankWorkingStatus = adapter.getPosition(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString());
+                int spinnerPositionForROInsWorkingStatus = adapter.getPosition(response.body().get(0).get("ROInsWorkingStatus").getAsString());
+
+                spinnerHandPumpWorkStatsyDW.setSelection(spinnerPositionForHandPumpWorkingStatus);
+                spinnerSubmersibleWorkStatsyDW.setSelection(spinnforSubmersibleWorkingStatus);
+                spinnerWaterSupplyWorkStatsyDW.setSelection(spinnerPositionForNNPalikaWaterSupplyWorkingStatus);
+                spinnerOverheadTankWorkStatsyDW.setSelection(spinnerPositionForOverHeadTankWorkingStatus);
+                spinnerROInstallationWokingStatus.setSelection(spinnerPositionForROInsWorkingStatus);
+
+                int spinnerPositionForROScheme = adapter.getPosition(response.body().get(0).get("ROInsScheme").getAsString());
+                spinnerROInstallationScheme.setSelection(spinnerPositionForROScheme);
+
+                edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps").getAsString());
+                edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps").getAsString());
+                edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps").getAsString());
+
+
+                recyclerViewDrinkingWaterFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsDrinkingWater.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsDrinkingWater.this,aList);
+                recyclerViewDrinkingWaterFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
     private File getImageFile() throws IOException{
         String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
         String imageName="jpg+"+timeStamp+"_";
@@ -490,18 +568,24 @@ LinearLayout linearLayout31;
             surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
 
         }
-
-        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraDrinkingWater(action,"7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
                 spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
                 spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
                 spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
                 spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),sheme,OtherScheme ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraDrinkingWater("1","7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
+        Log.d("TAG", "onClick: "+paraDrinkingWater(action,"7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
                 spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
                 spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
                 spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
                 spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),sheme,OtherScheme ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadDrinkingWater(surveyImagesParts,description);
+        Call<List<JsonObject>> call=apiService.uploadDrinkingWater(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -539,6 +623,22 @@ LinearLayout linearLayout31;
         });
     }
 
+                    private String paraDeletUlrs() {
+                        JsonArray jsonArray=new JsonArray();
+
+                        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+                        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+                            JsonObject jsonObject=new JsonObject();
+                            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+                            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+                            jsonObject.addProperty("PhotoUrl",newUrl2);
+                            jsonArray.add(jsonObject);
+                        }
+
+
+                        return jsonArray.toString();
+                    }
     private String paraDrinkingWater(String action, String paramId, String drinkingWater, String handPumpAvl, String handPumpWorkingStatus, String submersibleAvl, String submersibleWorkingStatus, String nnPalikaWaterSupplyAvl, String nnPalikaWaterSupplyWorkingStatus, String overHeadTankAvl, String overHeadTankWorkingStatus, String roInsAvl, String roInsWorkingStatus, String noOfTaps, String workingTaps, String nonWorkingTaps, String roInsScheme, String otherScheme, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<File> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("Action",action);

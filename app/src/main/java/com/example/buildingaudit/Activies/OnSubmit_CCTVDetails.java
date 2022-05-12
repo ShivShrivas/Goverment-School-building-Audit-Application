@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,7 +33,7 @@ public class OnSubmit_CCTVDetails extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     RecyclerView recyclerViewCCTVOnSubmit;
     ConstraintLayout layoutCCTV;
-    TextView uploadCCTV;
+    TextView uploadCCTV,editCCTVDetails;
 EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailabelty;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +68,16 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
         EdtNoOfCCTV=findViewById(R.id.EdtNoOfCCTV);
         edtCCTVWorkingStatus=findViewById(R.id.edtCCTVWorkingStatus);
         recyclerViewCCTVOnSubmit=findViewById(R.id.recyclerViewCCTVOnSubmit);
+        editCCTVDetails=findViewById(R.id.editCCTVDetails);
         disbaleEdiBox();
+        editCCTVDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_CCTVDetails.this,UpdateDetailsCCTV.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+            }
+        });
         recyclerViewCCTVOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
         RestClient restClient=new RestClient();
