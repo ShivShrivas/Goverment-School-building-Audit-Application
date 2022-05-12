@@ -51,6 +51,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
     Spinner ArtAndCraftRoomWorkingStatus,spinnerArtAndCraftRoomAvailabelty,ArtAndCraftRoomPhysicalStatus;
     ConstraintLayout constraintLayoutPR;
     ImageView ArtAndCraftImageUploadBtn;
-    RecyclerView recyclerViewArtAndCraft;
+    RecyclerView recyclerViewArtAndCraft,recyclerViewFromServerArtAndCraft;
     Button ArtAndCraftsubmitLabBtn;
      String action;
     ArrayAdapter<String> arrayAdapter;
@@ -78,6 +79,7 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
     ArrayAdapter<String> arrayAdapter2;
     File imageFile=null;
     String currentImagePath=null;
+    ArrayList<String> aList=new ArrayList<>();
 
 
     @Override
@@ -133,6 +135,7 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
         ArtAndCraftsubmitLabBtn=findViewById(R.id.ArtAndCraftsubmitLabBtn);
         ArtAndCraftImageUploadBtn=findViewById(R.id.ArtAndCraftImageUploadBtn);
         recyclerViewArtAndCraft=findViewById(R.id.recyclerViewArtAndCraft);
+        recyclerViewFromServerArtAndCraft=findViewById(R.id.recyclerViewFromServerArtAndCraft);
         ArtAndCraftRoomPhysicalStatus=findViewById(R.id.ArtAndCraftRoomPhysicalStatus);
 
         if (action.equals("3")){
@@ -310,9 +313,11 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
                     ArtAndCraftRoomPhysicalStatus.setSelection(spinnerPositionPhysicalStatus);
 
                 }
+                recyclerViewFromServerArtAndCraft.setLayoutManager(new LinearLayoutManager(UpdateDetailsArtAndCraft.this,LinearLayoutManager.HORIZONTAL,false));
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(UpdateDetailsArtAndCraft.this,StaffPhotoPathList);
-                recyclerViewArtAndCraft.setAdapter(onlineImageRecViewAdapter);
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsArtAndCraft.this,aList);
+                recyclerViewFromServerArtAndCraft.setAdapter(onlineImageRecViewAdapter);
                 dialog2.dismiss();
 
             }
