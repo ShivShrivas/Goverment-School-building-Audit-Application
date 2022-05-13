@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bsn.buildingaudit">
+    package="com.example.buildingaudit">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.bsn.buildingaudit.ApplicationController"
+        android:name="com.example.buildingaudit.ApplicationController"
         android:allowBackup="true"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
@@ -28,7 +28,7 @@
         tools:targetApi="m">
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.bsn.buildingaudit.provider"
+            android:authorities="com.example.buildingaudit.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <!-- ressource file to create -->
@@ -38,160 +38,160 @@
             </meta-data>
         </provider>
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_ArtAndCraft"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_ArtAndCraft"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsArtAndCraft"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsArtAndCraft"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_PrincipalRoom"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_PrincipalRoom"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsPrincipalRoom"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsPrincipalRoom"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_FurnitureDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_FurnitureDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_GirlsToiletDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_GirlsToiletDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_BoysToiletDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_BoysToiletDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_BoundryWalls"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_BoundryWalls"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_SolarPanel"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_SolarPanel"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_ElectricityArrangment"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_ElectricityArrangment"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_FireFighting"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_FireFighting"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_RainHarvesting"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_RainHarvesting"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_CCTVDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_CCTVDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_ComputerLabDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_ComputerLabDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_WifiDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_WifiDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_CycleStand"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_CycleStand"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_SoundSystemDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_SoundSystemDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_SmartClassDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_SmartClassDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_BioMetricDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_BioMetricDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_DrinkingWaterDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_DrinkingWaterDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_LibraryDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_LibraryDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_PlaygroundDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_PlaygroundDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_OpenGYmDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_PracticalLabsDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmit_StaffRoomDetails"
+            android:name="com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.NoInternetConnection"
+            android:name="com.example.buildingaudit.Activies.NoInternetConnection"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.OnSubmitClassRoomPage"
+            android:name="com.example.buildingaudit.Activies.OnSubmitClassRoomPage"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsCWSNRamp"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsCWSNRamp"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsCCTV"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsCCTV"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsCycleStand"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsCycleStand"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsMultipurposeHall"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsMultipurposeHall"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsSoundSystem"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsSoundSystem"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsBoundryWall"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsBoundryWall"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.AfterSubmitClassromDetails"
+            android:name="com.example.buildingaudit.Activies.AfterSubmitClassromDetails"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsOfExtraThings"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsOfExtraThings"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsGirlsToilet"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsGirlsToilet"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsBoysToilet"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsBoysToilet"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsSolarPanel"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsSolarPanel"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsRainHarvest"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsRainHarvest"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsFireFighting"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsFireFighting"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsElectricityArrangment"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsElectricityArrangment"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsBioMetric"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsBioMetric"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsFurnitures"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsFurnitures"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsComputerlab"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsComputerlab"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsDrinkingWater"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsDrinkingWater"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsSmartClass"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsSmartClass"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsGym"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsGym"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsPlayground"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsPlayground"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsTypeFour"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsTypeFour"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdatedetailsTypeThree"
+            android:name="com.example.buildingaudit.Activies.UpdatedetailsTypeThree"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.SplashScreen"
+            android:name="com.example.buildingaudit.Activies.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -200,16 +200,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailsTypeTwo"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailsTypeTwo"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.Activies.UpdateDetailTypeOne"
+            android:name="com.example.buildingaudit.Activies.UpdateDetailTypeOne"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.DashBoard"
+            android:name="com.example.buildingaudit.DashBoard"
             android:exported="false" />
         <activity
-            android:name="com.bsn.buildingaudit.MainActivity"
+            android:name="com.example.buildingaudit.MainActivity"
             android:exported="true" />
     </application>
 
