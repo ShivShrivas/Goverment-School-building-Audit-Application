@@ -37,17 +37,22 @@ public class OnlineImageRecViewAdapterEditable2 extends RecyclerView.Adapter<Onl
     @Override
     public void onBindViewHolder(@NonNull HistoryItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String dummyUrl=imageUrlString.get(position);
-        String newImgUrl=dummyUrl.replace(" ../wwwroot", ConstantFile.IMAGE_BASE_URL);
-        String newUrl2=newImgUrl.replaceAll("\"","");
-        Glide.with(holder.imageMain1).load(newUrl2).placeholder(R.drawable.background).into(holder.imageMain1);
-        holder.ImageCross.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                deletedUrls.add(imageUrlString.get(position).trim());
-                imageUrlString.remove(imageUrlString.get(position));
-                notifyDataSetChanged();
-            }
-        });
+        try{
+            String newImgUrl=dummyUrl.replace(" ../wwwroot", ConstantFile.IMAGE_BASE_URL);
+            String newUrl2=newImgUrl.replaceAll("\"","");
+            Glide.with(holder.imageMain1).load(newUrl2).placeholder(R.drawable.background).into(holder.imageMain1);
+            holder.ImageCross.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    deletedUrls.add(imageUrlString.get(position).trim());
+                    imageUrlString.remove(imageUrlString.get(position));
+                    notifyDataSetChanged();
+                }
+            });
+        }catch (Exception e){
+
+        }
+
 
     }
 

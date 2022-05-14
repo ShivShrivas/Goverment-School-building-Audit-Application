@@ -33,6 +33,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
+import com.example.buildingaudit.Adapters.SmartClassAdapter;
+import com.example.buildingaudit.Adapters.SmartClassAdapterForEdit;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.CompressLib.Compressor;
 import com.example.buildingaudit.ConstantValues.ConstantFile;
@@ -54,6 +57,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -93,7 +97,7 @@ public class UpdateDetailsSmartClass extends AppCompatActivity {
     ImageView smartClassImageUploadBtn,deleteRoomBtn;
     Button buttonForAddRooms;
     LinearLayout layoutForAddRooms;
-    RecyclerView recyclerViewSmartClass;
+    RecyclerView recyclerViewSmartClass,recyclerViewforViewFromServer,recyclerViewSmartClassFromServer;
 Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWorkingStatusSmartClass,
         spinnerTeacherAvailbilitySmartClass,spinnerProjectorSmartClass,spinnerLearningContentSmartClass,
         spinnerDigitalBoardSmartClass,smartClassAvailabilty;
@@ -102,8 +106,12 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
     TextView userName,schoolAddress,schoolName;
     ConstraintLayout constraintLayout24;
     Button submitSmartClassBtn;
+    ArrayList<SmartClassesCard> smartClassesCards=new ArrayList<>();
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
     EditText edtSmartOtherScheme;
     Dialog dialog;
+    ArrayAdapter<String> arrayAdapter,arrayAdapter1,arrayAdapter2,arrayAdapter3,arrayAdapter5;
     Dialog dialog2;
     String action;
     String otherSchemeOnCard,otherScheme;
@@ -153,6 +161,8 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         recyclerViewSmartClass=findViewById(R.id.recyclerViewSmartClass);
         constraintLayout24=findViewById(R.id.constraintLayout24);
         edtSmartOtherScheme=findViewById(R.id.edtSmartOtherScheme);
+        recyclerViewSmartClassFromServer=findViewById(R.id.recyclerViewSmartClassFromServer);
+        recyclerViewforViewFromServer=findViewById(R.id.recyclerViewforViewFromServer);
             if (action.equals("3")){
                 feychAllDataFromServer();
             }
@@ -161,7 +171,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
          arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
         }
-        ArrayAdapter<String> arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
+         arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerInstallationYearSmartClass.setAdapter(arrayAdapter1);
 
@@ -174,7 +184,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         arrayListUnderScheme.add("Vikas");
         arrayListUnderScheme.add("Others");
 
-        ArrayAdapter<String> arrayAdapter2=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListUnderScheme);
+       arrayAdapter2=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListUnderScheme);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerUnderSchemeSmartClass.setAdapter(arrayAdapter2);
 
@@ -198,7 +208,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         arrayListLevellingStatus.add("Functional");
         arrayListLevellingStatus.add("Non Functional");
 
-        ArrayAdapter<String> arrayAdapter3=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLevellingStatus);
+        arrayAdapter3=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListLevellingStatus);
         arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerWorkingStatusSmartClass.setAdapter(arrayAdapter3);
 
@@ -206,20 +216,18 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+       arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerTeacherAvailbilitySmartClass.setAdapter(arrayAdapter);
-        smartClassAvailabilty.setAdapter(arrayAdapter);
         spinnerProjectorSmartClass.setAdapter(arrayAdapter);
+        spinnerDigitalBoardSmartClass.setAdapter(arrayAdapter);
         spinnerLearningContentSmartClass.setAdapter(arrayAdapter);
-        ArrayList<String> arrayListboard=new ArrayList<>();
-        arrayListboard.add("Yes");
-        arrayListboard.add("No");
-
-
-        ArrayAdapter<String> arrayAdapter5=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListboard);
+        ArrayList<String> arrayListAvailbilty1=new ArrayList<>();
+        arrayListAvailbilty1.add("Yes");
+        arrayListAvailbilty1.add("No");
+        arrayAdapter5=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty1);
         arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerDigitalBoardSmartClass.setAdapter(arrayAdapter5);
+        smartClassAvailabilty.setAdapter(arrayAdapter5);
 
         smartClassImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -402,7 +410,7 @@ dialog2.show();
                 smartClassNumber=smartClassNumber+1;
                 final View addClsss=getLayoutInflater().inflate(R.layout.new_smart_class,null,false);
                 ImageView deleteRoomBtn=addClsss.findViewById(R.id.deleteRoomBtn);
-                TextView txtSmartRoomName=addClsss.findViewById(R.id.txtSmartRoomName);
+                TextView txtSmartRoomName=addClsss.findViewById(R.id.txtSmartRoomNameedtable);
                 txtSmartRoomName.setText("Smart Classoom");
                 Spinner spinnerInstallationYearSmartClassAdd=addClsss.findViewById(R.id.spinnerInstallationYearSmartClassAdd);
                 Spinner spinnerWorkingStatusSmartClassAdd=addClsss.findViewById(R.id.spinnerWorkingStatusSmartClassAdd);
@@ -445,6 +453,7 @@ dialog2.show();
 
 
     private void feychAllDataFromServer() {
+
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Call<List<JsonObject>> call=apiService.checkSmartClassDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"8"));
@@ -453,21 +462,49 @@ dialog2.show();
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-//                int spinnerPositionForRainHarvestingAvl = adapter.getPosition(response.body().get(0).get("RainHarvestingAvl").getAsString());
-//                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
-//
-//                spinnerRainharvestingAvailabilty.setSelection(spinnerPositionForRainHarvestingAvl);
-//                spinnerRainHavestingWorkStatus.setSelection(spinnerPositionForWorkingStatus);
-//
-//
-//
-//                recyclerViewRAinHarvestandCWSNRampFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsRainHarvest.this,LinearLayoutManager.HORIZONTAL,false));
-//
-//                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-//                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
-//                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
-//                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsRainHarvest.this,aList);
-//                recyclerViewRAinHarvestandCWSNRampFromServer.setAdapter(onlineImageRecViewAdapter);
+                int spinnerPositionForAvailablity = arrayAdapter5.getPosition(response.body().get(0).get("Availablity").getAsString());
+                int spinnerPositionForDigitalBoard = arrayAdapter.getPosition(response.body().get(0).get("DigitalBoard").getAsString());
+                int spinnerPositionForLearningContent = arrayAdapter.getPosition(response.body().get(0).get("LearningContent").getAsString());
+                int spinnerPositionForProjector = arrayAdapter.getPosition(response.body().get(0).get("Projector").getAsString());
+               response.body().get(0).get("Name").getAsString();
+                int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+
+                int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                spinnerWorkingStatusSmartClass.setSelection(spinnerPositionForWorkingStatus);
+                companyName1.setText(response.body().get(0).get("CompanyName").getAsString());
+                spinnerInstallationYearSmartClass.setSelection(spinnerPositionForInstallationYear);
+                smartClassAvailabilty.setSelection(spinnerPositionForAvailablity);
+                spinnerDigitalBoardSmartClass.setSelection(spinnerPositionForDigitalBoard);
+                spinnerProjectorSmartClass.setSelection(spinnerPositionForProjector);
+                spinnerLearningContentSmartClass.setSelection(spinnerPositionForLearningContent);
+                spinnerUnderSchemeSmartClass.setSelection(spinnerPositionForScheme);
+                edtSmartOtherScheme.setVisibility(View.GONE);
+
+
+
+
+                for (int i=1;i<response.body().size();i++){
+                    SmartClassesCard smartClassesCard=new SmartClassesCard();
+                    smartClassesCard.setCompanyName(response.body().get(i).get("CompanyName").getAsString());
+                    smartClassesCard.setName(response.body().get(i).get("Name").getAsString());
+                    smartClassesCard.setScheme(response.body().get(i).get("Scheme").getAsString());
+                    smartClassesCard.setInstallationYear(response.body().get(i).get("InstallationYear").getAsString());
+                    smartClassesCard.setWorkingStatus(response.body().get(i).get("WorkingStatus").getAsString());
+                    smartClassesCard.setSrno(response.body().get(i).get("Srno").getAsString());
+                    smartClassesCards.add(smartClassesCard);
+
+                }
+                recyclerViewforViewFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsSmartClass.this,RecyclerView.VERTICAL,false));
+                recyclerViewforViewFromServer.setAdapter(new SmartClassAdapterForEdit(UpdateDetailsSmartClass.this,smartClassesCards));
+                (new SmartClassAdapter(UpdateDetailsSmartClass.this,smartClassesCards)).notifyDataSetChanged();
+                recyclerViewSmartClassFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsSmartClass.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsSmartClass.this,aList);
+                recyclerViewSmartClassFromServer.setAdapter(onlineImageRecViewAdapter);
             }
 
             @Override
@@ -496,6 +533,8 @@ dialog2.show();
         return imageFile;
     }
     private void runService(SmartClassesCard[] array) {
+        ArrayList<SmartClassesCard> aList = new ArrayList<SmartClassesCard>(Arrays.asList(array));
+        aList.addAll(smartClassesCards);
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
@@ -515,9 +554,15 @@ dialog2.show();
             surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
 
         }
-
-        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraSmartClass("1","8","SmartClass",array, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraSmartClass("1","8","SmartClass",array, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraSmartClass(action,"8","SmartClass",aList, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
+        Log.d("TAG", "onClick: "+paraSmartClass(action,"8","SmartClass",aList, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
         Call<List<JsonObject>> call=apiService.uploadSmartClassDetails(surveyImagesParts,description);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
@@ -558,7 +603,23 @@ dialog2.show();
         });
     }
 
-    private String paraSmartClass(String action, String paramId, String smartClass, SmartClassesCard[] array, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String teacherAvailabilty, String projector, String learningContent, String digitalBoard, String avaiabilty, ArrayList<File> arrayListImages1) {
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+
+        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
+        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+    private String paraSmartClass(String action, String paramId, String smartClass, ArrayList<SmartClassesCard> array, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, String teacherAvailabilty, String projector, String learningContent, String digitalBoard, String avaiabilty, ArrayList<File> arrayListImages1) {
 
         JsonObject jsonObject=new JsonObject();
         if (avaiabilty.equals("No")){
@@ -567,15 +628,15 @@ dialog2.show();
             jsonObject.addProperty("ParamName",smartClass);
             JsonArray jsonArray=new JsonArray();
             try{
-                for ( int i=0;i<array.length;i++){
+                for ( int i=0;i<array.size();i++){
                     JsonObject jsonObject1=new JsonObject();
-                    jsonObject1.addProperty("InstallationYear",array[i].getInstallationYear());
-                    jsonObject1.addProperty("CompanyName",array[i].getCompanyName());
-                    jsonObject1.addProperty("Scheme",array[i].getScheme());
-                    jsonObject1.addProperty("OtherSchemeYN",array[i].getOtherSchemeYN());
-                    jsonObject1.addProperty("Srno",array[i].getSrno());
-                    jsonObject1.addProperty("Name",array[i].getName());
-                    jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());
+                    jsonObject1.addProperty("InstallationYear",array.get(i).getInstallationYear());
+                    jsonObject1.addProperty("CompanyName",array.get(i).getCompanyName());
+                    jsonObject1.addProperty("Scheme",array.get(i).getScheme());
+                    jsonObject1.addProperty("OtherSchemeYN",array.get(i).getOtherSchemeYN());
+                    jsonObject1.addProperty("Srno",i+1);
+                    jsonObject1.addProperty("Name",array.get(i).getName());
+                    jsonObject1.addProperty("WorkingStatus",array.get(i).getWorkingStatus());
                     jsonArray.add(jsonObject1);
                 }
             }catch (Exception e){
@@ -613,15 +674,15 @@ dialog2.show();
             jsonObject.addProperty("ParamId",paramId);
             jsonObject.addProperty("ParamName",smartClass);
             JsonArray jsonArray=new JsonArray();
-            for ( int i=0;i<array.length;i++){
+            for ( int i=0;i<array.size();i++){
                 JsonObject jsonObject1=new JsonObject();
-                jsonObject1.addProperty("InstallationYear",array[i].getInstallationYear());
-                jsonObject1.addProperty("CompanyName",array[i].getCompanyName());
-                jsonObject1.addProperty("Scheme",array[i].getScheme());
-                jsonObject1.addProperty("OtherSchemeYN",array[i].getOtherSchemeYN());
-                jsonObject1.addProperty("Srno",array[i].getSrno());
-                jsonObject1.addProperty("Name",array[i].getName());
-                jsonObject1.addProperty("WorkingStatus",array[i].getWorkingStatus());
+                jsonObject1.addProperty("InstallationYear",array.get(i).getInstallationYear());
+                jsonObject1.addProperty("CompanyName",array.get(i).getCompanyName());
+                jsonObject1.addProperty("Scheme",array.get(i).getScheme());
+                jsonObject1.addProperty("OtherSchemeYN",array.get(i).getOtherSchemeYN());
+                jsonObject1.addProperty("Srno",i+1);
+                jsonObject1.addProperty("Name",array.get(i).getName());
+                jsonObject1.addProperty("WorkingStatus",array.get(i).getWorkingStatus());
                 jsonArray.add(jsonObject1);
             }
             jsonObject.add("SmartClassData",(JsonElement)jsonArray);

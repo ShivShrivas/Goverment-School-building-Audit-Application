@@ -53,7 +53,7 @@ public class SmartClassAdapter extends RecyclerView.Adapter<SmartClassAdapter.Sm
         public SmartViewHolder(@NonNull View itemView) {
             super(itemView);
             edtWorkingStatus=itemView.findViewById(R.id.edtWorkingStatus);
-            txtSmartRoomName=itemView.findViewById(R.id.txtSmartRoomName);
+            txtSmartRoomName=itemView.findViewById(R.id.txtSmartRoomNameedtable);
             edtUnderScheme=itemView.findViewById(R.id.edtUnderScheme);
             edtCompanyName=itemView.findViewById(R.id.edtCompanyName);
             edtSmartInstalltionYear=itemView.findViewById(R.id.edtSmartInstalltionYear);

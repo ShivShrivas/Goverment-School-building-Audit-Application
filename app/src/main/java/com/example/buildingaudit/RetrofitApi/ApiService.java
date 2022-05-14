@@ -97,10 +97,10 @@ public  interface ApiService {
 
 
 
-
+@Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParamLabs/SPracticalLabDetails")
-    Call<List<JsonObject>> uploadLabDetails(@Body JsonObject object);
+    Call<List<JsonObject>> uploadLabDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object);
 
 
 
@@ -410,5 +410,21 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SBiometricDetails")
     Call<List<JsonObject>> uploadBiometricv2(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object,@Part("PhotoDeleteData") RequestBody deletulrs);
+
+    @Multipart
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParamLabs/SVocEduDetails")
+    Call<List<JsonObject>> uploadVocalRoom(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object,@Part("PhotoDeleteData") RequestBody deletulrs);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParamLabs/SVocEduDetails")
+    Call<List<JsonObject>> checkVocalRoom(@Body JsonObject paraGetDetails2);
+
+
+    @Multipart
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParam/SOfficeRoomDetails")
+    Call<List<JsonObject>> uploadOfficeRoom(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 }

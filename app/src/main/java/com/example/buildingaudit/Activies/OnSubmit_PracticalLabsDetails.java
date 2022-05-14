@@ -1,6 +1,7 @@
 package com.example.buildingaudit.Activies;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +30,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
-    private TextView schoolAddress,schoolName;
+    private TextView schoolAddress,schoolName,editPracticalLabDetails;
     ApplicationController applicationController;
     EditText edtHomeSciencelabAvailability,edtGeographyLabConditionedt,GeographyEquipmentStatus,edtGeographylabAvailability,edtBiologyLabCondition,edtBiologylabAvailability,edtBilogyEquipmentStatus
                     ,edtChemistryLabCondition,edtChemistryEquipmentStatus,edtChemistrylabAvailability,edtPhysicsLabCondition,edtPhysicsEquipmentStatus,edtPhysicslabAvailability
@@ -112,6 +113,16 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
         edtPhysicslabAvailability=findViewById(R.id.edtPhysicslabAvailability);
                 edtScienceLabCondition=findViewById(R.id.edtScienceLabCondition);
                 edtScienceEquipmentStatus=findViewById(R.id.edtScienceEquipmentStatus);
+        editPracticalLabDetails=findViewById(R.id.editPracticalLabDetails);
+        editPracticalLabDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(OnSubmit_PracticalLabsDetails.this,UpdatedetailsTypeThree.class);
+                i.putExtra("Action","3");
+                startActivity(i);
+                finish();
+            }
+        });
         setAllEditTextDisabled();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
@@ -245,6 +256,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
 
             try {
+                Log.d("TAG", "onResponse: "+list.get(0).getLabPhotoPath());
                 String[] scinceLabPhotoPathList=list.get(0).getLabPhotoPath().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,scinceLabPhotoPathList);
                 recyclerViewScienceLab.setAdapter(onlineImageRecViewAdapter);
@@ -253,6 +265,8 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
             }
 
                 try {
+                    Log.d("TAG", "onResponse: "+list.get(1).getLabPhotoPath());
+
                     String[] physicsLabPhotoPathList=list.get(1).getLabPhotoPath().split(",");
                     OnlineImageRecViewAdapter onlineImageRecViewAdapter1=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,physicsLabPhotoPathList);
                     recyclerViewPhysicsLab.setAdapter(onlineImageRecViewAdapter1);
@@ -261,6 +275,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
             }
 
                 try {
+                    Log.d("TAG", "onResponse: "+list.get(2).getLabPhotoPath());
 
                     String[] chemistryLabPhotoPathLis2=list.get(2).getLabPhotoPath().split(",");
                     OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,chemistryLabPhotoPathLis2);
@@ -270,6 +285,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
             }
 
                 try {
+                    Log.d("TAG", "onResponse: "+list.get(3).getLabPhotoPath());
 
                     String[] biologyLAbList=list.get(3).getLabPhotoPath().split(",");
                     OnlineImageRecViewAdapter onlineImageRecViewAdapter4=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,biologyLAbList);
@@ -281,6 +297,8 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
 
                 try {
+                    Log.d("TAG", "onResponse: "+list.get(4).getLabPhotoPath());
+
                     String[] homscienceLabList=list.get(4).getLabPhotoPath().split(",");
                         OnlineImageRecViewAdapter onlineImageRecViewAdapter5=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,homscienceLabList);
                     recyclerViewHomeScienceLab.setAdapter(onlineImageRecViewAdapter5);
@@ -289,6 +307,8 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                     }
 
                try {
+                   Log.d("TAG", "onResponse: "+list.get(5).getLabPhotoPath());
+
                    String[] muscilabList=list.get(5).getLabPhotoPath().split(",");
                    OnlineImageRecViewAdapter onlineImageRecViewAdapter6=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,muscilabList);
                    recyclerViewMusicLab.setAdapter(onlineImageRecViewAdapter6);
@@ -297,6 +317,8 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                }
 
               try {
+                  Log.d("TAG", "onResponse: "+list.get(6).getLabPhotoPath());
+
                   String[] geoGraphyList=list.get(6).getLabPhotoPath().split(",");
                   OnlineImageRecViewAdapter onlineImageRecViewAdapter7=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,geoGraphyList);
                   recyclerViewGeographyLab.setAdapter(onlineImageRecViewAdapter7);
@@ -357,6 +379,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
         jsonObject.addProperty("Action",action);
         jsonObject.addProperty("SchoolId",schoolId);
         jsonObject.addProperty("PeriodID",periodId);
+        jsonObject.addProperty("ParamId","3");
         return jsonObject;
     }
 }

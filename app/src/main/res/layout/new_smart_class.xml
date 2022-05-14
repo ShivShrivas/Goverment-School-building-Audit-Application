@@ -7,7 +7,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/constraintLayout12"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txtSmartRoomName"
+            android:id="@+id/txtSmartRoomNameedtable"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Smart Room"
@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_baseline_delete_forever_24"
-        app:layout_constraintBottom_toBottomOf="@+id/txtSmartRoomName"
-        app:layout_constraintEnd_toEndOf="@+id/txtSmartRoomName"
+        app:layout_constraintBottom_toBottomOf="@+id/txtSmartRoomNameedtable"
+        app:layout_constraintEnd_toEndOf="@+id/txtSmartRoomNameedtable"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.49" />
 
@@ -51,7 +51,7 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtSmartRoomName">
+            app:layout_constraintTop_toBottomOf="@+id/txtSmartRoomNameedtable">
 
             <TextView
                 android:layout_width="match_parent"

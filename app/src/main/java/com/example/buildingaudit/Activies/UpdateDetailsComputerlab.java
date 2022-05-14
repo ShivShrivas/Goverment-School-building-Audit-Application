@@ -89,7 +89,7 @@ public class UpdateDetailsComputerlab extends AppCompatActivity {
     Dialog dialog;
     String[] StaffPhotoPathList;
     ArrayList<String> aList=new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter,arrayAdapter1,arrayAdapter2,arrayAdapter5,arrayAdapter4;
+    ArrayAdapter<String> arrayAdapter,arrayAdapter1,arrayAdapter2,arrayAdapter5,arrayAdapter4,arrayAdapter6;
     String action;
 Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailabelty,spinnerInstallationYear,spinnerGrantUnderScheme,spinnerinternet,spinnerPowerBackup,spinnerFurniture,spinnerComputerOperator;
     ImageView ComputerLabImageUploadBtn;
@@ -205,9 +205,14 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         spinnerPrinterAvailable.setAdapter(arrayAdapter5);
         spinnerScannerAvailable.setAdapter(arrayAdapter5);
         spinnerinternet.setAdapter(arrayAdapter5);
-        spinnerComputeLabAvailabelty.setAdapter(arrayAdapter5);
 
 
+        ArrayList<String> arrayListFurnitures2=new ArrayList<>();
+        arrayListFurnitures2.add("Yes");
+        arrayListFurnitures2.add("No");
+        arrayListFurnitures2.add("Alternate Room");
+        arrayAdapter6=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListFurnitures2);
+        arrayAdapter6.setDropDownViewResource(R.layout.custom_text_spiiner);
 
         ComputerLabImageUploadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -375,7 +380,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = arrayAdapter5.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForAvailabilty = arrayAdapter6.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
                 int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
                 int spinnerPositionForInternet = arrayAdapter4.getPosition(response.body().get(0).get("Internet").getAsString());

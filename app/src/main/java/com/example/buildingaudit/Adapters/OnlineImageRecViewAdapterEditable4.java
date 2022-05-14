@@ -16,11 +16,11 @@ import com.example.buildingaudit.R;
 
 import java.util.ArrayList;
 
-public class OnlineImageRecViewAdapterEditable1 extends RecyclerView.Adapter<OnlineImageRecViewAdapterEditable1.HistoryItemViewHolder> {
+public class OnlineImageRecViewAdapterEditable4 extends RecyclerView.Adapter<OnlineImageRecViewAdapterEditable4.HistoryItemViewHolder> {
     Context context;
     ArrayList<String> imageUrlString;
     public static ArrayList<String> deletedUrls=new ArrayList<>();
-    public OnlineImageRecViewAdapterEditable1(Context context, ArrayList<String> staffPhotoPathList) {
+    public OnlineImageRecViewAdapterEditable4(Context context, ArrayList<String> staffPhotoPathList) {
         this.context=context;
         this.imageUrlString=staffPhotoPathList;
 

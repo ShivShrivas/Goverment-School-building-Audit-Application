@@ -7,191 +7,205 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-feature android:name="android.hardware.camera" android:required="true"/>
-    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.example.buildingaudit.ApplicationController"
+        android:name=".ApplicationController"
         android:allowBackup="true"
-        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BuildingAudit"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity
+            android:name=".Activies.OnSubmit_VocationalRoom"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetails_VocationalEducationRoom"
+            android:exported="false" />
+        <activity
+            android:name=".Activies.UpdateDetails_OfficeRoom"
+            android:exported="false" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.buildingaudit.provider"
             android:exported="false"
             android:grantUriPermissions="true">
+
             <!-- ressource file to create -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
+
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_ArtAndCraft"
+            android:name=".Activies.OnSubmit_ArtAndCraft"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsArtAndCraft"
+            android:name=".Activies.UpdateDetailsArtAndCraft"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_PrincipalRoom"
+            android:name=".Activies.OnSubmit_PrincipalRoom"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsPrincipalRoom"
+            android:name=".Activies.UpdateDetailsPrincipalRoom"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_FurnitureDetails"
+            android:name=".Activies.OnSubmit_FurnitureDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_GirlsToiletDetails"
+            android:name=".Activies.OnSubmit_GirlsToiletDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_BoysToiletDetails"
+            android:name=".Activies.OnSubmit_BoysToiletDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_BoundryWalls"
+            android:name=".Activies.OnSubmit_BoundryWalls"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_SolarPanel"
+            android:name=".Activies.OnSubmit_SolarPanel"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_ElectricityArrangment"
+            android:name=".Activies.OnSubmit_ElectricityArrangment"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_FireFighting"
+            android:name=".Activies.OnSubmit_FireFighting"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_RainHarvesting"
+            android:name=".Activies.OnSubmit_RainHarvesting"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_CCTVDetails"
+            android:name=".Activies.OnSubmit_CCTVDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_ComputerLabDetails"
+            android:name=".Activies.OnSubmit_ComputerLabDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_WifiDetails"
+            android:name=".Activies.OnSubmit_WifiDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_CycleStand"
+            android:name=".Activies.OnSubmit_CycleStand"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_SoundSystemDetails"
+            android:name=".Activies.OnSubmit_SoundSystemDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails"
+            android:name=".Activies.OnSubmit_MultipurposeHallDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_SmartClassDetails"
+            android:name=".Activies.OnSubmit_SmartClassDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_BioMetricDetails"
+            android:name=".Activies.OnSubmit_BioMetricDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_DrinkingWaterDetails"
+            android:name=".Activies.OnSubmit_DrinkingWaterDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_LibraryDetails"
+            android:name=".Activies.OnSubmit_LibraryDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_PlaygroundDetails"
+            android:name=".Activies.OnSubmit_PlaygroundDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails"
+            android:name=".Activies.OnSubmit_OpenGYmDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails"
+            android:name=".Activies.OnSubmit_PracticalLabsDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails"
+            android:name=".Activies.OnSubmit_StaffRoomDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.NoInternetConnection"
+            android:name=".Activies.NoInternetConnection"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.OnSubmitClassRoomPage"
+            android:name=".Activies.OnSubmitClassRoomPage"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsCWSNRamp"
+            android:name=".Activies.UpdateDetailsCWSNRamp"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsCCTV"
+            android:name=".Activies.UpdateDetailsCCTV"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsCycleStand"
+            android:name=".Activies.UpdateDetailsCycleStand"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsMultipurposeHall"
+            android:name=".Activies.UpdateDetailsMultipurposeHall"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsSoundSystem"
+            android:name=".Activies.UpdateDetailsSoundSystem"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsBoundryWall"
+            android:name=".Activies.UpdateDetailsBoundryWall"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.AfterSubmitClassromDetails"
+            android:name=".Activies.AfterSubmitClassromDetails"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsOfExtraThings"
+            android:name=".Activies.UpdateDetailsOfExtraThings"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsGirlsToilet"
+            android:name=".Activies.UpdateDetailsGirlsToilet"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsBoysToilet"
+            android:name=".Activies.UpdateDetailsBoysToilet"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsSolarPanel"
+            android:name=".Activies.UpdateDetailsSolarPanel"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsRainHarvest"
+            android:name=".Activies.UpdateDetailsRainHarvest"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsFireFighting"
+            android:name=".Activies.UpdateDetailsFireFighting"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsElectricityArrangment"
+            android:name=".Activies.UpdateDetailsElectricityArrangment"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsBioMetric"
+            android:name=".Activies.UpdateDetailsBioMetric"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsFurnitures"
+            android:name=".Activies.UpdateDetailsFurnitures"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsComputerlab"
+            android:name=".Activies.UpdateDetailsComputerlab"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsDrinkingWater"
+            android:name=".Activies.UpdateDetailsDrinkingWater"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsSmartClass"
+            android:name=".Activies.UpdateDetailsSmartClass"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsGym"
+            android:name=".Activies.UpdateDetailsGym"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsPlayground"
+            android:name=".Activies.UpdateDetailsPlayground"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsTypeFour"
+            android:name=".Activies.UpdateDetailsTypeFour"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdatedetailsTypeThree"
+            android:name=".Activies.UpdatedetailsTypeThree"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.SplashScreen"
+            android:name=".Activies.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -200,16 +214,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailsTypeTwo"
+            android:name=".Activies.UpdateDetailsTypeTwo"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.Activies.UpdateDetailTypeOne"
+            android:name=".Activies.UpdateDetailTypeOne"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.DashBoard"
+            android:name=".DashBoard"
             android:exported="false" />
         <activity
-            android:name="com.example.buildingaudit.MainActivity"
+            android:name=".MainActivity"
             android:exported="true" />
     </application>
 

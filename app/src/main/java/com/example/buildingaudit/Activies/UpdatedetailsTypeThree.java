@@ -2,10 +2,13 @@ package com.example.buildingaudit.Activies;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
@@ -19,15 +22,27 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.buildingaudit.Adapters.ImageAdapter;
+import com.example.buildingaudit.Adapters.ImageAdapter5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable1;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable2;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable3;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable4;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable5;
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable6;
 import com.example.buildingaudit.ApplicationController;
+import com.example.buildingaudit.CompressLib.Compressor;
+import com.example.buildingaudit.ConstantValues.ConstantFile;
 import com.example.buildingaudit.Model.LabCondition;
+import com.example.buildingaudit.Model.LabDetailsResponse;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
@@ -35,26 +50,48 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
-import com.karumi.dexter.listener.PermissionDeniedResponse;
-import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
-import com.karumi.dexter.listener.single.PermissionListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdatedetailsTypeThree extends AppCompatActivity {
+
+
+
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+    String[] StaffPhotoPathList;
+    ArrayList<String> aList=new ArrayList<>();
+    ArrayList<String> bList=new ArrayList<>();
+    ArrayList<String> cList=new ArrayList<>();
+    ArrayList<String> dList=new ArrayList<>();
+    ArrayList<String> eList=new ArrayList<>();
+    ArrayList<String> fList=new ArrayList<>();
+    ArrayList<String> gList=new ArrayList<>();
+    String currentImagePath=null;
+    File imageFile=null;
+    String action;
     int BtnType;
     Dialog dialog,dialog2;
 Spinner spinnerSciencelabAvailability,spinnerBiologylabAvailability,spinnerHomeMusiclabAvailability,spinnerHomeSciencelabAvailability,spinnerGeographylabAvailability,spinnerChemistrylabAvailability,spinnerPhysicslabAvailability;
@@ -67,12 +104,16 @@ Spinner spinnerMusicLabCondition,spinnerHomeScienceLabCondition,spinnerGeography
 RecyclerView recyclerViewMusicLab,recyclerViewHomeScienceLab,recyclerViewGeographyLab,recyclerViewScienceLab
         ,recyclerViewBiologyLab,recyclerViewChemistryLab,recyclerViewPhysicsLab;
 
+RecyclerView recyclerViewMusicLabFromServer,recyclerViewHomeScienceLabFromServer,recyclerViewGeographyLabFromServer,recyclerViewScienceLabFromServer
+        ,recyclerViewBiologyLabFromServer,recyclerViewChemistryLabFromServer,recyclerViewPhysicsLabFromServer;
+
 ImageView imageUpoadMusicLab,imageUpoadHomeScienceLab,imageUpoadGeographyLab
         ,imageUpoadScienceLab,imageUpoadBiologyLab,imageUpoadChemistryLab,imageUpoadPhysicsLab;
 TextView scienceLabNametxt,physicsLabtxt,chemistryLabtxt,biologyLabTxt,homeScienceLabTxt,musicLabTxt,georgaphyLabTxt;
 TextView userName,schoolAddress,schoolName;
 Button submitLabBtn;
 
+    ArrayAdapter<String> arrayAdapter,arrayAdapter2,arrayAdapter3;
 ArrayList<LabCondition> scienceLabDetailsArray=new ArrayList<>();
 ArrayList<LabCondition> physicLabDetailsArray=new ArrayList<>();
 ArrayList<LabCondition> chemistryLabDetailsArray=new ArrayList<>();
@@ -81,14 +122,15 @@ ArrayList<LabCondition> musicLabDetailsArray=new ArrayList<>();
 ArrayList<LabCondition> homeScienceLabDetailsArray=new ArrayList<>();
 ArrayList<LabCondition> geoGraphyLabDetailsArray=new ArrayList<>();
 ApplicationController applicationController;
-    ImageAdapter adapter1,adapter2,adapter3,adapter4,adapter5,adapter6,adapter7;
-    public ArrayList<Bitmap> arrayListImages1 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages2 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages3= new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages4 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages5 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages6 = new ArrayList<>();
-    public ArrayList<Bitmap> arrayListImages7 = new ArrayList<>();
+    ImageAdapter5 adapter1,adapter2,adapter3,adapter4,adapter5,adapter6,adapter7;
+    public ArrayList<File> arrayListImages1 = new ArrayList<>();
+    public ArrayList<File> arrayListImages2 = new ArrayList<>();
+    public ArrayList<File> arrayListImages3= new ArrayList<>();
+    public ArrayList<File> arrayListImages4 = new ArrayList<>();
+    public ArrayList<File> arrayListImages5 = new ArrayList<>();
+    public ArrayList<File> arrayListImages6 = new ArrayList<>();
+    public ArrayList<File> arrayListImages7 = new ArrayList<>();
+    public ArrayList<File> arrayListImagesFinal = new ArrayList<>();
 
     CardView scienceLabBodyCard,scienceLanImageCard,physicsLabBodyCard,physicsLabImageCard,
             chemistryLabBodyCard,chemistryLabImageCard,bioloyLabBodyCard,bioloyLabImageCard,
@@ -106,6 +148,8 @@ ApplicationController applicationController;
                 onBackPressed();
             }
         });
+        Intent i1=getIntent();
+        action=i1.getStringExtra("Action");
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
@@ -174,6 +218,14 @@ ApplicationController applicationController;
         recyclerViewChemistryLab=findViewById(R.id.recyclerViewChemistryLab);
         recyclerViewPhysicsLab=findViewById(R.id.recyclerViewPhysicsLab);
 
+        recyclerViewMusicLabFromServer=findViewById(R.id.recyclerViewMusicLabFromServer);
+        recyclerViewHomeScienceLabFromServer=findViewById(R.id.recyclerViewHomeScienceLabFromServer);
+        recyclerViewGeographyLabFromServer=findViewById(R.id.recyclerViewGeographyLabFromServer);
+        recyclerViewScienceLabFromServer=findViewById(R.id.recyclerViewScienceLabFromServer);
+        recyclerViewBiologyLabFromServer=findViewById(R.id.recyclerViewBiologyLabFromServer);
+        recyclerViewChemistryLabFromServer=findViewById(R.id.recyclerViewChemistryLabFromServer);
+        recyclerViewPhysicsLabFromServer=findViewById(R.id.recyclerViewPhysicsLabFromServer);
+
         imageUpoadMusicLab=findViewById(R.id.imageUpoadMusicLab);
         imageUpoadHomeScienceLab=findViewById(R.id.imageUpoadHomeScienceLab);
         imageUpoadGeographyLab=findViewById(R.id.imageUpoadGeographyLab);
@@ -185,11 +237,10 @@ ApplicationController applicationController;
 
 
 
-
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
-        ArrayAdapter<String> arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+        arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerHomeMusiclabAvailability.setAdapter(arrayAdapter);
                 spinnerChemistrylabAvailability.setAdapter(arrayAdapter);
@@ -204,7 +255,7 @@ ApplicationController applicationController;
         arrayListSpinner2.add("Partially Equipped");
         arrayListSpinner2.add("Not Equipped");
 
-        ArrayAdapter<String> arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner2);
+         arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner2);
         arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerMusicEquipmentStatus.setAdapter(arrayAdapter2);
                 spinnerHomeScienceEquipmentStatus.setAdapter(arrayAdapter2);
@@ -213,14 +264,15 @@ ApplicationController applicationController;
         spinnerGeographyEquipmentStatus.setAdapter(arrayAdapter2);
                 spinnerChemistryEquipmentStatus.setAdapter(arrayAdapter2);
         spinnerPhysicsEquipmentStatus.setAdapter(arrayAdapter2);
-
+        String[] StaffPhotoPathList;
+        ArrayList<String> aList=new ArrayList<>();
         ArrayList<String> arrayListSpinner3 = new ArrayList<>();
 
         arrayListSpinner3.add("Good Condition");
         arrayListSpinner3.add("Minor Repairing");
         arrayListSpinner3.add("Major repairing");
 
-        ArrayAdapter<String> arrayAdapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner3);
+         arrayAdapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner3);
         arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
 
         spinnerMusicLabCondition.setAdapter(arrayAdapter3);
@@ -231,11 +283,15 @@ ApplicationController applicationController;
                 spinnerChemistryLabCondition.setAdapter(arrayAdapter3);
         spinnerPhysicsLabCondition.setAdapter(arrayAdapter3);
 
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
+
         imageUpoadPhysicsLab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BtnType=1;
-                checkPermissions();
+                checkPermissions(1);
             }
         });
 
@@ -243,7 +299,7 @@ ApplicationController applicationController;
             @Override
             public void onClick(View view) {
                 BtnType=2;
-                checkPermissions();
+                checkPermissions(2);
             }
         });
 
@@ -251,23 +307,16 @@ ApplicationController applicationController;
             @Override
             public void onClick(View view) {
                 BtnType=3;
-                checkPermissions();
+                checkPermissions(3);
             }
         });
 
-        imageUpoadBiologyLab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BtnType=3;
-                checkPermissions();
-            }
-        });
 
         imageUpoadHomeScienceLab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BtnType=4;
-                checkPermissions();
+                checkPermissions(4);
             }
         });
 
@@ -275,7 +324,7 @@ ApplicationController applicationController;
             @Override
             public void onClick(View view) {
                 BtnType=5;
-                checkPermissions();
+                checkPermissions(5);
             }
         });
 
@@ -283,7 +332,7 @@ ApplicationController applicationController;
             @Override
             public void onClick(View view) {
                 BtnType=6;
-                checkPermissions();
+                checkPermissions(6);
             }
         });
 
@@ -291,43 +340,43 @@ ApplicationController applicationController;
             @Override
             public void onClick(View view) {
                 BtnType=7;
-                checkPermissions();
+                checkPermissions(7);
             }
         });
 
         recyclerViewPhysicsLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter1 = new ImageAdapter(this, arrayListImages1);
+        adapter1 = new ImageAdapter5(this, arrayListImages1);
         recyclerViewPhysicsLab.setAdapter(adapter1);
         adapter1.notifyDataSetChanged();
 
 
         recyclerViewChemistryLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter2 = new ImageAdapter(this, arrayListImages2);
+        adapter2 = new ImageAdapter5(this, arrayListImages2);
         recyclerViewChemistryLab.setAdapter(adapter2);
         adapter2.notifyDataSetChanged();
 
         recyclerViewBiologyLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter3 = new ImageAdapter(this, arrayListImages3);
+        adapter3 = new ImageAdapter5(this, arrayListImages3);
         recyclerViewBiologyLab.setAdapter(adapter3);
         adapter3.notifyDataSetChanged();
 
         recyclerViewHomeScienceLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter4= new ImageAdapter(this, arrayListImages4);
+        adapter4= new ImageAdapter5(this, arrayListImages4);
         recyclerViewHomeScienceLab.setAdapter(adapter4);
         adapter4.notifyDataSetChanged();
 
         recyclerViewMusicLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter5= new ImageAdapter(this, arrayListImages5);
+        adapter5= new ImageAdapter5(this, arrayListImages5);
         recyclerViewMusicLab.setAdapter(adapter5);
         adapter5.notifyDataSetChanged();
 
         recyclerViewGeographyLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter6= new ImageAdapter(this, arrayListImages6);
+        adapter6= new ImageAdapter5(this, arrayListImages6);
         recyclerViewGeographyLab.setAdapter(adapter6);
         adapter6.notifyDataSetChanged();
 
         recyclerViewScienceLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        adapter7= new ImageAdapter(this, arrayListImages7);
+        adapter7= new ImageAdapter5(this, arrayListImages7);
         recyclerViewScienceLab.setAdapter(adapter7);
         adapter7.notifyDataSetChanged();
 
@@ -460,8 +509,8 @@ dialog2.show();
 
                 LabCondition chemistryLabCondition=new LabCondition();
                 chemistryLabCondition.setLabName("ChemistryLab");
-                chemistryLabCondition.setLabCondition(spinnerChemistryLabCondition.getSelectedItem().toString());
-                chemistryLabCondition.setLabYN(spinnerChemistrylabAvailability.getSelectedItem().toString());
+                chemistryLabCondition.setLabCondition((String) spinnerChemistryLabCondition.getSelectedItem());
+                chemistryLabCondition.setLabYN((String) spinnerChemistrylabAvailability.getSelectedItem());
                 chemistryLabCondition.setSrno("3");
                 chemistryLabCondition.setEquipmentStatus(spinnerChemistryEquipmentStatus.getSelectedItem().toString());
 
@@ -526,12 +575,153 @@ dialog2.show();
 
     }
 
+
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<LabDetailsResponse>> call=apiService.checkLabDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"3"));
+        call.enqueue(new Callback<List<LabDetailsResponse>>() {
+            @Override
+            public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerAvalabiltyScience = arrayAdapter.getPosition(response.body().get(0).getLabYN());
+                int spinnerAvalabiltyPhysics = arrayAdapter.getPosition(response.body().get(1).getLabYN());
+                int spinnerAvalabiltyChemistry = arrayAdapter.getPosition(response.body().get(2).getLabYN());
+                int spinnerAvalabiltybiology = arrayAdapter.getPosition(response.body().get(3).getLabYN());
+                int spinnerAvalabiltyHomeScience = arrayAdapter.getPosition(response.body().get(4).getLabYN());
+                int spinnerAvalabiltyMusics = arrayAdapter.getPosition(response.body().get(5).getLabYN());
+                int spinnerAvalabiltyGeo = arrayAdapter.getPosition(response.body().get(6).getLabYN());
+
+                int spinnerEquipmentStatusScience = arrayAdapter.getPosition(response.body().get(0).getEquipmentStatus());
+                int spinnerEquipmentStatusPhysics = arrayAdapter.getPosition(response.body().get(1).getEquipmentStatus());
+                int spinnerEquipmentStatusChemistry = arrayAdapter.getPosition(response.body().get(2).getEquipmentStatus());
+                int spinnerEquipmentStatusbiology = arrayAdapter.getPosition(response.body().get(3).getEquipmentStatus());
+                int spinnerEquipmentStatusHomeScience = arrayAdapter.getPosition(response.body().get(4).getEquipmentStatus());
+                int spinnerEquipmentStatusMusics = arrayAdapter.getPosition(response.body().get(5).getEquipmentStatus());
+                int spinnerEquipmentStatusGeo = arrayAdapter.getPosition(response.body().get(6).getEquipmentStatus());
+
+                int spinnerLabConditionScience = arrayAdapter.getPosition(response.body().get(0).getLabCondition());
+                int spinnerLabConditionPhysics = arrayAdapter.getPosition(response.body().get(1).getLabCondition());
+                int spinnerLabConditionChemistry = arrayAdapter.getPosition(response.body().get(2).getLabCondition());
+                int spinnerLabConditionbiology = arrayAdapter.getPosition(response.body().get(3).getLabCondition());
+                int spinnerLabConditionHomeScience = arrayAdapter.getPosition(response.body().get(4).getLabCondition());
+                int spinnerLabConditionMusics = arrayAdapter.getPosition(response.body().get(5).getLabCondition());
+                int spinnerLabConditionGeo = arrayAdapter.getPosition(response.body().get(6).getLabCondition());
+
+                spinnerSciencelabAvailability.setSelection(spinnerAvalabiltyScience);
+                spinnerPhysicslabAvailability.setSelection(spinnerAvalabiltyPhysics);
+                spinnerChemistrylabAvailability.setSelection(spinnerAvalabiltyChemistry);
+                spinnerBiologylabAvailability.setSelection(spinnerAvalabiltybiology);
+                spinnerHomeSciencelabAvailability.setSelection(spinnerAvalabiltyHomeScience);
+                spinnerHomeMusiclabAvailability.setSelection(spinnerAvalabiltyMusics);
+                spinnerGeographylabAvailability.setSelection(spinnerAvalabiltyGeo);
+
+                spinnerScienceEquipmentStatus.setSelection(spinnerEquipmentStatusScience);
+                spinnerPhysicsEquipmentStatus.setSelection(spinnerEquipmentStatusPhysics);
+                spinnerChemistryEquipmentStatus.setSelection(spinnerEquipmentStatusChemistry);
+                spinnerBilogyEquipmentStatus.setSelection(spinnerEquipmentStatusbiology);
+                spinnerHomeScienceEquipmentStatus.setSelection(spinnerEquipmentStatusHomeScience);
+                spinnerMusicEquipmentStatus.setSelection(spinnerEquipmentStatusMusics);
+                spinnerGeographyEquipmentStatus.setSelection(spinnerEquipmentStatusGeo);
+
+
+                spinnerScienceLabCondition.setSelection(spinnerLabConditionScience);
+                spinnerPhysicsLabCondition.setSelection(spinnerLabConditionPhysics);
+                spinnerChemistryLabCondition.setSelection(spinnerLabConditionChemistry);
+                spinnerBiologyLabCondition.setSelection(spinnerLabConditionbiology);
+                spinnerHomeScienceLabCondition.setSelection(spinnerLabConditionHomeScience);
+                spinnerMusicLabCondition.setSelection(spinnerLabConditionMusics);
+                spinnerGeographyLabCondition.setSelection(spinnerLabConditionGeo);
+
+
+                aList = new ArrayList<String>(Arrays.asList(response.body().get(0).getLabPhotoPath()));
+                bList = new ArrayList<String>(Arrays.asList(response.body().get(1).getLabPhotoPath()));
+                cList = new ArrayList<String>(Arrays.asList(response.body().get(2).getLabPhotoPath()));
+                dList = new ArrayList<String>(Arrays.asList(response.body().get(3).getLabPhotoPath()));
+                eList = new ArrayList<String>(Arrays.asList(response.body().get(4).getLabPhotoPath()));
+                fList = new ArrayList<String>(Arrays.asList(response.body().get(5).getLabPhotoPath()));
+                gList = new ArrayList<String>(Arrays.asList(response.body().get(6).getLabPhotoPath()));
+
+                recyclerViewMusicLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
+                        recyclerViewHomeScienceLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
+                recyclerViewGeographyLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
+                        recyclerViewScienceLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
+                recyclerViewBiologyLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
+                        recyclerViewChemistryLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
+                recyclerViewPhysicsLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
+
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdatedetailsTypeThree.this,aList);
+                OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable1(UpdatedetailsTypeThree.this,bList);
+                OnlineImageRecViewAdapterEditable2 onlineImageRecViewAdapter2=new OnlineImageRecViewAdapterEditable2(UpdatedetailsTypeThree.this,cList);
+                OnlineImageRecViewAdapterEditable3 onlineImageRecViewAdapter3=new OnlineImageRecViewAdapterEditable3(UpdatedetailsTypeThree.this,dList);
+                OnlineImageRecViewAdapterEditable4 onlineImageRecViewAdapter4=new OnlineImageRecViewAdapterEditable4(UpdatedetailsTypeThree.this,eList);
+                OnlineImageRecViewAdapterEditable5 onlineImageRecViewAdapter5=new OnlineImageRecViewAdapterEditable5(UpdatedetailsTypeThree.this,fList);
+                OnlineImageRecViewAdapterEditable6 onlineImageRecViewAdapter6=new OnlineImageRecViewAdapterEditable6(UpdatedetailsTypeThree.this,gList);
+
+
+                recyclerViewScienceLabFromServer.setAdapter(onlineImageRecViewAdapter);
+                recyclerViewPhysicsLabFromServer.setAdapter(onlineImageRecViewAdapter1);
+                recyclerViewChemistryLabFromServer.setAdapter(onlineImageRecViewAdapter2);
+                recyclerViewBiologyLabFromServer.setAdapter(onlineImageRecViewAdapter3);
+                recyclerViewHomeScienceLabFromServer.setAdapter(onlineImageRecViewAdapter4);
+                recyclerViewMusicLabFromServer.setAdapter(onlineImageRecViewAdapter5);
+                recyclerViewGeographyLabFromServer.setAdapter(onlineImageRecViewAdapter6);
+
+            }
+
+            @Override
+            public void onFailure(Call<List<LabDetailsResponse>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
     private void runService(LabCondition scienceLabCondition, LabCondition physicsLabCondition, LabCondition chemistryLabCondition, LabCondition biologyLabCondition, LabCondition homeScienceLabCondition, LabCondition musicLabCondition, LabCondition geographyLabCondition) {
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onClick: "+paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUsertype(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
-        Call<List<JsonObject>> call=apiService.uploadLabDetails(paraLabDetails("1","3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
+        arrayListImagesFinal.addAll(arrayListImages1);
+        arrayListImagesFinal.addAll(arrayListImages2);
+        arrayListImagesFinal.addAll(arrayListImages3);
+        arrayListImagesFinal.addAll(arrayListImages4);
+        arrayListImagesFinal.addAll(arrayListImages5);
+        arrayListImagesFinal.addAll(arrayListImages6);
+        arrayListImagesFinal.addAll(arrayListImages7);
+        MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImagesFinal.size()];
+        for (int i = 0; i < arrayListImagesFinal.size(); i++) {
+            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImagesFinal.get(i).getPath());
+            File compressedImage = new Compressor.Builder(UpdatedetailsTypeThree.this)
+                    .setMaxWidth(720)
+                    .setMaxHeight(720)
+                    .setQuality(75)
+                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+                    .build()
+                    .compressToFile(new File(arrayListImagesFinal.get(i).getPath()));
+            RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
+                    compressedImage);
+            surveyImagesParts[i] = MultipartBody.Part.createFormData("FileData",compressedImage.getName(),surveyBody);
+
+        }
+        RequestBody deletUrl;
+        Log.d("TAG", "runService: "+paraDeletUlrs());
+        if (action.equals("3")){
+            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+        }else {
+            deletUrl=null;
+        }
+        RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraLabDetails(action,"3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
+        Log.d("TAG", "onClick: "+paraLabDetails(action,"3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUsertype(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
+        Call<List<JsonObject>> call=apiService.uploadLabDetails(surveyImagesParts,description);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -586,7 +776,31 @@ dialog2.show();
 
     }
 
-    private JsonObject paraLabDetails(String action, String paramId, String practicalLabsDetail, LabCondition scienceLabCondition, LabCondition physicsLabCondition, LabCondition chemistryLabCondition, LabCondition biologyLabCondition, LabCondition homeScienceLabCondition, LabCondition musicLabCondition, LabCondition geographyLabCondition, String latitude, String longitude, String schoolId, String periodID, String userTypeId, String usertype, ArrayList<Bitmap> arrayListImages7, ArrayList<Bitmap> arrayListImages1, ArrayList<Bitmap> arrayListImages2, ArrayList<Bitmap> arrayListImages3, ArrayList<Bitmap> arrayListImages4, ArrayList<Bitmap> arrayListImages5, ArrayList<Bitmap> arrayListImages6) {
+    private String paraDeletUlrs() {
+        JsonArray jsonArray=new JsonArray();
+        ArrayList<String> deleteUrlsFinal=new ArrayList<String>();
+        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable.deletedUrls);
+        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable1.deletedUrls);
+        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable2.deletedUrls);
+        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable3.deletedUrls);
+        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable4.deletedUrls);
+        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable5.deletedUrls);
+        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable6.deletedUrls);
+        Log.d("TAG", "paraDeletUlrs: "+ deleteUrlsFinal.size());
+
+        for (int i = 0; i < deleteUrlsFinal.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+deleteUrlsFinal.get(i));
+            String newUrl2=deleteUrlsFinal.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+
+    private String paraLabDetails(String action, String paramId, String practicalLabsDetail, LabCondition scienceLabCondition, LabCondition physicsLabCondition, LabCondition chemistryLabCondition, LabCondition biologyLabCondition, LabCondition homeScienceLabCondition, LabCondition musicLabCondition, LabCondition geographyLabCondition, String latitude, String longitude, String schoolId, String periodID, String userTypeId, String usertype, ArrayList<File> arrayListImages7, ArrayList<File> arrayListImages1, ArrayList<File> arrayListImages2, ArrayList<File> arrayListImages3, ArrayList<File> arrayListImages4, ArrayList<File> arrayListImages5, ArrayList<File> arrayListImages6) {
         int x=0;
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("Action",action);
@@ -608,30 +822,30 @@ dialog2.show();
         jsonObject.addProperty("PeriodID",periodID);
         jsonObject.addProperty("CreatedBy",userTypeId);
         jsonObject.addProperty("UserCode",usertype);
-        JsonArray jsonArrayLabPhoto = new JsonArray();
-
-        for (int i=0;i<arrayListImages7.size();i++){
-            jsonArrayLabPhoto.add( getLabImage(arrayListImages7.get(i),"Science Lab",x));
-            x++;
-        }for (int i=0;i<arrayListImages1.size();i++){
-            jsonArrayLabPhoto.add( getLabImage(arrayListImages1.get(i),"Physics Lab",x));
-            x++;
-        }for (int i=0;i<arrayListImages2.size();i++){
-            jsonArrayLabPhoto.add( getLabImage(arrayListImages2.get(i),"Chemistry Lab",x));
-            x++;
-        }for (int i=0;i<arrayListImages3.size();i++){
-            jsonArrayLabPhoto.add( getLabImage(arrayListImages3.get(i),"Biology Lab",x));
-            x++;
-        }for (int i=0;i<arrayListImages4.size();i++){
-            jsonArrayLabPhoto.add( getLabImage(arrayListImages4.get(i),"Home Science Lab",x));
-            x++;
-        }for (int i=0;i<arrayListImages5.size();i++){
-            jsonArrayLabPhoto.add( getLabImage(arrayListImages5.get(i),"Music Lab",x));
-            x++;
-        }for (int i=0;i<arrayListImages6.size();i++){
-            jsonArrayLabPhoto.add( getLabImage(arrayListImages6.get(i),"Geography Lab",x));
-            x++;
-        }
+//        JsonArray jsonArrayLabPhoto = new JsonArray();
+//
+//        for (int i=0;i<arrayListImages7.size();i++){
+//            jsonArrayLabPhoto.add( getLabImage(arrayListImages7.get(i),"Science Lab",x));
+//            x++;
+//        }for (int i=0;i<arrayListImages1.size();i++){
+//            jsonArrayLabPhoto.add( getLabImage(arrayListImages1.get(i),"Physics Lab",x));
+//            x++;
+//        }for (int i=0;i<arrayListImages2.size();i++){
+//            jsonArrayLabPhoto.add( getLabImage(arrayListImages2.get(i),"Chemistry Lab",x));
+//            x++;
+//        }for (int i=0;i<arrayListImages3.size();i++){
+//            jsonArrayLabPhoto.add( getLabImage(arrayListImages3.get(i),"Biology Lab",x));
+//            x++;
+//        }for (int i=0;i<arrayListImages4.size();i++){
+//            jsonArrayLabPhoto.add( getLabImage(arrayListImages4.get(i),"Home Science Lab",x));
+//            x++;
+//        }for (int i=0;i<arrayListImages5.size();i++){
+//            jsonArrayLabPhoto.add( getLabImage(arrayListImages5.get(i),"Music Lab",x));
+//            x++;
+//        }for (int i=0;i<arrayListImages6.size();i++){
+//            jsonArrayLabPhoto.add( getLabImage(arrayListImages6.get(i),"Geography Lab",x));
+//            x++;
+//        }
 //        jsonArrayLabPhoto.add(getLabImagesDynamic(arrayListImages7,"Science Lab",arrayListImages7.size()));
 //        jsonArrayLabPhoto.add(getLabImagesDynamic(arrayListImages1,"Physics Lab",arrayListImages7.size()+arrayListImages1.size()));
 //        jsonArrayLabPhoto.add(getLabImagesDynamic(arrayListImages2,"Chemistry Lab",arrayListImages7.size()+arrayListImages1.size()+arrayListImages2.size()));
@@ -639,9 +853,9 @@ dialog2.show();
 //        jsonArrayLabPhoto.add(getLabImagesDynamic(arrayListImages4,"Home Science Lab",arrayListImages7.size()+arrayListImages1.size()+arrayListImages2.size()+arrayListImages3.size()+arrayListImages4.size()));
 //        jsonArrayLabPhoto.add(getLabImagesDynamic(arrayListImages5,"Music Lab",arrayListImages7.size()+arrayListImages1.size()+arrayListImages2.size()+arrayListImages3.size()+arrayListImages4.size()+arrayListImages5.size()));
 //        jsonArrayLabPhoto.add(getLabImagesDynamic(arrayListImages6,"Geography Lab",arrayListImages7.size()+arrayListImages1.size()+arrayListImages2.size()+arrayListImages3.size()+arrayListImages4.size()+arrayListImages5.size()+arrayListImages6.size()));
-        jsonObject.add("LabPhotos",(JsonElement)jsonArrayLabPhoto);
+//        jsonObject.add("LabPhotos",(JsonElement)jsonArrayLabPhoto);
 
-        return jsonObject;
+        return jsonObject.toString();
     }
 
     private JsonArray getLabImagesDynamic(ArrayList<Bitmap> arrayListImages7, String name_lab,int i1) {
@@ -747,58 +961,138 @@ dialog2.show();
         }
     }
 
-    private void checkPermissions() {
-        Dexter.withActivity(UpdatedetailsTypeThree.this)
-                .withPermission(Manifest.permission.CAMERA)
-                .withListener(new PermissionListener() {
+    private void checkPermissions(int BtnType) {
+        Dexter.withContext(UpdatedetailsTypeThree.this)
+                .withPermissions(Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
                     @Override
-                    public void onPermissionGranted(PermissionGrantedResponse response) {
-                        // permission is granted, open the camera
+                    public void onPermissionsChecked(MultiplePermissionsReport multiplePermissionsReport) {
+                        if (multiplePermissionsReport.areAllPermissionsGranted()){
+                            Intent i=new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                            if (i.resolveActivity(getPackageManager())!=null){
 
-                        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                        startActivityForResult(intent, 7);
-                    }
+                                try {
 
-                    @Override
-                    public void onPermissionDenied(PermissionDeniedResponse response) {
-                        // check for permanent denial of permission
-                        if (response.isPermanentlyDenied()) {
+                                    imageFile =getImageFile(BtnType);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                if (imageFile!=null){
+//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
+//                                                    .setMaxWidth(720)
+//                                                    .setMaxHeight(720)
+//                                                    .setQuality(75)
+//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
+//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
+//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
+//                                                    .build()
+//                                                    .compressToFile(imageFile);
+                                    if (BtnType==1){
+                                        arrayListImages1.add(imageFile);
+                                    }else   if (BtnType==2){
+                                        arrayListImages2.add(imageFile);
+                                    }else   if (BtnType==3){
+                                        arrayListImages3.add(imageFile);
+                                    }else   if (BtnType==4){
+                                        arrayListImages4.add(imageFile);
+                                    }else   if (BtnType==5){
+                                        arrayListImages5.add(imageFile);
+                                    }else   if (BtnType==6){
+                                        arrayListImages6.add(imageFile);
+                                    }else   if (BtnType==7){
+                                        arrayListImages7.add(imageFile);
+                                    }
 
-                            // navigate user to app settings
-                            Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-                            Uri uri = Uri.fromParts("package", getPackageName(), null);
-                            intent.setData(uri);
-                            startActivity(intent);
+                                    Uri imageUri= FileProvider.getUriForFile(UpdatedetailsTypeThree.this, ConstantFile.PROVIDER_STRING,imageFile);
+                                    i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
+                                    startActivityForResult(i,2);
+                                }
+                            }
+
+                        }else if (multiplePermissionsReport.isAnyPermissionPermanentlyDenied()){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(UpdatedetailsTypeThree.this);
+
+                            // below line is the title
+                            // for our alert dialog.
+                            builder.setTitle("Need Permissions");
+
+                            // below line is our message for our dialog
+                            builder.setMessage("This app needs permission to use this feature. You can grant them in app settings.");
+                            builder.setPositiveButton("GOTO SETTINGS", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // this method is called on click on positive
+                                    // button and on clicking shit button we
+                                    // are redirecting our user from our app to the
+                                    // settings page of our app.
+                                    dialog.cancel();
+                                    // below is the intent from which we
+                                    // are redirecting our user.
+                                    Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                    Uri uri = Uri.fromParts("package", getPackageName(), null);
+                                    intent.setData(uri);
+                                    startActivityForResult(intent, 101);
+                                }
+                            });
+                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // this method is called when
+                                    // user click on negative button.
+                                    dialog.cancel();
+                                }
+                            });
+                            // below line is used
+                            // to display our dialog
+                            builder.show();
                         }
                     }
 
+
                     @Override
-                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
-                        token.continuePermissionRequest();
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> list, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
                     }
                 }).check();
 
+    }
+
+    private File getImageFile(int btnType) throws IOException {
+        String picName = "";
+        if (btnType==7){
+            picName="Sci_";
+        }else   if (btnType==1){
+            picName="Phy_";
+
+        }else   if (btnType==2){
+            picName="Che_";
+
+        }else   if (btnType==3){
+            picName="Bio_";
+
+        }else   if (btnType==4){
+            picName="Hom_   ";
+        }else   if (btnType==5){
+            picName="Mus_";
+        }else   if (btnType==6){
+            picName="Geo_";
+        }
+
+        String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        String imageName=picName+timeStamp+"_";
+        File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imageFile=File.createTempFile(imageName,".jpg",storageDir);
+
+        currentImagePath=imageFile.getAbsolutePath();
+        Log.d("TAG", "getImageFile: "+currentImagePath);
+        return imageFile;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 7 && resultCode == RESULT_OK ) {
             Bitmap bitmap = (Bitmap) data.getExtras().get("data");
-            if (BtnType==1){
-                arrayListImages1.add(bitmap);
-            }else   if (BtnType==2){
-                arrayListImages2.add(bitmap);
-            }else   if (BtnType==3){
-                arrayListImages3.add(bitmap);
-            }else   if (BtnType==4){
-                arrayListImages4.add(bitmap);
-            }else   if (BtnType==5){
-                arrayListImages5.add(bitmap);
-            }else   if (BtnType==6){
-                arrayListImages6.add(bitmap);
-            }else   if (BtnType==7){
-                arrayListImages7.add(bitmap);
-            }
+
 
         }
     }
