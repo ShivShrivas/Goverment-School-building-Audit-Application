@@ -219,7 +219,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout4"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:gravity="center_vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -240,7 +240,7 @@
                         android:inputType="number"
                         android:id="@+id/totalClassRooms"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:background="@drawable/cardbg"
                         android:maxLength="3"
@@ -284,7 +284,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout5"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -302,7 +302,7 @@
                         android:id="@+id/goodCondtionClassroom"
 
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:maxLength="3"
 
@@ -372,7 +372,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout6"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -391,7 +391,7 @@
                         android:id="@+id/minorRepairingClassroom"
 
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:maxLength="3"
 
@@ -462,7 +462,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayout7"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
@@ -480,7 +480,7 @@
                         android:id="@+id/majorRepairingClassroom"
 
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="40dp"
                         android:layout_weight="1"
                         android:background="@drawable/cardbg"
                         android:inputType="number"

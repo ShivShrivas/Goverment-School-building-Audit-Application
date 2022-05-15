@@ -225,6 +225,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         ArrayList<String> arrayListAvailbilty1=new ArrayList<>();
         arrayListAvailbilty1.add("Yes");
         arrayListAvailbilty1.add("No");
+        arrayListAvailbilty1.add("Alternate Room");
         arrayAdapter5=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty1);
         arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
         smartClassAvailabilty.setAdapter(arrayAdapter5);

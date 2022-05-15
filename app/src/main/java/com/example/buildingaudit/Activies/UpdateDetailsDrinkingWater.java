@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -90,11 +92,17 @@ public class UpdateDetailsDrinkingWater extends AppCompatActivity {
     String currentImagePath=null;
     String[] StaffPhotoPathList;
     File imageFile=null;
+
     ArrayList<String> aList=new ArrayList<>();
     ArrayAdapter<String> adapter;
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
     ImageAdapter5 adapter6;
     EditText edtNotWorkingDrinkingwaterTaps,edtWorkingDrinkingwaterTaps,edtTotalDrinkingwaterTaps;
+    EditText edtNotWorkingRO,edtWorkingRO,edtTotalRO;
+    EditText edtNotWorkingOHTanks,edtWorkingOHTanks,edtTotalOHTanks;
+    EditText edtNotWorkingSummerSible,edtWorkingSummerSible,edtTotalSummerSible;
+    EditText edtNotWorkingHandpump,edtWorkingHandpump,edtTotalHandpump;
+
     ImageView drinkingWaterImageUploadBtn;
     RecyclerView recyclerViewDrinkingWater,recyclerViewDrinkingWaterFromServer;
     TextView userName,schoolAddress,schoolName;
@@ -162,6 +170,15 @@ LinearLayout linearLayout31;
         recyclerViewDrinkingWaterFromServer=findViewById(R.id.recyclerViewDrinkingWaterFromServer);
         linearLayout31=findViewById(R.id.linearLayout31);
         edtDrinkingWaterOtherScheme=findViewById(R.id.edtDrinkingWaterOtherScheme);
+        edtNotWorkingRO=findViewById(R.id.edtNotWorkingRO);
+        edtWorkingRO=findViewById(R.id.edtWorkingRO);
+        edtTotalRO=findViewById(R.id.edtTotalRO);
+        edtNotWorkingSummerSible=findViewById(R.id.edtNotWorkingSummerSible);
+        edtWorkingSummerSible=findViewById(R.id.edtWorkingSummerSible);
+        edtTotalSummerSible=findViewById(R.id.edtTotalSummerSible);
+        edtNotWorkingHandpump=findViewById(R.id.edtNotWorkingHandpump);
+        edtWorkingHandpump=findViewById(R.id.edtWorkingHandpump);
+        edtTotalHandpump=findViewById(R.id.edtTotalHandpump);
         if (action.equals("3")){
             fetchAllDataFromServer();
         }
@@ -267,6 +284,31 @@ LinearLayout linearLayout31;
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        edtTotalRO.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try {
+                    if (Integer.valueOf(edtTotalRO.getText().toString().trim())==0){
+                        spinnerROInstallationScheme.setVisibility(View.GONE);
+                    }else{
+                        spinnerROInstallationScheme.setVisibility(View.VISIBLE);
+                    }
+                }catch (Exception e){
+                    spinnerROInstallationScheme.setVisibility(View.GONE);
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
 
             }
         });
@@ -399,45 +441,36 @@ LinearLayout linearLayout31;
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                int totalNumberOfWorkingTaps=0;
-                int totalNumberOfTaps=0;
-                int totalNumberOfNotWorkingTaps=0;
-                try {
-                    totalNumberOfTaps=Integer.parseInt(edtTotalDrinkingwaterTaps.getText().toString().trim());
-                }catch (Exception e){
-
-                }
-                try {
-                    totalNumberOfWorkingTaps=Integer.parseInt(edtWorkingDrinkingwaterTaps.getText().toString().trim());
-                }catch (Exception e){
-
-                }
-                try {
-                    totalNumberOfNotWorkingTaps=Integer.parseInt(edtNotWorkingDrinkingwaterTaps.getText().toString().trim());
-                }catch (Exception e){
-
-                }
-                if (totalNumberOfTaps!=totalNumberOfWorkingTaps+totalNumberOfNotWorkingTaps){
+                 if ( !checkValidation(Integer.parseInt(edtTotalDrinkingwaterTaps.getText().toString().trim()),Integer.parseInt(edtWorkingDrinkingwaterTaps.getText().toString().trim())
+                        ,Integer.parseInt(edtNotWorkingDrinkingwaterTaps.getText().toString().trim()))){
                     dialog2.dismiss();
-
                     Snackbar.make(drinkingwaterLayout, "Please provide correct number of Taps", Snackbar.LENGTH_INDEFINITE)
                             .setAction("Ok", new View.OnClickListener() {
                                 @Override
-                                public void onClick(View view) {
-
-                                }
-                            })
-                            .show();
+                                public void onClick(View view) { }}).show();
+                }else   if ( !checkValidation(Integer.parseInt(edtTotalRO.getText().toString().trim()),Integer.parseInt(edtWorkingRO.getText().toString().trim())
+                        ,Integer.parseInt(edtNotWorkingRO.getText().toString().trim()))){
+                    dialog2.dismiss();
+                    Snackbar.make(drinkingwaterLayout, "Please provide correct number of RO", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) { }}).show();
+                }else if ( !checkValidation(Integer.parseInt(edtTotalHandpump.getText().toString().trim()),Integer.parseInt(edtWorkingHandpump.getText().toString().trim())
+                        ,Integer.parseInt(edtNotWorkingHandpump.getText().toString().trim()))){
+                    dialog2.dismiss();
+                    Snackbar.make(drinkingwaterLayout, "Please provide correct number of Hand pump", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) { }}).show();
+                }else if ( !checkValidation(Integer.parseInt(edtTotalSummerSible.getText().toString().trim()),Integer.parseInt(edtWorkingSummerSible.getText().toString().trim())
+                        ,Integer.parseInt(edtNotWorkingSummerSible.getText().toString().trim()))){
+                    dialog2.dismiss();
+                    Snackbar.make(drinkingwaterLayout, "Please provide correct number of Submersible", Snackbar.LENGTH_INDEFINITE)
+                            .setAction("Ok", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) { }}).show();
                 }else {
-                    int total=0;
-                    try{
-                        total=Integer.parseInt(edtTotalDrinkingwaterTaps.getText().toString().trim());
-                    }catch (Exception e){
-                        total=0;
-                    }
-
-
-                    if (spinnerHandPumpAvailabiltyDW.getSelectedItem().toString().equals("No") && spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString().equals("No") && spinnerOverheadTankAvailabiltyDW.getSelectedItem().equals("No") && spinnerROInstallationAvailabiltyDW.getSelectedItem().toString().equals("No") && spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString().equals("No") && total==0){
+                    if ( spinnerOverheadTankAvailabiltyDW.getSelectedItem().equals("No") && spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString().equals("No") && Integer.valueOf(edtTotalDrinkingwaterTaps.getText().toString().trim())==0&& Integer.valueOf(edtTotalRO.getText().toString().trim())==0&& Integer.valueOf(edtTotalHandpump.getText().toString().trim())==0&& Integer.valueOf(edtTotalSummerSible.getText().toString().trim())==0){
                         Log.d("TAG", "onClick: all no and 0");
                         runService();
                     }else{
@@ -457,6 +490,14 @@ LinearLayout linearLayout31;
 
     }
 
+    private boolean checkValidation(int total, int working, int notworking) {
+        if (total!=working+notworking){
+            return false;
+        }else{
+            return true;
+        }
+    }
+
     private void fetchAllDataFromServer() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
@@ -466,27 +507,27 @@ LinearLayout linearLayout31;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("HandPumpAvl").getAsString());
-                int spinnforSubmersibleAvl= adapter.getPosition(response.body().get(0).get("SubmersibleAvl").getAsString());
+//                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("HandPumpAvl").getAsString());
+//                int spinnforSubmersibleAvl= adapter.getPosition(response.body().get(0).get("SubmersibleAvl").getAsString());
                 int spinnerPositionForNNPalikaWaterSupplyAvl = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
                 int spinnerPositionForOverHeadTankAvl = adapter.getPosition(response.body().get(0).get("OverHeadTankAvl").getAsString());
-                int spinnerPositionForROInsAvl = adapter.getPosition(response.body().get(0).get("ROInsAvl").getAsString());
-                spinnerHandPumpAvailabiltyDW.setSelection(spinnerPositionForHandPumpAvl);
-                spinnerSubmersibleAvailabiltyDW.setSelection(spinnforSubmersibleAvl);
+//                int spinnerPositionForROInsAvl = adapter.getPosition(response.body().get(0).get("ROInsAvl").getAsString());
+//                spinnerHandPumpAvailabiltyDW.setSelection(spinnerPositionForHandPumpAvl);
+//                spinnerSubmersibleAvailabiltyDW.setSelection(spinnforSubmersibleAvl);
                 spinnerWaterSupplyAvailabiltyDW.setSelection(spinnerPositionForNNPalikaWaterSupplyAvl);
                 spinnerOverheadTankAvailabiltyDW.setSelection(spinnerPositionForOverHeadTankAvl);
-                spinnerROInstallationAvailabiltyDW.setSelection(spinnerPositionForROInsAvl);
-                int spinnerPositionForHandPumpWorkingStatus = adapter.getPosition(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
-                int spinnforSubmersibleWorkingStatus= adapter.getPosition(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
+//                spinnerROInstallationAvailabiltyDW.setSelection(spinnerPositionForROInsAvl);
+//                int spinnerPositionForHandPumpWorkingStatus = adapter.getPosition(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
+//                int spinnforSubmersibleWorkingStatus= adapter.getPosition(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
                 int spinnerPositionForNNPalikaWaterSupplyWorkingStatus = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString());
                 int spinnerPositionForOverHeadTankWorkingStatus = adapter.getPosition(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString());
-                int spinnerPositionForROInsWorkingStatus = adapter.getPosition(response.body().get(0).get("ROInsWorkingStatus").getAsString());
+//                int spinnerPositionForROInsWorkingStatus = adapter.getPosition(response.body().get(0).get("ROInsWorkingStatus").getAsString());
 
-                spinnerHandPumpWorkStatsyDW.setSelection(spinnerPositionForHandPumpWorkingStatus);
-                spinnerSubmersibleWorkStatsyDW.setSelection(spinnforSubmersibleWorkingStatus);
+//                spinnerHandPumpWorkStatsyDW.setSelection(spinnerPositionForHandPumpWorkingStatus);
+//                spinnerSubmersibleWorkStatsyDW.setSelection(spinnforSubmersibleWorkingStatus);
                 spinnerWaterSupplyWorkStatsyDW.setSelection(spinnerPositionForNNPalikaWaterSupplyWorkingStatus);
                 spinnerOverheadTankWorkStatsyDW.setSelection(spinnerPositionForOverHeadTankWorkingStatus);
-                spinnerROInstallationWokingStatus.setSelection(spinnerPositionForROInsWorkingStatus);
+//                spinnerROInstallationWokingStatus.setSelection(spinnerPositionForROInsWorkingStatus);
 
                 int spinnerPositionForROScheme = adapter.getPosition(response.body().get(0).get("ROInsScheme").getAsString());
                 spinnerROInstallationScheme.setSelection(spinnerPositionForROScheme);
@@ -494,6 +535,21 @@ LinearLayout linearLayout31;
                 edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps").getAsString());
                 edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps").getAsString());
                 edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps").getAsString());
+
+
+                int totalRo=Integer.parseInt(response.body().get(0).get("RoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("RoNonWorking").getAsString());
+                int totalSub=Integer.parseInt(response.body().get(0).get("SubNoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("SubWorking").getAsString());
+                int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking").getAsString())+Integer.parseInt(response.body().get(0).get("HandWorking").getAsString());
+                edtNotWorkingRO.setText(response.body().get(0).get("RoNonWorking").getAsString());
+                edtWorkingRO.setText(response.body().get(0).get("RoWorking").getAsString());
+                edtTotalRO.setText(String.valueOf(totalRo));
+                edtNotWorkingSummerSible.setText(response.body().get(0).get("SubNoWorking").getAsString());
+                edtWorkingSummerSible.setText(response.body().get(0).get("SubWorking").getAsString());
+                edtTotalSummerSible.setText(String.valueOf(totalSub));
+                edtNotWorkingHandpump.setText(response.body().get(0).get("HandNonWorking").getAsString());
+                edtWorkingHandpump.setText(response.body().get(0).get("HandWorking").getAsString());
+                edtTotalHandpump.setText(String.valueOf(totalHand));
+
 
 
                 recyclerViewDrinkingWaterFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsDrinkingWater.this,LinearLayoutManager.HORIZONTAL,false));
@@ -575,11 +631,7 @@ LinearLayout linearLayout31;
                 spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
                 spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
                 spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),sheme,OtherScheme ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraDrinkingWater(action,"7","DrinkingWater",spinnerHandPumpAvailabiltyDW.getSelectedItem().toString(),
-                spinnerHandPumpWorkStatsyDW.getSelectedItem().toString(),spinnerSubmersibleAvailabiltyDW.getSelectedItem().toString(),
-                spinnerSubmersibleWorkStatsyDW.getSelectedItem().toString(),spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString(),
-                spinnerWaterSupplyWorkStatsyDW.getSelectedItem().toString(),spinnerOverheadTankAvailabiltyDW.getSelectedItem().toString(),spinnerOverheadTankWorkStatsyDW.getSelectedItem().toString(),spinnerROInstallationAvailabiltyDW.getSelectedItem().toString(),
-                spinnerROInstallationWokingStatus.getSelectedItem().toString(),edtTotalDrinkingwaterTaps.getText().toString(),edtWorkingDrinkingwaterTaps.getText().toString(),edtNotWorkingDrinkingwaterTaps.getText().toString(),sheme,OtherScheme ,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+
         Call<List<JsonObject>> call=apiService.uploadDrinkingWater(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
@@ -640,26 +692,26 @@ LinearLayout linearLayout31;
         jsonObject.addProperty("ParamId",paramId);
         jsonObject.addProperty("ParamName",drinkingWater);
         if (handPumpAvl.equals("No")){
-            jsonObject.addProperty("HandPumpAvl",handPumpAvl);
+            jsonObject.addProperty("HandPumpAvl","");
 
             jsonObject.addProperty("HandPumpWorkingStatus","");
         }else{
-            jsonObject.addProperty("HandPumpAvl",handPumpAvl);
+            jsonObject.addProperty("HandPumpAvl","");
 
-            jsonObject.addProperty("HandPumpWorkingStatus",handPumpWorkingStatus);
+            jsonObject.addProperty("HandPumpWorkingStatus","");
         }
 
 
 if (submersibleAvl.equals("No")){
-    jsonObject.addProperty("SubmersibleAvl",submersibleAvl);
+    jsonObject.addProperty("SubmersibleAvl","");
 
 
     jsonObject.addProperty("SubmersibleWorkingStatus","");
 }else{
-    jsonObject.addProperty("SubmersibleAvl",submersibleAvl);
+    jsonObject.addProperty("SubmersibleAvl","");
 
 
-    jsonObject.addProperty("SubmersibleWorkingStatus",submersibleWorkingStatus);
+    jsonObject.addProperty("SubmersibleWorkingStatus","");
 }
 
 
@@ -688,16 +740,16 @@ if (nnPalikaWaterSupplyAvl.equals("No")){
       }
 
 
-if (roInsAvl.equals("No")){
-    jsonObject.addProperty("ROInsAvl",roInsAvl);
+if (Integer.valueOf(edtTotalRO.getText().toString().trim())==0){
+    jsonObject.addProperty("ROInsAvl","");
     jsonObject.addProperty("ROInsWorkingStatus","");
     jsonObject.addProperty("ROInsScheme","");
     jsonObject.addProperty("OtherSchemeYN","");
 
 
 }else {
-    jsonObject.addProperty("ROInsAvl",roInsAvl);
-    jsonObject.addProperty("ROInsWorkingStatus",roInsWorkingStatus);
+    jsonObject.addProperty("ROInsAvl","");
+    jsonObject.addProperty("ROInsWorkingStatus","");
     jsonObject.addProperty("ROInsScheme",roInsScheme);
     jsonObject.addProperty("OtherSchemeYN",otherScheme);
 
@@ -707,6 +759,14 @@ if (roInsAvl.equals("No")){
         jsonObject.addProperty("NoOfTaps",noOfTaps);
         jsonObject.addProperty("WorkingTaps",workingTaps);
         jsonObject.addProperty("NonWorkingTaps",nonWorkingTaps);
+
+
+        jsonObject.addProperty("RoWorking",edtWorkingRO.getText().toString().trim());
+        jsonObject.addProperty("RoNonWorking",edtNotWorkingRO.getText().toString().trim());
+        jsonObject.addProperty("SubWorking",edtWorkingSummerSible.getText().toString().trim());
+        jsonObject.addProperty("SubNoWorking",edtNotWorkingSummerSible.getText().toString().trim());
+        jsonObject.addProperty("HandWorking",edtWorkingHandpump.getText().toString().trim());
+        jsonObject.addProperty("HandNonWorking",edtNotWorkingHandpump.getText().toString().trim());
 
         jsonObject.addProperty("Lat",latitude);
         jsonObject.addProperty("Long",longitude);

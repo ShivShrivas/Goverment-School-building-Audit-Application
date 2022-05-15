@@ -87,6 +87,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
     File imageFile=null;
     ArrayAdapter<String> arrayAdapter2;
     ArrayAdapter<String> arrayAdapter;
+    ArrayAdapter<String> arrayAdapter8;
     String[] StaffPhotoPathList;
     ArrayList<String> aList=new ArrayList<>();
     String action;
@@ -152,6 +153,15 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
          arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerRoomAvailabel.setAdapter(arrayAdapter);
+        ArrayList<String> arrayListSpinner8 = new ArrayList<>();
+
+        arrayListSpinner8.add("Yes");
+        arrayListSpinner8.add("No");
+        arrayListSpinner8.add("Alternate Room");
+
+        arrayAdapter8 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner8);
+        arrayAdapter8.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerRoomAvailabel.setAdapter(arrayAdapter8);
         spinnerFurnitureAvailabilty.setAdapter(arrayAdapter);
         spinnerAlmiraAndRacksAvailabilty.setAdapter(arrayAdapter);
         ArrayList<String> arrayListSpinner2 = new ArrayList<>();
@@ -269,26 +279,48 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerRoomAvailabel.getSelectedItem().toString().equals("No") ){
-                    if (arrayListImages1.size()==0){
+                if (action.equals("3")) {
+                    if (!spinnerRoomAvailabel.getSelectedItem().toString().equals("No")) {
+                        if (arrayListImages1.size() == 0 && aList.size()==0) {
+                            dialog2.dismiss();
+                            Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        } else {
+
+                            if (arrayListImages1.size() == 0 && action.equals("3") && aList.size() == 0) {
+                                Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
+                            } else {
+
+                                runService();
+                            }
+                        }
+
+                    } else {
+                        runService();
+
+                    }
+                } else {
+
+                if (!spinnerRoomAvailabel.getSelectedItem().toString().equals("No")) {
+                    if (arrayListImages1.size() == 0) {
                         dialog2.dismiss();
                         Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
 
-                        if (arrayListImages1.size()==0 && action.equals("3") && aList.size()==0){
+                        if (arrayListImages1.size() == 0 && action.equals("3") && aList.size() == 0) {
                             Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
-                        }else{
+                        } else {
 
                             runService();
                         }
                     }
 
-                }else
-                {
+                } else {
                     runService();
 
                 }
+            }
             }
         });
     }
@@ -302,7 +334,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter8.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
                 int spinnerPositionForFurnitureAvl = arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
                 int spinnerPositionForAlmirahRacksAvl = arrayAdapter.getPosition(response.body().get(0).get("AlmirahRacksAvl").getAsString());
                 int spinnerPositionForstatus = arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString());

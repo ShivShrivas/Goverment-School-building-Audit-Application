@@ -158,9 +158,10 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         spinnerInternalElectrification.setAdapter(adapter);
 
         ArrayList<String> arrayListPowerbackup =new ArrayList<>();
+        arrayListPowerbackup.add("None");
         arrayListPowerbackup.add("Generator");
         arrayListPowerbackup.add("Invertor");
-        arrayListPowerbackup.add("None");
+        arrayListPowerbackup.add("Both");
          arrayAdapter4=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListPowerbackup);
         arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerSource.setAdapter(arrayAdapter4);

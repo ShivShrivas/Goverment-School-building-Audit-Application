@@ -89,7 +89,7 @@ public class UpdateDetailsComputerlab extends AppCompatActivity {
     Dialog dialog;
     String[] StaffPhotoPathList;
     ArrayList<String> aList=new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter,arrayAdapter1,arrayAdapter2,arrayAdapter5,arrayAdapter4,arrayAdapter6;
+    ArrayAdapter<String> arrayAdapter,arrayAdapter1,arrayAdapter2,arrayAdapter5,arrayAdapter4,arrayAdapter6,arrayAdapter9;
     String action;
 Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailabelty,spinnerInstallationYear,spinnerGrantUnderScheme,spinnerinternet,spinnerPowerBackup,spinnerFurniture,spinnerComputerOperator;
     ImageView ComputerLabImageUploadBtn;
@@ -161,13 +161,19 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         if (action.equals("3")){
             fetchAllDataFromServer();
         }
-
-
+        ArrayList<String> arrayListFurnitures3=new ArrayList<>();
+        arrayListFurnitures3.add("Yes");
+        arrayListFurnitures3.add("No");
+        arrayListFurnitures3.add("Alternate Room");
+        arrayAdapter9=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListFurnitures3);
+        arrayAdapter9.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerFurniture.setAdapter(arrayAdapter9);
+        spinnerComputeLabAvailabelty.setAdapter(arrayAdapter9);
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
-            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        for (int i = 1990; i < 2022; i++) {
+            arrayListInstallationYear.add(String.valueOf(i));
         }
          arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
@@ -380,7 +386,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = arrayAdapter6.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForAvailabilty = arrayAdapter9.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
                 int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
                 int spinnerPositionForInternet = arrayAdapter4.getPosition(response.body().get(0).get("Internet").getAsString());

@@ -232,6 +232,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -271,6 +272,113 @@
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearLayout45"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout32">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+                        android:text="Good Condition"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edtgoodConditionForSingle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:textSize="17dp"
+                        android:textColor="@color/black"
+                        android:inputType="number"
+                        android:layout_weight="1"
+                        android:background="@drawable/cardbg"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+
+                        android:text="Minor Repairing"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edtMinorConditionForSingle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:textSize="17dp"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+
+                        android:layout_weight="1"
+                        android:background="@drawable/cardbg"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:textSize="16dp"
+
+                        android:text="Major Repairing"
+                        android:textColor="@color/black" />
+
+                    <EditText
+                        android:id="@+id/edtMajorConditionForSingle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:textSize="17dp"
+                        android:inputType="number"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+
+                        android:background="@drawable/cardbg"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
 
             <View
                 android:id="@+id/divider3"
@@ -279,7 +387,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout32" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout45" />
 
             <LinearLayout
                 android:id="@+id/linearLayout33"
@@ -346,6 +454,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
+                    android:visibility="gone"
                     android:layout_marginBottom="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
@@ -386,6 +495,115 @@
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linearLayout4555"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Good Condition"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/edtgoodConditionForDoubel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+
+                        android:background="@drawable/cardbg"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Minor Repairing"
+
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/edtMinorConditionForDoubel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cardbg"
+                        android:textColor="@color/black"
+
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Major Repairing"
+
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/edtMajorConditionForDoubel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+
+                        android:background="@drawable/cardbg"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textSize="17dp" />
+                </LinearLayout>
+            </LinearLayout>
+
             <View
                 android:id="@+id/divider4"
                 android:layout_width="match_parent"
@@ -393,19 +611,18 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout32" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout4555" />
 
             <LinearLayout
                 android:id="@+id/linearLayout34"
                 android:layout_width="match_parent"
 
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
                 android:orientation="vertical"
                 android:weightSum="5"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout33">
+                app:layout_constraintTop_toBottomOf="@+id/divider4">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -437,17 +654,17 @@
 
 
                         <EditText
-                            android:maxLength="4"
                             android:id="@+id/edtTrippelSeated"
-                            android:inputType="number"
-                            android:textAlignment="center"
-                            android:textColor="@color/textColor1"
-
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/cardbg"
+                            android:inputType="number"
 
-                            android:paddingStart="5dp" />
+                            android:maxLength="4"
+                            android:paddingStart="5dp"
+                            android:textAlignment="center"
+
+                            android:textColor="@color/textColor1" />
                     </androidx.cardview.widget.CardView>
 
                 </LinearLayout>
@@ -460,6 +677,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -473,16 +691,17 @@
                         android:gravity="center_vertical"
 
                         android:text="Physical Status"
-                        android:textColor="@color/textColor1"            android:textSize="14dp"
+                        android:textColor="@color/textColor1"
+                        android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.cardview.widget.CardView
 
-                        android:layout_weight="1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:foreground="@drawable/cardbg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -491,15 +710,123 @@
                         <EditText
                             android:id="@+id/edtTripleSeatesStatus"
                             android:layout_width="match_parent"
-                            android:background="@drawable/cardbg"
                             android:layout_height="30dp"
+                            android:layout_margin="4dp"
+                            android:background="@drawable/cardbg"
                             android:textAlignment="center"
-                            android:textColor="@color/textColor1"
-                            android:layout_margin="4dp" />
+                            android:textColor="@color/textColor1" />
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/linearLayout435"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout34">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Good Condition"
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/edtgoodConditionForTripple"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:textColor="@color/black"
+
+                        android:background="@drawable/cardbg"
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Minor Repairing"
+
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/edtMinorConditionForTripple"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cardbg"
+                        android:textColor="@color/black"
+
+                        android:inputType="number"
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textSize="17dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="Major Repairing"
+
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/edtMajorConditionForTripple"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/cardbg"
+                        android:inputType="number"
+                        android:textColor="@color/black"
+
+                        android:maxLength="4"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textSize="17dp" />
+                </LinearLayout>
+            </LinearLayout>
             <View
                 android:id="@+id/divider5"
                 android:layout_width="match_parent"
@@ -516,7 +843,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout34" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout435" />
 
             <LinearLayout
                 android:id="@+id/linearLayout35"

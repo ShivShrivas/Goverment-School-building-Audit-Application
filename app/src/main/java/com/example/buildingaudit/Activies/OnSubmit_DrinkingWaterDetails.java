@@ -1,10 +1,5 @@
 package com.example.buildingaudit.Activies;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +9,14 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.buildingaudit.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.example.buildingaudit.ApplicationController;
-
+import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
@@ -37,6 +36,11 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
         edtSubmersibleWorkStatsyDW,edtSubmersibleAvailabiltyDW,
         edtHandPumpWorkStatsyDW,edtHandPumpAvailabiltyDW;
 TextView uploadDW,editDrinkingWaterDetails;
+
+    EditText edtNotWorkingRO,edtWorkingRO,edtTotalRO;
+    EditText edtNotWorkingOHTanks,edtWorkingOHTanks,edtTotalOHTanks;
+    EditText edtNotWorkingSummerSible,edtWorkingSummerSible,edtTotalSummerSible;
+    EditText edtNotWorkingHandpump,edtWorkingHandpump,edtTotalHandpump;
     RecyclerView recyclerViewDrinkingWater;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
@@ -66,19 +70,22 @@ TextView uploadDW,editDrinkingWaterDetails;
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewDrinkingWater=findViewById(R.id.recyclerViewDrinkingWaterOnSubmit);
         edtROInstallationScheme=findViewById(R.id.edtROInstallationScheme);
-        edtROInstallationAvailabiltyDW=findViewById(R.id.edtROInstallationAvailabiltyDW);
+        edtNotWorkingRO=findViewById(R.id.edtNotWorkingRO);
+        edtWorkingRO=findViewById(R.id.edtWorkingRO);
+        edtTotalRO=findViewById(R.id.edtTotalRO);
+        edtNotWorkingSummerSible=findViewById(R.id.edtNotWorkingSummerSible);
+        edtWorkingSummerSible=findViewById(R.id.edtWorkingSummerSible);
+        edtTotalSummerSible=findViewById(R.id.edtTotalSummerSible);
+        edtNotWorkingHandpump=findViewById(R.id.edtNotWorkingHandpump);
+        edtWorkingHandpump=findViewById(R.id.edtWorkingHandpump);
+        edtTotalHandpump=findViewById(R.id.edtTotalHandpump);
         edtWorkingDrinkingwaterTaps=findViewById(R.id.edtWorkingDrinkingwaterTaps);
         edtOverheadTankWorkStatsyDW=findViewById(R.id.edtOverheadTankWorkStatsyDW);
         edtWaterSupplyWorkStatsyDW=findViewById(R.id.edtWaterSupplyWorkStatsyDW);
-        edtSubmersibleWorkStatsyDW=findViewById(R.id.edtSubmersibleWorkStatsyDW);
-        edtHandPumpWorkStatsyDW=findViewById(R.id.edtHandPumpWorkStatsyDW);
-        edtROInstallationWokingStatus=findViewById(R.id.edtROInstallationWokingStatus);
         edtNotWorkingDrinkingwaterTaps=findViewById(R.id.edtNotWorkingDrinkingwaterTaps);
         edtTotalDrinkingwaterTaps=findViewById(R.id.edtTotalDrinkingwaterTaps);
         edtOverheadTankAvailabiltyDW=findViewById(R.id.edtOverheadTankAvailabiltyDW);
         edtWaterSupplyAvailabiltyDW=findViewById(R.id.edtWaterSupplyAvailabiltyDW);
-        edtSubmersibleAvailabiltyDW=findViewById(R.id.edtSubmersibleAvailabiltyDW);
-        edtHandPumpAvailabiltyDW=findViewById(R.id.edtHandPumpAvailabiltyDW);
         editDrinkingWaterDetails=findViewById(R.id.editDrinkingWaterDetails);
         uploadDW=findViewById(R.id.uploadDW);
         editDrinkingWaterDetails.setOnClickListener(new View.OnClickListener() {
@@ -87,6 +94,7 @@ TextView uploadDW,editDrinkingWaterDetails;
                 Intent i=new Intent(OnSubmit_DrinkingWaterDetails.this,UpdateDetailsDrinkingWater.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         disableEditBox();
@@ -101,6 +109,18 @@ TextView uploadDW,editDrinkingWaterDetails;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
 
+int totalRo=Integer.parseInt(response.body().get(0).get("RoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("RoNonWorking").getAsString());
+int totalSub=Integer.parseInt(response.body().get(0).get("SubNoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("SubWorking").getAsString());
+int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking").getAsString())+Integer.parseInt(response.body().get(0).get("HandWorking").getAsString());
+                edtNotWorkingRO.setText(response.body().get(0).get("RoNonWorking").getAsString());
+                        edtWorkingRO.setText(response.body().get(0).get("RoWorking").getAsString());
+                edtTotalRO.setText(String.valueOf(totalRo));
+                        edtNotWorkingSummerSible.setText(response.body().get(0).get("SubNoWorking").getAsString());
+                edtWorkingSummerSible.setText(response.body().get(0).get("SubWorking").getAsString());
+                        edtTotalSummerSible.setText(String.valueOf(totalSub));
+                edtNotWorkingHandpump.setText(response.body().get(0).get("HandNonWorking").getAsString());
+                        edtWorkingHandpump.setText(response.body().get(0).get("HandWorking").getAsString());
+                edtTotalHandpump.setText(String.valueOf(totalHand));
 
 
 
@@ -108,19 +128,8 @@ TextView uploadDW,editDrinkingWaterDetails;
 
 
 
-
-                        if (response.body().get(0).get("ROInsAvl").getAsString().equals("No")){
-
-                            edtROInstallationAvailabiltyDW.setText(response.body().get(0).get("ROInsAvl").getAsString());
-
-                            edtROInstallationScheme.setVisibility(View.GONE);
-                            edtROInstallationWokingStatus.setVisibility(View.GONE);
-                        }else{
-
-                            edtROInstallationAvailabiltyDW.setText(response.body().get(0).get("ROInsAvl").getAsString());
                             edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme").getAsString());
-                            edtROInstallationWokingStatus.setText(response.body().get(0).get("ROInsWorkingStatus").getAsString());
-                        }
+
 
 
 
@@ -154,25 +163,7 @@ TextView uploadDW,editDrinkingWaterDetails;
 
                         }
 
-                        if (response.body().get(0).get("SubmersibleAvl").getAsString().equals("No")){
 
-                            edtSubmersibleAvailabiltyDW.setText(response.body().get(0).get("SubmersibleAvl").getAsString());
-                            edtSubmersibleWorkStatsyDW.setVisibility(View.GONE);
-                        }else{
-                            edtSubmersibleWorkStatsyDW.setText(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
-
-                            edtSubmersibleAvailabiltyDW.setText(response.body().get(0).get("SubmersibleAvl").getAsString());
-                        }
-                        if (response.body().get(0).get("HandPumpAvl").getAsString().equals("No")){
-
-                            edtHandPumpAvailabiltyDW.setText(response.body().get(0).get("HandPumpAvl").getAsString());
-                            edtHandPumpWorkStatsyDW.setVisibility(View.GONE);
-
-                        }else{
-                            edtHandPumpWorkStatsyDW.setText(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
-
-                            edtHandPumpAvailabiltyDW.setText(response.body().get(0).get("HandPumpAvl").getAsString());
-                        }
                        try {
                            String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                            OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_DrinkingWaterDetails.this,StaffPhotoPathList);
@@ -196,33 +187,48 @@ dialog2.dismiss();
 
     private void disableEditBox() {
         edtROInstallationScheme.setEnabled(false);
-                edtROInstallationAvailabiltyDW.setEnabled(false);
+
         edtWorkingDrinkingwaterTaps.setEnabled(false);
                 edtOverheadTankWorkStatsyDW.setEnabled(false);
         edtWaterSupplyWorkStatsyDW.setEnabled(false);
-                edtSubmersibleWorkStatsyDW.setEnabled(false);
-        edtHandPumpWorkStatsyDW.setEnabled(false);
-                edtROInstallationWokingStatus.setEnabled(false);
+
+
+
         edtNotWorkingDrinkingwaterTaps.setEnabled(false);
                 edtTotalDrinkingwaterTaps.setEnabled(false);
         edtOverheadTankAvailabiltyDW.setEnabled(false);
                 edtWaterSupplyAvailabiltyDW.setEnabled(false);
-        edtSubmersibleAvailabiltyDW.setEnabled(false);
-                edtHandPumpAvailabiltyDW.setEnabled(false);
         edtROInstallationScheme.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                edtROInstallationAvailabiltyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
         edtWorkingDrinkingwaterTaps.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 edtOverheadTankWorkStatsyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         edtWaterSupplyWorkStatsyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                edtSubmersibleWorkStatsyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        edtHandPumpWorkStatsyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                edtROInstallationWokingStatus.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        edtROInstallationScheme.setEnabled(false);
+                edtNotWorkingRO.setEnabled(false);
+        edtWorkingRO.setEnabled(false);
+                edtTotalRO.setEnabled(false);
+        edtNotWorkingSummerSible.setEnabled(false);
+                edtWorkingSummerSible.setEnabled(false);
+        edtTotalSummerSible.setEnabled(false);
+                edtNotWorkingHandpump.setEnabled(false);
+        edtWorkingHandpump.setEnabled(false);
+                edtTotalHandpump.setEnabled(false);
+        edtWorkingDrinkingwaterTaps.setEnabled(false);
+                edtOverheadTankWorkStatsyDW.setEnabled(false);
+        edtWaterSupplyWorkStatsyDW.setEnabled(false);
+                edtNotWorkingDrinkingwaterTaps.setEnabled(false);
+        edtTotalDrinkingwaterTaps.setEnabled(false);
+                edtOverheadTankAvailabiltyDW.setEnabled(false);
+        edtWaterSupplyAvailabiltyDW.setEnabled(false);
+
+
+
         edtNotWorkingDrinkingwaterTaps.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 edtTotalDrinkingwaterTaps.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         edtOverheadTankAvailabiltyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 edtWaterSupplyAvailabiltyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        edtSubmersibleAvailabiltyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                edtHandPumpAvailabiltyDW.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
 
 
     }

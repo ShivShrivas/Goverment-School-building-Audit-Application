@@ -275,11 +275,12 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_gravity="center"
                 android:gravity="center_vertical"
 
-                android:text="No. of CCTV"
+                android:text="No. of working CCTV"
                 android:textColor="@color/textColor1"
                 android:textSize="15dp" />
 
@@ -307,7 +308,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout29"
+            android:id="@+id/linearLayout328"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -317,6 +318,52 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout28">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:layout_gravity="center"
+
+                android:text="No. of not working CCTV"
+                android:textColor="@color/textColor1"
+                android:textSize="15dp" />
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:foreground="@drawable/cardbg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/EdtNoOfNotworkingCCTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/cardbg"
+                    android:inputType="number"
+                    android:textAlignment="center"
+                    android:textColor="@color/textColor1" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout29"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout328">
 
             <TextView
                 android:layout_width="match_parent"

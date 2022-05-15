@@ -103,8 +103,8 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
 //                    recyclerViewRAinHarveOnSub.setAdapter(onlineImageRecViewAdapter);
 //
 //                    dialog2.dismiss();
-//
-//                }
+
+             //   }
             }
 
             @Override

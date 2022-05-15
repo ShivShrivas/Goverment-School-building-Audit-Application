@@ -19,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -105,6 +106,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
     Dialog dialog2;
     String action;
     String currentImagePath=null;
+    EditText edtNotWorkingFF,edtWorkingFF,edtTotalFF;
     String[] StaffPhotoPathList;
     ArrayList<String> aList=new ArrayList<>();
     File imageFile=null;
@@ -148,6 +150,9 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         btnUpdateFireFighting=findViewById(R.id.btnUpdateFireFighting);
         constraintLayout30=findViewById(R.id.constraintLayout30);
         edtrenewalDate=findViewById(R.id.edtrenewalDate);
+        edtTotalFF=findViewById(R.id.edtTotalFF);
+        edtWorkingFF=findViewById(R.id.edtWorkingFF);
+        edtNotWorkingFF=findViewById(R.id.edtNotWorkingFF);
         recyclerViewFireFightningFromServer=findViewById(R.id.recyclerViewFireFightningFromServer);
 
         if (action.equals("3")){
@@ -334,7 +339,11 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
+                if ( !checkValidation(Integer.parseInt(edtTotalFF.getText().toString().trim()),Integer.parseInt(edtWorkingFF.getText().toString().trim())
+                        ,Integer.parseInt(edtNotWorkingFF.getText().toString().trim()))){
+                    dialog2.dismiss();
+                    Toast.makeText(UpdateDetailsFireFighting.this, "Please enter correct count of fire fighting", Toast.LENGTH_SHORT).show();
+                }else if (!spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
                     if (arrayListImages1.size()==0){
                         dialog2.dismiss();
 
@@ -352,6 +361,13 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         });
     }
 
+    private boolean checkValidation(int total, int working, int notworking) {
+        if (total!=working+notworking){
+            return false;
+        }else{
+            return true;
+        }
+    }
     private void fetchAllDataFromServer() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
@@ -373,7 +389,11 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                 spinnerFireFightWorkingStatus.setSelection(spinnerPositionForWorkingStatus);
                 spinnerFireFightingInstallationYear.setSelection(spinnerPositionForInstallationYear);
 
+                int totalRo=Integer.parseInt(response.body().get(0).get("NonWorkingCount").getAsString())+Integer.parseInt(response.body().get(0).get("WorkingCount").getAsString());
 
+                edtNotWorkingFF.setText(response.body().get(0).get("NonWorkingCount").getAsString());
+                edtWorkingFF.setText(response.body().get(0).get("WorkingCount").getAsString());
+                edtTotalFF.setText(String.valueOf(totalRo));
                 edtrenewalDate.setText(response.body().get(0).get("RenewalDateStatus").getAsString());
 
                 recyclerViewFireFightningFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsFireFighting.this,LinearLayoutManager.HORIZONTAL,false));
@@ -509,6 +529,9 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             jsonObject.addProperty("RenewalStatus","");
             jsonObject.addProperty("RenewalDateStatus","1800-08-08");
             jsonObject.addProperty("Training","");
+            jsonObject.addProperty("WorkingCount","");
+            jsonObject.addProperty("NonWorkingCount","");
+
             jsonObject.addProperty("WorkingStatus","");
             jsonObject.addProperty("Availabilty",toString5);
             jsonObject.addProperty("Lat",latitude);
@@ -531,6 +554,9 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             jsonObject.addProperty("InstallationYear",toString4);
             jsonObject.addProperty("RenewalStatus",toString1);
             jsonObject.addProperty("RenewalDateStatus",toString2);
+            jsonObject.addProperty("WorkingCount",edtWorkingFF.getText().toString().trim());
+            jsonObject.addProperty("NonWorkingCount",edtNotWorkingFF.getText().toString().trim());
+
             jsonObject.addProperty("Training",toString3);
             jsonObject.addProperty("WorkingStatus",toString);
             jsonObject.addProperty("Availabilty",toString5);

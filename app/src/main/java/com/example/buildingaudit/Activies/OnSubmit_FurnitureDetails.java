@@ -31,7 +31,8 @@ import retrofit2.Response;
 public class OnSubmit_FurnitureDetails extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
-
+    EditText edtMajorConditionForSingle,edtMajorConditionForDouble,edtMajorConditionForTripple,edtMinorConditionForSingle,edtMinorConditionForDouble,edtMinorConditionForTripple,edtgoodConditionForSingle,
+            edtgoodConditionForDouble,edtgoodConditionForTripple;
     EditText edtFurnitureRequired,edtTripleSeatesStatus,edtTrippelSeated,edtDoubleSeatesStatus,edtDoubleSeated
             ,edtSingleSeated,edtsingleSeatesStatus;
     LinearLayout constraintLayout9,constraintLayout59,constraintLayout49;
@@ -78,7 +79,15 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         constraintLayout59=findViewById(R.id.constraintLayout59);
         constraintLayout9=findViewById(R.id.constraintLayout9);
         editFurnituresDetails=findViewById(R.id.editFurnituresDetails);
-
+        edtMajorConditionForSingle=findViewById(R.id.edtMajorConditionForSingle);
+        edtMajorConditionForDouble=findViewById(R.id.edtMajorConditionForDoubel);
+        edtMajorConditionForTripple=findViewById(R.id.edtMajorConditionForTripple);
+        edtMinorConditionForDouble=findViewById(R.id.edtMinorConditionForDoubel);
+        edtMinorConditionForSingle=findViewById(R.id.edtMinorConditionForSingle);
+        edtMinorConditionForTripple=findViewById(R.id.edtMinorConditionForTripple);
+        edtgoodConditionForSingle=findViewById(R.id.edtgoodConditionForSingle);
+        edtgoodConditionForTripple=findViewById(R.id.edtgoodConditionForTripple);
+        edtgoodConditionForDouble=findViewById(R.id.edtgoodConditionForDoubel);
         disableEditText();
         editFurnituresDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,6 +99,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
             }
 
         });
+
         recyclerViewFurnituresOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
@@ -101,16 +111,28 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
                 edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture").getAsString());
                         edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength").getAsString());
 
+                edtgoodConditionForSingle.setText(response.body().get(0).get("GoodCount").getAsString());
+                edtMinorConditionForSingle.setText(response.body().get(0).get("MinorCount").getAsString());
+                edtMajorConditionForSingle.setText(response.body().get(0).get("MajorCount").getAsString());
 
+                edtgoodConditionForDouble.setText(response.body().get(1).get("GoodCount").getAsString());
+                edtMinorConditionForDouble.setText(response.body().get(1).get("MinorCount").getAsString());
+                edtMajorConditionForDouble.setText(response.body().get(1).get("MajorCount").getAsString());
+
+                edtgoodConditionForTripple.setText(response.body().get(2).get("GoodCount").getAsString());
+                edtMinorConditionForTripple.setText(response.body().get(2).get("MinorCount").getAsString());
+                edtMajorConditionForTripple.setText(response.body().get(2).get("MajorCount").getAsString());
 
 
                     if (response.body().get(0).get("TotalCnt").getAsString().equals("0")){
                         constraintLayout9.setVisibility(View.GONE);
                         edtSingleSeated.setText(response.body().get(0).get("TotalCnt").getAsString());
 
+
                     }else {
                         edtsingleSeatesStatus.setText(response.body().get(0).get("Condition").getAsString());
                         edtSingleSeated.setText(response.body().get(0).get("TotalCnt").getAsString());
+
 
                     }
   if (response.body().get(1).get("TotalCnt").getAsString().equals("0")){
@@ -161,6 +183,15 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
                 edtDoubleSeatesStatus.setEnabled(false);
         edtSingleSeated.setEnabled(false);
                 edtsingleSeatesStatus.setEnabled(false);
+        edtMajorConditionForSingle.setEnabled(false);
+                edtMajorConditionForDouble.setEnabled(false);
+        edtMajorConditionForTripple.setEnabled(false);
+                edtMinorConditionForDouble.setEnabled(false);
+        edtMinorConditionForSingle.setEnabled(false);
+                edtMinorConditionForTripple.setEnabled(false);
+        edtgoodConditionForSingle.setEnabled(false);
+                edtgoodConditionForTripple.setEnabled(false);
+        edtgoodConditionForDouble.setEnabled(false);
     }
     private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
         JsonObject jsonObject=new JsonObject();

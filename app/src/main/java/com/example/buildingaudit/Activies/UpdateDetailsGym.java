@@ -109,6 +109,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_gym);
+        applicationController= (ApplicationController) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -118,6 +119,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             }
         });
         Intent i=getIntent();
+        schoolAddress.setText(applicationController.getSchoolAddress());
         action=i.getStringExtra("Action");
 
         dialog = new Dialog(this);
@@ -145,9 +147,7 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         edtGymArea=findViewById(R.id.edtGymArea);
         recyclerViewGymFromServer=findViewById(R.id.recyclerViewGymFromServer);
         GymsubmitLabBtn=findViewById(R.id.GymsubmitLabBtn);
-        applicationController= (ApplicationController) getApplication();
         schoolName.setText(applicationController.getSchoolName());
-        schoolAddress.setText(applicationController.getSchoolAddress());
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");

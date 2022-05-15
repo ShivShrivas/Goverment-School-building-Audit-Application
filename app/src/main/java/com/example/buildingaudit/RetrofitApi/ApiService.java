@@ -418,7 +418,7 @@ public  interface ApiService {
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
-    @POST("PhysicalParamLabs/SVocEduDetails")
+    @POST("PhysicalParamLabs/VVocEduDetails")
     Call<List<JsonObject>> checkVocalRoom(@Body JsonObject paraGetDetails2);
 
 
@@ -426,5 +426,11 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SOfficeRoomDetails")
     Call<List<JsonObject>> uploadOfficeRoom(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object,@Part("PhotoDeleteData") RequestBody deletulrs);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("PhysicalParamLabs/SVocEduDetails")
+    Call<List<JsonObject>> checkOfficeRoom(@Body JsonObject paraGetDetails2);
+
 
 }

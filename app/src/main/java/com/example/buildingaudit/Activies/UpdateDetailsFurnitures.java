@@ -104,6 +104,8 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
     Dialog dialog2;
     TextView edtTotalFurnirtureStrenght;
     TextView userName,schoolAddress,schoolName;
+    EditText edtMajorConditionForSingle,edtMajorConditionForDouble,edtMajorConditionForTripple,edtMinorConditionForSingle,edtMinorConditionForDouble,edtMinorConditionForTripple,edtgoodConditionForSingle,
+            edtgoodConditionForDouble,edtgoodConditionForTripple;
     LinearLayout constraintLayout9;
     Dialog dialog;
     ApplicationController applicationController;
@@ -152,6 +154,16 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         submitBtnFurniture=findViewById(R.id.submitBtnFurniture);
         constraintLayout9=findViewById(R.id.constraintLayout9);
         recyclerViewFurnituresFromServer=findViewById(R.id.recyclerViewFurnituresFromServer);
+        edtMajorConditionForSingle=findViewById(R.id.edtMajorConditionForSingle);
+        edtMajorConditionForDouble=findViewById(R.id.edtMajorConditionForDouble);
+        edtMajorConditionForTripple=findViewById(R.id.edtMajorConditionForTripple);
+        edtMinorConditionForDouble=findViewById(R.id.edtMinorConditionForDouble);
+        edtMinorConditionForSingle=findViewById(R.id.edtMinorConditionForSingle);
+        edtMinorConditionForTripple=findViewById(R.id.edtMinorConditionForTripple);
+        edtgoodConditionForSingle=findViewById(R.id.edtgoodConditionForSingle);
+        edtgoodConditionForTripple=findViewById(R.id.edtgoodConditionForTripple);
+        edtgoodConditionForDouble=findViewById(R.id.edtgoodConditionForDouble);
+
         if (action.equals("3")){
             fetchAllDataFromServer();
         }
@@ -451,6 +463,18 @@ dialog2.show();
                 spinnersingleSeatesStatus.setSelection(spinnerPositionForCondition0);
                 spinnerDoubleSeatesStatus.setSelection(spinnerPositionForCondition1);
                 spinnerTripleSeatesStatus.setSelection(spinnerPositionForCondition2);
+                edtgoodConditionForSingle.setText(response.body().get(0).get("GoodCount").getAsString());
+                edtMinorConditionForSingle.setText(response.body().get(0).get("MinorCount").getAsString());
+                edtMajorConditionForSingle.setText(response.body().get(0).get("MajorCount").getAsString());
+
+                edtgoodConditionForDouble.setText(response.body().get(1).get("GoodCount").getAsString());
+                edtMinorConditionForDouble.setText(response.body().get(1).get("MinorCount").getAsString());
+                edtMajorConditionForDouble.setText(response.body().get(1).get("MajorCount").getAsString());
+
+                edtgoodConditionForTripple.setText(response.body().get(2).get("GoodCount").getAsString());
+                edtMinorConditionForTripple.setText(response.body().get(2).get("MinorCount").getAsString());
+                edtMajorConditionForTripple.setText(response.body().get(2).get("MajorCount").getAsString());
+
 
                 edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture").getAsString());
                 edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength").getAsString());
@@ -594,10 +618,16 @@ dialog2.show();
             JsonObject jsonObject1=new JsonObject();
             jsonObject1.addProperty("FurnitureType","Single");
         if ( Integer.parseInt(edtSingleSeated.getText().toString().trim())==0){
-            jsonObject1.addProperty("Condition","");
+            jsonObject1.addProperty("Condition","0");
+            jsonObject1.addProperty("GoodCount","0");
+            jsonObject1.addProperty("MajorCount","0");
+            jsonObject1.addProperty("MinorCount","0");
             jsonObject1.addProperty("TotalCnt",edtSingleSeated.getText().toString());
         }else{
             jsonObject1.addProperty("Condition",spinnersingleSeatesStatus.getSelectedItem().toString());
+            jsonObject1.addProperty("GoodCount",edtgoodConditionForSingle.getText().toString());
+            jsonObject1.addProperty("MajorCount",edtMajorConditionForSingle.getText().toString());
+            jsonObject1.addProperty("MinorCount",edtMinorConditionForSingle.getText().toString());
             jsonObject1.addProperty("TotalCnt",edtSingleSeated.getText().toString());
         }
 
@@ -606,10 +636,16 @@ dialog2.show();
             JsonObject jsonObject2=new JsonObject();
             jsonObject2.addProperty("FurnitureType","Double");
         if ( Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0){
-            jsonObject2.addProperty("Condition","");
+            jsonObject2.addProperty("Condition","0");
+            jsonObject2.addProperty("GoodCount","0");
+            jsonObject2.addProperty("MajorCount","0");
+            jsonObject2.addProperty("MinorCount","0");
             jsonObject2.addProperty("TotalCnt",edtDoubleSeated.getText().toString());
         }else{
             jsonObject2.addProperty("Condition",spinnerDoubleSeatesStatus.getSelectedItem().toString());
+            jsonObject2.addProperty("GoodCount",edtgoodConditionForDouble.getText().toString());
+            jsonObject2.addProperty("MajorCount",edtMajorConditionForDouble.getText().toString());
+            jsonObject2.addProperty("MinorCount",edtMinorConditionForDouble.getText().toString());
             jsonObject2.addProperty("TotalCnt",edtDoubleSeated.getText().toString());
         }
 
@@ -618,10 +654,16 @@ dialog2.show();
         JsonObject jsonObject3=new JsonObject();
         jsonObject3.addProperty("FurnitureType","Tripple");
             if ( Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0){
-                jsonObject3.addProperty("Condition","");
+                jsonObject3.addProperty("Condition","0");
+                jsonObject3.addProperty("GoodCount","0");
+                jsonObject3.addProperty("MajorCount","0");
+                jsonObject3.addProperty("MinorCount","0");
                 jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
             }else{
                 jsonObject3.addProperty("Condition",spinnerTripleSeatesStatus.getSelectedItem().toString());
+                jsonObject3.addProperty("GoodCount",edtgoodConditionForTripple.getText().toString());
+                jsonObject3.addProperty("MajorCount",edtMajorConditionForTripple.getText().toString());
+                jsonObject3.addProperty("MinorCount",edtMinorConditionForTripple.getText().toString());
                 jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
             }
 

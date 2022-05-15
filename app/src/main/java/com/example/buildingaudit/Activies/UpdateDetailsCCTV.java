@@ -88,7 +88,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
     public ArrayList<File> arrayListImages2 = new ArrayList<>();
     ImageAdapter5 adapter2;
-    EditText EdtNoOfCCTV;
+    EditText EdtNoOfCCTV,EdtNoNonOfCCTV;
 
     Dialog dialog,dialog2;
     String action;
@@ -139,6 +139,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         dialog2.setCancelable(false);
         spinnerCCTVWorkingStatus=findViewById(R.id.spinnerCCTVWorkingStatus);
         EdtNoOfCCTV=findViewById(R.id.EdtNoOfCCTV);
+        EdtNoNonOfCCTV=findViewById(R.id.EdtNoNonOfCCTV);
         spinnerCCTVInstallationYear=findViewById(R.id.spinnerCCTVInstallationYear);
         spinnerCCTVAvailabelty=findViewById(R.id.spinnerCCTVAvailabelty);
         CCTVImageUploadBtn=findViewById(R.id.CCTVImageUploadBtn);
@@ -311,12 +312,14 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("HandPumpAvl").getAsString());
+                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnforInstallationYear= arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
                 int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
                 spinnerCCTVAvailabelty.setSelection(spinnerPositionForAvailabilty);
                 spinnerCCTVWorkingStatus.setSelection(spinnerPositionForWorkingStatus);
                 spinnerCCTVInstallationYear.setSelection(spinnforInstallationYear);
+                EdtNoOfCCTV.setText(response.body().get(0).get("WorkingCount").getAsString());
+                EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount").getAsString());
 
                 recyclerViewCCTVFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsCCTV.this,LinearLayoutManager.HORIZONTAL,false));
 
@@ -450,6 +453,8 @@ if (availabilty.equals("No")){
     jsonObject.addProperty("PeriodID",periodID);
     jsonObject.addProperty("InstallationYear","0");
     jsonObject.addProperty("NoOfCCTV","0");
+    jsonObject.addProperty("NonWorkingCount","0");
+    jsonObject.addProperty("WorkingCount","0");
     jsonObject.addProperty("WorkingStatus","");
     jsonObject.addProperty("Availabilty",availabilty);
     jsonObject.addProperty("Lat",latitude);
@@ -470,7 +475,9 @@ if (availabilty.equals("No")){
     jsonObject.addProperty("SchoolId",schoolId);
     jsonObject.addProperty("PeriodID",periodID);
     jsonObject.addProperty("InstallationYear",installationYear);
-    jsonObject.addProperty("NoOfCCTV",nOOFcctv);
+    jsonObject.addProperty("NoOfCCTV",Integer.valueOf(EdtNoNonOfCCTV.getText().toString().trim())+Integer.valueOf(EdtNoOfCCTV.getText().toString().trim()));
+    jsonObject.addProperty("NonWorkingCount",EdtNoNonOfCCTV.getText().toString().trim());
+    jsonObject.addProperty("WorkingCount",EdtNoOfCCTV.getText().toString().trim());
     jsonObject.addProperty("WorkingStatus",workingStatus);
     jsonObject.addProperty("Availabilty",availabilty);
     jsonObject.addProperty("Lat",latitude);
