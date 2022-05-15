@@ -334,17 +334,32 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0 || arrayListImages2.size()==0){
-                    Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 || arrayListImages2.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
-                }else {
-                    runService();
+                        }else {
+                            runService();
 
-                }}else {
-                    runService();
+                        }}else {
+                        runService();
+                    }
+                }else{
+                    if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 || arrayListImages2.size()==0){
+                            Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runService();
+
+                        }}else {
+                        runService();
+                    }
                 }
+
             }
         });
 

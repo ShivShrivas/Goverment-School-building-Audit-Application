@@ -255,26 +255,7 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
 
             }
         });
-        edtSingleSeated.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (edtSingleSeated.getText().toString().equals("0")){
-                    constraintLayout9.setVisibility(View.GONE);
-                }else {
-                    constraintLayout9.setVisibility(View.VISIBLE);
-                }
-            }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
-        });
 
         edtTrippelSeated.addTextChangedListener(new TextWatcher() {
             @Override
@@ -423,7 +404,6 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
 dialog2.show();
 
 
-
                 arrayList.add(furnitureDetailssingle);
                 arrayList.add(furnitureDetailsDouble);
                 arrayList.add(furnitureDetailsTriple);
@@ -431,20 +411,54 @@ dialog2.show();
                 Log.d("TAG", "onClick: "+   arrayList.get(1).getFurnitureType());
                 if ( Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0 && Integer.parseInt(edtTotalFurnirtureStrenght.getText().toString().trim())==0 && Integer.parseInt(edtFurnitureRequired.getText().toString().trim())==0 && Integer.parseInt(edtSingleSeated.getText().toString().trim())==0 && Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0){
                     runService();
-                }else{
-                    if (arrayListImages1.size()==0){
-                        dialog2.dismiss();
+                }else{ if (!checkValidationOnCondition(Integer.valueOf(edtSingleSeated.getText().toString().trim()),Integer.valueOf(edtgoodConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMinorConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMajorConditionForSingle.getText().toString().trim())))
+                {
+                    dialog2.dismiss();
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Single seats count is incorrect", Toast.LENGTH_SHORT).show();
+                }else if(!checkValidationOnCondition(Integer.valueOf(edtDoubleSeated.getText().toString().trim()),Integer.valueOf(edtgoodConditionForDouble.getText().toString().trim()),Integer.valueOf(edtMinorConditionForDouble.getText().toString().trim()),Integer.valueOf(edtMajorConditionForDouble.getText().toString().trim())))
+                {
+                    dialog2.dismiss();
 
-                        Toast.makeText(UpdateDetailsFurnitures.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Double seats count is incorrect", Toast.LENGTH_SHORT).show();
 
-                    }else {
-                        runService();
+                }else if(!checkValidationOnCondition(Integer.valueOf(edtTrippelSeated.getText().toString().trim()),Integer.valueOf(edtgoodConditionForTripple.getText().toString().trim()),Integer.valueOf(edtMinorConditionForTripple.getText().toString().trim()),Integer.valueOf(edtMajorConditionForTripple.getText().toString().trim())))
+                {
+                    dialog2.dismiss();
 
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Triple seats count is incorrect", Toast.LENGTH_SHORT).show();
+
+                }else if (action.equals("3")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            dialog2.dismiss();
+
+                            Toast.makeText(UpdateDetailsFurnitures.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            runService();
+
+                        }
+                    }else{
+                        if (arrayListImages1.size()==0){
+                            dialog2.dismiss();
+
+                            Toast.makeText(UpdateDetailsFurnitures.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            runService();
+
+                        }
                     }
+
                 }
 
             }
         });
+    }
+
+    private boolean checkValidationOnCondition(Integer total, Integer goodCondition, Integer minorCond, Integer MajorCond) {
+        if (total!=goodCondition+minorCond+MajorCond){
+            return false;
+        }else return true;
     }
 
     private void fetchAllDataFromServer() {

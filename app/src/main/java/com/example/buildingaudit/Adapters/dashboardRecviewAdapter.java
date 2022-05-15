@@ -28,6 +28,7 @@ import com.example.buildingaudit.Activies.OnSubmit_FurnitureDetails;
 import com.example.buildingaudit.Activies.OnSubmit_GirlsToiletDetails;
 import com.example.buildingaudit.Activies.OnSubmit_LibraryDetails;
 import com.example.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails;
+import com.example.buildingaudit.Activies.OnSubmit_OfficeRoom;
 import com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PlaygroundDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails;
@@ -62,6 +63,7 @@ import com.example.buildingaudit.Activies.UpdateDetailsSolarPanel;
 import com.example.buildingaudit.Activies.UpdateDetailsSoundSystem;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeFour;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeTwo;
+import com.example.buildingaudit.Activies.UpdateDetails_OfficeRoom;
 import com.example.buildingaudit.Activies.UpdatedetailsTypeThree;
 import com.example.buildingaudit.Model.GetAllRoomsList;
 import com.example.buildingaudit.Model.LabDetailsResponse;
@@ -226,11 +228,78 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         case "25":
                             checkArtAndCraft();
                         break;
+
+                        case "26":
+                            Toast.makeText(context, "Sorry!! this module is not available now", Toast.LENGTH_SHORT).show();
+//                            checkVocalClass();
+//                            Intent i=new Intent(context, UpdateDetails_VocationalEducationRoom.class);
+//                            i.putExtra("Action","1");
+//                            context.startActivity(i);
+
+                        break;
+
+                        case "27":
+                          checkOfficeRoomClass();
+
+
+
+
+                            break;
                     default:
                         Toast.makeText(context, "Please, Update App for this module", Toast.LENGTH_SHORT).show();
                         break;
 
                 }
+            }
+        });
+    }
+
+    private void checkOfficeRoomClass() {
+        Call<List<JsonObject>> call=apiService.checkOfficeRoom(paraGetDetails2("2",schoolId, periodId,"27"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    Intent i=new Intent(context, UpdateDetails_OfficeRoom.class);
+                    i.putExtra("Action","1");
+                    context.startActivity(i);
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_OfficeRoom.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void checkVocalClass() {
+        Call<List<JsonObject>> call=apiService.checkVocalRoom(paraGetDetails2("2",schoolId, periodId,"26"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().size()==0){
+                    Intent i=new Intent(context, UpdateDetailsArtAndCraft.class);
+                    i.putExtra("Action","1");
+                    context.startActivity(i);
+                }else {
+                    context.startActivity(new Intent(context, OnSubmit_ArtAndCraft.class));
+//                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
+//
+//                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
             }
         });
     }

@@ -238,15 +238,36 @@ String action;
             @Override
             public void onClick(View view) {
                 dialog2.show();
+                if (action.equals(3)){
+                    if (!spinnerSchoolBand.getSelectedItem().toString().equals("No") ||!spinnerSoundSystem.getSelectedItem().toString().equals("No") ||!spinnerSchoolBandForGirls.getSelectedItem().toString().equals("No")  ){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsSoundSystem.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+                        }else{
+                            runService();
+                        }
 
-                if (!spinnerSchoolBand.getSelectedItem().toString().equals("No") &&!spinnerSoundSystem.getSelectedItem().toString().equals("No") &&!spinnerSchoolBandForGirls.getSelectedItem().toString().equals("No") && arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsSoundSystem.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
 
-                }else {
-                    runService();
+                    }else {
+                        runService();
 
-            }
+                    }
+                }else{
+                    if (!spinnerSchoolBand.getSelectedItem().toString().equals("No") ||!spinnerSoundSystem.getSelectedItem().toString().equals("No") ||!spinnerSchoolBandForGirls.getSelectedItem().toString().equals("No")  ){
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsSoundSystem.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+                        }else{
+                            runService();
+                        }
+
+
+                    }else {
+                        runService();
+
+                    }
+                }
+
             }
         });
     }

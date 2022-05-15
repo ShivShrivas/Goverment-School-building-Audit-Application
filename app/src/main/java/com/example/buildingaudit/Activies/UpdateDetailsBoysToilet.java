@@ -474,14 +474,26 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
                 if ( withflushTotal==0 && UrinalWithFlushTotalB==0 &&  spinnerCWSNBoysAvailability.getSelectedItem().toString().equals("No") && spinnerBoysDoors.getSelectedItem().toString().equals("No") && spinnerBoysDustbin.getSelectedItem().toString().equals("No")  ){
                     runService();
                 }else{
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsBoysToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                    if (action.equals("3")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsBoysToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
-                    }else {
-                        runService();
+                        }else {
+                            runService();
 
+                        }
+                    }else{
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsBoysToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runService();
+
+                        }
                     }
+
                 }
 
 

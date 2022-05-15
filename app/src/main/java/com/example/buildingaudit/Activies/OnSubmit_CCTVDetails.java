@@ -34,7 +34,7 @@ public class OnSubmit_CCTVDetails extends AppCompatActivity {
     RecyclerView recyclerViewCCTVOnSubmit;
     ConstraintLayout layoutCCTV;
     TextView uploadCCTV,editCCTVDetails,EdtNoOfNotworkingCCTV;
-EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailabelty;
+EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailabelty,edtTotalCCTV,EdtNoNonOfCCTV;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +60,13 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
-        EdtNoOfNotworkingCCTV=findViewById(R.id.EdtNoOfNotworkingCCTV);
         edtCCTVAvailabelty=findViewById(R.id.edtCCTVAvailabelty);
         uploadCCTV=findViewById(R.id.uploadCCTV);
         layoutCCTV=findViewById(R.id.layoutCCTV);
         edtCCTVInstallationYear=findViewById(R.id.edtCCTVInstallationYear);
         EdtNoOfCCTV=findViewById(R.id.EdtNoOfCCTV);
+        EdtNoNonOfCCTV=findViewById(R.id.EdtNoNonOfCCTV);
+        edtTotalCCTV=findViewById(R.id.edtTotalCCTV);
         edtCCTVWorkingStatus=findViewById(R.id.edtCCTVWorkingStatus);
         recyclerViewCCTVOnSubmit=findViewById(R.id.recyclerViewCCTVOnSubmit);
         editCCTVDetails=findViewById(R.id.editCCTVDetails);
@@ -97,8 +98,10 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
                     edtCCTVAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
                     edtCCTVInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
                     EdtNoOfCCTV.setText(response.body().get(0).get("WorkingCount").getAsString());
-                    EdtNoOfNotworkingCCTV.setText(response.body().get(0).get("NonWorkingCount").getAsString());
+                    edtTotalCCTV.setText(response.body().get(0).get("NoOfCCTV").getAsString());
+
                     edtCCTVWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
+                    EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount").getAsString());
                     try {
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                         OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CCTVDetails.this,StaffPhotoPathList);
@@ -126,7 +129,9 @@ dialog2.dismiss();
                 edtCCTVInstallationYear.setEnabled(false);
         EdtNoOfCCTV.setEnabled(false);
                 edtCCTVWorkingStatus.setEnabled(false);
-                EdtNoOfNotworkingCCTV.setEnabled(false);
+        EdtNoNonOfCCTV.setEnabled(false);
+        edtTotalCCTV.setEnabled(false);
+
     }
     private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
         JsonObject jsonObject=new JsonObject();

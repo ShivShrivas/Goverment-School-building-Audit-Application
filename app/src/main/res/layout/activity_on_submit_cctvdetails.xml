@@ -262,108 +262,186 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linearLayout28"
+            android:id="@+id/linearLayout2339"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout27">
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-                android:text="No. of working CCTV"
-                android:textColor="@color/textColor1"
-                android:textSize="15dp" />
-
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:foreground="@drawable/cardbg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <EditText
-                    android:id="@+id/EdtNoOfCCTV"
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/cardbg"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    android:textColor="@color/textColor1" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginStart="16dp"
+                    android:gravity="bottom"
+                    android:text="No. of CCTV"
+                    android:textColor="@color/textColor1"
+                    android:textSize="15dp" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="7dp"
+                android:layout_weight="1"
+                android:gravity="bottom">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:foreground="@drawable/cardbg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/textView1551"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total CCTV"
+                            android:textAlignment="center"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="8dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <EditText
+                            android:id="@+id/edtTotalCCTV"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLength="3"
+                            android:text="0"
+
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/textView1551" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1">
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+
+                        android:layout_height="match_parent"
+                        android:foreground="@drawable/cardbg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView122"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Working CCTV"
+                                android:textAlignment="center"
+                                android:textColor="?attr/colorPrimary"
+                                android:textSize="8dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <EditText
+                                android:id="@+id/EdtNoOfCCTV"
+                                android:layout_width="match_parent"
+
+                                android:layout_height="wrap_content"
+                                android:layout_margin="3dp"
+                                android:inputType="number"
+                                android:maxLength="3"
+                                android:text="0"
+                                android:textAlignment="center"
+
+                                android:textColor="@color/black"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/textView122"
+                                app:layout_constraintVertical_bias="0.96" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/cardbg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not Working CCTV"
+                        android:textAlignment="center"
+                        android:textColor="?attr/colorPrimary"
+                        android:textSize="8dp" />
+
+                    <EditText
+                        android:id="@+id/EdtNoNonOfCCTV"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:inputType="number"
+                        android:maxLength="3"
+
+                        android:text="0"
+                        android:textAlignment="center"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+
+            </LinearLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/linearLayout328"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout28">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:layout_gravity="center"
-
-                android:text="No. of not working CCTV"
-                android:textColor="@color/textColor1"
-                android:textSize="15dp" />
-
-            <androidx.cardview.widget.CardView
-
-                android:layout_width="match_parent"
-
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:foreground="@drawable/cardbg"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <EditText
-                    android:id="@+id/EdtNoOfNotworkingCCTV"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_margin="4dp"
-                    android:background="@drawable/cardbg"
-                    android:inputType="number"
-                    android:textAlignment="center"
-                    android:textColor="@color/textColor1" />
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/linearLayout29"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout328">
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout2339">
 
             <TextView
                 android:layout_width="match_parent"

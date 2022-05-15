@@ -474,14 +474,26 @@ LinearLayout linearLayout31;
                         Log.d("TAG", "onClick: all no and 0");
                         runService();
                     }else{
-                        if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsDrinkingWater.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                        if (action.equals("3")){
+                            if (arrayListImages1.size()==0 && aList.size()==0){
+                                Toast.makeText(UpdateDetailsDrinkingWater.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
 
-                    }else {
-                        runService();
+                            }else {
+                                runService();
 
-                    }
+                            }
+                        }else{
+                            if (arrayListImages1.size()==0){
+                                Toast.makeText(UpdateDetailsDrinkingWater.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
+
+                            }else {
+                                runService();
+
+                            }
+                        }
+
                     }
 
                 }

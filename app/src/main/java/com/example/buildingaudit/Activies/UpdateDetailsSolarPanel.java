@@ -194,8 +194,8 @@ EditText edtSolarPanelOtherScheme;
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
-            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        for (int i = 1990; i <= 2020; i++) {
+            arrayListInstallationYear.add(String.valueOf(i));
         }
        arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
@@ -326,18 +326,34 @@ EditText edtSolarPanelOtherScheme;
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerSolarPanel.getSelectedItem().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsSolarPanel.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerSolarPanel.getSelectedItem().equals("No")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsSolarPanel.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
-                    }else {
+                        }else {
+                            runService();
+
+                        }
+                    }else{
                         runService();
-
                     }
                 }else{
-                    runService();
+                    if (!spinnerSolarPanel.getSelectedItem().equals("No")){
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsSolarPanel.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runService();
+
+                        }
+                    }else{
+                        runService();
+                    }
                 }
+
 
             }
         });

@@ -273,18 +273,34 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsPlayground.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsPlayground.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
-                    }else {
+                        }else {
+                            runService();
+                        }
+                    }else
+                    {
                         runService();
                     }
-                }else
-                {
-                    runService();
+                }else{
+                    if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsPlayground.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runService();
+                        }
+                    }else
+                    {
+                        runService();
+                    }
                 }
+
 
             }
         });
@@ -308,7 +324,7 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
 
                 recyclerViewPlaygroundFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsPlayground.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
                 UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
                 OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsPlayground.this,aList);

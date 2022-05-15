@@ -270,16 +270,30 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerArtAndCraftRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsArtAndCraft.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerArtAndCraftRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0 && aList.size()==0){
+                        Toast.makeText(UpdateDetailsArtAndCraft.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
 
-                }else {
-                    runService();
+                    }else {
+                        runService();
 
-                }}else {
-                    runService();
+                    }}else {
+                        runService();
+                    }
+                }else{
+                    if (!spinnerArtAndCraftRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetailsArtAndCraft.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
+
+                    }else {
+                        runService();
+
+                    }}else {
+                        runService();
+                    }
                 }
+
             }
         });
     }

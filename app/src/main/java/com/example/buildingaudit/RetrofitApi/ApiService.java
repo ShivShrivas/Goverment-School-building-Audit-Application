@@ -429,7 +429,7 @@ public  interface ApiService {
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
-    @POST("PhysicalParamLabs/SVocEduDetails")
+    @POST("PhysicalParam/ViewOfficeRoomDetails")
     Call<List<JsonObject>> checkOfficeRoom(@Body JsonObject paraGetDetails2);
 
 

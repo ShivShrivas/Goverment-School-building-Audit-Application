@@ -159,7 +159,7 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
-        arrayListAvailbilty.add("Alternate Room");
+
         arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerMultipurposeHall.setAdapter(arrayAdapter);
@@ -266,18 +266,34 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerMultipurposeHall.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsMultipurposeHall.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerMultipurposeHall.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsMultipurposeHall.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
+                        }else {
+                            runSrvice();
+
+                        }
                     }else {
-runSrvice();
-
+                        runSrvice();
                     }
-                }else {
-                    runSrvice();
+                }else{
+                    if (!spinnerMultipurposeHall.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsMultipurposeHall.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runSrvice();
+
+                        }
+                    }else {
+                        runSrvice();
+                    }
                 }
+
 
             }
         });

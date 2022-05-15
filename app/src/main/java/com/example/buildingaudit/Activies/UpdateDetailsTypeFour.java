@@ -89,7 +89,7 @@ public class UpdateDetailsTypeFour extends AppCompatActivity {
     File imageFile=null;
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
     ImageView typeFourImageUploadBtn;
-    ArrayAdapter<String> arrayAdapter1,arrayAdapter,arrayAdapter2,arrayAdapter5;
+    ArrayAdapter<String> arrayAdapter1,arrayAdapter,arrayAdapter2,arrayAdapter5,arrayAdapter4;
     ImageAdapter5 adapter;
     ApplicationController applicationController;
 Dialog dialog;
@@ -171,7 +171,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         arrayListspinnerRoomAvailabelty.add("No");
          arrayAdapter1=new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,arrayListspinnerRoomAvailabelty);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerRoomAvailabelty.setAdapter(arrayAdapter1);
+
         spinnerNewsPaperAndMzin.setAdapter(arrayAdapter1);
         spinnerReadingCorner.setAdapter(arrayAdapter1);
         spinnerFurnitureAvailabiltyInLibrary.setAdapter(arrayAdapter1);
@@ -191,11 +191,11 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         arrayListReadingCorner.add("No");
         ArrayAdapter<String> arrayAdapter3 =new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListReadingCorner);
         arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
-
+        spinnerRoomAvailabelty.setAdapter(arrayAdapter3);
         ArrayList<String> arrayListnewsMgzin=new ArrayList<>();
         arrayListnewsMgzin.add("Yes");
         arrayListnewsMgzin.add("No");
-        ArrayAdapter<String> arrayAdapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListnewsMgzin);
+       arrayAdapter4 = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListnewsMgzin);
         arrayAdapter4.setDropDownViewResource(R.layout.custom_text_spiiner);
 
         ArrayList<String> arrayListGrantUnderScheme=new ArrayList<>();
@@ -333,18 +333,36 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
                 dialog2.show();
                 if(Integer.valueOf(edtTotalLibraryGrant.getText().toString())<=Integer.valueOf(edtExpenditure.getText().toString())){
                     edtTotalLibraryGrant.setError("total library grant is always greater and equal to expenditure");
-                }
-                if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
-                    if ( arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
-
-                    }else {
-                        runService();
-                    }
                 }else{
-                    runService();
+                    if (action.equals("3")){
+                        if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                            if ( arrayListImages1.size()==0 && aList.size()==0){
+                                Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
+
+                            }else {
+                                runService();
+                            }
+                        }else{
+                            runService();
+                        }
+                    }
+                    else{
+                        if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                            if ( arrayListImages1.size()==0){
+                                Toast.makeText(UpdateDetailsTypeFour.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
+
+                            }else {
+                                runService();
+                            }
+                        }else{
+                            runService();
+                        }
+                    }
+
                 }
+
 
             }
         });
@@ -361,7 +379,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter1.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter4.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnNewsMagzine = arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
                 int spinnerPositionForReadingCorner = arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString());
                 int spinnerPositionForFurnitureAvl = arrayAdapter1.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());

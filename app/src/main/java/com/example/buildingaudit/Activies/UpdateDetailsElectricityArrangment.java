@@ -279,19 +279,36 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
+                        }else {
+                            runSpinner();
+
+
+                        }
                     }else {
                         runSpinner();
-
-
                     }
-                }else {
-                   runSpinner();
+                }else{
+                    if (!spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runSpinner();
+
+
+                        }
+                    }else {
+                        runSpinner();
+                    }
                 }
+
 
             }
         });

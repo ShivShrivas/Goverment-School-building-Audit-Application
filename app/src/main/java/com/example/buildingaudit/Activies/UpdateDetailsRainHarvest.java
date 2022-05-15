@@ -273,18 +273,36 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerRainharvestingAvailabilty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsRainHarvest.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerRainharvestingAvailabilty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsRainHarvest.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
+                        }else {
+                            runService();
+
+                        }
                     }else {
                         runService();
-
                     }
-                }else {
-                    runService();
+
+                }else{
+
+                    if (!spinnerRainharvestingAvailabilty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsRainHarvest.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runService();
+
+                        }
+                    }else {
+                        runService();
+                    }
                 }
+
 
             }
         });

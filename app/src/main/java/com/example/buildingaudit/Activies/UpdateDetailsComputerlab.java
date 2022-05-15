@@ -164,7 +164,6 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         ArrayList<String> arrayListFurnitures3=new ArrayList<>();
         arrayListFurnitures3.add("Yes");
         arrayListFurnitures3.add("No");
-        arrayListFurnitures3.add("Alternate Room");
         arrayAdapter9=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListFurnitures3);
         arrayAdapter9.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerFurniture.setAdapter(arrayAdapter9);
@@ -172,7 +171,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        for (int i = 1990; i < 2022; i++) {
+        for (int i = 1990; i <=2022; i++) {
             arrayListInstallationYear.add(String.valueOf(i));
         }
          arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
@@ -347,20 +346,36 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
                     dialog2.dismiss();
                 }else{
 
+                if (action.equals("3")){
+                    if (!spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            dialog2.dismiss();
+                            Toast.makeText(UpdateDetailsComputerlab.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
-                if (!spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        dialog2.dismiss();
-                        Toast.makeText(UpdateDetailsComputerlab.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            runService();
 
-                    }else {
+
+                        }
+                    }else{
                         runService();
-
-
                     }
                 }else{
-                  runService();
+                    if (!spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0){
+                            dialog2.dismiss();
+                            Toast.makeText(UpdateDetailsComputerlab.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            runService();
+
+
+                        }
+                    }else{
+                        runService();
+                    }
                 }
+
             }
             }
         });

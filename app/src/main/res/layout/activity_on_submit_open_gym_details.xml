@@ -198,6 +198,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/black"
                 android:textAlignment="center"
+                android:padding="4dp"
                 android:background="@drawable/cardbg"
                 android:layout_margin="4dp"
                 android:layout_weight="1" />
@@ -252,6 +253,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
+                    android:padding="4dp"
+
                     android:background="@drawable/cardbg"
                     android:textAlignment="center"
                     android:textColor="@color/black" />
@@ -308,6 +311,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
+                        android:padding="4dp"
+
                         android:layout_weight="1"
                         android:background="@drawable/cardbg"
                         android:textAlignment="center"

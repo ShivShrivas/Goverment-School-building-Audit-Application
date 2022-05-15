@@ -344,15 +344,28 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                     dialog2.dismiss();
                     Toast.makeText(UpdateDetailsFireFighting.this, "Please enter correct count of fire fighting", Toast.LENGTH_SHORT).show();
                 }else if (!spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages1.size()==0){
-                        dialog2.dismiss();
+                    if (action.equals("3")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            dialog2.dismiss();
 
-                        Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
-                    }else {
-                        runService();
+                        }else {
+                            runService();
 
+                        }
+                    }else{
+                        if (arrayListImages1.size()==0){
+                            dialog2.dismiss();
+
+                            Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            runService();
+
+                        }
                     }
+
                 }else{
                     runService();
                 }

@@ -49,6 +49,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -114,7 +115,9 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
         recyclerViewOffice=findViewById(R.id.recyclerViewOffice);
         recyclerViewOfficeFromServer=findViewById(R.id.recyclerViewofficeFromServer);
         spinnerOfficeRoomAvailabelty=findViewById(R.id.spinnerOfficeRoomAvailabelty);
-
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
@@ -237,21 +240,76 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerOfficeRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetails_OfficeRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerOfficeRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0 && aList.size()==0){
+                        Toast.makeText(UpdateDetails_OfficeRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
 
+                    }else {
+                        runService();
+
+                    }}else {
+                        runService();
+                    }
                 }else {
-                    runService();
+                    if (!spinnerOfficeRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0){
+                        Toast.makeText(UpdateDetails_OfficeRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        dialog2.dismiss();
 
-                }}else {
-                    runService();
+                    }else {
+                        runService();
+
+                    }}else {
+                        runService();
+                    }
                 }
+
             }
         });
 
     }
 
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkOfficeRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"27"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                int spinnerPositionForRainHarvestingAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString());
+
+                spinnerOfficeRoomAvailabelty.setSelection(spinnerPositionForRainHarvestingAvl);
+                officeRoomWorkingStatus.setSelection(spinnerPositionForWorkingStatus);
+
+
+
+                recyclerViewOfficeFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_OfficeRoom.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetails_OfficeRoom.this,aList);
+                recyclerViewOfficeFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
     private void runService() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();

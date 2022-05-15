@@ -194,7 +194,7 @@ ConstraintLayout constraintLayout35;
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
+        for (int i = 1990; i <=2022; i++) {
             arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
         }
       arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
@@ -325,14 +325,26 @@ ConstraintLayout constraintLayout35;
                         dialog2.dismiss();
 
                     } else {
-                        if (arrayListImages2.size()==0){
-                            Toast.makeText(UpdateDetailsBioMetric.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
+                        if (action.equals("3")){
+                            if (arrayListImages2.size()==0 && aList.size()==0){
+                                Toast.makeText(UpdateDetailsBioMetric.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
 
-                        }else {
-                            runService();
+                            }else {
+                                runService();
 
+                            }
+                        }else{
+                            if (arrayListImages2.size()==0){
+                                Toast.makeText(UpdateDetailsBioMetric.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                dialog2.dismiss();
+
+                            }else {
+                                runService();
+
+                            }
                         }
+
                     }
                 }else {
                    runService();

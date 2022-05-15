@@ -88,7 +88,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
     public ArrayList<File> arrayListImages2 = new ArrayList<>();
     ImageAdapter5 adapter2;
-    EditText EdtNoOfCCTV,EdtNoNonOfCCTV;
+    EditText EdtNoOfCCTV,EdtNoNonOfCCTV,edtTotalCCTV;
 
     Dialog dialog,dialog2;
     String action;
@@ -140,6 +140,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         spinnerCCTVWorkingStatus=findViewById(R.id.spinnerCCTVWorkingStatus);
         EdtNoOfCCTV=findViewById(R.id.EdtNoOfCCTV);
         EdtNoNonOfCCTV=findViewById(R.id.EdtNoNonOfCCTV);
+        edtTotalCCTV=findViewById(R.id.edtTotalCCTV);
         spinnerCCTVInstallationYear=findViewById(R.id.spinnerCCTVInstallationYear);
         spinnerCCTVAvailabelty=findViewById(R.id.spinnerCCTVAvailabelty);
         CCTVImageUploadBtn=findViewById(R.id.CCTVImageUploadBtn);
@@ -172,8 +173,8 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
-            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        for (int i = 1990; i <=2022; i++) {
+            arrayListInstallationYear.add(String.valueOf(i));
         }
         arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
@@ -286,22 +287,50 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerCCTVAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (arrayListImages2.size()==0){
-                        Toast.makeText(UpdateDetailsCCTV.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                if ( !checkValidation(Integer.parseInt(edtTotalCCTV.getText().toString().trim()),Integer.parseInt(EdtNoOfCCTV.getText().toString().trim())
+                        ,Integer.parseInt(EdtNoNonOfCCTV.getText().toString().trim()))){
+                    dialog2.dismiss();
+                    Toast.makeText(UpdateDetailsCCTV.this, "CCTV count is incorrect!!", Toast.LENGTH_SHORT).show();
+                }else if (action.equals("3")){
+                    if (!spinnerCCTVAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages2.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsCCTV.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
+                        }else {
+                            runService();
+
+
+                        }
                     }else {
                         runService();
-
-
                     }
-                }else {
-                    runService();
+                }else{
+                    if (!spinnerCCTVAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages2.size()==0){
+                            Toast.makeText(UpdateDetailsCCTV.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runService();
+
+
+                        }
+                    }else {
+                        runService();
+                    }
                 }
+
 
             }
         });
+    }
+    private boolean checkValidation(int total, int working, int notworking) {
+        if (total!=working+notworking){
+            return false;
+        }else{
+            return true;
+        }
     }
     private void fetchAllDataFromServer() {
         RestClient restClient=new RestClient();
@@ -320,6 +349,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
                 spinnerCCTVInstallationYear.setSelection(spinnforInstallationYear);
                 EdtNoOfCCTV.setText(response.body().get(0).get("WorkingCount").getAsString());
                 EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount").getAsString());
+                edtTotalCCTV.setText(response.body().get(0).get("NoOfCCTV").getAsString());
 
                 recyclerViewCCTVFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsCCTV.this,LinearLayoutManager.HORIZONTAL,false));
 
@@ -475,7 +505,7 @@ if (availabilty.equals("No")){
     jsonObject.addProperty("SchoolId",schoolId);
     jsonObject.addProperty("PeriodID",periodID);
     jsonObject.addProperty("InstallationYear",installationYear);
-    jsonObject.addProperty("NoOfCCTV",Integer.valueOf(EdtNoNonOfCCTV.getText().toString().trim())+Integer.valueOf(EdtNoOfCCTV.getText().toString().trim()));
+    jsonObject.addProperty("NoOfCCTV",edtTotalCCTV.getText().toString().trim());
     jsonObject.addProperty("NonWorkingCount",EdtNoNonOfCCTV.getText().toString().trim());
     jsonObject.addProperty("WorkingCount",EdtNoOfCCTV.getText().toString().trim());
     jsonObject.addProperty("WorkingStatus",workingStatus);

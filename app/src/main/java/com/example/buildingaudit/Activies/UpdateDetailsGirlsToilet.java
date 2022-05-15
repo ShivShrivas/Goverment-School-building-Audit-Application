@@ -480,15 +480,27 @@ Spinner spinnerGirlsSanetoryNapkin,spinnerGirlsIncinerator,spinnerGirlsDustbin,s
                 if ( UrinalWithFlushTotalB==0 &&  withflushTotal==0 && spinnerGirlsSanetoryNapkin.getSelectedItem().toString().equals("No") && spinnerCWSNGirlstoiletAvalabilty.getSelectedItem().toString().equals("No") && spinnerGirlsDoorFacility.getSelectedItem().toString().equals("No") && spinnerGirlsDustbin.getSelectedItem().toString().equals("No") && spinnerGirlsIncinerator.getSelectedItem().toString().equals("No") ){
                     runService();
                 }else{
+                    if (action.equals("3")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
+                            Toast.makeText(UpdateDetailsGirlsToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
-                    if (arrayListImages1.size()==0){
-                        Toast.makeText(UpdateDetailsGirlsToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                        dialog2.dismiss();
+                        }else {
+                            runService();
 
-                    }else {
-                        runService();
+                        }
+                    }else{
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsGirlsToilet.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
+                        }else {
+                            runService();
+
+                        }
                     }
+
+
                 }
 
             }

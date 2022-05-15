@@ -138,7 +138,7 @@ public class UpdateDetailsPrincipalRoom extends AppCompatActivity {
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
-        arrayListAvailbilty.add("Alternate Room");
+
          arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerPrincipalRoomAvailabelty.setAdapter(arrayAdapter);
@@ -260,16 +260,36 @@ public class UpdateDetailsPrincipalRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (!spinnerPrincipalRoomAvailabelty.getSelectedItem().toString().equals("No")){ if (arrayListImages1.size()==0){
-                    Toast.makeText(UpdateDetailsPrincipalRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                    dialog2.dismiss();
+                if (action.equals("3")){
+                    if (!spinnerPrincipalRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0 && aList.size()==0){
 
-                }else {
-                    runService();
+                            Toast.makeText(UpdateDetailsPrincipalRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
 
-                }}else {
-                    runService();
+                        }else {
+                            runService();
+
+                        }
+                    }else {
+                        runService();
+                    }
+                }else{
+                    if (!spinnerPrincipalRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (arrayListImages1.size()==0){
+
+                            Toast.makeText(UpdateDetailsPrincipalRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                            dialog2.dismiss();
+
+                        }else {
+                            runService();
+
+                        }
+                    }else {
+                        runService();
+                    }
                 }
+
             }
         });
     }

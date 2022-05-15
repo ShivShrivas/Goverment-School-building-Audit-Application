@@ -168,8 +168,8 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
             }
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
 
-        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
-         arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        for (int i = 1990; i <= 2022; i++) {
+         arrayListInstallationYear.add(String.valueOf(i));
         }
          arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
@@ -225,7 +225,7 @@ Spinner spinnerInstallationYearSmartClass,spinnerUnderSchemeSmartClass,spinnerWo
         ArrayList<String> arrayListAvailbilty1=new ArrayList<>();
         arrayListAvailbilty1.add("Yes");
         arrayListAvailbilty1.add("No");
-        arrayListAvailbilty1.add("Alternate Room");
+
         arrayAdapter5=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty1);
         arrayAdapter5.setDropDownViewResource(R.layout.custom_text_spiiner);
         smartClassAvailabilty.setAdapter(arrayAdapter5);
