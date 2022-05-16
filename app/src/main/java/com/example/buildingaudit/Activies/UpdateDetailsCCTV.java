@@ -341,9 +341,9 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnforInstallationYear= arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
-                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnforInstallationYear= arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
                 spinnerCCTVAvailabelty.setSelection(spinnerPositionForAvailabilty);
                 spinnerCCTVWorkingStatus.setSelection(spinnerPositionForWorkingStatus);
                 spinnerCCTVInstallationYear.setSelection(spinnforInstallationYear);

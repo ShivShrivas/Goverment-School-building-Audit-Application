@@ -11,9 +11,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.example.buildingaudit.ApplicationController;
 import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
@@ -30,7 +32,9 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
     private TextView schoolAddress,schoolName,editVocalRoomDetails;
     ApplicationController applicationController;
     RecyclerView recyclerViewVocalIS,recyclerViewVocalHs;
-    EditText edtVocalISEquipmentStatus,edtVocalRoomISAvailability,edtVocalHSLabCondition,edtVocalHSEquipmentStatus,
+    CardView scienceLabBodyCard, physicsLabImageCard,physicsLabBodyCard,scienceLabImageCard;
+
+    EditText edtVocalISEquipmentStatus,edtVocalRoomISAvailability,edtVocalISCondition,edtVocalHSLabCondition,edtVocalHSEquipmentStatus,
             edtVocalRoomHSAvailability,edtvocalISAvailability;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,14 +59,29 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         dialog2.setCancelable(false);
         dialog2.show();
         schoolName=findViewById(R.id.schoolName);
-        schoolName.setText(applicationController.getSchoolName());
-        schoolAddress.setText(applicationController.getSchoolAddress());
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolAddress=findViewById(R.id.schoolAddress);
         recyclerViewVocalHs=findViewById(R.id.recyclerViewVocalHs);
         recyclerViewVocalIS=findViewById(R.id.recyclerViewVocalIS);
         editVocalRoomDetails=findViewById(R.id.editVocalRoomDetails);
-        edtvocalISAvailability=findViewById(R.id.edtVocalRoomISAvailability);
+        edtVocalISEquipmentStatus=findViewById(R.id.edtVocalISEquipmentStatus);
+        edtVocalRoomISAvailability=findViewById(R.id.edtVocalRoomISAvailability);
+        edtVocalISCondition=findViewById(R.id.edtVocalISCondition);
+        edtVocalRoomHSAvailability=findViewById(R.id.edtVocalRoomHSAvailability);
+        edtVocalHSEquipmentStatus=findViewById(R.id.edtVocalHSEquipmentStatus);
+        edtVocalHSLabCondition=findViewById(R.id.edtVocalHSLabCondition);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        scienceLabBodyCard=findViewById(R.id.scienceLabBodyCardV);
+        physicsLabBodyCard=findViewById(R.id.physicsLabBodyCardV);
+        physicsLabImageCard=findViewById(R.id.physicsLabImageCard);
+        scienceLabImageCard=findViewById(R.id.scienceLabImageCard);
+        edtVocalISEquipmentStatus.setEnabled(false);
+                edtVocalRoomISAvailability.setEnabled(false);
+        edtVocalISCondition.setEnabled(false);
+                edtVocalRoomHSAvailability.setEnabled(false);
+        edtVocalHSEquipmentStatus.setEnabled(false);
+                edtVocalHSLabCondition.setEnabled(false);
         editVocalRoomDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,6 +89,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
                 Intent i=new Intent(OnSubmit_VocationalRoom.this,UpdateDetails_VocationalEducationRoom.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         recyclerViewVocalHs.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -78,34 +98,47 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
-        Call<List<JsonObject>> call=apiService.checkVocalRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"27"));
+        Call<List<JsonObject>> call=apiService.checkVocalRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"26"));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
-//                if (response.body().get(0).get("RainHarvestingAvl").getAsString().equals("No")){
-//                    .setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
-//                    recyclerViewRAinHarveOnSub.setVisibility(View.GONE);
-//                    linearLayout5.setVisibility(View.GONE);
-//                    workingStatusHearOnSub.setVisibility(View.GONE);
-//                    dialog2.dismiss();
-//
-//
-//                }else{
-//
-//
-//
-//                    edtRainHavestingWorkStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
-//                    edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
-//
-//                    String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-//                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_RainHarvesting.this,StaffPhotoPathList);
-//                    recyclerViewRAinHarveOnSub.setAdapter(onlineImageRecViewAdapter);
-//
-//                    dialog2.dismiss();
+                if (response.body().get(0).get("RoomAvailable").getAsString().equals("No")){
+                    edtVocalRoomHSAvailability.setText(response.body().get(0).get("RoomAvailable").getAsString());
 
-             //   }
-            }
+                    scienceLabImageCard.setVisibility(View.GONE);
+                    scienceLabBodyCard.setVisibility(View.GONE);
+                }else{
+
+                    edtVocalRoomHSAvailability.setText(response.body().get(0).get("RoomAvailable").getAsString());
+                    edtVocalHSEquipmentStatus.setText(response.body().get(0).get("EquipmentStatus").getAsString());
+                    edtVocalHSLabCondition.setText(response.body().get(0).get("RoomCondition").getAsString());
+                }
+                if (response.body().get(1).get("RoomAvailable").getAsString().equals("No")){
+                    edtVocalRoomISAvailability.setText(response.body().get(1).get("RoomAvailable").getAsString());
+
+                    physicsLabBodyCard.setVisibility(View.GONE);
+                    physicsLabImageCard.setVisibility(View.GONE);
+                }else{
+                    edtVocalRoomISAvailability.setText(response.body().get(1).get("RoomAvailable").getAsString());
+                    edtVocalISEquipmentStatus.setText(response.body().get(1).get("EquipmentStatus").getAsString());
+                    edtVocalISCondition.setText(response.body().get(1).get("RoomCondition").getAsString());
+
+                }
+
+
+
+                    String[] StaffPhotoPathList=response.body().get(1).get("ClassPhotoPath").toString().split(",");
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_VocationalRoom.this,StaffPhotoPathList);
+                recyclerViewVocalIS.setAdapter(onlineImageRecViewAdapter);
+
+                    String[] StaffPhotoPathList1=response.body().get(0).get("ClassPhotoPath").toString().split(",");
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmit_VocationalRoom.this,StaffPhotoPathList1);
+                recyclerViewVocalIS.setAdapter(onlineImageRecViewAdapter2);
+
+                    dialog2.dismiss();
+
+                }
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {

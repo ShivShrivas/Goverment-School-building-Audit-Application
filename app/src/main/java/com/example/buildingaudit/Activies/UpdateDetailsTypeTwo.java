@@ -285,14 +285,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
                             dialog2.dismiss();
                             Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                         } else {
-
-                            if (arrayListImages1.size() == 0 && action.equals("3") && aList.size() == 0) {
-                                Toast.makeText(UpdateDetailsTypeTwo.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                                dialog2.dismiss();
-                            } else {
-
                                 runService();
-                            }
                         }
 
                     } else {
@@ -334,10 +327,10 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter8.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
-                int spinnerPositionForFurnitureAvl = arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
-                int spinnerPositionForAlmirahRacksAvl = arrayAdapter.getPosition(response.body().get(0).get("AlmirahRacksAvl").getAsString());
-                int spinnerPositionForstatus = arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter8.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString())==-1?0:arrayAdapter8.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                int spinnerPositionForFurnitureAvl = arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
+                int spinnerPositionForAlmirahRacksAvl = arrayAdapter.getPosition(response.body().get(0).get("AlmirahRacksAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("AlmirahRacksAvl").getAsString());
+                int spinnerPositionForstatus = arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString());
                 spinnerRoomAvailabel.setSelection(spinnerPositionForSeperateRoomsAvl);
                 spinnerAlmiraAndRacksAvailabilty.setSelection(spinnerPositionForAlmirahRacksAvl);
                 spinnerFurnitureAvailabilty.setSelection(spinnerPositionForFurnitureAvl);

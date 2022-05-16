@@ -100,7 +100,7 @@ public  interface ApiService {
 @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParamLabs/SPracticalLabDetails")
-    Call<List<JsonObject>> uploadLabDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object);
+    Call<List<JsonObject>> uploadLabDetails(@Part MultipartBody.Part[] part,@Part("RequestData") RequestBody object,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
 
@@ -418,7 +418,7 @@ public  interface ApiService {
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
-    @POST("PhysicalParamLabs/VVocEduDetails")
+    @POST("PhysicalParamLabs/ViewVRoomDetails")
     Call<List<JsonObject>> checkVocalRoom(@Body JsonObject paraGetDetails2);
 
 

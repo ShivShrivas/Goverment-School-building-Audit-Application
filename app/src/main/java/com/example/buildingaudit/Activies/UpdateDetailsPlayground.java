@@ -315,9 +315,9 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnerPositionForStandardTrack = arrayAdapter.getPosition(response.body().get(0).get("AvailabiltyStandardTrack").getAsString());
-                int spinnerPositionForLevellingStatus = arrayAdapter1.getPosition(response.body().get(0).get("LevellingStatus").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForStandardTrack = arrayAdapter.getPosition(response.body().get(0).get("AvailabiltyStandardTrack").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("AvailabiltyStandardTrack").getAsString());
+                int spinnerPositionForLevellingStatus = arrayAdapter1.getPosition(response.body().get(0).get("LevellingStatus").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("LevellingStatus").getAsString());
                 spinnerRoomAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
                 spinnertrackAvalabiltyStatus.setSelection(spinnerPositionForStandardTrack);
                 spinnerLevelingStatus.setSelection(spinnerPositionForLevellingStatus);

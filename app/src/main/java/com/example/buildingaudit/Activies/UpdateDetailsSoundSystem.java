@@ -292,9 +292,9 @@ String action;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSoundSysAvailability = arrayAdapter.getPosition(response.body().get(0).get("SoundSysAvailability").getAsString());
-                int spinnerPositionForSchoolBandInstAvlBoys = arrayAdapter.getPosition(response.body().get(0).get("SchoolBandInstAvlBoys").getAsString());
-                int spinnerPositionSchoolBandInstAvlGirls = arrayAdapter.getPosition(response.body().get(0).get("SchoolBandInstAvlGirls").getAsString());
+                int spinnerPositionForSoundSysAvailability = arrayAdapter.getPosition(response.body().get(0).get("SoundSysAvailability").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("SoundSysAvailability").getAsString());
+                int spinnerPositionForSchoolBandInstAvlBoys = arrayAdapter.getPosition(response.body().get(0).get("SchoolBandInstAvlBoys").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("SchoolBandInstAvlBoys").getAsString());
+                int spinnerPositionSchoolBandInstAvlGirls = arrayAdapter.getPosition(response.body().get(0).get("SchoolBandInstAvlGirls").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("SchoolBandInstAvlGirls").getAsString());
 
                 spinnerSoundSystem.setSelection(spinnerPositionForSoundSysAvailability);
                 spinnerSchoolBand.setSelection(spinnerPositionForSchoolBandInstAvlBoys);

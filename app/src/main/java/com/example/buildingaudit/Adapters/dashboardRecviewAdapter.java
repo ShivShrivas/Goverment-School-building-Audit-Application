@@ -28,7 +28,7 @@ import com.example.buildingaudit.Activies.OnSubmit_FurnitureDetails;
 import com.example.buildingaudit.Activies.OnSubmit_GirlsToiletDetails;
 import com.example.buildingaudit.Activies.OnSubmit_LibraryDetails;
 import com.example.buildingaudit.Activies.OnSubmit_MultipurposeHallDetails;
-import com.example.buildingaudit.Activies.OnSubmit_OfficeRoom;
+import com.example.buildingaudit.Activies.OnSubmit_Officeroom;
 import com.example.buildingaudit.Activies.OnSubmit_OpenGYmDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PlaygroundDetails;
 import com.example.buildingaudit.Activies.OnSubmit_PracticalLabsDetails;
@@ -38,6 +38,7 @@ import com.example.buildingaudit.Activies.OnSubmit_SmartClassDetails;
 import com.example.buildingaudit.Activies.OnSubmit_SolarPanel;
 import com.example.buildingaudit.Activies.OnSubmit_SoundSystemDetails;
 import com.example.buildingaudit.Activies.OnSubmit_StaffRoomDetails;
+import com.example.buildingaudit.Activies.OnSubmit_VocationalRoom;
 import com.example.buildingaudit.Activies.OnSubmit_WifiDetails;
 import com.example.buildingaudit.Activies.UpdateDetailTypeOne;
 import com.example.buildingaudit.Activies.UpdateDetailsArtAndCraft;
@@ -64,6 +65,7 @@ import com.example.buildingaudit.Activies.UpdateDetailsSoundSystem;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeFour;
 import com.example.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.example.buildingaudit.Activies.UpdateDetails_OfficeRoom;
+import com.example.buildingaudit.Activies.UpdateDetails_VocationalEducationRoom;
 import com.example.buildingaudit.Activies.UpdatedetailsTypeThree;
 import com.example.buildingaudit.Model.GetAllRoomsList;
 import com.example.buildingaudit.Model.LabDetailsResponse;
@@ -230,8 +232,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                         break;
 
                         case "26":
-                            Toast.makeText(context, "Sorry!! this module is not available now", Toast.LENGTH_SHORT).show();
-//                            checkVocalClass();
+                            checkVocalClass();
 //                            Intent i=new Intent(context, UpdateDetails_VocationalEducationRoom.class);
 //                            i.putExtra("Action","1");
 //                            context.startActivity(i);
@@ -265,7 +266,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-                    context.startActivity(new Intent(context, OnSubmit_OfficeRoom.class));
+                    context.startActivity(new Intent(context, OnSubmit_Officeroom.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 //
 //                    context.startActivity(i);
@@ -286,11 +287,11 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().size()==0){
-                    Intent i=new Intent(context, UpdateDetailsArtAndCraft.class);
+                    Intent i=new Intent(context, UpdateDetails_VocationalEducationRoom.class);
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-                    context.startActivity(new Intent(context, OnSubmit_ArtAndCraft.class));
+                    context.startActivity(new Intent(context, OnSubmit_VocationalRoom.class));
 //                    Intent i=new Intent(context, OnSubmitClassRoomPage.class);
 //
 //                    context.startActivity(i);

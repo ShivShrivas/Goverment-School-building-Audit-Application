@@ -329,8 +329,8 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForRainHarvestingAvl = adapter.getPosition(response.body().get(0).get("RainHarvestingAvl").getAsString());
-                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForRainHarvestingAvl = adapter.getPosition(response.body().get(0).get("RainHarvestingAvl").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("RainHarvestingAvl").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
 
                 spinnerRainharvestingAvailabilty.setSelection(spinnerPositionForRainHarvestingAvl);
                 spinnerRainHavestingWorkStatus.setSelection(spinnerPositionForWorkingStatus);

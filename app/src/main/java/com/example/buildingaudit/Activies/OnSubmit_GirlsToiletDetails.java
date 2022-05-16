@@ -1,10 +1,5 @@
 package com.example.buildingaudit.Activies;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +9,11 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.example.buildingaudit.ApplicationController;
@@ -82,6 +82,7 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
                 Intent i=new Intent(OnSubmit_GirlsToiletDetails.this,UpdateDetailsGirlsToilet.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         disableEditbox();

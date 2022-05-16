@@ -262,6 +262,8 @@
                                 <EditText
                                     android:id="@+id/edtVocalRoomHSAvailability"
                                     android:layout_width="match_parent"
+                                    android:textColor="@color/black"
+                                    android:textAlignment="center"
                                     android:layout_height="30dp"
                                     android:background="@drawable/cardbg"
                                     android:layout_margin="4dp"
@@ -274,7 +276,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/scienceLabBodyCard"
+                    android:id="@+id/scienceLabBodyCardV"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -328,7 +330,8 @@
                                     android:layout_height="30dp"
                                     android:id="@+id/edtVocalHSEquipmentStatus"
                                     android:background="@drawable/cardbg"
-
+                                    android:textColor="@color/black"
+                                    android:textAlignment="center"
                                     android:layout_width="match_parent"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
@@ -374,7 +377,8 @@
                                     android:layout_width="match_parent"
                                     android:layout_margin="4dp"
                                     android:background="@drawable/cardbg"
-
+                                    android:textColor="@color/black"
+                                    android:textAlignment="center"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
 
@@ -527,7 +531,8 @@
                                     android:layout_height="30dp"
                                     android:id="@+id/edtVocalRoomISAvailability"
                                     android:background="@drawable/cardbg"
-
+                                    android:textColor="@color/black"
+                                    android:textAlignment="center"
                                     android:layout_width="match_parent"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
@@ -539,7 +544,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/physicsLabBodyCard"
+                    android:id="@+id/physicsLabBodyCardV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -592,6 +597,8 @@
                                     android:layout_width="match_parent"
                                     android:background="@drawable/cardbg"
                                     android:layout_height="30dp"
+                                    android:textColor="@color/black"
+                                    android:textAlignment="center"
                                     android:layout_margin="4dp"
                                     android:layout_weight="1" />
                             </androidx.cardview.widget.CardView>
@@ -633,7 +640,8 @@
                                 <EditText
                                     android:layout_height="30dp"
                                     android:background="@drawable/cardbg"
-
+                                    android:textColor="@color/black"
+                                    android:textAlignment="center"
                                     android:id="@+id/edtVocalISCondition"
                                     android:layout_width="match_parent"
                                     android:layout_margin="4dp"

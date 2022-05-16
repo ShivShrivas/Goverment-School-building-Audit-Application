@@ -463,15 +463,15 @@ dialog2.show();
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailablity = arrayAdapter5.getPosition(response.body().get(0).get("Availablity").getAsString());
-                int spinnerPositionForDigitalBoard = arrayAdapter.getPosition(response.body().get(0).get("DigitalBoard").getAsString());
-                int spinnerPositionForLearningContent = arrayAdapter.getPosition(response.body().get(0).get("LearningContent").getAsString());
-                int spinnerPositionForProjector = arrayAdapter.getPosition(response.body().get(0).get("Projector").getAsString());
+                int spinnerPositionForAvailablity = arrayAdapter5.getPosition(response.body().get(0).get("Availablity").getAsString())==-1?0:arrayAdapter5.getPosition(response.body().get(0).get("Availablity").getAsString());
+                int spinnerPositionForDigitalBoard = arrayAdapter.getPosition(response.body().get(0).get("DigitalBoard").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("DigitalBoard").getAsString());
+                int spinnerPositionForLearningContent = arrayAdapter.getPosition(response.body().get(0).get("LearningContent").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("LearningContent").getAsString());
+                int spinnerPositionForProjector = arrayAdapter.getPosition(response.body().get(0).get("Projector").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Projector").getAsString());
                response.body().get(0).get("Name").getAsString();
-                int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+                int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
 
-                int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
-                int spinnerPositionForWorkingStatus = arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
                 spinnerWorkingStatusSmartClass.setSelection(spinnerPositionForWorkingStatus);
                 companyName1.setText(response.body().get(0).get("CompanyName").getAsString());
                 spinnerInstallationYearSmartClass.setSelection(spinnerPositionForInstallationYear);

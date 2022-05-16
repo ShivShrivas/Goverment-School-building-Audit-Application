@@ -81,6 +81,7 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
                 Intent i=new Intent(OnSubmit_BoundryWalls.this,UpdateDetailsBoundryWall.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         recyclerViewTwoTypeBoundarywallOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));

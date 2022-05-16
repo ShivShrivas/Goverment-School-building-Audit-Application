@@ -7,11 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,19 +28,24 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OnSubmit_RainHarvesting extends AppCompatActivity {
-EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
-    ApplicationController applicationController;
+public class OnSubmit_Officeroom extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
-    RecyclerView recyclerViewRAinHarveOnSub;
-    LinearLayout workingStatusLayout,linearLayout5;
-
-TextView workingStatusHearOnSub,editRainHarvestingDetails;
+    EditText edtGymAvailabelty,gymWorkingStatus,edtGymArea;
+    ApplicationController applicationController;
+    EditText OfficeRoomWorkingStatus,spinnerOfficeRoomAvailabelty;
+    ConstraintLayout constraintLayoutPR;
+    TextView editOfficeRoomDetails;
+    RecyclerView recyclerViewOffice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_on_submit_rain_harvesting);
-
+        setContentView(R.layout.activity_on_submit_officeroom);
+        applicationController= (ApplicationController) getApplication();
+        spinnerOfficeRoomAvailabelty=findViewById(R.id.spinnerOfficeRoomAvailabelty);
+        constraintLayoutPR=findViewById(R.id.constraintLayoutPR);
+        OfficeRoomWorkingStatus=findViewById(R.id.OfficeRoomWorkingStatus);
+        recyclerViewOffice=findViewById(R.id.recyclerViewOffice);
+        editOfficeRoomDetails=findViewById(R.id.editOfficeRoomDetails);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -56,60 +61,55 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
         dialog2.show();
-        applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
-        edtRainharvestingAvailabilty=findViewById(R.id.edtRainharvestingAvailabilty);
-        edtRainHavestingWorkStatus=findViewById(R.id.edtRainHavestingWorkStatus);
-        recyclerViewRAinHarveOnSub=findViewById(R.id.recyclerViewRAinHarveOnSub);
-        workingStatusLayout=findViewById(R.id.workingStatusLayout);
-        workingStatusHearOnSub=findViewById(R.id.workingStatusHearOnSub);
-        editRainHarvestingDetails=findViewById(R.id.editRainHarvestingDetails);
-        linearLayout5=findViewById(R.id.linearLayout5);
-        edtRainharvestingAvailabilty.setEnabled(false);
-        edtRainHavestingWorkStatus.setEnabled(false);
-        recyclerViewRAinHarveOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        editRainHarvestingDetails.setOnClickListener(new View.OnClickListener() {
+
+        recyclerViewOffice.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        disabledEdtBox();
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        editOfficeRoomDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i=new Intent(OnSubmit_RainHarvesting.this,UpdateDetailsRainHarvest.class);
+                Intent i=new Intent(OnSubmit_Officeroom.this,UpdateDetails_OfficeRoom.class);
                 i.putExtra("Action","3");
                 startActivity(i);
                 finish();
             }
         });
-        RestClient restClient=new RestClient();
-        ApiService apiService=restClient.getApiService();
-
-        Call<List<JsonObject>> call=apiService.checkRainHarvest(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"13"));
+        Call<List<JsonObject>> call=apiService.checkOfficeRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"27"));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
-                if (response.body().get(0).get("RainHarvestingAvl").getAsString().equals("No")){
-                    edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
-                    recyclerViewRAinHarveOnSub.setVisibility(View.GONE);
-                    linearLayout5.setVisibility(View.GONE);
-                    workingStatusHearOnSub.setVisibility(View.GONE);
+
+                if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
+                    edtGymAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                    constraintLayoutPR.setVisibility(View.GONE);
+
                     dialog2.dismiss();
+                }else {
+                    spinnerOfficeRoomAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
 
 
-                }else{
+                    OfficeRoomWorkingStatus.setText(response.body().get(0).get("Status").getAsString());
+                    try {
+                        String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_Officeroom.this,StaffPhotoPathList);
+                        recyclerViewOffice.setAdapter(onlineImageRecViewAdapter);
+                    }catch (Exception e){
+                        recyclerViewOffice.setVisibility(View.GONE);
 
+                    }
 
-
-                edtRainHavestingWorkStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
-                    edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
-
-                String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_RainHarvesting.this,StaffPhotoPathList);
-                recyclerViewRAinHarveOnSub.setAdapter(onlineImageRecViewAdapter);
+                }
 
                 dialog2.dismiss();
 
-                }
+
+
             }
 
             @Override
@@ -118,8 +118,11 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
 
             }
         });
+    }
 
-
+    private void disabledEdtBox() {
+        spinnerOfficeRoomAvailabelty.setEnabled(false);
+        OfficeRoomWorkingStatus.setEnabled(false);
     }
 
     private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {

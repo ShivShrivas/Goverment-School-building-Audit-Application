@@ -315,8 +315,8 @@ public class UpdateDetailsPrincipalRoom extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
-                int spinnerPositionForStatus = arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                int spinnerPositionForStatus = arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Status").getAsString());
 
                 spinnerPrincipalRoomAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
                 principalRoomWorkingStatus.setSelection(spinnerPositionForStatus);

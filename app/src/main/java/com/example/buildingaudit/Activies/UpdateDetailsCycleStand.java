@@ -330,9 +330,9 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilityl = arrayAdapter.getPosition(response.body().get(0).get("Availability").getAsString());
-                int spinnerPositionForFunctionalStatus = arrayAdapter2.getPosition(response.body().get(0).get("FunctionalStatus").getAsString());
-                int spinnerPositionForRepairingStatus = arrayAdapter3.getPosition(response.body().get(0).get("RepairingStatus").getAsString());
+                int spinnerPositionForAvailabilityl = arrayAdapter.getPosition(response.body().get(0).get("Availability").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Availability").getAsString());
+                int spinnerPositionForFunctionalStatus = arrayAdapter2.getPosition(response.body().get(0).get("FunctionalStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("FunctionalStatus").getAsString());
+                int spinnerPositionForRepairingStatus = arrayAdapter3.getPosition(response.body().get(0).get("RepairingStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("RepairingStatus").getAsString());
 
                 spinnerCycleStand.setSelection(spinnerPositionForAvailabilityl);
                 spinnerCycleStandFunctionalStatus.setSelection(spinnerPositionForFunctionalStatus);

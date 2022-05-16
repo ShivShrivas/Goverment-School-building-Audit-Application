@@ -323,10 +323,10 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnforInternalElectrification= adapter.getPosition(response.body().get(0).get("InternalElectrification").getAsString());
-                int spinnerPositionForSource = arrayAdapter2.getPosition(response.body().get(0).get("Source").getAsString());
-                int spinnerPositionForWorkingStatus = arrayAdapter4.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnforInternalElectrification= adapter.getPosition(response.body().get(0).get("InternalElectrification").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("InternalElectrification").getAsString());
+                int spinnerPositionForSource = arrayAdapter2.getPosition(response.body().get(0).get("Source").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Source").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter4.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter4.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
 
                 spinnerElectricityAvailabelty.setSelection(spinnerPositionForHandPumpAvl);
                 spinnerInternalElectrification.setSelection(spinnforInternalElectrification);

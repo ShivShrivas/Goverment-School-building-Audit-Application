@@ -521,8 +521,8 @@ LinearLayout linearLayout31;
                 Log.d("TAG", "onResponse: "+response.body());
 //                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("HandPumpAvl").getAsString());
 //                int spinnforSubmersibleAvl= adapter.getPosition(response.body().get(0).get("SubmersibleAvl").getAsString());
-                int spinnerPositionForNNPalikaWaterSupplyAvl = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
-                int spinnerPositionForOverHeadTankAvl = adapter.getPosition(response.body().get(0).get("OverHeadTankAvl").getAsString());
+                int spinnerPositionForNNPalikaWaterSupplyAvl = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
+                int spinnerPositionForOverHeadTankAvl = adapter.getPosition(response.body().get(0).get("OverHeadTankAvl").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("OverHeadTankAvl").getAsString());
 //                int spinnerPositionForROInsAvl = adapter.getPosition(response.body().get(0).get("ROInsAvl").getAsString());
 //                spinnerHandPumpAvailabiltyDW.setSelection(spinnerPositionForHandPumpAvl);
 //                spinnerSubmersibleAvailabiltyDW.setSelection(spinnforSubmersibleAvl);
@@ -531,8 +531,8 @@ LinearLayout linearLayout31;
 //                spinnerROInstallationAvailabiltyDW.setSelection(spinnerPositionForROInsAvl);
 //                int spinnerPositionForHandPumpWorkingStatus = adapter.getPosition(response.body().get(0).get("HandPumpWorkingStatus").getAsString());
 //                int spinnforSubmersibleWorkingStatus= adapter.getPosition(response.body().get(0).get("SubmersibleWorkingStatus").getAsString());
-                int spinnerPositionForNNPalikaWaterSupplyWorkingStatus = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString());
-                int spinnerPositionForOverHeadTankWorkingStatus = adapter.getPosition(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString());
+                int spinnerPositionForNNPalikaWaterSupplyWorkingStatus = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyWorkingStatus").getAsString());
+                int spinnerPositionForOverHeadTankWorkingStatus = adapter.getPosition(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("OverHeadTankWorkingStatus").getAsString());
 //                int spinnerPositionForROInsWorkingStatus = adapter.getPosition(response.body().get(0).get("ROInsWorkingStatus").getAsString());
 
 //                spinnerHandPumpWorkStatsyDW.setSelection(spinnerPositionForHandPumpWorkingStatus);
@@ -541,7 +541,7 @@ LinearLayout linearLayout31;
                 spinnerOverheadTankWorkStatsyDW.setSelection(spinnerPositionForOverHeadTankWorkingStatus);
 //                spinnerROInstallationWokingStatus.setSelection(spinnerPositionForROInsWorkingStatus);
 
-                int spinnerPositionForROScheme = adapter.getPosition(response.body().get(0).get("ROInsScheme").getAsString());
+                int spinnerPositionForROScheme = adapter.getPosition(response.body().get(0).get("ROInsScheme").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("ROInsScheme").getAsString());
                 spinnerROInstallationScheme.setSelection(spinnerPositionForROScheme);
 
                 edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps").getAsString());

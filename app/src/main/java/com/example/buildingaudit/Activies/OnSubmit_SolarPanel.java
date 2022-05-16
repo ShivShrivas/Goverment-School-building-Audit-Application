@@ -83,6 +83,7 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
                 Intent intent=new Intent(OnSubmit_SolarPanel.this,UpdateDetailsSolarPanel.class);
                 intent.putExtra("Action","3");
                 startActivity(intent);
+                finish();
             }
         });
         Call<List<JsonObject>> call=apiService.viewSolarPanelDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"14"));

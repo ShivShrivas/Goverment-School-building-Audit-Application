@@ -261,7 +261,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/scienceLabBodyCard"
+                    android:id="@+id/scienceLabBodyCardVocal"
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -398,7 +398,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/scienceLabImageCard"
+                    android:id="@+id/scienceLabImageCardVocal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginEnd="20dp"
@@ -407,7 +407,7 @@
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/scienceLabBodyCard">
+                    app:layout_constraintEnd_toEndOf="@+id/scienceLabBodyCardVocal">
 
                     <ImageView
                         android:id="@+id/imageUpoadVocalHS"
@@ -521,7 +521,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/physicsLabBodyCard"
+                    android:id="@+id/physicsLabBodyCardVocal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -655,7 +655,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/physicsLabImageCard"
+                    android:id="@+id/physicsLabImageCardVocal"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginEnd="20dp"
@@ -664,7 +664,7 @@
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/physicsLabBodyCard">
+                    app:layout_constraintEnd_toEndOf="@+id/physicsLabBodyCardVocal">
 
                     <ImageView
                         android:id="@+id/imageUpoadeViewVocalIS"

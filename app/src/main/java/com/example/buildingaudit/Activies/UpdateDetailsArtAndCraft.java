@@ -99,6 +99,7 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_details_art_and_craft);
+        applicationController= (ApplicationController) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -120,7 +121,6 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
-        applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
@@ -316,9 +316,9 @@ public class UpdateDetailsArtAndCraft extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
-                int spinnerPositionForWorkingStatus = arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
-                int spinnerPositionFoPhysicalStatus = arrayAdapter2.getPosition(response.body().get(0).get("PhysicalStatus").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionFoPhysicalStatus = arrayAdapter2.getPosition(response.body().get(0).get("PhysicalStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("PhysicalStatus").getAsString());
 
                 spinnerArtAndCraftRoomAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
                 ArtAndCraftRoomWorkingStatus.setSelection(spinnerPositionForWorkingStatus);

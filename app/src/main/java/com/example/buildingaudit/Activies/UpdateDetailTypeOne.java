@@ -273,19 +273,19 @@ int cameraType;
                                 runService(totalClassRoom);
                             }
 
-                        }else{
-                        }if ( !checkValidations(arrayListImages2,Integer.valueOf(goodCondtionClassroom.getText().toString()))){
-                            dialog2.dismiss();
-                            Toast.makeText(UpdateDetailTypeOne.this, "Please add minimum one image in good condition classes", Toast.LENGTH_SHORT).show();
-                        }
-                        else if(!checkValidations(arrayListImages3,Integer.valueOf(minorRepairingClassroom.getText().toString()))){
-                            dialog2.dismiss();
-                            Toast.makeText(UpdateDetailTypeOne.this, "Please add minimum one image in minor repairing classes ", Toast.LENGTH_SHORT).show();
-                        }   else if(!checkValidations(arrayListImages4,Integer.valueOf(majorRepairingClassroom.getText().toString()))){
-                            dialog2.dismiss();
-                            Toast.makeText(UpdateDetailTypeOne.this, "Please add minimum one image in major repairing classes ", Toast.LENGTH_SHORT).show();
-                        } else {
-                            runService(totalClassRoom);
+                        }else {
+                            if (!checkValidations(arrayListImages2, Integer.valueOf(goodCondtionClassroom.getText().toString()))) {
+                                dialog2.dismiss();
+                                Toast.makeText(UpdateDetailTypeOne.this, "Please add minimum one image in good condition classes", Toast.LENGTH_SHORT).show();
+                            } else if (!checkValidations(arrayListImages3, Integer.valueOf(minorRepairingClassroom.getText().toString()))) {
+                                dialog2.dismiss();
+                                Toast.makeText(UpdateDetailTypeOne.this, "Please add minimum one image in minor repairing classes ", Toast.LENGTH_SHORT).show();
+                            } else if (!checkValidations(arrayListImages4, Integer.valueOf(majorRepairingClassroom.getText().toString()))) {
+                                dialog2.dismiss();
+                                Toast.makeText(UpdateDetailTypeOne.this, "Please add minimum one image in major repairing classes ", Toast.LENGTH_SHORT).show();
+                            } else {
+                                runService(totalClassRoom);
+                            }
                         }
                         }
 

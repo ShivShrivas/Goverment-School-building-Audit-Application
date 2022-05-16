@@ -309,9 +309,9 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 spinnerGymAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
-                int spinnerPositionForworkignStatus = arrayAdapter1.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForworkignStatus = arrayAdapter1.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
                 gymWorkingStatus.setSelection(spinnerPositionForworkignStatus);
                 edtGymArea.setText(response.body().get(0).get("Areainsqmtr").getAsString());
 

@@ -1,11 +1,5 @@
 package com.example.buildingaudit.Activies;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,10 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.buildingaudit.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.example.buildingaudit.ApplicationController;
-
+import com.example.buildingaudit.R;
 import com.example.buildingaudit.RetrofitApi.ApiService;
 import com.example.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
@@ -85,6 +84,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
                 Intent i=new Intent(OnSubmit_ElectricityArrangment.this,UpdateDetailsElectricityArrangment.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         RestClient restClient=new RestClient();

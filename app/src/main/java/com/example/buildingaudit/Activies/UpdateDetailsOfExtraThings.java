@@ -282,7 +282,7 @@ Button submitWIFIBtn;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPosition = arrayAdapter.getPosition(response.body().get(0).get("WiFiInternetAvl").getAsString());
+                int spinnerPosition = arrayAdapter.getPosition(response.body().get(0).get("WiFiInternetAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("WiFiInternetAvl").getAsString());
                 spinnerWifiPresent.setSelection(spinnerPosition);
                 recyclerViewFromServerExtraThings.setLayoutManager(new LinearLayoutManager(UpdateDetailsOfExtraThings.this,LinearLayoutManager.HORIZONTAL,false));
 

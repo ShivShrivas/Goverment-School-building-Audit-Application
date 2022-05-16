@@ -401,15 +401,15 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = arrayAdapter9.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
-                int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
-                int spinnerPositionForInternet = arrayAdapter4.getPosition(response.body().get(0).get("Internet").getAsString());
-                int spinnerPositionForPowerBackUp= arrayAdapter2.getPosition(response.body().get(0).get("PowerBackUp").getAsString());
-                int spinnerPositionForFurnitures = arrayAdapter5.getPosition(response.body().get(0).get("Furnitures").getAsString());
-                int spinnerPositionForComputerOperator = arrayAdapter5.getPosition(response.body().get(0).get("ComputerOperator").getAsString());
-                int spinnerPositionForPrinterStatus = arrayAdapter5.getPosition(response.body().get(0).get("PrinterStatus").getAsString());
-                int spinnerPositionForScannerAvl = arrayAdapter5.getPosition(response.body().get(0).get("ScannerAvl").getAsString());
+                int spinnerPositionForAvailabilty = arrayAdapter9.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:arrayAdapter9.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+                int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
+                int spinnerPositionForInternet = arrayAdapter4.getPosition(response.body().get(0).get("Internet").getAsString())==-1?0:arrayAdapter4.getPosition(response.body().get(0).get("Internet").getAsString());
+                int spinnerPositionForPowerBackUp= arrayAdapter2.getPosition(response.body().get(0).get("PowerBackUp").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("PowerBackUp").getAsString());
+                int spinnerPositionForFurnitures = arrayAdapter5.getPosition(response.body().get(0).get("Furnitures").getAsString())==-1?0:arrayAdapter5.getPosition(response.body().get(0).get("Furnitures").getAsString());
+                int spinnerPositionForComputerOperator = arrayAdapter5.getPosition(response.body().get(0).get("ComputerOperator").getAsString())==-1?0:arrayAdapter5.getPosition(response.body().get(0).get("ComputerOperator").getAsString());
+                int spinnerPositionForPrinterStatus = arrayAdapter5.getPosition(response.body().get(0).get("PrinterStatus").getAsString())==-1?0:arrayAdapter5.getPosition(response.body().get(0).get("PrinterStatus").getAsString());
+                int spinnerPositionForScannerAvl = arrayAdapter5.getPosition(response.body().get(0).get("ScannerAvl").getAsString())==-1?0:arrayAdapter5.getPosition(response.body().get(0).get("ScannerAvl").getAsString());
 
                spinnerGrantUnderScheme.setSelection(spinnerPositionForScheme);
                spinnerInstallationYear.setSelection(spinnerPositionForInstallationYear);

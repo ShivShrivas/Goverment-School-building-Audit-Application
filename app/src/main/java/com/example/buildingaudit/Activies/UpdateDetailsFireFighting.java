@@ -390,11 +390,11 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnforTraining= adapter.getPosition(response.body().get(0).get("Training").getAsString());
-                int spinnerPositionForRenewalStatus = arrayAdapter3.getPosition(response.body().get(0).get("RenewalStatus").getAsString());
-                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
-                int spinnerPositionForInstallationYear = arrayAdapter2.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnforTraining= adapter.getPosition(response.body().get(0).get("Training").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Training").getAsString());
+                int spinnerPositionForRenewalStatus = arrayAdapter3.getPosition(response.body().get(0).get("RenewalStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("RenewalStatus").getAsString());
+                int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForInstallationYear = arrayAdapter2.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("InstallationYear").getAsString());
 
                 spinnerFireFightAvailabelty.setSelection(spinnerPositionForAvailabilty);
                 spinnerFireFightTraining.setSelection(spinnforTraining);

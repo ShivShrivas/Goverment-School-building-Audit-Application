@@ -23,6 +23,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,6 +50,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -69,9 +71,12 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
     String currentImagePath=null;
     String[] StaffPhotoPathList;
     ArrayList<String> aList=new ArrayList<>();
+    String[] StaffPhotoPathList1;
+    ArrayList<String> bList=new ArrayList<>();
     File imageFile=null;
-    ArrayAdapter<String> arrayAdapter,arrayAdapter2;
+    ArrayAdapter<String> arrayAdapter,arrayAdapter2,arrayAdapter3;
     ImageAdapter5 adapter6,adapter7;
+    CardView scienceLabBodyCard, physicsLabImageCard,physicsLabBodyCard,scienceLabImageCard;
     Spinner spinnerVocalRoomHSAvailability,spinnerVocalHSEquipmentStatus,
             spinnerVocalHSLabCondition,spinnerVocalRoomISAvailability,spinnerVocalISEquipmentStatus,
             spinnerVocalISCondition;
@@ -111,6 +116,10 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         schoolAddress.setText(applicationController.getSchoolAddress());
         spinnerVocalRoomHSAvailability=findViewById(R.id.spinnerVocalRoomHSAvailability);
         spinnerVocalHSEquipmentStatus=findViewById(R.id.spinnerVocalHSEquipmentStatus);
+        scienceLabBodyCard=findViewById(R.id.scienceLabBodyCardVocal);
+        physicsLabBodyCard=findViewById(R.id.physicsLabBodyCardVocal);
+        physicsLabImageCard=findViewById(R.id.physicsLabImageCardVocal);
+        scienceLabImageCard=findViewById(R.id.scienceLabImageCardVocal);
         spinnerVocalHSLabCondition=findViewById(R.id.spinnerVocalHSLabCondition);
         spinnerVocalISEquipmentStatus=findViewById(R.id.spinnerVocalISEquipmentStatus);
         spinnerVocalISCondition=findViewById(R.id.spinnerVocalISCondition);
@@ -126,6 +135,9 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         recyclerViewVocalHs=findViewById(R.id.recyclerViewVocalHs);
         vocalRoomUploadBtn=findViewById(R.id.vocalRoomUploadBtn);
         imageUpoadeViewVocalIS=findViewById(R.id.imageUpoadeViewVocalIS);
+        if (action.equals("3")){
+            fetchAllDataFromServer();
+        }
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
@@ -150,10 +162,10 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         arrayListSpinner3.add("Partially Equipped");
         arrayListSpinner3.add("Not Equipped");
 
-        arrayAdapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner3);
-        arrayAdapter2.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerVocalHSEquipmentStatus.setAdapter(arrayAdapter2);
-        spinnerVocalISEquipmentStatus.setAdapter(arrayAdapter2);
+        arrayAdapter3 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayListSpinner3);
+        arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerVocalHSEquipmentStatus.setAdapter(arrayAdapter3);
+        spinnerVocalISEquipmentStatus.setAdapter(arrayAdapter3);
 
         imageUpoadVocalHS.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,7 +348,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
                 dialog2.show();
                 if (action.equals("3")){
                     if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
-                        if (arrayListImages1.size()==0 || arrayListImages2.size()==0 && aList.size()==0){
+                        if (arrayListImages1.size()==0 || arrayListImages2.size()==0 && aList.size()==0 && bList.size()==0){
                             Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
 
@@ -364,6 +376,81 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         });
 
     }
+
+    private void fetchAllDataFromServer() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<JsonObject>> call=apiService.checkVocalRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"26"));
+        call.enqueue(new Callback<List<JsonObject>>() {
+            @Override
+            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                Log.d("TAG", "onResponse: "+response.body()+"///////");
+                Log.d("TAG", "onResponse: "+response.body());
+                if (response.body().get(0).get("RoomAvailable").getAsString().equals("No")){
+                    int spinnerPositionForSeperateRoomsAvlHS = arrayAdapter.getPosition(response.body().get(0).get("RoomAvailable").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("RoomAvailable").getAsString());
+                    spinnerVocalRoomHSAvailability.setSelection(spinnerPositionForSeperateRoomsAvlHS);
+                    scienceLabImageCard.setVisibility(View.GONE);
+                    scienceLabBodyCard.setVisibility(View.GONE);
+                }else{
+                    int spinnerPositionForSeperateRoomsAvlHS = arrayAdapter.getPosition(response.body().get(0).get("RoomAvailable").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("RoomAvailable").getAsString());
+                    spinnerVocalRoomHSAvailability.setSelection(spinnerPositionForSeperateRoomsAvlHS);
+                    int spinnerPositionForConditionHS = arrayAdapter2.getPosition(response.body().get(0).get("RoomCondition").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("RoomCondition").getAsString());
+                    spinnerVocalHSLabCondition.setSelection(spinnerPositionForConditionHS);
+                    int spinnerPositionFoEquipmentHS = arrayAdapter3.getPosition(response.body().get(0).get("EquipmentStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("EquipmentStatus").getAsString());
+                    spinnerVocalHSEquipmentStatus.setSelection(spinnerPositionFoEquipmentHS);
+
+                }
+                if (response.body().get(1).get("RoomAvailable").getAsString().equals("No")){
+                    int spinnerPositionForSeperateRoomsAvlIS = arrayAdapter.getPosition(response.body().get(1).get("RoomAvailable").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(1).get("RoomAvailable").getAsString());
+                    spinnerVocalRoomISAvailability.setSelection(spinnerPositionForSeperateRoomsAvlIS);
+                        physicsLabBodyCard.setVisibility(View.GONE);
+                        physicsLabImageCard.setVisibility(View.GONE);
+                }else{
+                    int spinnerPositionForSeperateRoomsAvlIS = arrayAdapter.getPosition(response.body().get(1).get("RoomAvailable").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(1).get("RoomAvailable").getAsString());
+                    int spinnerPositionForConditionIS = arrayAdapter2.getPosition(response.body().get(1).get("RoomCondition").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(1).get("RoomCondition").getAsString());
+                    int spinnerPositionFoEquipmentIS = arrayAdapter3.getPosition(response.body().get(1).get("EquipmentStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(1).get("EquipmentStatus").getAsString());
+
+
+                    spinnerVocalRoomISAvailability.setSelection(spinnerPositionForSeperateRoomsAvlIS);
+                    spinnerVocalISCondition.setSelection(spinnerPositionForConditionIS);
+                    spinnerVocalISEquipmentStatus.setSelection(spinnerPositionFoEquipmentIS);
+                }
+
+
+
+
+                recyclerViewVocalHsromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList=response.body().get(0).get("ClassPhotoPath").toString().split(",");
+                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this,aList);
+                recyclerViewVocalHsromServer.setAdapter(onlineImageRecViewAdapter);
+
+                recyclerViewVocalISFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
+
+                StaffPhotoPathList1=response.body().get(1).get("ClassPhotoPath").toString().split(",");
+                bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
+
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this,aList);
+                recyclerViewVocalISFromServer.setAdapter(onlineImageRecViewAdapter1);
+            }
+
+            @Override
+            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+
+            }
+        });
+    }
+    private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",action);
+        jsonObject.addProperty("ParamId",paramId);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodId);
+        return jsonObject;
+    }
+
 
     private void runService() {
         ArrayList<File> arrayListFinalImage=new ArrayList<>();
@@ -416,7 +503,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraVocal(action,"26","VocationalRoom",arrayList,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         Log.d("TAG", "onClick: "+paraVocal(action,"26","VocationalRoom",arrayList,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadPrincipal(surveyImagesParts,description,deletUrl);
+        Call<List<JsonObject>> call=apiService.uploadVocalRoom(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

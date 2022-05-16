@@ -82,6 +82,12 @@ public class UpdatedetailsTypeThree extends AppCompatActivity {
         return true;
     }
     String[] StaffPhotoPathList;
+    String[] StaffPhotoPathList1;
+    String[] StaffPhotoPathList2;
+    String[] StaffPhotoPathList3;
+    String[] StaffPhotoPathList4;
+    String[] StaffPhotoPathList5;
+    String[] StaffPhotoPathList6;
     ArrayList<String> aList=new ArrayList<>();
     ArrayList<String> bList=new ArrayList<>();
     ArrayList<String> cList=new ArrayList<>();
@@ -557,15 +563,27 @@ dialog2.show();
                             spinnerHomeSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")
                     ){
 
+                    if (action.equals("3")){
+                        if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0
+                        && aList.size()==0&& bList.size()==0 && cList.size()==0 && dList.size()==0 && eList.size()==0 && fList.size()==0 && gList.size()==0){
+                            dialog2.dismiss();
 
-                if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0 ){
-                    dialog2.dismiss();
+                            Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        }else {
+                            runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
+                        }
+                    }else{
+                        if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0 ){
+                            dialog2.dismiss();
 
-                }else {
-                        runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
-            }
+                            Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                        }else {
+                            runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
+                        }
+                    }
+
             }else {
                         runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
 
@@ -584,29 +602,30 @@ dialog2.show();
             @Override
             public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerAvalabiltyScience = arrayAdapter.getPosition(response.body().get(0).getLabYN());
-                int spinnerAvalabiltyPhysics = arrayAdapter.getPosition(response.body().get(1).getLabYN());
-                int spinnerAvalabiltyChemistry = arrayAdapter.getPosition(response.body().get(2).getLabYN());
-                int spinnerAvalabiltybiology = arrayAdapter.getPosition(response.body().get(3).getLabYN());
-                int spinnerAvalabiltyHomeScience = arrayAdapter.getPosition(response.body().get(4).getLabYN());
-                int spinnerAvalabiltyMusics = arrayAdapter.getPosition(response.body().get(5).getLabYN());
-                int spinnerAvalabiltyGeo = arrayAdapter.getPosition(response.body().get(6).getLabYN());
 
-                int spinnerEquipmentStatusScience = arrayAdapter.getPosition(response.body().get(0).getEquipmentStatus());
-                int spinnerEquipmentStatusPhysics = arrayAdapter.getPosition(response.body().get(1).getEquipmentStatus());
-                int spinnerEquipmentStatusChemistry = arrayAdapter.getPosition(response.body().get(2).getEquipmentStatus());
-                int spinnerEquipmentStatusbiology = arrayAdapter.getPosition(response.body().get(3).getEquipmentStatus());
-                int spinnerEquipmentStatusHomeScience = arrayAdapter.getPosition(response.body().get(4).getEquipmentStatus());
-                int spinnerEquipmentStatusMusics = arrayAdapter.getPosition(response.body().get(5).getEquipmentStatus());
-                int spinnerEquipmentStatusGeo = arrayAdapter.getPosition(response.body().get(6).getEquipmentStatus());
+                int spinnerAvalabiltyScience = arrayAdapter.getPosition(response.body().get(0).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(0).getLabYN());
+                int spinnerAvalabiltyPhysics = arrayAdapter.getPosition(response.body().get(1).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(1).getLabYN());
+                int spinnerAvalabiltyChemistry = arrayAdapter.getPosition(response.body().get(2).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(2).getLabYN());
+                int spinnerAvalabiltybiology = arrayAdapter.getPosition(response.body().get(3).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(3).getLabYN());
+                int spinnerAvalabiltyHomeScience = arrayAdapter.getPosition(response.body().get(4).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(4).getLabYN());
+                int spinnerAvalabiltyMusics = arrayAdapter.getPosition(response.body().get(5).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(5).getLabYN());
+                int spinnerAvalabiltyGeo = arrayAdapter.getPosition(response.body().get(6).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(6).getLabYN());
 
-                int spinnerLabConditionScience = arrayAdapter.getPosition(response.body().get(0).getLabCondition());
-                int spinnerLabConditionPhysics = arrayAdapter.getPosition(response.body().get(1).getLabCondition());
-                int spinnerLabConditionChemistry = arrayAdapter.getPosition(response.body().get(2).getLabCondition());
-                int spinnerLabConditionbiology = arrayAdapter.getPosition(response.body().get(3).getLabCondition());
-                int spinnerLabConditionHomeScience = arrayAdapter.getPosition(response.body().get(4).getLabCondition());
-                int spinnerLabConditionMusics = arrayAdapter.getPosition(response.body().get(5).getLabCondition());
-                int spinnerLabConditionGeo = arrayAdapter.getPosition(response.body().get(6).getLabCondition());
+                int spinnerEquipmentStatusScience = arrayAdapter2.getPosition(response.body().get(0).getEquipmentStatus())==-1?0:arrayAdapter2.getPosition(response.body().get(0).getEquipmentStatus());
+                int spinnerEquipmentStatusPhysics = arrayAdapter2.getPosition(response.body().get(1).getEquipmentStatus())==-1?0:arrayAdapter2.getPosition(response.body().get(1).getEquipmentStatus());
+                int spinnerEquipmentStatusChemistry = arrayAdapter2.getPosition(response.body().get(2).getEquipmentStatus())==-1?0:arrayAdapter2.getPosition(response.body().get(2).getEquipmentStatus());
+                int spinnerEquipmentStatusbiology = arrayAdapter2.getPosition(response.body().get(3).getEquipmentStatus())==-1?0:arrayAdapter2.getPosition(response.body().get(3).getEquipmentStatus());
+                int spinnerEquipmentStatusHomeScience = arrayAdapter2.getPosition(response.body().get(4).getEquipmentStatus())==-1?0:arrayAdapter2.getPosition(response.body().get(4).getEquipmentStatus());
+                int spinnerEquipmentStatusMusics = arrayAdapter2.getPosition(response.body().get(5).getEquipmentStatus())==-1?0:arrayAdapter2.getPosition(response.body().get(5).getEquipmentStatus());
+                int spinnerEquipmentStatusGeo = arrayAdapter2.getPosition(response.body().get(6).getEquipmentStatus())==-1?0:arrayAdapter2.getPosition(response.body().get(6).getEquipmentStatus());
+
+                int spinnerLabConditionScience = arrayAdapter3.getPosition(response.body().get(0).getLabCondition())==-1?0: arrayAdapter3.getPosition(response.body().get(0).getLabCondition());
+                int spinnerLabConditionPhysics = arrayAdapter3.getPosition(response.body().get(1).getLabCondition())==-1?0: arrayAdapter3.getPosition(response.body().get(1).getLabCondition());
+                int spinnerLabConditionChemistry = arrayAdapter3.getPosition(response.body().get(2).getLabCondition())==-1?0: arrayAdapter3.getPosition(response.body().get(2).getLabCondition());
+                int spinnerLabConditionbiology = arrayAdapter3.getPosition(response.body().get(3).getLabCondition())==-1?0: arrayAdapter3.getPosition(response.body().get(3).getLabCondition());
+                int spinnerLabConditionHomeScience = arrayAdapter3.getPosition(response.body().get(4).getLabCondition())==-1?0: arrayAdapter3.getPosition(response.body().get(4).getLabCondition());
+                int spinnerLabConditionMusics = arrayAdapter3.getPosition(response.body().get(5).getLabCondition())==-1?0: arrayAdapter3.getPosition(response.body().get(5).getLabCondition());
+                int spinnerLabConditionGeo = arrayAdapter3.getPosition(response.body().get(6).getLabCondition())==-1?0: arrayAdapter3.getPosition(response.body().get(6).getLabCondition());
 
                 spinnerSciencelabAvailability.setSelection(spinnerAvalabiltyScience);
                 spinnerPhysicslabAvailability.setSelection(spinnerAvalabiltyPhysics);
@@ -632,15 +651,62 @@ dialog2.show();
                 spinnerHomeScienceLabCondition.setSelection(spinnerLabConditionHomeScience);
                 spinnerMusicLabCondition.setSelection(spinnerLabConditionMusics);
                 spinnerGeographyLabCondition.setSelection(spinnerLabConditionGeo);
+                try {
+                    StaffPhotoPathList=response.body().get(0).getLabPhotoPath().split(",");
+                    aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                }catch (Exception e){
+
+                }
+
+                try {
+                    StaffPhotoPathList1=response.body().get(1).getLabPhotoPath().split(",");
+                    bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
+
+                }catch (Exception e){
+
+                }
+
+                try {
+                    StaffPhotoPathList2=response.body().get(2).getLabPhotoPath().split(",");
+                    cList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList2));
+
+                }catch (Exception e){
+
+                }
+
+                try {
+                    StaffPhotoPathList3=response.body().get(3).getLabPhotoPath().split(",");
+                    dList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList3));
+
+                }catch (Exception e){
+
+                }
+
+                try {
+                    StaffPhotoPathList4=response.body().get(4).getLabPhotoPath().split(",");
+                    eList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList4));
+
+                }catch (Exception e){
 
 
-                aList = new ArrayList<String>(Arrays.asList(response.body().get(0).getLabPhotoPath()));
-                bList = new ArrayList<String>(Arrays.asList(response.body().get(1).getLabPhotoPath()));
-                cList = new ArrayList<String>(Arrays.asList(response.body().get(2).getLabPhotoPath()));
-                dList = new ArrayList<String>(Arrays.asList(response.body().get(3).getLabPhotoPath()));
-                eList = new ArrayList<String>(Arrays.asList(response.body().get(4).getLabPhotoPath()));
-                fList = new ArrayList<String>(Arrays.asList(response.body().get(5).getLabPhotoPath()));
-                gList = new ArrayList<String>(Arrays.asList(response.body().get(6).getLabPhotoPath()));
+                }
+
+                try {
+                    StaffPhotoPathList5=response.body().get(5).getLabPhotoPath().split(",");
+                    fList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList5));
+
+                }catch (Exception e){
+
+                }
+                try{
+                    StaffPhotoPathList6=response.body().get(6).getLabPhotoPath().split(",");
+                    gList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList6));
+
+                }catch (Exception e){
+
+                }
+
+
 
                 recyclerViewMusicLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
                         recyclerViewHomeScienceLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
@@ -675,6 +741,10 @@ dialog2.show();
             }
         });
     }
+
+    private void checkNull() {
+    }
+
     private JsonObject paraGetDetails2(String action, String schoolId, String periodId, String paramId) {
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("Action",action);
@@ -721,7 +791,7 @@ dialog2.show();
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraLabDetails(action,"3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
         Log.d("TAG", "onClick: "+paraLabDetails(action,"3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUsertype(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
-        Call<List<JsonObject>> call=apiService.uploadLabDetails(surveyImagesParts,description);
+        Call<List<JsonObject>> call=apiService.uploadLabDetails(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -795,7 +865,7 @@ dialog2.show();
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
         }
-
+        Log.d("TAG", "paraDeletUlrs: "+jsonArray.toString());
 
         return jsonArray.toString();
     }

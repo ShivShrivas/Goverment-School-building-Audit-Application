@@ -368,11 +368,11 @@ EditText edtSolarPanelOtherScheme;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnerPositionForInstallationYear= arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
-                int spinnerPositionForWorkingStatus= arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
-                int spinnerPositionForSolarPanelType= arrayAdapter3.getPosition(response.body().get(0).get("SolarPanelType").getAsString());
-                int spinnerPositionForScheme= arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
+                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForInstallationYear= arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+                int spinnerPositionForWorkingStatus= arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForSolarPanelType= arrayAdapter3.getPosition(response.body().get(0).get("SolarPanelType").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("SolarPanelType").getAsString());
+                int spinnerPositionForScheme= arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
 
                 spinnerSolarPanel.setSelection(spinnerPositionForAvailabilty);
                 spinnerSolarPaneltWorkingStatus.setSelection(spinnerPositionForWorkingStatus);

@@ -511,9 +511,9 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilityCWSN = arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString());
-                int spinnerPositionForDoor= arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString());
-                int spinnerPositionForDustbin= arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString());
+                int spinnerPositionForAvailabilityCWSN = arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString());
+                int spinnerPositionForDoor= arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString());
+                int spinnerPositionForDustbin= arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString());
 
                 spinnerCWSNBoysAvailability.setSelection(spinnerPositionForAvailabilityCWSN);
                 spinnerBoysDoors.setSelection(spinnerPositionForDoor);

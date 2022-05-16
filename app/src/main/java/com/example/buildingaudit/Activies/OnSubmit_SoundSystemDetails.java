@@ -68,6 +68,7 @@ RecyclerView recyclerViewSoundSystmOnSub;
                 Intent i=new Intent(OnSubmit_SoundSystemDetails.this,UpdateDetailsSoundSystem.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         recyclerViewSoundSystmOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));

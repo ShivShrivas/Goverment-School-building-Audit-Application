@@ -77,6 +77,7 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
                 Intent i=new Intent(OnSubmit_CCTVDetails.this,UpdateDetailsCCTV.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         recyclerViewCCTVOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));

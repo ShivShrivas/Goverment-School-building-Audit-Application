@@ -380,17 +380,17 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter3.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnNewsMagzine = arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
-                int spinnerPositionForReadingCorner = arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString());
-                int spinnerPositionForFurnitureAvl = arrayAdapter1.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter3.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnNewsMagzine = arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
+                int spinnerPositionForReadingCorner = arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString());
+                int spinnerPositionForFurnitureAvl = arrayAdapter1.getPosition(response.body().get(0).get("FurnitureAvl").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
                 spinnerRoomAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
                 spinnerNewsPaperAndMzin.setSelection(spinnNewsMagzine);
                 spinnerFurnitureAvailabiltyInLibrary.setSelection(spinnerPositionForFurnitureAvl);
                 spinnerReadingCorner.setSelection(spinnerPositionForReadingCorner);
-                int spinnerPositionForworkignStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
-                int spinnerPositionForScheme = arrayAdapter5.getPosition(response.body().get(0).get("GrantScheme").getAsString());
-                int spinnerPositionForPhysicalStatus= arrayAdapter.getPosition(response.body().get(0).get("PhysicalStatus").getAsString());
+                int spinnerPositionForworkignStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForScheme = arrayAdapter5.getPosition(response.body().get(0).get("GrantScheme").getAsString())==-1?0:arrayAdapter5.getPosition(response.body().get(0).get("GrantScheme").getAsString());
+                int spinnerPositionForPhysicalStatus= arrayAdapter.getPosition(response.body().get(0).get("PhysicalStatus").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("PhysicalStatus").getAsString());
                 spinnerPhysicalStatus.setSelection(spinnerPositionForPhysicalStatus);
                 spinnerWorkingStatus.setSelection(spinnerPositionForworkignStatus);
                 spinnerGrantUnderScheme.setSelection(spinnerPositionForScheme);

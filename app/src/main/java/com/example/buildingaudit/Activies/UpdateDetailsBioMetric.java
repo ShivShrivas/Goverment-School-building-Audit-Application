@@ -362,11 +362,11 @@ ConstraintLayout constraintLayout35;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnerPositionForBioStaff = adapter.getPosition(response.body().get(0).get("BiometricUseStaff").getAsString());
-                int spinnerPositionForBioStu = adapter.getPosition(response.body().get(0).get("BiometricUseStudent").getAsString());
-                int spinnerPositionForYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
-                int spinnerPositionForworkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForBioStaff = adapter.getPosition(response.body().get(0).get("BiometricUseStaff").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("BiometricUseStaff").getAsString());
+                int spinnerPositionForBioStu = adapter.getPosition(response.body().get(0).get("BiometricUseStudent").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("BiometricUseStudent").getAsString());
+                int spinnerPositionForYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
+                int spinnerPositionForworkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
                 spinnerBioMetricMachineAvailabelty.setSelection(spinnerPositionForSeperateRoomsAvl);
                 spinneruserbiometricStaff.setSelection(spinnerPositionForBioStaff);
                 spinneruserbiometricStudent.setSelection(spinnerPositionForBioStu);

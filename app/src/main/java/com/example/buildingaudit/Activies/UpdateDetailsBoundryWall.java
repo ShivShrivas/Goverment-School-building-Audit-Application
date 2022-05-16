@@ -360,11 +360,11 @@ ArrayList<String> aList=new ArrayList<>();
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
-                int spinnforBoundaryWallType= arrayAdapter4.getPosition(response.body().get(0).get("BoundaryWallType").getAsString());
-                int spinnerPositionForWhiteWashStatus = adapter.getPosition(response.body().get(0).get("WhiteWashStatus").getAsString());
-                int spinnerPositionForCondition = arrayAdapter.getPosition(response.body().get(0).get("Condition").getAsString());
-                int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
+                int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnforBoundaryWallType= arrayAdapter4.getPosition(response.body().get(0).get("BoundaryWallType").getAsString())==-1?0:arrayAdapter4.getPosition(response.body().get(0).get("BoundaryWallType").getAsString());
+                int spinnerPositionForWhiteWashStatus = adapter.getPosition(response.body().get(0).get("WhiteWashStatus").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("WhiteWashStatus").getAsString());
+                int spinnerPositionForCondition = arrayAdapter.getPosition(response.body().get(0).get("Condition").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Condition").getAsString());
+                int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
 
                 spinnerBoundaryWallAvail.setSelection(spinnerPositionForAvailabilty);
                 spinnerBoundryScheme.setSelection(spinnerPositionForScheme);

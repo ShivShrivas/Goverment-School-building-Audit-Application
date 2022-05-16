@@ -319,8 +319,8 @@ public class UpdateDetailsMultipurposeHall extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailability= arrayAdapter.getPosition(response.body().get(0).get("Availability").getAsString());
-                int spinnerPositionForPhysicalStatus = arrayAdapter2.getPosition(response.body().get(0).get("PhysicalStatus").getAsString());
+                int spinnerPositionForAvailability= arrayAdapter.getPosition(response.body().get(0).get("Availability").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Availability").getAsString());
+                int spinnerPositionForPhysicalStatus = arrayAdapter2.getPosition(response.body().get(0).get("PhysicalStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("PhysicalStatus").getAsString());
 
                 spinnerMultipurposeHall.setSelection(spinnerPositionForAvailability);
                 spinnerMultiPurposeHallStatus.setSelection(spinnerPositionForPhysicalStatus);

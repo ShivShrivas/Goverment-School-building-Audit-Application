@@ -517,11 +517,11 @@ Spinner spinnerGirlsSanetoryNapkin,spinnerGirlsIncinerator,spinnerGirlsDustbin,s
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForAvailabilityCWSN = arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString());
-                int spinnerPositionForDoor= arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString());
-                int spinnerPositionForDustbin= arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString());
-                int spinnerPositionForFreeSanitaryNapkins= arrayAdapter.getPosition(response.body().get(0).get("FreeSanitaryNapkins").getAsString());
-                int spinnerPositionForIncinerator= arrayAdapter.getPosition(response.body().get(0).get("Incinerator").getAsString());
+                int spinnerPositionForAvailabilityCWSN = arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString());
+                int spinnerPositionForDoor= arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString());
+                int spinnerPositionForDustbin= arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString());
+                int spinnerPositionForFreeSanitaryNapkins= arrayAdapter.getPosition(response.body().get(0).get("FreeSanitaryNapkins").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("FreeSanitaryNapkins").getAsString());
+                int spinnerPositionForIncinerator= arrayAdapter.getPosition(response.body().get(0).get("Incinerator").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Incinerator").getAsString());
 
                 spinnerCWSNGirlstoiletAvalabilty.setSelection(spinnerPositionForAvailabilityCWSN);
                 spinnerGirlsDoorFacility.setSelection(spinnerPositionForDoor);
