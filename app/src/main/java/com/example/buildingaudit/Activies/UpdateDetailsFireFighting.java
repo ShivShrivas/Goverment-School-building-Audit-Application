@@ -167,8 +167,8 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        for (int i = 0; i < applicationController.getInstallationYears().size(); i++) {
-            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+        for (int i = 1990; i <=2022; i++) {
+            arrayListInstallationYear.add(String.valueOf(i));
         }
      arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);
@@ -407,7 +407,10 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                 edtNotWorkingFF.setText(response.body().get(0).get("NonWorkingCount").getAsString());
                 edtWorkingFF.setText(response.body().get(0).get("WorkingCount").getAsString());
                 edtTotalFF.setText(String.valueOf(totalRo));
-                edtrenewalDate.setText(response.body().get(0).get("RenewalDateStatus").getAsString());
+                String[] time=(response.body().get(0).get("RenewalDateStatus").getAsString()).split("T");
+
+                edtrenewalDate.setText(time[0]);
+
 
                 recyclerViewFireFightningFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsFireFighting.this,LinearLayoutManager.HORIZONTAL,false));
 

@@ -81,6 +81,7 @@ TextView uploadtextFireFighting;
                 Intent i=new Intent(OnSubmit_FireFighting.this,UpdateDetailsFireFighting.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         disableEditbox();

@@ -195,7 +195,7 @@ ConstraintLayout constraintLayout35;
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
         for (int i = 1990; i <=2022; i++) {
-            arrayListInstallationYear.add(applicationController.getInstallationYears().get(i).getYear());
+            arrayListInstallationYear.add(String.valueOf(i));
         }
       arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);
         arrayAdapter1.setDropDownViewResource(R.layout.custom_text_spiiner);

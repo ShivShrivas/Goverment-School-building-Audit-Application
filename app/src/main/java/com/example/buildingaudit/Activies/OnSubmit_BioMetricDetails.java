@@ -79,6 +79,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
                 Intent i=new Intent(OnSubmit_BioMetricDetails.this,UpdateDetailsBioMetric.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         recyclerViewBioMetricOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));

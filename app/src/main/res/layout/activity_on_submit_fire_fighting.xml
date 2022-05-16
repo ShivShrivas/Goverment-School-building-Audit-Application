@@ -525,10 +525,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="30dp"
                             android:layout_margin="4dp"
-
+                                android:gravity="center_horizontal|center_vertical"
                             android:layout_weight="1"
                             android:background="@drawable/cardbg"
-                            android:textAlignment="center"
+
                             android:textColor="@color/textColor1" />
                     </androidx.cardview.widget.CardView>
 

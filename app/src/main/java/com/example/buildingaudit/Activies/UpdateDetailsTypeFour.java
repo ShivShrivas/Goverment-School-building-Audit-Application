@@ -89,7 +89,7 @@ public class UpdateDetailsTypeFour extends AppCompatActivity {
     File imageFile=null;
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
     ImageView typeFourImageUploadBtn;
-    ArrayAdapter<String> arrayAdapter1,arrayAdapter,arrayAdapter2,arrayAdapter5,arrayAdapter4;
+    ArrayAdapter<String> arrayAdapter1,arrayAdapter,arrayAdapter2,arrayAdapter5,arrayAdapter4,arrayAdapter3;
     ImageAdapter5 adapter;
     ApplicationController applicationController;
 Dialog dialog;
@@ -189,7 +189,8 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         ArrayList<String> arrayListReadingCorner=new ArrayList<>();
         arrayListReadingCorner.add("Yes");
         arrayListReadingCorner.add("No");
-        ArrayAdapter<String> arrayAdapter3 =new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListReadingCorner);
+        arrayListReadingCorner.add("Alternate Room");
+       arrayAdapter3 =new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,arrayListReadingCorner);
         arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerRoomAvailabelty.setAdapter(arrayAdapter3);
         ArrayList<String> arrayListnewsMgzin=new ArrayList<>();
@@ -379,7 +380,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
-                int spinnerPositionForSeperateRoomsAvl = arrayAdapter4.getPosition(response.body().get(0).get("Availabilty").getAsString());
+                int spinnerPositionForSeperateRoomsAvl = arrayAdapter3.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnNewsMagzine = arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
                 int spinnerPositionForReadingCorner = arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString());
                 int spinnerPositionForFurnitureAvl = arrayAdapter1.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());

@@ -119,7 +119,6 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
             }
         });
         Intent i=getIntent();
-        schoolAddress.setText(applicationController.getSchoolAddress());
         action=i.getStringExtra("Action");
 
         dialog = new Dialog(this);
@@ -148,12 +147,13 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         recyclerViewGymFromServer=findViewById(R.id.recyclerViewGymFromServer);
         GymsubmitLabBtn=findViewById(R.id.GymsubmitLabBtn);
         schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
         arrayListAvailbilty.add("Alternate Room");
-     arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
+        arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerGymAvailabelty.setAdapter(arrayAdapter);
 

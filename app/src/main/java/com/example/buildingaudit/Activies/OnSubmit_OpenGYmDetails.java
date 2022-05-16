@@ -78,6 +78,7 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
                 Intent i=new Intent(OnSubmit_OpenGYmDetails.this,UpdateDetailsGym.class);
                 i.putExtra("Action","3");
                 startActivity(i);
+                finish();
             }
         });
         Call<List<JsonObject>> call=apiService.checkGymDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"6"));
