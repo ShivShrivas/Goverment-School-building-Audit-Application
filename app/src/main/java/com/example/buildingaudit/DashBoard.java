@@ -289,11 +289,33 @@ public class DashBoard extends AppCompatActivity {
                 @Override
                 public void onSuccess(Location location) {
                     if (location != null) {
+
                         longitude = String.valueOf(location.getLongitude());
                         latitude = String.valueOf(location.getLatitude());
                         Log.d("TAG", "onSuccess: "+latitude+longitude);
-                        applicationController.setLatitude(latitude);
-                        applicationController.setLongitude(longitude);
+                        if (longitude.equals(null) || latitude.equals(null) || longitude.equals("") || latitude.equals("")){
+                            AlertDialog.Builder builder = new AlertDialog.Builder(DashBoard.this);
+                            builder.setMessage("Device Location is not found please check ");
+                            builder.setCancelable(false);
+                            builder.setPositiveButton("check", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                    finish();
+                                }
+                            }).setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    onBackPressed();
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
+                        }else{
+                            applicationController.setLatitude(latitude);
+                            applicationController.setLongitude(longitude);
+                        }
+
                     }
                 }
             });
