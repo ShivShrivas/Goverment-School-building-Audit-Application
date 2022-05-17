@@ -13,6 +13,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -166,7 +167,41 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         arrayAdapter3.setDropDownViewResource(R.layout.custom_text_spiiner);
         spinnerVocalHSEquipmentStatus.setAdapter(arrayAdapter3);
         spinnerVocalISEquipmentStatus.setAdapter(arrayAdapter3);
+        spinnerVocalRoomISAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
+                    physicsLabBodyCard.setVisibility(View.GONE);
+                    physicsLabImageCard.setVisibility(View.GONE);
+                }else{
+                    physicsLabBodyCard.setVisibility(View.VISIBLE);
+                    physicsLabImageCard.setVisibility(View.VISIBLE);
+                }
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        spinnerVocalRoomHSAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if (spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No")){
+                    scienceLabBodyCard.setVisibility(View.GONE);
+                    scienceLabImageCard.setVisibility(View.GONE);
+                }else{
+                    scienceLabBodyCard.setVisibility(View.VISIBLE);
+                    scienceLabImageCard.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         imageUpoadVocalHS.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -180,7 +215,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
                                     if (i.resolveActivity(getPackageManager())!=null){
 
                                         try {
-                                            imageFile =getImageFile();
+                                            imageFile =getImageFile(10);
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
@@ -268,7 +303,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
                                     if (i.resolveActivity(getPackageManager())!=null){
 
                                         try {
-                                            imageFile =getImageFile();
+                                            imageFile =getImageFile(12);
                                         } catch (IOException e) {
                                             e.printStackTrace();
                                         }
@@ -348,7 +383,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
                 dialog2.show();
                 if (action.equals("3")){
                     if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
-                        if (arrayListImages1.size()==0 || arrayListImages2.size()==0 && aList.size()==0 && bList.size()==0){
+                        if (arrayListImages1.size()==0 && arrayListImages2.size()==0 && aList.size()==0 && bList.size()==0){
                             Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
 
@@ -360,7 +395,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
                     }
                 }else{
                     if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
-                        if (arrayListImages1.size()==0 || arrayListImages2.size()==0){
+                        if (arrayListImages1.size()==0 && arrayListImages2.size()==0){
                             Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
 
@@ -432,7 +467,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
                 StaffPhotoPathList1=response.body().get(1).get("ClassPhotoPath").toString().split(",");
                 bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
 
-                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this,aList);
+                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this,bList);
                 recyclerViewVocalISFromServer.setAdapter(onlineImageRecViewAdapter1);
             }
 
@@ -584,9 +619,9 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         return jsonArray.toString();
     }
 
-    private File getImageFile() throws IOException{
+    private File getImageFile(int i) throws IOException{
         String timeStamp=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        String imageName="jpg+"+timeStamp+"_";
+        String imageName=i+"_"+timeStamp+"_";
         File storageDir=getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 

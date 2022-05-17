@@ -307,7 +307,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                                 spf= new SimpleDateFormat("yyyy-MM-dd");
                                 spf1= new SimpleDateFormat("dd-MM-yyyy");
                                 fromdate= spf.format(newDate);
-                                edtrenewalDate.setText( spf1.format(newDate1));
+                                edtrenewalDate.setText( fromdate);
 
                             }
                         }, mYear, mDay, cDay);
@@ -339,35 +339,40 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if ( !checkValidation(Integer.parseInt(edtTotalFF.getText().toString().trim()),Integer.parseInt(edtWorkingFF.getText().toString().trim())
-                        ,Integer.parseInt(edtNotWorkingFF.getText().toString().trim()))){
-                    dialog2.dismiss();
-                    Toast.makeText(UpdateDetailsFireFighting.this, "Please enter correct count of fire fighting", Toast.LENGTH_SHORT).show();
-                }else if (!spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
-                    if (action.equals("3")){
-                        if (arrayListImages1.size()==0 && aList.size()==0){
-                            dialog2.dismiss();
+                if (spinnerFireFightAvailabelty.getSelectedItem().equals("No")){
+                    runService();
+                }else{
+                    if ( !checkValidation(Integer.parseInt(edtTotalFF.getText().toString().trim()),Integer.parseInt(edtWorkingFF.getText().toString().trim())
+                            ,Integer.parseInt(edtNotWorkingFF.getText().toString().trim()))){
+                        dialog2.dismiss();
+                        Toast.makeText(UpdateDetailsFireFighting.this, "Please enter correct count of fire fighting", Toast.LENGTH_SHORT).show();
+                    }else if (!spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
+                        if (action.equals("3")){
+                            if (arrayListImages1.size()==0 && aList.size()==0){
+                                dialog2.dismiss();
 
-                            Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
 
-                        }else {
-                            runService();
+                            }else {
+                                runService();
 
+                            }
+                        }else{
+                            if (arrayListImages1.size()==0){
+                                dialog2.dismiss();
+
+                                Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+
+                            }else {
+                                runService();
+
+                            }
                         }
+
                     }else{
-                        if (arrayListImages1.size()==0){
-                            dialog2.dismiss();
-
-                            Toast.makeText(UpdateDetailsFireFighting.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                        }else {
-                            runService();
-
-                        }
+                        runService();
                     }
 
-                }else{
-                    runService();
                 }
 
             }
@@ -474,9 +479,9 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraFireFight(action,"12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
-                spinnerFireFightRenewalStatus.getSelectedItem().toString(),fromdate,spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                spinnerFireFightRenewalStatus.getSelectedItem().toString(),edtrenewalDate.getText().toString(),spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         Log.d("TAG", "onClick: "+paraFireFight(action,"12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
-                spinnerFireFightRenewalStatus.getSelectedItem().toString(),fromdate,spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+                spinnerFireFightRenewalStatus.getSelectedItem().toString(),edtrenewalDate.getText().toString(),spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         Call<List<JsonObject>> call=apiService.uploadFireFighting(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
@@ -543,10 +548,10 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
             jsonObject.addProperty("PeriodID",periodID);
             jsonObject.addProperty("InstallationYear","0");
             jsonObject.addProperty("RenewalStatus","");
-            jsonObject.addProperty("RenewalDateStatus","1800-08-08");
+            jsonObject.addProperty("RenewalDateStatus","1900-01-01");
             jsonObject.addProperty("Training","");
-            jsonObject.addProperty("WorkingCount","");
-            jsonObject.addProperty("NonWorkingCount","");
+            jsonObject.addProperty("WorkingCount","0");
+            jsonObject.addProperty("NonWorkingCount","0");
 
             jsonObject.addProperty("WorkingStatus","");
             jsonObject.addProperty("Availabilty",toString5);

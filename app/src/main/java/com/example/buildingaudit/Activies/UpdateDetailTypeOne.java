@@ -634,6 +634,8 @@ int cameraType;
             File compressFile = filrCompressor(arrayListImages2.get(i));
             RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
                     compressFile);
+            Log.d("TAG", "runService:FileDataGood "+compressFile.getName());
+
             fileDataGood[i] = MultipartBody.Part.createFormData("FileDataGood", compressFile.getName(), surveyBody);
 
         }
@@ -645,6 +647,7 @@ int cameraType;
             File compressFile = filrCompressor(arrayListImages3.get(i));
             RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
                     compressFile);
+            Log.d("TAG", "runService:FileDataMinor "+compressFile.getName());
             fileDataMinor[i] = MultipartBody.Part.createFormData("FileDataMinor", compressFile.getName(), surveyBody);
 
         }
@@ -655,14 +658,15 @@ int cameraType;
             File compressFile = filrCompressor(arrayListImages4.get(i));
             RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
                     compressFile);
+            Log.d("TAG", "runService:FileDataMajor "+compressFile.getName());
             fileDataMajor[i] = MultipartBody.Part.createFormData("FileDataMajor", compressFile.getName(), surveyBody);
 
         }
         RequestBody PhotoDeleteGood, PhotoDeleteMajor, PhotoDeleteMinor;
         if (action.equals("3")) {
-            Log.d("TAG", "onClick: "+paraDeletUlrs());
-            Log.d("TAG", "onClick: "+paraDeletUlrs1());
-            Log.d("TAG", "onClick: "+paraDeletUlrs2());
+            Log.d("TAG", "onClick:photoDeleteGood "+paraDeletUlrs());
+            Log.d("TAG", "onClick:photoDeleteMajor "+paraDeletUlrs1());
+            Log.d("TAG", "onClick:photoDeleteMinor "+paraDeletUlrs2());
             PhotoDeleteGood = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs());
             PhotoDeleteMinor = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs1());
             PhotoDeleteMajor = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs2());
@@ -671,6 +675,7 @@ int cameraType;
             PhotoDeleteMinor = null;
             PhotoDeleteMajor = null;
         }
+
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraClassRoomDetails(action, "1", "ClassRoomDetails", totalClassRoom, goodCondtionClassroom.getText().toString(), majorRepairingClassroom.getText().toString(), minorRepairingClassroom.getText().toString(), edtPodiumClass.getText().toString(),
                 blackBoardCount.getText().toString(), whiteBoardCont.getText().toString(), greenBoardCount.getText().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), "GoodConditionPhotos", arrayListImages2, "MajorRepairingPhotos", arrayListImages3, "MinorRepairingPhotos", arrayListImages4));
         Log.d("TAG", "onClick: " + paraClassRoomDetails(action, "1", "ClassRoomDetails", totalClassRoom, goodCondtionClassroom.getText().toString(), majorRepairingClassroom.getText().toString(), minorRepairingClassroom.getText().toString(), edtPodiumClass.getText().toString(),
@@ -679,7 +684,7 @@ int cameraType;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: " + response.body());
+                Log.d("TAG", "onResponse: " + response.body()+response);
                 TextView textView = dialog.findViewById(R.id.dialogtextResponse);
                 Button button = dialog.findViewById(R.id.BtnResponseDialoge);
                 try {

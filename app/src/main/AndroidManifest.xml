@@ -33,9 +33,6 @@
             android:name=".Activies.OnSubmit_Officeroom"
             android:exported="false" />
         <activity
-            android:name=".Activies.OnSubmit_OfficeRoom"
-            android:exported="false" />
-        <activity
             android:name=".Activies.OnSubmit_VocationalRoom"
             android:exported="false" />
         <activity

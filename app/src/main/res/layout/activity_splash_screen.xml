@@ -50,11 +50,12 @@
         app:layout_constraintVertical_bias="0.050000012" />
 
     <TextView
+        android:id="@+id/versionTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:textAlignment="center"
-        android:text="version:2.6.4\n(In Beta Testing)"
+        android:text="version:3.1.0\n(In Beta Testing)"
         android:textColor="#393939"
         android:textSize="11dp"
         app:layout_constraintBottom_toBottomOf="parent"

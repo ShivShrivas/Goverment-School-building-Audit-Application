@@ -86,7 +86,7 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
 
                 if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
-                    edtGymAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                    spinnerOfficeRoomAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
                     constraintLayoutPR.setVisibility(View.GONE);
 
                     dialog2.dismiss();

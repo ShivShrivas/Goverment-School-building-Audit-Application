@@ -332,8 +332,9 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if(Integer.valueOf(edtTotalLibraryGrant.getText().toString())<=Integer.valueOf(edtExpenditure.getText().toString())){
+                if(Integer.valueOf(edtTotalLibraryGrant.getText().toString())<Integer.valueOf(edtExpenditure.getText().toString())){
                     edtTotalLibraryGrant.setError("total library grant is always greater and equal to expenditure");
+                    dialog2.dismiss();
                 }else{
                     if (action.equals("3")){
                         if (!spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
