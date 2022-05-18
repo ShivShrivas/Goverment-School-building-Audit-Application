@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">School Grading (In Testing)</string>
+    <string name="app_name">School Grading</string>
     <string name="opneToggel">open</string>
     <string name="close">close</string>
     <string name="edit_details"><u>Edit Details</u></string>
