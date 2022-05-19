@@ -46,9 +46,13 @@
                       causes the image to move when user scrolls at a specific ratio. -->
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:background="@drawable/header_back_img"
-                    android:scaleType="centerCrop"
+
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:layout_height="200dp"
+                    android:src="@drawable/msp_icon"
+                    android:paddingTop="15dp"
+                    android:scaleType="fitCenter"
+                    android:paddingBottom="48dp"
                     app:layout_collapseMode="parallax" />
 
                 <!-- The attribute app:layout_collapseMode="pin" is set so that

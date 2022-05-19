@@ -25,9 +25,12 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_baseline_remove_24.xml" value="0.186" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_lock_password.xml" value="0.2165" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_menu.xml" value="0.1825" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_no_internet.xml" value="0.1585" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_notifications.xml" value="0.1825" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_school_icon.xml" value="0.1585" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_settings.xml" value="0.1" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_userid.xml" value="0.2165" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/schoolicon.xml" value="0.1315" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/spinner_bg.xml" value="0.1" />
         <entry key="..\:/BuildingAudit/app/src/main/res/font/anti_corona.xml" value="1.3214285714285714" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_after_submit_classrom_details.xml" value="0.209375" />
