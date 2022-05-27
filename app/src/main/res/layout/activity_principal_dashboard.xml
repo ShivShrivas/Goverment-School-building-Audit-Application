@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-
     android:layout_height="match_parent"
     tools:context=".DashBoard">
 
@@ -71,7 +70,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout8"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <!--In textview we will be adding the text that i have
@@ -195,9 +194,9 @@
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="16dp"
 
                     android:background="@drawable/btn_resc_mgmnt"
                     app:cardCornerRadius="10dp"
@@ -207,17 +206,16 @@
                     app:layout_constraintTop_toBottomOf="@+id/cardView25" />
 
                 <Button
+                    android:id="@+id/btnStaffAttendance"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    android:layout_marginStart="24dp"
-
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@drawable/staff_btn"
                     app:cardCornerRadius="10dp"
                     app:cardElevation="5dp"
-
                     app:layout_anchorGravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

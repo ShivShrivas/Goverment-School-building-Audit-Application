@@ -30,6 +30,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name="com.bsn.staffAttendance.Dashboard_StaffAttendance"
+            android:exported="false" />
+        <activity
+            android:name="com.bsn.staffAttendance.UpdateDetails_StaffAttendance"
+            android:exported="false" />
+        <activity
             android:name=".Principal_Dashboard"
             android:exported="false" />
         <activity

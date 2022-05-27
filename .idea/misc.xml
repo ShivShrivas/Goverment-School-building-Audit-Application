@@ -36,6 +36,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/font/anti_corona.xml" value="1.3214285714285714" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_after_submit_classrom_details.xml" value="0.209375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dash_board.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dashboard_staff_attendance.xml" value="0.18" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_final_otp_submission.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_no_internet_connection.xml" value="0.19791666666666666" />
@@ -92,6 +93,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_solar_panel.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_solar_panel_and_boundry_wall.xml" value="0.18" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_sound_system.xml" value="0.22" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_staff_attendance.xml" value="0.19791666666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_five.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_four.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_two.xml" value="0.22" />
@@ -109,6 +111,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/nav_header_main_activity__admin.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/new_smart_class.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/progress_dialog.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/recview_attendance_card.xml" value="0.19791666666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/respons_dialog.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/smart_class_card.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/spinner_card_orange.xml" value="0.22003474232773595" />
