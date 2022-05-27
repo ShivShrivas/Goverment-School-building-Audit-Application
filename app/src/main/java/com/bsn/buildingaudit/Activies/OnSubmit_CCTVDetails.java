@@ -89,6 +89,9 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editCCTVDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     layoutCCTV.setVisibility(View.GONE);
                     edtCCTVAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());

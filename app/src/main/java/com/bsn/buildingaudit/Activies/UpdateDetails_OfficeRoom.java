@@ -74,7 +74,7 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
     ConstraintLayout constraintLayoutPR;
     ImageView officeImageUploadBtn;
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
-    ArrayAdapter<String> arrayAdapter,arrayAdapter2;
+    ArrayAdapter<String> arrayAdapter,arrayAdapter2,arrayAdapter6;
     RecyclerView recyclerViewOffice,recyclerViewOfficeFromServer;
     Button officesubmitLabBtn;
 
@@ -120,12 +120,21 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
         if (action.equals("3")){
             fetchAllDataFromServer();
         }
+
+        ArrayList<String> arrayListAvailbilty6=new ArrayList<>();
+        arrayListAvailbilty6.add("Yes");
+        arrayListAvailbilty6.add("No");
+        arrayListAvailbilty6.add("Alternate Room");
+        arrayAdapter6=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty6);
+        arrayAdapter6.setDropDownViewResource(R.layout.custom_text_spiiner);
+        spinnerOfficeRoomAvailabelty.setAdapter(arrayAdapter6);
+
+
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
         arrayListAvailbilty.add("Yes");
         arrayListAvailbilty.add("No");
         arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-        spinnerOfficeRoomAvailabelty.setAdapter(arrayAdapter);
         spinnerFurnitureAvailabiltyOR.setAdapter(arrayAdapter);
         spinnerAlmiraAndRacksAvailabiltyOR.setAdapter(arrayAdapter);
 
@@ -282,7 +291,7 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 Log.d("TAG", "onResponse: "+response.body());
                 int spinnerPositionForFurnitureAvl=0,spinnerPositionForAlmirahRacksAvl=0;
-                int spinnerPositionForRainHarvestingAvl = arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
+                int spinnerPositionForRainHarvestingAvl = arrayAdapter6.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
                 try{
 
                     spinnerPositionForFurnitureAvl = arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
@@ -307,11 +316,13 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
 
                 recyclerViewOfficeFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_OfficeRoom.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").getAsString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
                 UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                if (!aList.get(0).isEmpty()){
                 OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetails_OfficeRoom.this,aList);
                 recyclerViewOfficeFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
             }
 
             @Override
@@ -353,7 +364,12 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
         RequestBody deletUrl;
         Log.d("TAG", "runService: "+paraDeletUlrs());
         if (action.equals("3")){
-            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+            if (spinnerOfficeRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
+            }else{
+                deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+
+            }
         }else {
             deletUrl=null;
         }
@@ -398,6 +414,21 @@ public class UpdateDetails_OfficeRoom extends AppCompatActivity {
         });
     }
 
+    private String paraAllDeleteUrls() {
+        JsonArray jsonArray=new JsonArray();
+
+
+
+        for (int i = 0; i < aList.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            String newUrl2=aList.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
     private String paraoffice(String action, String s, String principaofficeRoomDetails, String toString, String toString1,String AlmirahRacksAvl,String FurnitureAvl, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<File> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
         if (toString.equals("no")){

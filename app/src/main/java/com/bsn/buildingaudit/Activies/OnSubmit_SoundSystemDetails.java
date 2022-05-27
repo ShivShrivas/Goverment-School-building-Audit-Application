@@ -79,6 +79,9 @@ RecyclerView recyclerViewSoundSystmOnSub;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editSoundAndBandDetails.setVisibility(View.VISIBLE);
+                }
                 edtSchoolBandForGirls.setText(response.body().get(0).get("SchoolBandInstAvlGirls").getAsString());
                         edtSchoolBand.setText(response.body().get(0).get("SchoolBandInstAvlBoys").getAsString());
                 edtSoundSystem.setText(response.body().get(0).get("SoundSysAvailability").getAsString());

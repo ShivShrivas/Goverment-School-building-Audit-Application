@@ -85,6 +85,9 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editCycleStandDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("Availability").getAsString().equals("No")){
                     edtCycleStand.setText(response.body().get(0).get("Availability").getAsString());
                     constraintLayout32.setVisibility(View.GONE);

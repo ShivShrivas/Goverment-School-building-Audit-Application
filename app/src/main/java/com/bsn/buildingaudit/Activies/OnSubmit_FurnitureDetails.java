@@ -108,6 +108,9 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editFurnituresDetails.setVisibility(View.VISIBLE);
+                }
                 edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture").getAsString());
                         edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength").getAsString());
 

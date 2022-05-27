@@ -94,7 +94,9 @@ TextView uploadtextFireFighting;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-                if(response.body().get(0).get("Availabilty").getAsString().equals("No")){
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editFirefightingDetails.setVisibility(View.VISIBLE);
+                }                if(response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     constraintLayout30.setVisibility(View.GONE);
                     edtFireFightAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
 

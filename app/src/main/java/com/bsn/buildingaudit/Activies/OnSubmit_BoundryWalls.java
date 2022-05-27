@@ -92,7 +92,9 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editBoundryWallsDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     edtBoundaryWallAvail.setText(response.body().get(0).get("Availabilty").getAsString());
                     layoutBoundry.setVisibility(View.GONE);

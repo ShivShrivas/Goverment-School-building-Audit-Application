@@ -67,6 +67,7 @@ import com.bsn.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.bsn.buildingaudit.Activies.UpdateDetails_OfficeRoom;
 import com.bsn.buildingaudit.Activies.UpdateDetails_VocationalEducationRoom;
 import com.bsn.buildingaudit.Activies.UpdatedetailsTypeThree;
+import com.bsn.buildingaudit.DashBoard;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
 import com.bsn.buildingaudit.R;
@@ -104,6 +105,16 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
 
     @Override
     public void onBindViewHolder(@NonNull dashboardRecViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        if (DashBoard.DataLocked==0){
+            if(arrayList.get(position).getParamId().toString().equals("27")){
+                DashBoard.btnBottom.setVisibility(View.VISIBLE);
+            }else{
+                DashBoard.btnBottom.setVisibility(View.GONE);
+
+            }
+        }else{
+            DashBoard.btnBottom.setVisibility(View.GONE);
+        }
 
 
         holder.roomTypetxt.setText(arrayList.get(position).getParamName());

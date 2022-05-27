@@ -501,11 +501,13 @@ dialog2.show();
                 (new SmartClassAdapter(UpdateDetailsSmartClass.this,smartClassesCards)).notifyDataSetChanged();
                 recyclerViewSmartClassFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsSmartClass.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").getAsString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
                 UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                if (!aList.get(0).isEmpty()){
                 OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsSmartClass.this,aList);
                 recyclerViewSmartClassFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
             }
 
             @Override
@@ -558,13 +560,18 @@ dialog2.show();
         RequestBody deletUrl;
         Log.d("TAG", "runService: "+paraDeletUlrs());
         if (action.equals("3")){
-            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+            if (smartClassAvailabilty.getSelectedItem().toString().equals("No")){
+                deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
+            }else{
+                deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+
+            }
         }else {
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraSmartClass(action,"8","SmartClass",aList, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
         Log.d("TAG", "onClick: "+paraSmartClass(action,"8","SmartClass",aList, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerTeacherAvailbilitySmartClass.getSelectedItem().toString(),spinnerProjectorSmartClass.getSelectedItem().toString(),spinnerLearningContentSmartClass.getSelectedItem().toString(),spinnerDigitalBoardSmartClass.getSelectedItem().toString(),smartClassAvailabilty.getSelectedItem().toString(),arrayListImages1));
-        Call<List<JsonObject>> call=apiService.uploadSmartClassDetails(surveyImagesParts,description);
+        Call<List<JsonObject>> call=apiService.uploadSmartClassDetails(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -602,6 +609,22 @@ dialog2.show();
 
             }
         });
+    }
+
+    private String paraAllDeleteUrls() {
+        JsonArray jsonArray=new JsonArray();
+
+
+
+        for (int i = 0; i < aList.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            String newUrl2=aList.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
     }
 
     private String paraDeletUlrs() {

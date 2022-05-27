@@ -131,6 +131,9 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
+                if (response.body().get(0).getDataLocked().equals("0")){
+                    editPracticalLabDetails.setVisibility(View.VISIBLE);
+                }
                List<LabDetailsResponse> list=response.body();
 
                if (list.get(0).getLabYN().toString().equals("Yes")){
@@ -372,6 +375,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                 edtPhysicslabAvailability.setEnabled(false);
         edtScienceLabCondition.setEnabled(false);
                 edtScienceEquipmentStatus.setEnabled(false);
+                edtHomeSciencelabAvailability.setEnabled(false);
     }
 
     private JsonObject paraGetDetails(String action, String schoolId, String periodId) {

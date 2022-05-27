@@ -7,8 +7,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestClient
 {
 
- //public static String BASE_URL="http://schoolgradingapiservices.bsninfotech.net/api/";
-  public static String BASE_URL="http://testimageupload.bsninfotech.org/api/";
+public static String BASE_URL="http://schoolgradingapiservices.bsninfotech.net/api/";
+//  public static String BASE_URL="http://testimageupload.bsninfotech.org/api/";
     private ApiService apiService;
     Retrofit retrofit=null;
     public RestClient()

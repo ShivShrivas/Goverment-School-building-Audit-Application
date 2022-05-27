@@ -95,7 +95,9 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editGirlsToiletDetails.setVisibility(View.VISIBLE);
+                }
                 edtUrinalWithFlushTotalB.setText(response.body().get(0).get("TotalUrinals").getAsString());
                 edtUrinalWithoutFlushB.setText(response.body().get(0).get("NoOfUrinalsWithOutFlush").getAsString());
                 edtUrinalWithFlushB.setText(response.body().get(0).get("NoOfUrinalsWithFlush").getAsString());

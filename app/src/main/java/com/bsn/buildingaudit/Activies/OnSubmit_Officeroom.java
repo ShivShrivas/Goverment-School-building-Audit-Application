@@ -86,7 +86,9 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
-
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editOfficeRoomDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
                     spinnerOfficeRoomAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
                     constraintLayoutPR.setVisibility(View.GONE);

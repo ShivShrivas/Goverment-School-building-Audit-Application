@@ -91,6 +91,9 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editBioMetricDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     layoutBioMetric.setVisibility(View.GONE);
                     dialog2.dismiss();

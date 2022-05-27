@@ -1,6 +1,7 @@
 package com.bsn.buildingaudit.RetrofitApi;
 
 import com.bsn.buildingaudit.Model.BoundryType;
+import com.bsn.buildingaudit.Model.DataLocked;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.Model.GetQuaterType;
 import com.bsn.buildingaudit.Model.GetSchoolDetails;
@@ -200,7 +201,7 @@ public  interface ApiService {
     @Multipart
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/SSmartClassDetails")
-    Call<List<JsonObject>> uploadSmartClassDetails(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody requestBody);
+    Call<List<JsonObject>> uploadSmartClassDetails(@Part MultipartBody.Part[] parts,@Part("RequestData") RequestBody requestBody,@Part("PhotoDeleteData") RequestBody deletulrs);
 
 
 
@@ -431,6 +432,11 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("PhysicalParam/ViewOfficeRoomDetails")
     Call<List<JsonObject>> checkOfficeRoom(@Body JsonObject paraGetDetails2);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("Login/GetInsertFinalDataLock")
+    Call<List<DataLocked>> checkLockedData(@Body JsonObject paraGetDetails2);
 
 
 }

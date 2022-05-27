@@ -44,6 +44,16 @@ public class GetSchoolDetails {
 
     String SUBJECTS;
 
+    int DataLocked;
+
+    public int getDataLocked() {
+        return DataLocked;
+    }
+
+    public void setDataLocked(int dataLocked) {
+        DataLocked = dataLocked;
+    }
+
     public GetSchoolDetails() {
     }
 

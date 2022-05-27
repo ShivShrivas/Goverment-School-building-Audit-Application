@@ -324,11 +324,13 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
 
                 recyclerViewPlaygroundFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsPlayground.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").getAsString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
                 UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                if (!aList.get(0).isEmpty()){
                 OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsPlayground.this,aList);
                 recyclerViewPlaygroundFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
             }
 
             @Override
@@ -380,8 +382,12 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
         RequestBody deletUrl;
         Log.d("TAG", "runService: "+paraDeletUlrs());
         if (action.equals("3")){
-            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
-        }else {
+            if (spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
+                deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
+            }else{
+                deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+
+            }        }else {
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraPlayGroundDetails(action,"5","PlayGroundDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerLevelingStatus.getSelectedItem().toString(), edtAreaOfPlayGround.getText().toString(), spinnertrackAvalabiltyStatus.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
@@ -424,6 +430,23 @@ spinnerRoomAvailabelty.setOnItemSelectedListener(new AdapterView.OnItemSelectedL
             }
         });
     }
+
+    private String paraAllDeleteUrls() {
+        JsonArray jsonArray=new JsonArray();
+
+
+
+        for (int i = 0; i < aList.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            String newUrl2=aList.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
+    }
+
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 

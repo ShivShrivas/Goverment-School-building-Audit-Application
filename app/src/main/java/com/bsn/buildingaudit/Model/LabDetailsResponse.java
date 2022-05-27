@@ -41,8 +41,21 @@ public class LabDetailsResponse {
     @Expose
     private String createdBy;
     @SerializedName("CreatedOn")
+
+
     @Expose
     private String createdOn;
+
+    @Expose
+    private String DataLocked;
+
+    public String getDataLocked() {
+        return DataLocked;
+    }
+
+    public void setDataLocked(String dataLocked) {
+        DataLocked = dataLocked;
+    }
 
     public Integer getSchoolID() {
         return schoolID;

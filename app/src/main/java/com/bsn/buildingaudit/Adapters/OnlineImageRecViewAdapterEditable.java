@@ -2,17 +2,19 @@ package com.bsn.buildingaudit.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.bsn.buildingaudit.ConstantValues.ConstantFile;
 import com.bsn.buildingaudit.R;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -38,17 +40,24 @@ public class OnlineImageRecViewAdapterEditable extends RecyclerView.Adapter<Onli
     public void onBindViewHolder(@NonNull HistoryItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String dummyUrl=imageUrlString.get(position);
         try{
+            Log.d("TAG", "onBindViewHolder: "+dummyUrl.equals("")+"///"+dummyUrl.isEmpty());
             String newImgUrl=dummyUrl.replace(" ../wwwroot", ConstantFile.IMAGE_BASE_URL);
-            String newUrl2=newImgUrl.replaceAll("\"","");
-            Glide.with(holder.imageMain1).load(newUrl2).placeholder(R.drawable.background).into(holder.imageMain1);
-            holder.ImageCross.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    deletedUrls.add(imageUrlString.get(position).trim());
-                    imageUrlString.remove(imageUrlString.get(position));
-                    notifyDataSetChanged();
-                }
-            });
+            Log.d("TAG", "onBindViewHolder: "+ URLUtil.isValidUrl(newImgUrl));
+            if (URLUtil.isValidUrl(newImgUrl)){
+                Log.d("TAG", "onBindViewHolder: "+ URLUtil.isValidUrl(newImgUrl));
+
+                String newUrl2=newImgUrl.replaceAll("\"","");
+                Glide.with(holder.imageMain1).load(newUrl2).into(holder.imageMain1);
+                holder.ImageCross.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        deletedUrls.add(imageUrlString.get(position).trim());
+                        imageUrlString.remove(imageUrlString.get(position));
+                        notifyDataSetChanged();
+                    }
+                });
+            }
+
         }catch (Exception e){
 
         }

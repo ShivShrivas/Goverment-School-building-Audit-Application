@@ -79,6 +79,9 @@ TextView PGImageUploadTxt,editPlayGroundDetails;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editPlayGroundDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     playGroundlayout.setVisibility(View.GONE);
                     EditTextPlaygroundAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());

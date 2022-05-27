@@ -725,6 +725,7 @@ dialog2.show();
                         recyclerViewChemistryLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
                 recyclerViewPhysicsLabFromServer.setLayoutManager(new LinearLayoutManager(UpdatedetailsTypeThree.this,LinearLayoutManager.HORIZONTAL,false));
 
+
                 OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdatedetailsTypeThree.this,aList);
                 OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable1(UpdatedetailsTypeThree.this,bList);
                 OnlineImageRecViewAdapterEditable2 onlineImageRecViewAdapter2=new OnlineImageRecViewAdapterEditable2(UpdatedetailsTypeThree.this,cList);
@@ -858,13 +859,33 @@ dialog2.show();
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
         ArrayList<String> deleteUrlsFinal=new ArrayList<String>();
-        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable.deletedUrls);
-        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable1.deletedUrls);
-        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable2.deletedUrls);
-        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable3.deletedUrls);
-        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable4.deletedUrls);
-        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable5.deletedUrls);
-        deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable6.deletedUrls);
+
+        if (spinnerSciencelabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(aList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable.deletedUrls); }
+
+        if (spinnerPhysicslabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(bList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable1.deletedUrls); }
+
+
+        if (spinnerChemistrylabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(cList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable2.deletedUrls); }
+
+
+        if (spinnerBiologylabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(dList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable3.deletedUrls); }
+
+
+        if (spinnerHomeSciencelabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(eList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable4.deletedUrls); }
+
+
+        if (spinnerHomeMusiclabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(fList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable5.deletedUrls); }
+
+
+        if (spinnerGeographylabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(gList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable6.deletedUrls); }
+
         Log.d("TAG", "paraDeletUlrs: "+ deleteUrlsFinal.size());
 
         for (int i = 0; i < deleteUrlsFinal.size(); i++) {

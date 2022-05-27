@@ -1,10 +1,5 @@
 package com.bsn.buildingaudit.Activies;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
@@ -102,6 +102,9 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 getAllUnEditable();
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editClassRoomDetails.setVisibility(View.VISIBLE);
+                }
                 Log.d("TAG", "onResponse: "+response.body()+"///////"+response.body().get(0).get("TotalRooms"));
                 totalClassRooms.setText(response.body().get(0).get("TotalRooms").toString());
                 minorRepairingClassroomAfterSubmit.setText(response.body().get(0).get("MinorRepairing").toString());

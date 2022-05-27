@@ -92,6 +92,9 @@ RecyclerView recyclerViewSmartClassONSubmit;
             @Override
                 public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                     Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editSmartClassDetails.setVisibility(View.VISIBLE);
+                }
                     if (response.body().get(0).get("Availablity").getAsString().equals("No")){
                         edtsmartClassAvailabilty.setText(response.body().get(0).get("Availablity").getAsString());
 

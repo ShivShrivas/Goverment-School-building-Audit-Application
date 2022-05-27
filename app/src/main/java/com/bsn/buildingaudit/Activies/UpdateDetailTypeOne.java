@@ -136,9 +136,9 @@ int cameraType;
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.respons_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-        dialog2 = new Dialog(this);
         Intent i=getIntent();
         action=i.getStringExtra("Action");
+        dialog2 = new Dialog(this);
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -664,6 +664,7 @@ int cameraType;
         }
         RequestBody PhotoDeleteGood, PhotoDeleteMajor, PhotoDeleteMinor;
         if (action.equals("3")) {
+
             Log.d("TAG", "onClick:photoDeleteGood "+paraDeletUlrs());
             Log.d("TAG", "onClick:photoDeleteMajor "+paraDeletUlrs1());
             Log.d("TAG", "onClick:photoDeleteMinor "+paraDeletUlrs2());
@@ -729,7 +730,7 @@ int cameraType;
             JsonObject jsonObject=new JsonObject();
             Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
-            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
         }
 
@@ -745,7 +746,7 @@ int cameraType;
             JsonObject jsonObject=new JsonObject();
             Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable1.deletedUrls.get(i));
             String newUrl2=OnlineImageRecViewAdapterEditable1.deletedUrls.get(i).replaceAll("\"","");
-            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
         }
 
@@ -761,7 +762,7 @@ int cameraType;
             JsonObject jsonObject=new JsonObject();
             Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable2.deletedUrls.get(i));
             String newUrl2=OnlineImageRecViewAdapterEditable2.deletedUrls.get(i).replaceAll("\"","");
-            jsonObject.addProperty("PhotoUrl",newUrl2);
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
         }
 
@@ -793,24 +794,29 @@ int cameraType;
 
                 goodConditionPathList=response.body().get(0).get("GoodConditionPhotos").toString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(goodConditionPathList));
-
-                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailTypeOne.this,aList);
-                recyclerViewTwoTypeOneGoodConditionFromServer.setAdapter(onlineImageRecViewAdapter);
+                if (!aList.get(0).isEmpty()) {
+                    OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter = new OnlineImageRecViewAdapterEditable(UpdateDetailTypeOne.this, aList);
+                    recyclerViewTwoTypeOneGoodConditionFromServer.setAdapter(onlineImageRecViewAdapter);
+                }
 
 
 
                 recyclerViewMinorConditionFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailTypeOne.this,LinearLayoutManager.HORIZONTAL,false));
                 minorPhotoPath=response.body().get(0).get("MinorRepairingPhotos").toString().split(",");
                bList = new ArrayList<String>(Arrays.asList(minorPhotoPath));
-                OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter2=new OnlineImageRecViewAdapterEditable1(UpdateDetailTypeOne.this,bList);
-                recyclerViewMinorConditionFromServer.setAdapter(onlineImageRecViewAdapter2);
+                if (!bList.get(0).isEmpty()) {
+                    OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter2 = new OnlineImageRecViewAdapterEditable1(UpdateDetailTypeOne.this, bList);
+                    recyclerViewMinorConditionFromServer.setAdapter(onlineImageRecViewAdapter2);
+                }
 
 
                 recyclerViewMjorRepairingFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailTypeOne.this,LinearLayoutManager.HORIZONTAL,false));
                 majorPhotoPath=response.body().get(0).get("MajorRepairingPhotos").toString().split(",");
                cList = new ArrayList<String>(Arrays.asList(majorPhotoPath));
-                OnlineImageRecViewAdapterEditable2 onlineImageRecViewAdapter3=new OnlineImageRecViewAdapterEditable2(UpdateDetailTypeOne.this,cList);
-                recyclerViewMjorRepairingFromServer.setAdapter(onlineImageRecViewAdapter3);
+                if (!cList.get(0).isEmpty()) {
+                    OnlineImageRecViewAdapterEditable2 onlineImageRecViewAdapter3 = new OnlineImageRecViewAdapterEditable2(UpdateDetailTypeOne.this, cList);
+                    recyclerViewMjorRepairingFromServer.setAdapter(onlineImageRecViewAdapter3);
+                }
 
 
             }

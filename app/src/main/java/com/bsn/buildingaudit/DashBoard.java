@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -33,12 +34,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsn.buildingaudit.Activies.Final_OTP_Submission;
 import com.bsn.buildingaudit.Adapters.dashboardRecviewAdapter;
 import com.bsn.buildingaudit.Model.BoundryType;
+import com.bsn.buildingaudit.Model.DataLocked;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.Model.InstallationYear;
+import com.bsn.buildingaudit.RetrofitApi.ApiMsg91;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
+import com.bsn.buildingaudit.RetrofitApi.RestClientMsg91;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -64,9 +69,11 @@ public class DashBoard extends AppCompatActivity {
     RecyclerView dashboardRecview;
     TextView userName, schoolAddress, schoolName;
     ProgressDialog progress;
+    public static Button btnBottom;
     ApplicationController applicationController;
     DrawerLayout mainDrawerLayout;
     Dialog dialog;
+    public  static  int DataLocked;
     LinearLayout logOutBtn;
     ImageView hamMenu;
     dashboardRecviewAdapter adapter;
@@ -98,12 +105,13 @@ public class DashBoard extends AppCompatActivity {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
          dialog = new Dialog (this);
         dialog.setCancelable(false);
-
+        DataLocked=applicationController.getDataLocked();
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.progress_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         //  dashboardRecview=findViewById(R.id.dashboardRecview);
         dashboardRecview = findViewById(R.id.recViewDashboard);
+        btnBottom = findViewById(R.id.btnBottom);
         userName = findViewById(R.id.userName);
         schoolAddress = findViewById(R.id.schoolAddress);
         logOutBtn = findViewById(R.id.logOutBtn);
@@ -115,11 +123,54 @@ public class DashBoard extends AppCompatActivity {
                 finish();
             }
         });
+        btnBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RestClient restClient=new RestClient();
+                ApiService apiService=restClient.getApiService();
+                Call<List<DataLocked>> call=apiService.checkLockedData(paraLocakedData("1",applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUserid()));
+                call.enqueue(new Callback<List<DataLocked>>() {
+                    @Override
+                    public void onResponse(Call<List<DataLocked>> call, Response<List<DataLocked>> response) {
+                        List<DataLocked> dataLockeds=response.body();
+                        if (checkAllPagesIsDone( dataLockeds)){
+                            RestClientMsg91 restClientMsg91=new RestClientMsg91();
+                            ApiMsg91 apiMsg91=restClientMsg91.getApiService();
+                            Call<JsonObject> call1=apiMsg91.getOtp("627cd1d23f61350c60138c24","91"+applicationController.getPhoneNumber(),"376489AgYgO9FDHy362711b3fP1");
+                            call1.enqueue(new Callback<JsonObject>() {
+                                @Override
+                                public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                                    Log.d("TAG", "onResponse: "+response.body().get("type"));
+                                    if (response.body().get("type").getAsString().equals("success")){
+                                        startActivity(new Intent(DashBoard.this, Final_OTP_Submission.class));
+                                    }else{
+                                        Toast.makeText(DashBoard.this, "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<JsonObject> call, Throwable t) {
+
+                                }
+                            });
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<DataLocked>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         schoolName = findViewById(R.id.schoolName);
         mainDrawerLayout = findViewById(R.id.mainDrawerLayout);
         hamMenu = findViewById(R.id.hamMenu);
         DrawerLayout navDrawer = findViewById(R.id.mainDrawerLayout);
 
+
+        dashboardRecview.setLayoutManager(new LinearLayoutManager(DashBoard.this));
 
         Log.d("TAG", "onCreate: " + applicationController.getUsername() + applicationController.getSchoolName());
         schoolName.setText(applicationController.getSchoolName());
@@ -136,10 +187,9 @@ public class DashBoard extends AppCompatActivity {
                 Log.d("TAG", "onResponse: getAllrooms "+response.body());
                 arrayList=response.body();
 
-                dashboardRecview.setLayoutManager(new LinearLayoutManager(DashBoard.this));
 
                 adapter=new dashboardRecviewAdapter(DashBoard.this,arrayList,applicationController.getSchoolId(),applicationController.getPeriodID());
-
+                dashboardRecview.setHasFixedSize(true);
                 dashboardRecview.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
@@ -164,6 +214,31 @@ public class DashBoard extends AppCompatActivity {
                 else navDrawer.closeDrawer(GravityCompat.END);
             }
         });
+    }
+
+    private boolean checkAllPagesIsDone(List<DataLocked> dataLockeds) {
+        boolean b=false;
+        for (int i=0;i<dataLockeds.size();i++){
+            if (dataLockeds.get(i).getSTATUS()==0){
+                Toast.makeText(this, ""+dataLockeds.get(i).getStatusName(), Toast.LENGTH_SHORT).show();
+                b=false;
+                break;
+            }
+            else {
+               b=true;
+            }
+        }
+        return b;
+    }
+
+    private JsonObject paraLocakedData(String s, String schoolId, String periodID, String userid) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("Action",s);
+        jsonObject.addProperty("SchoolId",schoolId);
+        jsonObject.addProperty("PeriodID",periodID);
+        jsonObject.addProperty("userid",userid);
+
+        return jsonObject;
     }
 
     private void setInstallationYearDynamic() {

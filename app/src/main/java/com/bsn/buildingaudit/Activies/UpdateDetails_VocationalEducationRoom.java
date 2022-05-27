@@ -31,6 +31,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.ImageAdapter5;
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
+import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable1;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.CompressLib.Compressor;
 import com.bsn.buildingaudit.ConstantValues.ConstantFile;
@@ -456,19 +457,21 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
 
                 recyclerViewVocalHsromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList=response.body().get(0).get("ClassPhotoPath").toString().split(",");
+                StaffPhotoPathList=response.body().get(0).get("ClassPhotoPath").getAsString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
                 UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
-                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this,aList);
-                recyclerViewVocalHsromServer.setAdapter(onlineImageRecViewAdapter);
-
+                if (!aList.get(0).isEmpty()) {
+                    OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter = new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this, aList);
+                    recyclerViewVocalHsromServer.setAdapter(onlineImageRecViewAdapter);
+                }
                 recyclerViewVocalISFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList1=response.body().get(1).get("ClassPhotoPath").toString().split(",");
+                StaffPhotoPathList1=response.body().get(1).get("ClassPhotoPath").getAsString().split(",");
                 bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
-
-                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this,bList);
+                if (!bList.get(0).isEmpty()){
+                OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable1(UpdateDetails_VocationalEducationRoom.this,bList);
                 recyclerViewVocalISFromServer.setAdapter(onlineImageRecViewAdapter1);
+            }
             }
 
             @Override
@@ -532,7 +535,9 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         RequestBody deletUrl;
         Log.d("TAG", "runService: "+paraDeletUlrs());
         if (action.equals("3")){
-            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+
+                deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+
         }else {
             deletUrl=null;
         }
@@ -604,14 +609,21 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
 
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
+        ArrayList<String> deleteUrlsFinal=new ArrayList<String>();
 
-        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+        if (spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(aList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable.deletedUrls); }
 
-        for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
+        if (spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(bList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable1.deletedUrls); }
+
+
+
+        for (int i = 0; i < deleteUrlsFinal.size(); i++) {
             JsonObject jsonObject=new JsonObject();
             Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
-            String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
-            jsonObject.addProperty("PhotoUrl",newUrl2);
+            String newUrl2=deleteUrlsFinal.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
         }
 

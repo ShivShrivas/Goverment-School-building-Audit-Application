@@ -88,6 +88,9 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editRainHarvestingDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("RainHarvestingAvl").getAsString().equals("No")){
                     edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
                     recyclerViewRAinHarveOnSub.setVisibility(View.GONE);

@@ -92,6 +92,9 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editArtAndCraftDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
                     edtArtAndCraftRoomAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
                     constraintLayoutAC.setVisibility(View.GONE);

@@ -84,6 +84,9 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editMultipurposeHallDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("Availability").getAsString().equals("No")){
                     linearLayout5.setVisibility(View.GONE);
                             constraintLayout9.setVisibility(View.GONE);

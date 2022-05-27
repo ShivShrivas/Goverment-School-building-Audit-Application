@@ -337,12 +337,15 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
                 spinnerRoomStatus.setSelection(spinnerPositionForstatus);
 
                 recyclerViewTwoTypetwoFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsTypeTwo.this,LinearLayoutManager.HORIZONTAL,false));
+                StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").getAsString().split(",");
 
-                StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
-                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
-                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsTypeTwo.this,aList);
-                recyclerViewTwoTypetwoFromServer.setAdapter(onlineImageRecViewAdapter);
+                Log.d("TAG", "onResponse:size "+aList.size());
+                if (!aList.get(0).isEmpty()){
+                    OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsTypeTwo.this,aList);
+                    recyclerViewTwoTypetwoFromServer.setAdapter(onlineImageRecViewAdapter);
+                }
+
             }
 
             @Override
@@ -395,7 +398,12 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
         RequestBody deletUrl;
         Log.d("TAG", "runService: "+paraDeletUlrs());
         if (action.equals("3")){
-            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+            if (spinnerRoomAvailabel.getSelectedItem().toString().equals("No")){
+                deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
+            }else{
+                deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+
+            }
         }else {
             deletUrl=null;
         }
@@ -439,6 +447,22 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String paraAllDeleteUrls() {
+        JsonArray jsonArray=new JsonArray();
+
+
+        for (int i = 0; i < aList.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            Log.d("TAG", "paraDeletUlrs: "+aList.get(i));
+            String newUrl2=aList.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
     }
 
     private String paraDeletUlrs() {

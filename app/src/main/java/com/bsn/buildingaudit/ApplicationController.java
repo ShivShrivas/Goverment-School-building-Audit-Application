@@ -32,6 +32,24 @@ String distid;
 String blockid;
 String  schoolName;
 String schoolAddress;
+String phoneNumber;
+int DataLocked;
+
+    public int getDataLocked() {
+        return DataLocked;
+    }
+
+    public void setDataLocked(int dataLocked) {
+        DataLocked = dataLocked;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 
     public List<BoundryType> getBoundryTypes() {
         return boundryTypes;

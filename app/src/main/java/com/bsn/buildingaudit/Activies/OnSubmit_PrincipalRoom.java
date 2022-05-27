@@ -62,7 +62,7 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
         edtRoomWorkingStatus=findViewById(R.id.edtRoomWorkingStatus);
         edtPrincipalRoomAvailabelty=findViewById(R.id.edtPrincipalRoomAvailabelty);
         recyclerViewprincipalOnSub=findViewById(R.id.recyclerViewprincipalOnSub);
-        constraintLayoutPR=findViewById(R.id.constraintLayoutPR);
+        constraintLayoutPR=findViewById(R.id.constraintLayoutAC);
         uploadPrincipal=findViewById(R.id.uploadPrincipal);
         editPrincipalRoomDetails=findViewById(R.id.editPrincipalRoomDetails);
         recyclerViewprincipalOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -76,6 +76,9 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
+                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                    editPrincipalRoomDetails.setVisibility(View.VISIBLE);
+                }
                 if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
                  edtPrincipalRoomAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());
                     constraintLayoutPR.setVisibility(View.GONE);

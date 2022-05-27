@@ -318,11 +318,13 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
 
                 recyclerViewGymFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsGym.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
+                StaffPhotoPathList=response.body().get(0).get("PhotoPath").getAsString().split(",");
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
                 UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                if (!aList.get(0).isEmpty()){
                 OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsGym.this,aList);
                 recyclerViewGymFromServer.setAdapter(onlineImageRecViewAdapter);
+            }
             }
 
             @Override
@@ -374,7 +376,12 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
         RequestBody deletUrl;
         Log.d("TAG", "runService: "+paraDeletUlrs());
         if (action.equals("3")){
-            deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+            if (spinnerGymAvailabelty.getSelectedItem().toString().equals("No")){
+                deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
+            }else{
+                deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
+
+            }
         }else {
             deletUrl=null;
         }
@@ -417,6 +424,22 @@ Spinner spinnerGymAvailabelty,gymWorkingStatus;
 
             }
         });
+    }
+
+    private String paraAllDeleteUrls() {
+        JsonArray jsonArray=new JsonArray();
+
+
+
+        for (int i = 0; i < aList.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            String newUrl2=aList.get(i).replaceAll("\"","");
+            jsonObject.addProperty("PhotoUrl",newUrl2.trim());
+            jsonArray.add(jsonObject);
+        }
+
+
+        return jsonArray.toString();
     }
 
     private String paraDeletUlrs() {

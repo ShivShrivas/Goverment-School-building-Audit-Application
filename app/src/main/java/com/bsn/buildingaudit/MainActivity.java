@@ -1,8 +1,5 @@
 package com.bsn.buildingaudit;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +22,9 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.bsn.buildingaudit.Activies.NoInternetConnection;
 import com.bsn.buildingaudit.Adapters.QuaterTypeAdapter;
@@ -270,14 +270,28 @@ CheckBox check_showpassword,check_remember;
         call.enqueue(new Callback<List<GetSchoolDetails>>() {
             @Override
             public void onResponse(Call<List<GetSchoolDetails>> call, Response<List<GetSchoolDetails>> response) {
-                getSchoolDetails=response.body();
-                Log.d("TAG", "onResponse: "+response.body());
-                applicationController.setSchoolName(getSchoolDetails.get(0).getSCHOOL_NAME());
-                applicationController.setSchoolAddress(getSchoolDetails.get(0).getADDRESS());
-                applicationController.setUsername(getSchoolDetails.get(0).getDESIGNATION());
-                startActivity(new Intent(MainActivity.this,DashBoard.class));
-                finish();
-                dialog.dismiss();
+                if (response != null) {
+                    if (response.code() == 200 && response.body() != null) {
+                        getSchoolDetails=response.body();
+                        Log.d("TAG", "onResponse: "+response.body());
+                        applicationController.setSchoolName(getSchoolDetails.get(0).getSCHOOL_NAME());
+                        applicationController.setSchoolAddress(getSchoolDetails.get(0).getADDRESS());
+                        applicationController.setUsername(getSchoolDetails.get(0).getDESIGNATION());
+                        applicationController.setPhoneNumber(getSchoolDetails.get(0).getPHONE_NO());
+                        applicationController.setDataLocked(getSchoolDetails.get(0).getDataLocked());
+
+                        startActivity(new Intent(MainActivity.this,Principal_Dashboard.class));
+                        finish();
+                        dialog.dismiss();
+                    }else{
+                        Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                    }
+                }else{
+                    Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                }
+
             }
 
             @Override
@@ -363,25 +377,48 @@ CheckBox check_showpassword,check_remember;
             @Override
             public void onResponse(Call<List<GetUserType>> call, Response<List<GetUserType>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-                arrayListUserType=response.body();
-                Resources res=getResources();
-                UserTyepAdapter userTyepAdapter=new UserTyepAdapter(MainActivity.this,R.layout.spinner_card_orange,arrayListUserType,res);
-                spinnerUserType.setAdapter(userTyepAdapter);
-                dialog.dismiss();
-                spinnerUserType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            getUserType= (GetUserType) adapterView.getSelectedItem();
-                            applicationController.setUsertype(getUserType.getTypevalue());
-                        applicationController.setUsertypeid(getUserType.getUsertypeid());
+                if (response != null || response.body().toString()!="null") {
+                    if (response.code() == 200 && response.body() != null) {
 
+                        arrayListUserType=response.body();
+                        Resources res=getResources();
+                        UserTyepAdapter userTyepAdapter=new UserTyepAdapter(MainActivity.this,R.layout.spinner_card_orange,arrayListUserType,res);
+                        spinnerUserType.setAdapter(userTyepAdapter);
+                        dialog.dismiss();
+                        spinnerUserType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            @Override
+                            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                getUserType= (GetUserType) adapterView.getSelectedItem();
+                                applicationController.setUsertype(getUserType.getTypevalue());
+                                applicationController.setUsertypeid(getUserType.getUsertypeid());
+
+                            }
+
+                            @Override
+                            public void onNothingSelected(AdapterView<?> adapterView) {
+
+                            }
+                        });
+                    }else{
+                        Snackbar.make(loginLayout,"Something wenr wrong please, Restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
+                                .setAction("OK", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        onRestart();
+                                    }
+                                });
                     }
 
-                    @Override
-                    public void onNothingSelected(AdapterView<?> adapterView) {
+                }else{
+                    Snackbar.make(loginLayout,"Something wenr wrong please, Restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
+                            .setAction("OK", new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onRestart();
+                                }
+                            });
+                }
 
-                    }
-                });
             }
 
             @Override
