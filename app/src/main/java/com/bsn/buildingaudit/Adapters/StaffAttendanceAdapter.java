@@ -57,7 +57,7 @@ public class StaffAttendanceAdapter extends RecyclerView.Adapter<StaffAttendance
             staffDeg=itemView.findViewById(R.id.staffDeg);
             staffname=itemView.findViewById(R.id.staffname);
             textView5=itemView.findViewById(R.id.textView5);
-            desc=itemView.findViewById(R.id.desc);
+
             ArrayList<String> arrayListPowerbackup =new ArrayList<>();
             arrayListPowerbackup.add("Present");
             arrayListPowerbackup.add("Absent");
