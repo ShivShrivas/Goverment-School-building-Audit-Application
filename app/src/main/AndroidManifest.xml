@@ -30,6 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name="com.bsn.staffAttendance.Date_Wise_Attendance"
+            android:exported="false" />
+        <activity
             android:name="com.bsn.staffAttendance.Dashboard_StaffAttendance"
             android:exported="false" />
         <activity

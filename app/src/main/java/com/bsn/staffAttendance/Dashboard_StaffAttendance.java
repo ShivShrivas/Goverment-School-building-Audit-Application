@@ -15,7 +15,8 @@ import com.bsn.buildingaudit.R;
 public class Dashboard_StaffAttendance extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     ApplicationController applicationController;
-    Button buttontake_attendance;
+    Button buttontake_attendance,btnStaffAttendance_monthwise;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,12 +34,21 @@ public class Dashboard_StaffAttendance extends AppCompatActivity {
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         buttontake_attendance=findViewById(R.id.buttontake_attendance);
+        btnStaffAttendance_monthwise=findViewById(R.id.btnStaffAttendance_monthwise);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
+
         buttontake_attendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Dashboard_StaffAttendance.this,UpdateDetails_StaffAttendance.class));
+            }
+        });
+
+        btnStaffAttendance_monthwise.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Dashboard_StaffAttendance.this,Date_Wise_Attendance.class));
             }
         });
     }

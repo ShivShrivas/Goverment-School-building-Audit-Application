@@ -5,6 +5,7 @@ import android.content.Context;
 
 import androidx.multidex.MultiDex;
 
+import com.bsn.buildingaudit.Model.AttendanceType;
 import com.bsn.buildingaudit.Model.BoundryType;
 import com.bsn.buildingaudit.Model.InstallationYear;
 
@@ -34,6 +35,15 @@ String  schoolName;
 String schoolAddress;
 String phoneNumber;
 int DataLocked;
+public  static List<AttendanceType> attendanceTypeList;
+
+    public static List<AttendanceType> getAttendanceTypeList() {
+        return attendanceTypeList;
+    }
+
+    public void setAttendanceTypeList(List<AttendanceType> attendanceTypeList) {
+        ApplicationController.attendanceTypeList = attendanceTypeList;
+    }
 
     public int getDataLocked() {
         return DataLocked;

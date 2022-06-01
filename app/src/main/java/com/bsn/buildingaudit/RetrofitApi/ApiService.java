@@ -1,5 +1,7 @@
 package com.bsn.buildingaudit.RetrofitApi;
 
+import com.bsn.buildingaudit.Model.AttendanceStaff;
+import com.bsn.buildingaudit.Model.AttendanceType;
 import com.bsn.buildingaudit.Model.BoundryType;
 import com.bsn.buildingaudit.Model.DataLocked;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
@@ -8,6 +10,7 @@ import com.bsn.buildingaudit.Model.GetSchoolDetails;
 import com.bsn.buildingaudit.Model.GetUserType;
 import com.bsn.buildingaudit.Model.InstallationYear;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 import java.util.List;
@@ -437,6 +440,22 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("Login/GetInsertFinalDataLock")
     Call<List<DataLocked>> checkLockedData(@Body JsonObject paraGetDetails2);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetAttendenceMaster")
+    Call<List<AttendanceType>> getAttendanceType();
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetStaffAttendenceData")
+    Call<List<AttendanceStaff>> getStaff(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/UpdateStaffAttendenceData")
+    Call<JsonArray> submitAttendance(@Body JsonObject jsonObject);
 
 
 }

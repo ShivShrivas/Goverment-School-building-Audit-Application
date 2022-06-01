@@ -18,6 +18,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -191,6 +192,25 @@ public class DashBoard extends AppCompatActivity {
                 adapter=new dashboardRecviewAdapter(DashBoard.this,arrayList,applicationController.getSchoolId(),applicationController.getPeriodID());
                 dashboardRecview.setHasFixedSize(true);
                 dashboardRecview.setAdapter(adapter);
+                dashboardRecview.getViewTreeObserver().addOnPreDrawListener(
+                        new ViewTreeObserver.OnPreDrawListener() {
+
+                            @Override
+                            public boolean onPreDraw() {
+                                dashboardRecview.getViewTreeObserver().removeOnPreDrawListener(this);
+
+                                for (int i = 0; i < dashboardRecview.getChildCount(); i++) {
+                                    View v = dashboardRecview.getChildAt(i);
+                                    v.setAlpha(0.0f);
+                                    v.animate().alpha(1.0f)
+                                            .setDuration(600)
+                                            .setStartDelay(i * 200)
+                                            .start();
+                                }
+
+                                return true;
+                            }
+                        });
                 adapter.notifyDataSetChanged();
                 dialog.dismiss();
             }
