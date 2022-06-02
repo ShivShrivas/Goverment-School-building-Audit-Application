@@ -382,35 +382,47 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 dialog2.show();
-                if (action.equals("3")){
-                    if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
-                        if (arrayListImages1.size()==0 && arrayListImages2.size()==0 && aList.size()==0 && bList.size()==0){
-                            Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
 
-                        }else {
-                            runService();
-
-                        }}else {
-                        runService();
-                    }
-                }else{
-                    if (!spinnerVocalRoomHSAvailability.getSelectedItem().toString().equals("No") || !spinnerVocalRoomISAvailability.getSelectedItem().toString().equals("No")){
-                        if (arrayListImages1.size()==0 && arrayListImages2.size()==0){
-                            Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-                            dialog2.dismiss();
-
-                        }else {
-                            runService();
-
-                        }}else {
-                        runService();
-                    }
+                if (checkImageAndLab(spinnerVocalRoomHSAvailability,arrayListImages1,aList) && checkImageAndLab(spinnerVocalRoomISAvailability,arrayListImages2,bList))
+                {
+                    runService();
                 }
+                else {
+                    Toast.makeText(UpdateDetails_VocationalEducationRoom.this, "Please Fill Data properly", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
 
+    }
+    private boolean checkImageAndLab(Spinner spinnerSciencelabAvailabilit, ArrayList<File> arrayListImages1, ArrayList<String> aList) {
+        if (!spinnerSciencelabAvailabilit.getSelectedItem().toString().equals("No")){
+            if (action.equals("3")){
+                Log.d("TAG", "checkImageAndLab: "+aList.size());
+                Log.d("TAG", "checkImageAndLab: "+arrayListImages1.size());
+                if (arrayListImages1.size()==0 & aList.size()==0 ){
+
+                    dialog2.dismiss();
+                    Toast.makeText(this, "Please check and Upload at least one Image", Toast.LENGTH_LONG).show();
+
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                if (arrayListImages1.size()==0 ){
+                    dialog2.dismiss();
+                    Toast.makeText(this, "Please check and Upload at least one Image", Toast.LENGTH_LONG).show();
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+        }else{
+            return true;
+        }
     }
 
     private void fetchAllDataFromServer() {
@@ -456,22 +468,30 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
 
 
                 recyclerViewVocalHsromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
+try {
+    StaffPhotoPathList=response.body().get(0).get("ClassPhotoPath").getAsString().split(",");
+    aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+    UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+    if (!aList.get(0).isEmpty()) {
+        OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter = new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this, aList);
+        recyclerViewVocalHsromServer.setAdapter(onlineImageRecViewAdapter);
+    }
+}catch (Exception e){
 
-                StaffPhotoPathList=response.body().get(0).get("ClassPhotoPath").getAsString().split(",");
-                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
-                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
-                if (!aList.get(0).isEmpty()) {
-                    OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter = new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this, aList);
-                    recyclerViewVocalHsromServer.setAdapter(onlineImageRecViewAdapter);
-                }
+}
+
                 recyclerViewVocalISFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
+try {
+    StaffPhotoPathList1=response.body().get(1).get("ClassPhotoPath").getAsString().split(",");
+    bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
+    if (!bList.get(0).isEmpty()){
+        OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable1(UpdateDetails_VocationalEducationRoom.this,bList);
+        recyclerViewVocalISFromServer.setAdapter(onlineImageRecViewAdapter1);
+    }
+}catch (Exception e){
 
-                StaffPhotoPathList1=response.body().get(1).get("ClassPhotoPath").getAsString().split(",");
-                bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
-                if (!bList.get(0).isEmpty()){
-                OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable1(UpdateDetails_VocationalEducationRoom.this,bList);
-                recyclerViewVocalISFromServer.setAdapter(onlineImageRecViewAdapter1);
-            }
+}
+
             }
 
             @Override

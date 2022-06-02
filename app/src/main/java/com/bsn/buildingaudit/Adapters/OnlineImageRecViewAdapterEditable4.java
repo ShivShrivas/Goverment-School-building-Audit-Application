@@ -2,6 +2,7 @@ package com.bsn.buildingaudit.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,22 +38,29 @@ public class OnlineImageRecViewAdapterEditable4 extends RecyclerView.Adapter<Onl
     @Override
     public void onBindViewHolder(@NonNull HistoryItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String dummyUrl=imageUrlString.get(position);
-        try{
-            String newImgUrl=dummyUrl.replace(" ../wwwroot", ConstantFile.IMAGE_BASE_URL);
-            String newUrl2=newImgUrl.replaceAll("\"","");
-            Glide.with(holder.imageMain1).load(newUrl2).placeholder(R.drawable.background).into(holder.imageMain1);
-            holder.ImageCross.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    deletedUrls.add(imageUrlString.get(position).trim());
-                    imageUrlString.remove(imageUrlString.get(position));
-                    notifyDataSetChanged();
+        if (!dummyUrl.equals("")){
+            try{
+                String newImgUrl=dummyUrl.replace(" ../wwwroot", ConstantFile.IMAGE_BASE_URL);
+                String newUrl2=newImgUrl.replaceAll("\"","");
+                Log.d("TAG", "onBindViewHolder: "+newUrl2);
+                if (newUrl2.trim().length()!=0){
+                    Glide.with(holder.imageMain1).load(newUrl2).placeholder(R.drawable.background).into(holder.imageMain1);
                 }
-            });
-        }catch (Exception e){
 
+            }catch (Exception e){
+                Log.d("TAG", "onBindViewHolder: "+e.getMessage());
+
+            }
         }
 
+        holder.ImageCross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletedUrls.add(imageUrlString.get(position).trim());
+                imageUrlString.remove(imageUrlString.get(position));
+                notifyDataSetChanged();
+            }
+        });
 
     }
 

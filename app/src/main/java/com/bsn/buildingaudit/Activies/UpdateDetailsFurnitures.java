@@ -111,6 +111,7 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
     ApplicationController applicationController;
     String currentImagePath=null;
     File imageFile=null;
+    LinearLayout linearLayout45,linearLayout455,linearLayout458;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +139,9 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
         dialog2.setCancelable(false);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        linearLayout458=findViewById(R.id.linearLayout458);
+        linearLayout455=findViewById(R.id.linearLayout455);
+        linearLayout45=findViewById(R.id.linearLayout45);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
@@ -248,6 +252,94 @@ public class UpdateDetailsFurnitures extends AppCompatActivity {
 
                 edtTotalFurnirtureStrenght.setText(String.valueOf(singleSeated+(tripleSeated*3)+(doubleSeated*2)));
 
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+//        Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0 &&
+//                Integer.parseInt(edtTotalFurnirtureStrenght.getText().toString().trim())==0 &&
+//                Integer.parseInt(edtFurnitureRequired.getText().toString().trim())==0 &&
+//                Integer.parseInt(edtSingleSeated.getText().toString().trim())==0 &&
+//                Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0
+
+        edtSingleSeated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try {
+                    if (Integer.parseInt(edtSingleSeated.getText().toString().trim())==0)
+                    {
+                        linearLayout45.setVisibility(View.GONE);
+                    }else{
+                        linearLayout45.setVisibility(View.VISIBLE);
+                    }
+                }catch (Exception e){
+                    linearLayout45.setVisibility(View.GONE);
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        edtDoubleSeated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try {
+                    if (Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0)
+                    {
+                        linearLayout455.setVisibility(View.GONE);
+                    }else{
+                        linearLayout455.setVisibility(View.VISIBLE);
+                    }
+                }catch (Exception e){
+                    linearLayout455.setVisibility(View.GONE);
+
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+
+        edtTrippelSeated.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try{
+                    if (Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0)
+                    {
+                        linearLayout458.setVisibility(View.GONE);
+                    }else{
+                        linearLayout458.setVisibility(View.VISIBLE);
+                    }
+                }catch (Exception e){
+                    linearLayout458.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -408,10 +500,43 @@ dialog2.show();
                 arrayList.add(furnitureDetailsDouble);
                 arrayList.add(furnitureDetailsTriple);
 
-                Log.d("TAG", "onClick: "+   arrayList.get(1).getFurnitureType());
-                if ( Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0 && Integer.parseInt(edtTotalFurnirtureStrenght.getText().toString().trim())==0 && Integer.parseInt(edtFurnitureRequired.getText().toString().trim())==0 && Integer.parseInt(edtSingleSeated.getText().toString().trim())==0 && Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0){
+                if (edtgoodConditionForSingle.getText().toString().trim().length()==0){
+                    dialog2.dismiss();
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Single Seated Good condition count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtMinorConditionForSingle.getText().toString().trim().length()==0){
+                    dialog2.dismiss();
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Single Seated Minor Repairing count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtMinorConditionForSingle.getText().toString().trim().length()==0){
+                    dialog2.dismiss();
+
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Single Seated Major Repairing count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtgoodConditionForDouble.getText().toString().trim().length()==0){                    dialog2.dismiss();
+                    dialog2.dismiss();
+
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Double Seated Good condition count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtMinorConditionForDouble.getText().toString().trim().length()==0){                    dialog2.dismiss();
+                    dialog2.dismiss();
+
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Double Seated Minor Repairing count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtMajorConditionForDouble.getText().toString().trim().length()==0){
+                    dialog2.dismiss();
+
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Double Seated Major Repairing count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtgoodConditionForTripple.getText().toString().trim().length()==0){
+                    dialog2.dismiss();
+
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Triple Seated Good condition count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtMinorConditionForTripple.getText().toString().trim().length()==0){
+                    dialog2.dismiss();
+
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Triple Seated Minor Repairing count is blank", Toast.LENGTH_SHORT).show();
+                }else if (edtMajorConditionForTripple.getText().toString().trim().length()==0){
+                    dialog2.dismiss();
+
+                    Toast.makeText(UpdateDetailsFurnitures.this, "Triple Seated Major Repairing count is blank", Toast.LENGTH_SHORT).show();
+                }else if ( Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0 && Integer.parseInt(edtTotalFurnirtureStrenght.getText().toString().trim())==0 && Integer.parseInt(edtFurnitureRequired.getText().toString().trim())==0 && Integer.parseInt(edtSingleSeated.getText().toString().trim())==0 && Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0){
                     runService();
-                }else{ if (!checkValidationOnCondition(Integer.valueOf(edtSingleSeated.getText().toString().trim()),Integer.valueOf(edtgoodConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMinorConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMajorConditionForSingle.getText().toString().trim())))
+                }else if (!checkValidationOnCondition(Integer.valueOf(edtSingleSeated.getText().toString().trim()),Integer.valueOf(edtgoodConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMinorConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMajorConditionForSingle.getText().toString().trim())))
                 {
                     dialog2.dismiss();
                     Toast.makeText(UpdateDetailsFurnitures.this, "Single seats count is incorrect", Toast.LENGTH_SHORT).show();
@@ -451,14 +576,15 @@ dialog2.show();
 
                 }
 
-            }
+
         });
     }
 
     private boolean checkValidationOnCondition(Integer total, Integer goodCondition, Integer minorCond, Integer MajorCond) {
         if (total!=goodCondition+minorCond+MajorCond){
             return false;
-        }else return true;
+        }else
+            return true;
     }
 
     private void fetchAllDataFromServer() {
@@ -477,17 +603,18 @@ dialog2.show();
                 spinnersingleSeatesStatus.setSelection(spinnerPositionForCondition0);
                 spinnerDoubleSeatesStatus.setSelection(spinnerPositionForCondition1);
                 spinnerTripleSeatesStatus.setSelection(spinnerPositionForCondition2);
-                edtgoodConditionForSingle.setText(response.body().get(0).get("GoodCount").getAsString());
-                edtMinorConditionForSingle.setText(response.body().get(0).get("MinorCount").getAsString());
-                edtMajorConditionForSingle.setText(response.body().get(0).get("MajorCount").getAsString());
 
-                edtgoodConditionForDouble.setText(response.body().get(1).get("GoodCount").getAsString());
-                edtMinorConditionForDouble.setText(response.body().get(1).get("MinorCount").getAsString());
-                edtMajorConditionForDouble.setText(response.body().get(1).get("MajorCount").getAsString());
+                edtgoodConditionForSingle.setText((response.body().get(0).get("GoodCount")) == null ?"0":(response.body().get(0).get("GoodCount").getAsString()));
+                edtMinorConditionForSingle.setText((response.body().get(0).get("MinorCount")) == null ?"0":(response.body().get(0).get("MinorCount").getAsString()));
+                edtMajorConditionForSingle.setText((response.body().get(0).get("MajorCount")) == null ?"0":(response.body().get(0).get("MajorCount").getAsString()));
 
-                edtgoodConditionForTripple.setText(response.body().get(2).get("GoodCount").getAsString());
-                edtMinorConditionForTripple.setText(response.body().get(2).get("MinorCount").getAsString());
-                edtMajorConditionForTripple.setText(response.body().get(2).get("MajorCount").getAsString());
+                edtgoodConditionForDouble.setText((response.body().get(1).get("GoodCount")) == null ?"0":(response.body().get(1).get("GoodCount").getAsString()));
+                edtMinorConditionForDouble.setText((response.body().get(1).get("MinorCount")) == null ?"0":(response.body().get(1).get("MinorCount").getAsString()));
+                edtMajorConditionForDouble.setText((response.body().get(1).get("MajorCount")) == null ?"0":(response.body().get(1).get("MajorCount").getAsString()));
+
+                edtgoodConditionForTripple.setText((response.body().get(2).get("GoodCount")) == null ?"0":(response.body().get(2).get("GoodCount").getAsString()));
+                edtMinorConditionForTripple.setText((response.body().get(2).get("MinorCount")) == null ?"0":(response.body().get(2).get("MinorCount").getAsString()));
+                edtMajorConditionForTripple.setText((response.body().get(2).get("MajorCount")) == null ?"0":(response.body().get(2).get("MajorCount").getAsString()));
 
 
                 edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture").getAsString());
@@ -638,7 +765,7 @@ dialog2.show();
             jsonObject1.addProperty("MinorCount","0");
             jsonObject1.addProperty("TotalCnt",edtSingleSeated.getText().toString());
         }else{
-            jsonObject1.addProperty("Condition",spinnersingleSeatesStatus.getSelectedItem().toString());
+            jsonObject1.addProperty("Condition","0");
             jsonObject1.addProperty("GoodCount",edtgoodConditionForSingle.getText().toString());
             jsonObject1.addProperty("MajorCount",edtMajorConditionForSingle.getText().toString());
             jsonObject1.addProperty("MinorCount",edtMinorConditionForSingle.getText().toString());
@@ -656,7 +783,7 @@ dialog2.show();
             jsonObject2.addProperty("MinorCount","0");
             jsonObject2.addProperty("TotalCnt",edtDoubleSeated.getText().toString());
         }else{
-            jsonObject2.addProperty("Condition",spinnerDoubleSeatesStatus.getSelectedItem().toString());
+            jsonObject2.addProperty("Condition","0");
             jsonObject2.addProperty("GoodCount",edtgoodConditionForDouble.getText().toString());
             jsonObject2.addProperty("MajorCount",edtMajorConditionForDouble.getText().toString());
             jsonObject2.addProperty("MinorCount",edtMinorConditionForDouble.getText().toString());
@@ -674,7 +801,7 @@ dialog2.show();
                 jsonObject3.addProperty("MinorCount","0");
                 jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
             }else{
-                jsonObject3.addProperty("Condition",spinnerTripleSeatesStatus.getSelectedItem().toString());
+                jsonObject3.addProperty("Condition","0");
                 jsonObject3.addProperty("GoodCount",edtgoodConditionForTripple.getText().toString());
                 jsonObject3.addProperty("MajorCount",edtMajorConditionForTripple.getText().toString());
                 jsonObject3.addProperty("MinorCount",edtMinorConditionForTripple.getText().toString());

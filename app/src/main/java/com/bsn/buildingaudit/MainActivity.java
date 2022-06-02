@@ -280,7 +280,7 @@ CheckBox check_showpassword,check_remember;
                         applicationController.setPhoneNumber(getSchoolDetails.get(0).getPHONE_NO());
                         applicationController.setDataLocked(getSchoolDetails.get(0).getDataLocked());
 
-                        startActivity(new Intent(MainActivity.this,Principal_Dashboard.class));
+                        startActivity(new Intent(MainActivity.this,DashBoard.class));
                         finish();
                         dialog.dismiss();
                     }else{

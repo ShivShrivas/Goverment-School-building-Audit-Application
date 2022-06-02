@@ -53,7 +53,14 @@ public class OnlineImageRecViewAdapterEditable1 extends RecyclerView.Adapter<Onl
 
         }
 
-
+        holder.ImageCross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletedUrls.add(imageUrlString.get(position).trim());
+                imageUrlString.remove(imageUrlString.get(position));
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

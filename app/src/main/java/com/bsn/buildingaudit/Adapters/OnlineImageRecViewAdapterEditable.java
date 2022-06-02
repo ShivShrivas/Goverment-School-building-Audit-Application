@@ -43,7 +43,7 @@ public class OnlineImageRecViewAdapterEditable extends RecyclerView.Adapter<Onli
             Log.d("TAG", "onBindViewHolder: "+dummyUrl.equals("")+"///"+dummyUrl.isEmpty());
             String newImgUrl=dummyUrl.replace(" ../wwwroot", ConstantFile.IMAGE_BASE_URL);
             Log.d("TAG", "onBindViewHolder: "+ URLUtil.isValidUrl(newImgUrl));
-            if (URLUtil.isValidUrl(newImgUrl)){
+
                 Log.d("TAG", "onBindViewHolder: "+ URLUtil.isValidUrl(newImgUrl));
 
                 String newUrl2=newImgUrl.replaceAll("\"","");
@@ -56,13 +56,20 @@ public class OnlineImageRecViewAdapterEditable extends RecyclerView.Adapter<Onli
                         notifyDataSetChanged();
                     }
                 });
-            }
+
 
         }catch (Exception e){
 
         }
 
-
+        holder.ImageCross.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deletedUrls.add(imageUrlString.get(position).trim());
+                imageUrlString.remove(imageUrlString.get(position));
+                notifyDataSetChanged();
+            }
+        });
     }
 
     @Override

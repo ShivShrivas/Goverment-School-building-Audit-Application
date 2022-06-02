@@ -252,6 +252,10 @@ ApplicationController applicationController;
         spinnerHomeMusiclabAvailability.setAdapter(arrayAdapter7);
         spinnerHomeSciencelabAvailability.setAdapter(arrayAdapter7);
         spinnerGeographylabAvailability.setAdapter(arrayAdapter7);
+        spinnerChemistrylabAvailability.setAdapter(arrayAdapter7);
+        spinnerPhysicslabAvailability.setAdapter(arrayAdapter7);
+        spinnerBiologylabAvailability.setAdapter(arrayAdapter7);
+        spinnerSciencelabAvailability.setAdapter(arrayAdapter7);
 
 
 
@@ -260,10 +264,7 @@ ApplicationController applicationController;
         arrayListAvailbilty.add("No");
         arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-                spinnerChemistrylabAvailability.setAdapter(arrayAdapter);
-        spinnerPhysicslabAvailability.setAdapter(arrayAdapter);
-                spinnerBiologylabAvailability.setAdapter(arrayAdapter);
-        spinnerSciencelabAvailability.setAdapter(arrayAdapter);
+
 
         ArrayList<String> arrayListSpinner2 = new ArrayList<>();
         arrayListSpinner2.add("Fully Equipped");
@@ -566,40 +567,75 @@ dialog2.show();
                geographyLabCondition.setLabYN(spinnerGeographylabAvailability.getSelectedItem().toString());
                geographyLabCondition.setSrno("7");
                geographyLabCondition.setEquipmentStatus(spinnerGeographyEquipmentStatus.getSelectedItem().toString());
+               if (checkImageAndLab(spinnerSciencelabAvailability,arrayListImages1,aList) && checkImageAndLab(spinnerPhysicslabAvailability,arrayListImages2,bList) &&
+                       checkImageAndLab(spinnerChemistrylabAvailability,arrayListImages3, cList) && checkImageAndLab(spinnerHomeMusiclabAvailability,arrayListImages4, dList) &&
+                       checkImageAndLab(spinnerHomeSciencelabAvailability,arrayListImages5, eList) && checkImageAndLab(spinnerGeographylabAvailability,arrayListImages6, fList)){
 
-                    if (spinnerSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerPhysicslabAvailability.getSelectedItem().toString().equals("Yes") ||
-                            spinnerChemistrylabAvailability.getSelectedItem().toString().equals("Yes") || spinnerHomeMusiclabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")||
-                            spinnerHomeSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")
-                    ){
+                   runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
 
-                    if (action.equals("3")){
-                        if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0
-                        && aList.size()==0&& bList.size()==0 && cList.size()==0 && dList.size()==0 && eList.size()==0 && fList.size()==0 && gList.size()==0){
-                            dialog2.dismiss();
 
-                            Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                        }else {
-                            runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
-                        }
-                    }else{
-                        if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0 ){
-                            dialog2.dismiss();
-
-                            Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                        }else {
-                            runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
-                        }
-                    }
-
-            }else {
-                        runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
-
+               }
+//                      checkImageAndLab(spinnerSciencelabAvailability,arrayListImages1, aList);
+//                    if (spinnerSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerPhysicslabAvailability.getSelectedItem().toString().equals("Yes") ||
+//                            spinnerChemistrylabAvailability.getSelectedItem().toString().equals("Yes") || spinnerHomeMusiclabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")||
+//                            spinnerHomeSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")
+//                    ){
+//
+//                    if (action.equals("3")){
+//                        if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0
+//                        && aList.size()==0&& bList.size()==0 && cList.size()==0 && dList.size()==0 && eList.size()==0 && fList.size()==0 && gList.size()==0){
+//                            dialog2.dismiss();
+//
+//                            Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+//
+//                        }else {
+//                            runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
+//                        }
+//                    }else{
+//                        if (arrayListImages1.size()==0 &&arrayListImages2.size()==0 &&arrayListImages3.size()==0 &&arrayListImages4.size()==0 &&arrayListImages5.size()==0 &&arrayListImages6.size()==0 &&arrayListImages7.size()==0 ){
+//                            dialog2.dismiss();
+//
+//                            Toast.makeText(UpdatedetailsTypeThree.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+//
+//                        }else {
+//                            runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
+//                        }
+//                    }
+//
+//            }
+                    else {
+                   dialog2.dismiss();
+                   Toast.makeText(UpdatedetailsTypeThree.this, "Please add image It's mandatory", Toast.LENGTH_SHORT).show();
                     }
             }
         });
 
+    }
+
+    private boolean checkImageAndLab(Spinner spinnerSciencelabAvailability, ArrayList<File> arrayListImages1, ArrayList<String> aList) {
+        if (!spinnerSciencelabAvailability.getSelectedItem().toString().equals("No")){
+            if (action.equals("3")){
+                if (arrayListImages1.size()==0 && aList.size()==0 ){
+                    dialog2.dismiss();
+                    Toast.makeText(this, "Please check and Upload at least one Image", Toast.LENGTH_LONG).show();
+
+                    return false;
+                }else{
+                    return true;
+                }
+            }else{
+                if (arrayListImages1.size()==0 ){
+                    dialog2.dismiss();
+                    Toast.makeText(this, "Please check and Upload at least one Image", Toast.LENGTH_LONG).show();
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+        }else{
+            return true;
+        }
     }
 
 
@@ -815,6 +851,8 @@ dialog2.show();
 
                     }else if(response.body().get(0).get("Status").getAsString().equals("S")){
                         textView.setText("Your details Submitted successfully ");
+                    }else{
+                        textView.setText("Please add atleast one image in all categories");
                     }
                     dialog2.dismiss();
 

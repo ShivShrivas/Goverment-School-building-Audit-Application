@@ -250,7 +250,7 @@
                         android:layout_weight="1"
                         android:text="Total Rooms"
                         android:textColor="@color/gray"
-                        android:textSize="17dp" />
+                        android:textSize="16dp" />
 
                     <EditText
                         android:inputType="number"
@@ -314,7 +314,7 @@
                         android:layout_weight="1"
                         android:text="Good Condition"
                         android:textColor="@color/gray"
-                        android:textSize="17dp" />
+                        android:textSize="16dp" />
 
                     <EditText
                         android:id="@+id/goodCondtionClassroomAfterSubmit"
@@ -389,7 +389,7 @@
                         android:layout_weight="1"
                         android:text="Minor Reparing"
                         android:textColor="@color/gray"
-                        android:textSize="17dp" />
+                        android:textSize="16dp" />
 
                     <EditText
                         android:id="@+id/minorRepairingClassroomAfterSubmit"
@@ -460,7 +460,7 @@
                         android:layout_weight="1"
                         android:text="Major Repairing"
                         android:textColor="@color/gray"
-                        android:textSize="17dp" />
+                        android:textSize="16dp" />
 
                     <EditText
                         android:id="@+id/majorRepairingClassroomAfterSubmit"

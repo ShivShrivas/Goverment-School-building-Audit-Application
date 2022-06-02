@@ -59,7 +59,7 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
-        constraintLayoutAC=findViewById(R.id.constraintLayoutAC);
+        constraintLayoutAC=findViewById(R.id.constraintLayoutPR);
         recyclerViewArtAndCraftOnSub=findViewById(R.id.recyclerViewArtAndCraftOnSub);
         edtArtAndCraftRoomPhysicalStatus=findViewById(R.id.edtArtAndCraftRoomPhysicalStatus);
         ArtAndCraftRoomWorkingStatus=findViewById(R.id.ArtAndCraftRoomWorkingStatus);

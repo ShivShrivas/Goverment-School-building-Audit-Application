@@ -114,17 +114,17 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
                 edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture").getAsString());
                         edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength").getAsString());
 
-                edtgoodConditionForSingle.setText(response.body().get(0).get("GoodCount").getAsString());
-                edtMinorConditionForSingle.setText(response.body().get(0).get("MinorCount").getAsString());
-                edtMajorConditionForSingle.setText(response.body().get(0).get("MajorCount").getAsString());
+                edtgoodConditionForSingle.setText((response.body().get(0).get("GoodCount")) == null ?"0":(response.body().get(0).get("GoodCount").getAsString()));
+                edtMinorConditionForSingle.setText((response.body().get(0).get("MinorCount")) == null ?"0":(response.body().get(0).get("MinorCount").getAsString()));
+                edtMajorConditionForSingle.setText((response.body().get(0).get("MajorCount")) == null ?"0":(response.body().get(0).get("MajorCount").getAsString()));
 
-                edtgoodConditionForDouble.setText(response.body().get(1).get("GoodCount").getAsString());
-                edtMinorConditionForDouble.setText(response.body().get(1).get("MinorCount").getAsString());
-                edtMajorConditionForDouble.setText(response.body().get(1).get("MajorCount").getAsString());
+                edtgoodConditionForDouble.setText((response.body().get(1).get("GoodCount")) == null ?"0":(response.body().get(1).get("GoodCount").getAsString()));
+                edtMinorConditionForDouble.setText((response.body().get(1).get("MinorCount")) == null ?"0":(response.body().get(1).get("MinorCount").getAsString()));
+                edtMajorConditionForDouble.setText((response.body().get(1).get("MajorCount")) == null ?"0":(response.body().get(1).get("MajorCount").getAsString()));
 
-                edtgoodConditionForTripple.setText(response.body().get(2).get("GoodCount").getAsString());
-                edtMinorConditionForTripple.setText(response.body().get(2).get("MinorCount").getAsString());
-                edtMajorConditionForTripple.setText(response.body().get(2).get("MajorCount").getAsString());
+                edtgoodConditionForTripple.setText((response.body().get(2).get("GoodCount")) == null ?"0":(response.body().get(2).get("GoodCount").getAsString()));
+                edtMinorConditionForTripple.setText((response.body().get(2).get("MinorCount")) == null ?"0":(response.body().get(2).get("MinorCount").getAsString()));
+                edtMajorConditionForTripple.setText((response.body().get(2).get("MajorCount")) == null ?"0":(response.body().get(2).get("MajorCount").getAsString()));
 
 
                     if (response.body().get(0).get("TotalCnt").getAsString().equals("0")){

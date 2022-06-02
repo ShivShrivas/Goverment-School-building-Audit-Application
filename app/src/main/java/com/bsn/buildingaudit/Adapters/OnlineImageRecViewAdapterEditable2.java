@@ -2,6 +2,7 @@ package com.bsn.buildingaudit.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class OnlineImageRecViewAdapterEditable2 extends RecyclerView.Adapter<Onl
                 }
             });
         }catch (Exception e){
-
+            Log.d("TAG", "onBindViewHolder:major   "+e.getMessage());
         }
 
 
