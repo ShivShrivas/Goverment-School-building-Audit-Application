@@ -281,7 +281,7 @@ ApplicationController applicationController;
                 spinnerChemistryEquipmentStatus.setAdapter(arrayAdapter2);
         spinnerPhysicsEquipmentStatus.setAdapter(arrayAdapter2);
         String[] StaffPhotoPathList;
-        ArrayList<String> aList=new ArrayList<>();
+
         ArrayList<String> arrayListSpinner3 = new ArrayList<>();
 
         arrayListSpinner3.add("Good Condition");
@@ -567,9 +567,10 @@ dialog2.show();
                geographyLabCondition.setLabYN(spinnerGeographylabAvailability.getSelectedItem().toString());
                geographyLabCondition.setSrno("7");
                geographyLabCondition.setEquipmentStatus(spinnerGeographyEquipmentStatus.getSelectedItem().toString());
-               if (checkImageAndLab(spinnerSciencelabAvailability,arrayListImages1,aList) && checkImageAndLab(spinnerPhysicslabAvailability,arrayListImages2,bList) &&
-                       checkImageAndLab(spinnerChemistrylabAvailability,arrayListImages3, cList) && checkImageAndLab(spinnerHomeMusiclabAvailability,arrayListImages4, dList) &&
-                       checkImageAndLab(spinnerHomeSciencelabAvailability,arrayListImages5, eList) && checkImageAndLab(spinnerGeographylabAvailability,arrayListImages6, fList)){
+               if (checkImageAndLab(spinnerSciencelabAvailability,arrayListImages7,aList) && checkImageAndLab(spinnerPhysicslabAvailability,arrayListImages1,bList) &&
+                       checkImageAndLab(spinnerChemistrylabAvailability,arrayListImages2, cList) && checkImageAndLab(spinnerBiologylabAvailability,arrayListImages3, dList)
+                       && checkImageAndLab(spinnerHomeSciencelabAvailability,arrayListImages4, eList) &&
+                       checkImageAndLab(spinnerHomeMusiclabAvailability,arrayListImages5, fList) && checkImageAndLab(spinnerGeographylabAvailability,arrayListImages6, gList)){
 
                    runService(scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition);
 
@@ -617,7 +618,7 @@ dialog2.show();
             if (action.equals("3")){
                 if (arrayListImages1.size()==0 && aList.size()==0 ){
                     dialog2.dismiss();
-                    Toast.makeText(this, "Please check and Upload at least one Image", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Please check and Upload at least one Image...", Toast.LENGTH_LONG).show();
 
                     return false;
                 }else{
@@ -626,7 +627,7 @@ dialog2.show();
             }else{
                 if (arrayListImages1.size()==0 ){
                     dialog2.dismiss();
-                    Toast.makeText(this, "Please check and Upload at least one Image", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Please check and Upload at least one Image.", Toast.LENGTH_LONG).show();
                     return false;
                 }else{
                     return true;

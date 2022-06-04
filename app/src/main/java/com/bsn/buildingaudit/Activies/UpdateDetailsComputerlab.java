@@ -237,15 +237,6 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
                                             e.printStackTrace();
                                         }
                                         if (imageFile!=null){
-//                                            File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
-//                                                    .setMaxWidth(720)
-//                                                    .setMaxHeight(720)
-//                                                    .setQuality(75)
-//                                                    .setCompressFormat(Bitmap.CompressFormat.JPEG)
-//                                                    .setDestinationDirectoryPath(Environment.getExternalStoragePublicDirectory(
-//                                                            Environment.DIRECTORY_PICTURES).getAbsolutePath())
-//                                                    .build()
-//                                                    .compressToFile(imageFile);
                                             arrayListImages1.add(imageFile);
                                             Uri imageUri= FileProvider.getUriForFile(UpdateDetailsComputerlab.this, ConstantFile.PROVIDER_STRING,imageFile);
                                             i.putExtra(MediaStore.EXTRA_OUTPUT,imageUri);
@@ -486,6 +477,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         }
         RequestBody deletUrl;
         Log.d("TAG", "runService: "+paraDeletUlrs());
+        Log.d("TAG", "images: "+surveyImagesParts);
         if (action.equals("3")){
             if (spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());

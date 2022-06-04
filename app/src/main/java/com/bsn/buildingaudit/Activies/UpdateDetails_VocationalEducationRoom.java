@@ -641,7 +641,6 @@ try {
 
         for (int i = 0; i < deleteUrlsFinal.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
             String newUrl2=deleteUrlsFinal.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);

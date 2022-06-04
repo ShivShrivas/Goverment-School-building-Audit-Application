@@ -136,7 +136,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                 }
                List<LabDetailsResponse> list=response.body();
 
-               if (list.get(0).getLabYN().toString().equals("Yes")){
+               if (!list.get(0).getLabYN().toString().equals("No")){
                    edtSciencelabAvailability.setText(list.get(0).getLabYN());
                }else {
                    edtSciencelabAvailability.setText(list.get(0).getLabYN());
@@ -151,7 +151,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
 
 
-                if (list.get(1).getLabYN().toString().equals("Yes")){
+                if (!list.get(1).getLabYN().toString().equals("No")){
                     edtPhysicslabAvailability.setText(list.get(1).getLabYN());
                 }else {
                     hidecards(physicsLabBodyCard,physicsLabImageCard);
@@ -166,7 +166,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                     edtPhysicsLabCondition.setText(list.get(1).getLabCondition().toString());
 
 
-                if (list.get(2).getLabYN().toString().equals("Yes")){
+                if (!list.get(2).getLabYN().toString().equals("No")){
                     edtChemistrylabAvailability.setText(list.get(1).getLabYN());
                 }else {
                     hidecards(chemistryLabBodyCard,chemistryLabImageCard);
@@ -181,7 +181,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                     edtChemistryLabCondition.setText(list.get(2).getLabCondition());
 
 
-                if (list.get(3).getLabYN().toString().equals("Yes")){
+                if (!list.get(3).getLabYN().toString().equals("No")){
                     edtBiologylabAvailability.setText(list.get(3).getLabYN());
                 }else {
                     hidecards(bioloyLabBodyCard,bioloyLabImageCard);
@@ -196,7 +196,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                     edtBiologyLabCondition.setText(list.get(3).getLabCondition());
 
 
-                if (list.get(4).getLabYN().toString().equals("Yes")){
+                if (!list.get(4).getLabYN().toString().equals("No")){
                     edtHomeSciencelabAvailability.setText(list.get(4).getLabYN());
                 }else {
                     hidecards(homeScienceLabBodyCard,homeScienceLabImageCard);
@@ -212,7 +212,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                     edtHomeScienceLabCondition.setText(list.get(4).getLabCondition());
 
 
-                if (list.get(5).getLabYN().toString().equals("Yes")){
+                if (!list.get(5).getLabYN().toString().equals("No")){
                     edtHomeMusiclabAvailability.setText(list.get(5).getLabYN());
                 }else {
                     hidecards(musicLabBodyCard,musicLabImageCard);
@@ -229,7 +229,7 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
 
 
 
-                if (list.get(6).getLabYN().toString().equals("Yes")){
+                if (!list.get(6).getLabYN().toString().equals("No")){
                     edtGeographylabAvailability.setText(list.get(6).getLabYN());
                 }else {
                     hidecards(geoGraphyLabBodyCard,geoGraphyLabImageCard);

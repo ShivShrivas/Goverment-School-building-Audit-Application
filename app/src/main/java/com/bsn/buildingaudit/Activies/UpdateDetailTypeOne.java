@@ -187,13 +187,19 @@ int cameraType;
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (goodCondtionClassroom.getText().toString().equals("0")){
+                try {
+                    if (Integer.valueOf(goodCondtionClassroom.getText().toString())==0){
+                        goodConditionImageUploadBtn.setVisibility(View.GONE);
+                    }else
+                    {
+                        goodConditionImageUploadBtn.setVisibility(View.VISIBLE);
+
+                    }
+                }catch (Exception e){
                     goodConditionImageUploadBtn.setVisibility(View.GONE);
-                }else
-                {
-                    goodConditionImageUploadBtn.setVisibility(View.VISIBLE);
 
                 }
+
             }
 
             @Override
@@ -209,12 +215,18 @@ int cameraType;
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (majorRepairingClassroom.getText().toString().equals("0")){
+                try{
+                    if (Integer.valueOf(majorRepairingClassroom.getText().toString())==0){
+                        majorRepairingUploadImageBtn.setVisibility(View.GONE);
+                    }else {
+                        majorRepairingUploadImageBtn.setVisibility(View.VISIBLE);
+
+                    }
+                }catch(Exception e){
                     majorRepairingUploadImageBtn.setVisibility(View.GONE);
-                }else {
-                    majorRepairingUploadImageBtn.setVisibility(View.VISIBLE);
 
                 }
+
             }
 
             @Override
@@ -231,12 +243,18 @@ int cameraType;
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (minorRepairingClassroom.getText().toString().equals("0")){
+                try {
+                    if (Integer.valueOf(minorRepairingClassroom.getText().toString())==0){
+                        minorRepairingUploadImageBtn.setVisibility(View.GONE);
+                    }else {
+                        minorRepairingUploadImageBtn.setVisibility(View.VISIBLE);
+
+                    }
+                }catch (Exception e){
                     minorRepairingUploadImageBtn.setVisibility(View.GONE);
-                }else {
-                    minorRepairingUploadImageBtn.setVisibility(View.VISIBLE);
 
                 }
+
             }
 
             @Override
@@ -264,13 +282,11 @@ int cameraType;
 
                     }else {
                         if (action.equals("3")){
-                            if (arrayListImages3.size()== 0 && arrayListImages2.size()==0&& arrayListImages4.size() == 0 && aList.size()==0&& bList.size()==0&& cList.size()==0 ) {
-                                dialog2.dismiss();
-
-                                Toast.makeText(UpdateDetailTypeOne.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
-
-                            }else{
+                            if (checkImageAndLab(Integer.valueOf(goodCondtionClassroom.getText().toString()),arrayListImages2,aList) && checkImageAndLab(Integer.valueOf(minorRepairingClassroom.getText().toString()),arrayListImages3,bList) && checkImageAndLab(Integer.valueOf(majorRepairingClassroom.getText().toString()),arrayListImages4,cList)){
                                 runService(totalClassRoom);
+                            }else{
+                                dialog2.dismiss();
+                                Toast.makeText(UpdateDetailTypeOne.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             }
 
                         }else {
@@ -622,7 +638,25 @@ int cameraType;
         }else
             return true;
     }
+    private boolean checkImageAndLab(int i,ArrayList<File> arrayListImages1, ArrayList<String> aList) {
 
+        if (i!=0){
+
+            if (arrayListImages1.size()==0 && aList.size()==0 ){
+                dialog2.dismiss();
+                Toast.makeText(this, "Please check and Upload at least one Image...", Toast.LENGTH_LONG).show();
+
+                return false;
+            }else{
+                return true;
+            }
+
+        }else{
+            return true;
+        }
+
+
+    }
     private void runService(int totalClassRoom) {
 
         RestClient restClient = new RestClient();

@@ -407,10 +407,10 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
                 spinnerFireFightWorkingStatus.setSelection(spinnerPositionForWorkingStatus);
                 spinnerFireFightingInstallationYear.setSelection(spinnerPositionForInstallationYear);
 
-                int totalRo=Integer.parseInt(response.body().get(0).get("NonWorkingCount").getAsString())+Integer.parseInt(response.body().get(0).get("WorkingCount").getAsString());
+                int totalRo=Integer.parseInt(response.body().get(0).get("NonWorkingCount")==null?"0":response.body().get(0).get("NonWorkingCount").getAsString())+Integer.parseInt(response.body().get(0).get("WorkingCount")==null?"0":response.body().get(0).get("WorkingCount").getAsString());
 
-                edtNotWorkingFF.setText(response.body().get(0).get("NonWorkingCount").getAsString());
-                edtWorkingFF.setText(response.body().get(0).get("WorkingCount").getAsString());
+                edtNotWorkingFF.setText(response.body().get(0).get("NonWorkingCount")==null?"0":response.body().get(0).get("NonWorkingCount").getAsString());
+                edtWorkingFF.setText(response.body().get(0).get("WorkingCount")==null?"0":response.body().get(0).get("WorkingCount").getAsString());
                 edtTotalFF.setText(String.valueOf(totalRo));
                 String[] time=(response.body().get(0).get("RenewalDateStatus").getAsString()).split("T");
 

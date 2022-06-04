@@ -312,26 +312,37 @@ LinearLayout linearLayout31;
 
             }
         });
-        spinnerROInstallationAvailabiltyDW.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        edtTotalRO.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                if (spinnerROInstallationAvailabiltyDW.getSelectedItem().toString().equals("No")){
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                try {
+                    if (Integer.valueOf(edtTotalRO.getText().toString())==0){
+                        spinnerROInstallationWokingStatus.setVisibility(View.GONE);
+                        spinnerROInstallationScheme.setVisibility(View.GONE);
+                        linearLayout31.setVisibility(View.GONE);
+
+                    }else{
+                        spinnerROInstallationWokingStatus.setVisibility(View.VISIBLE);
+                        spinnerROInstallationScheme.setVisibility(View.VISIBLE);
+                        linearLayout31.setVisibility(View.VISIBLE);
+
+
+                    }
+                }catch (Exception e){
                     spinnerROInstallationWokingStatus.setVisibility(View.GONE);
                     spinnerROInstallationScheme.setVisibility(View.GONE);
                     linearLayout31.setVisibility(View.GONE);
-
-                }else{
-                    spinnerROInstallationWokingStatus.setVisibility(View.VISIBLE);
-                    spinnerROInstallationScheme.setVisibility(View.VISIBLE);
-                    linearLayout31.setVisibility(View.VISIBLE);
-
-
                 }
+
             }
 
-
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+            public void afterTextChanged(Editable editable) {
 
             }
         });

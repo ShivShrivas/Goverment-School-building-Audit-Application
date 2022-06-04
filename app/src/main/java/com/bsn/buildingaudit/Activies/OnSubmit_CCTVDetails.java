@@ -101,11 +101,11 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
                 {
                     edtCCTVAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
                     edtCCTVInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
-                    EdtNoOfCCTV.setText(response.body().get(0).get("WorkingCount").getAsString());
-                    edtTotalCCTV.setText(response.body().get(0).get("NoOfCCTV").getAsString());
+                    EdtNoOfCCTV.setText(response.body().get(0).get("WorkingCount")==null?"0":response.body().get(0).get("WorkingCount").getAsString());
+                    edtTotalCCTV.setText(response.body().get(0).get("NoOfCCTV")==null?"0":response.body().get(0).get("NoOfCCTV").getAsString());
 
-                    edtCCTVWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
-                    EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount").getAsString());
+                    edtCCTVWorkingStatus.setText(response.body().get(0).get("WorkingStatus")==null?"0":response.body().get(0).get("WorkingStatus").getAsString());
+                    EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount")==null?"0":response.body().get(0).get("NonWorkingCount").getAsString());
                     try {
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                         OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CCTVDetails.this,StaffPhotoPathList);

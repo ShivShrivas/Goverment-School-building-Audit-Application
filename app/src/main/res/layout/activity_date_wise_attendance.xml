@@ -23,7 +23,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Solar Panel" />
+            app:title="Date wise Attendance" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -73,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:paddingStart="5dp"
                     android:text="04-12-2019"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
 

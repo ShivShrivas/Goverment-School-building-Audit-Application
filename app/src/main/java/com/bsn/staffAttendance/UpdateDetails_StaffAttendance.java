@@ -40,8 +40,9 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity {
     RecyclerView recyclerViewStaffAttendance;
     StaffAttendanceAdapter adapter;
     Button buttonSaveAtendance;
-    String formattedDate;
+    String formattedDate,formattedDate1;
     Toolbar toolbar;
+    TextView textView2;
     Dialog dialog;
     List<AttendanceStaff> arrayList;
     @Override
@@ -59,9 +60,13 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity {
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
          formattedDate = df.format(c);
+
+         SimpleDateFormat df1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+         formattedDate1 = df1.format(c);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
+        textView2=findViewById(R.id.textView2);
         buttonSaveAtendance=findViewById(R.id.buttonSaveAtendance);
         dialog = new Dialog(this);
         dialog.setCancelable(false);
@@ -71,6 +76,7 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity {
         recyclerViewStaffAttendance=findViewById(R.id.recyclerViewStaffAttendance);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
+        textView2.setText("Attendance Date: "+formattedDate1);
         recyclerViewStaffAttendance.setLayoutManager(new LinearLayoutManager(this));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();

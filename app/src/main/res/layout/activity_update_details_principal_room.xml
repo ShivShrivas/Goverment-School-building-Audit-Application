@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activies.UpdateDetailsPlayground">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
         android:layout_width="match_parent"
@@ -17,12 +18,12 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            app:navigationIcon="@drawable/arrow_back"
-            app:title="Principal Room"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
 
             android:theme="@style/ToolBarStyle"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" />
+            app:navigationIcon="@drawable/arrow_back"
+            app:title="Principal Room" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -126,7 +127,6 @@
                     android:src="@drawable/ic_notifications" />
 
 
-
             </LinearLayout>
 
         </LinearLayout>
@@ -145,6 +145,23 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView25" />
+
+    <ScrollView
+        android:id="@+id/scrollView20"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mobnumberTxt">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/linearLayout11"
@@ -272,6 +289,7 @@
         </LinearLayout>
 
         <HorizontalScrollView
+            android:id="@+id/horizontalScrollView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
