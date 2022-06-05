@@ -158,7 +158,7 @@
             style="@style/btn_style"
             android:layout_weight="1"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="130dp"
             android:layout_marginStart="16dp"
 
             android:layout_marginTop="16dp"
@@ -173,24 +173,6 @@
             app:layout_constraintTop_toBottomOf="@+id/buttontake_attendance" />
 
 
-        <Button
-            android:id="@+id/btnStaffAttendance_datewise"
-            style="@style/btn_style"
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/month_wise_attend"
-            app:cardCornerRadius="10dp"
-
-            app:cardElevation="5dp"
-            app:layout_anchorGravity="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnStaffAttendance_monthwise" />
     </LinearLayout>
 
 

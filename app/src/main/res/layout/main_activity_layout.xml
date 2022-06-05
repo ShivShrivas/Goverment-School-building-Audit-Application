@@ -35,6 +35,7 @@
              ii) app:contentScrim="@color/green" that specifies the color
                   of the collapsed toolbar -->
             <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/mCollapsingToolbarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:contentScrim="@color/purple_700"

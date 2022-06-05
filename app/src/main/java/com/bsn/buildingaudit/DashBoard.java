@@ -48,6 +48,7 @@ import com.bsn.buildingaudit.RetrofitApi.RestClientMsg91;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -78,6 +79,7 @@ public class DashBoard extends AppCompatActivity {
     LinearLayout logOutBtn;
     ImageView hamMenu;
     dashboardRecviewAdapter adapter;
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
 
     List<GetAllRoomsList> arrayList = new ArrayList<>();
     public boolean isConnected() {
@@ -114,8 +116,12 @@ public class DashBoard extends AppCompatActivity {
         dashboardRecview = findViewById(R.id.recViewDashboard);
         btnBottom = findViewById(R.id.btnBottom);
         userName = findViewById(R.id.userName);
+        mCollapsingToolbarLayout = findViewById(R.id.mCollapsingToolbarLayout);
         schoolAddress = findViewById(R.id.schoolAddress);
         logOutBtn = findViewById(R.id.logOutBtn);
+
+        mCollapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandedAppBar);
+        mCollapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
         logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

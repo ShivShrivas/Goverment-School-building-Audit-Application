@@ -80,7 +80,7 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<AttendanceStaff>> call, Response<List<AttendanceStaff>> response) {
                 arrayList=response.body();
-                if (arrayList.get(0).getDateofDay().isEmpty()){
+                if ((arrayList.get(0).getDateofDay()==null?"":arrayList.get(0).getDateofDay()).isEmpty()){
                     Log.d("TAG", "onResponse: "+response.body().get(0).getAttendenceStatusID());
                     recyclerViewStaffAttendance.setAdapter(new StaffAttendanceAdapter(UpdateDetails_StaffAttendance.this,arrayList,formattedDate));
                 }else{

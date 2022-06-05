@@ -38,6 +38,7 @@ import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable3;
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable4;
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable5;
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable6;
+import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable7;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.CompressLib.Compressor;
 import com.bsn.buildingaudit.ConstantValues.ConstantFile;
@@ -95,25 +96,26 @@ public class UpdatedetailsTypeThree extends AppCompatActivity {
     ArrayList<String> eList=new ArrayList<>();
     ArrayList<String> fList=new ArrayList<>();
     ArrayList<String> gList=new ArrayList<>();
+    ArrayList<String> hList=new ArrayList<>();
     String currentImagePath=null;
     File imageFile=null;
     String action;
     int BtnType;
     Dialog dialog,dialog2;
-Spinner spinnerSciencelabAvailability,spinnerBiologylabAvailability,spinnerHomeMusiclabAvailability,spinnerHomeSciencelabAvailability,spinnerGeographylabAvailability,spinnerChemistrylabAvailability,spinnerPhysicslabAvailability;
-Spinner spinnerMusicEquipmentStatus,spinnerHomeScienceEquipmentStatus
+Spinner spinnerSociallabAvailability,spinnerSciencelabAvailability,spinnerBiologylabAvailability,spinnerHomeMusiclabAvailability,spinnerHomeSciencelabAvailability,spinnerGeographylabAvailability,spinnerChemistrylabAvailability,spinnerPhysicslabAvailability;
+Spinner spinnerMusicEquipmentStatus,spinnerHomeScienceEquipmentStatus,spinnerSocialEquipmentStatus
         ,spinnerScienceEquipmentStatus,spinnerBilogyEquipmentStatus,spinnerGeographyEquipmentStatus,spinnerChemistryEquipmentStatus
         ,spinnerPhysicsEquipmentStatus;
-Spinner spinnerMusicLabCondition,spinnerHomeScienceLabCondition,spinnerGeographyLabCondition,spinnerScienceLabCondition,
+Spinner spinnerMusicLabCondition,spinnerHomeScienceLabCondition,spinnerGeographyLabCondition,spinnerScienceLabCondition,spinnerSocialLabCondition,
         spinnerBiologyLabCondition,spinnerChemistryLabCondition,spinnerPhysicsLabCondition;
 
-RecyclerView recyclerViewMusicLab,recyclerViewHomeScienceLab,recyclerViewGeographyLab,recyclerViewScienceLab
+RecyclerView recyclerViewMusicLab,recyclerViewHomeScienceLab,recyclerViewGeographyLab,recyclerViewScienceLab,recyclerViewSocailLab
         ,recyclerViewBiologyLab,recyclerViewChemistryLab,recyclerViewPhysicsLab;
 
-RecyclerView recyclerViewMusicLabFromServer,recyclerViewHomeScienceLabFromServer,recyclerViewGeographyLabFromServer,recyclerViewScienceLabFromServer
+RecyclerView recyclerViewMusicLabFromServer,recyclerViewHomeScienceLabFromServer,recyclerViewGeographyLabFromServer,recyclerViewScienceLabFromServer,recyclerViewSocialLabFromServer
         ,recyclerViewBiologyLabFromServer,recyclerViewChemistryLabFromServer,recyclerViewPhysicsLabFromServer;
 
-ImageView imageUpoadMusicLab,imageUpoadHomeScienceLab,imageUpoadGeographyLab
+ImageView imageUpoadMusicLab,imageUpoadHomeScienceLab,imageUpoadGeographyLab,imageUpoadSocialLab
         ,imageUpoadScienceLab,imageUpoadBiologyLab,imageUpoadChemistryLab,imageUpoadPhysicsLab;
 TextView scienceLabNametxt,physicsLabtxt,chemistryLabtxt,biologyLabTxt,homeScienceLabTxt,musicLabTxt,georgaphyLabTxt;
 TextView userName,schoolAddress,schoolName;
@@ -128,7 +130,7 @@ ArrayList<LabCondition> musicLabDetailsArray=new ArrayList<>();
 ArrayList<LabCondition> homeScienceLabDetailsArray=new ArrayList<>();
 ArrayList<LabCondition> geoGraphyLabDetailsArray=new ArrayList<>();
 ApplicationController applicationController;
-    ImageAdapter5 adapter1,adapter2,adapter3,adapter4,adapter5,adapter6,adapter7;
+    ImageAdapter5 adapter1,adapter2,adapter3,adapter4,adapter5,adapter6,adapter7,adapter8;
     public ArrayList<File> arrayListImages1 = new ArrayList<>();
     public ArrayList<File> arrayListImages2 = new ArrayList<>();
     public ArrayList<File> arrayListImages3= new ArrayList<>();
@@ -136,12 +138,13 @@ ApplicationController applicationController;
     public ArrayList<File> arrayListImages5 = new ArrayList<>();
     public ArrayList<File> arrayListImages6 = new ArrayList<>();
     public ArrayList<File> arrayListImages7 = new ArrayList<>();
+    public ArrayList<File> arrayListImages8 = new ArrayList<>();
     public ArrayList<File> arrayListImagesFinal = new ArrayList<>();
 
     CardView scienceLabBodyCard,scienceLanImageCard,physicsLabBodyCard,physicsLabImageCard,
             chemistryLabBodyCard,chemistryLabImageCard,bioloyLabBodyCard,bioloyLabImageCard,
             homeScienceLabBodyCard,homeScienceLabImageCard,musicLabBodyCard,musicLabImageCard,
-            geoGraphyLabImageCard,geoGraphyLabBodyCard;
+            socialLabBodyCard,socialLabImageCard,geoGraphyLabImageCard,geoGraphyLabBodyCard;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,23 +180,31 @@ ApplicationController applicationController;
         scienceLabBodyCard=findViewById(R.id.scienceLabBodyCard);
         scienceLanImageCard=findViewById(R.id.scienceLabImageCard);
         physicsLabImageCard=findViewById(R.id.physicsLabImageCard);
+        socialLabBodyCard=findViewById(R.id.socialLabBodyCard);
         physicsLabBodyCard=findViewById(R.id.physicsLabBodyCard);
         chemistryLabBodyCard=findViewById(R.id.chemistryLabBodyCard);
         chemistryLabImageCard=findViewById(R.id.chemistryLabImageCard);
         bioloyLabBodyCard=findViewById(R.id.bioloyLabBodyCard);
         bioloyLabImageCard=findViewById(R.id.bioloyLabImageCard);
+        socialLabImageCard=findViewById(R.id.socialLabImageCard);
         homeScienceLabBodyCard=findViewById(R.id.homeScienceLabBodyCard);
         homeScienceLabImageCard=findViewById(R.id.homeScienceLabImageCard);
         musicLabBodyCard=findViewById(R.id.musicLabBodyCard);
+        imageUpoadSocialLab=findViewById(R.id.imageUpoadSocialLab);
         musicLabImageCard=findViewById(R.id.musicLabImageCard);
         geoGraphyLabBodyCard=findViewById(R.id.geoGraphyLabBodyCard);
         geoGraphyLabImageCard=findViewById(R.id.geoGraphyLabImageCard);
+        recyclerViewSocailLab=findViewById(R.id.recyclerViewSocailLab);
         spinnerChemistrylabAvailability=findViewById(R.id.spinnerChemistrylabAvailability);
+        spinnerSocialEquipmentStatus=findViewById(R.id.spinnerSocialEquipmentStatus);
+        spinnerSocialLabCondition=findViewById(R.id.spinnerSocialLabCondition);
         spinnerHomeSciencelabAvailability=findViewById(R.id.spinnerHomeSciencelabAvailability);
         spinnerGeographylabAvailability=findViewById(R.id.spinnerGeographylabAvailability);
         spinnerPhysicslabAvailability=findViewById(R.id.spinnerPhysicslabAvailability);
         spinnerBiologylabAvailability=findViewById(R.id.spinnerBiologylabAvailability);
+        spinnerSociallabAvailability=findViewById(R.id.spinnerSociallabAvailability);
         spinnerSciencelabAvailability=findViewById(R.id.spinnerSciencelabAvailability);
+        recyclerViewSocialLabFromServer=findViewById(R.id.recyclerViewSocialLabFromServer);
         spinnerMusicEquipmentStatus=findViewById(R.id.spinnerMusicEquipmentStatus);
         spinnerHomeScienceEquipmentStatus=findViewById(R.id.spinnerHomeScienceEquipmentStatus);
         spinnerScienceEquipmentStatus=findViewById(R.id.spinnerScienceEquipmentStatus);
@@ -252,7 +263,11 @@ ApplicationController applicationController;
         spinnerHomeMusiclabAvailability.setAdapter(arrayAdapter7);
         spinnerHomeSciencelabAvailability.setAdapter(arrayAdapter7);
         spinnerGeographylabAvailability.setAdapter(arrayAdapter7);
-
+        spinnerChemistrylabAvailability.setAdapter(arrayAdapter7);
+        spinnerPhysicslabAvailability.setAdapter(arrayAdapter7);
+        spinnerBiologylabAvailability.setAdapter(arrayAdapter7);
+        spinnerSciencelabAvailability.setAdapter(arrayAdapter7);
+        spinnerSociallabAvailability.setAdapter(arrayAdapter7);
 
 
         ArrayList<String> arrayListAvailbilty=new ArrayList<>();
@@ -260,10 +275,7 @@ ApplicationController applicationController;
         arrayListAvailbilty.add("No");
         arrayAdapter=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListAvailbilty);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);
-                spinnerChemistrylabAvailability.setAdapter(arrayAdapter);
-        spinnerPhysicslabAvailability.setAdapter(arrayAdapter);
-                spinnerBiologylabAvailability.setAdapter(arrayAdapter);
-        spinnerSciencelabAvailability.setAdapter(arrayAdapter);
+
 
         ArrayList<String> arrayListSpinner2 = new ArrayList<>();
         arrayListSpinner2.add("Fully Equipped");
@@ -279,6 +291,7 @@ ApplicationController applicationController;
         spinnerGeographyEquipmentStatus.setAdapter(arrayAdapter2);
                 spinnerChemistryEquipmentStatus.setAdapter(arrayAdapter2);
         spinnerPhysicsEquipmentStatus.setAdapter(arrayAdapter2);
+        spinnerSocialEquipmentStatus.setAdapter(arrayAdapter2);
         String[] StaffPhotoPathList;
         ArrayList<String> aList=new ArrayList<>();
         ArrayList<String> arrayListSpinner3 = new ArrayList<>();
@@ -297,6 +310,7 @@ ApplicationController applicationController;
         spinnerBiologyLabCondition.setAdapter(arrayAdapter3);
                 spinnerChemistryLabCondition.setAdapter(arrayAdapter3);
         spinnerPhysicsLabCondition.setAdapter(arrayAdapter3);
+        spinnerSocialLabCondition.setAdapter(arrayAdapter3);
 
         if (action.equals("3")){
             fetchAllDataFromServer();
@@ -359,6 +373,14 @@ ApplicationController applicationController;
             }
         });
 
+        imageUpoadSocialLab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BtnType=8;
+                checkPermissions(8);
+            }
+        });
+
         recyclerViewPhysicsLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         adapter1 = new ImageAdapter5(this, arrayListImages1);
         recyclerViewPhysicsLab.setAdapter(adapter1);
@@ -394,6 +416,11 @@ ApplicationController applicationController;
         adapter7= new ImageAdapter5(this, arrayListImages7);
         recyclerViewScienceLab.setAdapter(adapter7);
         adapter7.notifyDataSetChanged();
+
+        recyclerViewSocailLab.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        adapter8= new ImageAdapter5(this, arrayListImages8);
+        recyclerViewSocailLab.setAdapter(adapter8);
+        adapter8.notifyDataSetChanged();
 
     spinnerSciencelabAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -487,6 +514,20 @@ ApplicationController applicationController;
             }
         });
 
+
+    spinnerSociallabAvailability.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                hideShowCards(socialLabBodyCard,socialLabImageCard,adapterView);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 //        spinnerSciencelabAvailability.getSelectedItem().toString(),spinnerScienceEquipmentStatus.getSelectedItem().toString(),spinnerScienceLabCondition.getSelectedItem().toString(),
 //                spinnerPhysicslabAvailability.getSelectedItem().toString(),spinnerPhysicsEquipmentStatus.getSelectedItem().toString(),spinnerPhysicsLabCondition.getSelectedItem().toString(),
 //                spinnerChemistrylabAvailability.getSelectedItem().toString(),spinnerChemistryEquipmentStatus.getSelectedItem().toString(),spinnerChemistryLabCondition.getSelectedItem().toString(),
@@ -567,9 +608,16 @@ dialog2.show();
                geographyLabCondition.setSrno("7");
                geographyLabCondition.setEquipmentStatus(spinnerGeographyEquipmentStatus.getSelectedItem().toString());
 
+                LabCondition socialLabCondition=new LabCondition();
+               socialLabCondition.setLabName("SocialScienceLab");
+               socialLabCondition.setLabCondition(spinnerSocialLabCondition.getSelectedItem().toString());
+               socialLabCondition.setLabYN(spinnerSociallabAvailability.getSelectedItem().toString());
+               socialLabCondition.setSrno("8");
+               socialLabCondition.setEquipmentStatus(spinnerSocialEquipmentStatus.getSelectedItem().toString());
+
                     if (spinnerSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerPhysicslabAvailability.getSelectedItem().toString().equals("Yes") ||
                             spinnerChemistrylabAvailability.getSelectedItem().toString().equals("Yes") || spinnerHomeMusiclabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")||
-                            spinnerHomeSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes")
+                            spinnerHomeSciencelabAvailability.getSelectedItem().toString().equals("Yes") || spinnerGeographylabAvailability.getSelectedItem().toString().equals("Yes") || spinnerSociallabAvailability.getSelectedItem().toString().equals("Yes")
                     ){
 
                     if (action.equals("3")){
@@ -612,10 +660,10 @@ dialog2.show();
             public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
 
-                int spinnerAvalabiltyScience = arrayAdapter.getPosition(response.body().get(0).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(0).getLabYN());
-                int spinnerAvalabiltyPhysics = arrayAdapter.getPosition(response.body().get(1).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(1).getLabYN());
-                int spinnerAvalabiltyChemistry = arrayAdapter.getPosition(response.body().get(2).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(2).getLabYN());
-                int spinnerAvalabiltybiology = arrayAdapter.getPosition(response.body().get(3).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(3).getLabYN());
+                int spinnerAvalabiltyScience = arrayAdapter7.getPosition(response.body().get(0).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(0).getLabYN());
+                int spinnerAvalabiltyPhysics = arrayAdapter7.getPosition(response.body().get(1).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(1).getLabYN());
+                int spinnerAvalabiltyChemistry = arrayAdapter7.getPosition(response.body().get(2).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(2).getLabYN());
+                int spinnerAvalabiltybiology = arrayAdapter7.getPosition(response.body().get(3).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(3).getLabYN());
                 int spinnerAvalabiltyHomeScience = arrayAdapter7.getPosition(response.body().get(4).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(4).getLabYN());
                 int spinnerAvalabiltyMusics = arrayAdapter7.getPosition(response.body().get(5).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(5).getLabYN());
                 int spinnerAvalabiltyGeo = arrayAdapter7.getPosition(response.body().get(6).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(6).getLabYN());
@@ -885,6 +933,9 @@ dialog2.show();
 
         if (spinnerGeographylabAvailability.getSelectedItem().toString().equals("No")){
             deleteUrlsFinal.addAll(gList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable6.deletedUrls); }
+
+          if (spinnerSociallabAvailability.getSelectedItem().toString().equals("No")){
+            deleteUrlsFinal.addAll(hList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable7.deletedUrls); }
 
         Log.d("TAG", "paraDeletUlrs: "+ deleteUrlsFinal.size());
 
@@ -1207,6 +1258,7 @@ dialog2.show();
         adapter5.notifyDataSetChanged();
         adapter6.notifyDataSetChanged();
         adapter7.notifyDataSetChanged();
+        adapter8.notifyDataSetChanged();
 
     }
 
@@ -1221,6 +1273,7 @@ dialog2.show();
         adapter5.notifyDataSetChanged();
         adapter6.notifyDataSetChanged();
         adapter7.notifyDataSetChanged();
+        adapter8.notifyDataSetChanged();
 
     }
 }

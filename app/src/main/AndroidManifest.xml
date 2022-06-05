@@ -29,31 +29,40 @@
         android:theme="@style/Theme.BuildingAudit"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name="com.bsn.staffAttendance.Date_Wise_Attendance"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name="com.bsn.staffAttendance.Dashboard_StaffAttendance"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name="com.bsn.staffAttendance.UpdateDetails_StaffAttendance"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Principal_Dashboard"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.Final_OTP_Submission"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_Officeroom"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_VocationalRoom"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetails_VocationalEducationRoom"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetails_OfficeRoom"
             android:exported="false" />
 
@@ -69,160 +78,212 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_ArtAndCraft"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsArtAndCraft"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_PrincipalRoom"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsPrincipalRoom"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_FurnitureDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_GirlsToiletDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_BoysToiletDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_BoundryWalls"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_SolarPanel"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_ElectricityArrangment"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_FireFighting"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_RainHarvesting"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_CCTVDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_ComputerLabDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_WifiDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_CycleStand"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_SoundSystemDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_MultipurposeHallDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_SmartClassDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_BioMetricDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_DrinkingWaterDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_LibraryDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_PlaygroundDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_OpenGYmDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_PracticalLabsDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmit_StaffRoomDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.NoInternetConnection"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.OnSubmitClassRoomPage"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsCWSNRamp"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsCCTV"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsCycleStand"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsMultipurposeHall"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsSoundSystem"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsBoundryWall"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.AfterSubmitClassromDetails"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsOfExtraThings"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsGirlsToilet"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsBoysToilet"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsSolarPanel"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsRainHarvest"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsFireFighting"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsElectricityArrangment"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsBioMetric"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsFurnitures"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsComputerlab"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsDrinkingWater"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsSmartClass"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsGym"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsPlayground"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsTypeFour"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdatedetailsTypeThree"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -231,16 +292,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailsTypeTwo"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".Activies.UpdateDetailTypeOne"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".DashBoard"
             android:exported="false" />
-        <activity
+           <activity
+            android:screenOrientation="portrait"
             android:name=".MainActivity"
             android:exported="true" />
     </application>
