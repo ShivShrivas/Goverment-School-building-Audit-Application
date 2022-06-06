@@ -35,12 +35,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UpdateDetails_StaffAttendance extends AppCompatActivity {
-    TextView userName,schoolAddress,schoolName;
+    TextView userName,schoolAddress,schoolName,textView2;
     ApplicationController applicationController;
     RecyclerView recyclerViewStaffAttendance;
     StaffAttendanceAdapter adapter;
     Button buttonSaveAtendance;
-    String formattedDate;
+    String formattedDate,formattedDate1;
     Toolbar toolbar;
     Dialog dialog;
     List<AttendanceStaff> arrayList;
@@ -59,8 +59,12 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity {
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
          formattedDate = df.format(c);
+
+         SimpleDateFormat df1 = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
+         formattedDate1 = df1.format(c);
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        textView2=findViewById(R.id.textView2);
         schoolName=findViewById(R.id.schoolName);
         buttonSaveAtendance=findViewById(R.id.buttonSaveAtendance);
         dialog = new Dialog(this);
@@ -71,24 +75,43 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity {
         recyclerViewStaffAttendance=findViewById(R.id.recyclerViewStaffAttendance);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
+        textView2.setText("Attendance Date: "+formattedDate1);
         recyclerViewStaffAttendance.setLayoutManager(new LinearLayoutManager(this));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Log.d("TAG", "onCreate: "+formattedDate);
+        Log.d("TAG", "onCreate: "+paraGetStaff(formattedDate,applicationController.getSchoolId()));
         Call<List<AttendanceStaff>> listCall=apiService.getStaff(paraGetStaff(formattedDate,applicationController.getSchoolId()));
         listCall.enqueue(new Callback<List<AttendanceStaff>>() {
             @Override
             public void onResponse(Call<List<AttendanceStaff>> call, Response<List<AttendanceStaff>> response) {
                 arrayList=response.body();
-                if ((arrayList.get(0).getDateofDay()==null?"":arrayList.get(0).getDateofDay()).isEmpty()){
-                    Log.d("TAG", "onResponse: "+response.body().get(0).getAttendenceStatusID());
-                    recyclerViewStaffAttendance.setAdapter(new StaffAttendanceAdapter(UpdateDetails_StaffAttendance.this,arrayList,formattedDate));
-                }else{
-                    TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-                    Button button=dialog.findViewById(R.id.BtnResponseDialoge);
+                try{
+                    if ((arrayList.get(0).getDateofDay() == null ? "" : arrayList.get(0).getDateofDay()).isEmpty()) {
+                        recyclerViewStaffAttendance.setAdapter(new StaffAttendanceAdapter(UpdateDetails_StaffAttendance.this, arrayList, formattedDate));
+                    } else {
+                        TextView textView = dialog.findViewById(R.id.dialogtextResponse);
+                        Button button = dialog.findViewById(R.id.BtnResponseDialoge);
+                        try {
+                            textView.setText("Today's Attendance already submitted \n" +
+                                    "please check on Date wise attendance page");
+                            dialog.show();
+                            button.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    onBackPressed();
+                                    dialog.dismiss();
+                                }
+                            });
+                        } catch (Exception e) {
+                            Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }catch (Exception e){
+                    TextView textView = dialog.findViewById(R.id.dialogtextResponse);
+                    Button button = dialog.findViewById(R.id.BtnResponseDialoge);
                     try {
-                        textView.setText("Today's Attendance already submitted \n" +
-                                "please check on Date wise attendance page");
+                        textView.setText("Sorry!! \n We could not find any details of your staff");
                         dialog.show();
                         button.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -97,7 +120,7 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         });
-                    }catch (Exception e){
+                    } catch (Exception f) {
                         Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
                     }
                 }

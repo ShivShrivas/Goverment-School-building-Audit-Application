@@ -23,7 +23,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Solar Panel" />
+            app:title="Date Wise Attendance" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +53,16 @@ CardView cardViewDataPicker;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_date_wise_attendance);
         applicationController= (ApplicationController) getApplication();
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         cardViewDataPicker=findViewById(R.id.cardViewDataPicker);
         txtdate=findViewById(R.id.txtdate);
         btn_GetAttendance=findViewById(R.id.btn_GetAttendance);
@@ -77,13 +88,13 @@ CardView cardViewDataPicker;
                 RestClient restClient=new RestClient();
                 ApiService apiService=restClient.getApiService();
                 Log.d("TAG", "onCreate: "+fromdate);
+                Log.d("TAG", "onClick: "+paraGetStaff(fromdate,applicationController.getSchoolId()));
                 Call<List<AttendanceStaff>> listCall=apiService.getStaff(paraGetStaff(fromdate,applicationController.getSchoolId()));
                 listCall.enqueue(new Callback<List<AttendanceStaff>>() {
                     @Override
                     public void onResponse(Call<List<AttendanceStaff>> call, Response<List<AttendanceStaff>> response) {
                         arrayList=response.body();
 
-                            Log.d("TAG", "onResponse: "+response.body().get(0).getAttendenceStatusID());
                             recyclerViewDateWiseAttednView.setAdapter(new StaffAttendanceAdapterOnView(Date_Wise_Attendance.this,arrayList,fromdate));
                         recyclerViewDateWiseAttednView.getViewTreeObserver().addOnPreDrawListener(
                                 new ViewTreeObserver.OnPreDrawListener() {
