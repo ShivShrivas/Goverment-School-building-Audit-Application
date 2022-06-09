@@ -30,6 +30,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".DIOS.Diios_Panel_Under_School_dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.JD_Dashboard"
+            android:exported="false"
+            android:label="@string/title_activity_jd_dashboard" />
+        <activity
             android:name=".DIOS.DIOS_Dashboard"
             android:exported="false" />
         <activity

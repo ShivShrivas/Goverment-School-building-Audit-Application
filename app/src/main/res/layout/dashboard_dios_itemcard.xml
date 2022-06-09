@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/chemistryLabBodyCard"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="2dp"
+        android:backgroundTint="?attr/colorPrimary"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_marginStart="2dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/roomTypetxt"
+        android:layout_width="match_parent"
+        android:paddingStart="14dp"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:fontFamily="@font/open_sans_herbew_bold"
+        android:text="Classroom Details"
+        android:textColor="#5A5A5A"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/updateOntxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="15dp"
+        android:text="13 Mar 2022 02:42 PM"
+        android:textAlignment="textStart"
+        android:textColor="#6E6E6E"
+        android:textSize="15dp" />
+
+</LinearLayout>
+            <LinearLayout
+                android:layout_weight="3.2"
+                android:padding="6dp"
+                android:gravity="end|center_vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+              <ImageView
+                  android:id="@+id/penddingAndSDoneBtn"
+                  android:layout_width="25dp"
+                  android:layout_height="25dp"
+                  android:src="@drawable/ic_right_icon"/>
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
