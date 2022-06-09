@@ -457,21 +457,28 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
 
                 recyclerViewVocalHsromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
 
-                StaffPhotoPathList=response.body().get(0).get("ClassPhotoPath").getAsString().split(",");
-                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
-                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
-                if (!aList.get(0).isEmpty()) {
-                    OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter = new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this, aList);
-                    recyclerViewVocalHsromServer.setAdapter(onlineImageRecViewAdapter);
-                }
-                recyclerViewVocalISFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this,LinearLayoutManager.HORIZONTAL,false));
+                try {
+                    StaffPhotoPathList = response.body().get(0).get("ClassPhotoPath") == null ? new String[]{} : response.body().get(0).get("ClassPhotoPath").getAsString().split(",");
+                    aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                    UpdateDetailsOfExtraThings obj = new UpdateDetailsOfExtraThings();
+                    if (!aList.get(0).isEmpty()) {
+                        OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter = new OnlineImageRecViewAdapterEditable(UpdateDetails_VocationalEducationRoom.this, aList);
+                        recyclerViewVocalHsromServer.setAdapter(onlineImageRecViewAdapter);
+                    }
+                    recyclerViewVocalISFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetails_VocationalEducationRoom.this, LinearLayoutManager.HORIZONTAL, false));
+                }catch (Exception e){
 
-                StaffPhotoPathList1=response.body().get(1).get("ClassPhotoPath").getAsString().split(",");
-                bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
-                if (!bList.get(0).isEmpty()){
-                OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter1=new OnlineImageRecViewAdapterEditable1(UpdateDetails_VocationalEducationRoom.this,bList);
-                recyclerViewVocalISFromServer.setAdapter(onlineImageRecViewAdapter1);
-            }
+                }
+                try{
+                    StaffPhotoPathList1 = response.body().get(1).get("ClassPhotoPath") == null ? new String[]{} : response.body().get(1).get("ClassPhotoPath").getAsString().split(",");
+                    bList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList1));
+                    if (!bList.get(0).isEmpty()) {
+                        OnlineImageRecViewAdapterEditable1 onlineImageRecViewAdapter1 = new OnlineImageRecViewAdapterEditable1(UpdateDetails_VocationalEducationRoom.this, bList);
+                        recyclerViewVocalISFromServer.setAdapter(onlineImageRecViewAdapter1);
+                    }
+            }catch (Exception e){
+
+                }
             }
 
             @Override

@@ -19,15 +19,16 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_dios_welcome.xml" value="0.179" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/search_bg.xml" value="0.1285" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dash_board.xml" value="0.1703125" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dashboard_staff_attendance.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dashboard_staff_attendance.xml" value="0.17" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_date_wise_attendance.xml" value="0.18" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_dashboard.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_final_otp_submission.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_art_and_craft.xml" value="0.17" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_bio_metric_details.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_class_room_page.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_playground_details.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_principal_room.xml" value="0.22" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_principal_dashboard.xml" value="0.2" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_principal_dashboard.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_detail_type_one.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_boundry_wall.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_cctv.xml" value="0.1859375" />
@@ -39,7 +40,8 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_staff_attendance.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_type_five.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_updatedetails_type_three.xml" value="0.1859375" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_activity_layout.xml" value="0.1" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/main_activity_layout.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/recview_attendance_card.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/recview_attendance_card_for_view.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/respons_dialog.xml" value="0.1859375" />
