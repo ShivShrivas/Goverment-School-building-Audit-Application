@@ -29,6 +29,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.bsn.buildingaudit.Activies.NoInternetConnection;
 import com.bsn.buildingaudit.Adapters.QuaterTypeAdapter;
 import com.bsn.buildingaudit.Adapters.UserTyepAdapter;
+import com.bsn.buildingaudit.DIOS.DIOS_Dashboard;
 import com.bsn.buildingaudit.Model.GetQuaterType;
 import com.bsn.buildingaudit.Model.GetSchoolDetails;
 import com.bsn.buildingaudit.Model.GetUserType;
@@ -204,33 +205,41 @@ CheckBox check_showpassword,check_remember;
             public void onClick(View view) {
 
                 dialog.show();
+                Log.d("TAG", "onClick: "+spinnerUserType.getSelectedItem().toString());
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
-                        RestClient restClient=new RestClient();
-                        ApiService apiService=restClient.getApiService();
-                        Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
-                        Call<List<JsonObject>> call=apiService.getLogin(paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
+                    if(applicationController.getUsertype().equals("AA")){
+                        Log.d("TAG", "in: "+password.getText()+"////"+username.getText());
+
+                            startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
+                            finish();
+                            dialog.dismiss();
+
+                    }else {
+                        RestClient restClient = new RestClient();
+                        ApiService apiService = restClient.getApiService();
+                        Log.d("TAG", "onClick: " + paraLogin(username.getText().toString(), applicationController.getUsertype(), password.getText().toString()));
+                        Call<List<JsonObject>> call = apiService.getLogin(paraLogin(username.getText().toString(), applicationController.getUsertype(), password.getText().toString()));
                         call.enqueue(new Callback<List<JsonObject>>() {
                             @Override
                             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                                Log.d("TAG", "onResponse: "+response.body());
-                                if (response.body().size()!=0){
+                                Log.d("TAG", "onResponse: " + response.body());
+                                if (response.body().size() != 0) {
                                     try {
-                                        if (response.body().get(0).get("pswd").getAsString().equals("0")){
+                                        if (response.body().get(0).get("pswd").getAsString().equals("0")) {
                                             Toast.makeText(MainActivity.this, "Please Enter Correct Username And Password!!", Toast.LENGTH_SHORT).show();
                                             dialog.dismiss();
                                         }
-                                    }catch (Exception e){
+                                    } catch (Exception e) {
 
                                     }
-                                    if(response.body().get(0).get("userid")!=null) {
+                                    if (response.body().get(0).get("userid") != null) {
                                         applicationController.setUserid(response.body().get(0).get("userid").getAsString());
                                         applicationController.setUsername(response.body().get(0).get("username").getAsString());
                                         applicationController.setSchoolId(response.body().get(0).get("schoolid").getAsString());
                                         getSchoolDetails();
 
-                                    }
-                                    else {
+                                    } else {
                                         Toast.makeText(MainActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     }
@@ -239,9 +248,9 @@ CheckBox check_showpassword,check_remember;
 
                             @Override
                             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                                Log.d("TAG", "onFailure: "+t);
+                                Log.d("TAG", "onFailure: " + t);
                                 dialog.dismiss();
-                                Snackbar.make(loginLayout,"Restart App or Check your internet Connection", BaseTransientBottomBar.LENGTH_INDEFINITE)
+                                Snackbar.make(loginLayout, "Restart App or Check your internet Connection", BaseTransientBottomBar.LENGTH_INDEFINITE)
                                         .setAction("Retry", new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
@@ -252,7 +261,7 @@ CheckBox check_showpassword,check_remember;
                                         });
                             }
                         });
-
+                    }
 
                 }else {
                     Toast.makeText(MainActivity.this, "Please enter username and password properly", Toast.LENGTH_SHORT).show();
@@ -263,43 +272,46 @@ CheckBox check_showpassword,check_remember;
 
     }
     private void getSchoolDetails() {
-        RestClient restClient=new RestClient();
-        ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "getSchoolDetails: "+paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
-        Call<List<GetSchoolDetails>> call=apiService.getSchoolDetails(paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
-        call.enqueue(new Callback<List<GetSchoolDetails>>() {
-            @Override
-            public void onResponse(Call<List<GetSchoolDetails>> call, Response<List<GetSchoolDetails>> response) {
-                if (response != null) {
-                    if (response.code() == 200 && response.body() != null) {
-                        getSchoolDetails=response.body();
-                        Log.d("TAG", "onResponse: "+response.body());
-                        applicationController.setSchoolName(getSchoolDetails.get(0).getSCHOOL_NAME());
-                        applicationController.setSchoolAddress(getSchoolDetails.get(0).getADDRESS());
-                        applicationController.setUsername(getSchoolDetails.get(0).getDESIGNATION());
-                        applicationController.setPhoneNumber(getSchoolDetails.get(0).getPHONE_NO());
-                        applicationController.setDataLocked(getSchoolDetails.get(0).getDataLocked());
 
-                        startActivity(new Intent(MainActivity.this,Principal_Dashboard.class));
-                        finish();
-                        dialog.dismiss();
+            RestClient restClient=new RestClient();
+            ApiService apiService=restClient.getApiService();
+            Log.d("TAG", "getSchoolDetails: "+paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
+            Call<List<GetSchoolDetails>> call=apiService.getSchoolDetails(paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
+            call.enqueue(new Callback<List<GetSchoolDetails>>() {
+                @Override
+                public void onResponse(Call<List<GetSchoolDetails>> call, Response<List<GetSchoolDetails>> response) {
+                    if (response != null) {
+                        if (response.code() == 200 && response.body() != null) {
+                            getSchoolDetails=response.body();
+                            Log.d("TAG", "onResponse: "+response.body());
+                            applicationController.setSchoolName(getSchoolDetails.get(0).getSCHOOL_NAME());
+                            applicationController.setSchoolAddress(getSchoolDetails.get(0).getADDRESS());
+                            applicationController.setUsername(getSchoolDetails.get(0).getDESIGNATION());
+                            applicationController.setPhoneNumber(getSchoolDetails.get(0).getPHONE_NO());
+                            applicationController.setDataLocked(getSchoolDetails.get(0).getDataLocked());
+
+                            startActivity(new Intent(MainActivity.this,Principal_Dashboard.class));
+                            finish();
+                            dialog.dismiss();
+                        }else{
+                            Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                        }
                     }else{
                         Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                     }
-                }else{
-                    Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
                 }
 
-            }
+                @Override
+                public void onFailure(Call<List<GetSchoolDetails>> call, Throwable t) {
+                    Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void onFailure(Call<List<GetSchoolDetails>> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-              
-            }
-        });
+                }
+            });
+
+
 
     }
 

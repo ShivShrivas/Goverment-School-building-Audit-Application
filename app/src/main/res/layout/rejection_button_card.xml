@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+
+        android:background="#FBFBFB"
+        android:gravity="center_vertical|center_horizontal"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:textSize="18dp"
+                android:background="#D50000"
+                android:layout_weight="1"
+                android:paddingStart="15dp"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"
+                android:text="Rejection!!"/>
+
+            <ImageView
+                android:id="@+id/dilogeCloseBtn"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="#D50000"
+                android:elevation="2dp"
+                android:foreground="@drawable/ic_baseline_highlight_off_24"
+                android:foregroundTint="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleForReasonreject"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_margin="5dp"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtUsername"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Remarks"
+                android:textSize="15dp"
+                android:textColorHint="#6C6C6C"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="4"
+                    style="@style/remarkBoxDIOSReject"
+                    android:textColor="#151515"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:backgroundTint="#D50000"
+            android:layout_height="wrap_content"
+            android:id="@+id/rejectdBtnDialoge"
+            android:text="Submit"/>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
+
+

@@ -30,4 +30,22 @@
     <item name="android:textColor">@color/white</item>
     <item name="android:textStyle">normal</item>
     </style>
+
+
+    <style name="remarkBoxDIOSApproved" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryVariant">@color/green</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green</item>
+    </style>
+
+    <style name="remarkBoxDIOSReject" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <item name="colorPrimary">#D50000</item>
+    <item name="colorPrimaryVariant">#D50000</item>
+    <item name="colorOnPrimary">@color/white</item>
+    <!-- Secondary brand color. -->
+    <item name="colorSecondary">#D50000</item>
+        <item name="colorSecondaryVariant">#D50000</item>
+    </style>
 </resources>

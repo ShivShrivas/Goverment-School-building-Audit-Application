@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bsn.buildingaudit">
+    package="com.bsn.buildingaudit" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -28,14 +28,29 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuildingAudit"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m">
+        tools:targetApi="m" >
+        <activity
+            android:name=".DIOS.SchoolResultDetails.Dashboard_School_Result_Detail"
+            android:exported="false" />
+
+        <activity
+            android:name=".DIOS.SchoolResultDetails.Student_Result_Details_last_three_years"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.SchoolResultDetails.College_Student_Result"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.SchoolStaff.Staff_Sanction_and_Working"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.SchoolStaff.All_Staff_Traing_Details"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.SchoolStaff.Dios_StaffDetails"
+            android:exported="false" />
         <activity
             android:name=".DIOS.Diios_Panel_Under_School_dashboard"
             android:exported="false" />
-        <activity
-            android:name=".ui.login.JD_Dashboard"
-            android:exported="false"
-            android:label="@string/title_activity_jd_dashboard" />
         <activity
             android:name=".DIOS.DIOS_Dashboard"
             android:exported="false" />
@@ -80,7 +95,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.bsn.buildingaudit.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
 
             <!-- ressource file to create -->
             <meta-data
@@ -295,7 +310,7 @@
         <activity
             android:name=".Activies.SplashScreen"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

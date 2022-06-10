@@ -1,9 +1,11 @@
 package com.bsn.buildingaudit.DIOS;
 
 import android.os.Bundle;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,13 +17,15 @@ import java.util.ArrayList;
 public class DIOS_Dashboard extends AppCompatActivity {
 RecyclerView recyclerViewForDiosDashboard;
 SearchView searchView;
+
 DIOS_DashboardAdapter adapter;
     ArrayList<String> arrayListSchool=new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dios_dashboard);
-
+        Window window = getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         arrayListSchool.add("PS K RAM NAGAR");
         arrayListSchool.add("SP BAL VIDYA MANDIR");
         arrayListSchool.add("PRI. V. HORA KACHHAR");

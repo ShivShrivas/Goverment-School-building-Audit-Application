@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bsn.buildingaudit.DIOS.DIOS_Dashboard;
 import com.bsn.staffAttendance.Dashboard_StaffAttendance;
 
 public class Principal_Dashboard extends AppCompatActivity {
@@ -47,11 +46,6 @@ LinearLayout diosLay;
             }
         });
 
-        diosLay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Principal_Dashboard.this, DIOS_Dashboard.class));
-            }
-        });
+
     }
 }

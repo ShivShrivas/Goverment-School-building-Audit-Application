@@ -7,7 +7,15 @@
     <color name="teal_700">#ffa000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="gray">#202020</color>
     <color name="gray2">#C3C3C3</color>
     <color name="textColor1">#202020</color>
+    <color name="DIOS_ColorPrimary">#615DE1</color>
+    <color name="DIOS_ColorPrimaryDark">#3E3AB3</color>
+
+    <color name="red">#E32227</color>
+    <color name="aqua">#A95700</color>
+    <color name="blue">#088FFA</color>
+    <color name="cyan">#275D5D</color>
+    <color name="gray">#313B41</color>
+    <color name="green">#2BB02B</color>
 </resources>

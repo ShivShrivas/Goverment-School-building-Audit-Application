@@ -10,7 +10,7 @@
         android:layout_height="55dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
-        android:backgroundTint="?attr/colorPrimary"
+        android:backgroundTint="@color/DIOS_ColorPrimary"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="6dp"
         app:cardCornerRadius="4dp"
