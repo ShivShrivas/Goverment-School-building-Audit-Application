@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.bsn.buildingaudit" >
+    package="com.bsn.buildingaudit">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -28,11 +28,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BuildingAudit"
         android:usesCleartextTraffic="true"
-        tools:targetApi="m" >
+        tools:targetApi="m">
+        <activity
+            android:name=".DIOS.ExtraActivitiesDetails.ExtraActivity_Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.ExtraActivitiesDetails.Participation_Details"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.ExtraActivitiesDetails.Ncc_Details"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.ExtraActivitiesDetails.Extra_Activities_Details"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.CampusBeautification.Campus_Beautification_Details"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.StudentEnrollment.Student_Enrollment_Details"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.co_curricular_activities.Co_Curricular_Dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.co_curricular_activities.Scount_and_Guide"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.co_curricular_activities.Red_Cross_Society"
+            android:exported="false" />
+        <activity
+            android:name=".DIOS.co_curricular_activities.Game_Details"
+            android:exported="false" />
         <activity
             android:name=".DIOS.SchoolResultDetails.Dashboard_School_Result_Detail"
             android:exported="false" />
-
+        <activity
+            android:name=".Activies.UpdateDetails_GeofenchingDetails"
+            android:exported="false" />
         <activity
             android:name=".DIOS.SchoolResultDetails.Student_Result_Details_last_three_years"
             android:exported="false" />
@@ -95,7 +127,7 @@
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.bsn.buildingaudit.provider"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
 
             <!-- ressource file to create -->
             <meta-data
@@ -310,7 +342,7 @@
         <activity
             android:name=".Activies.SplashScreen"
             android:exported="true"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

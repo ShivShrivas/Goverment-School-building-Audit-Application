@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
@@ -19,6 +20,14 @@ CardView staffsenctionAndWorking,allStaffTraing;
         setContentView(R.layout.activity_dios_staff_details);
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         staffsenctionAndWorking=findViewById(R.id.staffsenctionAndWorking);
         allStaffTraing=findViewById(R.id.allStaffTraing);
         staffsenctionAndWorking.setOnClickListener(new View.OnClickListener() {

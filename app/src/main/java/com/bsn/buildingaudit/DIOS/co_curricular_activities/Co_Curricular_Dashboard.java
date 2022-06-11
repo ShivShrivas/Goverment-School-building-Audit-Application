@@ -1,4 +1,4 @@
-package com.bsn.buildingaudit.DIOS.SchoolResultDetails;
+package com.bsn.buildingaudit.DIOS.co_curricular_activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,14 +12,14 @@ import androidx.core.content.ContextCompat;
 
 import com.bsn.buildingaudit.R;
 
-public class Dashboard_School_Result_Detail extends AppCompatActivity {
-CardView currentResult,last_threeYearResult;
+public class Co_Curricular_Dashboard extends AppCompatActivity {
+CardView game_details,redCrossSociety,scoutAndGuide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_co_curricular_dashboard);
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
-        setContentView(R.layout.activity_dashboard_school_result_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -28,18 +28,26 @@ CardView currentResult,last_threeYearResult;
                 onBackPressed();
             }
         });
-        last_threeYearResult=findViewById(R.id.ExtraActivitiesDetails);
-        currentResult=findViewById(R.id.Ncc_activiies_Details);
-        currentResult.setOnClickListener(new View.OnClickListener() {
+        game_details=findViewById(R.id.ExtraActivitiesDetails);
+        redCrossSociety=findViewById(R.id.Ncc_activiies_Details);
+        scoutAndGuide=findViewById(R.id.participationsCardView);
+
+        game_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Dashboard_School_Result_Detail.this,College_Student_Result.class));
+                startActivity(new Intent(Co_Curricular_Dashboard.this,Game_Details.class));
             }
         });
- last_threeYearResult.setOnClickListener(new View.OnClickListener() {
+        redCrossSociety.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Dashboard_School_Result_Detail.this,Student_Result_Details_last_three_years.class));
+                startActivity(new Intent(Co_Curricular_Dashboard.this,Red_Cross_Society.class));
+            }
+        });
+        scoutAndGuide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Co_Curricular_Dashboard.this,Scount_and_Guide.class));
             }
         });
 

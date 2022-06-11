@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:title="School Result Dashboard" />
+        app:title="Extra Activities Dashboard" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout38"
@@ -38,14 +38,14 @@
             android:text="@string/dios_name"
             android:textColor="@color/white"
             android:textSize="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView17"
+            app:layout_constraintBottom_toTopOf="@+id/textView16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/textView16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_herbew_bold"
@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans_herbew_bold"
-                        android:text="Last 3 Year Result"
+                        android:text="Extra Activities"
                         android:textColor="#5A5A5A"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -264,7 +264,58 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans_herbew_bold"
-                        android:text="Current Result"
+                        android:text="NCC Details"
+                        android:textColor="#5A5A5A"
+                        android:textSize="15dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="13 Mar 2022 02:42 PM"
+                        android:textAlignment="textEnd"
+                        android:textColor="#6E6E6E"
+                        android:textSize="15dp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/participationsCardView"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:backgroundTint="@color/DIOS_ColorPrimary"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Ncc_activiies_Details">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="2dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/open_sans_herbew_bold"
+                        android:text="Participations"
                         android:textColor="#5A5A5A"
                         android:textSize="15dp"
                         android:textStyle="bold" />
