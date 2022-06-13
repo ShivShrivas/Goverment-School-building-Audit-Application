@@ -20,7 +20,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Library"
+            app:title="@string/library"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -140,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="32dp"
         android:layout_marginTop="4dp"
-        android:text="Library Room"
+        android:text="@string/library_room"
 
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
@@ -178,7 +178,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="Availability"
+                    android:text="@string/availability"
                                android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -230,7 +230,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Physical Status"
+                        android:text="@string/physical_status"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -273,7 +273,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Furniture Availability"
+                        android:text="@string/furniture_availability"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -316,7 +316,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Number of Almira"
+                        android:text="@string/number_of_almira"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -361,7 +361,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Number of Books"
+                        android:text="@string/number_of_books"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -405,7 +405,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Working Status"
+                        android:text="@string/working_status"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -449,7 +449,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Reading Corner"
+                        android:text="@string/reading_corner"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -494,7 +494,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Does the school subscribe to newspapers/ magazines?"
+                        android:text="@string/does_the_school_subscribe_to_newspapers_magazines"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -538,7 +538,7 @@
                         android:layout_weight="1"
                         android:layout_gravity="center_vertical"
                         android:gravity="center_vertical"
-                        android:text="Grant Under Scheme"
+                        android:text="@string/grant_under_scheme"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -594,7 +594,7 @@
                             android:layout_margin="4dp"
                             android:layout_weight="1"
                             android:background="@drawable/cardbg"
-                            android:hint="Enter Other Scheme Name Here.."
+                            android:hint="@string/enter_other_scheme_name_here"
                             android:paddingStart="5dp" />
                     </androidx.cardview.widget.CardView>
 
@@ -618,7 +618,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Total Library Grant"
+                        android:text="@string/total_library_grant"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -663,7 +663,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Library grant(Rs.)\n In current F.Y."
+                        android:text="@string/library_grant_rs_n_in_current_f_y"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -710,7 +710,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Expenditure(Rs.)\n In current F.Y."
+                        android:text="@string/expenditure_rs_n_in_current_f_ys"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -755,7 +755,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Upload Images"
+                        android:text="@string/upload_images"
                         android:textColor="@color/textColor1"
 
                         android:textSize="15dp" />
@@ -804,7 +804,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="76dp"
                 android:layout_marginEnd="24dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toBottomOf="parent"

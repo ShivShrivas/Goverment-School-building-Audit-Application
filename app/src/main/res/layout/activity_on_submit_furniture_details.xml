@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Furniture"
+            app:title="@string/furniture"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="4dp"
-        android:text="Furnitures"
+        android:text="@string/furnitures"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -193,7 +193,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Single Seated"
+                        android:text="@string/single_seated"
                         android:textColor="@color/white"
 
                         android:textSize="16dp"
@@ -296,7 +296,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:textSize="16dp"
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -328,7 +328,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Minor Repairing"
+                        android:text="@string/minor_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -361,7 +361,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -415,7 +415,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Double Seated"
+                        android:text="@string/double_seated"
                         android:textColor="@color/white"
 
                         android:textSize="16dp"
@@ -518,7 +518,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
@@ -550,7 +550,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:text="Minor Repairing"
+                        android:text="@string/minor_repairing"
 
                         android:textColor="@color/black"
                         android:textSize="16dp" />
@@ -583,7 +583,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
 
                         android:textColor="@color/black"
                         android:textSize="16dp" />
@@ -637,7 +637,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Tripple Seated"
+                        android:text="@string/triple_seated"
                         android:textColor="@color/white"
 
                         android:textSize="16dp"
@@ -742,7 +742,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
@@ -774,7 +774,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:text="Minor Repairing"
+                        android:text="@string/minor_repairing"
 
                         android:textColor="@color/black"
                         android:textSize="16dp" />
@@ -807,7 +807,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
 
                         android:textColor="@color/black"
                         android:textSize="16dp" />
@@ -862,7 +862,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingStart="6dp"
-                    android:text="Total Strength Covered"
+                    android:text="@string/total_strength_covered"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -897,7 +897,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingStart="6dp"
-                    android:text="Additional Furniture Required"
+                    android:text="@string/additional_furniture_required"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -930,7 +930,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Uploaded Images"
+                    android:text="@string/uploaded_images"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 

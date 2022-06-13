@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:title="Last Three Years Result" />
+        app:title="@string/last_three_year_result" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewFOrStudentResult"
@@ -49,7 +49,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:background="@drawable/bg_red"
-            android:text="Rejected"
+            android:text="@string/rejected"
             android:textSize="14dp"
 
             />
@@ -63,7 +63,7 @@
             android:layout_weight="1"
             android:textColor="@color/white"
             android:background="@drawable/bg_green"
-            android:text="Approved"
+            android:text="@string/approved"
             android:textSize="14dp"
 
             />

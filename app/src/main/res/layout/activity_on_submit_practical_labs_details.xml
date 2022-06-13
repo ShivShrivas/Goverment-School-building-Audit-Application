@@ -19,7 +19,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Practical Lab"
+            app:title="@string/practical_lab"
 
             android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
@@ -141,7 +141,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
-        android:text="Practical Labs Details"
+        android:text="@string/practical_labs_details"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +176,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Up to High School"
+                android:text="@string/up_to_high_school"
                 android:textColor="@color/black"
                 android:background="#D6D6D6"
                 android:textSize="15dp"
@@ -227,7 +227,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Science Lab"
+                            android:text="@string/science_lab"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -248,7 +248,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Availability"
+                                android:text="@string/availability"
                                 android:textColor="@color/white"
                                 android:textSize="10dp"
                                 android:textStyle="normal" />
@@ -316,7 +316,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Equipment Status"
+                                android:text="@string/equipment_status"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -363,7 +363,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Lab Condition"
+                                android:text="@string/lab_condition"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -437,7 +437,7 @@
                 android:paddingStart="10dp"
                 android:paddingTop="3dp"
                 android:paddingBottom="3dp"
-                android:text="Up to Intermediate"
+                android:text="@string/up_to_intermediate"
                 android:textSize="15dp"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout16" />
 
@@ -481,7 +481,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Physics Lab"
+                            android:text="@string/physics_lab"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -502,7 +502,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Availability"
+                                android:text="@string/availability"
                                 android:textColor="@color/white"
                                 android:textSize="10dp"
                                 android:textStyle="normal" />
@@ -567,7 +567,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Equipment Status"
+                                android:text="@string/equipment_status"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -613,7 +613,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Lab Condition"
+                                android:text="@string/lab_condition"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -805,7 +805,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Equipment Status"
+                                android:text="@string/equipment_status"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -851,7 +851,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Lab Condition"
+                                android:text="@string/lab_condition"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -957,7 +957,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Biology Lab"
+                            android:text="@string/biology_lab"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -978,7 +978,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Availability"
+                                android:text="@string/availability"
                                 android:textColor="@color/white"
                                 android:textSize="10dp"
                                 android:textStyle="normal" />
@@ -1044,7 +1044,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Equipment Status"
+                                android:text="@string/equipment_status"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1090,7 +1090,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Lab Condition"
+                                android:text="@string/lab_condition"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1194,7 +1194,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Social Science Lab"
+                            android:text="@string/social_science_lab"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -1215,7 +1215,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Availability"
+                                android:text="@string/availability"
                                 android:textColor="@color/white"
                                 android:textSize="10dp"
                                 android:textStyle="normal" />
@@ -1281,7 +1281,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Equipment Status"
+                                android:text="@string/equipment_status"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1327,7 +1327,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Lab Condition"
+                                android:text="@string/lab_condition"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1434,7 +1434,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Home Science Lab"
+                            android:text="@string/home_science_lab"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -1455,7 +1455,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Availability"
+                                android:text="@string/availability"
                                 android:textColor="@color/white"
                                 android:textSize="10dp"
                                 android:textStyle="normal" />
@@ -1521,7 +1521,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Equipment Status"
+                                android:text="@string/equipment_status"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1567,7 +1567,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Lab Condition"
+                                android:text="@string/lab_condition"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1672,7 +1672,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Music Lab"
+                            android:text="@string/music_lab"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -1693,7 +1693,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Availability"
+                                android:text="@string/availability"
                                 android:textColor="@color/white"
                                 android:textSize="10dp"
                                 android:textStyle="normal" />
@@ -1759,7 +1759,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Equipment Status"
+                                android:text="@string/equipment_status"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1805,7 +1805,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
 
-                                android:text="Lab Condition"
+                                android:text="@string/lab_condition"
                                 android:textColor="@color/textColor1"
                                 android:textSize="15dp" />
 
@@ -1878,7 +1878,7 @@
                 android:layout_marginTop="32dp"
                 android:visibility="gone"
                 android:background="?attr/colorPrimary"
-                android:text="Submit Details"
+                android:text="@string/submit_details"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

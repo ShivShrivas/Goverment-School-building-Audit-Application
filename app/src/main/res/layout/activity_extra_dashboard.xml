@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:title="Extra Activities Dashboard" />
+        app:title="@string/extra_activties_dashboard" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout38"
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/open_sans_herbew_bold"
-            android:text="School Grading &amp; Monitoring System"
+            android:text="@string/school_grading_amp_monitoring_system"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="14dp"
@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans_herbew_bold"
-                        android:text="Extra Activities"
+                        android:text="@string/extra_activities"
                         android:textColor="#5A5A5A"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -264,7 +264,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans_herbew_bold"
-                        android:text="NCC Details"
+                        android:text="@string/ncc_details"
                         android:textColor="#5A5A5A"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -315,7 +315,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans_herbew_bold"
-                        android:text="Participations"
+                        android:text="@string/participation"
                         android:textColor="#5A5A5A"
                         android:textSize="15dp"
                         android:textStyle="bold" />

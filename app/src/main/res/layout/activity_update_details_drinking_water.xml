@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Drinking Water"
+            app:title="@string/drinking_water"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -140,7 +140,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Drinking Water"
+        android:text="@string/drinking_water"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -189,7 +189,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Availability"
+                        android:text="@string/availability"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp"
                         android:textStyle="bold" />
@@ -204,7 +204,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Working Status"
+                        android:text="@string/working_status"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp"
                         android:textStyle="bold" />
@@ -317,7 +317,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="24dp"
                         android:gravity="center_horizontal|bottom"
-                        android:text="No. of Handpump"
+                        android:text="@string/no_of_handpump"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -347,7 +347,7 @@
                                 android:id="@+id/textView1551"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Total Handpump"
+                                android:text="@string/total_handpump"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorPrimary"
                                 android:textSize="8dp"
@@ -405,7 +405,7 @@
                                     android:id="@+id/textView122"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Working Handpump"
+                                    android:text="@string/working_handpump"
                                     android:textAlignment="center"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="8dp"
@@ -446,7 +446,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Not Working Handpump"
+                            android:text="@string/not_working_handpump"
                             android:textAlignment="center"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="8dp" />
@@ -487,7 +487,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Submersible"
+                        android:text="@string/submersible"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -566,7 +566,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="24dp"
                         android:gravity="center_horizontal|bottom"
-                        android:text="No. of Submersible"
+                        android:text="@string/no_of_submersible"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -596,7 +596,7 @@
                                 android:id="@+id/textView1531"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Total Submersible"
+                                android:text="@string/total_submersible"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorPrimary"
                                 android:textSize="8dp"
@@ -654,7 +654,7 @@
                                     android:id="@+id/textView123"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Working Submersible"
+                                    android:text="@string/working_submersible"
                                     android:textAlignment="center"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="8dp"
@@ -695,7 +695,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Not Working Submersible"
+                            android:text="@string/not_working_submersible"
                             android:textAlignment="center"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="8dp" />
@@ -734,7 +734,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Nagar Nigam/Nagar Palika Water Supply"
+                        android:text="@string/nagar_nigam_nagar_palika_water_supply"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -813,7 +813,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Overhead Tank"
+                android:text="@string/overhead_tank"
                 android:textColor="@color/textColor1"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -893,7 +893,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="24dp"
                         android:gravity="center_horizontal|bottom"
-                        android:text="No. of Taps"
+                        android:text="@string/no_of_taps"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -923,7 +923,7 @@
                                 android:id="@+id/textView155"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Total Taps Count"
+                                android:text="@string/total_taps_count"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorPrimary"
                                 android:textSize="8dp"
@@ -981,7 +981,7 @@
                                     android:id="@+id/textView12"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Working Taps"
+                                    android:text="@string/working_taps"
                                     android:textAlignment="center"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="8dp"
@@ -1022,7 +1022,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Not Working taps"
+                            android:text="@string/not_working_taps"
                             android:textAlignment="center"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="8dp" />
@@ -1063,7 +1063,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="RO Installation"
+                android:text="@string/ro_installation"
 
                 android:textColor="@color/textColor1"
                 android:textSize="15dp" />
@@ -1146,7 +1146,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginBottom="24dp"
                         android:gravity="center_horizontal|bottom"
-                        android:text="No. of RO"
+                        android:text="@string/no_of_ro"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
                 </LinearLayout>
@@ -1176,7 +1176,7 @@
                                 android:id="@+id/textView1255"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Total RO Count"
+                                android:text="@string/total_ro_count"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorPrimary"
                                 android:textSize="8dp"
@@ -1234,7 +1234,7 @@
                                     android:id="@+id/textView127"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Working RO"
+                                    android:text="@string/working_ro"
                                     android:textAlignment="center"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="8dp"
@@ -1275,7 +1275,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Not Working RO"
+                            android:text="@string/not_working_ro"
                             android:textAlignment="center"
                             android:textColor="?attr/colorPrimary"
                             android:textSize="8dp" />
@@ -1314,7 +1314,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical|center_horizontal"
-                    android:text="Ro Installation Under Scheme"
+                    android:text="@string/ro_installation_under_scheme"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -1392,7 +1392,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Upload Images"
+                    android:text="@string/upload_images"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 
@@ -1441,7 +1441,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

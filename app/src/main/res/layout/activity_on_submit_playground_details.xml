@@ -23,7 +23,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Playground" />
+            app:title="@string/playground" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -179,20 +179,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mobnumberTxt">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -247,7 +245,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Levelling Status"
+                        android:text="@string/levelling_status"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -295,7 +293,7 @@
                         android:gravity="center_vertical"
 
 
-                        android:text="Area in sq. mtr."
+                        android:text="@string/area_in_sq_mtr"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -344,7 +342,7 @@
                         android:gravity="center_vertical"
 
 
-                        android:text="Availability of Standard Track"
+                        android:text="@string/availability_of_standard_track"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -389,7 +387,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Uploaded Images"
+                        android:text="@string/uploaded_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 

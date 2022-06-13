@@ -23,7 +23,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Sound System and band" />
+            app:title="@string/sound_system_and_band" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Sound System and School Band"
+        android:text="@string/sound_system_and_school_band"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -167,7 +167,7 @@
                 android:layout_marginTop="8dp"
                 android:background="?attr/colorPrimary"
                 android:paddingStart="8dp"
-                android:text="Band For Boys"
+                android:text="@string/band_for_boys"
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -192,7 +192,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Sound System Availability"
+                    android:text="@string/sound_system_availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -235,7 +235,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="School Band and Instruments Availability"
+                    android:text="@string/school_band_and_instruments_availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -267,7 +267,7 @@
                 android:layout_marginTop="8dp"
                 android:background="?attr/colorPrimary"
                 android:paddingStart="8dp"
-                android:text="Band For Girls"
+                android:text="@string/band_for_girls"
                 android:textColor="@color/white"
                 android:textSize="15dp"
                 android:textStyle="bold"
@@ -294,7 +294,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="School Band and Instruments Availability"
+                    android:text="@string/school_band_and_instruments_availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -335,7 +335,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Upload Images"
+                    android:text="@string/upload_images"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 
@@ -384,7 +384,7 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

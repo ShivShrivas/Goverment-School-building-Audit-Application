@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Multipurpose Hall"
+            app:title="@string/multipurpose_hall"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Multipurpose Hall"
+        android:text="@string/multipurpose_hall"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +178,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-            android:text="Availability"
+            android:text="@string/availability"
             android:textColor="@color/textColor1"
             android:textSize="15dp" />
 
@@ -226,7 +226,7 @@
             android:layout_weight="1"
             android:gravity="center_vertical"
 
-            android:text="Physical Status"
+            android:text="@string/physical_status"
             android:textColor="@color/textColor1"            android:textSize="14dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -272,7 +272,7 @@
             android:gravity="center_vertical"
 
 
-            android:text="Sitting Capacity"
+            android:text="@string/sitting_capacity"
             android:textColor="@color/textColor1"            android:textSize="15dp" />
 
         <androidx.cardview.widget.CardView
@@ -318,7 +318,7 @@ android:layout_margin="4dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            android:text="Uploaded Images"
+            android:text="@string/uploaded_images"
             android:textColor="?attr/colorPrimary"
             android:textSize="15dp" />
 

@@ -18,7 +18,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Class Room"
+            app:title="@string/class_room"
             app:navigationIcon="@drawable/arrow_back"
             android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Classroom Details"
+        android:text="@string/classroom_details"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -171,7 +171,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="No. of Rooms"
+            android:text="@string/no_of_rooms"
 
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -183,7 +183,7 @@
             android:layout_weight="1"
 
 
-            android:text="Upload Images"
+            android:text="@string/upload_images"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="17dp" />
@@ -232,7 +232,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Total Rooms"
+                        android:text="@string/total_rooms"
                         android:textColor="@color/gray"
                         android:textSize="17dp" />
 
@@ -294,7 +294,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/gray"
                         android:textSize="17dp" />
 
@@ -383,7 +383,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Minor Reparing"
+                        android:text="@string/minor_reparing"
                         android:textColor="@color/gray"
                         android:textSize="17dp" />
 
@@ -472,7 +472,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
                         android:textColor="@color/gray"
                         android:textSize="17dp" />
 
@@ -560,7 +560,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Number of Classrooms with Podium"
+                        android:text="@string/number_of_classrooms_with_podium"
                         android:textAlignment="textStart"
                         android:textColor="@color/gray"
                         android:textSize="17dp" />
@@ -610,7 +610,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Board in Classroom"
+                        android:text="@string/board_in_classroom"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="?attr/colorPrimary"
@@ -636,7 +636,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="Board Type"
+                                    android:text="@string/board_type"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -651,7 +651,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_horizontal|center_vertical"
-                                    android:text="Available in Rooms"
+                                    android:text="@string/available_in_rooms"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -673,7 +673,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="Black Board"
+                                    android:text="@string/black_board"
                                     android:textColor="@color/gray"
                                     android:textSize="15dp" />
                             </LinearLayout>
@@ -722,7 +722,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="White Board"
+                                    android:text="@string/white_board"
                                     android:textColor="@color/gray"
                                     android:textSize="15dp" />
                             </LinearLayout>
@@ -771,7 +771,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="Green Board"
+                                    android:text="@string/green_board"
                                     android:textColor="@color/gray"
                                     android:textSize="15dp" />
                             </LinearLayout>
@@ -819,7 +819,7 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textSize="18dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView11"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -831,7 +831,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="**your Location will also be captured"
+                android:text="@string/your_location_will_also_be_captured"
                 android:textAlignment="textStart"
                 android:textColor="@color/white"
                 android:textSize="12dp"

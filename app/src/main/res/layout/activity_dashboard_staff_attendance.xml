@@ -22,7 +22,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Staff Attendance Dashboard" />
+            app:title="@string/staff_attendance" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

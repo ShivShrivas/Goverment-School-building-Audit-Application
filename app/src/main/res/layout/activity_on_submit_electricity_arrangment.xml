@@ -23,7 +23,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Electricity Arrangement" />
+            app:title="@string/electricity_arrangment" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Electricity Arrangement"
+        android:text="@string/electricity_arrangment"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +191,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -246,7 +246,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Intrenal Electrification"
+                        android:text="@string/intrenal_electrification"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -293,7 +293,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Other options/Source"
+                        android:text="@string/other_options_source"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -341,7 +341,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Working Status"
+                        android:text="@string/working_status"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -387,7 +387,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="No. Bulbs/Tube Light"
+                        android:text="@string/no_bulbs_tube_light"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -433,7 +433,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="No. of Fans"
+                        android:text="@string/no_of_fans"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -478,7 +478,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Uploaded Images"
+                        android:text="@string/uploaded_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 

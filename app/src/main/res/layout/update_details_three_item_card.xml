@@ -113,7 +113,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Equipment Status"
+                        android:text="@string/equipment_status"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 
@@ -155,7 +155,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Lab Condition"
+                        android:text="@string/lab_condition"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 

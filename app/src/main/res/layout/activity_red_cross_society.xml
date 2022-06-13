@@ -43,7 +43,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Red cross Society formation"
+                android:text="@string/red_cross_society_formation"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -87,7 +87,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Red cross office facilities"
+                android:text="@string/red_cross_office_facilities"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -131,7 +131,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Training Camp organized"
+                android:text="@string/training_camp_organized"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -175,7 +175,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Stock Register"
+                android:text="@string/stock_register"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -219,7 +219,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Income/Expenses details register"
+                android:text="@string/income_expenses_details_register"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -263,7 +263,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Project activity register "
+                android:text="@string/project_activity_register"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -307,7 +307,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Available Amount in Account"
+                android:text="@string/available_amount_in_account"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -351,7 +351,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Current deposit Amount with Registration No."
+                android:text="@string/current_deposit_amount_with_registration_no"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -395,7 +395,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="District Level Deposit Amount"
+                android:text="@string/district_level_deposit_amount"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -439,7 +439,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="School Level Balance Amount"
+                android:text="@string/school_level_balance_amount"
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -478,7 +478,7 @@
             android:textColor="@color/white"
             android:layout_weight="1"
             android:background="@drawable/bg_red"
-            android:text="Rejected"
+            android:text="@string/rejected"
             android:textSize="14dp"
 
             />
@@ -491,7 +491,7 @@
             android:textColor="@color/white"
             android:layout_weight="1"
             android:background="@drawable/bg_green"
-            android:text="Approved"
+            android:text="@string/approved"
             android:textSize="14dp"
 
             />

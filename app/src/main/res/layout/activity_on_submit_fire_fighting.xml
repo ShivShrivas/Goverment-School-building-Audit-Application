@@ -23,7 +23,7 @@
 
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Fire Fighting" />
+            app:title="@string/fire_fighting" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -138,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Fire Fighting"
+        android:text="@string/fire_fighting"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -190,7 +190,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -245,7 +245,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Year Of Installation"
+                        android:text="@string/year_of_installation"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -338,7 +338,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_horizontal|center_vertical"
-                            android:text="Fire Fighting"
+                            android:text="@string/fire_fighting"
                             android:textColor="@color/textColor1"
                             android:textSize="15dp" />
                     </LinearLayout>
@@ -368,7 +368,7 @@
                                     android:id="@+id/textView1551"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Total Fire Fighting"
+                                    android:text="@string/total_fire_fighting"
                                     android:textAlignment="center"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="8dp"
@@ -426,7 +426,7 @@
                                         android:id="@+id/textView122"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:text="Working Fire Fighting"
+                                        android:text="@string/working_fire_fighting"
                                         android:textAlignment="center"
                                         android:textColor="?attr/colorPrimary"
                                         android:textSize="8dp"
@@ -467,7 +467,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Not Working Fire Fighting"
+                                android:text="@string/not_working_fire_fighting"
                                 android:textAlignment="center"
                                 android:textColor="?attr/colorPrimary"
                                 android:textSize="8dp" />
@@ -507,7 +507,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Last Renewal Status"
+                        android:text="@string/last_renewal_status"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -554,7 +554,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Renewal Date"
+                        android:text="@string/renewal_date"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -602,7 +602,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Training on Fire fighting"
+                        android:text="@string/training_on_fire_fighting"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -647,7 +647,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Uploaded Images"
+                        android:text="@string/uploaded_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 

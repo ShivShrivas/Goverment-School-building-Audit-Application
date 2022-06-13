@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Wifi and Internet"
+            app:title="@string/wifi_and_internet"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Wifi in school"
+        android:text="@string/wifi_in_school"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -176,7 +176,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Wifi Internet Availability"
+                    android:text="@string/wifi_internet_availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -225,7 +225,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Upload Images"
+                        android:text="@string/upload_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 
@@ -276,7 +276,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

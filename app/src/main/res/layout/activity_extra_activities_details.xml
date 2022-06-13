@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:title="Extra Activities Details" />
+        app:title="@string/extra_activties" />
 
     <ScrollView
         android:id="@+id/scrollView20"
@@ -62,7 +62,7 @@
                             android:background="@color/DIOS_ColorPrimary"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="Activities"
+                            android:text="@string/activities"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -80,7 +80,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Sports Day"
+                            android:text="@string/sports_day"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -124,7 +124,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Invited Chief Guest"
+                                android:text="@string/invited_chief_guest"
                                 android:textColor="@color/black"
                                 android:textSize="11dp"
                                 android:textStyle="bold" />
@@ -153,7 +153,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Annual Day/Prize Day/Cultural Day"
+                            android:text="@string/annual_day_prize_day_cultural_day"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -197,7 +197,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="Invited Chief Guest"
+                                android:text="@string/invited_chief_guest"
                                 android:textColor="@color/black"
                                 android:textSize="11dp"
                                 android:textStyle="bold" />
@@ -227,7 +227,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Yoga Day"
+                            android:text="@string/yoga_day"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -258,7 +258,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Inter House Competition"
+                            android:text="@string/inter_house_competition"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -289,7 +289,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="School Website"
+                            android:text="@string/school_website"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -333,7 +333,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="URL"
+                                android:text="@string/url"
                                 android:textColor="@color/black"
                                 android:textSize="11dp"
                                 android:textStyle="bold" />
@@ -363,7 +363,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="School Email ID"
+                            android:text="@string/school_email_id"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -407,7 +407,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text="EMAIL"
+                                android:text="@string/email"
                                 android:textColor="@color/black"
                                 android:textSize="11dp"
                                 android:textStyle="bold" />
@@ -437,7 +437,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="PTA Meeting"
+                            android:text="@string/pta_meeting"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -468,7 +468,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Monthly Test"
+                            android:text="@string/monthly_test"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -499,7 +499,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Teacher’s Dairy"
+                            android:text="@string/teacher_s_dairy"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -530,7 +530,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Health check up camps"
+                            android:text="@string/health_check_up_camps"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -561,7 +561,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="School Magazine"
+                            android:text="@string/school_magazine"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -592,7 +592,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Special Guest Invited(For Career Counselling)"
+                            android:text="@string/special_guest_invited_for_career_counselling"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -623,7 +623,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Name of Guest"
+                            android:text="@string/name_of_guest"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -654,7 +654,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Designation"
+                            android:text="@string/designation"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -685,7 +685,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="SMDC Meet"
+                            android:text="@string/smdc_meet"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -716,7 +716,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Alumni Meet"
+                            android:text="@string/alumni_meet"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -759,7 +759,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Schools Science Exhibition"
+                            android:text="@string/schools_science_exhibition"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -788,7 +788,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Inspired Award"
+                            android:text="@string/inspired_award"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -817,7 +817,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Selection of Student in National Talent Search Examination"
+                            android:text="@string/selection_of_student_in_national_talent_search_examination"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -846,7 +846,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Skill developments programmes"
+                            android:text="@string/skill_developments_programmes"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -875,7 +875,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Innovation in Education"
+                            android:text="@string/innovation_in_education"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -904,7 +904,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Others(mission Shakti, SPC, Kala Utasav.)"
+                            android:text="@string/others_mission_shakti_spc_kala_utasav"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -933,7 +933,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Students Tie"
+                            android:text="@string/students_tie"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -962,7 +962,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Students Belt"
+                            android:text="@string/students_belt"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -991,7 +991,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Students Uniform"
+                            android:text="@string/students_uniform"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -1020,7 +1020,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Students  ID Cards"
+                            android:text="@string/students_id_cards"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -1060,7 +1060,7 @@
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_red"
-                        android:text="Rejected"
+                        android:text="@string/rejected"
                         android:textColor="@color/white"
                         android:textSize="14dp"
 
@@ -1073,7 +1073,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_green"
-                        android:text="Approved"
+                        android:text="@string/approved"
                         android:textColor="@color/white"
                         android:textSize="14dp"
 

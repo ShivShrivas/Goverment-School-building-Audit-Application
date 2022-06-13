@@ -17,7 +17,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Girls Toilet"
+            app:title="@string/girls_toilet"
 
             android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Details of Girls Toilets"
+        android:text="@string/details_of_girls_toilets"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -184,7 +184,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
-                        android:text="No. of Toilets seats available excluding CWSN friendly Toilets"
+                        android:text="@string/no_of_toilets_seats_available_excluding_cwsn_friendly_toilets"
                         android:textColor="@color/white"
 
                         android:textSize="17dp" />
@@ -210,7 +210,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="With Flushing and Cleaning facility"
+                            android:text="@string/with_flushing_and_cleaning_facility"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -254,7 +254,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Without Flushing and Cleaning facility"
+                            android:text="@string/without_flushing_and_cleaning_facility"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -295,7 +295,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Total"
+                            android:text="@string/total"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -344,7 +344,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:text="Availability if CWSN friendly toilets"
+                    android:text="@string/availability_if_cwsn_friendly_toilets"
                     android:textColor="@color/white"
 
                     android:textSize="17dp" />
@@ -394,7 +394,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
-                        android:text="No. of CWSN friendly toilet seates"
+                        android:text="@string/no_of_cwsn_friendly_toilet_seates"
                         android:textColor="@color/white"
 
                         android:textSize="17dp" />
@@ -420,7 +420,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="With Flushing and Cleaning facility"
+                            android:text="@string/with_flushing_and_cleaning_facility"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -465,7 +465,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Without Flushing and Cleaning facility"
+                            android:text="@string/without_flushing_and_cleaning_facility"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -508,7 +508,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Total"
+                            android:text="@string/total"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -566,7 +566,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
-                        android:text="Total No. of Urinals"
+                        android:text="@string/total_no_of_urinals"
                         android:textColor="@color/white"
 
                         android:textSize="17dp" />
@@ -593,7 +593,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="With Flushing and Cleaning facility"
+                            android:text="@string/with_flushing_and_cleaning_facility"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -636,7 +636,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Without Flushing and Cleaning facility"
+                            android:text="@string/without_flushing_and_cleaning_facility"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -678,7 +678,7 @@
                             android:layout_marginStart="4dp"
                             android:layout_weight="1"
                             android:gravity="center_vertical"
-                            android:text="Total"
+                            android:text="@string/total"
                             android:textColor="@color/black"
                             android:textSize="15dp" />
 
@@ -733,7 +733,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Facility"
+                        android:text="@string/facility"
                         android:textAlignment="textStart"
                         android:textColor="@color/white"
                         android:textSize="17dp" />
@@ -742,7 +742,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Availability"
+                        android:text="@string/availability"
                         android:textAlignment="textEnd"
                         android:textColor="@color/white"
                         android:textSize="17dp" />
@@ -773,7 +773,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Door Facility"
+                        android:text="@string/door_facility"
                         android:textAlignment="textStart"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp" />
@@ -820,7 +820,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Dustbin"
+                        android:text="@string/dustbin"
                         android:textAlignment="textStart"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp" />
@@ -866,7 +866,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Incinerator"
+                        android:text="@string/incinerator"
                         android:textAlignment="textStart"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp" />
@@ -912,7 +912,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Free Sanitary Napkin"
+                        android:text="@string/free_sanitary_napkin"
                         android:textAlignment="textStart"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="17dp" />
@@ -954,7 +954,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Upload Images"
+                    android:text="@string/upload_images"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 
@@ -1000,7 +1000,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="17dp"
                 app:layout_constraintEnd_toEndOf="parent"

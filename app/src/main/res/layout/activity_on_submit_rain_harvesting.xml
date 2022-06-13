@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Rain Harvesting"
+            app:title="@string/rain_harvesting"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:text="Rain Harvesting"
+        android:text="@string/rain_harvesting"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -174,7 +174,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:text="Type"
+            android:text="@string/type"
             android:textAlignment="textStart"
             android:textColor="@color/white"
             android:textSize="17dp" />
@@ -184,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="6dp"
             android:layout_weight="1"
-            android:text="Availabilty"
+            android:text="@string/availability"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
             android:textSize="17dp" />
@@ -195,7 +195,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="Working Status"
+            android:text="@string/working_status"
             android:textAlignment="textEnd"
             android:textColor="@color/white"
             android:textSize="17dp" />
@@ -223,7 +223,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="Rain Harvesting"
+                android:text="@string/rain_harvesting"
                 android:textColor="@color/textColor1"
                 android:textSize="15dp" />
         </LinearLayout>
@@ -311,7 +311,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:text="Uploaded Images"
+            android:text="@string/uploaded_images"
             android:textColor="?attr/colorPrimary"
             android:textSize="15dp" />
 

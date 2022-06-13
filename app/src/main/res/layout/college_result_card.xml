@@ -24,7 +24,7 @@
                 android:id="@+id/classText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Class: 6th"
+                android:text="@string/class_6th"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="18dp"
@@ -82,7 +82,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:paddingStart="22dp"
-                        android:text="Total Enrolled"
+                        android:text="@string/total_enrolled"
                         android:textColor="#3A3838"
                         android:textSize="16dp"
                         android:textStyle="bold" />
@@ -122,7 +122,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:paddingStart="16dp"
-                                android:text="Appeared in 1st Monthly"
+                                android:text="@string/appeared_in_1st_monthly"
 
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
@@ -154,7 +154,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:paddingStart="16dp"
-                                android:text="Passed in 1st Monthly"
+                                android:text="@string/passed_in_1st_monthly"
                                 android:textAlignment="center"
 
                                 android:textColor="@color/black"
@@ -197,7 +197,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:paddingStart="16dp"
-                                android:text="Appeared in 2nd Monthly"
+                                android:text="@string/appeared_in_2nd_monthly"
 
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
@@ -230,7 +230,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:paddingStart="16dp"
-                                android:text="Passed in 2nd Monthly"
+                                android:text="@string/passed_in_2nd_monthly"
 
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
@@ -274,7 +274,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:paddingStart="16dp"
-                                android:text="Appeared in 3rd Monthly"
+                                android:text="@string/appeared_in_3rd_monthly"
 
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
@@ -306,7 +306,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:paddingStart="16dp"
-                                android:text="Passed in 3rd Monthly"
+                                android:text="@string/passed_in_3rd_monthly"
 
                                 android:textAlignment="center"
                                 android:textColor="@color/black"
@@ -346,7 +346,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingStart="16dp"
-                            android:text="Half Yearly Appeared"
+                            android:text="@string/half_yearly_appeared"
 
                             android:textAlignment="center"
                             android:textColor="@color/black"
@@ -378,7 +378,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingStart="16dp"
-                            android:text="Half Yearly Passed"
+                            android:text="@string/half_yearly_passed"
 
                             android:textAlignment="center"
                             android:textColor="@color/black"
@@ -409,6 +409,7 @@
                         android:layout_margin="1dp"
                         android:layout_weight="1"
                         android:background="@color/white"
+
                         android:gravity="center_vertical"
                         android:orientation="vertical">
 
@@ -417,7 +418,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingStart="16dp"
-                            android:text="Yearly appeared"
+                            android:text="@string/yearly_appeared"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="13dp" />
@@ -448,7 +449,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:paddingStart="16dp"
-                            android:text="Yearly Passed"
+                            android:text="@string/yearly_passed"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="13dp" />

@@ -19,7 +19,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Bio Metric"
+            app:title="@string/bio_metric"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Biometric"
+                android:text="@string/biometric"
                 android:textColor="?attr/colorPrimary"
                 android:textSize="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +174,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -225,7 +225,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="No. of Machines"
+                        android:text="@string/no_of_machines"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -272,7 +272,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Year Of Installation"
+                        android:text="@string/year_of_installation"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -315,7 +315,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Working Status"
+                        android:text="@string/working_status"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -358,7 +358,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Use of Biometric for Staff"
+                        android:text="@string/use_of_biometric_for_staff"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -401,7 +401,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Use of Biometric for Student"
+                        android:text="@string/use_of_biometric_for_student"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -468,7 +468,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Upload Images"
+                        android:text="@string/upload_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 
@@ -492,7 +492,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="8dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

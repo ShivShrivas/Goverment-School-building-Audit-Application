@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:title="School Result Dashboard" />
+        app:title="@string/schoo_result_dash" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout38"
@@ -214,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans_herbew_bold"
-                        android:text="Last 3 Year Result"
+                        android:text="@string/last_3_year_result"
                         android:textColor="#5A5A5A"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -264,7 +264,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:fontFamily="@font/open_sans_herbew_bold"
-                        android:text="Current Result"
+                        android:text="@string/current_result"
                         android:textColor="#5A5A5A"
                         android:textSize="15dp"
                         android:textStyle="bold" />

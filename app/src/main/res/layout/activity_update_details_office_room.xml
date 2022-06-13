@@ -23,7 +23,7 @@
 
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Office Room" />
+            app:title="@string/office_room" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Office Room"
+        android:text="@string/office_room"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -177,7 +177,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -228,7 +228,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Working Status"
+                        android:text="@string/working_status"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -273,7 +273,7 @@
                         android:layout_marginTop="4dp"
                         android:layout_marginBottom="4dp"
                         android:layout_weight="1"
-                        android:text="Furniture Available"
+                        android:text="@string/furniture_available"
                         android:textColor="@color/black"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -323,7 +323,7 @@
                         android:layout_marginEnd="2dp"
                         android:layout_marginBottom="4dp"
                         android:layout_weight="1"
-                        android:text="Almirah/Racks Available"
+                        android:text="@string/almirah_racks_available"
                         android:textColor="@color/black"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -366,7 +366,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Upload Images"
+                        android:text="@string/upload_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 
@@ -417,7 +417,7 @@
                 android:layout_marginTop="36dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

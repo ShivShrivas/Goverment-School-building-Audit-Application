@@ -38,8 +38,7 @@
         android:id="@+id/textView9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Department of  Secondary Education
-\n Government of Uttar Pradesh"
+        android:text="@string/department_of_secondary_education_government_of_uttar_pradesh"
         android:textAlignment="center"
         android:textColor="?attr/colorPrimary"
         android:textSize="18dp"

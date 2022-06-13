@@ -44,8 +44,7 @@
         android:marqueeRepeatLimit="marquee_forever"
         android:paddingBottom="3dp"
         android:layout_marginBottom="4dp"
-        android:text="Department of  Secondary Education
- Government of Uttar Pradesh"
+        android:text="@string/department_of_secondary_education_government_of_uttar_pradesh"
         android:textAlignment="center"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -147,7 +146,7 @@
                 android:layout_marginEnd="32dp"
                 android:drawableStart="@drawable/ic_userid"
                 android:drawablePadding="15dp"
-                android:hint="Enter User Id"
+                android:hint="@string/enter_user_id"
                 android:maxLength="20"
                 android:maxLines="1"
                 android:singleLine="true"
@@ -165,7 +164,7 @@
                 android:layout_marginEnd="32dp"
                 android:drawableStart="@drawable/ic_lock_password"
                 android:drawablePadding="15dp"
-                android:hint="Enter Password"
+                android:hint="@string/enter_password"
                 android:inputType="textPassword"
                 android:maxLength="20"
                 android:singleLine="true"
@@ -191,7 +190,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Remember Me"
+                    android:text="@string/remember_me"
                     android:textSize="11dp" />
 
                 <CheckBox
@@ -199,7 +198,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Show password"
+                    android:text="@string/show_password"
                     android:textSize="11dp" />
 
             </LinearLayout>
@@ -212,7 +211,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="16dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

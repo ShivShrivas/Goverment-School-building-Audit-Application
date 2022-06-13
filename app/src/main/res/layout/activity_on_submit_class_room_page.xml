@@ -18,7 +18,7 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Class Room"
+            app:title="@string/class_room"
             app:navigationIcon="@drawable/arrow_back"
             android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
@@ -140,7 +140,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="4dp"
-        android:text="Classroom Details"
+        android:text="@string/classroom_details"
         android:textColor="?attr/colorPrimary"
         android:textSize="22dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +187,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="No. of Rooms"
+            android:text="@string/no_of_rooms"
 
             android:textAlignment="center"
             android:textColor="@color/white"
@@ -248,7 +248,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Total Rooms"
+                        android:text="@string/total_rooms"
                         android:textColor="@color/gray"
                         android:textSize="17dp" />
 

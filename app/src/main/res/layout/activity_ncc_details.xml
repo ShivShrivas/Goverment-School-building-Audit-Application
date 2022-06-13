@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:title="NCC Details" />
+        app:title="@string/ncc_details" />
 
     <ScrollView
         android:id="@+id/scrollView18"
@@ -64,7 +64,7 @@
                             android:background="@color/DIOS_ColorPrimary"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="NCC Details (For Current Academic Year)"
+                            android:text="@string/ncc_details_for_current_academic_year"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Whether NCC is running in your School?"
+                            android:text="@string/whether_ncc_is_running_in_your_school"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -111,7 +111,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Year of raising NCC"
+                            android:text="@string/year_of_raising_ncc"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -140,7 +140,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Whether School has NCC Parade Ground?"
+                            android:text="@string/whether_school_has_ncc_parade_ground"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -169,10 +169,11 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Whether School has NCC Room?"
+                            android:text="@string/wheather_school_hass"
                             android:textColor="@color/black"
                             android:textSize="15dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            tools:ignore="HardcodedText" />
 
 
                         <TextView
@@ -198,7 +199,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Whether school has a trained  ANO for each wing/Division"
+                            android:text="@string/whether_school_has_a_trained_ano_for_each_wing_division"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -228,7 +229,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Cadets participated in SSCD(Social Service and Community Development)"
+                            android:text="@string/cadets_participated_in_sscd_social_service_and_community_development"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -282,7 +283,7 @@
                             android:background="@color/DIOS_ColorPrimary"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="NCC Details (For Current Academic Year)"
+                            android:text="@string/ncc_details_for_current_academic_year"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -303,7 +304,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="Wing / Division"
+                            android:text="@string/wing_division"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -314,7 +315,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="Availability"
+                            android:text="@string/availability"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -325,7 +326,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="No. of Cadets"
+                            android:text="@string/no_of_cadets"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -344,7 +345,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="SD"
+                            android:text="@string/sd"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -386,7 +387,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="SW"
+                            android:text="@string/sw"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -428,7 +429,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="JD"
+                            android:text="@string/jd"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -470,7 +471,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="JW"
+                            android:text="@string/jw"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -514,7 +515,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="Wings"
+                            android:text="@string/wings"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -525,7 +526,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="Availability"
+                            android:text="@string/availability"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -545,7 +546,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="ARMY"
+                            android:text="@string/army"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -572,7 +573,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="NAVAL"
+                            android:text="@string/naval"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -599,7 +600,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="AIR"
+                            android:text="@string/air"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -636,7 +637,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_red"
-                    android:text="Rejected"
+                    android:text="@string/rejected"
                     android:textColor="@color/white"
                     android:textSize="14dp"
 
@@ -649,7 +650,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_green"
-                    android:text="Approved"
+                    android:text="@string/approved"
                     android:textColor="@color/white"
                     android:textSize="14dp"
 

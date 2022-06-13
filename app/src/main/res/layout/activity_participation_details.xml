@@ -64,7 +64,7 @@
                             android:background="@color/DIOS_ColorPrimary"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="Participation in National/State level camps (For Current Academic Year)"
+                            android:text="@string/participation_in_national_state_level_camps_for_current_academic_year"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -82,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Republic Day Camp"
+                            android:text="@string/republic_day_camp"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -111,7 +111,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Thal Sena Camp"
+                            android:text="@string/thal_sena_camp"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -140,7 +140,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Nau Sena Camp"
+                            android:text="@string/nau_sena_camp"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -169,7 +169,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Vayu Sena Camp"
+                            android:text="@string/vayu_sena_camp"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -198,37 +198,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Mountaineering Camp"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="Trekking Camp"
+                            android:text="@string/mountaineering_camp"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -258,7 +228,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Ek Bharat Shreshth Bharat"
+                            android:text="@string/trekking_camp"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -288,7 +258,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Special NIC"
+                            android:text="@string/ek_bharat_shreshth_bharat"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -318,7 +288,37 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Local Republic Day Camp"
+                            android:text="@string/special_nic"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="2"
+                            android:background="@drawable/cardbg"
+                            android:padding="8dp"
+                            android:text="5"
+                            android:textAlignment="center"
+                            android:textSize="15dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:layout_weight="1"
+                            android:text="@string/local_republic_day_camp"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -371,7 +371,7 @@
                             android:background="@color/DIOS_ColorPrimary"
                             android:gravity="center_vertical"
                             android:padding="5dp"
-                            android:text="Cadet Performance (For Current Academic Year)"
+                            android:text="@string/cadet_performance_for_current_academic_year"
                             android:textColor="@color/white"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -389,7 +389,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Cadets Appeared in C Certificate"
+                            android:text="@string/cadets_appeared_in_c_certificate"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -418,7 +418,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Cadets Passed in C Certificate"
+                            android:text="@string/cadets_passed_in_c_certificate"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -447,7 +447,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Cadets Appeared in B Certificate"
+                            android:text="@string/cadets_appeared_in_b_certificate"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -476,7 +476,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Cadets Passed in B Certificate marks"
+                            android:text="@string/cadets_passed_in_b_certificate_marks"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -505,7 +505,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Cadets Appeared in A Certificate"
+                            android:text="@string/cadets_appeared_in_a_certificate"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -637,7 +637,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Chief Minister, Scholarship"
+                            android:text="@string/chief_minister_scholarship"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -666,7 +666,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="CWS Scholarship"
+                            android:text="@string/cws_scholarship"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -695,7 +695,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
                             android:layout_weight="1"
-                            android:text="Chief Minister, Medal"
+                            android:text="@string/chief_minister_medal"
                             android:textColor="@color/black"
                             android:textSize="15dp"
                             android:textStyle="bold" />
@@ -735,7 +735,7 @@
                     android:layout_marginEnd="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_red"
-                    android:text="Rejected"
+                    android:text="@string/rejected"
                     android:textSize="14dp"
 
                     />
@@ -747,7 +747,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_weight="1"
                     android:background="@drawable/bg_green"
-                    android:text="Approved"
+                    android:text="@string/approved"
                     android:textSize="14dp"
 
                     />

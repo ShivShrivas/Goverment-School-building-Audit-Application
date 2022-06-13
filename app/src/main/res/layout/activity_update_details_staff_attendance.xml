@@ -23,7 +23,7 @@
 
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Staff Attendance" />
+            app:title="@string/staff_attendance" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -141,7 +141,7 @@
         android:textSize="16dp"
         android:textColor="?attr/colorPrimary"
         android:paddingBottom="3dp"
-        android:text="Date:"
+        android:text="@string/date"
         android:textAlignment="textEnd"
         app:layout_constraintTop_toBottomOf="@+id/cardView25" />
 
@@ -177,7 +177,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="24dp"
-                android:text="Save"
+                android:text="@string/save"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="17dp"

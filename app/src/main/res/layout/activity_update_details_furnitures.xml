@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Furniture"
+            app:title="@string/furniture"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -138,7 +138,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Furnitures"
+        android:text="@string/furnitures"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -181,7 +181,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Single Seated"
+                        android:text="@string/single_seated"
                         android:textColor="@color/white"
 
                         android:textSize="16dp"
@@ -236,7 +236,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Physical Status"
+                        android:text="@string/physical_status"
                         android:textColor="@color/textColor1"            android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -284,7 +284,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:textSize="16dp"
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -315,7 +315,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Minor Repairing"
+                        android:text="@string/minor_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -347,7 +347,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -390,7 +390,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Double Seated"
+                        android:text="@string/double_seated"
                         android:textColor="@color/white"
 
                         android:textSize="16dp"
@@ -444,7 +444,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Physical Status"
+                        android:text="@string/physical_status"
                         android:textColor="@color/textColor1"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -494,7 +494,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -525,7 +525,7 @@
                         android:textSize="16dp"
 
                         android:layout_weight="1"
-                        android:text="Minor Repairing"
+                        android:text="@string/minor_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -556,7 +556,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -599,7 +599,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="Tripple Seated"
+                        android:text="@string/triple_seated"
                         android:textColor="@color/white"
 
                         android:textSize="16dp"
@@ -653,7 +653,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Physical Status"
+                        android:text="@string/physical_status"
                         android:textColor="@color/textColor1"
                         android:textSize="14dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -703,7 +703,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -733,7 +733,7 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:textSize="16dp"
-                        android:text="Minor Repairing"
+                        android:text="@string/minor_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -764,7 +764,7 @@
                         android:layout_weight="1"
                         android:textSize="16dp"
 
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
                         android:textColor="@color/black" />
 
                     <EditText
@@ -800,7 +800,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingStart="6dp"
-                    android:text="Total Strength Covered"
+                    android:text="@string/total_strength_covered"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -836,7 +836,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:paddingStart="6dp"
-                    android:text="Additional Furniture Required \n(mention required sitting capacity)"
+                    android:text="@string/additional_furniture_required_n_mention_required_sitting_capacity"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -871,7 +871,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_weight="1"
-                    android:text="Upload Images"
+                    android:text="@string/upload_images"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="15dp" />
 
@@ -920,7 +920,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"

@@ -23,7 +23,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Playground" />
+            app:title="@string/playground" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -137,7 +137,7 @@
         android:id="@+id/mobnumberTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Playground"
+        android:text="@string/playground"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -175,7 +175,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -230,7 +230,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Levelling Status"
+                        android:text="@string/levelling_status"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -274,7 +274,7 @@
                         android:gravity="center_vertical"
 
 
-                        android:text="Area in sq. mtr."
+                        android:text="@string/area_in_sq_mtr"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -320,7 +320,7 @@
                         android:gravity="center_vertical"
 
 
-                        android:text="Availability of Standard Track"
+                        android:text="@string/availability_of_standard_track"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -360,7 +360,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Upload Images"
+                        android:text="@string/upload_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 
@@ -409,7 +409,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

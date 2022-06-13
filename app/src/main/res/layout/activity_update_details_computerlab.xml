@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Computer Lab"
+            app:title="@string/computer_lab"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"
@@ -136,7 +136,7 @@
         android:id="@+id/mobnumberTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Computer Lab"
+        android:text="@string/computer_lab"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +174,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp" />
 
@@ -225,7 +225,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Year Of Installation"
+                        android:text="@string/year_of_installation"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -269,7 +269,7 @@
                         android:gravity="center_vertical"
 
 
-                        android:text="No. of Computers"
+                        android:text="@string/no_of_computers"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -317,7 +317,7 @@
                         android:gravity="center_vertical"
 
 
-                        android:text="No. of working Computers"
+                        android:text="@string/no_of_working_computers"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -365,7 +365,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Under Scheme"
+                        android:text="@string/under_scheme"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -420,7 +420,7 @@
                             android:layout_margin="4dp"
                             android:layout_weight="1"
                             android:background="@drawable/cardbg"
-                            android:hint="Enter Other Scheme Name Here.."
+                            android:hint="@string/enter_other_scheme_name_here"
                             android:paddingStart="5dp" />
                     </androidx.cardview.widget.CardView>
 
@@ -444,7 +444,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Internet"
+                        android:text="@string/internet"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -486,7 +486,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Power Backup"
+                        android:text="@string/power_backup"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -528,7 +528,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Furnitures"
+                        android:text="@string/furniture"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -570,7 +570,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Computer Operator"
+                        android:text="@string/computer_operator"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -612,7 +612,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Printer Availability"
+                        android:text="@string/printer_availability"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -654,7 +654,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Scanner Availability"
+                        android:text="@string/scanner_availability"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -696,7 +696,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="No. of Computer Lab"
+                        android:text="@string/no_of_computer_lab"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -741,7 +741,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Upload Images"
+                        android:text="@string/upload_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 
@@ -791,7 +791,7 @@
                 android:layout_marginTop="52dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"

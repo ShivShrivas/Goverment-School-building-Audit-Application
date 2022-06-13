@@ -23,7 +23,7 @@
             android:background="?attr/colorPrimary"
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Date Wise Attendance" />
+            app:title="@string/date_wise_attendance" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -62,7 +62,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Attendance Date"
+                    android:text="@string/attendance_date"
                     android:textColor="?attr/colorPrimary"
                     android:textSize="12dp"
                     android:textStyle="bold"></TextView>
@@ -93,7 +93,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        android:text="Get Attendance"
+        android:text="@string/get_attendance"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

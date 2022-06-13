@@ -14,6 +14,488 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="passed_student"><b>%</b> of Passed Student</string>
+    <string name="cctv">CCTV</string>
+    <string name="principal_training_and_teacher_traing">Principal and Teachers Training Details</string>
+    <string name="training_for_principal">Training For Principal</string>
+    <string name="no_of_proposed_training_module">No. of Proposed Training/Module</string>
+    <string name="no_of_trainings_modules_completed">No. of Trainings/Modules Completed</string>
+    <string name="training_for_teacher">Training For Teacher</string>
+
+    <string name="approved">Approved</string>
+
+    <string name="details_of_trees">Details of Trees</string>
+    <string name="plantation">Plantation</string>
+    <string name="wall_painting_slogan_writing_bala_work">Wall Painting/ Slogan Writing /BALA Work</string>
+    <string name="availability_of_dustbins_in_campus">Availability of dustbins in Campus</string>
+    <string name="eco_club">Eco Club</string>
+    <string name="display_board_notice_board">Display Board/ Notice Board</string>
+    <string name="no_of_trees">No. Of Trees</string>
+    <string name="running_metre_of_flower_bed">Running Metre of flower bed</string>
+    <string name="plantation_details_for_financial_year">Plantation Details for Financial Year</string>
+    <string name="target">Target</string>
+    <string name="planted">Planted</string>
+    <string name="survive">Survive</string>
+    <string name="school_building_white_wash_painting">School Building White Wash/ Painting</string>
+    <string name="last_done_fy">Last Done (FY)</string>
+    <string name="budget_fy">Budget (FY)</string>
+    <string name="sanction_amount">Sanction Amount</string>
+
+    <string name="maintenance_of_windows_doors">Maintenance of Windows/ Doors</string>
+    <string name="painting_of_black_boards">Painting of Black Boards</string>
+    <string name="repairing_of_furniture_s">Repairing of Furniture\'s</string>
+    <string name="cleaning_of_water_tanks">Cleaning of water tanks</string>
+    <string name="cleaning_of_drainage_system">Cleaning of Drainage System</string>
+    <string name="cleaning_of_toilets">Cleaning of Toilets</string>
+    <string name="maintenance_of_electrical_equipment_s">Maintenance of Electrical Equipment\'s</string>
+    <string name="boards_of_honour_for_students">Boards of Honour For Students</string>
+    <string name="boards_of_honour_for_teachers_amp_staff"><![CDATA[Boards of Honour For Teachers & Staff]]></string>
+    <string name="sign_board_outside_the_school">Sign Board outside the school</string>
+    <string name="rejected">Rejected</string>
+    <string name="co_curricular">Co-Curricular Activities Dashboard</string>
+    <string name="school_grading_amp_monitoring_system"><![CDATA[School Grading & Monitoring System]]></string>
+
+    <string name="red_cross_society">Red Cross Society</string>
+    <string name="scout_amp_guide"><![CDATA[Scout & Guide]]></string>
+    <string name="current_yeat">Current Year result Details</string>
+    <string name="parameters">Parameters</string>
+    <string name="updated_on">Updated On</string>
+    <string name="schoo_result_dash">School Result Dashboard</string>
+    <string name="last_3_year_result">Last 3 Year Result</string>
+    <string name="current_result">Current Result</string>
+    <string name="staff_attendance">Staff Attendance Dashboard</string>
+    <string name="date_wise_attendance">Date Wise Attendance</string>
+    <string name="attendance_date">Attendance Date</string>
+    <string name="get_attendance">Get Attendance</string>
+    <string name="school_wise_dashboard">School Wise Dashboard</string>
+    <string name="student_enrollment">Student Enrollment</string>
+    <string name="school_staff">School Staff</string>
+    <string name="school_result_details">School Result Details</string>
+    <string name="receipts_and_expenditure">Receipts And Expenditure</string>
+    <string name="subject_wise_syllabus">Subject Wise Syllabus</string>
+    <string name="school_physical_status">School Physical Status</string>
+    <string name="campus_beautification">Campus Beautification</string>
+    <string name="extra_activity_details">Extra Activity Details</string>
+    <string name="co_curricular_activities">Co-Curricular Activities</string>
+    <string name="school_name">School Name</string>
+    <string name="staff_details_dashbiard">Staff Details Dashboard</string>
+    <string name="staff_sanction_amp_working"><![CDATA[Staff Sanction & Working]]></string>
+    <string name="principal_amp_teacher_training"><![CDATA[Principal & Teacher Training]]></string>
+    <string name="extra_activties">Extra Activities Details</string>
+    <string name="activities">Activities</string>
+    <string name="sports_day">Sports Day</string>
+
+    <string name="annual_day_prize_day_cultural_day">Annual Day/Prize Day/Cultural Day</string>
+    <string name="invited_chief_guest">Invited Chief Guest</string>
+    <string name="yoga_day">Yoga Day</string>
+    <string name="inter_house_competition">Inter House Competition</string>
+    <string name="school_website">School Website</string>
+    <string name="url">URL</string>
+    <string name="school_email_id">School Email ID</string>
+    <string name="email">EMAIL</string>
+    <string name="pta_meeting">PTA Meeting</string>
+    <string name="monthly_test">Monthly Test</string>
+    <string name="teacher_s_dairy">Teacher’s Dairy</string>
+    <string name="health_check_up_camps">Health check up camps</string>
+    <string name="school_magazine">School Magazine</string>
+    <string name="special_guest_invited_for_career_counselling">Special Guest Invited(For Career Counselling)</string>
+    <string name="name_of_guest">Name of Guest</string>
+    <string name="designation">Designation</string>
+    <string name="smdc_meet">SMDC Meet</string>
+    <string name="alumni_meet">Alumni Meet</string>
+    <string name="schools_science_exhibition">Schools Science Exhibition</string>
+    <string name="inspired_award">Inspired Award</string>
+    <string name="selection_of_student_in_national_talent_search_examination">Selection of Student in National Talent Search Examination</string>
+    <string name="skill_developments_programmes">Skill developments programmes</string>
+    <string name="innovation_in_education">Innovation in Education</string>
+    <string name="others_mission_shakti_spc_kala_utasav">Others(mission Shakti, SPC, Kala Utasav.)</string>
+    <string name="students_tie">Students Tie</string>
+    <string name="students_belt">Students Belt</string>
+    <string name="students_uniform">Students Uniform</string>
+    <string name="students_id_cards">Students ID Cards</string>
+    <string name="extra_activties_dashboard">Extra Activities Dashboard</string>
+    <string name="extra_activities">Extra Activities</string>
+    <string name="participation">Participation</string>
+    <string name="department_of_secondary_education_government_of_uttar_pradesh">Department of Secondary Education Government of Uttar Pradesh</string>
+    <string name="your_mobile_number_is">Your Mobile Number is</string>
+    <string name="enter_one_time_password">Enter One Time Password</string>
+    <string name="verify_otp">Verify OTP</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="game_details">Game Details</string>
+    <string name="game_facility">Game Facility</string>
+
+    <string name="grant_for_sports_amp_physical_education"><![CDATA[Grant for Sports & Physical Education]]></string>
+    <string name="receipt_amount">Receipt Amount</string>
+    <string name="expenditure_amount">Expenditure Amount</string>
+    <string name="games_type">Games Type</string>
+    <string name="indoor_games">Indoor Games</string>
+    <string name="outdoor_games">Outdoor Games</string>
+    <string name="availability_of_sport_teacher">Availability of Sport Teacher</string>
+    <string name="yes">Yes</string>
+    <string name="is_any_teacher_nominated">IS any teacher Nominated</string>
+    <string name="availability_of_sports">Availability of Sports</string>
+    <string name="is_any_student_participated_in_district_level">Is any student participated in District level.</string>
+    <string name="is_any_student_participated_in_state_level">Is any student participated in State level.</string>
+    <string name="no">No</string>
+    <string name="is_any_student_participated_in_national_level">Is any student participated in National level.</string>
+    <string name="school_is_registered_in_fit_india_schools_programme">School is registered in Fit India Schools Programme.</string>
+    <string name="how_many_students_registered_in_fit_india_schools_programme">How many students registered in Fit India Schools Programme.</string>
+    <string name="school_is_registered_in_khelo_india_programme">School is registered in Khelo India Programme.</string>
+    <string name="how_many_students_registered_in_khelo_india_programme">How many students registered in Khelo India Programme.</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="show_password">Show password</string>
+    <string name="enter_user_id">Enter User Id</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="ncc_details">NCC Details</string>
+    <string name="whether_ncc_is_running_in_your_school">Whether NCC is running in your School?</string>
+    <string name="year_of_raising_ncc">Year of raising NCC</string>
+    <string name="whether_school_has_ncc_parade_ground">Whether School has NCC Parade Ground?</string>
+    <string name="wheather_school_hass">Whether School has NCC Room?</string>
+    <string name="whether_school_has_a_trained_ano_for_each_wing_division">Whether school has a trained ANO for each wing/Division</string>
+    <string name="cadets_participated_in_sscd_social_service_and_community_development">Cadets participated in SSCD(Social Service and Community Development)</string>
+    <string name="ncc_details_for_current_academic_year">NCC Details (For Current Academic Year)</string>
+    <string name="wing_division">Wing / Division</string>
+    <string name="no_of_cadets">No. of Cadets</string>
+    <string name="sd">SD</string>
+    <string name="sw">SW</string>
+    <string name="jd">JD</string>
+    <string name="jw">JW</string>
+    <string name="wings">Wings</string>
+    <string name="army">ARMY</string>
+    <string name="naval">NAVAL</string>
+    <string name="air">AIR</string>
+    <string name="art_and_craft">Art And Craft Room</string>
+
+    <string name="no_of_machines">No.of Machines</string>
+
+    <string name="boundary_wall">Boundary Wall</string>
+
+    <string name="uploaded_images">Uploaded Images</string>
+    <string name="no_of_cctv">No. of CCTV</string>
+    <string name="total_cctv">Total CCTV</string>
+    <string name="working_cctv">Working CCTV</string>
+    <string name="not_working_cctv">Not Working CCTV</string>
+    <string name="computer_lab">Computer Lab</string>
+
+    <string name="no_of_computers">No. of Computers</string>
+    <string name="no_of_working_computers">No. of working Computers</string>
+    <string name="internet">Internet</string>
+    <string name="power_backup">Power Backup</string>
+    <string name="computer_operator">Computer Operator</string>
+    <string name="printer_availability">Printer Availability</string>
+    <string name="functional_status">Functional Status</string>
+    <string name="repairing_status">Repairing Status</string>
+    <string name="hand_pump">Hand Pump</string>
+    <string name="intrenal_electrification">Intrenal Electrification</string>
+    <string name="last_renewal_status">Last Renewal Status</string>
+    <string name="renewal_date">Renewal Date</string>
+    <string name="furniture">Furniture</string>
+    <string name="furnitures">Furnitures</string>
+    <string name="single_seated">Single Seated</string>
+    <string name="minor_repairing">Minor Repairing</string>
+    <string name="double_seated">Double Seated</string>
+    <string name="triple_seated">Triple Seated</string>
+    <string name="additional_furniture_required">Additional Furniture Required</string>
+    <string name="library_room">Library Room</string>
+    <string name="furniture_availability">Furniture Availability</string>
+    <string name="number_of_almira">Number of Almira</string>
+    <string name="number_of_books">Number of Books</string>
+    <string name="reading_corner">Reading Corner</string>
+    <string name="library_grant_rs_n_in_current_f_y">Library grant(Rs.)\n In current F.Y.</string>
+    <string name="expenditure_rs_n_in_current_f_y">Expenditure(Rs.)\n In current F.Y.</string>
+    <string name="almira_availability">Almira Availability</string>
+    <string name="open_gym">Open Gym</string>
+    <string name="playground">Playground</string>
+    <string name="levelling_status">Levelling Status</string>
+    <string name="area_in_sq_mtr">Area in sq. mtr.</string>
+    <string name="availability_of_standard_track">Availability of Standard Track</string>
+    <string name="practical_labs_details">Practical Labs Details</string>
+    <string name="practical_lab">Practical Lab</string>
+
+    <string name="type">Type</string>
+
+    <string name="rain_harvesting">Rain Harvesting</string>
+
+    <string name="smart_class">Smart Class</string>
+
+    <string name="solar_panel">Solar Panel</string>
+
+    <string name="kilowatt_of_solar_panel">Kilowatt of Solar Panel</string>
+    <string name="type_of_solar_panel">Type of Solar Panel</string>
+    <string name="sound_system_and_band">Sound System and band</string>
+    <string name="sound_and_band">Sound and Band</string>
+
+    <string name="staff_room">Staff Room</string>
+    <string name="separate_room_available">Separate Room Available</string>
+    <string name="status">Status</string>
+    <string name="furniture_available">Furniture Available</string>
+    <string name="almirah_racks_available">Almirah/Racks Available</string>
+    <string name="vocational_room">Vocational Room</string>
+    <string name="wifi_in_school">Wifi in school</string>
+    <string name="wifi_and_internet">Wifi and Internet</string>
+    <string name="wifi_internet_availability">Wifi Internet Availability</string>
+    <string name="school_geofenching">School Geofenching</string>
+    <string name="add_location">Add Location+</string>
+    <string name="latitude">Latitude</string>
+    <string name="longitude">Longitude</string>
+    <string name="date_ntime">Date \nTime</string>
+    <string name="participation_in_national_state_level_camps_for_current_academic_year">Participation in National/State level camps (For Current Academic Year)</string>
+    <string name="republic_day_camp">Republic Day Camp</string>
+    <string name="thal_sena_camp">Thal Sena Camp</string>
+    <string name="nau_sena_camp">Nau Sena Camp</string>
+    <string name="vayu_sena_camp">Vayu Sena Camp</string>
+    <string name="mountaineering_camp">Mountaineering Camp</string>
+    <string name="trekking_camp">Trekking Camp</string>
+    <string name="ek_bharat_shreshth_bharat">Ek Bharat Shreshth Bharat</string>
+    <string name="special_nic">Special NIC</string>
+    <string name="local_republic_day_camp">Local Republic Day Camp</string>
+    <string name="cadet_performance_for_current_academic_year">Cadet Performance (For Current Academic Year)</string>
+    <string name="cadets_appeared_in_c_certificate">Cadets Appeared in C Certificate</string>
+    <string name="cadets_passed_in_c_certificate">Cadets Passed in C Certificate</string>
+    <string name="cadets_appeared_in_b_certificate">Cadets Appeared in B Certificate</string>
+    <string name="cadets_passed_in_b_certificate_marks">Cadets Passed in B Certificate marks</string>
+    <string name="cadets_appeared_in_a_certificate">Cadets Appeared in A Certificate</string>
+    <string name="chief_minister_scholarship">Chief Minister, Scholarship</string>
+    <string name="cws_scholarship">CWS Scholarship</string>
+    <string name="chief_minister_medal">Chief Minister, Medal</string>
+    <string name="red_cross_society_formation">Red cross Society formation</string>
+    <string name="red_cross_office_facilities">Red cross office facilities</string>
+    <string name="training_camp_organized">Training Camp organized</string>
+    <string name="stock_register">Stock Register</string>
+    <string name="income_expenses_details_register">Income/Expenses details register</string>
+    <string name="project_activity_register">Project activity register</string>
+    <string name="available_amount_in_account">Available Amount in Account</string>
+    <string name="current_deposit_amount_with_registration_no">Current deposit Amount with Registration No.</string>
+    <string name="district_level_deposit_amount">District Level Deposit Amount</string>
+    <string name="school_level_balance_amount">School Level Balance Amount</string>
+    <string name="how_many_students_are_enrolled_in_your_school">How many Students are Enrolled in your School?</string>
+    <string name="is_scout_group_guide_company_registered_in_school">Is Scout Group/ Guide company registered in School?</string>
+    <string name="is_school_s_scout_group_guide_company_renewed_till_now">Is School’s Scout group/guide company renewed till now?</string>
+    <string name="school_has_scout_master_guide_captain">School has scout master/ guide captain?</string>
+    <string name="if_yes_mention_the_level_of_training_basic_course_advance_course_hwb_alt_lt_tick_option_provided">If YES mention the level of training. (Basic course, Advance course, HWB, ALT, LT tick option provided)</string>
+    <string name="whether_the_school_has_sufficient_training_material">Whether the school has sufficient training material?</string>
+    <string name="whether_the_school_has_scout_guide_room">Whether the school has scout/guide room?</string>
+    <string name="whether_the_school_has_scout_guide_stock_register_and_expenses_register">Whether the school has scout/guide stock register and Expenses register ?</string>
+    <string name="school_s_scouts_guide_got_training_of_pravesh_pratham_sopan_and_dwitiya_sopan">School’s scouts/ guide got training of “Pravesh , Pratham Sopan and Dwitiya Sopan”</string>
+    <string name="whether_the_school_s_scouts_guides_participated_in_rajya_puraskar_testing_camp_after_completing_tritiya_sopan_testing_camp">Whether the School’s scouts/guides participated in Rajya Puraskar testing camp after completing Tritiya Sopan testing camp.</string>
+    <string name="whether_the_school_s_scout_guide_participated_in_rashtrapati_testing_camp">Whether the school’s scout/ guide participated in Rashtrapati Testing camp?</string>
+    <string name="whether_the_schools_scouts_guides_participated_in_district_rally_and_other_programmes">Whether the schools scouts / guides participated in district rally and other programmes?</string>
+    <string name="whether_the_schools_scouts_guides_participated_in_regional_rally_state_rally_and_other_programmes">Whether the Schools scouts/guides participated in regional rally / state rally and other programmes ?</string>
+    <string name="whether_the_schools_scouts_guides_participated_in_national_international_level_programmes">Whether the schools scouts/guides participated in National/ International level programmes?</string>
+    <string name="whether_the_schools_scouts_guides_took_part_in_social_works">Whether the schools scouts/ guides took part in social works?</string>
+    <string name="expenditure_for_the_current_financial_year_for_the_scouts_guides_training_training_material_and_other_expenses">Expenditure for the current financial year for the scouts/guides training, training material and other expenses. ?</string>
+    <string name="staff_sanction_and_working">Staff Sanction and Working</string>
+    <string name="principal">Principal</string>
+    <string name="vice_principal">Vice Principal</string>
+
+    <string name="lecturer">Lecturer</string>
+    <string name="asst_teacher">Asst. Teacher</string>
+
+    <string name="physical_educator">Physical Educator</string>
+    <string name="lab_assistant">Lab Assistant</string>
+    <string name="librarian">Librarian</string>
+    <string name="computer_teacher">Computer Teacher</string>
+    <string name="sr_clerk">Sr.Clerk</string>
+    <string name="clerk">Clerk</string>
+
+    <string name="peon">Peon</string>
+
+    <string name="sweeper">Sweeper</string>
+    <string name="no_of_sanctioned_posts">No of Sanctioned Posts</string>
+    <string name="no_of_posted_staff">No Of Posted Staff</string>
+    <string name="no_of_attached_staff">No Of Attached Staff</string>
+    <string name="no_of_working_staff">No Of Working Staff</string>
+    <string name="no_of_working_staff_during_inspection">No Of Working Staff During Inspection</string>
+    <string name="student_enrollment_details">Student Enrollment Details</string>
+    <string name="last_three_year_result">Last Three Years Result</string>
+    <string name="class_room">Class Room</string>
+    <string name="classroom_details">Classroom Details</string>
+    <string name="no_of_rooms">No. of Rooms</string>
+
+    <string name="total_rooms">Total Rooms</string>
+    <string name="good_condition">Good Condition</string>
+    <string name="minor_reparing">Minor Reparing</string>
+    <string name="major_repairing">Major Repairing</string>
+    <string name="number_of_classrooms_with_podium">Number of Classrooms with Podium</string>
+    <string name="board_in_classroom">Board in Classroom</string>
+    <string name="board_type">Board Type</string>
+    <string name="available_in_rooms">Available in Rooms</string>
+    <string name="black_board">Black Board</string>
+    <string name="white_board">White Board</string>
+    <string name="green_board">Green Board</string>
+    <string name="your_location_will_also_be_captured">**your Location will also be captured</string>
+
+    <string name="art_and_craft_room">Art And Craft Room</string>
+    <string name="bio_metric">Bio Metric</string>
+    <string name="biometric">Biometric</string>
+    <string name="use_of_biometric_for_staff">Use of Biometric for Staff</string>
+    <string name="use_of_biometric_for_student">Use of Biometric for Student</string>
+    <string name="boundry_wall">Boundary Wall</string>
+    <string name="area_of_school_in_sq_mtr">Area of School in Sq. mtr.</string>
+    <string name="length_of_boundary_wall_in_mtr">Length of Boundary Wall in mtr.</string>
+    <string name="type_of_boundary_wall">Type of Boundary Wall</string>
+    <string name="white_wash_status">White Wash Status</string>
+
+    <string name="condition">Condition</string>
+
+    <string name="boys_toilet">Boys Toilet</string>
+    <string name="details_of_boys_toilets">Details of Boys Toilets</string>
+
+
+    <string name="scanner_availability">Scanner Availability</string>
+    <string name="no_of_computer_lab">No. of Computer Lab</string>
+    <string name="cwsn_ramp">CWSN Ramp</string>
+    <string name="cycle_stand">Cycle Stand</string>
+    <string name="cycles_capacity_count">Cycles Capacity Count</string>
+    <string name="physical_status">Physical Status</string>
+
+    <string name="drinking_water">Drinking Water</string>
+    <string name="no_of_handpump">No. of Handpump</string>
+    <string name="total_handpump">Total Handpump</string>
+    <string name="working_handpump">Working Handpump</string>
+    <string name="not_working_handpump">Not Working Handpump</string>
+    <string name="submersible">Submersible</string>
+    <string name="no_of_submersible">No. of Submersible</string>
+    <string name="total_submersible">Total Submersible</string>
+    <string name="working_submersible">Working Submersible</string>
+    <string name="not_working_submersible">Not Working Submersible</string>
+    <string name="nagar_nigam_nagar_palika_water_supply">Nagar Nigam/Nagar Palika Water Supply</string>
+    <string name="overhead_tank">Overhead Tank</string>
+    <string name="no_of_taps">No. of Taps</string>
+    <string name="total_taps_count">Total Taps Count</string>
+    <string name="working_taps">Working Taps</string>
+    <string name="not_working_taps">Not Working taps</string>
+    <string name="ro_installation">RO Installation</string>
+    <string name="no_of_ro">No. of RO</string>
+    <string name="total_ro_count">Total RO Count</string>
+    <string name="working_ro">Working RO</string>
+    <string name="not_working_ro">Not Working RO</string>
+    <string name="ro_installation_under_scheme">Ro Installation Under Scheme</string>
+
+    <string name="electricity_arrangment">Electricity Arrangement</string>
+    <string name="other_options_source">Other options/Source</string>
+    <string name="no_bulbs_tube_light">No. Bulbs/Tube Light</string>
+    <string name="no_of_fans">No. of Fans</string>
+
+    <string name="fire_fighting">Fire Fighting</string>
+    <string name="total_fire_fighting">Total Fire Fighting</string>
+    <string name="working_fire_fighting">Working Fire Fighting</string>
+    <string name="not_working_fire_fighting">Not Working Fire Fighting</string>
+    <string name="renewal_status">Renewal Status</string>
+    <string name="last_renewal_date">Last Renewal Date</string>
+    <string name="training_on_fire_fighting">Training on Fire fighting</string>
+
+    <string name="total_strength_covered">Total Strength Covered</string>
+    <string name="additional_furniture_required_n_mention_required_sitting_capacity">Additional Furniture Required \n(mention required sitting capacity)</string>
+
+    <string name="girls_toilet">Girls Toilet</string>
+    <string name="details_of_girls_toilets">Details of Girls Toilets</string>
+    <string name="no_of_toilets_seats_available_excluding_cwsn_friendly_toilets">No. of Toilets seats available excluding CWSN friendly Toilets</string>
+
+    <string name="availability_if_cwsn_friendly_toilets">Availability if CWSN friendly toilets</string>
+    <string name="no_of_cwsn_friendly_toilet_seates">No. of CWSN friendly toilet seates</string>
+
+    <string name="total_no_of_urinals">Total No. of Urinals</string>
+    <string name="with_flushing_and_cleaning_facility">With Flushing and Cleaning facility</string>
+    <string name="without_flushing_and_cleaning_facility">Without Flushing and Cleaning facility</string>
+    <string name="total">Total</string>
+    <string name="facility">Facility</string>
+    <string name="door_facility">Door Facility</string>
+    <string name="dustbin">Dustbin</string>
+    <string name="incinerator">Incinerator</string>
+    <string name="free_sanitary_napkin">Free Sanitary Napkin</string>
+
+    <string name="opem_gym">Open Gym</string>
+    <string name="multipurpose_hall">Multipurpose Hall</string>
+    <string name="sitting_capacity">Sitting Capacity</string>
+
+    <string name="office_room">Office Room</string>
+    <string name="principal_room">Principal Room</string>
+    <string name="smart_classoom_1">Smart Classoom 1</string>
+    <string name="year_of_installation">Year Of Installation</string>
+    <string name="company_name">Company Name</string>
+    <string name="under_scheme">Under Scheme</string>
+
+    <string name="working_status">Working Status</string>
+    <string name="add_another_room">Add Another Room</string>
+    <string name="teacher_availability">Teacher Availability</string>
+    <string name="projector">Projector</string>
+    <string name="learning_content">Learning Content</string>
+    <string name="digital_board">Digital Board</string>
+
+    <string name="sound_system_and_school_band">Sound System and School Band</string>
+    <string name="sound_system_availability">Sound System Availability</string>
+    <string name="band_for_boys">Band For Boys</string>
+
+    <string name="band_for_girls">Band For Girls</string>
+    <string name="school_band_and_instruments_availability">School Band and Instruments Availability</string>
+    <string name="upload_images">Upload Images</string>
+
+    <string name="date">Date:</string>
+    <string name="save">Save</string>
+    <string name="library">Library</string>
+    <string name="does_the_school_subscribe_to_newspapers_magazines">Does the school subscribe to newspapers/ magazines?</string>
+    <string name="grant_under_scheme">Grant Under Scheme</string>
+    <string name="enter_other_scheme_name_here">Enter Other Scheme Name Here..</string>
+    <string name="total_library_grant">Total Library Grant</string>
+    <string name="expenditure_rs_n_in_current_f_ys">Expenditure(Rs.)\n In current F.Y.</string>
+
+    <string name="separate_room">Separate Room</string>
+
+    <string name="practical_labs">Practical Labs</string>
+    <string name="up_to_high_school">Up to High School</string>
+    <string name="science_lab">Science Lab</string>
+
+
+    <string name="up_to_intermediate">Up to Intermediate</string>
+    <string name="physics_lab">Physics Lab</string>
+
+    <string name="chemistry_lab">Chemistry Lab</string>
+
+    <string name="biology_lab">Biology Lab</string>
+
+    <string name="social_science_lab">Social Science Lab</string>
+
+    <string name="home_science_lab">Home Science Lab</string>
+
+    <string name="music_lab">Music Lab</string>
+    <string name="availability">Availability</string>
+
+    <string name="submit_details">Submit Details</string>
+    <string name="approval">Approval</string>
+    <string name="enter_remarks">Enter Remarks</string>
+    <string name="submit">Submit</string>
+    <string name="class_7th">Class: 7th</string>
+    <string name="no_of_enrollments">No. of Enrollments</string>
+    <string name="boys">Boys</string>
+    <string name="girls">Girls</string>
+    <string name="attendance_by_months">Attendance By Months</string>
+    <string name="no_of_student_absent_from_15_days">No. of student Absent from 15 days</string>
+    <string name="no_of_student_absent_from_30_days">No. of student Absent from 30 days</string>
+    <string name="_2010">2010</string>
+
+    <string name="no_of_appeared_student">No. of Appeared Student</string>
+    <string name="no_of_passed_student">No. of Passed Student</string>
+    <string name="_1st_division">1st Division</string>
+    <string name="_2nd_division">2nd Division</string>
+    <string name="_3rd_division">3rd Division</string>
+    <string name="district_level_topper">District Level Topper</string>
+    <string name="state_level_topper">State Level Topper</string>
+    <string name="competitive_exam_selection">Competitive exam selection</string>
+    <string name="class_6th">Class: 6th</string>
+    <string name="total_enrolled">Total Enrolled</string>
+    <string name="appeared_in_1st_monthly">Appeared in 1st Monthly</string>
+    <string name="passed_in_1st_monthly">Passed in 1st Monthly</string>
+    <string name="appeared_in_2nd_monthly">Appeared in 2nd Monthly</string>
+    <string name="passed_in_2nd_monthly">Passed in 2nd Monthly</string>
+    <string name="appeared_in_3rd_monthly">Appeared in 3rd Monthly</string>
+    <string name="passed_in_3rd_monthly">Passed in 3rd Monthly</string>
+    <string name="half_yearly_appeared">Half Yearly Appeared</string>
+    <string name="half_yearly_passed">Half Yearly Passed</string>
+    <string name="yearly_appeared">Yearly appeared</string>
+    <string name="yearly_passed">Yearly Passed</string>
+    <string name="equipment_status">Equipment Status</string>
+    <string name="lab_condition">Lab Condition</string>
+
 
     <string-array name="array_yesno">
         <item>Yes</item>

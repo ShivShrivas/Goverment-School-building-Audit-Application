@@ -27,7 +27,7 @@
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
                 android:layout_gravity="center"
-                android:text="Approval"/>
+                android:text="@string/approval"/>
 
             <ImageView
                 android:elevation="2dp"
@@ -57,7 +57,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Enter Remarks"
+                android:hint="@string/enter_remarks"
                 android:textSize="15dp"
                 android:textColorHint="#6C6C6C"
                 app:boxStrokeColor="?attr/colorPrimary"
@@ -85,7 +85,7 @@
             android:backgroundTint="@color/green"
             android:layout_height="wrap_content"
             android:id="@+id/approovedBtnDialoge"
-            android:text="Submit"/>
+            android:text="@string/submit"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
 

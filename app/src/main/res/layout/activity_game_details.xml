@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/arrow_back"
-        app:title="Game Details" />
+        app:title="@string/game_details" />
 
     <ScrollView
         android:id="@+id/scrollView7"
@@ -41,7 +41,7 @@
                 android:layout_height="35dp"
                 android:background="@color/DIOS_ColorPrimary"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Game Facility"
+                android:text="@string/game_facility"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:textStyle="bold"
@@ -73,7 +73,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Availability"
+                        android:text="@string/availability"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -121,7 +121,7 @@
                             android:id="@+id/monthNameTxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Grant for Sports &amp; Physical Education"
+                            android:text="@string/grant_for_sports_amp_physical_education"
                             android:textAlignment="center"
                             android:textColor="#2C2C2C"
                             android:textSize="14dp" />
@@ -155,7 +155,7 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:text="Receipt Amount"
+                                        android:text="@string/receipt_amount"
                                         android:textAlignment="center"
                                         android:textColor="#2B2B2B"
                                         android:textSize="13dp"
@@ -204,7 +204,7 @@
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        android:text="Expenditure  Amount"
+                                        android:text="@string/expenditure_amount"
                                         android:textAlignment="center"
                                         android:textColor="#272727"
                                         android:textSize="13dp"
@@ -267,7 +267,7 @@
                             android:id="@+id/schemeNameTxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Grant Under Scheme"
+                            android:text="@string/grant_under_scheme"
                             android:textAlignment="center"
                             android:textColor="#2C2C2C"
                             android:textSize="14dp" />
@@ -318,7 +318,7 @@
                 android:layout_height="35dp"
                 android:background="@color/DIOS_ColorPrimary"
                 android:gravity="center_vertical|center_horizontal"
-                android:text="Games Type"
+                android:text="@string/games_type"
                 android:textColor="@color/white"
                 android:textSize="16dp"
                 android:textStyle="bold"
@@ -357,7 +357,7 @@
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Indoor Games"
+                            android:text="@string/indoor_games"
                             android:textAlignment="center"
                             android:textColor="#2C2C2C"
                             android:textSize="14dp"
@@ -433,7 +433,7 @@
 
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Outdoor Games"
+                            android:text="@string/outdoor_games"
                             android:textAlignment="center"
                             android:textColor="#2C2C2C"
                             android:textSize="14dp"
@@ -501,7 +501,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Availability of Sport Teacher"
+                        android:text="@string/availability_of_sport_teacher"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -514,7 +514,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1.8"
                         android:gravity="center_vertical|end"
-                        android:text="Yes"
+                        android:text="@string/yes"
                         android:textColor="@color/DIOS_ColorPrimary"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -545,7 +545,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="IS any teacher Nominated"
+                        android:text="@string/is_any_teacher_nominated"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -558,7 +558,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1.8"
                         android:gravity="center_vertical|end"
-                        android:text="Yes"
+                        android:text="@string/yes"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -589,7 +589,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="Availability of Sports"
+                        android:text="@string/availability_of_sports"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -602,7 +602,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="1.8"
                         android:gravity="center_vertical|end"
-                        android:text="Yes"
+                        android:text="@string/yes"
                         android:textColor="@color/DIOS_ColorPrimary"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -645,7 +645,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="4dp"
-                        android:text="Is any student participated in District level."
+                        android:text="@string/is_any_student_participated_in_district_level"
                         android:textColor="#3C3B3B"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -710,7 +710,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="4dp"
-                        android:text="Is any student participated in State level."
+                        android:text="@string/is_any_student_participated_in_state_level"
                         android:textColor="#3C3B3B"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -722,7 +722,7 @@
                         android:gravity="center_vertical|center_horizontal"
 
                         android:paddingStart="16dp"
-                        android:text="No"
+                        android:text="@string/no"
                         android:textColor="#000000"
                         android:textStyle="bold" />
 
@@ -775,7 +775,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:padding="4dp"
-                        android:text="Is any student participated in National level."
+                        android:text="@string/is_any_student_participated_in_national_level"
                         android:textColor="#3C3B3B"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -826,7 +826,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="School is registered in Fit India Schools Programme."
+                        android:text="@string/school_is_registered_in_fit_india_schools_programme"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -839,7 +839,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="2"
                         android:gravity="center_vertical|end"
-                        android:text="Yes"
+                        android:text="@string/yes"
                         android:textColor="@color/DIOS_ColorPrimary"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -870,7 +870,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="How many students registered in Fit India Schools Programme."
+                        android:text="@string/how_many_students_registered_in_fit_india_schools_programme"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -914,7 +914,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="School is registered in Khelo India Programme."
+                        android:text="@string/school_is_registered_in_khelo_india_programme"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -927,7 +927,7 @@
                         android:layout_marginEnd="16dp"
                         android:layout_weight="2"
                         android:gravity="center_vertical|end"
-                        android:text="Yes"
+                        android:text="@string/yes"
                         android:textColor="@color/DIOS_ColorPrimary"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -958,7 +958,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
-                        android:text="How many students registered in Khelo India Programme."
+                        android:text="@string/how_many_students_registered_in_khelo_india_programme"
                         android:textColor="@color/black"
                         android:textSize="15dp"
                         android:textStyle="bold" />
@@ -998,7 +998,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/white"
                     android:background="@drawable/bg_red"
-                    android:text="Rejected"
+                    android:text="@string/rejected"
                     android:textSize="14dp"
 
                     />
@@ -1011,7 +1011,7 @@
                     android:layout_weight="1"
                     android:textColor="@color/white"
                     android:background="@drawable/bg_green"
-                    android:text="Approved"
+                    android:text="@string/approved"
                     android:textSize="14dp"
 
                     />

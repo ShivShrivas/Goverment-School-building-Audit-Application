@@ -18,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="CWSN Ramp"
+            app:title="@string/cwsn_ramp"
 
             android:theme="@style/ToolBarStyle"
             android:layout_height="?attr/actionBarSize"

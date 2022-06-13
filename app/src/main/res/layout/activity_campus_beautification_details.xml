@@ -60,7 +60,7 @@
                                 android:padding="5dp"
                                 android:textSize="16dp"
                                 android:textStyle="bold"
-                                android:text="Campus Beautification"
+                                android:text="@string/campus_beautification"
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -79,7 +79,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Plantation"/>
+                                android:text="@string/plantation"/>
 
 
                             <androidx.cardview.widget.CardView
@@ -113,7 +113,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Wall Painting/ Slogan Writing /BALA Work"/>
+                                android:text="@string/wall_painting_slogan_writing_bala_work"/>
 
 
                             <androidx.cardview.widget.CardView
@@ -147,7 +147,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Availability of dustbins in Campus "/>
+                                android:text="@string/availability_of_dustbins_in_campus"/>
 
 
                             <androidx.cardview.widget.CardView
@@ -181,7 +181,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Eco Club"/>
+                                android:text="@string/eco_club"/>
 
 
                             <androidx.cardview.widget.CardView
@@ -215,7 +215,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Display Board/ Notice Board "/>
+                                android:text="@string/display_board_notice_board"/>
 
 
                             <androidx.cardview.widget.CardView
@@ -274,7 +274,7 @@
                                 android:padding="5dp"
                                 android:textSize="16dp"
                                 android:textStyle="bold"
-                                android:text="Details of Trees"
+                                android:text="@string/details_of_trees"
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -293,7 +293,7 @@
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="No. Of Trees"/>
+                                android:text="@string/no_of_trees"/>
 
 
                             <TextView
@@ -305,7 +305,8 @@
                                 android:text="Types of Trees"
                                 android:textSize="15dp"
                                 android:textAlignment="center"
-                                android:layout_weight="1"/>
+                                android:layout_weight="1"
+                                tools:ignore="HardcodedText" />
 
                             <TextView
                                 android:textColor="@color/black"
@@ -313,7 +314,7 @@
                                 android:gravity="center"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Running Metre of flower bed"
+                                android:text="@string/running_metre_of_flower_bed"
                                 android:textSize="15dp"
                                 android:textAlignment="center"
                                 android:layout_weight="1"/>
@@ -398,7 +399,7 @@
                                 android:textSize="16dp"
                                 android:layout_weight="1"
                                 android:textStyle="bold"
-                                android:text="Plantation Details for Financial Year"
+                                android:text="@string/plantation_details_for_financial_year"
                                 android:textColor="@color/white" />
 
                             <TextView
@@ -425,7 +426,7 @@
                                 android:textColor="@color/black"
                                 android:textStyle="bold"
                                 android:layout_marginStart="8dp"
-                                android:text="Target"/>
+                                android:text="@string/target"/>
 
 
                             <TextView
@@ -452,7 +453,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Planted"/>
+                                android:text="@string/planted"/>
 
 
                             <TextView
@@ -479,7 +480,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Survive"/>
+                                android:text="@string/survive"/>
 
 
                             <TextView
@@ -532,7 +533,7 @@
                                 android:padding="5dp"
                                 android:textSize="16dp"
                                 android:textStyle="bold"
-                                android:text="School Building White Wash/ Painting"
+                                android:text="@string/school_building_white_wash_painting"
                                 android:textColor="@color/white" />
 
                         </LinearLayout>
@@ -550,7 +551,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Last Done (FY)"/>
+                                android:text="@string/last_done_fy"/>
 
 
                             <TextView
@@ -577,7 +578,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="White Wash Status"/>
+                                android:text="@string/white_wash_status"/>
 
 
                             <TextView
@@ -604,7 +605,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Budget (FY)"/>
+                                android:text="@string/budget_fy"/>
 
 
                             <TextView
@@ -631,7 +632,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Sanction Amount"/>
+                                android:text="@string/sanction_amount"/>
 
 
                             <TextView
@@ -658,176 +659,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Expenditure Amount"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="Maintenance of Windows/ Doors"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="Painting of Black Boards "/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="Repairing of Furniture's "/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="Cleaning of water tanks "/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="Cleaning of Drainage System "/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="Cleaning of Toilets "/>
+                                android:text="@string/expenditure_amount"/>
 
 
                             <TextView
@@ -856,7 +688,147 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Maintenance of Electrical Equipment's"/>
+                                android:text="@string/maintenance_of_windows_doors"/>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp"
+                                android:text="5"
+                                android:textSize="15dp"
+                                android:textAlignment="center"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/cardbg"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/painting_of_black_boards"/>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp"
+                                android:text="5"
+                                android:textSize="15dp"
+                                android:textAlignment="center"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/cardbg"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/repairing_of_furniture_s"/>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp"
+                                android:text="5"
+                                android:textSize="15dp"
+                                android:textAlignment="center"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/cardbg"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/cleaning_of_water_tanks"/>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp"
+                                android:text="5"
+                                android:textSize="15dp"
+                                android:textAlignment="center"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/cardbg"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/cleaning_of_drainage_system"/>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp"
+                                android:text="5"
+                                android:textSize="15dp"
+                                android:textAlignment="center"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/cardbg"/>
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/cleaning_of_toilets"/>
 
 
                             <TextView
@@ -885,7 +857,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Boards of Honour For Students"/>
+                                android:text="@string/maintenance_of_electrical_equipment_s"/>
 
 
                             <TextView
@@ -914,7 +886,7 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Boards of Honour For Teachers &amp; Staff"/>
+                                android:text="@string/boards_of_honour_for_students"/>
 
 
                             <TextView
@@ -943,7 +915,36 @@
                                 android:textSize="15dp"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="Sign Board outside the school"/>
+                                android:text="@string/boards_of_honour_for_teachers_amp_staff"/>
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:padding="8dp"
+                                android:text="5"
+                                android:textSize="15dp"
+                                android:textAlignment="center"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/cardbg"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+                            <TextView
+                                android:textStyle="bold"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:textSize="15dp"
+                                android:textColor="@color/black"
+                                android:layout_marginStart="8dp"
+                                android:text="@string/sign_board_outside_the_school"/>
 
 
                             <TextView
@@ -983,7 +984,7 @@
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_red"
-                        android:text="Rejected"
+                        android:text="@string/rejected"
                         android:textSize="14dp"
 
                         />
@@ -995,7 +996,7 @@
                         android:layout_marginStart="4dp"
                         android:layout_weight="1"
                         android:background="@drawable/bg_green"
-                        android:text="Approved"
+                        android:text="@string/approved"
                         android:textSize="14dp"
 
                         />

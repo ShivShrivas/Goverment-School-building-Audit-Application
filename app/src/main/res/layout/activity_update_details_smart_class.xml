@@ -18,7 +18,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Smart Class"
+            app:title="@string/smart_class"
 
             android:layout_width="match_parent"
             android:theme="@style/ToolBarStyle"
@@ -139,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="Smart Class"
+        android:text="@string/smart_class"
         android:textColor="?attr/colorPrimary"
         android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -182,7 +182,7 @@
                     android:layout_weight="1"
                     android:gravity="center_vertical"
 
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/textColor1"
                     android:textSize="15dp"  />
 
@@ -227,7 +227,7 @@
                         android:layout_height="wrap_content"
                         android:background="?attr/colorPrimary"
                         android:padding="8dp"
-                        android:text="Smart Classoom 1"
+                        android:text="@string/smart_classoom_1"
                         android:textAlignment="textStart"
                         android:textColor="@color/white"
                         android:textSize="16dp"
@@ -255,7 +255,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
 
-                            android:text="Year Of Installation"
+                            android:text="@string/year_of_installation"
                             android:textColor="@color/textColor1"
                             android:textSize="15dp" />
 
@@ -298,7 +298,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
 
-                            android:text="Company Name"
+                            android:text="@string/company_name"
                             android:textColor="@color/textColor1"
                             android:textSize="15dp" />
 
@@ -341,7 +341,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
 
-                            android:text="Under Scheme"
+                            android:text="@string/under_scheme"
                             android:textColor="@color/textColor1"
                             android:textSize="15dp" />
 
@@ -394,7 +394,7 @@
                                 android:id="@+id/edtSmartOtherScheme"
                                 android:layout_width="match_parent"
                                 android:layout_height="32dp"
-                                android:hint="Enter Other Scheme Name Here.."
+                                android:hint="@string/enter_other_scheme_name_here"
                                 android:paddingStart="5dp"
                                 android:background="@drawable/cardbg"
                                 android:layout_margin="4dp"
@@ -422,7 +422,7 @@
                             android:layout_weight="1"
                             android:gravity="center_vertical"
 
-                            android:text="Working Status"
+                            android:text="@string/working_status"
                             android:textColor="@color/textColor1"
                             android:textSize="15dp" />
 
@@ -467,7 +467,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:drawableEnd="@drawable/ic_add"
-                    android:text="Add Another Room"
+                    android:text="@string/add_another_room"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="15dp"
@@ -499,7 +499,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Teacher Availability"
+                        android:text="@string/teacher_availability"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -542,7 +542,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Projector"
+                        android:text="@string/projector"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -585,7 +585,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Learning Content"
+                        android:text="@string/learning_content"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -628,7 +628,7 @@
                         android:layout_weight="1"
                         android:gravity="center_vertical"
 
-                        android:text="Digital Board"
+                        android:text="@string/digital_board"
                         android:textColor="@color/textColor1"
                         android:textSize="15dp" />
 
@@ -669,7 +669,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_weight="1"
-                        android:text="Upload Images"
+                        android:text="@string/upload_images"
                         android:textColor="?attr/colorPrimary"
                         android:textSize="15dp" />
 
@@ -720,7 +720,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="16dp"
                 android:background="?attr/colorPrimary"
-                android:text="Submit"
+                android:text="@string/submit"
                 android:textColor="@color/white"
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
