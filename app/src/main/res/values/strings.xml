@@ -20,9 +20,7 @@
     <string name="no_of_proposed_training_module">No. of Proposed Training/Module</string>
     <string name="no_of_trainings_modules_completed">No. of Trainings/Modules Completed</string>
     <string name="training_for_teacher">Training For Teacher</string>
-
     <string name="approved">Approved</string>
-
     <string name="details_of_trees">Details of Trees</string>
     <string name="plantation">Plantation</string>
     <string name="wall_painting_slogan_writing_bala_work">Wall Painting/ Slogan Writing /BALA Work</string>
@@ -39,7 +37,6 @@
     <string name="last_done_fy">Last Done (FY)</string>
     <string name="budget_fy">Budget (FY)</string>
     <string name="sanction_amount">Sanction Amount</string>
-
     <string name="maintenance_of_windows_doors">Maintenance of Windows/ Doors</string>
     <string name="painting_of_black_boards">Painting of Black Boards</string>
     <string name="repairing_of_furniture_s">Repairing of Furniture\'s</string>
@@ -53,7 +50,6 @@
     <string name="rejected">Rejected</string>
     <string name="co_curricular">Co-Curricular Activities Dashboard</string>
     <string name="school_grading_amp_monitoring_system"><![CDATA[School Grading & Monitoring System]]></string>
-
     <string name="red_cross_society">Red Cross Society</string>
     <string name="scout_amp_guide"><![CDATA[Scout & Guide]]></string>
     <string name="current_yeat">Current Year result Details</string>
@@ -83,7 +79,6 @@
     <string name="extra_activties">Extra Activities Details</string>
     <string name="activities">Activities</string>
     <string name="sports_day">Sports Day</string>
-
     <string name="annual_day_prize_day_cultural_day">Annual Day/Prize Day/Cultural Day</string>
     <string name="invited_chief_guest">Invited Chief Guest</string>
     <string name="yoga_day">Yoga Day</string>
@@ -122,7 +117,6 @@
     <string name="resend_otp">Resend OTP</string>
     <string name="game_details">Game Details</string>
     <string name="game_facility">Game Facility</string>
-
     <string name="grant_for_sports_amp_physical_education"><![CDATA[Grant for Sports & Physical Education]]></string>
     <string name="receipt_amount">Receipt Amount</string>
     <string name="expenditure_amount">Expenditure Amount</string>
@@ -164,18 +158,14 @@
     <string name="naval">NAVAL</string>
     <string name="air">AIR</string>
     <string name="art_and_craft">Art And Craft Room</string>
-
     <string name="no_of_machines">No.of Machines</string>
-
     <string name="boundary_wall">Boundary Wall</string>
-
     <string name="uploaded_images">Uploaded Images</string>
     <string name="no_of_cctv">No. of CCTV</string>
     <string name="total_cctv">Total CCTV</string>
     <string name="working_cctv">Working CCTV</string>
     <string name="not_working_cctv">Not Working CCTV</string>
     <string name="computer_lab">Computer Lab</string>
-
     <string name="no_of_computers">No. of Computers</string>
     <string name="no_of_working_computers">No. of working Computers</string>
     <string name="internet">Internet</string>
@@ -210,20 +200,14 @@
     <string name="availability_of_standard_track">Availability of Standard Track</string>
     <string name="practical_labs_details">Practical Labs Details</string>
     <string name="practical_lab">Practical Lab</string>
-
     <string name="type">Type</string>
-
     <string name="rain_harvesting">Rain Harvesting</string>
-
     <string name="smart_class">Smart Class</string>
-
     <string name="solar_panel">Solar Panel</string>
-
     <string name="kilowatt_of_solar_panel">Kilowatt of Solar Panel</string>
     <string name="type_of_solar_panel">Type of Solar Panel</string>
     <string name="sound_system_and_band">Sound System and band</string>
     <string name="sound_and_band">Sound and Band</string>
-
     <string name="staff_room">Staff Room</string>
     <string name="separate_room_available">Separate Room Available</string>
     <string name="status">Status</string>
@@ -286,19 +270,15 @@
     <string name="staff_sanction_and_working">Staff Sanction and Working</string>
     <string name="principal">Principal</string>
     <string name="vice_principal">Vice Principal</string>
-
     <string name="lecturer">Lecturer</string>
     <string name="asst_teacher">Asst. Teacher</string>
-
     <string name="physical_educator">Physical Educator</string>
     <string name="lab_assistant">Lab Assistant</string>
     <string name="librarian">Librarian</string>
     <string name="computer_teacher">Computer Teacher</string>
     <string name="sr_clerk">Sr.Clerk</string>
     <string name="clerk">Clerk</string>
-
     <string name="peon">Peon</string>
-
     <string name="sweeper">Sweeper</string>
     <string name="no_of_sanctioned_posts">No of Sanctioned Posts</string>
     <string name="no_of_posted_staff">No Of Posted Staff</string>
@@ -310,7 +290,6 @@
     <string name="class_room">Class Room</string>
     <string name="classroom_details">Classroom Details</string>
     <string name="no_of_rooms">No. of Rooms</string>
-
     <string name="total_rooms">Total Rooms</string>
     <string name="good_condition">Good Condition</string>
     <string name="minor_reparing">Minor Reparing</string>
@@ -323,7 +302,6 @@
     <string name="white_board">White Board</string>
     <string name="green_board">Green Board</string>
     <string name="your_location_will_also_be_captured">**your Location will also be captured</string>
-
     <string name="art_and_craft_room">Art And Craft Room</string>
     <string name="bio_metric">Bio Metric</string>
     <string name="biometric">Biometric</string>
@@ -334,20 +312,15 @@
     <string name="length_of_boundary_wall_in_mtr">Length of Boundary Wall in mtr.</string>
     <string name="type_of_boundary_wall">Type of Boundary Wall</string>
     <string name="white_wash_status">White Wash Status</string>
-
     <string name="condition">Condition</string>
-
     <string name="boys_toilet">Boys Toilet</string>
     <string name="details_of_boys_toilets">Details of Boys Toilets</string>
-
-
     <string name="scanner_availability">Scanner Availability</string>
     <string name="no_of_computer_lab">No. of Computer Lab</string>
     <string name="cwsn_ramp">CWSN Ramp</string>
     <string name="cycle_stand">Cycle Stand</string>
     <string name="cycles_capacity_count">Cycles Capacity Count</string>
     <string name="physical_status">Physical Status</string>
-
     <string name="drinking_water">Drinking Water</string>
     <string name="no_of_handpump">No. of Handpump</string>
     <string name="total_handpump">Total Handpump</string>
@@ -370,12 +343,10 @@
     <string name="working_ro">Working RO</string>
     <string name="not_working_ro">Not Working RO</string>
     <string name="ro_installation_under_scheme">Ro Installation Under Scheme</string>
-
     <string name="electricity_arrangment">Electricity Arrangement</string>
     <string name="other_options_source">Other options/Source</string>
     <string name="no_bulbs_tube_light">No. Bulbs/Tube Light</string>
     <string name="no_of_fans">No. of Fans</string>
-
     <string name="fire_fighting">Fire Fighting</string>
     <string name="total_fire_fighting">Total Fire Fighting</string>
     <string name="working_fire_fighting">Working Fire Fighting</string>
@@ -383,17 +354,13 @@
     <string name="renewal_status">Renewal Status</string>
     <string name="last_renewal_date">Last Renewal Date</string>
     <string name="training_on_fire_fighting">Training on Fire fighting</string>
-
     <string name="total_strength_covered">Total Strength Covered</string>
     <string name="additional_furniture_required_n_mention_required_sitting_capacity">Additional Furniture Required \n(mention required sitting capacity)</string>
-
     <string name="girls_toilet">Girls Toilet</string>
     <string name="details_of_girls_toilets">Details of Girls Toilets</string>
     <string name="no_of_toilets_seats_available_excluding_cwsn_friendly_toilets">No. of Toilets seats available excluding CWSN friendly Toilets</string>
-
     <string name="availability_if_cwsn_friendly_toilets">Availability if CWSN friendly toilets</string>
     <string name="no_of_cwsn_friendly_toilet_seates">No. of CWSN friendly toilet seates</string>
-
     <string name="total_no_of_urinals">Total No. of Urinals</string>
     <string name="with_flushing_and_cleaning_facility">With Flushing and Cleaning facility</string>
     <string name="without_flushing_and_cleaning_facility">Without Flushing and Cleaning facility</string>
@@ -403,33 +370,27 @@
     <string name="dustbin">Dustbin</string>
     <string name="incinerator">Incinerator</string>
     <string name="free_sanitary_napkin">Free Sanitary Napkin</string>
-
     <string name="opem_gym">Open Gym</string>
     <string name="multipurpose_hall">Multipurpose Hall</string>
     <string name="sitting_capacity">Sitting Capacity</string>
-
     <string name="office_room">Office Room</string>
     <string name="principal_room">Principal Room</string>
     <string name="smart_classoom_1">Smart Classoom 1</string>
     <string name="year_of_installation">Year Of Installation</string>
     <string name="company_name">Company Name</string>
     <string name="under_scheme">Under Scheme</string>
-
     <string name="working_status">Working Status</string>
     <string name="add_another_room">Add Another Room</string>
     <string name="teacher_availability">Teacher Availability</string>
     <string name="projector">Projector</string>
     <string name="learning_content">Learning Content</string>
     <string name="digital_board">Digital Board</string>
-
     <string name="sound_system_and_school_band">Sound System and School Band</string>
     <string name="sound_system_availability">Sound System Availability</string>
     <string name="band_for_boys">Band For Boys</string>
-
     <string name="band_for_girls">Band For Girls</string>
     <string name="school_band_and_instruments_availability">School Band and Instruments Availability</string>
     <string name="upload_images">Upload Images</string>
-
     <string name="date">Date:</string>
     <string name="save">Save</string>
     <string name="library">Library</string>
@@ -438,28 +399,18 @@
     <string name="enter_other_scheme_name_here">Enter Other Scheme Name Here..</string>
     <string name="total_library_grant">Total Library Grant</string>
     <string name="expenditure_rs_n_in_current_f_ys">Expenditure(Rs.)\n In current F.Y.</string>
-
     <string name="separate_room">Separate Room</string>
-
     <string name="practical_labs">Practical Labs</string>
     <string name="up_to_high_school">Up to High School</string>
     <string name="science_lab">Science Lab</string>
-
-
     <string name="up_to_intermediate">Up to Intermediate</string>
     <string name="physics_lab">Physics Lab</string>
-
     <string name="chemistry_lab">Chemistry Lab</string>
-
     <string name="biology_lab">Biology Lab</string>
-
     <string name="social_science_lab">Social Science Lab</string>
-
     <string name="home_science_lab">Home Science Lab</string>
-
     <string name="music_lab">Music Lab</string>
     <string name="availability">Availability</string>
-
     <string name="submit_details">Submit Details</string>
     <string name="approval">Approval</string>
     <string name="enter_remarks">Enter Remarks</string>
@@ -472,7 +423,6 @@
     <string name="no_of_student_absent_from_15_days">No. of student Absent from 15 days</string>
     <string name="no_of_student_absent_from_30_days">No. of student Absent from 30 days</string>
     <string name="_2010">2010</string>
-
     <string name="no_of_appeared_student">No. of Appeared Student</string>
     <string name="no_of_passed_student">No. of Passed Student</string>
     <string name="_1st_division">1st Division</string>
@@ -495,7 +445,6 @@
     <string name="yearly_passed">Yearly Passed</string>
     <string name="equipment_status">Equipment Status</string>
     <string name="lab_condition">Lab Condition</string>
-
 
     <string-array name="array_yesno">
         <item>Yes</item>
