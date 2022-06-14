@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="app_name">स्कूल ग्रेडिंग &amp; निगरानी</string>
+    <string name="app_name">स्कूल श्रेणी निर्धारण और निरीक्षण</string>
     <string name="opneToggel">खोलना</string>
     <string name="close">बंद करना</string>
     <string name="edit_details">विवरण संपादित करें</string>
@@ -55,8 +55,8 @@
     <string name="red_cross_society">रेड क्रॉस सोसायटी</string>
     <string name="scout_amp_guide">स्काउट और गाइड</string>
     <string name="current_yeat">वर्तमान वर्ष के परिणाम विवरण</string>
-    <string name="parameters">मापदंडों</string>
-    <string name="updated_on">को अपडेट किया</string>
+    <string name="parameters">मापदंड</string>
+    <string name="updated_on">अंतिम अपडेट किया</string>
     <string name="schoo_result_dash">स्कूल परिणाम डैशबोर्ड</string>
     <string name="last_3_year_result">पिछले 3 साल का परिणाम</string>
     <string name="current_result">वर्तमान परिणाम</string>
@@ -328,11 +328,11 @@
     <string name="total_handpump">कुल हैंडपंप</string>
     <string name="working_handpump">काम कर रहे हैंडपंप</string>
     <string name="not_working_handpump">काम नहीं कर रहा हैंडपंप</string>
-    <string name="submersible">पनडुब्बी</string>
-    <string name="no_of_submersible">पनडुब्बी की संख्या</string>
-    <string name="total_submersible">कुल सबमर्सिबल</string>
-    <string name="working_submersible">काम कर रहे पनडुब्बी</string>
-    <string name="not_working_submersible">सबमर्सिबल काम नहीं कर रहा</string>
+    <string name="submersible">सबमर्सिबल पंप</string>
+    <string name="no_of_submersible">सबमर्सिबल पंप की संख्या</string>
+    <string name="total_submersible">कुल सबमर्सिबल पंप</string>
+    <string name="working_submersible">काम कर रहे सबमर्सिबल पंप</string>
+    <string name="not_working_submersible">सबमर्सिबल पंप काम नहीं कर रहा</string>
     <string name="nagar_nigam_nagar_palika_water_supply">नगर निगम/नगर पालिका जलापूर्ति</string>
     <string name="overhead_tank">ओवरहेड टैंक</string>
     <string name="no_of_taps">नलों की संख्या</string>
@@ -376,7 +376,7 @@
     <string name="multipurpose_hall">बहुउद्देशीय हॉल</string>
     <string name="sitting_capacity">बैठने की क्षमता</string>
     <string name="office_room">ऑफ़िस रूम</string>
-    <string name="principal_room">प्रधान कक्ष</string>
+    <string name="principal_room">प्रधानाचार्य कक्ष</string>
     <string name="smart_classoom_1">स्मार्ट क्लासरूम 1</string>
     <string name="year_of_installation">स्थापना का वर्ष</string>
     <string name="company_name">कंपनी का नाम</string>

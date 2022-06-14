@@ -111,17 +111,17 @@ TextView uploadDW,editDrinkingWaterDetails;
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
                     editDrinkingWaterDetails.setVisibility(View.VISIBLE);
                 }
-int totalRo=Integer.parseInt(response.body().get(0).get("RoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("RoNonWorking").getAsString());
-int totalSub=Integer.parseInt(response.body().get(0).get("SubNoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("SubWorking").getAsString());
-int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking").getAsString())+Integer.parseInt(response.body().get(0).get("HandWorking").getAsString());
-                edtNotWorkingRO.setText(response.body().get(0).get("RoNonWorking").getAsString());
-                        edtWorkingRO.setText(response.body().get(0).get("RoWorking").getAsString());
+int totalRo=Integer.parseInt(response.body().get(0).get("RoWorking")==null?"0":response.body().get(0).get("RoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("RoNonWorking")==null?"0":response.body().get(0).get("RoNonWorking").getAsString());
+int totalSub=Integer.parseInt(response.body().get(0).get("SubNoWorking")==null?"0":response.body().get(0).get("SubNoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("SubWorking")==null?"0":response.body().get(0).get("SubWorking").getAsString());
+int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking")==null?"0":response.body().get(0).get("HandNonWorking").getAsString())+Integer.parseInt(response.body().get(0).get("HandWorking")==null?"0":response.body().get(0).get("HandWorking").getAsString());
+                edtNotWorkingRO.setText(response.body().get(0).get("RoNonWorking")==null?"0":response.body().get(0).get("RoNonWorking").getAsString());
+                edtWorkingRO.setText(response.body().get(0).get("RoWorking")==null?"0":response.body().get(0).get("RoWorking").getAsString());
                 edtTotalRO.setText(String.valueOf(totalRo));
-                        edtNotWorkingSummerSible.setText(response.body().get(0).get("SubNoWorking").getAsString());
-                edtWorkingSummerSible.setText(response.body().get(0).get("SubWorking").getAsString());
-                        edtTotalSummerSible.setText(String.valueOf(totalSub));
-                edtNotWorkingHandpump.setText(response.body().get(0).get("HandNonWorking").getAsString());
-                        edtWorkingHandpump.setText(response.body().get(0).get("HandWorking").getAsString());
+                edtNotWorkingSummerSible.setText(response.body().get(0).get("SubNoWorking")==null?"0":response.body().get(0).get("SubNoWorking").getAsString());
+                edtWorkingSummerSible.setText(response.body().get(0).get("SubWorking")==null?"0":response.body().get(0).get("SubWorking").getAsString());
+                edtTotalSummerSible.setText(String.valueOf(totalSub));
+                edtNotWorkingHandpump.setText(response.body().get(0).get("HandNonWorking")==null?"0":response.body().get(0).get("HandNonWorking").getAsString());
+                edtWorkingHandpump.setText(response.body().get(0).get("HandWorking")==null?"0":response.body().get(0).get("HandWorking").getAsString());
                 edtTotalHandpump.setText(String.valueOf(totalHand));
 
 
@@ -130,7 +130,7 @@ int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking").getA
 
 
 
-                            edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme").getAsString());
+                            edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme")==null?"0":response.body().get(0).get("ROInsScheme").getAsString());
 
 
 
@@ -141,9 +141,9 @@ int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking").getA
                             edtTotalDrinkingwaterTaps.setText("0");
 
                         }else{
-                            edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps").getAsString());
-                            edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps").getAsString());
-                            edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps").getAsString());
+                            edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps")==null?"0":response.body().get(0).get("WorkingTaps").getAsString());
+                            edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps")==null?"0":response.body().get(0).get("NonWorkingTaps").getAsString());
+                            edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps")==null?"0":response.body().get(0).get("NoOfTaps").getAsString());
                         }
                         if (response.body().get(0).get("OverHeadTankAvl").getAsString().equals("No")){
                             edtOverheadTankAvailabiltyDW.setText(response.body().get(0).get("OverHeadTankAvl").getAsString());

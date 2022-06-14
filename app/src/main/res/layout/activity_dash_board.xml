@@ -23,46 +23,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <Button
                 android:id="@+id/logOutBtn"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
+                android:layout_width="0dp"
+                android:text="Logout"
+                android:drawableStart="@drawable/logout"
+                android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/colorPrimary"
-                    android:layout_weight="1">
-
-                    <ImageButton
-                        android:id="@+id/imageButton2"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-
-                        android:layout_marginTop="3dp"
-                        android:background="?attr/colorPrimary"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/logout"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="?attr/colorPrimary"
-                        android:text="Logout"
-                        android:textAlignment="center"
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageButton2" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

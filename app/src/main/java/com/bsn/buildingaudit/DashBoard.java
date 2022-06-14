@@ -76,7 +76,7 @@ public class DashBoard extends AppCompatActivity {
     DrawerLayout mainDrawerLayout;
     Dialog dialog;
     public  static  int DataLocked;
-    LinearLayout logOutBtn;
+    Button logOutBtn;
     ImageView hamMenu;
     dashboardRecviewAdapter adapter;
     CollapsingToolbarLayout mCollapsingToolbarLayout;

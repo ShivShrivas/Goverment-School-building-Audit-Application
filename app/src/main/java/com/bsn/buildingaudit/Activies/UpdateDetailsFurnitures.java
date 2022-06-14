@@ -638,7 +638,7 @@ dialog2.show();
             jsonObject1.addProperty("MinorCount","0");
             jsonObject1.addProperty("TotalCnt",edtSingleSeated.getText().toString());
         }else{
-            jsonObject1.addProperty("Condition",spinnersingleSeatesStatus.getSelectedItem().toString());
+            jsonObject1.addProperty("Condition","");
             jsonObject1.addProperty("GoodCount",edtgoodConditionForSingle.getText().toString());
             jsonObject1.addProperty("MajorCount",edtMajorConditionForSingle.getText().toString());
             jsonObject1.addProperty("MinorCount",edtMinorConditionForSingle.getText().toString());
@@ -656,7 +656,7 @@ dialog2.show();
             jsonObject2.addProperty("MinorCount","0");
             jsonObject2.addProperty("TotalCnt",edtDoubleSeated.getText().toString());
         }else{
-            jsonObject2.addProperty("Condition",spinnerDoubleSeatesStatus.getSelectedItem().toString());
+            jsonObject2.addProperty("Condition","");
             jsonObject2.addProperty("GoodCount",edtgoodConditionForDouble.getText().toString());
             jsonObject2.addProperty("MajorCount",edtMajorConditionForDouble.getText().toString());
             jsonObject2.addProperty("MinorCount",edtMinorConditionForDouble.getText().toString());
@@ -674,7 +674,7 @@ dialog2.show();
                 jsonObject3.addProperty("MinorCount","0");
                 jsonObject3.addProperty("TotalCnt",edtTrippelSeated.getText().toString());
             }else{
-                jsonObject3.addProperty("Condition",spinnerTripleSeatesStatus.getSelectedItem().toString());
+                jsonObject3.addProperty("Condition","");
                 jsonObject3.addProperty("GoodCount",edtgoodConditionForTripple.getText().toString());
                 jsonObject3.addProperty("MajorCount",edtMajorConditionForTripple.getText().toString());
                 jsonObject3.addProperty("MinorCount",edtMinorConditionForTripple.getText().toString());

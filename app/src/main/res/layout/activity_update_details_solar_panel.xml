@@ -350,7 +350,6 @@
                             android:layout_margin="4dp"
                             android:layout_weight="1" />
                     </androidx.cardview.widget.CardView>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -430,7 +429,7 @@
                             android:layout_margin="4dp"
                             android:layout_weight="1"
                             android:background="@drawable/cardbg"
-                            android:inputType="number"
+                            android:inputType="numberDecimal"
 
                             android:maxLength="6"
                             android:text="0"

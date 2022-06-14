@@ -194,7 +194,7 @@ EditText edtSolarPanelOtherScheme;
 
 
         ArrayList<String> arrayListInstallationYear=new ArrayList<>();
-        for (int i = 1990; i <= 2020; i++) {
+        for (int i = 1990; i <= 2021; i++) {
             arrayListInstallationYear.add(String.valueOf(i));
         }
        arrayAdapter1=new ArrayAdapter(this, android.R.layout.simple_spinner_item,arrayListInstallationYear);

@@ -544,22 +544,22 @@ LinearLayout linearLayout31;
                 int spinnerPositionForROScheme = adapter.getPosition(response.body().get(0).get("ROInsScheme").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("ROInsScheme").getAsString());
                 spinnerROInstallationScheme.setSelection(spinnerPositionForROScheme);
 
-                edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps").getAsString());
-                edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps").getAsString());
-                edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps").getAsString());
+                edtNotWorkingDrinkingwaterTaps.setText(response.body().get(0).get("NonWorkingTaps")==null?"0":response.body().get(0).get("NonWorkingTaps").getAsString());
+                edtWorkingDrinkingwaterTaps.setText(response.body().get(0).get("WorkingTaps")==null?"0":response.body().get(0).get("WorkingTaps").getAsString());
+                edtTotalDrinkingwaterTaps.setText(response.body().get(0).get("NoOfTaps")==null?"0":response.body().get(0).get("NoOfTaps").getAsString());
 
 
-                int totalRo=Integer.parseInt(response.body().get(0).get("RoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("RoNonWorking").getAsString());
-                int totalSub=Integer.parseInt(response.body().get(0).get("SubNoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("SubWorking").getAsString());
-                int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking").getAsString())+Integer.parseInt(response.body().get(0).get("HandWorking").getAsString());
-                edtNotWorkingRO.setText(response.body().get(0).get("RoNonWorking").getAsString());
-                edtWorkingRO.setText(response.body().get(0).get("RoWorking").getAsString());
+                int totalRo=Integer.parseInt(response.body().get(0).get("RoWorking")==null?"0":response.body().get(0).get("RoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("RoNonWorking")==null?"0":response.body().get(0).get("RoNonWorking").getAsString());
+                int totalSub=Integer.parseInt(response.body().get(0).get("SubNoWorking")==null?"0":response.body().get(0).get("SubNoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("SubWorking")==null?"0":response.body().get(0).get("SubWorking").getAsString());
+                int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking")==null?"0":response.body().get(0).get("HandNonWorking").getAsString())+Integer.parseInt(response.body().get(0).get("HandWorking")==null?"0":response.body().get(0).get("HandWorking").getAsString());
+                edtNotWorkingRO.setText(response.body().get(0).get("RoNonWorking")==null?"0":response.body().get(0).get("RoNonWorking").getAsString());
+                edtWorkingRO.setText(response.body().get(0).get("RoWorking")==null?"0":response.body().get(0).get("RoWorking").getAsString());
                 edtTotalRO.setText(String.valueOf(totalRo));
-                edtNotWorkingSummerSible.setText(response.body().get(0).get("SubNoWorking").getAsString());
-                edtWorkingSummerSible.setText(response.body().get(0).get("SubWorking").getAsString());
+                edtNotWorkingSummerSible.setText(response.body().get(0).get("SubNoWorking")==null?"0":response.body().get(0).get("SubNoWorking").getAsString());
+                edtWorkingSummerSible.setText(response.body().get(0).get("SubWorking")==null?"0":response.body().get(0).get("SubWorking").getAsString());
                 edtTotalSummerSible.setText(String.valueOf(totalSub));
-                edtNotWorkingHandpump.setText(response.body().get(0).get("HandNonWorking").getAsString());
-                edtWorkingHandpump.setText(response.body().get(0).get("HandWorking").getAsString());
+                edtNotWorkingHandpump.setText(response.body().get(0).get("HandNonWorking")==null?"0":response.body().get(0).get("HandNonWorking").getAsString());
+                edtWorkingHandpump.setText(response.body().get(0).get("HandWorking")==null?"0":response.body().get(0).get("HandWorking").getAsString());
                 edtTotalHandpump.setText(String.valueOf(totalHand));
 
 

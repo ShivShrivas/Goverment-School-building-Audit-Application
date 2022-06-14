@@ -312,9 +312,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Good Condition"
+                        android:text="@string/good_condition"
                         android:textColor="@color/gray"
-                        android:textSize="17dp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/goodCondtionClassroomAfterSubmit"
@@ -387,9 +387,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Minor Reparing"
+                        android:text="@string/minor_repairing"
                         android:textColor="@color/gray"
-                        android:textSize="17dp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/minorRepairingClassroomAfterSubmit"
@@ -458,9 +458,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Major Repairing"
+                        android:text="@string/major_repairing"
                         android:textColor="@color/gray"
-                        android:textSize="17dp" />
+                        android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/majorRepairingClassroomAfterSubmit"
@@ -528,7 +528,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Number of Classrooms with Podium"
+                        android:text="@string/number_of_classrooms_with_podium"
                         android:textAlignment="textStart"
                         android:textColor="@color/gray"
                         android:textSize="17dp" />
@@ -580,7 +580,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
-                        android:text="Board in Classroom"
+                        android:text="@string/board_in_classroom"
                         android:textStyle="bold"
                         android:textAlignment="center"
                         android:textColor="?attr/colorPrimary"
@@ -606,7 +606,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="Board Type"
+                                    android:text="@string/board_type"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -621,7 +621,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:gravity="center_horizontal|center_vertical"
-                                    android:text="Available in Rooms"
+                                    android:text="@string/available_in_rooms"
                                     android:textColor="?attr/colorPrimary"
                                     android:textSize="16dp"
                                     android:textStyle="bold" />
@@ -643,7 +643,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="Black Board"
+                                    android:text="@string/black_board"
                                     android:textColor="@color/gray"
                                     android:textSize="15dp" />
                             </LinearLayout>
@@ -693,7 +693,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="White Board"
+                                    android:text="@string/white_board"
                                     android:textColor="@color/gray"
                                     android:textSize="15dp" />
                             </LinearLayout>
@@ -743,7 +743,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:gravity="center_vertical|center_horizontal"
-                                    android:text="Green Board"
+                                    android:text="@string/green_board"
                                     android:textColor="@color/gray"
                                     android:textSize="15dp" />
                             </LinearLayout>

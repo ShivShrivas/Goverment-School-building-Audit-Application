@@ -111,49 +111,46 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
                     editFurnituresDetails.setVisibility(View.VISIBLE);
                 }
-                edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture").getAsString());
-                        edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength").getAsString());
-
-                edtgoodConditionForSingle.setText(response.body().get(0).get("GoodCount").getAsString());
-                edtMinorConditionForSingle.setText(response.body().get(0).get("MinorCount").getAsString());
-                edtMajorConditionForSingle.setText(response.body().get(0).get("MajorCount").getAsString());
-
-                edtgoodConditionForDouble.setText(response.body().get(1).get("GoodCount").getAsString());
-                edtMinorConditionForDouble.setText(response.body().get(1).get("MinorCount").getAsString());
-                edtMajorConditionForDouble.setText(response.body().get(1).get("MajorCount").getAsString());
-
-                edtgoodConditionForTripple.setText(response.body().get(2).get("GoodCount").getAsString());
-                edtMinorConditionForTripple.setText(response.body().get(2).get("MinorCount").getAsString());
-                edtMajorConditionForTripple.setText(response.body().get(2).get("MajorCount").getAsString());
+                edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture")==null?"0":response.body().get(0).get("AdditionalFurniture").getAsString());
+                edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength")==null?"0":response.body().get(0).get("TotalStrength").getAsString());
+                edtgoodConditionForSingle.setText(response.body().get(0).get("GoodCount")==null?"0":response.body().get(0).get("GoodCount").getAsString());
+                edtMinorConditionForSingle.setText(response.body().get(0).get("MinorCount")==null?"0":response.body().get(0).get("MinorCount").getAsString());
+                edtMajorConditionForSingle.setText(response.body().get(0).get("MajorCount")==null?"0":response.body().get(0).get("MajorCount").getAsString());
+                edtgoodConditionForDouble.setText(response.body().get(1).get("GoodCount")==null?"0":response.body().get(1).get("GoodCount").getAsString());
+                edtMinorConditionForDouble.setText(response.body().get(1).get("MinorCount")==null?"0":response.body().get(1).get("MinorCount").getAsString());
+                edtMajorConditionForDouble.setText(response.body().get(1).get("MajorCount")==null?"0":response.body().get(1).get("MajorCount").getAsString());
+                edtgoodConditionForTripple.setText(response.body().get(2).get("GoodCount")==null?"0":response.body().get(2).get("GoodCount").getAsString());
+                edtMinorConditionForTripple.setText(response.body().get(2).get("MinorCount")==null?"0":response.body().get(2).get("MinorCount").getAsString());
+                edtMajorConditionForTripple.setText(response.body().get(2).get("MajorCount")==null?"0":response.body().get(2).get("MajorCount").getAsString());
 
 
                     if (response.body().get(0).get("TotalCnt").getAsString().equals("0")){
                         constraintLayout9.setVisibility(View.GONE);
-                        edtSingleSeated.setText(response.body().get(0).get("TotalCnt").getAsString());
+                        edtSingleSeated.setText(response.body().get(0).get("TotalCnt")==null?"0":response.body().get(0).get("TotalCnt").getAsString());
 
 
                     }else {
-                        edtsingleSeatesStatus.setText(response.body().get(0).get("Condition").getAsString());
-                        edtSingleSeated.setText(response.body().get(0).get("TotalCnt").getAsString());
+                        edtsingleSeatesStatus.setText(response.body().get(0).get("Condition")==null?"0":response.body().get(0).get("Condition").getAsString());
+                        edtSingleSeated.setText(response.body().get(0).get("TotalCnt")==null?"0":response.body().get(0).get("TotalCnt").getAsString());
 
 
                     }
   if (response.body().get(1).get("TotalCnt").getAsString().equals("0")){
                         constraintLayout59.setVisibility(View.GONE);
-                        edtDoubleSeated.setText(response.body().get(1).get("TotalCnt").getAsString());
+                        edtDoubleSeated.setText(response.body().get(1).get("TotalCnt")==null?"0":response.body().get(1).get("TotalCnt").getAsString());
 
                     }else {
-                        edtDoubleSeatesStatus.setText(response.body().get(1).get("Condition").getAsString());
-                        edtDoubleSeated.setText(response.body().get(1).get("TotalCnt").getAsString());
+                        edtDoubleSeatesStatus.setText(response.body().get(1).get("Condition").getAsString()==null?"0":response.body().get(1).get("Condition").getAsString());
+                        edtDoubleSeated.setText(response.body().get(1).get("TotalCnt").getAsString()==null?"0":response.body().get(1).get("TotalCnt").getAsString());
 
                     }
   if (response.body().get(2).get("TotalCnt").getAsString().equals("0")){
                         constraintLayout49.setVisibility(View.GONE);
-                        edtTrippelSeated.setText(response.body().get(2).get("TotalCnt").getAsString());
+                        edtTrippelSeated.setText(response.body().get(2).get("TotalCnt")==null?"0":response.body().get(2).get("TotalCnt").getAsString());
 
                     }else {
-                        edtTripleSeatesStatus.setText(response.body().get(2).get("Condition").getAsString());
-                        edtTrippelSeated.setText(response.body().get(2).get("TotalCnt").getAsString());
+                        edtTripleSeatesStatus.setText(response.body().get(2).get("Condition")==null?"0":response.body().get(2).get("Condition").getAsString());
+                        edtTrippelSeated.setText(response.body().get(2).get("TotalCnt")==null?"0":response.body().get(2).get("TotalCnt").getAsString());
 
                     }
 

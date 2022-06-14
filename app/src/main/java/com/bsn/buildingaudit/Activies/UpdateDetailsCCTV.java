@@ -347,9 +347,9 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
                 spinnerCCTVAvailabelty.setSelection(spinnerPositionForAvailabilty);
                 spinnerCCTVWorkingStatus.setSelection(spinnerPositionForWorkingStatus);
                 spinnerCCTVInstallationYear.setSelection(spinnforInstallationYear);
-                EdtNoOfCCTV.setText(response.body().get(0).get("WorkingCount").getAsString());
-                EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount").getAsString());
-                edtTotalCCTV.setText(response.body().get(0).get("NoOfCCTV").getAsString());
+                EdtNoOfCCTV.setText(response.body().get(0).get("WorkingCount")==null?"0":response.body().get(0).get("WorkingCount").getAsString());
+                EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount")==null?"0":response.body().get(0).get("NonWorkingCount").getAsString());
+                edtTotalCCTV.setText(response.body().get(0).get("NoOfCCTV")==null?"0":response.body().get(0).get("NoOfCCTV").getAsString());
 
                 recyclerViewCCTVFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsCCTV.this,LinearLayoutManager.HORIZONTAL,false));
 
