@@ -217,7 +217,7 @@
     <string name="wifi_in_school">Wifi in school</string>
     <string name="wifi_and_internet">Wifi and Internet</string>
     <string name="wifi_internet_availability">Wifi Internet Availability</string>
-    <string name="school_geofenching">School Geofenching</string>
+    <string name="school_geofenching">School Geofencing</string>
     <string name="add_location">Add Location+</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>

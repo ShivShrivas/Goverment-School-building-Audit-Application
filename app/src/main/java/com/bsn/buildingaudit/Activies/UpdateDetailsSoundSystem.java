@@ -125,7 +125,7 @@ String action;
         soundSystemImageUploadBtn=findViewById(R.id.soundSystemImageUploadBtn);
         spinnerSoundSystem=findViewById(R.id.spinnerSoundSystem);
         spinnerSchoolBand=findViewById(R.id.spinnerSchoolBand);
-        spinnerSchoolBandForGirls=findViewById(R.id.spinnerSchoolBandForGirls);
+        spinnerSchoolBandForGirls=findViewById(R.id.spinnerDialog_Lang);
         submitSoundSystemBtn=findViewById(R.id.submitSoundSystemBtn);
         recyclerViewSoundSystmFromServer=findViewById(R.id.recyclerViewSoundSystmFromServer);
         dialog = new Dialog(this);

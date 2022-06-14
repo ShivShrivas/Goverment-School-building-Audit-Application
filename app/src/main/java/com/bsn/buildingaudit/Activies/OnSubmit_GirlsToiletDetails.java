@@ -117,9 +117,9 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
                     edtCSWNfriendlyTotalB.setText(response.body().get(0).get("TotalCWSN").getAsString());
                     edtCSWNwithoutfriendlyB.setText(response.body().get(0).get("NoOfSeatsCWSNWithOutFlush").getAsString());
                     edtCSWNfriendlyB.setText(response.body().get(0).get("NoOfSeatsCWSNWithFlush").getAsString());
-                    edtsgirlsIncinator.setText(response.body().get(0).get("Incinerator").getAsString());
-                    edtGirlsSanetoryNapkin.setText(response.body().get(0).get("FreeSanitaryNapkins").getAsString());
                 }
+                edtsgirlsIncinator.setText(response.body().get(0).get("Incinerator").getAsString());
+                edtGirlsSanetoryNapkin.setText(response.body().get(0).get("FreeSanitaryNapkins").getAsString());
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_GirlsToiletDetails.this,StaffPhotoPathList);
                 recyclerViewBoysToiletOnSub.setAdapter(onlineImageRecViewAdapter);

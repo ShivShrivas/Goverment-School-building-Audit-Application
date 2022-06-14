@@ -219,7 +219,7 @@
     <string name="wifi_in_school">स्कूल में वाईफाई</string>
     <string name="wifi_and_internet">वाईफाई और इंटरनेट</string>
     <string name="wifi_internet_availability">वाईफाई इंटरनेट उपलब्धता</string>
-    <string name="school_geofenching">स्कूल जियोफेनिंग</string>
+    <string name="school_geofenching">स्कूल जियोफ़ेंसिंग</string>
     <string name="add_location">स्थान जोड़ें+</string>
     <string name="latitude">अक्षांश</string>
     <string name="longitude">देशान्तर</string>
@@ -302,7 +302,7 @@
     <string name="available_in_rooms">कमरों में उपलब्ध</string>
     <string name="black_board">ब्लैक बोर्ड</string>
     <string name="white_board">व्हाइट बोर्ड</string>
-    <string name="green_board">हरा बोर्ड</string>
+    <string name="green_board">ग्रीन बोर्ड</string>
     <string name="your_location_will_also_be_captured">**आपकी लोकेशन भी कैप्चर की जाएगी</string>
     <string name="art_and_craft_room">कला और शिल्प कक्ष</string>
     <string name="bio_metric">जैव मीट्रिक</string>
@@ -416,7 +416,7 @@
     <string name="submit_details">विवरण जमा करें</string>
     <string name="approval">अनुमोदन</string>
     <string name="enter_remarks">टिप्पणी दर्ज करें</string>
-    <string name="submit">प्रस्तुत करना</string>
+    <string name="submit">प्रस्तुत करें</string>
     <string name="class_7th">कक्षा : 7वीं</string>
     <string name="no_of_enrollments">नामांकन की संख्या</string>
     <string name="boys">लड़के</string>

@@ -206,6 +206,12 @@ CheckBox check_showpassword,check_remember;
                 dialog.show();
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
+                    if (applicationController.getUsertype().equals("AA")){
+                        Toast.makeText(MainActivity.this, "Only Principal Module You Can Select!!", Toast.LENGTH_LONG).show();
+//                        startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
+//                        finish();
+//                        dialog.dismiss();
+                    }else{
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
                         Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
@@ -253,6 +259,8 @@ CheckBox check_showpassword,check_remember;
                             }
                         });
 
+                    }
+
 
                 }else {
                     Toast.makeText(MainActivity.this, "Please enter username and password properly", Toast.LENGTH_SHORT).show();
@@ -280,7 +288,7 @@ CheckBox check_showpassword,check_remember;
                         applicationController.setPhoneNumber(getSchoolDetails.get(0).getPHONE_NO());
                         applicationController.setDataLocked(getSchoolDetails.get(0).getDataLocked());
 
-                        startActivity(new Intent(MainActivity.this,Principal_Dashboard.class));
+                        startActivity(new Intent(MainActivity.this,DashBoard.class));
                         finish();
                         dialog.dismiss();
                     }else{

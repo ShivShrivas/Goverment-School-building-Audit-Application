@@ -2,6 +2,7 @@ package com.bsn.buildingaudit.Activies;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -9,6 +10,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,16 +43,23 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
     double longitude;
     GeofenceAdapter adapter;
     LocationManager locationManager;
-
+    Dialog dialog;
+    DateFormat dateFormat;
+    Calendar cal;
 Button addGeoTagBtn,btnSubmitgeoFench;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onsubmit_geofenching_details);
         applicationController = (ApplicationController) getApplication();
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy \n HH:mm:ss");
-        Calendar cal = Calendar.getInstance();
+         dateFormat = new SimpleDateFormat("dd/MM/yyyy \n HH:mm:ss");
+         cal = Calendar.getInstance();
+        dialog = new Dialog(this);
 
+        dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog.setContentView (R.layout.progress_dialog);
+        dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+        dialog.setCancelable(false);
         schoolAddress = findViewById(R.id.schoolAddress);
         geoFenchingRecview = findViewById(R.id.geoFenchingRecview);
         schoolName = findViewById(R.id.schoolName);
@@ -90,37 +99,50 @@ Button addGeoTagBtn,btnSubmitgeoFench;
         addGeoTagBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (getLocation()){
-                    if (lattitude!=0.0 && longitude!=0.0){
-                        if (arrayList.size()<11){
-                            try{
-                                if (!arrayList.get(arrayList.size()-1).getLattitude().equals(String.valueOf(lattitude)) && !arrayList.get(arrayList.size()-1).getLongitute().equals(String.valueOf(longitude))){
-                                    GeoTags geoTags=new GeoTags(String.valueOf(lattitude), String.valueOf(longitude),  dateFormat.format(cal.getTime()));
-                                    arrayList.add(geoTags);
-                                    adapter.notifyDataSetChanged();
-                                }else{
-                                    Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Please change your location", Toast.LENGTH_SHORT).show();
-                                }
-                            }catch (Exception e){
-                                GeoTags geoTags=new GeoTags(String.valueOf(lattitude), String.valueOf(longitude),  dateFormat.format(cal.getTime()));
-                                arrayList.add(geoTags);
-                                adapter.notifyDataSetChanged();
-                            }
-
-                           
-                        }else{
-                            Toast.makeText(UpdateDetails_GeofenchingDetails.this, "You can not take more than ten tags", Toast.LENGTH_SHORT).show();
-                        }
-                      
-                    }else{
-                        Toast.makeText(UpdateDetails_GeofenchingDetails.this, "we are fetching your location please retry", Toast.LENGTH_SHORT).show();
-                    }
-                   
-                }
-
+                getLocationLatLong();
+                dialog.show();
 
             }
         });
+    }
+
+    private void getLocationLatLong() {
+
+        if (getLocation()){
+            if (lattitude!=0.0 && longitude!=0.0){
+                if (arrayList.size()<11){
+                    try{
+                        if (!arrayList.get(arrayList.size()-1).getLattitude().equals(String.valueOf(lattitude)) && !arrayList.get(arrayList.size()-1).getLongitute().equals(String.valueOf(longitude))){
+                            GeoTags geoTags=new GeoTags(String.valueOf(lattitude), String.valueOf(longitude),  dateFormat.format(cal.getTime()));
+                            arrayList.add(geoTags);
+                            adapter.notifyDataSetChanged();
+                        }else{
+                            Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Please change your location", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
+                    }catch (Exception e){
+                        GeoTags geoTags=new GeoTags(String.valueOf(lattitude), String.valueOf(longitude),  dateFormat.format(cal.getTime()));
+                        arrayList.add(geoTags);
+                        adapter.notifyDataSetChanged();
+                        dialog.dismiss();
+                    }
+
+
+                }else{
+                    Toast.makeText(UpdateDetails_GeofenchingDetails.this, "You can not take more than ten tags", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+
+            }else{
+                Toast.makeText(UpdateDetails_GeofenchingDetails.this, "we are fetching your location please retry", Toast.LENGTH_SHORT).show();
+                getLocationLatLong();
+            }
+
+        }else{
+            Toast.makeText(this, "Please enable location of your device", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
+        }
+
     }
 
     @SuppressLint("MissingPermission")

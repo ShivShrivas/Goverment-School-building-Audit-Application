@@ -23,7 +23,7 @@
 
             android:theme="@style/ToolBarStyle"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="Update Geofenching" />
+            app:title="Update Geofencing" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
