@@ -32,7 +32,9 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
     ApplicationController applicationController;
     LinearLayout linearLayoutCWSNfriendlyToilet;
     TextView userName,schoolAddress,schoolName,editGirlsToiletDetails;
+    LinearLayout linearLayout21;
     RecyclerView recyclerViewBoysToiletOnSub;
+    String Type;
     EditText edtUrinalWithFlushTotalB,edtUrinalWithoutFlushB,edtUrinalWithFlushB,edtCSWNfriendlyTotalB,edtCSWNwithoutfriendlyB,edtCSWNfriendlyB,
             edtwithflushTotal,edtWithoutFlushClean,edtWithFlushClean,edtBoysDustbin,edtBoysDoors,edtCWSNBoysAvailability,edtsgirlsIncinator,edtGirlsSanetoryNapkin;
     @Override
@@ -48,6 +50,8 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -64,6 +68,7 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
         edtUrinalWithFlushB=findViewById(R.id.edtUrinalWithFlushB);
         edtCSWNfriendlyTotalB=findViewById(R.id.edtCSWNfriendlyTotalB);
         edtCSWNwithoutfriendlyB=findViewById(R.id.edtCSWNwithoutfriendlyB);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtCSWNfriendlyB=findViewById(R.id.edtCSWNfriendlyB);
         edtwithflushTotal=findViewById(R.id.edtwithflushTotal);
         edtWithoutFlushClean=findViewById(R.id.edtWithoutFlushClean);
@@ -76,6 +81,9 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
         edtGirlsSanetoryNapkin=findViewById(R.id.edtGirlsSanetoryNapkin);
         edtsgirlsIncinator=findViewById(R.id.edtsgirlsIncinator);
         editGirlsToiletDetails=findViewById(R.id.editGirlsToiletDetails);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         editGirlsToiletDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,7 +104,13 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editGirlsToiletDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editGirlsToiletDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editGirlsToiletDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 edtUrinalWithFlushTotalB.setText(response.body().get(0).get("TotalUrinals").getAsString());
                 edtUrinalWithoutFlushB.setText(response.body().get(0).get("NoOfUrinalsWithOutFlush").getAsString());

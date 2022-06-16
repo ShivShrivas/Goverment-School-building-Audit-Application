@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +36,8 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
 
     EditText edtTypeOfSolarPanel,edtcapacityOfSolarPanel,edtSolarPanelScheme,edtSolarPaneltWorkingStatus,edtSolraPanelInstallationYear,edtSolarPanel;
     RecyclerView recyclerViewTwoTypeSolarpanelAndOnSub;
+    LinearLayout linearLayout21;
+    String Type;
     ConstraintLayout constraintLayout23;
     Button buttonSolarePanelOnSub;
     @Override
@@ -51,7 +54,8 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
             }
         });
         Dialog dialog2 = new Dialog(this);
-
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -73,6 +77,10 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
         editSolarPanelDetails=findViewById(R.id.editSolarPanelDetails);
         recyclerViewTwoTypeSolarpanelAndOnSub=findViewById(R.id.recyclerViewTwoTypeSolarpanelAndOnSub);
         buttonSolarePanelOnSub=findViewById(R.id.buttonSolarePanelOnSub);
+        linearLayout21=findViewById(R.id.linearLayout21);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         recyclerViewTwoTypeSolarpanelAndOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         disableEditbox();
         RestClient restClient=new RestClient();
@@ -92,7 +100,11 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editSolarPanelDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editSolarPanelDetails.setVisibility(View.GONE);
+                    }else{editSolarPanelDetails.setVisibility(View.VISIBLE);}
+
+
                 }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     edtSolarPanel.setText(response.body().get(0).get("Availabilty").getAsString());

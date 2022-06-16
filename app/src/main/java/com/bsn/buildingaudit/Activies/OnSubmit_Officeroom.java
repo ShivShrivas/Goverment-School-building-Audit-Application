@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +35,9 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
     ApplicationController applicationController;
     EditText OfficeRoomWorkingStatus,spinnerOfficeRoomAvailabelty,OfficeRoomAlmirah,OfficeRoomFurniture;
     ConstraintLayout constraintLayoutPR;
+    String Type;
     TextView editOfficeRoomDetails;
+    LinearLayout linearLayout21;
     RecyclerView recyclerViewOffice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,7 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
         OfficeRoomAlmirah=findViewById(R.id.OfficeRoomAlmirah);
         OfficeRoomFurniture=findViewById(R.id.OfficeRoomFurniture);
         editOfficeRoomDetails=findViewById(R.id.editOfficeRoomDetails);
+        linearLayout21=findViewById(R.id.linearLayout21);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -57,7 +61,8 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
             }
         });
         Dialog dialog2 = new Dialog(this);
-
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -67,7 +72,10 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
-
+            if (Type.equals("D")){
+                linearLayout21.setVisibility(View.VISIBLE);
+                editOfficeRoomDetails.setVisibility(View.GONE);
+            }
         recyclerViewOffice.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         disabledEdtBox();
         RestClient restClient=new RestClient();
@@ -81,13 +89,20 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
                 finish();
             }
         });
+
         Call<List<JsonObject>> call=apiService.checkOfficeRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"27"));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editOfficeRoomDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editOfficeRoomDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editOfficeRoomDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
                     spinnerOfficeRoomAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());

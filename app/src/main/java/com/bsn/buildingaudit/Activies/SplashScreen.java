@@ -53,7 +53,7 @@ TextView versionTxt;
     void showDialogForLang(){
         ArrayList<String> arrayList=new ArrayList<>();
         arrayList.add("English");
-//        arrayList.add("Hindi");
+        arrayList.add("Hindi");
 
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, arrayList);
         arrayAdapter.setDropDownViewResource(R.layout.custom_text_spiiner);

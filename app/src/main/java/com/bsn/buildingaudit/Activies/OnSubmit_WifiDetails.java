@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,9 @@ EditText edtWifiPresent;
 RecyclerView recyclerViewExtraThingsOnSub;
 TextView wifiUploadImageTxt;
     ApplicationController applicationController;
+    LinearLayout linearLayout21;
     TextView userName,schoolAddress,schoolName;
+    String Type;
     TextView editWIFIRoomDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +56,12 @@ TextView wifiUploadImageTxt;
                 onBackPressed();
             }
         });
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
+
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        linearLayout21=findViewById(R.id.linearLayout21);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
@@ -64,7 +71,9 @@ TextView wifiUploadImageTxt;
         recyclerViewExtraThingsOnSub=findViewById(R.id.recyclerViewExtraThingsOnSub);
         edtWifiPresent.setEnabled(false);
         recyclerViewExtraThingsOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Call<List<JsonObject>> call=apiService.checkWifiDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"20"));
@@ -73,7 +82,13 @@ TextView wifiUploadImageTxt;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editWIFIRoomDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editWIFIRoomDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editWIFIRoomDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("WiFiInternetAvl").getAsString().equals("No")){
                     edtWifiPresent.setText(response.body().get(0).get("WiFiInternetAvl").getAsString());

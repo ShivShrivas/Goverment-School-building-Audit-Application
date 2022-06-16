@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +37,10 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
     EditText edtAlmiraAndRacksAvailabiltyOnSubmit,edtFurnitureAvailabiltyOnSubmit,edtStaffRoomStatusOnSubmit,edtStaffRoomAvailabilityOnSubmit;
     RecyclerView recyclerViewStafroomtwoOnSubmit;
     ConstraintLayout constraintLayout22;
+    String Type;
+    LinearLayout linearLayout11;
+    TextView mobnumberTxt,uploadedImagetxt;
+    ImageView schoolIcon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,17 +52,33 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
         dialog2.show();
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
         edtAlmiraAndRacksAvailabiltyOnSubmit=findViewById(R.id.edtAlmiraAndRacksAvailabiltyOnSubmit);
         edtFurnitureAvailabiltyOnSubmit=findViewById(R.id.edtFurnitureAvailabiltyOnSubmit);
         edtStaffRoomStatusOnSubmit=findViewById(R.id.edtStaffRoomStatusOnSubmit);
         edtStaffRoomAvailabilityOnSubmit=findViewById(R.id.edtStaffRoomAvailabilityOnSubmit);
         constraintLayout22=findViewById(R.id.constraintLayout22);
+        mobnumberTxt=findViewById(R.id.mobnumberTxt);
+        linearLayout11=findViewById(R.id.linearLayout11);
+        uploadedImagetxt=findViewById(R.id.uploadedImagetxt);
         recyclerViewStafroomtwoOnSubmit=findViewById(R.id.recyclerViewStafroomtwoOnSubmit);
         applicationController= (ApplicationController) getApplication();
+        editStaffRoomDetails=findViewById(R.id.editStaffRoomDetails);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        if (Type.equals("D")){
+            toolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            Window window = getWindow();
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+            mobnumberTxt.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
 
+            uploadedImagetxt.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+
+            linearLayout11.setVisibility(View.VISIBLE);
+            editStaffRoomDetails.setVisibility(View.GONE);
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,7 +87,6 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         });
         schoolName=findViewById(R.id.schoolName);
         schoolAddress=findViewById(R.id.schoolAddress);
-        editStaffRoomDetails=findViewById(R.id.editStaffRoomDetails);
 
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
@@ -86,7 +108,13 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 setAllEditTextDisabled();
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editStaffRoomDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editStaffRoomDetails.setVisibility(View.GONE);
+
+                    }else{
+
+                        editStaffRoomDetails.setVisibility(View.VISIBLE);
+                    }
                 }
                 if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
                     constraintLayout22.setVisibility(View.GONE);

@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#142F00FF"
+    android:background="#E1F5FE"
     tools:context=".DIOS.SchoolStaff.All_Staff_Traing_Details">
 
     <androidx.appcompat.widget.Toolbar

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,8 @@ import retrofit2.Response;
 public class OnSubmit_VocationalRoom extends AppCompatActivity {
     private TextView schoolAddress,schoolName,editVocalRoomDetails;
     ApplicationController applicationController;
+    LinearLayout linearLayout21;
+    String Type;
     RecyclerView recyclerViewVocalIS,recyclerViewVocalHs;
     CardView scienceLabBodyCard, physicsLabImageCard,physicsLabBodyCard,scienceLabImageCard;
 
@@ -58,6 +61,9 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
         dialog2.show();
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
+
         schoolName=findViewById(R.id.schoolName);
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolAddress=findViewById(R.id.schoolAddress);
@@ -66,6 +72,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         editVocalRoomDetails=findViewById(R.id.editVocalRoomDetails);
         edtVocalISEquipmentStatus=findViewById(R.id.edtVocalISEquipmentStatus);
         edtVocalRoomISAvailability=findViewById(R.id.edtVocalRoomISAvailability);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtVocalISCondition=findViewById(R.id.edtVocalISCondition);
         edtVocalRoomHSAvailability=findViewById(R.id.edtVocalRoomHSAvailability);
         edtVocalHSEquipmentStatus=findViewById(R.id.edtVocalHSEquipmentStatus);
@@ -76,6 +83,9 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         physicsLabBodyCard=findViewById(R.id.physicsLabBodyCardV);
         physicsLabImageCard=findViewById(R.id.physicsLabImageCard);
         scienceLabImageCard=findViewById(R.id.scienceLabImageCard);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         edtVocalISEquipmentStatus.setEnabled(false);
                 edtVocalRoomISAvailability.setEnabled(false);
         edtVocalISCondition.setEnabled(false);
@@ -104,7 +114,13 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editVocalRoomDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editVocalRoomDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editVocalRoomDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("RoomAvailable").getAsString().equals("No")){
                     edtVocalRoomHSAvailability.setText(response.body().get(0).get("RoomAvailable").getAsString());

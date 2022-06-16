@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,8 @@ public class OnSubmit_CycleStand extends AppCompatActivity {
 EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleStandCapacity,edtCycleStand;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
+    LinearLayout linearLayout21;
+    String Type;
     ConstraintLayout constraintLayout32;
     TextView uploadCYcleStand,editCycleStandDetails;
     RecyclerView recyclerCycleStandOnSub;
@@ -48,6 +51,8 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -63,11 +68,15 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
         edtCycleStandFunctionalStatus=findViewById(R.id.edtCycleStandFunctionalStatus);
         edtCycyleStandCapacity=findViewById(R.id.edtCycyleStandCapacity);
         recyclerCycleStandOnSub=findViewById(R.id.recyclerCycleStandOnSub);
+        linearLayout21=findViewById(R.id.linearLayout21);
         uploadCYcleStand=findViewById(R.id.uploadCYcleStand);
         constraintLayout32=findViewById(R.id.constraintLayout32);
         edtCycleStand=findViewById(R.id.edtCycleStand);
         editCycleStandDetails=findViewById(R.id.editCycleStandDetails);
         disableEdiBox();
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         recyclerCycleStandOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         editCycleStandDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,7 +95,13 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editCycleStandDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editCycleStandDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editCycleStandDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("Availability").getAsString().equals("No")){
                     edtCycleStand.setText(response.body().get(0).get("Availability").getAsString());

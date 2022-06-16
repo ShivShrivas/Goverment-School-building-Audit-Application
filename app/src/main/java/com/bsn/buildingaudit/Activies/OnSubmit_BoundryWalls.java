@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
     RecyclerView recyclerViewTwoTypeBoundarywallOnSub;
     ConstraintLayout layoutBoundry;
     TextView uploadBoundary,editBoundryWallsDetails;
+    LinearLayout linearLayout21;
+    String Type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +65,12 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         edtWallCondition=findViewById(R.id.edtWallCondition);
         uploadBoundary=findViewById(R.id.uploadBoundary);
+        linearLayout21=findViewById(R.id.linearLayout21);
         layoutBoundry=findViewById(R.id.layoutBoundry);
         edtBoundryScheme=findViewById(R.id.edtBoundryScheme);
         edtWhiteWash=findViewById(R.id.edtWhiteWash);
@@ -75,6 +81,9 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
         editBoundryWallsDetails=findViewById(R.id.editBoundryWallsDetails);
         recyclerViewTwoTypeBoundarywallOnSub=findViewById(R.id.recyclerViewTwoTypeBoundarywallOnSub);
         disableEditbox();
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         editBoundryWallsDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,7 +102,13 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editBoundryWallsDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editBoundryWallsDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editBoundryWallsDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     edtBoundaryWallAvail.setText(response.body().get(0).get("Availabilty").getAsString());

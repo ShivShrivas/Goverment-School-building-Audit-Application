@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,8 @@ public class OnSubmit_CCTVDetails extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     RecyclerView recyclerViewCCTVOnSubmit;
     ConstraintLayout layoutCCTV;
+    LinearLayout linearLayout21;
+    String Type;
     TextView uploadCCTV,editCCTVDetails,EdtNoOfNotworkingCCTV;
 EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailabelty,edtTotalCCTV,EdtNoNonOfCCTV;
     @Override
@@ -49,6 +52,8 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -61,6 +66,7 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtCCTVAvailabelty=findViewById(R.id.edtCCTVAvailabelty);
+        linearLayout21=findViewById(R.id.linearLayout21);
         uploadCCTV=findViewById(R.id.uploadCCTV);
         layoutCCTV=findViewById(R.id.layoutCCTV);
         edtCCTVInstallationYear=findViewById(R.id.edtCCTVInstallationYear);
@@ -70,6 +76,9 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
         edtCCTVWorkingStatus=findViewById(R.id.edtCCTVWorkingStatus);
         recyclerViewCCTVOnSubmit=findViewById(R.id.recyclerViewCCTVOnSubmit);
         editCCTVDetails=findViewById(R.id.editCCTVDetails);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         disbaleEdiBox();
         editCCTVDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,7 +99,13 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editCCTVDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editCCTVDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editCCTVDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     layoutCCTV.setVisibility(View.GONE);

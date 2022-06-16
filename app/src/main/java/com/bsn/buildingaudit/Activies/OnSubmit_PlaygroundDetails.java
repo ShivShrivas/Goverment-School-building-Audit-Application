@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +33,9 @@ public class OnSubmit_PlaygroundDetails extends AppCompatActivity {
 EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGround,EditTexttrackAvalabiltyStatus;
     ApplicationController applicationController;
     RecyclerView recyclerViewPlayground;
+    LinearLayout linearLayout21;
 ConstraintLayout playGroundlayout;
+    String Type;
 TextView PGImageUploadTxt,editPlayGroundDetails;
 
     TextView userName,schoolAddress,schoolName;
@@ -50,6 +53,8 @@ TextView PGImageUploadTxt,editPlayGroundDetails;
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -64,12 +69,15 @@ TextView PGImageUploadTxt,editPlayGroundDetails;
         playGroundlayout=findViewById(R.id.playGroundlayout);
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
+        linearLayout21=findViewById(R.id.linearLayout21);
         PGImageUploadTxt=findViewById(R.id.PGImageUploadTxt);
         editPlayGroundDetails=findViewById(R.id.editPlayGroundDetails);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewPlayground.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         disabledEdtBox();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
@@ -80,7 +88,13 @@ TextView PGImageUploadTxt,editPlayGroundDetails;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editPlayGroundDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editPlayGroundDetails.setVisibility(View.GONE);
+
+                    }else{
+
+                        editPlayGroundDetails.setVisibility(View.VISIBLE);
+                    }
                 }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     playGroundlayout.setVisibility(View.GONE);

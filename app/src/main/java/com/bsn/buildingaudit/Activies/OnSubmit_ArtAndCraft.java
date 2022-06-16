@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,8 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     ConstraintLayout constraintLayoutAC;
+    LinearLayout linearLayout21;
+    String Type;
     EditText edtArtAndCraftRoomPhysicalStatus,ArtAndCraftRoomWorkingStatus,edtArtAndCraftRoomAvailabelty;
     TextView UploadedImageAC,editArtAndCraftDetails;
     RecyclerView recyclerViewArtAndCraftOnSub;
@@ -48,6 +51,8 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -60,13 +65,16 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         constraintLayoutAC=findViewById(R.id.constraintLayoutPR);
+        linearLayout21=findViewById(R.id.linearLayout21);
         recyclerViewArtAndCraftOnSub=findViewById(R.id.recyclerViewArtAndCraftOnSub);
         edtArtAndCraftRoomPhysicalStatus=findViewById(R.id.edtArtAndCraftRoomPhysicalStatus);
         ArtAndCraftRoomWorkingStatus=findViewById(R.id.ArtAndCraftRoomWorkingStatus);
         edtArtAndCraftRoomAvailabelty=findViewById(R.id.edtArtAndCraftRoomAvailabelty);
         UploadedImageAC=findViewById(R.id.UploadedImageAC);
         editArtAndCraftDetails=findViewById(R.id.editArtAndCraftDetails);
-
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         edtArtAndCraftRoomPhysicalStatus.setEnabled(false);
                 ArtAndCraftRoomWorkingStatus.setEnabled(false);
         edtArtAndCraftRoomAvailabelty.setEnabled(false);
@@ -93,7 +101,13 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editArtAndCraftDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editArtAndCraftDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editArtAndCraftDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("SeperateRoomsAvl").getAsString().equals("No")){
                     edtArtAndCraftRoomAvailabelty.setText(response.body().get(0).get("SeperateRoomsAvl").getAsString());

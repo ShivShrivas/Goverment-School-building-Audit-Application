@@ -61,6 +61,7 @@
                 android:gravity="center">
 
                 <ImageView
+                    android:id="@+id/schoolIcon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/schoolicon" />
@@ -214,6 +215,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/scienceLabHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary">
@@ -468,6 +470,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/physicsLabHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary">
@@ -705,6 +708,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/chemistryLabHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary">
@@ -944,6 +948,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/bioLabHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary">
@@ -1158,10 +1163,10 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout17"
                 android:layout_width="match_parent"
-                android:paddingBottom="8dp"
-
                 android:layout_height="wrap_content"
+
                 android:layout_marginTop="8dp"
+                android:paddingBottom="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout19">
@@ -1181,6 +1186,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/socialScienceLabHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary">
@@ -1229,16 +1235,17 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                      <EditText                              
-                                    android:textColor="@color/textColor1"                                     android:textAlignment="center"
-
-                                    android:layout_height="30dp"
-                                    android:background="@drawable/cardbg"
+                                <EditText
                                     android:id="@+id/edtGeographyAvaialabilty"
                                     android:layout_width="match_parent"
-                          
+
+                                    android:layout_height="30dp"
                                     android:layout_margin="4dp"
-                                    android:layout_weight="1" />
+                                    android:layout_weight="1"
+                                    android:background="@drawable/cardbg"
+
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColor1" />
                             </androidx.cardview.widget.CardView>
                         </LinearLayout>
 
@@ -1295,16 +1302,17 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                      <EditText                              
-                                    android:textColor="@color/textColor1"                                     android:textAlignment="center"
-
-                                    android:layout_height="30dp"
-                                    android:background="@drawable/cardbg"
+                                <EditText
                                     android:id="@+id/edtGeographyEquipmentStatus"
                                     android:layout_width="match_parent"
-                             
+
+                                    android:layout_height="30dp"
                                     android:layout_margin="4dp"
-                                    android:layout_weight="1" />
+                                    android:layout_weight="1"
+                                    android:background="@drawable/cardbg"
+
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColor1" />
                             </androidx.cardview.widget.CardView>
 
                         </LinearLayout>
@@ -1341,16 +1349,17 @@
                                 app:layout_constraintTop_toTopOf="parent">
 
 
-                                      <EditText                              
-                                    android:textColor="@color/textColor1"                                     android:textAlignment="center"
-
-                                    android:layout_height="30dp"
-                                    android:background="@drawable/cardbg"
+                                <EditText
                                     android:id="@+id/edtGeographyLabCondition"
                                     android:layout_width="match_parent"
-                         
+
+                                    android:layout_height="30dp"
                                     android:layout_margin="4dp"
-                                    android:layout_weight="1" />
+                                    android:layout_weight="1"
+                                    android:background="@drawable/cardbg"
+
+                                    android:textAlignment="center"
+                                    android:textColor="@color/textColor1" />
                             </androidx.cardview.widget.CardView>
 
                         </LinearLayout>
@@ -1377,9 +1386,9 @@
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="10dp"
                     android:backgroundTint="?attr/colorPrimary"
+                    android:visibility="gone"
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
-                    android:visibility="gone"
 
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/geoGraphyLabBodyCard">
@@ -1421,6 +1430,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/homeScienceLabHeader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary">
@@ -1659,6 +1669,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <LinearLayout
+                        android:id="@+id/musicLabheader"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="?attr/colorPrimary">
@@ -1871,6 +1882,44 @@
                 </androidx.cardview.widget.CardView>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:id="@+id/linearLayout21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                android:padding="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout17">
+
+                <Button
+                    style="@style/btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_red"
+                    android:text="@string/rejected"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
+                    />
+
+                <Button
+                    style="@style/btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green"
+                    android:text="@string/approved"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
+                    />
+            </LinearLayout>
             <Button
                 android:id="@+id/submitLabBtn"
                 android:layout_width="match_parent"

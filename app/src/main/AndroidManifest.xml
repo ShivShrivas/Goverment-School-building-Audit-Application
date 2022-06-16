@@ -30,6 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".DIOS.physicalStatus.Physical_Status_DIOS_Dashboard"
+            android:exported="false" />
+        <activity
             android:name=".DIOS.ExtraActivitiesDetails.ExtraActivity_Dashboard"
             android:exported="false" />
         <activity

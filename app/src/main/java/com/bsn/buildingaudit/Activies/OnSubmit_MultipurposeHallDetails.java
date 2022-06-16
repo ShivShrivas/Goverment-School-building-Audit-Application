@@ -32,6 +32,8 @@ public class OnSubmit_MultipurposeHallDetails extends AppCompatActivity {
 EditText edtMultipurposeHall,edtMultiPurposeHallStatus,edtSittingCapacity;
 RecyclerView recyclerViewMultipurposeHallOnSubmit;
     ApplicationController applicationController;
+    LinearLayout linearLayout21;
+    String Type;
     TextView userName,schoolAddress,schoolName,editMultipurposeHallDetails;
     LinearLayout linearLayout5,linearLayout13,constraintLayout9;
     @Override
@@ -47,6 +49,8 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -55,6 +59,7 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
         dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        linearLayout21=findViewById(R.id.linearLayout21);
         linearLayout5=findViewById(R.id.linearLayout5);
         constraintLayout9=findViewById(R.id.constraintLayout9);
         linearLayout13=findViewById(R.id.linearLayout13);
@@ -66,6 +71,9 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
         edtSittingCapacity=findViewById(R.id.edtMHsittingCapacityOnSub);
         editMultipurposeHallDetails=findViewById(R.id.editMultipurposeHallDetails);
         recyclerViewMultipurposeHallOnSubmit=findViewById(R.id.recyclerViewMultipurposeHallOnSubmit);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         disableEditBox();
         recyclerViewMultipurposeHallOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         editMultipurposeHallDetails.setOnClickListener(new View.OnClickListener() {
@@ -85,7 +93,13 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editMultipurposeHallDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editMultipurposeHallDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editMultipurposeHallDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("Availability").getAsString().equals("No")){
                     linearLayout5.setVisibility(View.GONE);

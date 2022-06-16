@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +33,8 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     ConstraintLayout constraintLayoutPR;
+    LinearLayout linearLayout21;
+    String Type;
     EditText edtRoomWorkingStatus,edtPrincipalRoomAvailabelty;
     RecyclerView recyclerViewprincipalOnSub;
     TextView  uploadPrincipal,editPrincipalRoomDetails;
@@ -48,6 +51,8 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -57,6 +62,7 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
+        linearLayout21=findViewById(R.id.linearLayout21);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtRoomWorkingStatus=findViewById(R.id.edtRoomWorkingStatus);
@@ -68,6 +74,9 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
         recyclerViewprincipalOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         edtRoomWorkingStatus.setEnabled(false);
                 edtPrincipalRoomAvailabelty.setEnabled(false);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 

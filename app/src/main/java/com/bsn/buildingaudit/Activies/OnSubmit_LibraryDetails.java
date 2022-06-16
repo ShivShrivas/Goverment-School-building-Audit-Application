@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +36,10 @@ EditText  edtLibraryAvailabelty,edtPhysicalStatus,numberOfAlmira,edtExpenditure,
 RecyclerView recyclerViewTwoTypeFourOnSubmit;
 ApplicationController applicationController;
 ConstraintLayout libraryLayout;
-TextView uploadLibrary,editLibraryDetails;
+    String Type;
+    LinearLayout linearLayout21;
+TextView uploadLibrary,editLibraryDetails,mobnumberTxt;
+ImageView schoolIcon;
     TextView userName,schoolAddress,schoolName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,8 @@ TextView uploadLibrary,editLibraryDetails;
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -56,10 +64,13 @@ TextView uploadLibrary,editLibraryDetails;
         dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        schoolIcon=findViewById(R.id.schoolIcon);
+        mobnumberTxt=findViewById(R.id.mobnumberTxt);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         numberOfAlmira=findViewById(R.id.numberOfAlmira);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtLibraryAvailabelty=findViewById(R.id.edtLibraryAvailabelty);
         edtPhysicalStatus=findViewById(R.id.edtPhysicalStatus);
         edtExpenditure=findViewById(R.id.edtExpenditure);
@@ -77,7 +88,16 @@ TextView uploadLibrary,editLibraryDetails;
         libraryLayout=findViewById(R.id.libraryLayout);
         uploadLibrary=findViewById(R.id.uploadLibrary);
         editLibraryDetails=findViewById(R.id.editLibraryDetails);
-
+        if (Type.equals("D")){
+            toolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            schoolIcon.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.schoolicon_dios_panel));
+            Window window = getWindow();
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+            mobnumberTxt.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            uploadLibrary.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            linearLayout21.setVisibility(View.VISIBLE);
+            editLibraryDetails.setVisibility(View.GONE);
+        }
 
         disableEditing();
         recyclerViewTwoTypeFourOnSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -99,7 +119,13 @@ TextView uploadLibrary,editLibraryDetails;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editLibraryDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editLibraryDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editLibraryDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
     libraryLayout.setVisibility(View.GONE);

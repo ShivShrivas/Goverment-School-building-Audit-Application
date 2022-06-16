@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,9 +36,11 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
     EditText edtElectricityAvailabelty,edtInternalElectrification,edtSource,edtElectricStatus,edtnoOfTubeLight,
             edtnoOfFans;
     RecyclerView recyclerViewElectricityArrangmentOnSub;
+    LinearLayout linearLayout21;
     ConstraintLayout constraintLayoutEA;
     TextView uploadImageTxt,editElectricDetails;
     Button submitBtnElectricityArrangeOnSub;
+    String Type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +55,8 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -66,6 +71,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
         schoolAddress.setText(applicationController.getSchoolAddress());
 
         edtElectricityAvailabelty=findViewById(R.id.edtElectricityAvailabelty);
+        linearLayout21=findViewById(R.id.linearLayout21);
         editElectricDetails=findViewById(R.id.editElectricDetails);
         uploadImageTxt=findViewById(R.id.uploadImageTxt);
         edtInternalElectrification=findViewById(R.id.edtInternalElectrification);
@@ -76,6 +82,9 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
         recyclerViewElectricityArrangmentOnSub=findViewById(R.id.recyclerViewElectricityArrangmentOnSub);
         submitBtnElectricityArrangeOnSub=findViewById(R.id.submitBtnElectricityArrangeOnSub);
         constraintLayoutEA=findViewById(R.id.constraintLayoutEA);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         disableEditbox();
         recyclerViewElectricityArrangmentOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         editElectricDetails.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +104,11 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editElectricDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editElectricDetails.setVisibility(View.GONE);
+                    }else{
+                        editElectricDetails.setVisibility(View.VISIBLE);
+                    }
                 }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     constraintLayoutEA.setVisibility(View.GONE);

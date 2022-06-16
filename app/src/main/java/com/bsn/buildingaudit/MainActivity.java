@@ -29,6 +29,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import com.bsn.buildingaudit.Activies.NoInternetConnection;
 import com.bsn.buildingaudit.Adapters.QuaterTypeAdapter;
 import com.bsn.buildingaudit.Adapters.UserTyepAdapter;
+import com.bsn.buildingaudit.DIOS.DIOS_Dashboard;
 import com.bsn.buildingaudit.Model.GetQuaterType;
 import com.bsn.buildingaudit.Model.GetSchoolDetails;
 import com.bsn.buildingaudit.Model.GetUserType;
@@ -202,15 +203,14 @@ CheckBox check_showpassword,check_remember;
         SubmitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 dialog.show();
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
                     if (applicationController.getUsertype().equals("AA")){
-                        Toast.makeText(MainActivity.this, "Only Principal Module You Can Select!!", Toast.LENGTH_LONG).show();
-//                        startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
-//                        finish();
-//                        dialog.dismiss();
+                       // Toast.makeText(MainActivity.this, "Only Principal Module You Can Select!!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
+                        finish();
+                        dialog.dismiss();
                     }else{
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();

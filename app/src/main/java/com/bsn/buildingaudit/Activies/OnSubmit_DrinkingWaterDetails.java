@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,7 +38,9 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
         edtHandPumpWorkStatsyDW,edtHandPumpAvailabiltyDW;
 TextView uploadDW,editDrinkingWaterDetails;
 
+LinearLayout linearLayout21;
     EditText edtNotWorkingRO,edtWorkingRO,edtTotalRO;
+    String Type;
     EditText edtNotWorkingOHTanks,edtWorkingOHTanks,edtTotalOHTanks;
     EditText edtNotWorkingSummerSible,edtWorkingSummerSible,edtTotalSummerSible;
     EditText edtNotWorkingHandpump,edtWorkingHandpump,edtTotalHandpump;
@@ -57,6 +60,8 @@ TextView uploadDW,editDrinkingWaterDetails;
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -69,6 +74,7 @@ TextView uploadDW,editDrinkingWaterDetails;
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewDrinkingWater=findViewById(R.id.recyclerViewDrinkingWaterOnSubmit);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtROInstallationScheme=findViewById(R.id.edtROInstallationScheme);
         edtNotWorkingRO=findViewById(R.id.edtNotWorkingRO);
         edtWorkingRO=findViewById(R.id.edtWorkingRO);
@@ -98,7 +104,10 @@ TextView uploadDW,editDrinkingWaterDetails;
             }
         });
         disableEditBox();
-
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+            editDrinkingWaterDetails.setVisibility(View.GONE);
+        }
         recyclerViewDrinkingWater.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
 
         RestClient restClient=new RestClient();
@@ -109,7 +118,14 @@ TextView uploadDW,editDrinkingWaterDetails;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editDrinkingWaterDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D"))
+                    {
+                        editDrinkingWaterDetails.setVisibility(View.GONE);
+
+                    }else{
+
+                        editDrinkingWaterDetails.setVisibility(View.VISIBLE);
+                    }
                 }
 int totalRo=Integer.parseInt(response.body().get(0).get("RoWorking")==null?"0":response.body().get(0).get("RoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("RoNonWorking")==null?"0":response.body().get(0).get("RoNonWorking").getAsString());
 int totalSub=Integer.parseInt(response.body().get(0).get("SubNoWorking")==null?"0":response.body().get(0).get("SubNoWorking").getAsString())+Integer.parseInt(response.body().get(0).get("SubWorking")==null?"0":response.body().get(0).get("SubWorking").getAsString());

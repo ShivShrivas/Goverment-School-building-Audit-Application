@@ -32,10 +32,11 @@ import retrofit2.Response;
 public class OnSubmit_BoysToiletDetails extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName,editBoysToiletDetails;
-    LinearLayout linearLayoutCWSNfriendlyToilet;
+    LinearLayout linearLayoutCWSNfriendlyToilet,linearLayout21;
     RecyclerView recyclerViewBoysToiletOnSub;
     EditText edtUrinalWithFlushTotalB,edtUrinalWithoutFlushB,edtUrinalWithFlushB,edtCSWNfriendlyTotalB,edtCSWNwithoutfriendlyB,edtCSWNfriendlyB,
             edtwithflushTotal,edtWithoutFlushClean,edtWithFlushClean,edtBoysDustbin,edtBoysDoors,edtCWSNBoysAvailability;
+    String Type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,9 @@ public class OnSubmit_BoysToiletDetails extends AppCompatActivity {
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
         dialog2.show();
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
+
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -66,6 +70,7 @@ public class OnSubmit_BoysToiletDetails extends AppCompatActivity {
         edtUrinalWithoutFlushB=findViewById(R.id.edtUrinalWithoutFlushB);
         edtUrinalWithFlushB=findViewById(R.id.edtUrinalWithFlushB);
         edtCSWNfriendlyTotalB=findViewById(R.id.edtCSWNfriendlyTotalB);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtCSWNwithoutfriendlyB=findViewById(R.id.edtCSWNwithoutfriendlyB);
         edtCSWNfriendlyB=findViewById(R.id.edtCSWNfriendlyB);
         edtwithflushTotal=findViewById(R.id.edtwithflushTotal);
@@ -76,6 +81,9 @@ public class OnSubmit_BoysToiletDetails extends AppCompatActivity {
         edtCWSNBoysAvailability=findViewById(R.id.edtCWSNBoysAvailability);
         recyclerViewBoysToiletOnSub=findViewById(R.id.recyclerViewBoysToiletOnSub);
         linearLayoutCWSNfriendlyToilet=findViewById(R.id.linearLayoutCWSNfriendlyToilet);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         editBoysToiletDetails=findViewById(R.id.editBoysToiletDetails);
         editBoysToiletDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,7 +106,13 @@ public class OnSubmit_BoysToiletDetails extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editBoysToiletDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editBoysToiletDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editBoysToiletDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 edtUrinalWithFlushTotalB.setText(response.body().get(0).get("TotalUrinals").getAsString());
                         edtUrinalWithoutFlushB.setText(response.body().get(0).get("NoOfUrinalsWithOutFlush").getAsString());

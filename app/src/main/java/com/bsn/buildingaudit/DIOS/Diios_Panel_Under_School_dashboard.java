@@ -9,16 +9,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
+import com.bsn.buildingaudit.DIOS.CampusBeautification.Campus_Beautification_Details;
 import com.bsn.buildingaudit.DIOS.ExtraActivitiesDetails.ExtraActivity_Dashboard;
 import com.bsn.buildingaudit.DIOS.SchoolResultDetails.Dashboard_School_Result_Detail;
 import com.bsn.buildingaudit.DIOS.SchoolStaff.Dios_StaffDetails;
 import com.bsn.buildingaudit.DIOS.StudentEnrollment.Student_Enrollment_Details;
 import com.bsn.buildingaudit.DIOS.co_curricular_activities.Co_Curricular_Dashboard;
+import com.bsn.buildingaudit.DIOS.physicalStatus.Physical_Status_DIOS_Dashboard;
 import com.bsn.buildingaudit.R;
 
 public class Diios_Panel_Under_School_dashboard extends AppCompatActivity {
-CardView dashCardBtn_SchoolDetails,dashCardBtn_SchoolStaff,dashCardBtn_SchoolResultDetails;
-CardView coCurriculatCard,ExtraDetailsCard;
+CardView dashCardBtn_SchoolDetails,dashCardBtn_SchoolStaff,dashCardBtn_SchoolResultDetails,diosPhysicalStatus;
+CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,8 @@ CardView coCurriculatCard,ExtraDetailsCard;
         dashCardBtn_SchoolResultDetails=findViewById(R.id.dashCardBtn_SchoolResultDetails);
         coCurriculatCard=findViewById(R.id.coCurriculatCard);
         ExtraDetailsCard=findViewById(R.id.ExtraDetailsCard);
+        diosPhysicalStatus=findViewById(R.id.diosPhysicalStatus);
+        campusBeautificationCard=findViewById(R.id.campusBeautificationCard);
 
 
         dashCardBtn_SchoolDetails.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +66,22 @@ CardView coCurriculatCard,ExtraDetailsCard;
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, ExtraActivity_Dashboard.class));
+            }
+        });
+
+
+        diosPhysicalStatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, Physical_Status_DIOS_Dashboard.class));
+            }
+        });
+
+
+        campusBeautificationCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, Campus_Beautification_Details.class));
             }
         });
 

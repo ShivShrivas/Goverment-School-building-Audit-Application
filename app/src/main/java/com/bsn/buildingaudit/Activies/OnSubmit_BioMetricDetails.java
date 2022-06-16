@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,8 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName,editBioMetricDetails;
     ConstraintLayout layoutBioMetric;
+    LinearLayout linearLayout21;
+    String Type;
     EditText edtBioMetricMachinecountOnSubmit,edtBioMetricMachineAvailabelty,edtBioMetricInstallationYear,edtuserbiometricStaff,edtuserbiometricStudent,edtBiometricWorkingStatus;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,8 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -58,6 +63,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
+        linearLayout21=findViewById(R.id.linearLayout21);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewBioMetricOnSubmit=findViewById(R.id.recyclerViewBioMetricOnSubmit);
@@ -72,7 +78,9 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
                 edtBiometricWorkingStatus=findViewById(R.id.edtBiometricWorkingStatus);
 
                 disableEditbox();
-
+            if (Type.equals("D")){
+                linearLayout21.setVisibility(View.VISIBLE);
+            }
         editBioMetricDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,7 +100,13 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editBioMetricDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editBioMetricDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editBioMetricDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     layoutBioMetric.setVisibility(View.GONE);

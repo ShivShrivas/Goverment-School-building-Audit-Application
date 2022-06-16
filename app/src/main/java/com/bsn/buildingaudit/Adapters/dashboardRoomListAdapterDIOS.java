@@ -67,7 +67,6 @@ import com.bsn.buildingaudit.Activies.UpdateDetailsTypeTwo;
 import com.bsn.buildingaudit.Activies.UpdateDetails_OfficeRoom;
 import com.bsn.buildingaudit.Activies.UpdateDetails_VocationalEducationRoom;
 import com.bsn.buildingaudit.Activies.UpdatedetailsTypeThree;
-import com.bsn.buildingaudit.DashBoard;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
 import com.bsn.buildingaudit.R;
@@ -82,13 +81,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecviewAdapter.dashboardRecViewHolder> {
+public class dashboardRoomListAdapterDIOS extends RecyclerView.Adapter<dashboardRoomListAdapterDIOS.dashboardRecViewHolder> {
     Context context;
     RestClient restClient=new RestClient();
     ApiService apiService=restClient.getApiService();
     String schoolId,periodId;
     List<GetAllRoomsList> arrayList=new ArrayList();
-    public dashboardRecviewAdapter(Context context, List<GetAllRoomsList> arrayList,String schoolId,String periodId) {
+    public dashboardRoomListAdapterDIOS(Context context, List<GetAllRoomsList> arrayList, String schoolId, String periodId) {
         this.periodId=periodId;
         this.schoolId=schoolId;
    this.context=context;
@@ -99,22 +98,12 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
     @NonNull
     @Override
     public dashboardRecViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_review_itemcard,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.dashboard_review_itemcard_dios,parent,false);
         return new dashboardRecViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull dashboardRecViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        if (DashBoard.DataLocked==0){
-            if(arrayList.get(position).getParamId().toString().equals("27")){
-                DashBoard.btnBottom.setVisibility(View.VISIBLE);
-            }else{
-                DashBoard.btnBottom.setVisibility(View.GONE);
-
-            }
-        }else{
-            DashBoard.btnBottom.setVisibility(View.GONE);
-        }
 
 
         holder.roomTypetxt.setText(arrayList.get(position).getParamName());
@@ -277,9 +266,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-
+                  
                     Intent i=new Intent(context, OnSubmit_Officeroom.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -302,9 +291,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-
+                  
                     Intent i=new Intent(context, OnSubmit_VocationalRoom.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -327,9 +316,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-
+                   
                     Intent i=new Intent(context, OnSubmit_ArtAndCraft.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -353,9 +342,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
 
                 }else {
-
+                
                     Intent i=new Intent(context, OnSubmit_PrincipalRoom.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -380,7 +369,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmit_FurnitureDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -404,9 +393,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
 
                 }else {
-
+            
                     Intent i=new Intent(context, OnSubmit_GirlsToiletDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -431,7 +420,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
 
                 }else {
                     Intent i=new Intent(context, OnSubmit_BoysToiletDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -455,9 +444,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
 
                 }else {
-
+                   
                     Intent i=new Intent(context, OnSubmit_BoundryWalls.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -481,9 +470,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
 
                 }else {
-
+                    
                     Intent i=new Intent(context, OnSubmit_SolarPanel.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -506,9 +495,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-
+        
                     Intent i=new Intent(context, OnSubmit_ElectricityArrangment.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -531,9 +520,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-
+                  
                     Intent i=new Intent(context, OnSubmit_FireFighting.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -556,9 +545,9 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     i.putExtra("Action","1");
                     context.startActivity(i);
                 }else {
-
+            
                     Intent i=new Intent(context, OnSubmit_RainHarvesting.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -582,7 +571,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmit_CCTVDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -606,7 +595,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmit_ComputerLabDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -631,7 +620,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else {
 
                     Intent i=new Intent(context, OnSubmit_WifiDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -657,7 +646,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else {
 
                     Intent i=new Intent(context, OnSubmit_CycleStand.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -683,7 +672,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else {
 
                     Intent i=new Intent(context, OnSubmit_SoundSystemDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -709,7 +698,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else {
 
                     Intent i=new Intent(context, OnSubmit_MultipurposeHallDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -735,7 +724,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else {
 
                     Intent i=new Intent(context, OnSubmit_SmartClassDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -761,7 +750,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else {
 
                     Intent i=new Intent(context, OnSubmit_BioMetricDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -786,7 +775,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
 
                 }else {
                     Intent i=new Intent(context, OnSubmit_DrinkingWaterDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -810,7 +799,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmit_LibraryDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -836,7 +825,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                 }else {
 
                     Intent i=new Intent(context, OnSubmit_PlaygroundDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -861,7 +850,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmit_PracticalLabsDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -886,7 +875,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmit_StaffRoomDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }
@@ -912,7 +901,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmit_OpenGYmDetails.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
 
                 }
@@ -938,7 +927,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     context.startActivity(i);
                 }else {
                     Intent i=new Intent(context, OnSubmitClassRoomPage.class);
-                    i.putExtra("Type","P");
+                    i.putExtra("Type","D");
                     context.startActivity(i);
                 }
             }

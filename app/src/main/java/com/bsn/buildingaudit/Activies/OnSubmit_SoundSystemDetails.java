@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,6 +32,8 @@ public class OnSubmit_SoundSystemDetails extends AppCompatActivity {
 EditText edtSchoolBandForGirls,edtSchoolBand,edtSoundSystem;
 RecyclerView recyclerViewSoundSystmOnSub;
     ApplicationController applicationController;
+    LinearLayout linearLayout21;
+    String Type;
     TextView userName,schoolAddress,schoolName,editSoundAndBandDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ RecyclerView recyclerViewSoundSystmOnSub;
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -59,9 +64,13 @@ RecyclerView recyclerViewSoundSystmOnSub;
         edtSchoolBandForGirls=findViewById(R.id.edtSchoolBandForGirls);
         edtSchoolBand=findViewById(R.id.edtSchoolBand);
         edtSoundSystem=findViewById(R.id.edtSoundSystem);
+        linearLayout21=findViewById(R.id.linearLayout21);
         recyclerViewSoundSystmOnSub=findViewById(R.id.recyclerViewSoundSystmOnSub);
         editSoundAndBandDetails=findViewById(R.id.editSoundAndBandDetails);
         disableEditBox();
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         editSoundAndBandDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,7 +89,13 @@ RecyclerView recyclerViewSoundSystmOnSub;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editSoundAndBandDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editSoundAndBandDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editSoundAndBandDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 edtSchoolBandForGirls.setText(response.body().get(0).get("SchoolBandInstAvlGirls").getAsString());
                         edtSchoolBand.setText(response.body().get(0).get("SchoolBandInstAvlBoys").getAsString());

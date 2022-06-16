@@ -119,7 +119,7 @@ public  static List<AttendanceType> attendanceTypeList;
     }
 
     public String getSchoolId() {
-        return SchoolId;
+        return "2057";
     }
 
     public void setSchoolId(String schoolId) {

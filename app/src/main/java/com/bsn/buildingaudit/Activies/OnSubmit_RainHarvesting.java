@@ -33,8 +33,8 @@ EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     RecyclerView recyclerViewRAinHarveOnSub;
-    LinearLayout workingStatusLayout,linearLayout5;
-
+    LinearLayout workingStatusLayout,linearLayout5,linearLayout21;
+String Type;
 TextView workingStatusHearOnSub,editRainHarvestingDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,12 +56,15 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
         dialog2.show();
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtRainharvestingAvailabilty=findViewById(R.id.edtRainharvestingAvailabilty);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtRainHavestingWorkStatus=findViewById(R.id.edtRainHavestingWorkStatus);
         recyclerViewRAinHarveOnSub=findViewById(R.id.recyclerViewRAinHarveOnSub);
         workingStatusLayout=findViewById(R.id.workingStatusLayout);
@@ -70,6 +73,9 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
         linearLayout5=findViewById(R.id.linearLayout5);
         edtRainharvestingAvailabilty.setEnabled(false);
         edtRainHavestingWorkStatus.setEnabled(false);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         recyclerViewRAinHarveOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         editRainHarvestingDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +95,13 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editRainHarvestingDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editRainHarvestingDetails.setVisibility(View.GONE);
+
+                    }else{
+
+                        editRainHarvestingDetails.setVisibility(View.VISIBLE);
+                    }
                 }
                 if (response.body().get(0).get("RainHarvestingAvl").getAsString().equals("No")){
                     edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());

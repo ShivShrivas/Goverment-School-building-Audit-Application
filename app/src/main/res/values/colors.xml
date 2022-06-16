@@ -9,8 +9,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray2">#C3C3C3</color>
     <color name="textColor1">#202020</color>
-    <color name="DIOS_ColorPrimary">#615DE1</color>
-    <color name="DIOS_ColorPrimaryDark">#3E3AB3</color>
+    <color name="DIOS_ColorPrimary">#0080C5</color>
+    <color name="DIOS_ColorPrimaryDark">#0080C5</color>
 
     <color name="red">#E32227</color>
     <color name="aqua">#A95700</color>

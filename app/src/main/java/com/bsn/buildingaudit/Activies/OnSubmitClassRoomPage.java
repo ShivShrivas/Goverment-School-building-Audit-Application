@@ -7,10 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,26 +34,53 @@ public class OnSubmitClassRoomPage extends AppCompatActivity {
 private TextView schoolAddress,schoolName,editClassRoomDetails;
 Dialog dialog;
 ApplicationController applicationController;
+TextView mobnumberTxt,numberOfRoomText,boardinClassRoom,availableInRooms,boardType;
 EditText totalClassRooms,edtPodiumClassAfterSubmit,majorRepairingClassroom,
         minorRepairingClassroomAfterSubmit,greenBoardCountAfterSubmit,goodCondtionClassroomAfterSubmit,whiteBoardContAfterSubmit,blackBoardCountAfterSubmit;
 RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmit,recyclerViewThreeTypeOneAfterSubmit;
-
+String Type;
+ImageView schoolIcon;
+LinearLayout diosButtonLayout,linearLayout2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_on_submit_class_room_page);
         applicationController= (ApplicationController) getApplication();
+        schoolIcon=findViewById(R.id.schoolIcon);
+        mobnumberTxt=findViewById(R.id.mobnumberTxt);
+        numberOfRoomText=findViewById(R.id.numberOfRoomText);
+        boardinClassRoom=findViewById(R.id.boardinClassRoom);
+        diosButtonLayout=findViewById(R.id.linearLayout11);
+        availableInRooms=findViewById(R.id.availableInRooms);
+        linearLayout2=findViewById(R.id.linearLayout2);
+        editClassRoomDetails=findViewById(R.id.editClassRoomDetails);
+        boardType=findViewById(R.id.boardType);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onBackPressed();
             }
         });
+        if (Type.equals("D")){
+            toolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            schoolIcon.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.schoolicon_dios_panel));
+            Window window = getWindow();
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+            mobnumberTxt.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            numberOfRoomText.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            linearLayout2.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            boardType.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            availableInRooms.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            boardinClassRoom.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            diosButtonLayout.setVisibility(View.VISIBLE);
+            editClassRoomDetails.setVisibility(View.GONE);
+        }
         dialog = new Dialog(this);
         dialog.setCancelable(false);
 
@@ -65,7 +95,6 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
         dialog2.setCancelable(false);
         dialog2.show();
         schoolName=findViewById(R.id.schoolName);
-        editClassRoomDetails=findViewById(R.id.editClassRoomDetails);
         schoolAddress=findViewById(R.id.schoolAddress);
         totalClassRooms=findViewById(R.id.totalClassRoomsAfterSubmit);
         edtPodiumClassAfterSubmit=findViewById(R.id.edtPodiumClassAfterSubmit);
@@ -78,6 +107,7 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
         recyclerViewTwoTypeOneAfterSubmit=findViewById(R.id.recyclerViewTwoTypeOneAfterSubmit);
         recyclerViewThreeTypeOneAfterSubmit=findViewById(R.id.recyclerViewThreeTypeOneAfterSubmit);
         recyclerViewFourTypeOneAfterSubmit=findViewById(R.id.recyclerViewFourTypeOneAfterSubmit);
+
         recyclerViewTwoTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerViewThreeTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerViewFourTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -103,7 +133,12 @@ RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmi
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 getAllUnEditable();
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editClassRoomDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editClassRoomDetails.setVisibility(View.GONE);
+                    }else{
+                        editClassRoomDetails.setVisibility(View.VISIBLE);
+                    }
+
                 }
                 Log.d("TAG", "onResponse: "+response.body()+"///////"+response.body().get(0).get("TotalRooms"));
                 totalClassRooms.setText(response.body().get(0).get("TotalRooms").toString());

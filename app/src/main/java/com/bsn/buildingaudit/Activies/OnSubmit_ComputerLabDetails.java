@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +34,8 @@ public class OnSubmit_ComputerLabDetails extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName,editComputerLabDetails;
 RecyclerView recyclerViewComputerLabOnSubmit;
 ConstraintLayout layOutComputerLab;
+LinearLayout linearLayout51;
+String Type;
         EditText edtNoOfLab,edtScannerAvailable,edtPrinterAvailable,edtComputerOperator
                 ,edtPowerBackup,edtFurniture,edtinternet,edtGrantUnderScheme,edtNoOfWorkingComputer,edtNoOfComputer
                 ,edtInstallationYear,edtComputeLabAvailabelty;
@@ -49,6 +52,8 @@ ConstraintLayout layOutComputerLab;
                 onBackPressed();
             }
         });
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         Dialog dialog2 = new Dialog(this);
 
@@ -64,6 +69,7 @@ ConstraintLayout layOutComputerLab;
         schoolAddress.setText(applicationController.getSchoolAddress());
 
         edtNoOfLab=findViewById(R.id.edtNoOfLab);
+        linearLayout51=findViewById(R.id.linearLayout51);
         edtScannerAvailable=findViewById(R.id.edtScannerAvailable);
         edtPrinterAvailable=findViewById(R.id.edtPrinterAvailable);
         edtComputerOperator=findViewById(R.id.edtComputerOperator);
@@ -78,6 +84,9 @@ ConstraintLayout layOutComputerLab;
         edtComputeLabAvailabelty=findViewById(R.id.edtComputeLabAvailabelty);
         recyclerViewComputerLabOnSubmit=findViewById(R.id.recyclerViewComputerLabOnSubmit);
         editComputerLabDetails=findViewById(R.id.editComputerLabDetails);
+        if (Type.equals("D")){
+            linearLayout51.setVisibility(View.VISIBLE);
+        }
         editComputerLabDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,7 +107,13 @@ ConstraintLayout layOutComputerLab;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+response);
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editComputerLabDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editComputerLabDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editComputerLabDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     layOutComputerLab.setVisibility(View.GONE);

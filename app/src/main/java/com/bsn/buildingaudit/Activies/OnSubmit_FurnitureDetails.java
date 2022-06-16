@@ -31,6 +31,7 @@ import retrofit2.Response;
 public class OnSubmit_FurnitureDetails extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
+    LinearLayout linearLayout21;
     EditText edtMajorConditionForSingle,edtMajorConditionForDouble,edtMajorConditionForTripple,edtMinorConditionForSingle,edtMinorConditionForDouble,edtMinorConditionForTripple,edtgoodConditionForSingle,
             edtgoodConditionForDouble,edtgoodConditionForTripple;
     EditText edtFurnitureRequired,edtTripleSeatesStatus,edtTrippelSeated,edtDoubleSeatesStatus,edtDoubleSeated
@@ -38,6 +39,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
     LinearLayout constraintLayout9,constraintLayout59,constraintLayout49;
     TextView edtTotalFurnirtureStrenght,editFurnituresDetails;
     RecyclerView recyclerViewFurnituresOnSub;
+    String Type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,8 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
         dialog2.show();
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
@@ -68,6 +72,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
 
         edtFurnitureRequired=findViewById(R.id.edtFurnitureRequired);
         edtTotalFurnirtureStrenght=findViewById(R.id.edtTotalFurnirtureStrenght);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtTripleSeatesStatus=findViewById(R.id.edtTripleSeatesStatus);
         edtTrippelSeated=findViewById(R.id.edtTrippelSeated);
         edtDoubleSeated=findViewById(R.id.edtDoubleSeated);
@@ -88,6 +93,9 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         edtgoodConditionForSingle=findViewById(R.id.edtgoodConditionForSingle);
         edtgoodConditionForTripple=findViewById(R.id.edtgoodConditionForTripple);
         edtgoodConditionForDouble=findViewById(R.id.edtgoodConditionForDoubel);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         disableEditText();
         editFurnituresDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,7 +117,13 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editFurnituresDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editFurnituresDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editFurnituresDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                 edtFurnitureRequired.setText(response.body().get(0).get("AdditionalFurniture")==null?"0":response.body().get(0).get("AdditionalFurniture").getAsString());
                 edtTotalFurnirtureStrenght.setText(response.body().get(0).get("TotalStrength")==null?"0":response.body().get(0).get("TotalStrength").getAsString());

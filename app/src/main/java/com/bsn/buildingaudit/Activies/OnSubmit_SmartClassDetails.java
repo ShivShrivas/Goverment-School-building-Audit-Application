@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,11 +34,12 @@ import retrofit2.Response;
 
 public class OnSubmit_SmartClassDetails extends AppCompatActivity {
 RecyclerView smartClassONSubmitRecView;
+LinearLayout linearLayout21;
 RecyclerView recyclerViewSmartClassONSubmit;
     ApplicationController applicationController;
     private TextView schoolAddress,schoolName,editSmartClassDetails;
     ConstraintLayout layoutSmartClass;
-
+    String Type;
     EditText edtsmartClassAvailabilty,edtDigitalBoardSmartClass,edtLearningContentSmartClass,edtProjectorSmartClass,edtTeacherAvailbilitySmartClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,8 @@ RecyclerView recyclerViewSmartClassONSubmit;
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog2.setCancelable(false);
         dialog2.show();
-
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,6 +68,7 @@ RecyclerView recyclerViewSmartClassONSubmit;
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtsmartClassAvailabilty=findViewById(R.id.edtsmartClassAvailabilty);
+        linearLayout21=findViewById(R.id.linearLayout21);
         edtDigitalBoardSmartClass=findViewById(R.id.edtDigitalBoardSmartClass);
         edtLearningContentSmartClass=findViewById(R.id.edtLearningContentSmartClass);
         edtProjectorSmartClass=findViewById(R.id.edtProjectorSmartClass);
@@ -73,6 +77,9 @@ RecyclerView recyclerViewSmartClassONSubmit;
         recyclerViewSmartClassONSubmit=findViewById(R.id.recyclerViewSmartClassONSubmit);
         layoutSmartClass=findViewById(R.id.layoutSmartClass);
         editSmartClassDetails=findViewById(R.id.editSmartClassDetails);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         recyclerViewSmartClassONSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         editSmartClassDetails.setOnClickListener(new View.OnClickListener() {
             @Override

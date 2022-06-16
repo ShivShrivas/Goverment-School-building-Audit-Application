@@ -240,8 +240,8 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/smartClassONSubmitRecView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_width="421dp"
+                        android:layout_height="192dp"
                         android:background="@drawable/cardbg"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -496,6 +496,45 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:id="@+id/linearLayout21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutSmartClass">
+
+                <Button
+                    style="@style/btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_red"
+                    android:text="@string/rejected"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
+                    />
+
+                <Button
+                    style="@style/btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_green"
+                    android:text="@string/approved"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
+                    />
+            </LinearLayout>
             <Button
                 android:id="@+id/submitSmartClassBtn"
                 android:layout_width="match_parent"
@@ -511,7 +550,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/recyclerViewSmartClassONSubmit" />
+ />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

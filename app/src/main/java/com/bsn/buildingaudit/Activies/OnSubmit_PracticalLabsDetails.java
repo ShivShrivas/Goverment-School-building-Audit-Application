@@ -7,11 +7,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,18 +35,22 @@ import retrofit2.Response;
 public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
     private TextView schoolAddress,schoolName,editPracticalLabDetails;
     ApplicationController applicationController;
+
+    LinearLayout linearLayout21,physicsLabHeader,socialScienceLabHeader,musicLabheader,homeScienceLabHeader,chemistryLabHeader,scienceLabHeader,bioLabHeader;
     EditText edtHomeSciencelabAvailability,edtGeographyLabConditionedt,GeographyEquipmentStatus,edtGeographylabAvailability,edtBiologyLabCondition,edtBiologylabAvailability,edtBilogyEquipmentStatus
                     ,edtChemistryLabCondition,edtChemistryEquipmentStatus,edtChemistrylabAvailability,edtPhysicsLabCondition,edtPhysicsEquipmentStatus,edtPhysicslabAvailability
                 ,edtHomeScienceLabCondition,edtHomeScienceEquipmentStatus
-            ,edtScienceLabCondition,edtSciencelabAvailability,edtScienceEquipmentStatus,edtMusicLabCondition,edtHomeMusiclabAvailability,edtMusicEquipmentStatus
-            ;
+            ,edtScienceLabCondition,edtSciencelabAvailability,edtScienceEquipmentStatus,edtMusicLabCondition,edtHomeMusiclabAvailability,edtMusicEquipmentStatus;
+
+    String Type;
     RecyclerView recyclerViewMusicLab,recyclerViewHomeScienceLab,recyclerViewGeographyLab,recyclerViewScienceLab
             ,recyclerViewBiologyLab,recyclerViewChemistryLab,recyclerViewPhysicsLab;
-
+ImageView schoolIcon;
     CardView scienceLabBodyCard,scienceLanImageCard,physicsLabBodyCard,physicsLabImageCard,
             chemistryLabBodyCard,chemistryLabImageCard,bioloyLabBodyCard,bioloyLabImageCard,
             homeScienceLabBodyCard,homeScienceLabImageCard,musicLabBodyCard,musicLabImageCard,
             geoGraphyLabImageCard,geoGraphyLabBodyCard;
+    TextView mobnumberTxt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,7 +58,8 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
         applicationController= (ApplicationController) getApplication();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,10 +76,21 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
         dialog2.show();
         schoolName=findViewById(R.id.schoolName);
         schoolAddress=findViewById(R.id.schoolAddress);
+        scienceLabHeader=findViewById(R.id.scienceLabHeader);
+        chemistryLabHeader=findViewById(R.id.chemistryLabHeader);
+        linearLayout21=findViewById(R.id.linearLayout21);
+        bioLabHeader=findViewById(R.id.bioLabHeader);
+        musicLabheader=findViewById(R.id.musicLabheader);
+        homeScienceLabHeader=findViewById(R.id.homeScienceLabHeader);
+        socialScienceLabHeader=findViewById(R.id.socialScienceLabHeader);
+        mobnumberTxt=findViewById(R.id.mobnumberTxt);
+        schoolIcon=findViewById(R.id.schoolIcon);
+
         scienceLabBodyCard=findViewById(R.id.scienceLabBodyCard);
         scienceLanImageCard=findViewById(R.id.scienceLabImageCard);
         physicsLabImageCard=findViewById(R.id.physicsLabImageCard);
         physicsLabBodyCard=findViewById(R.id.physicsLabBodyCard);
+        physicsLabHeader=findViewById(R.id.physicsLabHeader);
         chemistryLabBodyCard=findViewById(R.id.chemistryLabBodyCard);
         chemistryLabImageCard=findViewById(R.id.chemistryLabImageCard);
         bioloyLabBodyCard=findViewById(R.id.bioloyLabBodyCard);
@@ -123,6 +142,22 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
                 finish();
             }
         });
+        if (Type.equals("D")){
+            toolbar.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            schoolIcon.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.schoolicon_dios_panel));
+            Window window = getWindow();
+            window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+            mobnumberTxt.setTextColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            scienceLabHeader.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            physicsLabHeader.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            chemistryLabHeader.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            bioLabHeader.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            homeScienceLabHeader.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            musicLabheader.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            socialScienceLabHeader.setBackgroundColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimary));
+            linearLayout21.setVisibility(View.VISIBLE);
+            editPracticalLabDetails.setVisibility(View.GONE);
+        }
         setAllEditTextDisabled();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
@@ -132,7 +167,13 @@ public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
             public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).getDataLocked().equals("0")){
-                    editPracticalLabDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editPracticalLabDetails.setVisibility(View.GONE);
+
+                    }else{
+                        editPracticalLabDetails.setVisibility(View.VISIBLE);
+
+                    }
                 }
                List<LabDetailsResponse> list=response.body();
 

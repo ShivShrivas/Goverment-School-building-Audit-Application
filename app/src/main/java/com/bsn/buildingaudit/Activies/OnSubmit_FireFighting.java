@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,8 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
         EditText edtFireFightTraining,edtFireFightRenewalStatus,edtFireFightWorkingStatus,edtFireFightingInstallationYear,edtFireFightAvailabelty;
         TextView edtrenewalDate,editFirefightingDetails;
     EditText edtNotWorkingFF,edtWorkingFF,edtTotalFF;
+    LinearLayout linearLayout21;
+    String Type;
         ConstraintLayout constraintLayout30;
         RecyclerView recyclerViewFireFightningoNsUB;
 TextView uploadtextFireFighting;
@@ -51,6 +54,8 @@ TextView uploadtextFireFighting;
             }
         });
         Dialog dialog2 = new Dialog(this);
+        Intent i=getIntent();
+        Type=i.getStringExtra("Type");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -60,6 +65,7 @@ TextView uploadtextFireFighting;
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
+        linearLayout21=findViewById(R.id.linearLayout21);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtTotalFF=findViewById(R.id.edtTotalFF);
@@ -75,6 +81,9 @@ TextView uploadtextFireFighting;
         edtFireFightingInstallationYear=findViewById(R.id.edtFireFightingInstallationYear);
         recyclerViewFireFightningoNsUB=findViewById(R.id.recyclerViewFireFightningoNsUB);
         constraintLayout30=findViewById(R.id.constraintLayout30);
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+        }
         editFirefightingDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,7 +104,13 @@ TextView uploadtextFireFighting;
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    editFirefightingDetails.setVisibility(View.VISIBLE);
+                    if (Type.equals("D")){
+                        editFirefightingDetails.setVisibility(View.GONE);
+
+                    }else{
+
+                        editFirefightingDetails.setVisibility(View.VISIBLE);
+                    }
                 }                if(response.body().get(0).get("Availabilty").getAsString().equals("No")){
                     constraintLayout30.setVisibility(View.GONE);
                     edtFireFightAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
