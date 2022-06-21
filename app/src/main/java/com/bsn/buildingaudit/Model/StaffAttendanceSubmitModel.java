@@ -1,6 +1,6 @@
 package com.bsn.buildingaudit.Model;
 
-public class StaffAttendanceSubmitModel {
+public class    StaffAttendanceSubmitModel {
     String RecordID,AttendenceDate,AttendenceStatusID;
 
     public StaffAttendanceSubmitModel() {

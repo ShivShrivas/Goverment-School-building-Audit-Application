@@ -14,13 +14,14 @@ import com.bsn.buildingaudit.DIOS.ExtraActivitiesDetails.ExtraActivity_Dashboard
 import com.bsn.buildingaudit.DIOS.SchoolResultDetails.Dashboard_School_Result_Detail;
 import com.bsn.buildingaudit.DIOS.SchoolStaff.Dios_StaffDetails;
 import com.bsn.buildingaudit.DIOS.StudentEnrollment.Student_Enrollment_Details;
+import com.bsn.buildingaudit.DIOS.SubjectWiseSyllabus.Syllabus_Details_page;
 import com.bsn.buildingaudit.DIOS.co_curricular_activities.Co_Curricular_Dashboard;
 import com.bsn.buildingaudit.DIOS.physicalStatus.Physical_Status_DIOS_Dashboard;
 import com.bsn.buildingaudit.R;
 
 public class Diios_Panel_Under_School_dashboard extends AppCompatActivity {
 CardView dashCardBtn_SchoolDetails,dashCardBtn_SchoolStaff,dashCardBtn_SchoolResultDetails,diosPhysicalStatus;
-CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard;
+CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard,dashCardBtn_SubjectWiseDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard;
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         dashCardBtn_SchoolDetails=findViewById(R.id.dashCardBtn_StudentEnrollment);
+        dashCardBtn_SubjectWiseDetails=findViewById(R.id.dashCardBtn_SubjectWiseDetails);
         dashCardBtn_SchoolStaff=findViewById(R.id.dashCardBtn_SchoolStaff);
         dashCardBtn_SchoolResultDetails=findViewById(R.id.dashCardBtn_SchoolResultDetails);
         coCurriculatCard=findViewById(R.id.coCurriculatCard);
@@ -82,6 +84,15 @@ CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard;
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, Campus_Beautification_Details.class));
+            }
+        });
+
+
+
+        dashCardBtn_SubjectWiseDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, Syllabus_Details_page.class));
             }
         });
 

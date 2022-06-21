@@ -77,7 +77,8 @@ CardView cardViewDataPicker;
         calenderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setDate();
+
+        setDate();
 
             }
         });
@@ -85,61 +86,48 @@ CardView cardViewDataPicker;
         btn_GetAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                RestClient restClient=new RestClient();
-                ApiService apiService=restClient.getApiService();
-                Log.d("TAG", "onCreate: "+fromdate);
-                Log.d("TAG", "onClick: "+paraGetStaff(fromdate,applicationController.getSchoolId()));
-                Call<List<AttendanceStaff>> listCall=apiService.getStaff(paraGetStaff(fromdate,applicationController.getSchoolId()));
-                listCall.enqueue(new Callback<List<AttendanceStaff>>() {
-                    @Override
-                    public void onResponse(Call<List<AttendanceStaff>> call, Response<List<AttendanceStaff>> response) {
-                        arrayList=response.body();
+                getStaffListWithAttendance();
 
-                            recyclerViewDateWiseAttednView.setAdapter(new StaffAttendanceAdapterOnView(Date_Wise_Attendance.this,arrayList,fromdate));
-                        recyclerViewDateWiseAttednView.getViewTreeObserver().addOnPreDrawListener(
-                                new ViewTreeObserver.OnPreDrawListener() {
+            }
+        });
+    }
 
-                                    @Override
-                                    public boolean onPreDraw() {
-                                        recyclerViewDateWiseAttednView.getViewTreeObserver().removeOnPreDrawListener(this);
+    private void getStaffListWithAttendance() {
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onCreate: "+fromdate);
+        Log.d("TAG", "onClick: "+paraGetStaff(fromdate,applicationController.getSchoolId()));
+        Call<List<AttendanceStaff>> listCall=apiService.getStaff(paraGetStaff(fromdate,applicationController.getSchoolId()));
+        listCall.enqueue(new Callback<List<AttendanceStaff>>() {
+            @Override
+            public void onResponse(Call<List<AttendanceStaff>> call, Response<List<AttendanceStaff>> response) {
+                arrayList=response.body();
 
-                                        for (int i = 0; i < recyclerViewDateWiseAttednView.getChildCount(); i++) {
-                                            View v = recyclerViewDateWiseAttednView.getChildAt(i);
-                                            v.setAlpha(0.0f);
-                                            v.animate().alpha(1.0f)
-                                                    .setDuration(800)
-                                                    .setStartDelay(i * 400)
-                                                    .start();
-                                        }
+                recyclerViewDateWiseAttednView.setAdapter(new StaffAttendanceAdapterOnView(Date_Wise_Attendance.this,arrayList,fromdate));
+                recyclerViewDateWiseAttednView.getViewTreeObserver().addOnPreDrawListener(
+                        new ViewTreeObserver.OnPreDrawListener() {
 
-                                        return true;
-                                    }
-                                });
-//                            TextView textView=dialog.findViewById(R.id.dialogtextResponse);
-//                            Button button=dialog.findViewById(R.id.BtnResponseDialoge);
-//                            try {
-//                                textView.setText("");
-//                                dialog.show();
-//                                button.setOnClickListener(new View.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(View view) {
-//                                        onBackPressed();
-//                                        dialog.dismiss();
-//                                    }
-//                                });
-//                            }catch (Exception e){
-//                                Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
-//                            }
-//
-//
+                            @Override
+                            public boolean onPreDraw() {
+                                recyclerViewDateWiseAttednView.getViewTreeObserver().removeOnPreDrawListener(this);
 
-                    }
+                                for (int i = 0; i < recyclerViewDateWiseAttednView.getChildCount(); i++) {
+                                    View v = recyclerViewDateWiseAttednView.getChildAt(i);
+                                    v.setAlpha(0.0f);
+                                    v.animate().alpha(1.0f)
+                                            .setDuration(800)
+                                            .setStartDelay(i * 400)
+                                            .start();
+                                }
 
-                    @Override
-                    public void onFailure(Call<List<AttendanceStaff>> call, Throwable t) {
+                                return true;
+                            }
+                        });
+            }
 
-                    }
-                });
+            @Override
+            public void onFailure(Call<List<AttendanceStaff>> call, Throwable t) {
+
             }
         });
     }
@@ -156,7 +144,7 @@ CardView cardViewDataPicker;
 
     }
 
-    private void setDate() {
+    private boolean setDate() {
         final java.util.Calendar c = java.util.Calendar.getInstance();
         final int mYear = c.get(java.util.Calendar.YEAR);
         final int mDay = c.get(Calendar.MONTH);
@@ -182,12 +170,13 @@ CardView cardViewDataPicker;
                         spf1= new SimpleDateFormat("dd-MM-yyyy");
                         fromdate= spf.format(newDate);
                         txtdate.setText( spf1.format(newDate1));
-
+                        getStaffListWithAttendance();
                     }
                 }, mYear, mDay, cDay);
-        datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
 
+        datePickerDialog.getDatePicker().setMaxDate(c.getTimeInMillis());
         datePickerDialog.show();
+        return true;
     }
 
     private JsonObject paraGetStaff(String formattedDate, String schoolId) {

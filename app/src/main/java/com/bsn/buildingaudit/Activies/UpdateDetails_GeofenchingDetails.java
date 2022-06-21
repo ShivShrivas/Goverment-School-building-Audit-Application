@@ -8,6 +8,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -100,13 +101,13 @@ Button addGeoTagBtn,btnSubmitgeoFench;
             @Override
             public void onClick(View v) {
                 getLocationLatLong();
-                dialog.show();
 
             }
         });
     }
 
     private void getLocationLatLong() {
+        dialog.show();
 
         if (getLocation()){
             if (lattitude!=0.0 && longitude!=0.0){
@@ -116,9 +117,12 @@ Button addGeoTagBtn,btnSubmitgeoFench;
                             GeoTags geoTags=new GeoTags(String.valueOf(lattitude), String.valueOf(longitude),  dateFormat.format(cal.getTime()));
                             arrayList.add(geoTags);
                             adapter.notifyDataSetChanged();
-                        }else{
-                            Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Please change your location", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
+
+                        }else{
+                            dialog.dismiss();
+                            Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Please change your location", Toast.LENGTH_SHORT).show();
+
                         }
                     }catch (Exception e){
                         GeoTags geoTags=new GeoTags(String.valueOf(lattitude), String.valueOf(longitude),  dateFormat.format(cal.getTime()));
@@ -134,8 +138,13 @@ Button addGeoTagBtn,btnSubmitgeoFench;
                 }
 
             }else{
-                Toast.makeText(UpdateDetails_GeofenchingDetails.this, "we are fetching your location please retry", Toast.LENGTH_SHORT).show();
-                getLocationLatLong();
+                Toast.makeText(UpdateDetails_GeofenchingDetails.this, "we are fetching your location please wait", Toast.LENGTH_SHORT).show();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getLocationLatLong();
+                    }
+                },2000);
             }
 
         }else{
