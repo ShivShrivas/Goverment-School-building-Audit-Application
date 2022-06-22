@@ -55,7 +55,7 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
 
         convertView = inflater.inflate(R.layout.list_item_new, null);
         TextView text = (TextView) convertView.findViewById(R.id.expandedListItem);
-        text.setCompoundDrawablesWithIntrinsicBounds(0, 0,isExpanded ? android.R.drawable.arrow_up_float : android.R.drawable.arrow_down_float, 0);
+        text.setCompoundDrawablesWithIntrinsicBounds(isExpanded ? android.R.drawable.arrow_up_float : android.R.drawable.arrow_down_float, 0,0, 0);
         String groupText = getGroup(groupPosition).toString();
         text.setText(groupText);
         return convertView;
@@ -85,7 +85,7 @@ public class SecondLevelAdapter extends BaseExpandableListAdapter {
 
         TextView textView = (TextView) convertView.findViewById(R.id.listTitle);
 
-        String[] childArray = data.get(groupPosition);
+        String[] childArray = data.get(0);
 
         String text = childArray[childPosition];
 

@@ -207,10 +207,58 @@ CheckBox check_showpassword,check_remember;
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
                     if (applicationController.getUsertype().equals("AA")){
-                       // Toast.makeText(MainActivity.this, "Only Principal Module You Can Select!!", Toast.LENGTH_LONG).show();
-                        startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
-                        finish();
-                        dialog.dismiss();
+                        RestClient restClient=new RestClient();
+                        ApiService apiService=restClient.getApiService();
+                        Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
+                        Call<List<JsonObject>> call=apiService.getLogin(paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
+                        call.enqueue(new Callback<List<JsonObject>>() {
+                            @Override
+                            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+                                Log.d("TAG", "onResponse: "+response.body());
+                                if (response.body().size()!=0){
+                                    try {
+                                        if (response.body().get(0).get("pswd").getAsString().equals("0")){
+                                            Toast.makeText(MainActivity.this, "Please Enter Correct Username And Password!!", Toast.LENGTH_SHORT).show();
+                                            dialog.dismiss();
+                                        }
+                                    }catch (Exception e){
+
+                                    }
+                                    if(response.body().get(0).get("userid")!=null) {
+                                        applicationController.setUserid(response.body().get(0).get("userid")==null?"":response.body().get(0).get("userid").getAsString());
+                                        applicationController.setUsername(response.body().get(0).get("username")==null?"":response.body().get(0).get("username").getAsString());
+                                        applicationController.setSchoolId(response.body().get(0).get("schoolid")==null?"":response.body().get(0).get("schoolid").getAsString());
+                                        applicationController.setBlockid(response.body().get(0).get("blockid")==null?"":response.body().get(0).get("blockid").getAsString());
+                                        applicationController.setDistid(response.body().get(0).get("distid")==null?"":response.body().get(0).get("distid").getAsString());
+                                        applicationController.setDivid(response.body().get(0).get("divid")==null?"":response.body().get(0).get("divid").getAsString());
+                                        startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
+                                        finish();
+                                        dialog.dismiss();
+
+                                    }
+                                    else {
+                                        Toast.makeText(MainActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+                                Log.d("TAG", "onFailure: "+t);
+                                dialog.dismiss();
+                                Snackbar.make(loginLayout,"Restart App or Check your internet Connection", BaseTransientBottomBar.LENGTH_INDEFINITE)
+                                        .setAction("Retry", new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View view) {
+                                                setDataInUserTypeSpinner();
+                                                setQuaterTypeInSpinner();
+                                                dialog.show();
+                                            }
+                                        });
+                            }
+                        });
+
                     }else{
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();

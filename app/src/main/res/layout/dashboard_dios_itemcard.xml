@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/chemistryLabBodyCard"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="65dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:backgroundTint="@color/DIOS_ColorPrimary"
@@ -54,7 +54,6 @@
         android:id="@+id/updateOntxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:paddingStart="15dp"
         android:text="13 Mar 2022 02:42 PM"
         android:textAlignment="textStart"

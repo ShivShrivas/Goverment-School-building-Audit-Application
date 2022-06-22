@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E3F2FD"
+        android:background="#F4FAFF"
         tools:context=".DIOS.StudentEnrollment.Student_Enrollment_Details">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

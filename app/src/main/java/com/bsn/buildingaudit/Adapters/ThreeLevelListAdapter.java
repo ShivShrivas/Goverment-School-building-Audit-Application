@@ -86,7 +86,7 @@ public class ThreeLevelListAdapter extends BaseExpandableListAdapter {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView = inflater.inflate(R.layout.list_item, null);
         TextView text = (TextView) convertView.findViewById(R.id.expandedListItem);
-        text.setCompoundDrawablesWithIntrinsicBounds(0, 0, isExpanded ? android.R.drawable.arrow_up_float : android.R.drawable.arrow_down_float, 0);
+        text.setCompoundDrawablesWithIntrinsicBounds(isExpanded ? android.R.drawable.arrow_up_float : android.R.drawable.arrow_down_float, 0, 0, 0);
 
         text.setText(this.parentHeaders[groupPosition]);
 

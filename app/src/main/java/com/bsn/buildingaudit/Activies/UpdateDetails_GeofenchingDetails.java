@@ -28,12 +28,20 @@ import com.bsn.buildingaudit.Adapters.GeofenceAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.Model.GeoTags;
 import com.bsn.buildingaudit.R;
+import com.bsn.buildingaudit.RetrofitApi.ApiService;
+import com.bsn.buildingaudit.RetrofitApi.RestClient;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implements LocationListener {
     ApplicationController applicationController;
@@ -47,13 +55,25 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
     Dialog dialog;
     DateFormat dateFormat;
     Calendar cal;
-Button addGeoTagBtn,btnSubmitgeoFench;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (ContextCompat.checkSelfPermission(UpdateDetails_GeofenchingDetails.this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(UpdateDetails_GeofenchingDetails.this,new String[]{
+                    Manifest.permission.ACCESS_FINE_LOCATION
+            },100);
+        }
+    }
+
+    Button addGeoTagBtn,btnSubmitgeoFench;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_onsubmit_geofenching_details);
         applicationController = (ApplicationController) getApplication();
-         dateFormat = new SimpleDateFormat("dd/MM/yyyy \n HH:mm:ss");
+         dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
          cal = Calendar.getInstance();
         dialog = new Dialog(this);
 
@@ -92,8 +112,31 @@ Button addGeoTagBtn,btnSubmitgeoFench;
                 if (arrayList.size()<4){
                     Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Please add tags more than four points", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Data Submitted ", Toast.LENGTH_SHORT).show();
-                    onBackPressed();
+                    RestClient restClient=new RestClient();
+                    ApiService apiService=restClient.getApiService();
+                    Call<JsonObject> call=apiService.uploadGeoFenchingDetails(paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                    call.enqueue(new Callback<JsonObject>() {
+                        @Override
+                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                            if (response.body().get("StatusCode").toString().equals("1")){
+                                Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Data Submitted Successfully!!", Toast.LENGTH_SHORT).show();
+                                onBackPressed();
+                            }else{
+                                Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Something went wrong!! ", Toast.LENGTH_SHORT).show();
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<JsonObject> call, Throwable t) {
+                            Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Something went wrong!! ", Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+
+
                 }
             }
         });
@@ -104,6 +147,25 @@ Button addGeoTagBtn,btnSubmitgeoFench;
 
             }
         });
+    }
+
+    private JsonObject paraGetJsonOfGeos(String schoolId, ArrayList<GeoTags> arrayList) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("SchoolID",schoolId);
+        jsonObject.add("GeoFenceData",getTagsJsonArray(arrayList));
+        return jsonObject;
+    }
+
+    private JsonArray getTagsJsonArray(ArrayList<GeoTags> arrayList) {
+       JsonArray jsonArray=new JsonArray();
+        for (int i = 0; i < arrayList.size(); i++) {
+            JsonObject jsonObject=new JsonObject();
+            jsonObject.addProperty("Lati",arrayList.get(i).getLattitude());
+            jsonObject.addProperty("Longi",arrayList.get(i).getLongitute());
+            jsonObject.addProperty("CapturedDate",arrayList.get(i).getDateAndTime());
+            jsonArray.add(jsonObject);
+        }
+       return jsonArray;
     }
 
     private void getLocationLatLong() {
@@ -154,6 +216,7 @@ Button addGeoTagBtn,btnSubmitgeoFench;
 
     }
 
+
     @SuppressLint("MissingPermission")
     private boolean getLocation() {
         try {
@@ -161,6 +224,8 @@ Button addGeoTagBtn,btnSubmitgeoFench;
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER ,1000,1,UpdateDetails_GeofenchingDetails.this);
             return true;
         }catch (Exception e){
+            Log.d("TAG", "getLocation: "+e);
+            dialog.dismiss();
             return false;
         }
     }

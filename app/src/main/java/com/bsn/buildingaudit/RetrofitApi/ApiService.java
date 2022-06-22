@@ -10,6 +10,9 @@ import com.bsn.buildingaudit.Model.GetSchoolDetails;
 import com.bsn.buildingaudit.Model.GetUserType;
 import com.bsn.buildingaudit.Model.InstallationYear;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
+import com.bsn.buildingaudit.Model.SchoolListModel;
+import com.bsn.buildingaudit.Model.StudentAbsentDetailsModel;
+import com.bsn.buildingaudit.Model.StudentEnrollmentListModel;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -456,6 +459,25 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("SchoolGrading/UpdateStaffAttendenceData")
     Call<JsonArray> submitAttendance(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetSchoolListDistrictWise")
+    Call<List<SchoolListModel>> getSchoolListDistricWise(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/AddGeoFenceData")
+    Call<JsonObject> uploadGeoFenchingDetails(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetStudentStrengthData")
+    Call<List<StudentEnrollmentListModel>> getStudentEnrollmentDetails(@Body JsonObject jsonObject);
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetAbsentStudentData")
+    Call<List<StudentAbsentDetailsModel>> getStudentAbsentDetails(@Body JsonObject jsonObject);
 
 
 }

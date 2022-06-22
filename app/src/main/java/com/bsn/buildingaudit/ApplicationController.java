@@ -26,6 +26,7 @@ public class ApplicationController extends Application {
     String Usertype;
 String PeriodID;
 String SchoolId;
+String DiosLocalSchoolId;
 String userid;
 String username;
 String divid;
@@ -111,7 +112,7 @@ public  static List<AttendanceType> attendanceTypeList;
     }
 
     public String getPeriodID() {
-        return "26";
+        return "29";
     }
 
     public void setPeriodID(String periodID) {
@@ -180,5 +181,13 @@ public  static List<AttendanceType> attendanceTypeList;
 
     public void setSchoolAddress(String schoolAddress) {
         this.schoolAddress = schoolAddress;
+    }
+
+    public String getDiosLocalSchoolId() {
+        return "2057";
+    }
+
+    public void setDiosLocalSchoolId(String diosLocalSchoolId) {
+        DiosLocalSchoolId = diosLocalSchoolId;
     }
 }

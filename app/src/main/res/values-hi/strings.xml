@@ -422,8 +422,8 @@
     <string name="boys">लड़के</string>
     <string name="girls">लड़कियाँ</string>
     <string name="attendance_by_months">महीनों तक उपस्थिति</string>
-    <string name="no_of_student_absent_from_15_days">15 दिनों से अनुपस्थित छात्रों की संख्या</string>
-    <string name="no_of_student_absent_from_30_days">30 दिनों से अनुपस्थित छात्रों की संख्या</string>
+    <string name="no_of_student_absent_from_15_days">7 दिनों से अनुपस्थित छात्रों की संख्या</string>
+    <string name="no_of_student_absent_from_30_days">15 दिनों से अनुपस्थित छात्रों की संख्या</string>
     <string name="_2010">2010</string>
     <string name="no_of_appeared_student">उपस्थित छात्र की संख्या</string>
     <string name="no_of_passed_student">उत्तीर्ण छात्र की संख्या</string>

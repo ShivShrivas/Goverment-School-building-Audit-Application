@@ -420,8 +420,8 @@
     <string name="boys">Boys</string>
     <string name="girls">Girls</string>
     <string name="attendance_by_months">Attendance By Months</string>
-    <string name="no_of_student_absent_from_15_days">No. of student Absent from 15 days</string>
-    <string name="no_of_student_absent_from_30_days">No. of student Absent from 30 days</string>
+    <string name="no_of_student_absent_from_15_days">No. of student Absent from 7 days</string>
+    <string name="no_of_student_absent_from_30_days">No. of student Absent from 15 days</string>
     <string name="_2010">2010</string>
     <string name="no_of_appeared_student">No. of Appeared Student</string>
     <string name="no_of_passed_student">No. of Passed Student</string>
@@ -445,6 +445,7 @@
     <string name="yearly_passed">Yearly Passed</string>
     <string name="equipment_status">Equipment Status</string>
     <string name="lab_condition">Lab Condition</string>
+    <string name="welcome_string" translatable="false"><b>Welcome,</b></string>
 
     <string-array name="array_yesno">
         <item>Yes</item>

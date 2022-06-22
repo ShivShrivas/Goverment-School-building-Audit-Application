@@ -78,7 +78,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#CCBBFB"
+                    android:background="#FBE9E7"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -142,6 +142,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
+                                        android:id="@+id/boysEnrollmentCount"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="234"
@@ -187,6 +188,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
+                                        android:id="@+id/girlsEnrollmentCount"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="234"
@@ -208,6 +210,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/attendance_by_months"
+                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/DIOS_ColorPrimary"
                 android:textSize="15dp"
@@ -237,30 +240,49 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
                     android:gravity="center_horizontal|center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_of_student_absent_from_15_days"
+                        android:textStyle="bold"
                         android:textColor="@color/DIOS_ColorPrimary"
-                        android:textSize="16dp" />
+                        android:textSize="15dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.8"
+                    android:layout_weight="1.5"
                     android:padding="5dp">
 
                     <TextView
+                        android:id="@+id/absentFromFifteenDays"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/cardbg"
                         android:gravity="center_vertical|center_horizontal"
                         android:text="234"
+                        android:textStyle="bold"
                         android:textColor="@color/black" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/sevenDaysAbsentSheet"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.8"
+                    android:padding="5dp">
+
+                 <ImageView
+                     android:layout_width="match_parent"
+                     android:src="@drawable/ic_eye"
+
+                     android:layout_height="match_parent"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -278,30 +300,48 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight=".8"
                     android:gravity="center_horizontal|center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_of_student_absent_from_30_days"
+                        android:textStyle="bold"
                         android:textColor="@color/DIOS_ColorPrimary"
-                        android:textSize="16dp" />
+                        android:textSize="15dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.8"
+                    android:layout_weight="1.5"
                     android:padding="5dp">
 
                     <TextView
+                        android:id="@+id/absentFromthisryDays"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/cardbg"
                         android:gravity="center_vertical|center_horizontal"
                         android:text="456"
+                        android:textStyle="bold"
+
                         android:textColor="@color/black" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/fifteenDaysAbsentSheet"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.8"
+                    android:padding="5dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:src="@drawable/ic_eye"
+
+                        android:layout_height="match_parent"/>
                 </LinearLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
