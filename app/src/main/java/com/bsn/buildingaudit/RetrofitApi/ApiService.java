@@ -468,7 +468,7 @@ public  interface ApiService {
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("SchoolGrading/AddGeoFenceData")
-    Call<JsonObject> uploadGeoFenchingDetails(@Body JsonObject jsonObject);
+    Call<JsonArray> uploadGeoFenchingDetails(@Body JsonObject jsonObject);
 
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")

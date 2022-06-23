@@ -112,7 +112,7 @@ public  static List<AttendanceType> attendanceTypeList;
     }
 
     public String getPeriodID() {
-        return "29";
+        return PeriodID;
     }
 
     public void setPeriodID(String periodID) {
@@ -120,7 +120,7 @@ public  static List<AttendanceType> attendanceTypeList;
     }
 
     public String getSchoolId() {
-        return "2057";
+        return SchoolId;
     }
 
     public void setSchoolId(String schoolId) {

@@ -30,6 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".SchoolDetailsPages.School_Details"
+            android:exported="false" />
+        <activity
             android:name=".DIOS.SubjectWiseSyllabus.Syllabus_Details_page"
             android:exported="false" />
         <activity

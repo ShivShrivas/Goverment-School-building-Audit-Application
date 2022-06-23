@@ -206,7 +206,7 @@ CheckBox check_showpassword,check_remember;
                 dialog.show();
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
-                    if (applicationController.getUsertype().equals("AA")){
+                    if (applicationController.getUsertype().equals("AA0")){
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
                         Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
@@ -231,6 +231,7 @@ CheckBox check_showpassword,check_remember;
                                         applicationController.setBlockid(response.body().get(0).get("blockid")==null?"":response.body().get(0).get("blockid").getAsString());
                                         applicationController.setDistid(response.body().get(0).get("distid")==null?"":response.body().get(0).get("distid").getAsString());
                                         applicationController.setDivid(response.body().get(0).get("divid")==null?"":response.body().get(0).get("divid").getAsString());
+                                        applicationController.setPeriodID("29");
                                         startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
                                         finish();
                                         dialog.dismiss();
@@ -281,6 +282,7 @@ CheckBox check_showpassword,check_remember;
                                         applicationController.setUserid(response.body().get(0).get("userid").getAsString());
                                         applicationController.setUsername(response.body().get(0).get("username").getAsString());
                                         applicationController.setSchoolId(response.body().get(0).get("schoolid").getAsString());
+                                        applicationController.setPeriodID("26");
                                         getSchoolDetails();
 
                                     }

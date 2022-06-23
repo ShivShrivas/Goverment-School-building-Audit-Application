@@ -114,27 +114,34 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
                 }else{
                     RestClient restClient=new RestClient();
                     ApiService apiService=restClient.getApiService();
-                    Call<JsonObject> call=apiService.uploadGeoFenchingDetails(paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
-                    call.enqueue(new Callback<JsonObject>() {
-                        @Override
-                        public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                            if (response.body().get("StatusCode").toString().equals("1")){
-                                Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
-                                Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Data Submitted Successfully!!", Toast.LENGTH_SHORT).show();
-                                onBackPressed();
-                            }else{
-                                Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
-                                Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Something went wrong!! ", Toast.LENGTH_SHORT).show();
+                    Log.d("TAG", "onClick: "+paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                    Call<JsonArray> call=apiService.uploadGeoFenchingDetails(paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                  call.enqueue(new Callback<JsonArray>() {
+                      @Override
+                      public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                          JsonObject jsonObject= (JsonObject) response.body().get(0);
+                          Log.d("TAG", "onResponse: "+jsonObject.get("StatusCode"));
+                          if (jsonObject.get("StatusCode").toString().equals("1")){
+                              Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                              Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Data Submitted Successfully!!", Toast.LENGTH_SHORT).show();
+                              onBackPressed();
+                          }else if(jsonObject.get("StatusCode").toString().equals("2")){
+                              Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                              Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Data already submitted", Toast.LENGTH_SHORT).show();
+                              onBackPressed();
+                          }else{
+                              Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                              Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Something went wrong!! ", Toast.LENGTH_SHORT).show();
 
-                            }
-                        }
+                          }
+                      }
 
-                        @Override
-                        public void onFailure(Call<JsonObject> call, Throwable t) {
-                            Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Something went wrong!! ", Toast.LENGTH_SHORT).show();
+                      @Override
+                      public void onFailure(Call<JsonArray> call, Throwable t) {
+                          Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Something went wrong!! ", Toast.LENGTH_SHORT).show();
 
-                        }
-                    });
+                      }
+                  });
 
 
                 }

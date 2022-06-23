@@ -4,13 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Model.StudentAbsentDetailsModel;
 import com.bsn.buildingaudit.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
@@ -32,10 +32,10 @@ public class AdapterStudentAbsentDetails extends RecyclerView.Adapter<AdapterStu
 
     @Override
     public void onBindViewHolder(@NonNull AbsentDetailsViewHolder holder, int position) {
-        holder.absentCount.setText(arrayList.get(position).getAbsentDays());
-        holder.studentnameAbsent.setText(arrayList.get(position).getNameOfStudent());
-        holder.parentNameAbsent.setText(arrayList.get(position).getNameOfFather());
-        holder.absentreason.setText(arrayList.get(position).getReason());
+        holder.absentCount.setText(arrayList.get(position).getAbsentDays().toString());
+        holder.studentnameAbsent.setText(arrayList.get(position).getNameOfStudent().toString());
+        holder.parentNameAbsent.setText(arrayList.get(position).getNameOfFather().toString());
+        holder.absentreason.setText(arrayList.get(position).getReason().toString());
     }
 
     @Override
@@ -44,7 +44,7 @@ public class AdapterStudentAbsentDetails extends RecyclerView.Adapter<AdapterStu
     }
 
     public class AbsentDetailsViewHolder extends RecyclerView.ViewHolder{
-        TextView absentCount,parentNameAbsent,studentnameAbsent,absentreason;
+        TextInputEditText absentCount,parentNameAbsent,studentnameAbsent,absentreason;
 
         public AbsentDetailsViewHolder(@NonNull View itemView) {
             super(itemView);

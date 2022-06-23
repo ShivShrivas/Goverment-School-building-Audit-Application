@@ -3,6 +3,7 @@ package com.bsn.buildingaudit.DIOS;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Window;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -30,6 +31,7 @@ RecyclerView recyclerViewForDiosDashboard;
 SearchView searchView;
     public static ApplicationController applicationController;
 DIOS_DashboardAdapter adapter;
+private TextView textView8;
     ArrayList<SchoolListModel> arrayListSchool=new ArrayList<>();
 
     public static boolean setSchoolIdInContoller(Integer schoolid) {
@@ -50,8 +52,9 @@ DIOS_DashboardAdapter adapter;
         ApiService apiService=restClient.getApiService();
         recyclerViewForDiosDashboard=findViewById(R.id.recyclerViewForDiosDashboard);
         searchView=findViewById(R.id.searchView);
+        textView8=findViewById(R.id.textView8);
         recyclerViewForDiosDashboard.setLayoutManager(new LinearLayoutManager(this));
-
+        textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
 
         Call<List<SchoolListModel>> call=apiService.getSchoolListDistricWise(jsonObject);
         call.enqueue(new Callback<List<SchoolListModel>>() {
