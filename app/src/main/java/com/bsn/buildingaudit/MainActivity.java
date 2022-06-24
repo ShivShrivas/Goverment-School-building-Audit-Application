@@ -47,19 +47,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-Button SubmitBtn;
-ApplicationController applicationController;
-
+    Button SubmitBtn;
+    ApplicationController applicationController;
     SharedPreferences sharedpreferences;
-EditText password,username;
-Spinner spinnerUserType,spinnerFinancialQuarter;
-RestClient restClient;
-ApiService apiService;
-Dialog dialog;
-ConstraintLayout loginLayout;
-List<GetSchoolDetails> getSchoolDetails=new ArrayList<>();
+    EditText password,username;
+    Spinner spinnerUserType,spinnerFinancialQuarter;
+    RestClient restClient;
+    ApiService apiService;
+    Dialog dialog;
+    ConstraintLayout loginLayout;
+    List<GetSchoolDetails> getSchoolDetails=new ArrayList<>();
     SharedPreferences.Editor editor;
-CheckBox check_showpassword,check_remember;
+    CheckBox check_showpassword,check_remember;
     List<GetQuaterType> arrayListQuater =new ArrayList<>();
     List<GetUserType> arrayListUserType =new ArrayList<>();
     GetUserType getUserType;
@@ -206,7 +205,8 @@ CheckBox check_showpassword,check_remember;
                 dialog.show();
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
-                    if (applicationController.getUsertype().equals("AA0")){
+                    Log.d("TAG", "onClick: "+applicationController.getUsertype());
+                    if (applicationController.getUsertype().equals("AA")){
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
                         Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
@@ -308,10 +308,7 @@ CheckBox check_showpassword,check_remember;
                                         });
                             }
                         });
-
                     }
-
-
                 }else {
                     Toast.makeText(MainActivity.this, "Please enter username and password properly", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();

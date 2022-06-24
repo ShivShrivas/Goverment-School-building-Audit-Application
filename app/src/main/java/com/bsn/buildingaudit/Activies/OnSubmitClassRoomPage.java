@@ -107,7 +107,6 @@ LinearLayout diosButtonLayout,linearLayout2;
         recyclerViewTwoTypeOneAfterSubmit=findViewById(R.id.recyclerViewTwoTypeOneAfterSubmit);
         recyclerViewThreeTypeOneAfterSubmit=findViewById(R.id.recyclerViewThreeTypeOneAfterSubmit);
         recyclerViewFourTypeOneAfterSubmit=findViewById(R.id.recyclerViewFourTypeOneAfterSubmit);
-
         recyclerViewTwoTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerViewThreeTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerViewFourTypeOneAfterSubmit.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
@@ -132,14 +131,20 @@ LinearLayout diosButtonLayout,linearLayout2;
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 getAllUnEditable();
-                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
-                    if (Type.equals("D")){
-                        editClassRoomDetails.setVisibility(View.GONE);
-                    }else{
-                        editClassRoomDetails.setVisibility(View.VISIBLE);
+                try {
+                    if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                        if (Type.equals("D")){
+                            editClassRoomDetails.setVisibility(View.GONE);
+                        }else{
+                            editClassRoomDetails.setVisibility(View.VISIBLE);
+                        }
+
                     }
+                }catch (Exception e){
+                    editClassRoomDetails.setVisibility(View.GONE);
 
                 }
+
                 Log.d("TAG", "onResponse: "+response.body()+"///////"+response.body().get(0).get("TotalRooms"));
                 totalClassRooms.setText(response.body().get(0).get("TotalRooms").toString());
                 minorRepairingClassroomAfterSubmit.setText(response.body().get(0).get("MinorRepairing").toString());

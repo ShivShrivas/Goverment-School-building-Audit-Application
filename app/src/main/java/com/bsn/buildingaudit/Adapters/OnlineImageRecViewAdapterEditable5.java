@@ -23,7 +23,6 @@ public class OnlineImageRecViewAdapterEditable5 extends RecyclerView.Adapter<Onl
     public OnlineImageRecViewAdapterEditable5(Context context, ArrayList<String> staffPhotoPathList) {
         this.context=context;
         this.imageUrlString=staffPhotoPathList;
-
     }
 
     @NonNull
@@ -31,7 +30,6 @@ public class OnlineImageRecViewAdapterEditable5 extends RecyclerView.Adapter<Onl
     public HistoryItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.image_card_layout,parent,false);
         return new HistoryItemViewHolder(view);
-
     }
 
     @Override
