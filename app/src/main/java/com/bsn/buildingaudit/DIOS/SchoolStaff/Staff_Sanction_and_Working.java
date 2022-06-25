@@ -8,20 +8,42 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsn.buildingaudit.Adapters.StaffSanctionAndWorkingAdapter;
+import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.StaffSanctionAndWorkingModel;
 import com.bsn.buildingaudit.R;
+import com.bsn.buildingaudit.RetrofitApi.ApiService;
+import com.bsn.buildingaudit.RetrofitApi.RestClient;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Staff_Sanction_and_Working extends AppCompatActivity {
 Button btnApprovalStaffSanction,btnRejectStaffSanction;
+RecyclerView staffSanctionRecview;
+    ApplicationController applicationController;
+    List<StaffSanctionAndWorkingModel> arrayList=new ArrayList<>();
+    StaffSanctionAndWorkingAdapter staffSanctionAndWorkingAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_staff_sanction_and_working);
         Window window = getWindow();
+        applicationController= (ApplicationController) getApplication();
+
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+        staffSanctionRecview=findViewById(R.id.staffSanctionRecview);
+        staffSanctionRecview.setLayoutManager(new LinearLayoutManager(this));
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -32,6 +54,25 @@ Button btnApprovalStaffSanction,btnRejectStaffSanction;
         });
         btnRejectStaffSanction=findViewById(R.id.btnRejectStaffSanction);
         btnApprovalStaffSanction=findViewById(R.id.btnApprovalStaffSanction);
+
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<List<StaffSanctionAndWorkingModel>> call=apiService.getSanctionAndWorking(paraStaffSanctionJson("2",applicationController.getPeriodID()));
+        call.enqueue(new Callback<List<StaffSanctionAndWorkingModel>>() {
+            @Override
+            public void onResponse(Call<List<StaffSanctionAndWorkingModel>> call, Response<List<StaffSanctionAndWorkingModel>> response) {
+                arrayList=response.body();
+                staffSanctionAndWorkingAdapter=new StaffSanctionAndWorkingAdapter(Staff_Sanction_and_Working.this,arrayList);
+                staffSanctionRecview.setAdapter(staffSanctionAndWorkingAdapter);
+                staffSanctionAndWorkingAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<StaffSanctionAndWorkingModel>> call, Throwable t) {
+
+            }
+        });
 
         ArrayList<String> myImageNameList = new ArrayList<>();
         myImageNameList.add("All Given Information is correct");
@@ -57,5 +98,13 @@ Button btnApprovalStaffSanction,btnRejectStaffSanction;
                 StaticFunctions.showDialogReject(Staff_Sanction_and_Working.this,myImageNameList2);
             }
         });
+    }
+
+    private JsonObject paraStaffSanctionJson(String schoolId, String periodID) {
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("SchoolID",schoolId);
+        jsonObject.addProperty("PeriodID",periodID);
+
+        return jsonObject;
     }
 }

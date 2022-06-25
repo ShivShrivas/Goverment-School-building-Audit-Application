@@ -11,6 +11,7 @@ import com.bsn.buildingaudit.Model.GetUserType;
 import com.bsn.buildingaudit.Model.InstallationYear;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
 import com.bsn.buildingaudit.Model.SchoolListModel;
+import com.bsn.buildingaudit.Model.StaffSanctionAndWorkingModel;
 import com.bsn.buildingaudit.Model.StudentAbsentDetailsModel;
 import com.bsn.buildingaudit.Model.StudentEnrollmentListModel;
 import com.google.gson.JsonArray;
@@ -478,6 +479,15 @@ public  interface ApiService {
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("SchoolGrading/GetAbsentStudentData")
     Call<List<StudentAbsentDetailsModel>> getStudentAbsentDetails(@Body JsonObject jsonObject);
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetSchoolDetails")
+    Call<List<JsonObject>> getSchoolDetailsForDIOS(@Body JsonObject jsonObject);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetStaffSanctionWorkingData")
+    Call<List<StaffSanctionAndWorkingModel>> getSanctionAndWorking(@Body JsonObject jsonObject);
 
 
 }

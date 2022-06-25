@@ -9,14 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsn.buildingaudit.Model.ClassDatum;
 import com.bsn.buildingaudit.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class SubjectRecviewAdapter extends RecyclerView.Adapter<SubjectRecviewAdapter.SubjectViewHolder>{
     Context context;
-    ArrayList<String> subjectArray;
-    public SubjectRecviewAdapter(Context context, ArrayList<String> subjectArray) {
+    List<ClassDatum> subjectArray;
+    public SubjectRecviewAdapter(Context context, List<ClassDatum> subjectArray) {
         this.context=context;
         this.subjectArray=subjectArray;
 
@@ -31,7 +32,7 @@ public class SubjectRecviewAdapter extends RecyclerView.Adapter<SubjectRecviewAd
 
     @Override
     public void onBindViewHolder(@NonNull SubjectViewHolder holder, int position) {
-        holder.subjecttextView.setText(subjectArray.get(position));
+        holder.subjecttextView.setText(subjectArray.get(position).getClassName());
     }
 
     @Override
