@@ -3,21 +3,26 @@ package com.bsn.buildingaudit.SchoolDetailsPages;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsn.buildingaudit.Adapters.ClassesRecviewAdapter;
+import com.bsn.buildingaudit.Adapters.SubjectRecviewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.Model.ClassDatum;
 import com.bsn.buildingaudit.Model.SchoolDetailsModel;
+import com.bsn.buildingaudit.Model.SubjectDatum;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import retrofit2.Call;
@@ -26,18 +31,59 @@ import retrofit2.Response;
 
 public class School_Details extends AppCompatActivity {
     ApplicationController applicationController;
-
+ArrayList<String> subjectSixToEight=new ArrayList<>();
+ArrayList<String> subjectNineToTenth=new ArrayList<>();
+ArrayList<String> subjectEleventhToTwelveth=new ArrayList<>();
+TextView schoolAddTxt,pincodeTxt,mobTxt,dateOfRegisTxt,authorityContactTxt,cateGoryOfSchoolTxt,affiliationTxt,designationTxt,authorityTxt;
    List<ClassDatum> classesArrayList =new ArrayList<>();
-   List<SchoolDetailsModel> schoolDetailsList =new ArrayList<>();
-RecyclerView recViewForPermittedSubjects,recViewForRunningClasses;
+   List<SubjectDatum> subjectsArrayList =new ArrayList<>();
+   SchoolDetailsModel schoolDetailsList;
+RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPermittedSubjectsElevenTwelve,recViewForPermittedSubjectsNinthToTenth,recViewForPermittedSubjectsSixthToEight;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_school_details);
         applicationController= (ApplicationController) getApplication();
-        GridLayoutManager layoutManager=new GridLayoutManager(this,2);
+        GridLayoutManager layoutManager=new GridLayoutManager(this,2){
+            @Override
+            public boolean canScrollVertically() {
+                return  false;
+            }
+        };
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         recViewForRunningClasses=findViewById(R.id.recViewForRunningClasses);
+        schoolDetailsList=new SchoolDetailsModel();
+        schoolAddTxt=findViewById(R.id.schoolAddTxt);
+        mobTxt=findViewById(R.id.mobTxt);
+        pincodeTxt=findViewById(R.id.pincodeTxt);
+        dateOfRegisTxt=findViewById(R.id.dateOfRegisTxt);
+        cateGoryOfSchoolTxt=findViewById(R.id.cateGoryOfSchoolTxt);
+        affiliationTxt=findViewById(R.id.affiliationTxt);
+        authorityTxt=findViewById(R.id.authorityTxt);
+        authorityContactTxt=findViewById(R.id.authorityContactTxt);
+        designationTxt=findViewById(R.id.designationTxt);
+        recViewForPermittedSubjectsNinthToTenth=findViewById(R.id.recViewForPermittedSubjectsNinthToTenth);
+        recViewForPermittedSubjectsElevenTwelve=findViewById(R.id.recViewForPermittedSubjectsElevenTwelve);
+        recViewForPermittedSubjectsSixthToEight=findViewById(R.id.recViewForPermittedSubjectsSixthToEight);
+        GridLayoutManager layoutManager1=new GridLayoutManager(School_Details.this,2){
+            @Override
+            public boolean canScrollVertically() {
+                return  false;
+            }
+        };
+        GridLayoutManager layoutManager2=new GridLayoutManager(School_Details.this,2){
+            @Override
+            public boolean canScrollVertically() {
+                return  false;
+            }
+        };
+        GridLayoutManager layoutManager3=new GridLayoutManager(School_Details.this,2){
+            @Override
+            public boolean canScrollVertically() {
+                return  false;
+            }
+        };
+
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,20 +93,70 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses;
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+paraSchoolRequestJson("2",applicationController.getPeriodID()));
-        Call<List<JsonObject>> call=apiService.getSchoolDetailsForDIOS(paraSchoolRequestJson("2",applicationController.getPeriodID()));
-        call.enqueue(new Callback<List<JsonObject>>() {
+        Log.d("TAG", "onCreate: "+paraSchoolRequestJson("131",applicationController.getPeriodID()));
+        Call<SchoolDetailsModel> call=apiService.getSchoolDetailsForDIOS(paraSchoolRequestJson("131",applicationController.getPeriodID()));
+        call.enqueue(new Callback<SchoolDetailsModel>() {
             @Override
-            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
+            public void onResponse(Call<SchoolDetailsModel> call, Response<SchoolDetailsModel> response) {
                 Log.d("TAG", "onResponse: "+response.body());
-//                schoolDetailsList=response.body();
-//                classesArrayList=schoolDetailsList.get(0).getClassData();
-//                recViewForRunningClasses.setLayoutManager(layoutManager);
-//                recViewForRunningClasses.setAdapter(new SubjectRecviewAdapter(School_Details.this,classesArrayList));
+
+
+                schoolDetailsList=response.body();
+                schoolAddTxt.setText(schoolDetailsList.getAddress());
+                mobTxt.setText(schoolDetailsList.getPhoneNo());
+                pincodeTxt.setText(schoolDetailsList.getPinCode().toString());
+                dateOfRegisTxt.setText(schoolDetailsList.getDor().split("T")[0]);
+                cateGoryOfSchoolTxt.setText(schoolDetailsList.getCategory());
+                affiliationTxt.setText(schoolDetailsList.getAffiliationClass());
+                authorityTxt.setText(schoolDetailsList.getAuthorityName());
+                authorityContactTxt.setText(schoolDetailsList.getContactNo());
+                designationTxt.setText(schoolDetailsList.getStaffDesignation());
+                classesArrayList=schoolDetailsList.getClassData();
+                subjectsArrayList=schoolDetailsList.getSubjectData();
+                for (int i=0;i<subjectsArrayList.size();i++){
+                    if (subjectsArrayList.get(i).getClassID()==15 ||subjectsArrayList.get(i).getClassID()==12  ){
+                        subjectEleventhToTwelveth.add(subjectsArrayList.get(i).getSubjectName());
+                        HashSet hs = new HashSet();
+
+                        hs.addAll(subjectEleventhToTwelveth); // demoArrayList= name of arrayList from which u want to remove duplicates
+
+                        subjectEleventhToTwelveth.clear();
+                        subjectEleventhToTwelveth.addAll(hs);
+                        recViewForPermittedSubjectsElevenTwelve.setLayoutManager(layoutManager1);
+                        recViewForPermittedSubjectsElevenTwelve.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectEleventhToTwelveth));
+
+                    }else if(subjectsArrayList.get(i).getClassID()==11 ||subjectsArrayList.get(i).getClassID()==10  ){
+                        subjectNineToTenth.add(subjectsArrayList.get(i).getSubjectName());
+                        HashSet hs = new HashSet();
+
+                        hs.addAll(subjectNineToTenth); // demoArrayList= name of arrayList from which u want to remove duplicates
+
+                        subjectNineToTenth.clear();
+                        subjectNineToTenth.addAll(hs);
+                        recViewForPermittedSubjectsNinthToTenth.setLayoutManager(layoutManager2);
+                        recViewForPermittedSubjectsNinthToTenth.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectNineToTenth));
+
+                    }else{
+                        subjectSixToEight.add(subjectsArrayList.get(i).getSubjectName());
+                        HashSet hs = new HashSet();
+
+                        hs.addAll(subjectSixToEight); // demoArrayList= name of arrayList from which u want to remove duplicates
+
+                        subjectSixToEight.clear();
+                        subjectSixToEight.addAll(hs);
+                        recViewForPermittedSubjectsSixthToEight.setLayoutManager(layoutManager3);
+                        recViewForPermittedSubjectsSixthToEight.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectSixToEight));
+
+
+                    }
+                }
+
+                recViewForRunningClasses.setLayoutManager(layoutManager);
+                recViewForRunningClasses.setAdapter(new ClassesRecviewAdapter(School_Details.this,classesArrayList));
             }
 
             @Override
-            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
+            public void onFailure(Call<SchoolDetailsModel> call, Throwable t) {
                 Log.d("TAG", "onFailure: "+t.getMessage());
             }
         });
@@ -77,12 +173,6 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses;
         subjectArray.add("COMPUTER SCIENCE");
 
 
-        recViewForPermittedSubjects=findViewById(R.id.recViewForPermittedSubjects);
-
-
-        GridLayoutManager layoutManager1=new GridLayoutManager(this,2);
-
-        recViewForPermittedSubjects.setLayoutManager(layoutManager1);
 
 
 

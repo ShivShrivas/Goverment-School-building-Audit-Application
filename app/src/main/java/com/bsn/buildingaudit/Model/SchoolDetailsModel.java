@@ -52,10 +52,11 @@ public class SchoolDetailsModel {
     private String builidingType;
     @SerializedName("ClassData")
     @Expose
-    private List<ClassDatum> classData = null;
+    private List<ClassDatum> classData;
+
     @SerializedName("SubjectData")
     @Expose
-    private List<SubjectDatum> subjectData = null;
+    private List<SubjectDatum> subjectData;
 
     public Integer getSchoolDetailId() {
         return schoolDetailId;

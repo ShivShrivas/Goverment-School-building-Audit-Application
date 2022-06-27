@@ -3,7 +3,6 @@ package com.bsn.buildingaudit.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,30 +41,43 @@ public class DIOS_DashboardAdapter extends RecyclerView.Adapter<DIOS_DashboardAd
     @Override
     public void onBindViewHolder(@NonNull dashboardRecViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.roomTypetxt.setText(arrayListSchool.get(position).getSchoolname());
-        holder.updateOntxt.setText(arrayListSchool.get(position).getJdstatusdate().replace("T"," "));
-        if ((arrayListSchool.get(position).getJdstatus().equals("1"))){
 
-            holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_right_icon));
-        }
-        else{
-            holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_wron_icon));
+        holder.updateOntxt.setText(arrayListSchool.get(position).getJdstatusdate()==null?"Not Available":arrayListSchool.get(position).getJdstatusdate().replace("T"," "));
+      try{if ((arrayListSchool.get(position).getJdstatus().equals("1"))){
 
-        }
+          holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_right_icon));
+      }
+      else{
+          holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_wron_icon));
+
+      }}catch (Exception e ){
+          holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_wron_icon));
+
+
+      }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if ((arrayListSchool.get(position).getJdstatus().equals("1"))){
-                    Toast.makeText(context, "this School inspection is done", Toast.LENGTH_SHORT).show();
-                }else{
+                try {
+                    if ((arrayListSchool.get(position).getJdstatus().equals("1"))){
+                        Toast.makeText(context, "this School inspection is done", Toast.LENGTH_SHORT).show();
+                    }else{
+                        if ( DIOS_Dashboard.setSchoolIdInContoller(arrayListSchool.get(position).getSchoolid())){
+                            Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
+                            context.startActivity(i);
+                        }
+
+
+
+                    }
+                }catch (Exception e){
                     if ( DIOS_Dashboard.setSchoolIdInContoller(arrayListSchool.get(position).getSchoolid())){
                         Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
                         context.startActivity(i);
                     }
-
-
-                    
                 }
+
             }
         });
 
