@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="?attr/colorPrimary"
     android:layout_height="match_parent"
     tools:context=".DashBoard">
 
@@ -12,8 +13,9 @@
             android:id="@+id/bannnerImage"
             android:layout_width="0dp"
             android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/banner"
+            android:padding="40dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/sgms"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

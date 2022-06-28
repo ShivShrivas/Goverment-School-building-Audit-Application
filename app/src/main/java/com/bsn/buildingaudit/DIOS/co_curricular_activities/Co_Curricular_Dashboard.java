@@ -38,6 +38,7 @@ CardView game_details,redCrossSociety,scoutAndGuide;
                 startActivity(new Intent(Co_Curricular_Dashboard.this,Game_Details.class));
             }
         });
+
         redCrossSociety.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
