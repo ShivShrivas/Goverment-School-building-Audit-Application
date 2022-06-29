@@ -120,7 +120,7 @@ public  static List<AttendanceType> attendanceTypeList;
     }
 
     public String getSchoolId() {
-        return SchoolId;
+        return "1438";
     }
 
     public void setSchoolId(String schoolId) {
@@ -152,7 +152,7 @@ public  static List<AttendanceType> attendanceTypeList;
     }
 
     public String getDistid() {
-        return distid;
+        return "34";
     }
 
     public void setDistid(String distid) {

@@ -21,13 +21,14 @@ import com.bsn.buildingaudit.DIOS.StudentEnrollment.Student_Enrollment_Details;
 import com.bsn.buildingaudit.DIOS.SubjectWiseSyllabus.Syllabus_Details_page;
 import com.bsn.buildingaudit.DIOS.co_curricular_activities.Co_Curricular_Dashboard;
 import com.bsn.buildingaudit.DIOS.physicalStatus.Physical_Status_DIOS_Dashboard;
+import com.bsn.buildingaudit.DIOS.reciept_and_expenditure.Reciept_And_Expenditures;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.SchoolDetailsPages.School_Details;
 
 public class Diios_Panel_Under_School_dashboard extends AppCompatActivity {
     ApplicationController applicationController;
 CardView dashCardBtn_SchoolDetails,dashCardBtn_SchoolStaff,dashCardBtn_SchoolResultDetails,diosPhysicalStatus;
-CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard,dashCardBtn_SubjectWiseDetails;
+CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard,dashCardBtn_SubjectWiseDetails,recieptAndExpenditurCard;
 TextView textView8;
 String localSchoolId;
 ImageView schoolDetailsBtn;
@@ -50,6 +51,7 @@ ImageView schoolDetailsBtn;
         ExtraDetailsCard=findViewById(R.id.ExtraDetailsCard);
         diosPhysicalStatus=findViewById(R.id.diosPhysicalStatus);
         campusBeautificationCard=findViewById(R.id.campusBeautificationCard);
+        recieptAndExpenditurCard=findViewById(R.id.recieptAndExpenditurCard);
         textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
         schoolDetailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +113,14 @@ ImageView schoolDetailsBtn;
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, Syllabus_Details_page.class));
+            }
+        });
+
+
+        recieptAndExpenditurCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, Reciept_And_Expenditures.class));
             }
         });
 

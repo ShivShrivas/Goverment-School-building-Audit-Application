@@ -56,7 +56,7 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         btnRejectStudentpresence=findViewById(R.id.btnRejectStudentpresence);
         btnApprovalStudentpresence=findViewById(R.id.btnApprovalStudentpresence);
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID",applicationController.getDiosLocalSchoolId());
+        jsonObject.addProperty("SchoolID","2033");
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
 
         RestClient restClient=new RestClient();

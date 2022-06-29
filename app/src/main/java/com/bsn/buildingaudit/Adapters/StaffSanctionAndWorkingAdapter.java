@@ -25,7 +25,7 @@ public class StaffSanctionAndWorkingAdapter extends RecyclerView.Adapter<StaffSa
     @NonNull
     @Override
     public StaffSanctionAndWorkingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.staff_sanction_and_working_item_card,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.staff_sanction_working_item_card,parent,false);
         return new StaffSanctionAndWorkingViewHolder(view);
     }
 
@@ -36,6 +36,7 @@ public class StaffSanctionAndWorkingAdapter extends RecyclerView.Adapter<StaffSa
         holder.noOfSanctionPosts.setText(arrayList.get(position).getSanctionedPost().toString());
         holder.noOfPostedStaff.setText(arrayList.get(position).getNoOfPostedStaff().toString());
         holder.designamtionName.setText(arrayList.get(position).getStaffDesignation().toString());
+        holder.noOfVacantPost.setText(arrayList.get(position).getNoOfVacantPost().toString());
     }
 
     @Override
@@ -44,7 +45,7 @@ public class StaffSanctionAndWorkingAdapter extends RecyclerView.Adapter<StaffSa
     }
 
     public class StaffSanctionAndWorkingViewHolder extends RecyclerView.ViewHolder {
-        TextView noOfWorkingStaff,noOfAttachedStaff,noOfPostedStaff,noOfSanctionPosts,designamtionName;
+        TextView noOfWorkingStaff,noOfAttachedStaff,noOfPostedStaff,noOfSanctionPosts,designamtionName,noOfVacantPost;
         public StaffSanctionAndWorkingViewHolder(@NonNull View itemView) {
             super(itemView);
             noOfSanctionPosts=itemView.findViewById(R.id.noOfSanctionPosts);
@@ -52,6 +53,7 @@ public class StaffSanctionAndWorkingAdapter extends RecyclerView.Adapter<StaffSa
             noOfAttachedStaff=itemView.findViewById(R.id.noOfAttachedStaff);
             noOfWorkingStaff=itemView.findViewById(R.id.noOfWorkingStaff);
             designamtionName=itemView.findViewById(R.id.designamtionName);
+            noOfVacantPost=itemView.findViewById(R.id.noOfNoOfVacantPost);
         }
     }
 }

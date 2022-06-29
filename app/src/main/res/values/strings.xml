@@ -280,11 +280,11 @@
     <string name="clerk">Clerk</string>
     <string name="peon">Peon</string>
     <string name="sweeper">Sweeper</string>
-    <string name="no_of_sanctioned_posts">No of Sanctioned Posts</string>
-    <string name="no_of_posted_staff">No Of Posted Staff</string>
-    <string name="no_of_attached_staff">No Of Attached Staff</string>
-    <string name="no_of_working_staff">No Of Working Staff</string>
-    <string name="no_of_working_staff_during_inspection">No Of Working Staff During Inspection</string>
+    <string name="no_of_sanctioned_posts">No. of Sanctioned Posts</string>
+    <string name="no_of_posted_staff">No. Of Posted Staff</string>
+    <string name="no_of_attached_staff">No. Of Attached Staff</string>
+    <string name="no_of_working_staff">No. Of Working Staff</string>
+    <string name="no_of_working_staff_during_inspection">No. Of Working Staff During Inspection</string>
     <string name="student_enrollment_details">Student Enrollment Details</string>
     <string name="last_three_year_result">Last Three Years Result</string>
     <string name="class_room">Class Room</string>

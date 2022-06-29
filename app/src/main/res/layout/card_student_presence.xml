@@ -78,7 +78,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="#FBE9E7"
+                    android:background="#E3F2FD"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -231,8 +231,9 @@
                 android:id="@+id/linearLayout9"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nastedRecViewMonths">
@@ -247,8 +248,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_of_student_absent_from_15_days"
-                        android:textStyle="bold"
-                        android:textColor="@color/DIOS_ColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -266,7 +266,7 @@
                         android:gravity="center_vertical|center_horizontal"
                         android:text="234"
                         android:textStyle="bold"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/DIOS_ColorPrimary" />
                 </LinearLayout>
 
 
@@ -290,9 +290,9 @@
                 android:id="@+id/linearLayout10"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout9">
@@ -307,8 +307,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/no_of_student_absent_from_30_days"
-                        android:textStyle="bold"
-                        android:textColor="@color/DIOS_ColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15dp" />
                 </LinearLayout>
 
@@ -327,7 +326,7 @@
                         android:text="456"
                         android:textStyle="bold"
 
-                        android:textColor="@color/black" />
+                        android:textColor="@color/DIOS_ColorPrimaryDark" />
                 </LinearLayout>
 
                 <LinearLayout

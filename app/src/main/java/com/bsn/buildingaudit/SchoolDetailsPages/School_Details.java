@@ -93,8 +93,8 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+paraSchoolRequestJson("131",applicationController.getPeriodID()));
-        Call<SchoolDetailsModel> call=apiService.getSchoolDetailsForDIOS(paraSchoolRequestJson("131",applicationController.getPeriodID()));
+        Log.d("TAG", "onCreate: "+paraSchoolRequestJson(applicationController.getSchoolId(),applicationController.getPeriodID()));
+        Call<SchoolDetailsModel> call=apiService.getSchoolDetailsForDIOS(paraSchoolRequestJson(applicationController.getSchoolId(),applicationController.getPeriodID()));
         call.enqueue(new Callback<SchoolDetailsModel>() {
             @Override
             public void onResponse(Call<SchoolDetailsModel> call, Response<SchoolDetailsModel> response) {

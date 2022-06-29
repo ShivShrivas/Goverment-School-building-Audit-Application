@@ -57,7 +57,7 @@ RecyclerView staffSanctionRecview;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<StaffSanctionAndWorkingModel>> call=apiService.getSanctionAndWorking(paraStaffSanctionJson("2",applicationController.getPeriodID()));
+        Call<List<StaffSanctionAndWorkingModel>> call=apiService.getSanctionAndWorking(paraStaffSanctionJson(applicationController.getSchoolId(),applicationController.getPeriodID()));
         call.enqueue(new Callback<List<StaffSanctionAndWorkingModel>>() {
             @Override
             public void onResponse(Call<List<StaffSanctionAndWorkingModel>> call, Response<List<StaffSanctionAndWorkingModel>> response) {
