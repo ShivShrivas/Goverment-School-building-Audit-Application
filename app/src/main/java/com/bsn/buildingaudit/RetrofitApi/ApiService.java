@@ -10,14 +10,17 @@ import com.bsn.buildingaudit.Model.GetSchoolDetails;
 import com.bsn.buildingaudit.Model.GetUserType;
 import com.bsn.buildingaudit.Model.InstallationYear;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
+import com.bsn.buildingaudit.Model.LastThreeYearsModel;
 import com.bsn.buildingaudit.Model.SchoolDetailsModel;
 import com.bsn.buildingaudit.Model.SchoolListModel;
 import com.bsn.buildingaudit.Model.StaffSanctionAndWorkingModel;
 import com.bsn.buildingaudit.Model.StudentAbsentDetailsModel;
 import com.bsn.buildingaudit.Model.StudentEnrollmentListModel;
+import com.bsn.buildingaudit.Model.StudentListModelTopper;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -489,6 +492,16 @@ public  interface ApiService {
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("SchoolGrading/GetStaffSanctionWorkingData")
     Call<List<StaffSanctionAndWorkingModel>> getSanctionAndWorking(@Body JsonObject jsonObject);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetThreeYearResultData")
+    Call<ArrayList<LastThreeYearsModel>> getThreeYearResult(@Body JsonObject jsonObject);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetThreeYearResultStudentData")
+    Call<ArrayList<StudentListModelTopper>> getStudentDataExamWise(@Body JsonObject jsonObject);
 
 
 }

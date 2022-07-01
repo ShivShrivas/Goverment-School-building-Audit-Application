@@ -9,14 +9,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsn.buildingaudit.Model.StudentListModelTopper;
 import com.bsn.buildingaudit.R;
 
 import java.util.ArrayList;
 
 public class AdapterStudentGameDetails extends RecyclerView.Adapter<AdapterStudentGameDetails.StudentDetailsViewHolder> {
     Context context;
-    ArrayList<String> myImageNameList;
-    public AdapterStudentGameDetails(Context context, ArrayList<String> myImageNameList) {
+    ArrayList<StudentListModelTopper> myImageNameList;
+    public AdapterStudentGameDetails(Context context, ArrayList<StudentListModelTopper> myImageNameList) {
         this.context=context;
         this.myImageNameList=myImageNameList;
 
@@ -33,7 +34,7 @@ public class AdapterStudentGameDetails extends RecyclerView.Adapter<AdapterStude
 
     @Override
     public void onBindViewHolder(@NonNull StudentDetailsViewHolder holder, int position) {
-        holder.studName.setText(myImageNameList.get(position));
+        holder.studName.setText(myImageNameList.get(position).getStudentname());
     }
 
     @Override
