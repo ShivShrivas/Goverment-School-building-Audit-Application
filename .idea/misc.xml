@@ -27,11 +27,13 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_calendar.xml" value="0.1515" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_dios_welcome.xml" value="0.179" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_eye.xml" value="0.102" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/incompleted_card_bg.xml" value="0.154" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/light_maroon_bg.xml" value="0.134" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/light_white_bg.xml" value="0.133" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/schoolicon.xml" value="0.1755" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/schoolicon_dios_panel.xml" value="0.1755" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/search_bg.xml" value="0.1285" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/verfied_card_bg.xml" value="0.194" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/activity_jd_dashboard.xml" value="0.211328125" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/activity_staff_sanction_and_working.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/approved_button_card.xml" value="0.2108843537414966" />
@@ -95,7 +97,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_staff_sanction_and_working.xml" value="0.18039413845376454" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_student_enrollment_details.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_student_result_details.xml" value="0.2" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_syllabus_details_page.xml" value="0.5" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_syllabus_details_page.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_detail_type_one.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_art_and_craft.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_update_details_bio_metric.xml" value="0.1859375" />
@@ -129,14 +131,16 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/card_student_presence.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/card_student_result.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/classatt_listview_footer.xml" value="0.1859375" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/college_result_card.xml" value="0.2" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/college_result_card.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/custom_text_spiiner.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_dios_itemcard.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard_dios.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/editable_smart_class_card.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/fragment_dynamic.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/games_card.xml" value="0.1703125" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/geofench_card_layout.xml" value="0.2962138084632517" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/history_image_card.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/image_card_layout.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/item_card_for_absent_details.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/language_card.xml" value="0.25" />
@@ -156,6 +160,8 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/reseaon_card_with_checkbox.xml" value="0.16145833333333334" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/respons_dialog.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/respons_dialog_onsave.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/smart_class_card.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/spinner_card_orange.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/staff_sanction_and_working_item_card.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/staff_sanction_working_item_card.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/student_details_card.xml" value="0.1859375" />
@@ -165,7 +171,8 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/student_list_dialog2.xml" value="0.16145833333333334" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/student_list_dialog_for_fifteendays.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/subject_ietm_card.xml" value="0.33" />
-        <entry key="..\:/BuildingAudit/app/src/main/res/layout/training_card.xml" value="0.2" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/subject_syllabus_item_card.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/training_card.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/update_details_three_item_card.xml" value="0.1859375" />
       </map>
     </option>

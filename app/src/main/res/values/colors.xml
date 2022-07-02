@@ -18,4 +18,6 @@
     <color name="cyan">#275D5D</color>
     <color name="gray">#313B41</color>
     <color name="green">#2BB02B</color>
+    <color name="completed_color">#41AA00</color>
+    <color name="incompleted_color">#AA0000</color>
 </resources>

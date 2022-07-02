@@ -18,7 +18,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#00C853">
+            android:background="@color/DIOS_ColorPrimary">
 
             <TextView
                 android:id="@+id/classText"
@@ -56,7 +56,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#E8F5E9"
+            android:background="#EDE7F6"
             android:padding="5dp">
 
             <LinearLayout
@@ -88,6 +88,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/totalEnrolledtxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1.9"
@@ -129,6 +130,7 @@
                                 android:textSize="13dp" />
 
                             <TextView
+                                android:id="@+id/appreaderInFirstMonthTxt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -161,6 +163,7 @@
                                 android:textSize="13dp" />
 
                             <TextView
+                                android:id="@+id/passesInFirstMonth"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.8"
@@ -204,6 +207,7 @@
                                 android:textSize="13dp" />
 
                             <TextView
+                                android:id="@+id/appreaderInSecondMonthTxt"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -237,6 +241,7 @@
                                 android:textSize="13dp" />
 
                             <TextView
+                                android:id="@+id/passesInSecMonth"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1.8"
@@ -252,81 +257,7 @@
 
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingStart="16dp"
-                                android:text="@string/appeared_in_3rd_monthly"
-
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="13dp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="433"
-                                android:textAlignment="center"
-                                android:textColor="@color/cyan"
-                                android:textSize="18dp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="@color/white"
-                            android:gravity="center_vertical"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:paddingStart="16dp"
-                                android:text="@string/passed_in_3rd_monthly"
-
-                                android:textAlignment="center"
-                                android:textColor="@color/black"
-                                android:textSize="13dp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1.8"
-                                android:text="566"
-                                android:textAlignment="center"
-
-                                android:textColor="#0091EA"
-                                android:textSize="18dp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-                    </LinearLayout>
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -353,6 +284,7 @@
                             android:textSize="13dp" />
 
                         <TextView
+                            android:id="@+id/appreaderInHalfYearlyTxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -385,6 +317,7 @@
                             android:textSize="13dp" />
 
                         <TextView
+                            android:id="@+id/passesInHalfYearlyMonth"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1.8"
@@ -424,6 +357,7 @@
                             android:textSize="13dp" />
 
                         <TextView
+                            android:id="@+id/appreaderInYearlyTxt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
@@ -455,6 +389,7 @@
                             android:textSize="13dp" />
 
                         <TextView
+                            android:id="@+id/passesInYearlyExamMonth"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"

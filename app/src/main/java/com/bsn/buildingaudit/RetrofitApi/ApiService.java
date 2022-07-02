@@ -3,6 +3,7 @@ package com.bsn.buildingaudit.RetrofitApi;
 import com.bsn.buildingaudit.Model.AttendanceStaff;
 import com.bsn.buildingaudit.Model.AttendanceType;
 import com.bsn.buildingaudit.Model.BoundryType;
+import com.bsn.buildingaudit.Model.CurrentYearResultModel;
 import com.bsn.buildingaudit.Model.DataLocked;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.Model.GetQuaterType;
@@ -11,12 +12,14 @@ import com.bsn.buildingaudit.Model.GetUserType;
 import com.bsn.buildingaudit.Model.InstallationYear;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
 import com.bsn.buildingaudit.Model.LastThreeYearsModel;
+import com.bsn.buildingaudit.Model.PrincipalAndTeacherTrainingModel;
 import com.bsn.buildingaudit.Model.SchoolDetailsModel;
 import com.bsn.buildingaudit.Model.SchoolListModel;
 import com.bsn.buildingaudit.Model.StaffSanctionAndWorkingModel;
 import com.bsn.buildingaudit.Model.StudentAbsentDetailsModel;
 import com.bsn.buildingaudit.Model.StudentEnrollmentListModel;
 import com.bsn.buildingaudit.Model.StudentListModelTopper;
+import com.bsn.buildingaudit.Model.SubjectWiseSyllabusModel;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
@@ -502,6 +505,23 @@ public  interface ApiService {
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("SchoolGrading/GetThreeYearResultStudentData")
     Call<ArrayList<StudentListModelTopper>> getStudentDataExamWise(@Body JsonObject jsonObject);
+
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetCurrentResultData")
+    Call<ArrayList<CurrentYearResultModel>> getCurrentYearResult(@Body JsonObject jsonObject);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetSyllabusData")
+    Call<ArrayList<SubjectWiseSyllabusModel>> getSubjectSyllabus(@Body JsonObject jsonObject);
+
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetTrainingData")
+    Call<PrincipalAndTeacherTrainingModel> getPrincipalAndTeacherTraining(@Body JsonObject jsonObject);
 
 
 }

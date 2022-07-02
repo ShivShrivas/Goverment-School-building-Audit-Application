@@ -6,7 +6,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E1F5FE"
     tools:context=".DIOS.SchoolStaff.All_Staff_Traing_Details">
 
     <androidx.appcompat.widget.Toolbar
@@ -79,6 +78,8 @@
 
 
                     <TextView
+                        android:id="@+id/principalTraingingProposedTxt"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -110,6 +111,8 @@
 
 
                     <TextView
+                        android:id="@+id/principalTraingingCompTxt"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -125,15 +128,14 @@
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:keepScreenOn="true"
+
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/training_card" />
+     />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -176,13 +178,15 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="@string/no_of_trainings_modules_completed"
+                        android:text="@string/no_of_proposed_training_module"
 
                         android:textColor="@color/black"
                         android:textSize="15dp" />
 
 
                     <TextView
+                        android:id="@+id/staffTraingingProposedTxt"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -216,6 +220,8 @@
                         android:textSize="15dp" />
 
                     <TextView
+                        android:id="@+id/staffTraingingCompTxt"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
@@ -232,14 +238,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
 
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
-                    tools:itemCount="6"
-                    tools:listitem="@layout/training_card" />
+ />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
