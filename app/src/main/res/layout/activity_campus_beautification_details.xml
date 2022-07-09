@@ -77,7 +77,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:textSize="15dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
                                 android:text="@string/plantation"/>
 
@@ -90,8 +89,10 @@
                                 android:background="@drawable/cardbg"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
-                                <Spinner
-                                    android:entries="@array/array_yesno"
+                                <TextView
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
+                                    android:gravity="center_vertical|center_horizontal"
                                     android:id="@+id/spinnerPlant1"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -111,7 +112,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:textSize="15dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
                                 android:text="@string/wall_painting_slogan_writing_bala_work"/>
 
@@ -124,8 +124,10 @@
                                 android:background="@drawable/cardbg"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
-                                <Spinner
-                                    android:entries="@array/array_yesno"
+                                <TextView
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
                                     android:id="@+id/spinnerWallPainting"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -145,7 +147,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:textSize="15dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
                                 android:text="@string/availability_of_dustbins_in_campus"/>
 
@@ -158,8 +159,10 @@
                                 android:background="@drawable/cardbg"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
-                                <Spinner
-                                    android:entries="@array/array_yesno"
+                                <TextView
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
                                     android:id="@+id/spinnerAvailabilityDustbin"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -179,7 +182,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:textSize="15dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
                                 android:text="@string/eco_club"/>
 
@@ -192,8 +194,11 @@
                                 android:background="@drawable/cardbg"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
-                                <Spinner
-                                    android:entries="@array/array_yesno"
+                                <TextView
+                                    android:gravity="center_vertical|center_horizontal"
+                                    android:textColor="@color/black"
+
+                                    android:textSize="16dp"
                                     android:id="@+id/spinnerEcoClub"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -213,7 +218,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:textSize="15dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
                                 android:text="@string/display_board_notice_board"/>
 
@@ -226,8 +230,9 @@
                                 android:background="@drawable/cardbg"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent">
-                                <Spinner
-                                    android:entries="@array/array_yesno"
+                                <TextView
+android:gravity="center_vertical|center_horizontal"                                    android:textColor="@color/black"
+                                    android:textSize="16dp"
                                     android:id="@+id/spinnerDisplayBoard"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
@@ -285,15 +290,16 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1">
                             <TextView
-                                android:gravity="start"
+
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1.2"
+                                android:layout_weight="1"
+                                android:textAlignment="center"
                                 android:textSize="15dp"
                                 android:textStyle="bold"
                                 android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="@string/no_of_trees"/>
+                                android:text="Name Of Trees"/>
 
 
                             <TextView
@@ -302,77 +308,32 @@
                                 android:gravity="center"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Types of Trees"
+                                android:text="Count of Trees"
                                 android:textSize="15dp"
                                 android:textAlignment="center"
-                                android:layout_weight="1"
+                                android:layout_weight="1.4"
                                 tools:ignore="HardcodedText" />
 
-                            <TextView
-                                android:textColor="@color/black"
-                                android:textStyle="bold"
-                                android:gravity="center"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/running_metre_of_flower_bed"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_weight="1"/>
 
                         </LinearLayout>
-                        <LinearLayout
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/treeDetailsRecview"
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="1.2"
-                                android:background="@drawable/cardbg"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/cardbg"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="1.2"
-                                android:background="@drawable/cardbg"/>
-
-
-                        </LinearLayout>
+                            android:layout_height="wrap_content" />
 
 
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
 
+                    android:id="@+id/constraintLayout47"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
                     android:layout_margin="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
@@ -394,574 +355,122 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical"
                                 android:padding="5dp"
-                                android:textSize="16dp"
-                                android:layout_weight="1"
-                                android:textStyle="bold"
                                 android:text="@string/plantation_details_for_financial_year"
-                                android:textColor="@color/white" />
+                                android:textColor="@color/white"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
 
                             <TextView
-                                android:gravity="center"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1.4"
-                                android:textSize="15dp"
+                                android:gravity="center"
+                                android:text="2022"
                                 android:textColor="@color/white"
-                                android:text="2022"/>
+                                android:textSize="15dp" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:textStyle="bold"
                                 android:layout_marginStart="8dp"
-                                android:text="@string/target"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:layout_weight="1"
+                                android:text="@string/target"
                                 android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/planted"/>
+                                android:textStyle="bold" />
 
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/survive"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_margin="4dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.4">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@color/DIOS_ColorPrimary"
-                                android:gravity="center_vertical"
-                                android:padding="5dp"
+                                android:id="@+id/targetedPlantation"
+                                android:layout_gravity="center_vertical|center_horizontal"                                    android:textColor="@color/black"
                                 android:textSize="16dp"
-                                android:textStyle="bold"
-                                android:text="@string/school_building_white_wash_painting"
-                                android:textColor="@color/white" />
-
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:background="@drawable/cardbg"
+                                android:padding="8dp"
+                                android:text="5"
+                                android:textAlignment="center"
+                             />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
                             <TextView
-                                android:textStyle="bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="@string/last_done_fy"/>
+                                android:layout_weight="1"
+                                android:text="@string/planted"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
 
 
                             <TextView
+                                android:id="@+id/PlantED"
+                                android:layout_gravity="center_vertical|center_horizontal"                                    android:textColor="@color/black"
+                                android:textSize="16dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
                                 android:layout_margin="5dp"
                                 android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/white_wash_status"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:background="@drawable/cardbg"
                                 android:padding="8dp"
                                 android:text="5"
-                                android:textSize="15dp"
                                 android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/budget_fy"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/sanction_amount"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/expenditure_amount"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
+                                />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:orientation="horizontal"
                             android:layout_height="match_parent"
-                            android:layout_weight="1">
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
                             <TextView
-                                android:textStyle="bold"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
                                 android:layout_marginStart="8dp"
-                                android:text="@string/maintenance_of_windows_doors"/>
+                                android:layout_weight="1"
+                                android:text="@string/survive"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
 
 
                             <TextView
+                                android:id="@+id/survivedTree"
+                                android:layout_gravity="center_vertical|center_horizontal"                                    android:textColor="@color/black"
+                                android:textSize="16dp"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
                                 android:layout_margin="5dp"
                                 android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/painting_of_black_boards"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:background="@drawable/cardbg"
                                 android:padding="8dp"
                                 android:text="5"
-                                android:textSize="15dp"
                                 android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/repairing_of_furniture_s"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/cleaning_of_water_tanks"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/cleaning_of_drainage_system"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/cleaning_of_toilets"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
+                                 />
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/maintenance_of_electrical_equipment_s"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/boards_of_honour_for_students"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/boards_of_honour_for_teachers_amp_staff"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:orientation="horizontal"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1">
-                            <TextView
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:textSize="15dp"
-                                android:textColor="@color/black"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/sign_board_outside_the_school"/>
-
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textSize="15dp"
-                                android:textAlignment="center"
-                                android:layout_margin="5dp"
-                                android:layout_weight="2"
-                                android:background="@drawable/cardbg"/>
-
-                        </LinearLayout>
 
                     </LinearLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
                 <LinearLayout
@@ -971,6 +480,7 @@
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
                     android:padding="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

@@ -177,7 +177,7 @@
                 android:id="@+id/cardView11"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -193,39 +193,12 @@
                         android:layout_height="match_parent"
                         android:layout_margin="1dp"
                         android:layout_weight="1"
-                        android:textStyle="bold"
-
-                        android:textColor="@color/white"
                         android:gravity="center_horizontal|center_vertical"
-                        android:text="@string/latitude"
-                        android:textSize="16dp" />
-
-
-                    <TextView
-                        android:id="@+id/txtLongt"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="1dp"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:gravity="center_horizontal|center_vertical"
-                        android:text="@string/longitude"
+                        android:text="Added locations Shown Below"
                         android:textColor="@color/white"
                         android:textSize="16dp" />
 
 
-                    <TextView
-                        android:id="@+id/txtDateTime"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="1dp"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-
-                        android:gravity="center_horizontal|center_vertical"
-                        android:text="@string/date_ntime"
-                        android:textColor="@color/white"
-                        android:textSize="16dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

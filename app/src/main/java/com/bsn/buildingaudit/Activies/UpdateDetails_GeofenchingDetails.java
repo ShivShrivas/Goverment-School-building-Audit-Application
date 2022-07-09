@@ -21,7 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.GeofenceAdapter;
@@ -53,6 +53,7 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
     GeofenceAdapter adapter;
     LocationManager locationManager;
     Dialog dialog;
+    Dialog dialog2;
     DateFormat dateFormat;
     Calendar cal;
 
@@ -76,7 +77,12 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
          dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
          cal = Calendar.getInstance();
         dialog = new Dialog(this);
+        dialog2 = new Dialog(this);
+        dialog2.setCancelable(false);
 
+        dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
+        dialog2.setContentView (R.layout.respons_dialog_onsave);
+        dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.progress_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -103,7 +109,7 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
             }
         });
 
-        geoFenchingRecview.setLayoutManager(new LinearLayoutManager(this));
+        geoFenchingRecview.setLayoutManager(new GridLayoutManager(this,3));
         adapter=new GeofenceAdapter(this, arrayList);
         geoFenchingRecview.setAdapter(adapter);
         btnSubmitgeoFench.setOnClickListener(new View.OnClickListener() {
@@ -121,19 +127,37 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
                       public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                           JsonObject jsonObject= (JsonObject) response.body().get(0);
                           Log.d("TAG", "onResponse: "+jsonObject.get("StatusCode"));
-                          if (jsonObject.get("StatusCode").toString().equals("1")){
-                              Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
-                              Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Data Submitted Successfully!!", Toast.LENGTH_SHORT).show();
-                              onBackPressed();
-                          }else if(jsonObject.get("StatusCode").toString().equals("2")){
-                              Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
-                              Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Data already submitted", Toast.LENGTH_SHORT).show();
-                              onBackPressed();
-                          }else{
-                              Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
-                              Toast.makeText(UpdateDetails_GeofenchingDetails.this, "Something went wrong!! ", Toast.LENGTH_SHORT).show();
+                          TextView textView=dialog2.findViewById(R.id.dialogtextResponse);
+                          Button button=dialog2.findViewById(R.id.BtnResponseDialoge);
+                          try {
+                              if (jsonObject.get("StatusCode").toString().equals("1")){
+                                  Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                textView.setText("Data Submitted Successfully!!");
+                              }else if(jsonObject.get("StatusCode").toString().equals("2")){
+                                  Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                  textView.setText("Data already submitted");
+
+                              }else{
+                                  Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                  textView.setText("Something went wrong!!");
+
+                              }
+                              dialog.dismiss();
+
+                              dialog2.show();
+                              button.setOnClickListener(new View.OnClickListener() {
+                                  @Override
+                                  public void onClick(View view) {
+                                      onBackPressed();
+                                      dialog2.dismiss();
+                                  }
+                              });
+                          }catch (Exception e){
+                              Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                              dialog.dismiss();
 
                           }
+
                       }
 
                       @Override
@@ -228,7 +252,7 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
     private boolean getLocation() {
         try {
             locationManager=(LocationManager) getApplicationContext().getSystemService(LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER ,1000,1,UpdateDetails_GeofenchingDetails.this);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER ,1000,1 ,UpdateDetails_GeofenchingDetails.this);
             return true;
         }catch (Exception e){
             Log.d("TAG", "getLocation: "+e);

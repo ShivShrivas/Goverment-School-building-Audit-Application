@@ -38,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -69,1015 +70,1123 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/sports_day"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/invited_chief_guest"
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/annual_day_prize_day_cultural_day"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/invited_chief_guest"
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/yoga_day"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/inter_house_competition"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/school_website"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/url"
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/school_email_id"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text=""
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:text="@string/email"
-                                android:textColor="@color/black"
-                                android:textSize="11dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="5dp"
-                                android:background="@drawable/cardbg"
-                                android:padding="8dp"
-                                android:text="5"
-                                android:textAlignment="center"
-                                android:textSize="15dp" />
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/pta_meeting"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/monthly_test"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/teacher_s_dairy"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/health_check_up_camps"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/school_magazine"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/special_guest_invited_for_career_counselling"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/name_of_guest"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/designation"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/smdc_meet"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/alumni_meet"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout58"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout57">
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/schools_science_exhibition"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/inspired_award"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/selection_of_student_in_national_talent_search_examination"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/skill_developments_programmes"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/innovation_in_education"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/others_mission_shakti_spc_kala_utasav"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/students_tie"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/students_belt"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/students_uniform"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:layout_weight="1"
-                            android:text="@string/students_id_cards"
-                            android:textColor="@color/black"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:background="@drawable/cardbg"
-                            android:padding="8dp"
-                            android:text="5"
-                            android:textAlignment="center"
-                            android:textSize="15dp" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/linearLayout21"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:padding="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout58">
-
-                    <Button
-                        style="@style/btn_style"
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView11"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_red"
-                        android:text="@string/rejected"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"
-
-                        />
-
-                    <Button
-                        style="@style/btn_style"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
                         android:layout_marginStart="4dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/bg_green"
-                        android:text="@string/approved"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
-                        />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/sports_day"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/SPORTDAYSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView12"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/invited_chief_guest"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/INVITEDCGSPORTDAY"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardView13"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Chief Guest Title"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/TXTSPORTSCHIEFTITLE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/annual_day_prize_day_cultural_day"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/ANNUALDAYSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Annual Day Chief Guest"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/INVITEDCGANNUALDAY"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Annual Day chief guest Title"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/INVITEDCGANNUALTITLE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Annual Day Date"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/INVITEDCGADATE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/yoga_day"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/YOGADAYSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/inter_house_competition"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/INTERHOUSESTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/school_website"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/WEBSITESTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Website URL"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/WEBSITEURL"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="School mail status"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/WEBSITEMAILSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/school_email_id"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/WEBSITEMAIL"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Parent meeting status"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/PTAMEETINGSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Parent meeting date"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/PTAMEETINGDATE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/monthly_test"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/MONTHLYTESTSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/teacher_s_dairy"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/TEACHERDIARYSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/health_check_up_camps"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/HEATHCHECKUPSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Health check up campus date"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/HEATHCHECKUPDATE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/school_magazine"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/SCHOOLMAGAZINESTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/special_guest_invited_for_career_counselling"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/SPECIALGUESTSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/smdc_meet"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/SMDCMEETSTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="SMDC meet date"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/SMDCMEETDATE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Count of SMDC meet"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/SMDCMEETTOTAL"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="@string/alumni_meet"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/ALUMNISTATUSDATE"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1.8"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 

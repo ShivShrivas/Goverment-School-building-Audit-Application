@@ -3,8 +3,11 @@ package com.bsn.buildingaudit.RetrofitApi;
 import com.bsn.buildingaudit.Model.AttendanceStaff;
 import com.bsn.buildingaudit.Model.AttendanceType;
 import com.bsn.buildingaudit.Model.BoundryType;
+import com.bsn.buildingaudit.Model.CampusPlantationDetalsModel;
+import com.bsn.buildingaudit.Model.CampusWhiteWashDetalsModel;
 import com.bsn.buildingaudit.Model.CurrentYearResultModel;
 import com.bsn.buildingaudit.Model.DataLocked;
+import com.bsn.buildingaudit.Model.GameDetailsModel;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.Model.GetQuaterType;
 import com.bsn.buildingaudit.Model.GetSchoolDetails;
@@ -13,8 +16,10 @@ import com.bsn.buildingaudit.Model.InstallationYear;
 import com.bsn.buildingaudit.Model.LabDetailsResponse;
 import com.bsn.buildingaudit.Model.LastThreeYearsModel;
 import com.bsn.buildingaudit.Model.PrincipalAndTeacherTrainingModel;
+import com.bsn.buildingaudit.Model.RedCrossModel;
 import com.bsn.buildingaudit.Model.SchoolDetailsModel;
 import com.bsn.buildingaudit.Model.SchoolListModel;
+import com.bsn.buildingaudit.Model.ScoutAndGuideModel;
 import com.bsn.buildingaudit.Model.StaffSanctionAndWorkingModel;
 import com.bsn.buildingaudit.Model.StudentAbsentDetailsModel;
 import com.bsn.buildingaudit.Model.StudentEnrollmentListModel;
@@ -522,6 +527,34 @@ public  interface ApiService {
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("SchoolGrading/GetTrainingData")
     Call<PrincipalAndTeacherTrainingModel> getPrincipalAndTeacherTraining(@Body JsonObject jsonObject);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetCampusBeautyData")
+    Call<CampusPlantationDetalsModel> getPlantationDetals(@Body JsonObject jsonObject);
+
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetSchoolBuildingWhiteWash")
+    Call<CampusWhiteWashDetalsModel> getWhiteWashDetails(@Body JsonObject jsonObject);
+
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetGameDetails")
+    Call<GameDetailsModel> getGameDetails(@Body JsonObject jsonObject);
+
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetRedCrossData")
+    Call<RedCrossModel> getRedCrossSociety(@Body JsonObject jsonObject);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetScoutGuideData")
+    Call<ScoutAndGuideModel> getScoutAndGuide(@Body JsonObject jsonObject);
 
 
 }

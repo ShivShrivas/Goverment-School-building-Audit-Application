@@ -69,6 +69,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/STUDENTENROLLED"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -115,6 +116,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTCOMPREGISTED"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -161,6 +163,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTCOMPRENEW"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -207,6 +210,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTMASTERSTATUS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -253,6 +257,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTMASTERTRAINING"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -299,6 +304,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/TRAININGMATERIALSTATUS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -345,6 +351,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTROOMSTATUS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -391,6 +398,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/STOCKEXPREGISTER"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -437,6 +445,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTTRAININGPPSDS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -483,6 +492,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTPARTIRAJYA"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -529,6 +539,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SCOUTPARTIRASHTRAPATI"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -555,39 +566,110 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/whether_the_schools_scouts_guides_participated_in_district_rally_and_other_programmes"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/SCOUTPARTIDISTRICTRALLY"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1.8"
+                            android:gravity="center_vertical|end"
+                            android:text="Yes"
+                            android:textColor="@color/DIOS_ColorPrimary"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/districRallyRecview"
+                        android:layout_width="match_parent"
+                        android:layout_margin="6dp"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                app:cardElevation="3dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
 
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-                    <TextView
+                    android:layout_height="wrap_content">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/whether_the_schools_scouts_guides_participated_in_district_rally_and_other_programmes"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/whether_the_schools_scouts_guides_participated_in_regional_rally_state_rally_and_other_programmes"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/SCOUTPARTIREGRALLY"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1.8"
+                            android:gravity="center_vertical|end"
+                            android:text="Yes"
+                            android:textColor="@color/DIOS_ColorPrimary"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/stateRallyRecview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1.8"
-                        android:gravity="center_vertical|end"
-                        android:text="Yes"
-                android:textColor="@color/DIOS_ColorPrimary"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_margin="6dp"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -602,38 +684,51 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+
+
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-                    <TextView
+                    android:layout_height="wrap_content">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/whether_the_schools_scouts_guides_participated_in_regional_rally_state_rally_and_other_programmes"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/whether_the_schools_scouts_guides_participated_in_national_international_level_programmes"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/SCOUTPARTINATIONAL"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1.8"
+                            android:gravity="center_vertical|end"
+                            android:text="Yes"
+                            android:textColor="@color/DIOS_ColorPrimary"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/nationalRallyRecview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1.8"
-                        android:gravity="center_vertical|end"
-                        android:text="Yes"
-                android:textColor="@color/DIOS_ColorPrimary"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_margin="6dp"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -648,38 +743,52 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+
+
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-                    <TextView
+                    android:layout_height="wrap_content">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/whether_the_schools_scouts_guides_participated_in_national_international_level_programmes"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/whether_the_schools_scouts_guides_took_part_in_social_works"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/SCOUTPARTISOCIALWORK"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1.8"
+                            android:gravity="center_vertical|end"
+                            android:text="Yes"
+                            android:textColor="@color/DIOS_ColorPrimary"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/socialWorkRallyRecview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1.8"
-                        android:gravity="center_vertical|end"
-                        android:text="Yes"
-                android:textColor="@color/DIOS_ColorPrimary"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        android:layout_margin="6dp" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -694,84 +803,50 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/whether_the_schools_scouts_guides_took_part_in_social_works"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1.8"
-                        android:gravity="center_vertical|end"
-                        android:text="Yes"
-                android:textColor="@color/DIOS_ColorPrimary"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                app:cardElevation="3dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
 
                 <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8">
-
-                    <TextView
+                    android:layout_height="wrap_content">
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/expenditure_for_the_current_financial_year_for_the_scouts_guides_training_training_material_and_other_expenses"
-                        android:textColor="@color/black"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-                    <TextView
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:text="@string/expenditure_for_the_current_financial_year_for_the_scouts_guides_training_training_material_and_other_expenses"
+                            android:textColor="@color/black"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/EXPSCOUTGUIDE"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="3dp"
+                            android:layout_marginBottom="3dp"
+
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1.8"
+                            android:gravity="center_vertical|end"
+                            android:text="Yes"
+                            android:textColor="@color/DIOS_ColorPrimary"
+                            android:textSize="15dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/expeditureRecview"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="3dp"
-                        android:layout_marginBottom="3dp"
-
-                        android:layout_marginEnd="16dp"
-                        android:layout_weight="1.8"
-                        android:gravity="center_vertical|end"
-                        android:text="Yes"
-                android:textColor="@color/DIOS_ColorPrimary"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
+                        android:layout_margin="6dp"
+                        android:layout_height="wrap_content"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 

@@ -20,6 +20,7 @@
         app:navigationIcon="@drawable/arrow_back"
         app:title="Red Cross Society" />
 
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView11"
         android:layout_width="match_parent"
@@ -49,6 +50,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/FORMATIONSTATUS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -62,6 +64,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView12"
@@ -93,6 +96,8 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/OFFICEFACILITIESSTATUS"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -137,6 +142,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/TRAININGCAMPSTATUS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -181,6 +187,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/STOCKREGISTERSTATUS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -225,6 +232,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/INCOMEEXPSTATUS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -269,6 +277,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/PROJECTACTIVITYSTATUS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -313,6 +322,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/AMTAVAIINACC"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -357,6 +367,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/CURRENTDEPAMTWITHREGNO"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -401,6 +412,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/DISTRICTLAMT"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"
@@ -445,6 +457,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/SCHOOLBALANCEAMT"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="16dp"

@@ -11,8 +11,10 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="6dp"
+
         android:layout_marginEnd="6dp"
-        app:cardCornerRadius="4dp"
+        app:cardCornerRadius="6dp"
+
         app:cardElevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,35 +23,16 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/black">
+            android:orientation="vertical"
+            android:padding="5dp"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txtLat"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="23.737737"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
+    I<ImageView
+            android:id="@+id/my_location"
+            android:layout_width="match_parent"
 
-
-            <TextView
-                android:id="@+id/txtLongt"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="1dp"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="23.737737"
-                android:textColor="@color/black"
-                android:textSize="14dp" />
-
-
+            android:src="@drawable/ic_my_location"
+            android:layout_height="50dp"/>
             <TextView
                 android:id="@+id/txtDateTime"
                 android:layout_width="match_parent"
@@ -59,7 +42,7 @@
                 android:background="@color/white"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="12-06-2022 \n 09:34:45 PM"
-                android:textColor="@color/black"
+                android:textColor="#6E6E6E"
                 android:textSize="14dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

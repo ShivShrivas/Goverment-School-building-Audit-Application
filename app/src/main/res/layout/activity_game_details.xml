@@ -79,6 +79,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/GAMEFACILITYSTATUS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -169,7 +170,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/boysCountTxt"
+                                        android:id="@+id/GRANTRECIPTAMT"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="234"
@@ -218,7 +219,7 @@
                                     android:layout_weight="1">
 
                                     <TextView
-                                        android:id="@+id/girlsCounttxt"
+                                        android:id="@+id/GRANTEXPENAMT"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:text="234"
@@ -264,9 +265,8 @@
                         android:gravity="center_horizontal|center_vertical">
 
                         <TextView
-                            android:id="@+id/schemeNameTxt"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/grant_under_scheme"
                             android:textAlignment="center"
                             android:textColor="#2C2C2C"
@@ -293,7 +293,7 @@
                                 android:layout_weight="1">
 
                                 <TextView
-                                    android:id="@+id/schemeNametxt"
+                                    android:id="@+id/SCHEMENAME"
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
                                     android:text="234"
@@ -506,6 +506,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/SPORTTEACHERSTATUS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -650,6 +651,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/countD"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1.6"
@@ -661,13 +663,12 @@
                         android:textStyle="bold" />
 
                     <ImageView
-                        android:id="@+id/showDetails"
+                        android:id="@+id/showDetailsD"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:layout_weight="1.9"
-                        android:background="@drawable/ic_eye"
-                        android:backgroundTint="@color/DIOS_ColorPrimary" />
+                        android:src="@drawable/ic_eye" />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -715,6 +716,8 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/countS"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1.6"
@@ -726,13 +729,15 @@
                         android:textStyle="bold" />
 
                     <ImageView
+                        android:id="@+id/showDetailsS"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:layout_weight="1.9"
-                        android:background="@drawable/ic_eye"
+                        android:src="@drawable/ic_eye"
                         android:backgroundTint="@color/purple_700"
-                        android:visibility="invisible" />
+   />
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
@@ -780,6 +785,8 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/countN"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1.6"
@@ -791,11 +798,13 @@
                         android:textStyle="bold" />
 
                     <ImageView
+                        android:id="@+id/showDetailsN"
+
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="5dp"
                         android:layout_weight="1.9"
-                        android:background="@drawable/ic_eye"
+                        android:src="@drawable/ic_eye"
                         android:backgroundTint="@color/DIOS_ColorPrimary" />
                 </LinearLayout>
 
@@ -831,6 +840,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/FITINDIASTATUS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -875,6 +885,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/FITINDIASTDCOUNT"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -919,6 +930,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/KHELOINDIASTATUS"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"
@@ -963,6 +975,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/KHELOINDIASTDCOUNT"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="16dp"

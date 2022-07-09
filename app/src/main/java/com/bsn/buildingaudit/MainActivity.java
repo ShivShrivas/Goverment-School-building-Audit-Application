@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<List<GetSchoolDetails>>() {
             @Override
             public void onResponse(Call<List<GetSchoolDetails>> call, Response<List<GetSchoolDetails>> response) {
-                if (response != null) {
+                if (response != null && response.body().size()>=1) {
                     if (response.code() == 200 && response.body() != null) {
                         getSchoolDetails=response.body();
                         Log.d("TAG", "onResponse: "+response.body());
@@ -340,10 +340,12 @@ public class MainActivity extends AppCompatActivity {
                         dialog.dismiss();
                     }else{
                         Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
 
                     }
                 }else{
                     Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
 
                 }
 
@@ -352,7 +354,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<GetSchoolDetails>> call, Throwable t) {
                 Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-              
+                dialog.dismiss();
+
             }
         });
 

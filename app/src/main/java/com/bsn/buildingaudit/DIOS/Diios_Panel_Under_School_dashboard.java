@@ -13,7 +13,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.bsn.buildingaudit.ApplicationController;
-import com.bsn.buildingaudit.DIOS.CampusBeautification.Campus_Beautification_Details;
+import com.bsn.buildingaudit.DIOS.CampusBeautification.CampusBeautificationDashboard;
 import com.bsn.buildingaudit.DIOS.ExtraActivitiesDetails.ExtraActivity_Dashboard;
 import com.bsn.buildingaudit.DIOS.SchoolResultDetails.Dashboard_School_Result_Detail;
 import com.bsn.buildingaudit.DIOS.SchoolStaff.Dios_StaffDetails;
@@ -103,7 +103,7 @@ ImageView schoolDetailsBtn;
         campusBeautificationCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, Campus_Beautification_Details.class));
+                startActivity(new Intent(Diios_Panel_Under_School_dashboard.this, CampusBeautificationDashboard.class));
             }
         });
 
