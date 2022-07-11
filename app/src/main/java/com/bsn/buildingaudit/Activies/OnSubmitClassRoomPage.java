@@ -126,6 +126,7 @@ LinearLayout diosButtonLayout,linearLayout2;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onCreate: "+paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
         Call<List<JsonObject>> call=apiService.checkDetailsOfRooms(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

@@ -43,25 +43,27 @@ public class DIOS_DashboardAdapter extends RecyclerView.Adapter<DIOS_DashboardAd
         holder.roomTypetxt.setText(arrayListSchool.get(position).getSchoolname());
 
         holder.updateOntxt.setText(arrayListSchool.get(position).getJdstatusdate()==null?"Not Available":arrayListSchool.get(position).getJdstatusdate().replace("T"," "));
-      try{if ((arrayListSchool.get(position).getJdstatus().equals("1"))){
+      try{
+          if ((arrayListSchool.get(position).getJdstatus()==1)){
 
           holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_right_icon));
       }
       else{
+
           holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_wron_icon));
-
-      }}catch (Exception e ){
+      }
+      }catch (Exception e ){
           holder.penddingAndSDoneBtn.setImageDrawable(context.getDrawable(R.drawable.ic_wron_icon));
-
-
       }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
-                    if ((arrayListSchool.get(position).getJdstatus().equals("1"))){
+                    if ((arrayListSchool.get(position).getJdstatus()==1)){
                         Toast.makeText(context, "this School inspection is done", Toast.LENGTH_SHORT).show();
+                        Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
+                        context.startActivity(i);
                     }else{
                         if ( DIOS_Dashboard.setSchoolIdInContoller(arrayListSchool.get(position).getSchoolid())){
                             Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);

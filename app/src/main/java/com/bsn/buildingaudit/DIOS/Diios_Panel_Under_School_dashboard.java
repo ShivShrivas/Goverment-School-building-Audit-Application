@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
@@ -39,7 +40,14 @@ ImageView schoolDetailsBtn;
         applicationController= (ApplicationController) getApplication();
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         Log.d("TAG", "onCreate: "+localSchoolId);
         dashCardBtn_SchoolDetails=findViewById(R.id.dashCardBtn_StudentEnrollment);
         schoolDetailsBtn=findViewById(R.id.schoolDetailsBtn);

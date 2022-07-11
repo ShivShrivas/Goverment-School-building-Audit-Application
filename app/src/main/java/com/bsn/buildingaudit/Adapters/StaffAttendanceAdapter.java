@@ -111,7 +111,6 @@ public class StaffAttendanceAdapter extends RecyclerView.Adapter<StaffAttendance
             call.enqueue(new Callback<List<AttendanceType>>() {
                 @Override
                 public void onResponse(Call<List<AttendanceType>> call, Response<List<AttendanceType>> response) {
-                    Log.d("TAG", "onResponse: "+response.body().get(0).getAttendenceStatus());
                     arrayList1=  response.body();
                     Resources res = context.getResources();
                     arrayAdapter4=new AttendanceTypeAdapter(context, android.R.layout.simple_spinner_item,arrayList1 ,res);

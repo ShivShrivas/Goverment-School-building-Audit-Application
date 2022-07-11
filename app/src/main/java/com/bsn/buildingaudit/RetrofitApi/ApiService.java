@@ -9,6 +9,8 @@ import com.bsn.buildingaudit.Model.CurrentYearResultModel;
 import com.bsn.buildingaudit.Model.DataLocked;
 import com.bsn.buildingaudit.Model.GameDetailsModel;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
+import com.bsn.buildingaudit.Model.GetExtraActivitiesModel;
+import com.bsn.buildingaudit.Model.GetOtherExtraActivitiesModel;
 import com.bsn.buildingaudit.Model.GetQuaterType;
 import com.bsn.buildingaudit.Model.GetSchoolDetails;
 import com.bsn.buildingaudit.Model.GetUserType;
@@ -555,6 +557,15 @@ public  interface ApiService {
    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
     @POST("SchoolGrading/GetScoutGuideData")
     Call<ScoutAndGuideModel> getScoutAndGuide(@Body JsonObject jsonObject);
+
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetExtraActivitiesDetails")
+    Call<GetExtraActivitiesModel> getExtraActivities(@Body JsonObject jsonObject);
+
+   @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/GetOtherExtraActivitiesDetails")
+    Call<GetOtherExtraActivitiesModel> getOtherExtraActivities(@Body JsonObject jsonObject);
 
 
 }

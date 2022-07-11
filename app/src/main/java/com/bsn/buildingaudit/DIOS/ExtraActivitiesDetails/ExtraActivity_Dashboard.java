@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 import com.bsn.buildingaudit.R;
 
 public class ExtraActivity_Dashboard extends AppCompatActivity {
-CardView ExtraActivitiesDetails,participationsCardView,Ncc_activiies_Details;
+CardView ExtraActivitiesDetails,participationsCardView,Ncc_activiies_Details,OtherExtraActivitiesDetails;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +29,11 @@ CardView ExtraActivitiesDetails,participationsCardView,Ncc_activiies_Details;
                 onBackPressed();
             }
         });
+
         ExtraActivitiesDetails=findViewById(R.id.ExtraActivitiesDetails);
         participationsCardView=findViewById(R.id.participationsCardView);
         Ncc_activiies_Details=findViewById(R.id.Ncc_activiies_Details);
+        OtherExtraActivitiesDetails=findViewById(R.id.OtherExtraActivitiesDetails);
 
         ExtraActivitiesDetails.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +55,18 @@ CardView ExtraActivitiesDetails,participationsCardView,Ncc_activiies_Details;
                 startActivity(new Intent(ExtraActivity_Dashboard.this,Ncc_Details.class));
             }
         });
+
+
+        OtherExtraActivitiesDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(ExtraActivity_Dashboard.this,Other_Extra_Activities_Details.class));
+            }
+        });
+
+
+
+
 
     }
 }

@@ -143,52 +143,57 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity implements 
             if (lattitude!=0.0 && longitude!=0.0){
             try{
                 Log.d("TAG", "getLocationLatLong: "+calculateLocationDifference(geoFencheLattitude,getGeoFencheLongitude,lattitude,longitude));
-                if (calculateLocationDifference(geoFencheLattitude,getGeoFencheLongitude,lattitude,longitude)<100) {
-                    RestClient restClient=new RestClient();
-                    ApiService apiService=restClient.getApiService();
-                    Call<JsonArray> call=  apiService.submitAttendance(paraAttendance(StaffAttendanceAdapter.staffAttendanceSubmitModels));
+                if (arrayList.size()==StaffAttendanceAdapter.staffAttendanceSubmitModels.size()){
+                    if (calculateLocationDifference(geoFencheLattitude,getGeoFencheLongitude,lattitude,longitude)<100) {
+                        RestClient restClient=new RestClient();
+                        ApiService apiService=restClient.getApiService();
+                        Call<JsonArray> call=  apiService.submitAttendance(paraAttendance(StaffAttendanceAdapter.staffAttendanceSubmitModels));
 
-                    Log.d("TAG", "onClick: "+paraAttendance(StaffAttendanceAdapter.staffAttendanceSubmitModels));
-                    call.enqueue(new Callback<JsonArray>() {
-                        @Override
-                        public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                            Log.d("TAG", "onResponse: "+response.body());
-                            JsonObject jsonObject=response.body().get(0).getAsJsonObject();
+                        Log.d("TAG", "onClick: "+paraAttendance(StaffAttendanceAdapter.staffAttendanceSubmitModels));
+                        call.enqueue(new Callback<JsonArray>() {
+                            @Override
+                            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                Log.d("TAG", "onResponse: "+response.body());
+                                JsonObject jsonObject=response.body().get(0).getAsJsonObject();
                                 dialog2.dismiss();
-                            dialog3 = new Dialog(UpdateDetails_StaffAttendance.this);
-                            dialog3.setCancelable(false);
-                            dialog3.requestWindowFeature (Window.FEATURE_NO_TITLE);
-                            dialog3.setContentView (R.layout.respons_dialog_onsave);
-                            dialog3.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
-                            TextView textView=dialog3.findViewById(R.id.dialogtextResponse);
-                            Button button=dialog3.findViewById(R.id.BtnResponseDialoge);
-                            try {
-                                textView.setText(jsonObject.get("Status").getAsString());
-                                dialog3.show();
-                                button.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View view) {
-                                        onBackPressed();
-                                        dialog3.dismiss();
-                                    }
-                                });
-                            }catch (Exception e){
-                                Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                                dialog3 = new Dialog(UpdateDetails_StaffAttendance.this);
+                                dialog3.setCancelable(false);
+                                dialog3.requestWindowFeature (Window.FEATURE_NO_TITLE);
+                                dialog3.setContentView (R.layout.respons_dialog_onsave);
+                                dialog3.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+                                TextView textView=dialog3.findViewById(R.id.dialogtextResponse);
+                                Button button=dialog3.findViewById(R.id.BtnResponseDialoge);
+                                try {
+                                    textView.setText(jsonObject.get("Status").getAsString());
+                                    dialog3.show();
+                                    button.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View view) {
+                                            onBackPressed();
+                                            dialog3.dismiss();
+                                        }
+                                    });
+                                }catch (Exception e){
+                                    Toast.makeText(getApplicationContext(), "Something went wrong please try again!!", Toast.LENGTH_SHORT).show();
+                                    dialog2.dismiss();
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<JsonArray> call, Throwable t) {
+                                Log.d("TAG", "onFailure: "+t.getMessage());
                                 dialog2.dismiss();
                             }
-                        }
-                        @Override
-                        public void onFailure(Call<JsonArray> call, Throwable t) {
-                            Log.d("TAG", "onFailure: "+t.getMessage());
-                            dialog2.dismiss();
-                        }
-                    });
+                        });
 
 
-            }else{
-                    dialog2.dismiss();
-                    Toast.makeText(UpdateDetails_StaffAttendance.this, "Please take Attendance in School location", Toast.LENGTH_SHORT).show();
+                    }else{
+                        dialog2.dismiss();
+                        Toast.makeText(UpdateDetails_StaffAttendance.this, "Please take Attendance in School location", Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(this, "Please take attendance of all staff!!", Toast.LENGTH_SHORT).show();
                 }
+
             }catch (Exception e){
                 dialog2.dismiss();
                 Toast.makeText(UpdateDetails_StaffAttendance.this, "Sorry We are unable to get your location please retry!!", Toast.LENGTH_SHORT).show();

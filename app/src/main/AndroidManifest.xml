@@ -30,6 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".DIOS.ExtraActivitiesDetails.Other_Extra_Activities_Details"
+            android:exported="false" />
+        <activity
             android:name=".DIOS.CampusBeautification.CampusBeautificationDashboard"
             android:exported="false" />
         <activity

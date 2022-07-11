@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".DIOS.ExtraActivitiesDetails.Extra_Activities_Details">
 
     <androidx.appcompat.widget.Toolbar
@@ -31,14 +32,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+             android:layout_height="wrap_content"
+>
 
             <androidx.constraintlayout.widget.ConstraintLayout
 
+                android:id="@+id/constraintLayout48"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -55,7 +57,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_width="match_parent"
@@ -84,14 +86,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/sports_day"
                                 android:textColor="@color/black"
@@ -101,11 +107,12 @@
                             <TextView
                                 android:id="@+id/SPORTDAYSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -116,7 +123,7 @@
 
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView12"
+                        android:id="@+id/INVITEDCGSPORTDAYLAYOUT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -129,14 +136,19 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:gravity="center_vertical"
                                 android:text="@string/invited_chief_guest"
                                 android:textColor="@color/black"
@@ -146,11 +158,12 @@
                             <TextView
                                 android:id="@+id/INVITEDCGSPORTDAY"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -160,7 +173,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
-                        android:id="@+id/cardView13"
+                        android:id="@+id/TXTSPORTSCHIEFTITLELAYOUT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="4dp"
@@ -173,14 +186,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.2"
                                 android:gravity="center_vertical"
                                 android:text="Chief Guest Title"
                                 android:textColor="@color/black"
@@ -190,11 +207,12 @@
                             <TextView
                                 android:id="@+id/TXTSPORTSCHIEFTITLE"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1.3"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -218,12 +236,17 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -235,11 +258,12 @@
                             <TextView
                                 android:id="@+id/ANNUALDAYSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1.5"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -250,6 +274,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/INVITEDCGANNUALDAYLAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -262,13 +287,18 @@
                         app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
                         <LinearLayout
+
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -280,11 +310,12 @@
                             <TextView
                                 android:id="@+id/INVITEDCGANNUALDAY"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1.5"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -294,6 +325,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/INVITEDCGANNUALTITLELAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -307,12 +339,17 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -324,11 +361,12 @@
                             <TextView
                                 android:id="@+id/INVITEDCGANNUALTITLE"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1.3"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -339,6 +377,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/INVITEDCGADATELAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -352,14 +391,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.1"
                                 android:gravity="center_vertical"
                                 android:text="Annual Day Date"
                                 android:textColor="@color/black"
@@ -369,11 +412,12 @@
                             <TextView
                                 android:id="@+id/INVITEDCGADATE"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -397,14 +441,19 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/yoga_day"
                                 android:textColor="@color/black"
@@ -414,11 +463,12 @@
                             <TextView
                                 android:id="@+id/YOGADAYSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -441,12 +491,16 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -458,11 +512,12 @@
                             <TextView
                                 android:id="@+id/INTERHOUSESTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1.3"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -485,14 +540,19 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/school_website"
                                 android:textColor="@color/black"
@@ -502,11 +562,12 @@
                             <TextView
                                 android:id="@+id/WEBSITESTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -516,6 +577,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/WEBSITEURLLAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -529,14 +591,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="2.2"
                                 android:gravity="center_vertical"
                                 android:text="Website URL"
                                 android:textColor="@color/black"
@@ -546,11 +612,12 @@
                             <TextView
                                 android:id="@+id/WEBSITEURL"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -574,12 +641,17 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -591,11 +663,12 @@
                             <TextView
                                 android:id="@+id/WEBSITEMAILSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="2"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -606,6 +679,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/WEBSITEMAILLAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -619,14 +693,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="2"
                                 android:gravity="center_vertical"
                                 android:text="@string/school_email_id"
                                 android:textColor="@color/black"
@@ -636,11 +714,12 @@
                             <TextView
                                 android:id="@+id/WEBSITEMAIL"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -664,12 +743,17 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -681,11 +765,12 @@
                             <TextView
                                 android:id="@+id/PTAMEETINGSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1.5"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -696,6 +781,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/PTAMEETINGDATELAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -709,12 +795,16 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -726,11 +816,12 @@
                             <TextView
                                 android:id="@+id/PTAMEETINGDATE"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -753,14 +844,19 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/monthly_test"
                                 android:textColor="@color/black"
@@ -770,11 +866,12 @@
                             <TextView
                                 android:id="@+id/MONTHLYTESTSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -798,14 +895,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/teacher_s_dairy"
                                 android:textColor="@color/black"
@@ -815,11 +916,12 @@
                             <TextView
                                 android:id="@+id/TEACHERDIARYSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -843,12 +945,17 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -860,11 +967,12 @@
                             <TextView
                                 android:id="@+id/HEATHCHECKUPSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="2"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -875,6 +983,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/HEATHCHECKUPDATELAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -888,12 +997,16 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -905,11 +1018,12 @@
                             <TextView
                                 android:id="@+id/HEATHCHECKUPDATE"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="2"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -933,14 +1047,19 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/school_magazine"
                                 android:textColor="@color/black"
@@ -950,11 +1069,12 @@
                             <TextView
                                 android:id="@+id/SCHOOLMAGAZINESTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -978,12 +1098,16 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -995,11 +1119,12 @@
                             <TextView
                                 android:id="@+id/SPECIALGUESTSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="2"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -1022,14 +1147,19 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/smdc_meet"
                                 android:textColor="@color/black"
@@ -1039,11 +1169,12 @@
                             <TextView
                                 android:id="@+id/SMDCMEETSTATUS"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -1054,6 +1185,7 @@
 
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/SMDCMEETDATELAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1067,12 +1199,16 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
                                 android:layout_weight="1"
                                 android:gravity="center_vertical"
@@ -1084,7 +1220,8 @@
                             <TextView
                                 android:id="@+id/SMDCMEETDATE"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
@@ -1098,6 +1235,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.cardview.widget.CardView
+                        android:id="@+id/SMDCMEETTOTALLAYOUT"
 
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1111,14 +1249,19 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="Count of SMDC meet"
                                 android:textColor="@color/black"
@@ -1128,11 +1271,12 @@
                             <TextView
                                 android:id="@+id/SMDCMEETTOTAL"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
-                                android:layout_weight="1.8"
+                                android:layout_weight="1"
                                 android:gravity="center_vertical|end"
                                 android:text="Yes"
                                 android:textColor="@color/DIOS_ColorPrimary"
@@ -1156,14 +1300,18 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
                             app:layout_constraintTop_toBottomOf="@+id/textView8">
 
                             <TextView
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
-                                android:layout_weight="1"
+                                android:layout_weight="1.7"
                                 android:gravity="center_vertical"
                                 android:text="@string/alumni_meet"
                                 android:textColor="@color/black"
@@ -1171,9 +1319,62 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/ALUMNISTATUS"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginStart="16dp"
+
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical|end"
+                                android:text="Yes"
+                                android:textColor="@color/DIOS_ColorPrimary"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/ALUMNISTATUSDATELAYOUT"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="4dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="4dp"
+                        app:cardElevation="3dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#E1E1E1"
+                            android:gravity="center_vertical"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            app:layout_constraintTop_toBottomOf="@+id/textView8">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginStart="16dp"
+                                android:layout_weight="1"
+                                android:gravity="center_vertical"
+                                android:text="Alumni Status Date"
+                                android:textColor="@color/black"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
                                 android:id="@+id/ALUMNISTATUSDATE"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
+
                                 android:layout_marginStart="16dp"
 
                                 android:layout_marginEnd="16dp"
@@ -1190,6 +1391,81 @@
                 </LinearLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <LinearLayout
+                android:id="@+id/linearLayout21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:padding="5dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout48">
+
+                <Button
+                    style="@style/btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_red"
+                    android:text="@string/rejected"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
+                    />
+
+                <Button
+                    style="@style/btn_style"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:paddingStart="100dp"
+                    android:background="@drawable/bg_green"
+                    android:text="@string/approved"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="16dp"
+                android:padding="5dp"
+                android:gravity="center_horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout48">
+
+
+
+                <Button
+                    android:id="@+id/checked_btn_JD"
+                    style="@style/btn_style"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:paddingStart="80dp"
+                    android:paddingEnd="80dp"
+                    android:background="@drawable/bg_light_blue"
+                    android:text="Checked"
+                    android:textColor="@color/white"
+                    android:textSize="14dp"
+
+                    />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
