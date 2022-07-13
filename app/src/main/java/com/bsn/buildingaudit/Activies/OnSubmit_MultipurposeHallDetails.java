@@ -115,7 +115,7 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
 
                     edtSittingCapacity.setText(response.body().get(0).get("SittingCapacity").getAsString());
                     try {String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_MultipurposeHallDetails.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_MultipurposeHallDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerViewMultipurposeHallOnSubmit.setAdapter(onlineImageRecViewAdapter);
 
                     }catch (Exception e){

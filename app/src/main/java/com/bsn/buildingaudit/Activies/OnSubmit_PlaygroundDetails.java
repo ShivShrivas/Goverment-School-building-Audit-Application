@@ -35,6 +35,7 @@ EditText EditTextPlaygroundAvailabelty,EditTextLevellingStatus,edtAreaOfPlayGrou
     RecyclerView recyclerViewPlayground;
     LinearLayout linearLayout21;
 ConstraintLayout playGroundlayout;
+    Call<List<JsonObject>> call;
     String Type;
 TextView PGImageUploadTxt,editPlayGroundDetails;
 
@@ -82,7 +83,11 @@ TextView PGImageUploadTxt,editPlayGroundDetails;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
-        Call<List<JsonObject>> call=apiService.checkPlayGroundDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"5"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkPlayGroundDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"5"));
+        }else{
+            call=apiService.checkPlayGroundDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"5"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -107,7 +112,7 @@ TextView PGImageUploadTxt,editPlayGroundDetails;
                     EditTexttrackAvalabiltyStatus.setText(response.body().get(0).get("AvailabiltyStandardTrack").getAsString());
                     try {
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PlaygroundDetails.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PlaygroundDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerViewPlayground.setAdapter(onlineImageRecViewAdapter);
                     }catch (Exception e){
                         PGImageUploadTxt.setVisibility(View.GONE);

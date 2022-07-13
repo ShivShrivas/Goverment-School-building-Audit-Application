@@ -3,6 +3,7 @@ package com.bsn.buildingaudit.Activies;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -41,6 +42,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
     LinearLayout linearLayout11;
     TextView mobnumberTxt,uploadedImagetxt;
     ImageView schoolIcon;
+    Call<List<JsonObject>> call;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,12 +104,17 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkStaffRoomDetails(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
+        Log.d("TAG", "onCreate: "+paraGetDetails("2","2033", applicationController.getPeriodID()));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkStaffRoomDetails(paraGetDetails("2","2033", applicationController.getPeriodID()));
+        }else{
+            call=apiService.checkStaffRoomDetails(paraGetDetails("11","2033", applicationController.getPeriodID()));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 setAllEditTextDisabled();
-                if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
+                if (response.body().get(0).get("DataLocked").toString().equals("0")){
                     if (Type.equals("D")){
                         editStaffRoomDetails.setVisibility(View.GONE);
 
@@ -126,7 +133,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                     edtFurnitureAvailabiltyOnSubmit.setText(response.body().get(0).get("FurnitureAvl").getAsString());
                     edtStaffRoomStatusOnSubmit.setText(response.body().get(0).get("Status").getAsString());
                     String[] StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").toString().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_StaffRoomDetails.this,StaffPhotoPathList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_StaffRoomDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                     recyclerViewStafroomtwoOnSubmit.setAdapter(onlineImageRecViewAdapter);
                     dialog2.dismiss();
                 }

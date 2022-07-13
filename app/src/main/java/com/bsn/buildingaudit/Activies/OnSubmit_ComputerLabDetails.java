@@ -134,7 +134,7 @@ String Type;
                     edtComputeLabAvailabelty.setText(response.body().get(0).get("Availabilty").getAsString());
                     try{
                     String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ComputerLabDetails.this,StaffPhotoPathList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ComputerLabDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                     recyclerViewComputerLabOnSubmit.setAdapter(onlineImageRecViewAdapter);
 
                 }catch (Exception e){

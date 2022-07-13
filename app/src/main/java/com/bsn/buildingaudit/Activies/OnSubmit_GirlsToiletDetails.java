@@ -35,6 +35,7 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
     LinearLayout linearLayout21;
     RecyclerView recyclerViewBoysToiletOnSub;
     String Type;
+    Call<List<JsonObject>> call;
     EditText edtUrinalWithFlushTotalB,edtUrinalWithoutFlushB,edtUrinalWithFlushB,edtCSWNfriendlyTotalB,edtCSWNwithoutfriendlyB,edtCSWNfriendlyB,
             edtwithflushTotal,edtWithoutFlushClean,edtWithFlushClean,edtBoysDustbin,edtBoysDoors,edtCWSNBoysAvailability,edtsgirlsIncinator,edtGirlsSanetoryNapkin;
     @Override
@@ -98,7 +99,11 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkGirlsToilet(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"17"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkGirlsToilet(paraGetDetails2("2","2033", applicationController.getPeriodID(),"17"));
+        }else{
+            call=apiService.checkGirlsToilet(paraGetDetails2("11","2033", applicationController.getPeriodID(),"17"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -135,7 +140,7 @@ public class OnSubmit_GirlsToiletDetails extends AppCompatActivity {
                 edtsgirlsIncinator.setText(response.body().get(0).get("Incinerator").getAsString());
                 edtGirlsSanetoryNapkin.setText(response.body().get(0).get("FreeSanitaryNapkins").getAsString());
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_GirlsToiletDetails.this,StaffPhotoPathList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_GirlsToiletDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                 recyclerViewBoysToiletOnSub.setAdapter(onlineImageRecViewAdapter);
                 dialog2.dismiss();
 

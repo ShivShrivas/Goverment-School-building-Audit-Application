@@ -39,6 +39,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
     LinearLayout constraintLayout9,constraintLayout59,constraintLayout49;
     TextView edtTotalFurnirtureStrenght,editFurnituresDetails;
     RecyclerView recyclerViewFurnituresOnSub;
+    Call<List<JsonObject>> call;
     String Type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,7 +112,11 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         recyclerViewFurnituresOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkFurniture(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"18"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkFurniture(paraGetDetails2("2","2033", applicationController.getPeriodID(),"18"));
+        }else{
+            call=apiService.checkFurniture(paraGetDetails2("11","2033", applicationController.getPeriodID(),"18"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -172,7 +177,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
 
 
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FurnitureDetails.this,StaffPhotoPathList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FurnitureDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                 recyclerViewFurnituresOnSub.setAdapter(onlineImageRecViewAdapter);
 
                 dialog2.dismiss();

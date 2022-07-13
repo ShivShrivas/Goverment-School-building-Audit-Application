@@ -34,7 +34,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
     RecyclerView recyclerViewBioMetricOnSubmit;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName,editBioMetricDetails;
-    ConstraintLayout layoutBioMetric;
+    ConstraintLayout layoutBioMetric;Call<List<JsonObject>> call;
     LinearLayout linearLayout21;
     String Type;
     EditText edtBioMetricMachinecountOnSubmit,edtBioMetricMachineAvailabelty,edtBioMetricInstallationYear,edtuserbiometricStaff,edtuserbiometricStudent,edtBiometricWorkingStatus;
@@ -94,7 +94,11 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkBioMetricDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"9"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkBioMetricDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"9"));
+        }else{
+            call=apiService.checkBioMetricDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"9"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -123,7 +127,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
                     edtBiometricWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
                     try {
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BioMetricDetails.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BioMetricDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerViewBioMetricOnSubmit.setAdapter(onlineImageRecViewAdapter);
 
                     }catch (Exception e){

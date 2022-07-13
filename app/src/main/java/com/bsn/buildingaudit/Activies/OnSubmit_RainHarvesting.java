@@ -119,7 +119,7 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
                     edtRainharvestingAvailabilty.setText(response.body().get(0).get("RainHarvestingAvl").getAsString());
 
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_RainHarvesting.this,StaffPhotoPathList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_RainHarvesting.this,StaffPhotoPathList, applicationController.getUsertype());
                 recyclerViewRAinHarveOnSub.setAdapter(onlineImageRecViewAdapter);
 
                 dialog2.dismiss();

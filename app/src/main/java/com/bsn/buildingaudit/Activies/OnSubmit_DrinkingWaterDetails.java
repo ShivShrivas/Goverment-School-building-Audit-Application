@@ -38,7 +38,7 @@ EditText edtROInstallationScheme,edtROInstallationWokingStatus,
         edtHandPumpWorkStatsyDW,edtHandPumpAvailabiltyDW;
 TextView uploadDW,editDrinkingWaterDetails;
 
-LinearLayout linearLayout21;
+LinearLayout linearLayout21,linearLayout31;
     EditText edtNotWorkingRO,edtWorkingRO,edtTotalRO;
     String Type;
     EditText edtNotWorkingOHTanks,edtWorkingOHTanks,edtTotalOHTanks;
@@ -46,6 +46,7 @@ LinearLayout linearLayout21;
     EditText edtNotWorkingHandpump,edtWorkingHandpump,edtTotalHandpump;
     RecyclerView recyclerViewDrinkingWater;
     ApplicationController applicationController;
+    Call<List<JsonObject>> call;
     TextView userName,schoolAddress,schoolName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ LinearLayout linearLayout21;
         schoolAddress.setText(applicationController.getSchoolAddress());
         recyclerViewDrinkingWater=findViewById(R.id.recyclerViewDrinkingWaterOnSubmit);
         linearLayout21=findViewById(R.id.linearLayout21);
+        linearLayout31=findViewById(R.id.linearLayout31);
         edtROInstallationScheme=findViewById(R.id.edtROInstallationScheme);
         edtNotWorkingRO=findViewById(R.id.edtNotWorkingRO);
         edtWorkingRO=findViewById(R.id.edtWorkingRO);
@@ -112,7 +114,11 @@ LinearLayout linearLayout21;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkDrinkingWater(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"7"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkDrinkingWater(paraGetDetails2("2","2033", applicationController.getPeriodID(),"7"));
+        }else{
+            call=apiService.checkDrinkingWater(paraGetDetails2("13","2033", applicationController.getPeriodID(),"7"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -145,8 +151,13 @@ int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking")==nul
 
 
 
+                    try{
+                        edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme")==null?"0":response.body().get(0).get("ROInsScheme").getAsString());
 
-                            edtROInstallationScheme.setText(response.body().get(0).get("ROInsScheme")==null?"0":response.body().get(0).get("ROInsScheme").getAsString());
+                    }catch (Exception e){
+
+                        linearLayout31.setVisibility(View.GONE);
+                    }
 
 
 
@@ -184,7 +195,7 @@ int totalHand=Integer.parseInt(response.body().get(0).get("HandNonWorking")==nul
 
                        try {
                            String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                           OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_DrinkingWaterDetails.this,StaffPhotoPathList);
+                           OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_DrinkingWaterDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                            recyclerViewDrinkingWater.setAdapter(onlineImageRecViewAdapter);
                        }catch (Exception e){
                            recyclerViewDrinkingWater.setVisibility(View.GONE);

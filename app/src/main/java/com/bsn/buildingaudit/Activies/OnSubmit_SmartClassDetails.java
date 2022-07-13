@@ -40,6 +40,7 @@ RecyclerView recyclerViewSmartClassONSubmit;
     private TextView schoolAddress,schoolName,editSmartClassDetails;
     ConstraintLayout layoutSmartClass;
     String Type;
+    Call<List<JsonObject>> call;
     EditText edtsmartClassAvailabilty,edtDigitalBoardSmartClass,edtLearningContentSmartClass,edtProjectorSmartClass,edtTeacherAvailbilitySmartClass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,8 +94,11 @@ RecyclerView recyclerViewSmartClassONSubmit;
         disableEditBox();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-
-        Call<List<JsonObject>> call=apiService.checkSmartClassDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"8"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkSmartClassDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"8"));
+        }else{
+            call=apiService.checkSmartClassDetails(paraGetDetails2("13","2033", applicationController.getPeriodID(),"8"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
                 public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -120,7 +124,7 @@ RecyclerView recyclerViewSmartClassONSubmit;
                             SmartClassesCard smartClassesCard=new SmartClassesCard();
 
                             String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                            OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList);
+                            OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                             recyclerViewSmartClassONSubmit.setAdapter(onlineImageRecViewAdapter);
                             smartClassesCard.setCompanyName(response.body().get(i).get("CompanyName").getAsString());
                             smartClassesCard.setName(response.body().get(i).get("Name").getAsString());
@@ -136,7 +140,7 @@ RecyclerView recyclerViewSmartClassONSubmit;
                         (new SmartClassAdapter(OnSubmit_SmartClassDetails.this,smartClassesCards)).notifyDataSetChanged();
 
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SmartClassDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerViewSmartClassONSubmit.setAdapter(onlineImageRecViewAdapter);
                         dialog2.dismiss();
 

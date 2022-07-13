@@ -35,6 +35,7 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
     TextView userName,schoolAddress,schoolName;
     LinearLayout linearLayout21;
     String Type;
+    Call<List<JsonObject>> call;
     ConstraintLayout constraintLayout32;
     TextView uploadCYcleStand,editCycleStandDetails;
     RecyclerView recyclerCycleStandOnSub;
@@ -89,7 +90,11 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkCycleStand(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"21"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkCycleStand(paraGetDetails2("2","2033", applicationController.getPeriodID(),"21"));
+        }else{
+            call=apiService.checkCycleStand(paraGetDetails2("11","2033", applicationController.getPeriodID(),"21"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -114,7 +119,7 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
                     edtCycleStand.setText(response.body().get(0).get("Availability").getAsString());
                     try{
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CycleStand.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CycleStand.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerCycleStandOnSub.setAdapter(onlineImageRecViewAdapter);
                     }catch (Exception e){
                         recyclerCycleStandOnSub.setVisibility(View.GONE);

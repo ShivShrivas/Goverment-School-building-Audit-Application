@@ -148,11 +148,11 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
 
 
                     String[] StaffPhotoPathList=response.body().get(1).get("ClassPhotoPath").toString().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_VocationalRoom.this,StaffPhotoPathList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_VocationalRoom.this,StaffPhotoPathList, applicationController.getUsertype());
                 recyclerViewVocalIS.setAdapter(onlineImageRecViewAdapter);
 
                     String[] StaffPhotoPathList1=response.body().get(0).get("ClassPhotoPath").toString().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmit_VocationalRoom.this,StaffPhotoPathList1);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmit_VocationalRoom.this,StaffPhotoPathList1, applicationController.getUsertype());
                 recyclerViewVocalHs.setAdapter(onlineImageRecViewAdapter2);
 
                     dialog2.dismiss();

@@ -127,7 +127,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
                     edtnoOfFans.setText(response.body().get(0).get("NoOfFans").getAsString());
 try{
     String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ElectricityArrangment.this,StaffPhotoPathList);
+    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ElectricityArrangment.this,StaffPhotoPathList, applicationController.getUsertype());
     recyclerViewElectricityArrangmentOnSub.setAdapter(onlineImageRecViewAdapter);
 }catch (Exception e){
     recyclerViewElectricityArrangmentOnSub.setVisibility(View.GONE);

@@ -131,7 +131,7 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
                     OfficeRoomWorkingStatus.setText(response.body().get(0).get("Status").getAsString());
                     try {
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_Officeroom.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_Officeroom.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerViewOffice.setAdapter(onlineImageRecViewAdapter);
                     }catch (Exception e){
                         recyclerViewOffice.setVisibility(View.GONE);

@@ -100,7 +100,7 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
 
                     }
                     String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PrincipalRoom.this,StaffPhotoPathList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PrincipalRoom.this,StaffPhotoPathList, applicationController.getUsertype());
                     recyclerViewprincipalOnSub.setAdapter(onlineImageRecViewAdapter);
                     dialog2.dismiss();
 

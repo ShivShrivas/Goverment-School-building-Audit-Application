@@ -30,7 +30,7 @@ public class Diios_Panel_Under_School_dashboard extends AppCompatActivity {
     ApplicationController applicationController;
 CardView dashCardBtn_SchoolDetails,dashCardBtn_SchoolStaff,dashCardBtn_SchoolResultDetails,diosPhysicalStatus;
 CardView coCurriculatCard,ExtraDetailsCard,campusBeautificationCard,dashCardBtn_SubjectWiseDetails,recieptAndExpenditurCard;
-TextView textView8;
+TextView textView8,schoolAddress,schoolName;
 String localSchoolId;
 ImageView schoolDetailsBtn;
     @Override
@@ -49,18 +49,22 @@ ImageView schoolDetailsBtn;
             }
         });
         Log.d("TAG", "onCreate: "+localSchoolId);
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        textView8=findViewById(R.id.textView8);
+        textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
         dashCardBtn_SchoolDetails=findViewById(R.id.dashCardBtn_StudentEnrollment);
         schoolDetailsBtn=findViewById(R.id.schoolDetailsBtn);
         dashCardBtn_SubjectWiseDetails=findViewById(R.id.dashCardBtn_SubjectWiseDetails);
         dashCardBtn_SchoolStaff=findViewById(R.id.dashCardBtn_SchoolStaff);
         dashCardBtn_SchoolResultDetails=findViewById(R.id.dashCardBtn_SchoolResultDetails);
-        textView8=findViewById(R.id.textView8);
         coCurriculatCard=findViewById(R.id.coCurriculatCard);
         ExtraDetailsCard=findViewById(R.id.ExtraDetailsCard);
         diosPhysicalStatus=findViewById(R.id.diosPhysicalStatus);
         campusBeautificationCard=findViewById(R.id.campusBeautificationCard);
         recieptAndExpenditurCard=findViewById(R.id.recieptAndExpenditurCard);
-        textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
         schoolDetailsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

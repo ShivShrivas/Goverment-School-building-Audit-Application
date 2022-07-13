@@ -2,6 +2,7 @@ package com.bsn.buildingaudit.DIOS.physicalStatus;
 
 import android.os.Bundle;
 import android.view.Window;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.dashboardRoomListAdapterDIOS;
+import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.R;
 
@@ -16,14 +18,23 @@ import java.util.ArrayList;
 
 public class Physical_Status_DIOS_Dashboard extends AppCompatActivity {
 RecyclerView recyclerViewForDiosDashboardPhysicalStatus;
+    TextView textView8,schoolAddress,schoolName;
+    ApplicationController applicationController;
     dashboardRoomListAdapterDIOS adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_physical_status_dios_dashboard);
+        applicationController= (ApplicationController) getApplication();
         recyclerViewForDiosDashboardPhysicalStatus=findViewById(R.id.recyclerViewForDiosDashboardPhysicalStatus);
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
+        textView8=findViewById(R.id.textView8);
+        textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
         ArrayList<GetAllRoomsList> arrayList=new ArrayList<>();
         GetAllRoomsList getAllRoomsList=new GetAllRoomsList("1","Class Room Details","12-15-2022 02:30:28 PM","2057","26");
         GetAllRoomsList getAllRoomsList1=new GetAllRoomsList("2","Staff Room Details","12-15-2022 02:30:28 PM","2057","26");

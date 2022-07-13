@@ -40,6 +40,7 @@ EditText totalClassRooms,edtPodiumClassAfterSubmit,majorRepairingClassroom,
 RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmit,recyclerViewThreeTypeOneAfterSubmit;
 String Type;
 ImageView schoolIcon;
+    Call<List<JsonObject>> call;
 LinearLayout diosButtonLayout,linearLayout2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,8 +127,12 @@ LinearLayout diosButtonLayout,linearLayout2;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
-        Call<List<JsonObject>> call=apiService.checkDetailsOfRooms(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
+        Log.d("TAG", "onCreate: "+paraGetDetails("12","2033", applicationController.getPeriodID())+applicationController.getUsertype());
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkDetailsOfRooms(paraGetDetails("2","2033", applicationController.getPeriodID()));
+        }else{
+            call=apiService.checkDetailsOfRooms(paraGetDetails("12","2033", applicationController.getPeriodID()));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -146,7 +151,6 @@ LinearLayout diosButtonLayout,linearLayout2;
 
                 }
 
-                Log.d("TAG", "onResponse: "+response.body()+"///////"+response.body().get(0).get("TotalRooms"));
                 totalClassRooms.setText(response.body().get(0).get("TotalRooms").toString());
                 minorRepairingClassroomAfterSubmit.setText(response.body().get(0).get("MinorRepairing").toString());
                 if (response.body().get(0).get("MinorRepairing").toString().equals("0")){
@@ -176,15 +180,15 @@ LinearLayout diosButtonLayout,linearLayout2;
                 String[] majorRepairingList=majorRepairing.split(",");
                 String minorRepairing=response.body().get(0).get("MinorRepairingPhotos").toString();
                 String[] minorRepairingList=minorRepairing.split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,goodConditionsList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,goodConditionsList,applicationController.getUsertype());
                 recyclerViewTwoTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter);
 
 
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,minorRepairingList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter2=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,minorRepairingList, applicationController.getUsertype());
                 recyclerViewThreeTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter2);
 
 
-              OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,majorRepairingList);
+              OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmitClassRoomPage.this,majorRepairingList, applicationController.getUsertype());
                 recyclerViewFourTypeOneAfterSubmit.setAdapter(onlineImageRecViewAdapter3);
                 onlineImageRecViewAdapter.notifyDataSetChanged();
 

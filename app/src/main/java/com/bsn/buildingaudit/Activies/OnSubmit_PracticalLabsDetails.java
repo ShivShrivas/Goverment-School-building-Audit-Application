@@ -302,7 +302,7 @@ ImageView schoolIcon;
             try {
                 Log.d("TAG", "onResponse: "+list.get(0).getLabPhotoPath());
                 String[] scinceLabPhotoPathList=list.get(0).getLabPhotoPath().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,scinceLabPhotoPathList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,scinceLabPhotoPathList, applicationController.getUsertype());
                 recyclerViewScienceLab.setAdapter(onlineImageRecViewAdapter);
             }catch (Exception e){
 
@@ -312,7 +312,7 @@ ImageView schoolIcon;
                     Log.d("TAG", "onResponse: "+list.get(1).getLabPhotoPath());
 
                     String[] physicsLabPhotoPathList=list.get(1).getLabPhotoPath().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter1=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,physicsLabPhotoPathList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter1=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,physicsLabPhotoPathList, applicationController.getUsertype());
                     recyclerViewPhysicsLab.setAdapter(onlineImageRecViewAdapter1);
             }catch (Exception e){
 
@@ -322,7 +322,7 @@ ImageView schoolIcon;
                     Log.d("TAG", "onResponse: "+list.get(2).getLabPhotoPath());
 
                     String[] chemistryLabPhotoPathLis2=list.get(2).getLabPhotoPath().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,chemistryLabPhotoPathLis2);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,chemistryLabPhotoPathLis2, applicationController.getUsertype());
                     recyclerViewChemistryLab.setAdapter(onlineImageRecViewAdapter3);
             }catch (Exception e){
 
@@ -332,7 +332,7 @@ ImageView schoolIcon;
                     Log.d("TAG", "onResponse: "+list.get(3).getLabPhotoPath());
 
                     String[] biologyLAbList=list.get(3).getLabPhotoPath().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter4=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,biologyLAbList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter4=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,biologyLAbList, applicationController.getUsertype());
                     recyclerViewBiologyLab.setAdapter(onlineImageRecViewAdapter4);
             }catch (Exception e){
 
@@ -344,7 +344,7 @@ ImageView schoolIcon;
                     Log.d("TAG", "onResponse: "+list.get(4).getLabPhotoPath());
 
                     String[] homscienceLabList=list.get(4).getLabPhotoPath().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter5=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,homscienceLabList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter5=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,homscienceLabList, applicationController.getUsertype());
                     recyclerViewHomeScienceLab.setAdapter(onlineImageRecViewAdapter5);
                     }catch (Exception e){
 
@@ -354,7 +354,7 @@ ImageView schoolIcon;
                    Log.d("TAG", "onResponse: "+list.get(5).getLabPhotoPath());
 
                    String[] muscilabList=list.get(5).getLabPhotoPath().split(",");
-                   OnlineImageRecViewAdapter onlineImageRecViewAdapter6=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,muscilabList);
+                   OnlineImageRecViewAdapter onlineImageRecViewAdapter6=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,muscilabList, applicationController.getUsertype());
                    recyclerViewMusicLab.setAdapter(onlineImageRecViewAdapter6);
                }catch (Exception e){
 
@@ -364,7 +364,7 @@ ImageView schoolIcon;
                   Log.d("TAG", "onResponse: "+list.get(6).getLabPhotoPath());
 
                   String[] geoGraphyList=list.get(6).getLabPhotoPath().split(",");
-                  OnlineImageRecViewAdapter onlineImageRecViewAdapter7=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,geoGraphyList);
+                  OnlineImageRecViewAdapter onlineImageRecViewAdapter7=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,geoGraphyList, applicationController.getUsertype());
                   recyclerViewGeographyLab.setAdapter(onlineImageRecViewAdapter7);
               }catch (Exception e){
 

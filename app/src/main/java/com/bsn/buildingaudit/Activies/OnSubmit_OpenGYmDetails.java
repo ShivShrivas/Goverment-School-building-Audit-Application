@@ -34,6 +34,7 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
     EditText edtGymAvailabelty,gymWorkingStatus,edtGymArea;
     RecyclerView recyclerViewGymOnSubmit;
     TextView gymUploadtxt,editOpenGymDetails;
+    Call<List<JsonObject>> call;
     ConstraintLayout gymLayout;
     LinearLayout  linearLayout21;
 
@@ -90,7 +91,11 @@ String Type;
                 finish();
             }
         });
-        Call<List<JsonObject>> call=apiService.checkGymDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"6"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkGymDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"6"));
+        }else{
+            call=apiService.checkGymDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"6"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -115,7 +120,7 @@ String Type;
                         gymWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
                         try {
                             String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                            OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_OpenGYmDetails.this,StaffPhotoPathList);
+                            OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_OpenGYmDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                             recyclerViewGymOnSubmit.setAdapter(onlineImageRecViewAdapter);
                         }catch (Exception e){
                             recyclerViewGymOnSubmit.setVisibility(View.GONE);

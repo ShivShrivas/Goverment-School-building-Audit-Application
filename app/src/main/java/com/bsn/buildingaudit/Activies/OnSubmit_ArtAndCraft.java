@@ -123,7 +123,7 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
 
                 }
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ArtAndCraft.this,StaffPhotoPathList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_ArtAndCraft.this,StaffPhotoPathList, applicationController.getUsertype());
                 recyclerViewArtAndCraftOnSub.setAdapter(onlineImageRecViewAdapter);
                 dialog2.dismiss();
 

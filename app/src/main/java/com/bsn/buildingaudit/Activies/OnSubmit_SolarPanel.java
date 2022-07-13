@@ -37,6 +37,7 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
     EditText edtTypeOfSolarPanel,edtcapacityOfSolarPanel,edtSolarPanelScheme,edtSolarPaneltWorkingStatus,edtSolraPanelInstallationYear,edtSolarPanel;
     RecyclerView recyclerViewTwoTypeSolarpanelAndOnSub;
     LinearLayout linearLayout21;
+    Call<List<JsonObject>> call;
     String Type;
     ConstraintLayout constraintLayout23;
     Button buttonSolarePanelOnSub;
@@ -94,8 +95,11 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
                 finish();
             }
         });
-        Call<List<JsonObject>> call=apiService.viewSolarPanelDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"14"));
-        call.enqueue(new Callback<List<JsonObject>>() {
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.viewSolarPanelDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"14"));
+        }else{
+            call=apiService.viewSolarPanelDetails(paraGetDetails2("13","2033", applicationController.getPeriodID(),"14"));
+        }        call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
                 Log.d("TAG", "onResponse: "+response.body()+"///////");
@@ -120,7 +124,7 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
                     edtSolraPanelInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
                     edtSolarPanel.setText(response.body().get(0).get("Availabilty").getAsString());
                     String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SolarPanel.this,StaffPhotoPathList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SolarPanel.this,StaffPhotoPathList, applicationController.getUsertype());
                     recyclerViewTwoTypeSolarpanelAndOnSub.setAdapter(onlineImageRecViewAdapter);
                     dialog2.dismiss();
 

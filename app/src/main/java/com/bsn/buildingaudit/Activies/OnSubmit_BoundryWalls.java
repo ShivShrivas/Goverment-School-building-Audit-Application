@@ -37,6 +37,7 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
     RecyclerView recyclerViewTwoTypeBoundarywallOnSub;
     ConstraintLayout layoutBoundry;
     TextView uploadBoundary,editBoundryWallsDetails;
+    Call<List<JsonObject>> call;
     LinearLayout linearLayout21;
     String Type;
     @Override
@@ -96,7 +97,11 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
         recyclerViewTwoTypeBoundarywallOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkBoundryWall(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"15"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkBoundryWall(paraGetDetails2("2","2033", applicationController.getPeriodID(),"15"));
+        }else{
+            call=apiService.checkBoundryWall(paraGetDetails2("12","2033", applicationController.getPeriodID(),"15"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -125,7 +130,7 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
                     edtBoundaryWallAvail.setText(response.body().get(0).get("Availabilty").getAsString());
                     try {
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BoundryWalls.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_BoundryWalls.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerViewTwoTypeBoundarywallOnSub.setAdapter(onlineImageRecViewAdapter);
                     }catch (Exception e){
                         recyclerViewTwoTypeBoundarywallOnSub.setVisibility(View.GONE);

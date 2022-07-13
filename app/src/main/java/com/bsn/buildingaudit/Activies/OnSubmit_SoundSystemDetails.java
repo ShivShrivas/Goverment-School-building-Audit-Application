@@ -102,7 +102,7 @@ RecyclerView recyclerViewSoundSystmOnSub;
                 edtSoundSystem.setText(response.body().get(0).get("SoundSysAvailability").getAsString());
 
                 String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SoundSystemDetails.this,StaffPhotoPathList);
+                OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_SoundSystemDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                 recyclerViewSoundSystmOnSub.setAdapter(onlineImageRecViewAdapter);
                 dialog2.dismiss();
 

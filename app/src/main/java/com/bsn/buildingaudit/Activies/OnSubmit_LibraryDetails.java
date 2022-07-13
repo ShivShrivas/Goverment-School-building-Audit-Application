@@ -40,6 +40,7 @@ ConstraintLayout libraryLayout;
     LinearLayout linearLayout21;
 TextView uploadLibrary,editLibraryDetails,mobnumberTxt;
 ImageView schoolIcon;
+    Call<List<JsonObject>> call;
     TextView userName,schoolAddress,schoolName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,11 @@ ImageView schoolIcon;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkLibraryDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"4"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkLibraryDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"4"));
+        }else{
+            call=apiService.checkLibraryDetails(paraGetDetails2("11","2", applicationController.getPeriodID(),"4"));
+        }
         editLibraryDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,7 +155,7 @@ if (response.body().get(0).get("Availabilty").getAsString().equals("No")){
 
     try{
         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_LibraryDetails.this,StaffPhotoPathList);
+        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_LibraryDetails.this,StaffPhotoPathList, applicationController.getUsertype());
         recyclerViewTwoTypeFourOnSubmit.setAdapter(onlineImageRecViewAdapter);
     }catch (Exception e){
         recyclerViewTwoTypeFourOnSubmit.setVisibility(View.GONE);

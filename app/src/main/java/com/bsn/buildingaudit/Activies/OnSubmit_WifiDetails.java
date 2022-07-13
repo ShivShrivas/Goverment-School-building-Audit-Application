@@ -36,6 +36,7 @@ TextView wifiUploadImageTxt;
     LinearLayout linearLayout21;
     TextView userName,schoolAddress,schoolName;
     String Type;
+    Call<List<JsonObject>> call;
     TextView editWIFIRoomDetails;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,11 @@ TextView wifiUploadImageTxt;
         }
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkWifiDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"20"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkWifiDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"20"));
+        }else{
+            call=apiService.checkWifiDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"20"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
@@ -101,7 +106,7 @@ TextView wifiUploadImageTxt;
 
 
                     String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_WifiDetails.this,StaffPhotoPathList);
+                    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_WifiDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                     recyclerViewExtraThingsOnSub.setAdapter(onlineImageRecViewAdapter);
                     dialog2.dismiss();
 

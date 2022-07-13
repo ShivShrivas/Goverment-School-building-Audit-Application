@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.DIOS.DIOS_Dashboard;
 import com.bsn.buildingaudit.DIOS.Diios_Panel_Under_School_dashboard;
 import com.bsn.buildingaudit.Model.SchoolListModel;
@@ -24,11 +25,13 @@ public class DIOS_DashboardAdapter extends RecyclerView.Adapter<DIOS_DashboardAd
     Context context;
     ArrayList<SchoolListModel> arrayListSchool;
     ArrayList<String> itemsCopy;
+    ApplicationController applicationController;
 
 
     public DIOS_DashboardAdapter(Context context, ArrayList<SchoolListModel> arrayListSchool) {
         this.context=context;
         this.arrayListSchool=arrayListSchool;
+        applicationController= (ApplicationController) context.getApplicationContext();
     }
 
     @NonNull
@@ -62,7 +65,10 @@ public class DIOS_DashboardAdapter extends RecyclerView.Adapter<DIOS_DashboardAd
                 try {
                     if ((arrayListSchool.get(position).getJdstatus()==1)){
                         Toast.makeText(context, "this School inspection is done", Toast.LENGTH_SHORT).show();
+
                         Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
+                        applicationController.setSchoolName(arrayListSchool.get(position).getSchoolname());
+                        applicationController.setSchoolAddress(arrayListSchool.get(position).getBlockname()+" "+arrayListSchool.get(position).getDistrictname()+" "+arrayListSchool.get(position).getDivisionname());
                         context.startActivity(i);
                     }else{
                         if ( DIOS_Dashboard.setSchoolIdInContoller(arrayListSchool.get(position).getSchoolid())){

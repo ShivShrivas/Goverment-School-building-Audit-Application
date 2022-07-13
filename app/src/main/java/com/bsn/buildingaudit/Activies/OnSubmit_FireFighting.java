@@ -133,7 +133,7 @@ TextView uploadtextFireFighting;
                     edtFireFightingInstallationYear.setText(response.body().get(0).get("InstallationYear").getAsString());
 try {
     String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FireFighting.this,StaffPhotoPathList);
+    OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_FireFighting.this,StaffPhotoPathList, applicationController.getUsertype());
     recyclerViewFireFightningoNsUB.setAdapter(onlineImageRecViewAdapter);
 }catch (Exception e){
     recyclerViewFireFightningoNsUB.setVisibility(View.GONE);

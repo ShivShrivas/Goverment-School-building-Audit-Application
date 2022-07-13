@@ -123,7 +123,7 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
                     EdtNoNonOfCCTV.setText(response.body().get(0).get("NonWorkingCount").getAsString());
                     try {
                         String[] StaffPhotoPathList=response.body().get(0).get("PhotoPath").toString().split(",");
-                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CCTVDetails.this,StaffPhotoPathList);
+                        OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_CCTVDetails.this,StaffPhotoPathList, applicationController.getUsertype());
                         recyclerViewCCTVOnSubmit.setAdapter(onlineImageRecViewAdapter);
                     }catch (Exception e){
                         recyclerViewCCTVOnSubmit.setVisibility(View.GONE);
