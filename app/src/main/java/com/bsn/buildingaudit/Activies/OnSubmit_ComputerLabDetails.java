@@ -35,6 +35,7 @@ public class OnSubmit_ComputerLabDetails extends AppCompatActivity {
 RecyclerView recyclerViewComputerLabOnSubmit;
 ConstraintLayout layOutComputerLab;
 LinearLayout linearLayout51;
+    Call<List<JsonObject>> call;
 String Type;
         EditText edtNoOfLab,edtScannerAvailable,edtPrinterAvailable,edtComputerOperator
                 ,edtPowerBackup,edtFurniture,edtinternet,edtGrantUnderScheme,edtNoOfWorkingComputer,edtNoOfComputer
@@ -101,7 +102,11 @@ String Type;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkComputerLab(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"19"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkComputerLab(paraGetDetails2("2","2033", applicationController.getPeriodID(),"19"));
+        }else{
+            call=apiService.checkComputerLab(paraGetDetails2("11","2033", applicationController.getPeriodID(),"19"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

@@ -35,7 +35,7 @@ import retrofit2.Response;
 public class OnSubmit_PracticalLabsDetails extends AppCompatActivity {
     private TextView schoolAddress,schoolName,editPracticalLabDetails;
     ApplicationController applicationController;
-
+    Call<List<LabDetailsResponse>> call;
     LinearLayout linearLayout21,physicsLabHeader,socialScienceLabHeader,musicLabheader,homeScienceLabHeader,chemistryLabHeader,scienceLabHeader,bioLabHeader;
     EditText edtHomeSciencelabAvailability,edtGeographyLabConditionedt,GeographyEquipmentStatus,edtGeographylabAvailability,edtBiologyLabCondition,edtBiologylabAvailability,edtBilogyEquipmentStatus
                     ,edtChemistryLabCondition,edtChemistryEquipmentStatus,edtChemistrylabAvailability,edtPhysicsLabCondition,edtPhysicsEquipmentStatus,edtPhysicslabAvailability
@@ -161,7 +161,11 @@ ImageView schoolIcon;
         setAllEditTextDisabled();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<LabDetailsResponse>> call=apiService.checkLabDetails(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkLabDetails(paraGetDetails("2","2033", applicationController.getPeriodID()));
+        }else{
+            call=apiService.checkLabDetails(paraGetDetails("10","2033", applicationController.getPeriodID()));
+        }
         call.enqueue(new Callback<List<LabDetailsResponse>>() {
             @Override
             public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
@@ -204,7 +208,7 @@ ImageView schoolIcon;
                     edtPhysicsEquipmentStatus.setText(list.get(1).getEquipmentStatus());
 
 
-                    edtPhysicsLabCondition.setText(list.get(1).getLabCondition().toString());
+                    edtPhysicsLabCondition.setText(list.get(1).getLabCondition());
 
 
                 if (list.get(2).getLabYN().toString().equals("Yes")){

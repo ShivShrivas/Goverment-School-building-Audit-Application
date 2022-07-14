@@ -32,6 +32,7 @@ public class OnSubmit_SoundSystemDetails extends AppCompatActivity {
 EditText edtSchoolBandForGirls,edtSchoolBand,edtSoundSystem;
 RecyclerView recyclerViewSoundSystmOnSub;
     ApplicationController applicationController;
+    Call<List<JsonObject>> call;
     LinearLayout linearLayout21;
     String Type;
     TextView userName,schoolAddress,schoolName,editSoundAndBandDetails;
@@ -83,7 +84,11 @@ RecyclerView recyclerViewSoundSystmOnSub;
         recyclerViewSoundSystmOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkSoundSystem(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"22"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkSoundSystem(paraGetDetails2("2","2033", applicationController.getPeriodID(),"22"));
+        }else{
+            call=apiService.checkSoundSystem(paraGetDetails2("11","2033", applicationController.getPeriodID(),"22"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

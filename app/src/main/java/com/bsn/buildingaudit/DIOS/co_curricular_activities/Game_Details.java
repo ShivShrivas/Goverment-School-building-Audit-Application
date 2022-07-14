@@ -75,7 +75,7 @@ public class Game_Details extends AppCompatActivity {
             }
         });
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID","2");
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
         recViewOutDoorGames = findViewById(R.id.recViewOutDoorGames);
         showDetailsD = findViewById(R.id.showDetailsD);

@@ -50,9 +50,10 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
                 return  false;
             }
         };
+        schoolDetailsList=new SchoolDetailsModel();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         recViewForRunningClasses=findViewById(R.id.recViewForRunningClasses);
-        schoolDetailsList=new SchoolDetailsModel();
+
         schoolAddTxt=findViewById(R.id.schoolAddTxt);
         mobTxt=findViewById(R.id.mobTxt);
         pincodeTxt=findViewById(R.id.pincodeTxt);
@@ -93,7 +94,7 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+paraSchoolRequestJson(applicationController.getSchoolId(),applicationController.getPeriodID()));
+        Log.d("TAG", "onCreate: "+paraSchoolRequestJson("2033",applicationController.getPeriodID()));
         Call<SchoolDetailsModel> call=apiService.getSchoolDetailsForDIOS(paraSchoolRequestJson(applicationController.getSchoolId(),applicationController.getPeriodID()));
         call.enqueue(new Callback<SchoolDetailsModel>() {
             @Override
@@ -101,8 +102,8 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
                 Log.d("TAG", "onResponse: "+response.body());
 
 
-                schoolDetailsList=response.body();
-                schoolAddTxt.setText(schoolDetailsList.getAddress());
+                 schoolDetailsList=response.body();
+                schoolAddTxt.setText(schoolDetailsList.getAddress()==null?"Not Avaialable":schoolDetailsList.getAddress());
                 mobTxt.setText(schoolDetailsList.getPhoneNo());
                 pincodeTxt.setText(schoolDetailsList.getPinCode().toString());
                 dateOfRegisTxt.setText(schoolDetailsList.getDor().split("T")[0]);

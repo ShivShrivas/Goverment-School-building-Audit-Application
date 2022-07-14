@@ -32,6 +32,7 @@ public class OnSubmit_RainHarvesting extends AppCompatActivity {
 EditText edtRainharvestingAvailabilty,edtRainHavestingWorkStatus;
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
+    Call<List<JsonObject>> call;
     RecyclerView recyclerViewRAinHarveOnSub;
     LinearLayout workingStatusLayout,linearLayout5,linearLayout21;
 String Type;
@@ -89,7 +90,11 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
-        Call<List<JsonObject>> call=apiService.checkRainHarvest(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"13"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkRainHarvest(paraGetDetails2("2","2033", applicationController.getPeriodID(),"13"));
+        }else{
+            call=apiService.checkRainHarvest(paraGetDetails2("11","2033", applicationController.getPeriodID(),"13"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

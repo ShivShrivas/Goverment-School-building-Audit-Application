@@ -33,6 +33,7 @@ EditText edtMultipurposeHall,edtMultiPurposeHallStatus,edtSittingCapacity;
 RecyclerView recyclerViewMultipurposeHallOnSubmit;
     ApplicationController applicationController;
     LinearLayout linearLayout21;
+    Call<List<JsonObject>> call;
     String Type;
     TextView userName,schoolAddress,schoolName,editMultipurposeHallDetails;
     LinearLayout linearLayout5,linearLayout13,constraintLayout9;
@@ -87,7 +88,11 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkMultiPurposeHall(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"23"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkMultiPurposeHall(paraGetDetails2("2","2033", applicationController.getPeriodID(),"23"));
+        }else{
+            call=apiService.checkMultiPurposeHall(paraGetDetails2("11","2033", applicationController.getPeriodID(),"23"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

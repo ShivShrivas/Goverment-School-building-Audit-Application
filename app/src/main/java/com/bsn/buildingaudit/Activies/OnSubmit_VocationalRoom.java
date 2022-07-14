@@ -34,6 +34,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
     ApplicationController applicationController;
     LinearLayout linearLayout21;
     String Type;
+    Call<List<JsonObject>> call;
     RecyclerView recyclerViewVocalIS,recyclerViewVocalHs;
     CardView scienceLabBodyCard, physicsLabImageCard,physicsLabBodyCard,scienceLabImageCard;
 
@@ -108,7 +109,11 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
-        Call<List<JsonObject>> call=apiService.checkVocalRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"26"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkVocalRoom(paraGetDetails2("2","2033", applicationController.getPeriodID(),"26"));
+        }else{
+            call=apiService.checkVocalRoom(paraGetDetails2("12","2033", applicationController.getPeriodID(),"26"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

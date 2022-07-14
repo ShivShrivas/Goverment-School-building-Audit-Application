@@ -63,7 +63,7 @@ TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWa
             }
         });
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID","2033");
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();

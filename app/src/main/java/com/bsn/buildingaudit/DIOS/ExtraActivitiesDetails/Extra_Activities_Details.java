@@ -87,7 +87,7 @@ public class Extra_Activities_Details extends AppCompatActivity {
         ALUMNISTATUSDATE=findViewById(R.id.ALUMNISTATUSDATE);
         ALUMNISTATUS=findViewById(R.id.ALUMNISTATUS);
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID","2");
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
         RestClient restClient = new RestClient();
         ApiService apiService=restClient.getApiService();

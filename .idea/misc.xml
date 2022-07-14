@@ -53,6 +53,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_date_wise_attendance.xml" value="0.18" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_diios_panel_under_school_dashboard.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_dashboard.xml" value="0.22" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_inner_dashboard.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_staff_details.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_extra_activities_details.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_extra_dashboard.xml" value="0.25" />
@@ -142,6 +143,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_dios_itemcard.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard_dios.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/dios_dashboard_menu_item_card.xml" value="0.19739583333333333" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/editable_smart_class_card.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/fragment_dynamic.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/games_card.xml" value="0.1703125" />

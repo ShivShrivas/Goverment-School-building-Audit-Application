@@ -30,8 +30,8 @@ public class DIOS_Dashboard extends AppCompatActivity {
 RecyclerView recyclerViewForDiosDashboard;
 SearchView searchView;
     public static ApplicationController applicationController;
-DIOS_DashboardAdapter adapter;
-private TextView textView8;
+    private TextView textView8;
+    DIOS_DashboardAdapter adapter;
     ArrayList<SchoolListModel> arrayListSchool=new ArrayList<>();
 
     public static boolean setSchoolIdInContoller(Integer schoolid) {
@@ -46,16 +46,16 @@ private TextView textView8;
         applicationController= (ApplicationController) getApplication();
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+        recyclerViewForDiosDashboard=findViewById(R.id.recyclerViewForDiosDashboard);
+        searchView=findViewById(R.id.searchView);
+        recyclerViewForDiosDashboard.setLayoutManager(new LinearLayoutManager(this));
+        textView8=findViewById(R.id.textView8);
+        textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
+
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("DistrictID",applicationController.getDistid());
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        recyclerViewForDiosDashboard=findViewById(R.id.recyclerViewForDiosDashboard);
-        searchView=findViewById(R.id.searchView);
-        textView8=findViewById(R.id.textView8);
-        recyclerViewForDiosDashboard.setLayoutManager(new LinearLayoutManager(this));
-        textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
-
         Call<List<SchoolListModel>> call=apiService.getSchoolListDistricWise(jsonObject);
         call.enqueue(new Callback<List<SchoolListModel>>() {
             @Override

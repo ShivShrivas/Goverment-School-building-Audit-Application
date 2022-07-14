@@ -66,9 +66,9 @@ PrincipalAndTeacherTrainingModel arrayList;
         approveAllStaffTraing=findViewById(R.id.approveAllStaffTraing);
         rejectAllStaffTraing=findViewById(R.id.rejectAllStaffTraing);
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID","2033");
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
-
+        Log.d("TAG", "onCreate: "+jsonObject);
         recyclerView.setLayoutManager(new LinearLayoutManager(this){
             @Override
             public boolean canScrollVertically() {

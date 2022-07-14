@@ -34,6 +34,8 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     ConstraintLayout constraintLayoutAC;
     LinearLayout linearLayout21;
+
+    Call<List<JsonObject>> call;
     String Type;
     EditText edtArtAndCraftRoomPhysicalStatus,ArtAndCraftRoomWorkingStatus,edtArtAndCraftRoomAvailabelty;
     TextView UploadedImageAC,editArtAndCraftDetails;
@@ -95,7 +97,11 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
-        Call<List<JsonObject>> call=apiService.checkArtAndCraft(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"25"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkArtAndCraft(paraGetDetails2("2","2033", applicationController.getPeriodID(),"25"));
+        }else{
+            call=apiService.checkArtAndCraft(paraGetDetails2("11","2033", applicationController.getPeriodID(),"25"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

@@ -9,6 +9,7 @@ import com.bsn.buildingaudit.Model.CurrentYearResultModel;
 import com.bsn.buildingaudit.Model.DataLocked;
 import com.bsn.buildingaudit.Model.GameDetailsModel;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
+import com.bsn.buildingaudit.Model.GetDashboardMenuDataModel;
 import com.bsn.buildingaudit.Model.GetExtraActivitiesModel;
 import com.bsn.buildingaudit.Model.GetOtherExtraActivitiesModel;
 import com.bsn.buildingaudit.Model.GetQuaterType;
@@ -567,5 +568,14 @@ public  interface ApiService {
     @POST("SchoolGrading/GetOtherExtraActivitiesDetails")
     Call<GetOtherExtraActivitiesModel> getOtherExtraActivities(@Body JsonObject jsonObject);
 
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/GetDashboardMenu")
+   Call<ArrayList<GetDashboardMenuDataModel>> getDiosDashboardCardsData(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/GetDashboardSubMenu")
+   Call<ArrayList<GetDashboardMenuDataModel>> getDiosSubmenuCardsData(@Body JsonObject jsonObject);
 
 }

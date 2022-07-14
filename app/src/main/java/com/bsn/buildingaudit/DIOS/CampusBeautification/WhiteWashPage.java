@@ -62,7 +62,7 @@ TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
         whitewashStatus=findViewById(R.id.whitewashStatus);
         lastDoneWhiteWashYear=findViewById(R.id.lastDoneWhiteWashYear);
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID","2");
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();

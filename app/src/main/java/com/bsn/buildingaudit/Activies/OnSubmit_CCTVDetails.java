@@ -36,6 +36,7 @@ public class OnSubmit_CCTVDetails extends AppCompatActivity {
     ConstraintLayout layoutCCTV;
     LinearLayout linearLayout21;
     String Type;
+    Call<List<JsonObject>> call;
     TextView uploadCCTV,editCCTVDetails,EdtNoOfNotworkingCCTV;
 EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailabelty,edtTotalCCTV,EdtNoNonOfCCTV;
     @Override
@@ -93,7 +94,11 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkCCTVDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"10"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkCCTVDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"10"));
+        }else{
+            call=apiService.checkCCTVDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"10"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

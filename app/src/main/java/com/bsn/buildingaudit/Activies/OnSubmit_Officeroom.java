@@ -34,6 +34,7 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
     EditText edtGymAvailabelty,gymWorkingStatus,edtGymArea;
     ApplicationController applicationController;
     EditText OfficeRoomWorkingStatus,spinnerOfficeRoomAvailabelty,OfficeRoomAlmirah,OfficeRoomFurniture;
+    Call<List<JsonObject>> call;
     ConstraintLayout constraintLayoutPR;
     String Type;
     TextView editOfficeRoomDetails;
@@ -90,7 +91,11 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
             }
         });
 
-        Call<List<JsonObject>> call=apiService.checkOfficeRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"27"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkOfficeRoom(paraGetDetails2("2","2033", applicationController.getPeriodID(),"27"));
+        }else{
+            call=apiService.checkOfficeRoom(paraGetDetails2("11","2033", applicationController.getPeriodID(),"27"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

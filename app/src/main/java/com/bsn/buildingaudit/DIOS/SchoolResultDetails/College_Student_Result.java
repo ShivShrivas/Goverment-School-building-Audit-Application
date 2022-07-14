@@ -49,7 +49,7 @@ Button approveBtnCollegeResult,rejectBtnCollegeResult;
             }
         });
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID","2033");
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
         recyclerViewStudent_college_result=findViewById(R.id.recyclerViewStudent_college_result);
         rejectBtnCollegeResult=findViewById(R.id.rejectBtnCollegeResult);

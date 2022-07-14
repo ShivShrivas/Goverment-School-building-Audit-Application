@@ -37,6 +37,7 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
             edtnoOfFans;
     RecyclerView recyclerViewElectricityArrangmentOnSub;
     LinearLayout linearLayout21;
+    Call<List<JsonObject>> call;
     ConstraintLayout constraintLayoutEA;
     TextView uploadImageTxt,editElectricDetails;
     Button submitBtnElectricityArrangeOnSub;
@@ -98,7 +99,11 @@ public class OnSubmit_ElectricityArrangment extends AppCompatActivity {
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkElectricityArrangement(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"11"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkElectricityArrangement(paraGetDetails2("2","2033", applicationController.getPeriodID(),"11"));
+        }else{
+            call=apiService.checkElectricityArrangement(paraGetDetails2("11","2033", applicationController.getPeriodID(),"11"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

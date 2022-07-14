@@ -36,6 +36,7 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
         TextView edtrenewalDate,editFirefightingDetails;
     EditText edtNotWorkingFF,edtWorkingFF,edtTotalFF;
     LinearLayout linearLayout21;
+    Call<List<JsonObject>> call;
     String Type;
         ConstraintLayout constraintLayout30;
         RecyclerView recyclerViewFireFightningoNsUB;
@@ -98,7 +99,11 @@ TextView uploadtextFireFighting;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Call<List<JsonObject>> call=apiService.checkFireFighting(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"12"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkFireFighting(paraGetDetails2("2","2033", applicationController.getPeriodID(),"12"));
+        }else{
+            call=apiService.checkFireFighting(paraGetDetails2("13","2033", applicationController.getPeriodID(),"12"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {

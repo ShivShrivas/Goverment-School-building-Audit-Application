@@ -44,7 +44,7 @@ public class Red_Cross_Society extends AppCompatActivity {
         FORMATIONSTATUS=findViewById(R.id.FORMATIONSTATUS);
         setSupportActionBar(toolbar);
         JsonObject jsonObject=new JsonObject();
-        jsonObject.addProperty("SchoolID","2");
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();

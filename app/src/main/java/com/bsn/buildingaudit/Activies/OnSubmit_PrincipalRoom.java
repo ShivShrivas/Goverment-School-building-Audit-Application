@@ -34,6 +34,7 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
     TextView userName,schoolAddress,schoolName;
     ConstraintLayout constraintLayoutPR;
     LinearLayout linearLayout21;
+    Call<List<JsonObject>> call;
     String Type;
     EditText edtRoomWorkingStatus,edtPrincipalRoomAvailabelty;
     RecyclerView recyclerViewprincipalOnSub;
@@ -80,7 +81,11 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
-        Call<List<JsonObject>> call=apiService.checkPrincipal(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"24"));
+        if (applicationController.getUsertype().equals("VA")){
+            call=apiService.checkPrincipal(paraGetDetails2("2","2033", applicationController.getPeriodID(),"24"));
+        }else{
+            call=apiService.checkPrincipal(paraGetDetails2("11","2033", applicationController.getPeriodID(),"24"));
+        }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
