@@ -69,6 +69,7 @@ public class DIOS_DashboardAdapter extends RecyclerView.Adapter<DIOS_DashboardAd
                         Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
                         applicationController.setSchoolName(arrayListSchool.get(position).getSchoolname());
                         applicationController.setSchoolAddress(arrayListSchool.get(position).getBlockname()+" "+arrayListSchool.get(position).getDistrictname()+" "+arrayListSchool.get(position).getDivisionname());
+                        applicationController.setSchoolId(arrayListSchool.get(position).getSchoolid().toString());
                         context.startActivity(i);
                     }else{
                         if ( DIOS_Dashboard.setSchoolIdInContoller(arrayListSchool.get(position).getSchoolid())){

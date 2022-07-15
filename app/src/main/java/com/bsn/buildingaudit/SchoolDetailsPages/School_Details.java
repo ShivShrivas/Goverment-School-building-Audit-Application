@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,9 +32,11 @@ import retrofit2.Response;
 
 public class School_Details extends AppCompatActivity {
     ApplicationController applicationController;
+    TextView textView8,schoolAddress,schoolName;
 ArrayList<String> subjectSixToEight=new ArrayList<>();
 ArrayList<String> subjectNineToTenth=new ArrayList<>();
 ArrayList<String> subjectEleventhToTwelveth=new ArrayList<>();
+CardView cardView32,cardView35,cardView36;
 TextView schoolAddTxt,pincodeTxt,mobTxt,dateOfRegisTxt,authorityContactTxt,cateGoryOfSchoolTxt,affiliationTxt,designationTxt,authorityTxt;
    List<ClassDatum> classesArrayList =new ArrayList<>();
    List<SubjectDatum> subjectsArrayList =new ArrayList<>();
@@ -52,8 +55,12 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
         };
         schoolDetailsList=new SchoolDetailsModel();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        recViewForRunningClasses=findViewById(R.id.recViewForRunningClasses);
 
+        recViewForRunningClasses=findViewById(R.id.recViewForRunningClasses);
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
         schoolAddTxt=findViewById(R.id.schoolAddTxt);
         mobTxt=findViewById(R.id.mobTxt);
         pincodeTxt=findViewById(R.id.pincodeTxt);
@@ -62,6 +69,9 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
         affiliationTxt=findViewById(R.id.affiliationTxt);
         authorityTxt=findViewById(R.id.authorityTxt);
         authorityContactTxt=findViewById(R.id.authorityContactTxt);
+        cardView36=findViewById(R.id.cardView36);
+        cardView35=findViewById(R.id.cardView35);
+        cardView32=findViewById(R.id.cardView32);
         designationTxt=findViewById(R.id.designationTxt);
         recViewForPermittedSubjectsNinthToTenth=findViewById(R.id.recViewForPermittedSubjectsNinthToTenth);
         recViewForPermittedSubjectsElevenTwelve=findViewById(R.id.recViewForPermittedSubjectsElevenTwelve);
@@ -124,7 +134,13 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
                         subjectEleventhToTwelveth.clear();
                         subjectEleventhToTwelveth.addAll(hs);
                         recViewForPermittedSubjectsElevenTwelve.setLayoutManager(layoutManager1);
-                        recViewForPermittedSubjectsElevenTwelve.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectEleventhToTwelveth));
+                        Log.d("TAG", "onResponse: "+subjectEleventhToTwelveth.size()+"//");
+                        if (subjectEleventhToTwelveth.isEmpty()){
+                            cardView36.setVisibility(View.GONE);
+                        }else{
+                            cardView36.setVisibility(View.VISIBLE);
+                            recViewForPermittedSubjectsElevenTwelve.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectEleventhToTwelveth));
+                        }
 
                     }else if(subjectsArrayList.get(i).getClassID()==11 ||subjectsArrayList.get(i).getClassID()==10  ){
                         subjectNineToTenth.add(subjectsArrayList.get(i).getSubjectName());
@@ -135,7 +151,12 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
                         subjectNineToTenth.clear();
                         subjectNineToTenth.addAll(hs);
                         recViewForPermittedSubjectsNinthToTenth.setLayoutManager(layoutManager2);
-                        recViewForPermittedSubjectsNinthToTenth.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectNineToTenth));
+                        if (subjectNineToTenth.isEmpty()){
+                            cardView35.setVisibility(View.GONE);
+                        }else{
+                            cardView35.setVisibility(View.VISIBLE);
+                            recViewForPermittedSubjectsNinthToTenth.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectNineToTenth));
+                        }
 
                     }else{
                         subjectSixToEight.add(subjectsArrayList.get(i).getSubjectName());
@@ -146,7 +167,14 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
                         subjectSixToEight.clear();
                         subjectSixToEight.addAll(hs);
                         recViewForPermittedSubjectsSixthToEight.setLayoutManager(layoutManager3);
-                        recViewForPermittedSubjectsSixthToEight.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectSixToEight));
+                        if (subjectSixToEight.isEmpty()){
+                                cardView32.setVisibility(View.GONE);
+                        }else{
+                            cardView32.setVisibility(View.VISIBLE);
+
+                            recViewForPermittedSubjectsSixthToEight.setAdapter(new SubjectRecviewAdapter(School_Details.this,subjectSixToEight));
+
+                        }
 
 
                     }

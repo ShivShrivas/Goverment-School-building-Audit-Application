@@ -62,7 +62,7 @@
                     android:textColor="@color/black" />
 
                 <TextView
-                    android:id="@+id/noOfSanctionPosts"
+                    android:id="@+id/REMAMT"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="3"

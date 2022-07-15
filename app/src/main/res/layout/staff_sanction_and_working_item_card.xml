@@ -65,7 +65,7 @@
 
 
                 <TextView
-                    android:id="@+id/noOfSanctionPosts"
+                    android:id="@+id/REMAMT"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"

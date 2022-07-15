@@ -48,7 +48,7 @@ public class StaffSanctionAndWorkingAdapter extends RecyclerView.Adapter<StaffSa
         TextView noOfWorkingStaff,noOfAttachedStaff,noOfPostedStaff,noOfSanctionPosts,designamtionName,noOfVacantPost;
         public StaffSanctionAndWorkingViewHolder(@NonNull View itemView) {
             super(itemView);
-            noOfSanctionPosts=itemView.findViewById(R.id.noOfSanctionPosts);
+            noOfSanctionPosts=itemView.findViewById(R.id.REMAMT);
             noOfPostedStaff=itemView.findViewById(R.id.noOfPostedStaff);
             noOfAttachedStaff=itemView.findViewById(R.id.noOfAttachedStaff);
             noOfWorkingStaff=itemView.findViewById(R.id.noOfWorkingStaff);

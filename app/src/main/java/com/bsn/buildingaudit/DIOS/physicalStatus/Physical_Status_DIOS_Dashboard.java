@@ -1,10 +1,12 @@
 package com.bsn.buildingaudit.DIOS.physicalStatus;
 
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +31,14 @@ RecyclerView recyclerViewForDiosDashboardPhysicalStatus;
         recyclerViewForDiosDashboardPhysicalStatus=findViewById(R.id.recyclerViewForDiosDashboardPhysicalStatus);
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());

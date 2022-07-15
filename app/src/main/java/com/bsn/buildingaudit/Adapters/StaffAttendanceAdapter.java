@@ -49,7 +49,11 @@ public class StaffAttendanceAdapter extends RecyclerView.Adapter<StaffAttendance
         return new StaffAttendanceViewHolder(view);
 
     }
-
+    @Override
+    public int getItemViewType(int position)
+    {
+        return position;
+    }
     @Override
     public void onBindViewHolder(@NonNull StaffAttendanceAdapter.StaffAttendanceViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.staffname.setText(arrayList.get(position).getStaffName());

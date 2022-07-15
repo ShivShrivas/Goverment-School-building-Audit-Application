@@ -1,41 +1,73 @@
 package com.bsn.buildingaudit.DIOS.reciept_and_expenditure;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.RecieptAndExpenditureAdapter;
+import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.Model.GetReciptExpDetailsModel;
 import com.bsn.buildingaudit.R;
+import com.bsn.buildingaudit.RetrofitApi.ApiService;
+import com.bsn.buildingaudit.RetrofitApi.RestClient;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Reciept_And_Expenditures extends AppCompatActivity {
 RecyclerView recyclerViewRecieptAndExpenditure;
+ArrayList<GetReciptExpDetailsModel> arrayList=new ArrayList<>();
+ApplicationController applicationController;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reciept_and_expenditures);
+        applicationController= (ApplicationController) getApplication();
+        Window window = getWindow();
+        window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+        JsonObject jsonObject=new JsonObject();
+        jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
+        jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
+        Log.d("TAG", "onCreate: "+jsonObject);
         recyclerViewRecieptAndExpenditure=findViewById(R.id.recyclerViewRecieptAndExpenditure);
-        ArrayList<String> arrayList=new ArrayList<>();
-        arrayList.add("क्रीडा");
-        arrayList.add("विज्ञान");
-        arrayList.add("स्काउटिंग");
-        arrayList.add("रेडक्रास");
-        arrayList.add("निर्धन शुल्क");
-        arrayList.add("जलपान");
-        arrayList.add("वाचनालय");
-        arrayList.add("निश्रव्य दृश्य");
-        arrayList.add("कला");
-        arrayList.add("पत्रिका");
-        arrayList.add("प्रगति पत्र");
-        arrayList.add("अनुपस्थिति दण्ड");
-        arrayList.add("गृह परीक्षा");
-        arrayList.add("पत्रिका");
-
         recyclerViewRecieptAndExpenditure.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewRecieptAndExpenditure.setAdapter(new RecieptAndExpenditureAdapter(this,arrayList));
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
+        Call<ArrayList<GetReciptExpDetailsModel>> call=apiService.getReciptExpDetails(jsonObject);
+        call.enqueue(new Callback<ArrayList<GetReciptExpDetailsModel>>() {
+            @Override
+            public void onResponse(Call<ArrayList<GetReciptExpDetailsModel>> call, Response<ArrayList<GetReciptExpDetailsModel>> response) {
+                ArrayList<GetReciptExpDetailsModel> arrayList=response.body();
+
+                recyclerViewRecieptAndExpenditure.setAdapter(new RecieptAndExpenditureAdapter(Reciept_And_Expenditures.this,arrayList));
+
+            }
+
+            @Override
+            public void onFailure(Call<ArrayList<GetReciptExpDetailsModel>> call, Throwable t) {
+
+            }
+        });
+
 
 
     }

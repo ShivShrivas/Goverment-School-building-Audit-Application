@@ -90,36 +90,57 @@ ApplicationController applicationController;
                 SCOUTPARTIREGRALLY.setText(scoutAndGuideModel.getScoutpartiregrally()==null?"No":scoutAndGuideModel.getScoutpartiregrally().toString());
                 SCOUTPARTINATIONAL.setText(scoutAndGuideModel.getScoutpartinational()==null?"No":scoutAndGuideModel.getScoutpartinational().toString());
                 SCOUTPARTISOCIALWORK.setText(scoutAndGuideModel.getScoutpartisocialwork()==null?"No":scoutAndGuideModel.getScoutpartisocialwork().toString());
-                EXPSCOUTGUIDE.setText(scoutAndGuideModel.getExpscoutguide()==null?"No":scoutAndGuideModel.getExpscoutguide().toString());
-                if (scoutAndGuideModel.getScoutpartidistrictrally().equals("No") ){
+                EXPSCOUTGUIDE.setText(scoutAndGuideModel.getExpscoutguide()==null?"0.0":scoutAndGuideModel.getExpscoutguide().toString());
+                try {
+                    if (scoutAndGuideModel.getScoutpartidistrictrally().equals("No") ){
+                        districRallyRecview.setVisibility(View.GONE);
+                    }
+                }catch (Exception e){
                     districRallyRecview.setVisibility(View.GONE);
+
                 }
+
                 String[] SCOUTPARTIDISTRICTRALLYPHOTO=scoutAndGuideModel.getScoutpartidistrictrallyphoto().split(",");
                 ScoutAndGuideImageRecViewAdapter scoutAndGuideImageRecViewAdapter1=new ScoutAndGuideImageRecViewAdapter(Scount_and_Guide.this,SCOUTPARTIDISTRICTRALLYPHOTO);
                 districRallyRecview.setAdapter(scoutAndGuideImageRecViewAdapter1);
                 scoutAndGuideImageRecViewAdapter1.notifyDataSetChanged();
-
-                if (scoutAndGuideModel.getScoutpartiregrally().equals("No") ){
+                try {
+                    if (scoutAndGuideModel.getScoutpartiregrally().equals("No") ){
+                        stateRallyRecview.setVisibility(View.GONE);
+                    }
+                }catch (Exception e){
                     stateRallyRecview.setVisibility(View.GONE);
+
                 }
+
                 String[] SCOUTPARTIREGRALLYPHOTO=scoutAndGuideModel.getScoutpartiregrallyphoto().split(",");
                 ScoutAndGuideImageRecViewAdapter scoutAndGuideImageRecViewAdapter2=new ScoutAndGuideImageRecViewAdapter(Scount_and_Guide.this,SCOUTPARTIREGRALLYPHOTO);
                 stateRallyRecview.setAdapter(scoutAndGuideImageRecViewAdapter2);
                 scoutAndGuideImageRecViewAdapter2.notifyDataSetChanged();
 
-
-                if (scoutAndGuideModel.getScoutpartinational().toString().equals("No") ){
+                try {
+                    if (scoutAndGuideModel.getScoutpartinational().toString().equals("No") ){
+                        nationalRallyRecview.setVisibility(View.GONE);
+                    }
+                }catch (Exception e){
                     nationalRallyRecview.setVisibility(View.GONE);
+
                 }
+
                 String[] SCOUTPARTINATIONALPHOTO=scoutAndGuideModel.getScoutpartinationalphoto().split(",");
                 ScoutAndGuideImageRecViewAdapter scoutAndGuideImageRecViewAdapter3=new ScoutAndGuideImageRecViewAdapter(Scount_and_Guide.this,SCOUTPARTINATIONALPHOTO);
                 nationalRallyRecview.setAdapter(scoutAndGuideImageRecViewAdapter3);
                 scoutAndGuideImageRecViewAdapter3.notifyDataSetChanged();
 
-
-                if (scoutAndGuideModel.getScoutpartisocialwork().toString().equals("No") ){
+                try {
+                    if (scoutAndGuideModel.getScoutpartisocialwork().toString().equals("No") ){
+                        socialWorkRallyRecview.setVisibility(View.GONE);
+                    }
+                }catch (Exception e){
                     socialWorkRallyRecview.setVisibility(View.GONE);
+
                 }
+
                 String[] SCOUTPARTISOCIALWORKPHOTO=scoutAndGuideModel.getScoutpartisocialworkphoto().split(",");
                 ScoutAndGuideImageRecViewAdapter scoutAndGuideImageRecViewAdapter4=new ScoutAndGuideImageRecViewAdapter(Scount_and_Guide.this,SCOUTPARTISOCIALWORKPHOTO);
                 socialWorkRallyRecview.setAdapter(scoutAndGuideImageRecViewAdapter4);

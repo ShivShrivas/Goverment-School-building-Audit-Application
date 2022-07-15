@@ -11,8 +11,11 @@ import com.bsn.buildingaudit.Model.GameDetailsModel;
 import com.bsn.buildingaudit.Model.GetAllRoomsList;
 import com.bsn.buildingaudit.Model.GetDashboardMenuDataModel;
 import com.bsn.buildingaudit.Model.GetExtraActivitiesModel;
+import com.bsn.buildingaudit.Model.GetNCCDetailsModel;
+import com.bsn.buildingaudit.Model.GetNCCParticipationDetailsModel;
 import com.bsn.buildingaudit.Model.GetOtherExtraActivitiesModel;
 import com.bsn.buildingaudit.Model.GetQuaterType;
+import com.bsn.buildingaudit.Model.GetReciptExpDetailsModel;
 import com.bsn.buildingaudit.Model.GetSchoolDetails;
 import com.bsn.buildingaudit.Model.GetUserType;
 import com.bsn.buildingaudit.Model.InstallationYear;
@@ -577,5 +580,20 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
    @POST("SchoolGrading/GetDashboardSubMenu")
    Call<ArrayList<GetDashboardMenuDataModel>> getDiosSubmenuCardsData(@Body JsonObject jsonObject);
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/GetNCCDetails")
+   Call<GetNCCDetailsModel> getNCCDetails(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/GetNCCParticipationDetails")
+   Call<GetNCCParticipationDetailsModel> getNCCParticipationDetails(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/GetReciptExpDetails")
+   Call<ArrayList<GetReciptExpDetailsModel>> getReciptExpDetails(@Body JsonObject jsonObject);
+
 
 }
