@@ -64,6 +64,7 @@ TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
+        Log.d("TAG", "onCreate: "+jsonObject);
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         Call<CampusWhiteWashDetalsModel> call=apiService.getWhiteWashDetails(jsonObject);
