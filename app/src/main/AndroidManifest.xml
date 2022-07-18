@@ -30,7 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
-            android:name=".Face_Recognition_Page"
+            android:name="com.bsn.staffAttendance.Face_Recog_Activity"
+            android:exported="false" />        <activity
+            android:name="com.bsn.staffAttendance.Face_Recognition_Page"
             android:exported="false" />
         <activity
             android:name="com.bsn.buildingaudit.DIOS.Dios_InnerDashboard"
@@ -114,15 +116,15 @@
             android:name=".DIOS.DIOS_Dashboard"
             android:exported="false" />
         <activity
-            android:name=".Date_Wise_Attendance"
+            android:name="com.bsn.staffAttendance.Date_Wise_Attendance"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Dashboard_StaffAttendance"
+            android:name="com.bsn.staffAttendance.Dashboard_StaffAttendance"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".UpdateDetails_StaffAttendance"
+            android:name="com.bsn.staffAttendance.UpdateDetails_StaffAttendance"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

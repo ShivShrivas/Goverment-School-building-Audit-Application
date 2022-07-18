@@ -40,6 +40,8 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/activity_jd_dashboard.xml" value="0.211328125" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/activity_staff_sanction_and_working.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/approved_button_card.xml" value="0.2108843537414966" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/face_recog_activity.xml" value="0.16" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/face_recogniz_activity.xml" value="0.2578231292517007" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w936dp/activity_jd_dashboard.xml" value="0.139453125" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_after_submit_classrom_details.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_all_staff_traing_details.xml" value="0.25" />
@@ -146,6 +148,8 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dashboard_review_itemcard_dios.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/dios_dashboard_menu_item_card.xml" value="0.19739583333333333" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/editable_smart_class_card.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/face_recogniz_activity" value="0.19739583333333333" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/face_recogniz_activity.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/facerecoge_item_card.xml" value="0.18" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/fragment_dynamic.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/games_card.xml" value="0.1703125" />

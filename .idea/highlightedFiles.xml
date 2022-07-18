@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ProjectTreeColorHighlighter">
     <files>
-      <node color="3" path="$PROJECT_DIR$/app/src/main/java/com/bsn/buildingaudit/DIOS" />
-      <node color="1" path="$PROJECT_DIR$/app/src/main/java/com/bsn/buildingaudit/DIOS/SchoolStaff/All_Staff_Traing_Details.java" />
       <node color="4" path="$PROJECT_DIR$/app/src/main/java/com/bsn/staffAttendance" />
     </files>
     <colors>

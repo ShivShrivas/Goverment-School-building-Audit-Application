@@ -1,8 +1,10 @@
 package com.bsn.buildingaudit.DIOS.SubjectWiseSyllabus;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bsn.buildingaudit.Adapters.TabAdapter;
@@ -35,7 +37,14 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
         applicationController= (ApplicationController) getApplication();
         viewPager =  findViewById(R.id.viewPager);
         tab = findViewById(R.id.tabLayout);
-
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
 
 
         JsonObject jsonObject=new JsonObject();

@@ -1,6 +1,7 @@
 package com.bsn.staffAttendance;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -47,6 +48,10 @@ public class Face_Recognition_Page extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        schoolAddress=findViewById(R.id.schoolAddress);
+        schoolName=findViewById(R.id.schoolName);
+        schoolName.setText(applicationController.getSchoolName());
+        schoolAddress.setText(applicationController.getSchoolAddress());
         txtdate=findViewById(R.id.txtdate);
         Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
@@ -59,11 +64,13 @@ public class Face_Recognition_Page extends AppCompatActivity {
     private void getStaffData() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "getStaffData: "+paraGetStaff(formattedDate,applicationController.getSchoolId()));
         Call<List<AttendanceStaff>> listCall=apiService.getStaff(paraGetStaff(formattedDate,applicationController.getSchoolId()));
        listCall.enqueue(new Callback<List<AttendanceStaff>>() {
            @Override
            public void onResponse(Call<List<AttendanceStaff>> call, Response<List<AttendanceStaff>> response) {
                List<AttendanceStaff> attendanceStaff=response.body();
+               Log.d("TAG", "onResponse: "+attendanceStaff);
                adapter= new FacerecognizationStaffAdapter(Face_Recognition_Page.this,attendanceStaff);
                recyclerViewStaffFaceRecognization.setAdapter(adapter);
                adapter.notifyDataSetChanged();
