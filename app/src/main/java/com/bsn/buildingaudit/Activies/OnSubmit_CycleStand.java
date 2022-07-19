@@ -91,9 +91,9 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkCycleStand(paraGetDetails2("2","2033", applicationController.getPeriodID(),"21"));
+            call=apiService.checkCycleStand(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"21"));
         }else{
-            call=apiService.checkCycleStand(paraGetDetails2("11","2033", applicationController.getPeriodID(),"21"));
+            call=apiService.checkCycleStand(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"21"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

@@ -110,9 +110,9 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         ApiService apiService=restClient.getApiService();
 
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkVocalRoom(paraGetDetails2("2","2033", applicationController.getPeriodID(),"26"));
+            call=apiService.checkVocalRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"26"));
         }else{
-            call=apiService.checkVocalRoom(paraGetDetails2("12","2033", applicationController.getPeriodID(),"26"));
+            call=apiService.checkVocalRoom(paraGetDetails2("12",applicationController.getSchoolId(), applicationController.getPeriodID(),"26"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

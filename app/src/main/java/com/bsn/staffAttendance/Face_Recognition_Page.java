@@ -48,6 +48,7 @@ public class Face_Recognition_Page extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());

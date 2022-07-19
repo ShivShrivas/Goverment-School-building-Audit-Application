@@ -84,9 +84,9 @@ TextView PGImageUploadTxt,editPlayGroundDetails;
         ApiService apiService=restClient.getApiService();
 
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkPlayGroundDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"5"));
+            call=apiService.checkPlayGroundDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"5"));
         }else{
-            call=apiService.checkPlayGroundDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"5"));
+            call=apiService.checkPlayGroundDetails(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"5"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

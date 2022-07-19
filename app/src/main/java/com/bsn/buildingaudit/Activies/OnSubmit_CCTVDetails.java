@@ -95,9 +95,9 @@ EditText edtCCTVWorkingStatus,EdtNoOfCCTV,edtCCTVInstallationYear,edtCCTVAvailab
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkCCTVDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"10"));
+            call=apiService.checkCCTVDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"10"));
         }else{
-            call=apiService.checkCCTVDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"10"));
+            call=apiService.checkCCTVDetails(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"10"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

@@ -98,9 +98,9 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkBoundryWall(paraGetDetails2("2","2033", applicationController.getPeriodID(),"15"));
+            call=apiService.checkBoundryWall(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"15"));
         }else{
-            call=apiService.checkBoundryWall(paraGetDetails2("12","2033", applicationController.getPeriodID(),"15"));
+            call=apiService.checkBoundryWall(paraGetDetails2("12",applicationController.getSchoolId(), applicationController.getPeriodID(),"15"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

@@ -92,9 +92,9 @@ public class OnSubmit_Officeroom extends AppCompatActivity {
         });
 
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkOfficeRoom(paraGetDetails2("2","2033", applicationController.getPeriodID(),"27"));
+            call=apiService.checkOfficeRoom(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"27"));
         }else{
-            call=apiService.checkOfficeRoom(paraGetDetails2("11","2033", applicationController.getPeriodID(),"27"));
+            call=apiService.checkOfficeRoom(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"27"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

@@ -91,9 +91,9 @@ TextView workingStatusHearOnSub,editRainHarvestingDetails;
         ApiService apiService=restClient.getApiService();
 
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkRainHarvest(paraGetDetails2("2","2033", applicationController.getPeriodID(),"13"));
+            call=apiService.checkRainHarvest(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"13"));
         }else{
-            call=apiService.checkRainHarvest(paraGetDetails2("11","2033", applicationController.getPeriodID(),"13"));
+            call=apiService.checkRainHarvest(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"13"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

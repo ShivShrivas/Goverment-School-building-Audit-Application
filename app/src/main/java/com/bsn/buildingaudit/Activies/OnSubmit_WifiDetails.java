@@ -78,9 +78,9 @@ TextView wifiUploadImageTxt;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkWifiDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"20"));
+            call=apiService.checkWifiDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"20"));
         }else{
-            call=apiService.checkWifiDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"20"));
+            call=apiService.checkWifiDetails(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"20"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

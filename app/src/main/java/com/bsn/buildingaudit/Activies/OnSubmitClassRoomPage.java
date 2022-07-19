@@ -127,11 +127,11 @@ LinearLayout diosButtonLayout,linearLayout2;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+paraGetDetails("12","2033", applicationController.getPeriodID())+applicationController.getUsertype());
+        Log.d("TAG", "onCreate: "+paraGetDetails("12",applicationController.getSchoolId(), applicationController.getPeriodID())+applicationController.getUsertype());
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkDetailsOfRooms(paraGetDetails("2","2033", applicationController.getPeriodID()));
+            call=apiService.checkDetailsOfRooms(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
         }else{
-            call=apiService.checkDetailsOfRooms(paraGetDetails("12","2033", applicationController.getPeriodID()));
+            call=apiService.checkDetailsOfRooms(paraGetDetails("12",applicationController.getSchoolId(), applicationController.getPeriodID()));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

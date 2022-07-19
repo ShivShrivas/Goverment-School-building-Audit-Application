@@ -98,9 +98,9 @@ public class OnSubmit_ArtAndCraft extends AppCompatActivity {
         ApiService apiService=restClient.getApiService();
 
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkArtAndCraft(paraGetDetails2("2","2033", applicationController.getPeriodID(),"25"));
+            call=apiService.checkArtAndCraft(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"25"));
         }else{
-            call=apiService.checkArtAndCraft(paraGetDetails2("11","2033", applicationController.getPeriodID(),"25"));
+            call=apiService.checkArtAndCraft(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"25"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

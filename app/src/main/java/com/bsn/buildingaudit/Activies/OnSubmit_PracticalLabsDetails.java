@@ -162,9 +162,9 @@ ImageView schoolIcon;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkLabDetails(paraGetDetails("2","2033", applicationController.getPeriodID()));
+            call=apiService.checkLabDetails(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
         }else{
-            call=apiService.checkLabDetails(paraGetDetails("10","2033", applicationController.getPeriodID()));
+            call=apiService.checkLabDetails(paraGetDetails("10",applicationController.getSchoolId(), applicationController.getPeriodID()));
         }
         call.enqueue(new Callback<List<LabDetailsResponse>>() {
             @Override

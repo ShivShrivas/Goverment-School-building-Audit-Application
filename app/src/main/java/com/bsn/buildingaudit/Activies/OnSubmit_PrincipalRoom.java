@@ -82,9 +82,9 @@ public class OnSubmit_PrincipalRoom extends AppCompatActivity {
         ApiService apiService=restClient.getApiService();
 
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkPrincipal(paraGetDetails2("2","2033", applicationController.getPeriodID(),"24"));
+            call=apiService.checkPrincipal(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"24"));
         }else{
-            call=apiService.checkPrincipal(paraGetDetails2("11","2033", applicationController.getPeriodID(),"24"));
+            call=apiService.checkPrincipal(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"24"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

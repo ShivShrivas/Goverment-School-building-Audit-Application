@@ -102,9 +102,9 @@ public class OnSubmit_BoysToiletDetails extends AppCompatActivity {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkBoysToilet(paraGetDetails2("2","2033", applicationController.getPeriodID(),"16"));
+            call=apiService.checkBoysToilet(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"16"));
         }else{
-            call=apiService.checkBoysToilet(paraGetDetails2("11","2033", applicationController.getPeriodID(),"16"));
+            call=apiService.checkBoysToilet(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"16"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

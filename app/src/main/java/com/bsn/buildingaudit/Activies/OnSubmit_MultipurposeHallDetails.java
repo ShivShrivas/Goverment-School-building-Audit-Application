@@ -89,9 +89,9 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkMultiPurposeHall(paraGetDetails2("2","2033", applicationController.getPeriodID(),"23"));
+            call=apiService.checkMultiPurposeHall(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"23"));
         }else{
-            call=apiService.checkMultiPurposeHall(paraGetDetails2("11","2033", applicationController.getPeriodID(),"23"));
+            call=apiService.checkMultiPurposeHall(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"23"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

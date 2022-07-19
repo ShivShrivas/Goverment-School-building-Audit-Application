@@ -95,9 +95,9 @@ RecyclerView recyclerViewSmartClassONSubmit;
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkSmartClassDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"8"));
+            call=apiService.checkSmartClassDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"8"));
         }else{
-            call=apiService.checkSmartClassDetails(paraGetDetails2("13","2033", applicationController.getPeriodID(),"8"));
+            call=apiService.checkSmartClassDetails(paraGetDetails2("13",applicationController.getSchoolId(), applicationController.getPeriodID(),"8"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

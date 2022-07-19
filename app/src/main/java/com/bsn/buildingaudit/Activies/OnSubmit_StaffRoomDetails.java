@@ -104,11 +104,11 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+paraGetDetails("2","2033", applicationController.getPeriodID()));
+        Log.d("TAG", "onCreate: "+paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkStaffRoomDetails(paraGetDetails("2","2033", applicationController.getPeriodID()));
+            call=apiService.checkStaffRoomDetails(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
         }else{
-            call=apiService.checkStaffRoomDetails(paraGetDetails("11","2033", applicationController.getPeriodID()));
+            call=apiService.checkStaffRoomDetails(paraGetDetails("11",applicationController.getSchoolId(), applicationController.getPeriodID()));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

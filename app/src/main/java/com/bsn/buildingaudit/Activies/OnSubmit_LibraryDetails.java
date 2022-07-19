@@ -108,7 +108,7 @@ ImageView schoolIcon;
         if (applicationController.getUsertype().equals("VA")){
             call=apiService.checkLibraryDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"4"));
         }else{
-            call=apiService.checkLibraryDetails(paraGetDetails2("11","2", applicationController.getPeriodID(),"4"));
+            call=apiService.checkLibraryDetails(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"4"));
         }
         editLibraryDetails.setOnClickListener(new View.OnClickListener() {
             @Override

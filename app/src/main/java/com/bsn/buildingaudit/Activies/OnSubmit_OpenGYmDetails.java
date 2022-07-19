@@ -92,9 +92,9 @@ String Type;
             }
         });
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.checkGymDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"6"));
+            call=apiService.checkGymDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"6"));
         }else{
-            call=apiService.checkGymDetails(paraGetDetails2("11","2033", applicationController.getPeriodID(),"6"));
+            call=apiService.checkGymDetails(paraGetDetails2("11",applicationController.getSchoolId(), applicationController.getPeriodID(),"6"));
         }
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override

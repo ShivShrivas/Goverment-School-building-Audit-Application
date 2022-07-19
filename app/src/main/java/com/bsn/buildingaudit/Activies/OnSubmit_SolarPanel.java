@@ -96,9 +96,9 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
             }
         });
         if (applicationController.getUsertype().equals("VA")){
-            call=apiService.viewSolarPanelDetails(paraGetDetails2("2","2033", applicationController.getPeriodID(),"14"));
+            call=apiService.viewSolarPanelDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"14"));
         }else{
-            call=apiService.viewSolarPanelDetails(paraGetDetails2("13","2033", applicationController.getPeriodID(),"14"));
+            call=apiService.viewSolarPanelDetails(paraGetDetails2("13",applicationController.getSchoolId(), applicationController.getPeriodID(),"14"));
         }        call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
