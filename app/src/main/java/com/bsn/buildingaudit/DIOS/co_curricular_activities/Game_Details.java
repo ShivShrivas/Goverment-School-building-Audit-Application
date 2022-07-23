@@ -3,6 +3,7 @@ package com.bsn.buildingaudit.DIOS.co_curricular_activities;
 import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -84,6 +85,7 @@ public class Game_Details extends AppCompatActivity {
         recViewIndoorGames = findViewById(R.id.recViewIndoorGames);
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        Log.d("TAG", "onCreate: "+jsonObject);
         Call<GameDetailsModel> call=apiService.getGameDetails(jsonObject);
         call.enqueue(new Callback<GameDetailsModel>() {
             @Override

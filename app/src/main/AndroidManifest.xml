@@ -30,8 +30,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name="com.bsn.staffAttendance.Staff_Face_Recognization_Activity"
+            android:exported="false" />
+        <activity
             android:name="com.bsn.staffAttendance.Face_Recog_Activity"
-            android:exported="false" />        <activity
+            android:exported="false" />
+        <activity
             android:name="com.bsn.staffAttendance.Face_Recognition_Page"
             android:exported="false" />
         <activity

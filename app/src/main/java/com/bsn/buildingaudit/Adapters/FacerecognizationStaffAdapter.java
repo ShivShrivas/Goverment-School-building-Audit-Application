@@ -40,7 +40,9 @@ public class FacerecognizationStaffAdapter extends RecyclerView.Adapter<Facereco
         holder.recognize_face_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                context.startActivity(new Intent(context, Face_Recog_Activity.class));
+                Intent i=new Intent(context, Face_Recog_Activity.class);
+                i.putExtra("UserName",attendanceStaff.get(position).getStaffName());
+                context.startActivity(i);
             }
         });
 

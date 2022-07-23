@@ -48,6 +48,7 @@ import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -97,7 +98,7 @@ public class Face_Recog_Activity extends AppCompatActivity {
     boolean start=true,flipX=false;
     Context context=Face_Recog_Activity.this;
     int cam_face=CameraSelector.LENS_FACING_BACK; //Default Back Camera
-
+    ApplicationController applicationController;
     int[] intValues;
     int inputSize=112;  //Input size for model
     boolean isModelQuantized=false;
@@ -105,10 +106,12 @@ public class Face_Recog_Activity extends AppCompatActivity {
     float IMAGE_MEAN = 128.0f;
     float IMAGE_STD = 128.0f;
     int OUTPUT_SIZE=192; //Output size of model
+    SharedPreferences sharedpreferences;
     private static int SELECT_PICTURE = 1;
     ProcessCameraProvider cameraProvider;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
-
+Intent i;
+String UserName;
     String modelFile="mobile_face_net.tflite"; //model name
 
     private HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>(); //saved Faces
@@ -120,11 +123,14 @@ public class Face_Recog_Activity extends AppCompatActivity {
         setContentView(R.layout.face_recogniz_activity);
         face_preview =findViewById(R.id.imageView);
         reco_name =findViewById(R.id.textView);
+        i=getIntent();
+        UserName=i.getStringExtra("UserName");
         preview_info =findViewById(R.id.textView2);
         textAbove_preview =findViewById(R.id.textAbovePreview);
         add_face=findViewById(R.id.imageButton);
         add_face.setVisibility(View.INVISIBLE);
-
+        sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
+        applicationController= (ApplicationController) getApplication();
         SharedPreferences sharedPref = getSharedPreferences("Distance",Context.MODE_PRIVATE);
         distance = sharedPref.getFloat("distance",1.00f);
 
@@ -325,16 +331,10 @@ public class Face_Recog_Activity extends AppCompatActivity {
 
             start=false;
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setTitle("Enter Name");
-
-                // Set up the input
-            final EditText input = new EditText(context);
-
-            input.setInputType(InputType.TYPE_CLASS_TEXT );
-            builder.setView(input);
+            builder.setTitle(UserName+"'s face addedd successfully!!");
 
                 // Set up the buttons
-            builder.setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Done", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //Toast.makeText(context, input.getText().toString(), Toast.LENGTH_SHORT).show();
@@ -344,7 +344,12 @@ public class Face_Recog_Activity extends AppCompatActivity {
                             "0", "", -1f);
                     result.setExtra(embeedings);
 
-                    registered.put( input.getText().toString(),result);
+
+
+                    registered.put( UserName,result);
+                    ApplicationController.registered.put(UserName,result);
+                    onBackPressed();
+                    finish();
                     start=true;
 
                 }
@@ -554,7 +559,8 @@ public class Face_Recog_Activity extends AppCompatActivity {
             }
         }, ContextCompat.getMainExecutor(this));
     }
-    void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
+    void bindPreview(@NonNull ProcessCameraProvider cameraProvider)
+    {
         Preview preview = new Preview.Builder()
                 .build();
 

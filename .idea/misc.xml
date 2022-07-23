@@ -37,6 +37,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/schoolicon_dios_panel.xml" value="0.1755" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/search_bg.xml" value="0.1285" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/verfied_card_bg.xml" value="0.194" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/font/anti_coronafont.xml" value="0.22760416666666666" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/activity_jd_dashboard.xml" value="0.211328125" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/activity_staff_sanction_and_working.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout-w1240dp/approved_button_card.xml" value="0.2108843537414966" />
@@ -103,6 +104,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_school_details.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_scount_and_guide.xml" value="0.21" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_splash_screen.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_staff_face_recognization.xml" value="0.19739583333333333" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_staff_sanction_and_working.xml" value="0.18039413845376454" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_student_enrollment_details.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_student_result_details.xml" value="0.2" />

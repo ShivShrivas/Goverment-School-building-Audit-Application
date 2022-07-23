@@ -8,7 +8,9 @@ import androidx.multidex.MultiDex;
 import com.bsn.buildingaudit.Model.AttendanceType;
 import com.bsn.buildingaudit.Model.BoundryType;
 import com.bsn.buildingaudit.Model.InstallationYear;
+import com.bsn.staffAttendance.SimilarityClassifier;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class ApplicationController extends Application {
@@ -37,6 +39,15 @@ String schoolAddress;
 String phoneNumber;
 int DataLocked;
 public  static List<AttendanceType> attendanceTypeList;
+    public static HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>(); //saved Faces
+
+    public HashMap<String, SimilarityClassifier.Recognition> getRegistered() {
+        return registered;
+    }
+
+    public void setRegistered(HashMap<String, SimilarityClassifier.Recognition> registered) {
+        this.registered = registered;
+    }
 
     public static List<AttendanceType> getAttendanceTypeList() {
         return attendanceTypeList;
