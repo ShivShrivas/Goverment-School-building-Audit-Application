@@ -72,42 +72,6 @@ SearchView searchView;
 
             }
         });
-//
-//        arrayListSchool.add("PS K RAM NAGAR");
-//        arrayListSchool.add("SP BAL VIDYA MANDIR");
-//        arrayListSchool.add("PRI. V. HORA KACHHAR");
-//        arrayListSchool.add("POORV M. V. KURSAULI");
-//        arrayListSchool.add("PS RAM NAGAR II");
-//        arrayListSchool.add("B.M.P. SCHOOL PRI. V.");
-//        arrayListSchool.add("PRI. V. HORA BANGER");
-//        arrayListSchool.add("POORV M. V. MANDHANA I");
-//        arrayListSchool.add("POORV M. V. MANDHANA II");
-//        arrayListSchool.add("PRI. V. MANDHANA I");
-//        arrayListSchool.add("M.S.D.VID.M. JHS RAMDEVIPURAM");
-//        arrayListSchool.add("PRI. V. BAGDAUDHI KACHHAR");
-//        arrayListSchool.add("KANYA VIDHYALAY JH SCHOOL");
-//        arrayListSchool.add("SWAMI VIVEKA NAND PV LODHAR");
-//        arrayListSchool.add("RAM CHANDRA ADARSH M.V.MANDHNA");
-//        arrayListSchool.add("PRI. V. GORHA");
-//        arrayListSchool.add("NEW BAAN USHA DEEP P SCHOOL");
-//        arrayListSchool.add("MASTER MIND PUBLIC SCHOOL");
-//        arrayListSchool.add("PT. SATISH CHANDRA C.V. MANDIR");
-//        arrayListSchool.add("R PATAP VIDYALAY MANDHANA");
-//        arrayListSchool.add("PRI. V. LODHER");
-//        arrayListSchool.add("UPS HORA KACHHAR");
-//        arrayListSchool.add("PRI. V. MANDHANA II");
-//        arrayListSchool.add("PRI. V. PERGAHI");
-//        arrayListSchool.add("ACHARYA KISHORI DAS S. B. V.");
-//        arrayListSchool.add("UPS HORA BANGAR");
-//        arrayListSchool.add("CAMBREGE SCHOOL");
-//        arrayListSchool.add("PRI. V. KURSAULI");
-//        arrayListSchool.add("PS BAGDAUNDHI BANGAR");
-//        arrayListSchool.add("MATRI BHARTI B. J. H.S. MANDHANA");
-//        arrayListSchool.add("B.P.M.G. INTER COLLEGE");
-//        arrayListSchool.add("N. V. USADEEP PUBLIC SCHOOL");
-//        arrayListSchool.add("PRI. V. CHAKRATANPUR");
-//        arrayListSchool.add("PRI. V. RAM NAGAR I");
-//        arrayListSchool.add("S. P. B. J. H. S. MANDHANA");
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

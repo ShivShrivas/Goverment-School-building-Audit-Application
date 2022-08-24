@@ -1,8 +1,11 @@
 package com.bsn.buildingaudit.DIOS.ExtraActivitiesDetails;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +14,15 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.GetExtraActivitiesModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,6 +39,9 @@ public class Extra_Activities_Details extends AppCompatActivity {
     CardView ALUMNISTATUSDATELAYOUT,SMDCMEETTOTALLAYOUT,SMDCMEETDATELAYOUT,HEATHCHECKUPDATELAYOUT,PTAMEETINGDATELAYOUT,
             WEBSITEMAILLAYOUT,WEBSITEURLLAYOUT,INVITEDCGADATELAYOUT,INVITEDCGANNUALTITLELAYOUT,INVITEDCGANNUALDAYLAYOUT
             ,TXTSPORTSCHIEFTITLELAYOUT,    INVITEDCGSPORTDAYLAYOUT;
+    Button extraActivitiesApproveBtn,extraActivitiesRejectBtn;
+    Intent i;
+    String ParentID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,11 +60,15 @@ public class Extra_Activities_Details extends AppCompatActivity {
         });
         ALUMNISTATUSDATELAYOUT=findViewById(R.id.ALUMNISTATUSDATELAYOUT);
         SMDCMEETTOTALLAYOUT=findViewById(R.id.SMDCMEETTOTALLAYOUT);
+        extraActivitiesApproveBtn=findViewById(R.id.extraActivitiesApproveBtn);
+        extraActivitiesRejectBtn=findViewById(R.id.extraActivitiesRejectBtn);
         SMDCMEETDATELAYOUT=findViewById(R.id.SMDCMEETDATELAYOUT);
         HEATHCHECKUPDATELAYOUT=findViewById(R.id.HEATHCHECKUPDATELAYOUT);
         PTAMEETINGDATELAYOUT=findViewById(R.id.PTAMEETINGDATELAYOUT);
         WEBSITEMAILLAYOUT=findViewById(R.id.WEBSITEMAILLAYOUT);
         WEBSITEURLLAYOUT=findViewById(R.id.WEBSITEURLLAYOUT);
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
         INVITEDCGADATELAYOUT=findViewById(R.id.INVITEDCGADATELAYOUT);
         INVITEDCGANNUALTITLELAYOUT=findViewById(R.id.INVITEDCGANNUALTITLELAYOUT);
         INVITEDCGANNUALDAYLAYOUT=findViewById(R.id.INVITEDCGANNUALDAYLAYOUT);
@@ -233,6 +247,51 @@ public class Extra_Activities_Details extends AppCompatActivity {
 
             }
         });
+        extraActivitiesRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
 
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+        extraActivitiesApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 }

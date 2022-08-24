@@ -1,5 +1,6 @@
 package com.bsn.buildingaudit.DIOS.StudentEnrollment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bsn.buildingaudit.Adapters.Student_PresenceAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.StudentEnrollmentListModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -32,6 +34,8 @@ public class Student_Enrollment_Details extends AppCompatActivity {
     Student_PresenceAdapter adapter;
     RecyclerView recyclerViewStudentpresence;
     ApplicationController applicationController;
+    Intent i;
+    String ParentID;
     Button btnApprovalStudentpresence,btnRejectStudentpresence;
     ArrayList<StudentEnrollmentListModel> arrayList=new ArrayList<>();
 
@@ -40,7 +44,8 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_enrollment_details);
         applicationController= (ApplicationController) getApplication();
-
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
 
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
@@ -83,22 +88,27 @@ public class Student_Enrollment_Details extends AppCompatActivity {
 
 
 
-        ArrayList<String> myImageNameList = new ArrayList<>();
-        myImageNameList.add("All things are in good position");
-        myImageNameList.add("some things are in good position");
-        myImageNameList.add("most of things are in good position");
-        myImageNameList.add("noting is in good position but data is correct");
-
-
-        ArrayList<String> myImageNameList2 = new ArrayList<>();
-        myImageNameList2.add("All things are not in good position");
-        myImageNameList2.add("some things are not in good position");
-        myImageNameList2.add("most of things are not in good position");
-        myImageNameList2.add("All things are in good position but data is not correct");
         btnApprovalStudentpresence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogApprove(Student_Enrollment_Details.this,myImageNameList);
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(Student_Enrollment_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
@@ -106,7 +116,24 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         btnRejectStudentpresence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogReject(Student_Enrollment_Details.this, myImageNameList2);
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(Student_Enrollment_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
             }
         });
     }

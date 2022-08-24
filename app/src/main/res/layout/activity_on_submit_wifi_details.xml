@@ -263,6 +263,7 @@
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewExtraThingsOnSub">
 
         <Button
+            android:id="@+id/wifiDetailsRejectedBtn"
             style="@style/btn_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -276,6 +277,7 @@
             />
 
         <Button
+            android:id="@+id/wifiDetailsApprovedBtn"
             style="@style/btn_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

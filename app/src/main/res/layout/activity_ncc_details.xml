@@ -642,6 +642,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout40">
 
                 <Button
+                    android:id="@+id/nccDetailsRejectedBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -655,6 +656,7 @@
                     />
 
                 <Button
+                    android:id="@+id/nccDetatilsApproveBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

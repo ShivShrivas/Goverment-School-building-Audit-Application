@@ -43,7 +43,7 @@ public class DiosSubMenuDashboardAdapter extends RecyclerView.Adapter<DiosSubMen
                 try {
                     Log.d("TAG", "onClick: "+arrayList.get(position).getAppClassName());
                     Intent i=new Intent(context, Class.forName(arrayList.get(position).getAppClassName()));
-
+                    i.putExtra("ParamId",arrayList.get(position).getParamid().toString());
                     context.startActivity(i);
                 } catch (Exception e) {
                     e.printStackTrace();

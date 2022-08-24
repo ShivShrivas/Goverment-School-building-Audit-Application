@@ -1,8 +1,11 @@
 package com.bsn.buildingaudit.DIOS.CampusBeautification;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.TreeDetailsAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.CampusPlantationDetalsModel;
 import com.bsn.buildingaudit.Model.TreeData;
 import com.bsn.buildingaudit.R;
@@ -30,6 +35,9 @@ public class Campus_Beautification_Details extends AppCompatActivity {
 ApplicationController applicationController;
 TreeDetailsAdapter adapter;
 RecyclerView treeDetailsRecview;
+    Intent i;
+    String ParentID;
+Button campusBeautificationApproveBtn,campusBeautificationRejectBtn;
 TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWallPainting,spinnerPlant1,survivedTree
         ,targetedPlantation,PlantED;
     @Override
@@ -46,6 +54,10 @@ TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWa
         spinnerAvailabilityDustbin=findViewById(R.id.spinnerAvailabilityDustbin);
         spinnerWallPainting=findViewById(R.id.spinnerWallPainting);
         spinnerPlant1=findViewById(R.id.spinnerPlant1);
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
+        campusBeautificationApproveBtn=findViewById(R.id.campusBeautificationApproveBtn);
+        campusBeautificationRejectBtn=findViewById(R.id.campusBeautificationRejectBtn);
         PlantED=findViewById(R.id.PlantED);
         targetedPlantation=findViewById(R.id.targetedPlantation);
         survivedTree=findViewById(R.id.survivedTree);
@@ -94,6 +106,52 @@ TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWa
 
             }
         });
+        campusBeautificationApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(Campus_Beautification_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
 
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        campusBeautificationRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(Campus_Beautification_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 }

@@ -1277,6 +1277,7 @@ Has a road safety club been formed in the school?"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout48">
 
                 <Button
+                    android:id="@+id/OtherExtraActivitiesRejectBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1290,6 +1291,7 @@ Has a road safety club been formed in the school?"
                     />
 
                 <Button
+                    android:id="@+id/OtherExtraActivitiesApproveBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

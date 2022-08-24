@@ -1,6 +1,8 @@
 package com.bsn.buildingaudit.DIOS.SchoolResultDetails;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -14,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bsn.buildingaudit.Adapters.StudentCollegeWiseResultAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.DIOS.StudentEnrollment.Student_Enrollment_Details;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.CurrentYearResultModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -30,6 +34,8 @@ public class College_Student_Result extends AppCompatActivity {
 RecyclerView recyclerViewStudent_college_result;
     ApplicationController applicationController;
 StudentCollegeWiseResultAdapter adapter;
+    Intent i;
+    String ParentID;
 Button approveBtnCollegeResult,rejectBtnCollegeResult;
     ArrayList<CurrentYearResultModel> currentYearResultL=new ArrayList<>();
 
@@ -42,6 +48,8 @@ Button approveBtnCollegeResult,rejectBtnCollegeResult;
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,14 +97,48 @@ Button approveBtnCollegeResult,rejectBtnCollegeResult;
         approveBtnCollegeResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogApprove(College_Student_Result.this,myImageNameList);
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(College_Student_Result.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
         rejectBtnCollegeResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogReject(College_Student_Result.this,myImageNameList2);
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(College_Student_Result.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
             }
         });
     }

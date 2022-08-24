@@ -2,6 +2,7 @@ package com.bsn.buildingaudit.DIOS.co_curricular_activities;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bsn.buildingaudit.Adapters.AdapterGameDetails;
 import com.bsn.buildingaudit.Adapters.GamesAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.GameDatum;
 import com.bsn.buildingaudit.Model.GameDetailsModel;
 import com.bsn.buildingaudit.Model.GameName;
@@ -42,6 +45,9 @@ public class Game_Details extends AppCompatActivity {
     GamesAdapter adapter, adapter2;
     TextView countD,countS,countN;
     Dialog dialog;
+    Intent i;
+    String ParentID;
+    Button game_details_Approve_Btn,game_details_rejectBtn;
     ArrayList<GameStudentName> studentListDistricLevel = new ArrayList<>();
     ArrayList<GameStudentName> studentListStateLevel = new ArrayList<>();
     ArrayList<GameStudentName> studentListNatioanalLevel = new ArrayList<>();
@@ -55,6 +61,8 @@ public class Game_Details extends AppCompatActivity {
         applicationController= (ApplicationController) getApplication();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
 
         countD=findViewById(R.id.countD);
         countS=findViewById(R.id.countS);
@@ -64,6 +72,8 @@ public class Game_Details extends AppCompatActivity {
         GRANTEXPENAMT=findViewById(R.id.GRANTEXPENAMT);
         SCHEMENAME=findViewById(R.id.SCHEMENAME);
         SPORTTEACHERSTATUS=findViewById(R.id.SPORTTEACHERSTATUS);
+        game_details_rejectBtn=findViewById(R.id.game_details_rejectBtn);
+        game_details_Approve_Btn=findViewById(R.id.game_details_Approve_Btn);
         FITINDIASTATUS=findViewById(R.id.FITINDIASTATUS);
         FITINDIASTDCOUNT=findViewById(R.id.FITINDIASTDCOUNT);
         KHELOINDIASTATUS=findViewById(R.id.KHELOINDIASTATUS);
@@ -213,5 +223,57 @@ public class Game_Details extends AppCompatActivity {
         recyclerView.setAdapter(adapterRe);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
         dialog.show();
+
+        game_details_Approve_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                RestClient restClient=new RestClient();
+                ApiService apiService=restClient.getApiService();
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(Game_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        game_details_rejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                RestClient restClient=new RestClient();
+                ApiService apiService=restClient.getApiService();
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(Game_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 }

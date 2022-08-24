@@ -1,5 +1,6 @@
 package com.bsn.buildingaudit.DIOS.SchoolStaff;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.bsn.buildingaudit.Adapters.PrincipalTrainingAdapter;
 import com.bsn.buildingaudit.Adapters.StaffTrainingAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.P;
 import com.bsn.buildingaudit.Model.PrincipalAndTeacherTrainingModel;
 import com.bsn.buildingaudit.Model.T;
@@ -40,6 +42,8 @@ PrincipalAndTeacherTrainingModel arrayList;
     ArrayList<P> arrayListPrincipal=new ArrayList<>();
     ArrayList<T> arrayListTeacher=new ArrayList<>();
     StaffTrainingAdapter adapter;
+    Intent i;
+    String ParentID;
     PrincipalTrainingAdapter adapter1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +61,8 @@ PrincipalAndTeacherTrainingModel arrayList;
                 onBackPressed();
             }
         });
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView2=findViewById(R.id.recyclerView2);
         staffTraingingCompTxt=findViewById(R.id.staffTraingingCompTxt);
@@ -135,14 +141,48 @@ PrincipalAndTeacherTrainingModel arrayList;
         approveAllStaffTraing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogApprove(All_Staff_Traing_Details.this,myImageNameList);
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(All_Staff_Traing_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
             }
         });
 
         rejectAllStaffTraing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogReject(All_Staff_Traing_Details.this,myImageNameList2);
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(All_Staff_Traing_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
             }
         });
     }

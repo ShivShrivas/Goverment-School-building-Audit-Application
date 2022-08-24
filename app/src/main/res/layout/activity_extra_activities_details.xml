@@ -1400,13 +1400,14 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="16dp"
                 android:padding="5dp"
-                android:visibility="gone"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout48">
 
                 <Button
+                    android:id="@+id/extraActivitiesRejectBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1420,6 +1421,7 @@
                     />
 
                 <Button
+                    android:id="@+id/extraActivitiesApproveBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

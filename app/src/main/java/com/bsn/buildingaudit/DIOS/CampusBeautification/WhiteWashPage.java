@@ -1,17 +1,24 @@
 package com.bsn.buildingaudit.DIOS.CampusBeautification;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.CampusWhiteWashDetalsModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -19,6 +26,8 @@ import retrofit2.Response;
 
 public class WhiteWashPage extends AppCompatActivity {
     ApplicationController applicationController;
+    Intent i;
+    String ParentID;
 TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
         sanctionAmount,expenditureAmount,mantinamceOfDoorTxt,paintingOfBlackBoard,
         repairingOfFurnitures,cleaningOfWaterTank,cleaningOfDrainageSystem,
@@ -29,12 +38,15 @@ TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
         yearofLastReapairWork,boundryWallReapairWork,finalRepairWorkOfBoundryWall,
         RepairWorkofTheGate,lastYearOfGateReapair,isRampAvailableForHandicapt,
         rampRepairWorkForDiff,rampRepairWorkForDivyang;
+Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_white_wash_page);
         applicationController= (ApplicationController) getApplication();
         rampRepairWorkForDivyang=findViewById(R.id.rampRepairWorkForDivyang);
+        White_Wash_Reject_Btn=findViewById(R.id.White_Wash_Reject_Btn);
+        White_Wash_Approve_Btn=findViewById(R.id.White_Wash_Approve_Btn);
         rampRepairWorkForDiff=findViewById(R.id.rampRepairWorkForDiff);
         isRampAvailableForHandicapt=findViewById(R.id.isRampAvailableForHandicapt);
         lastYearOfGateReapair=findViewById(R.id.lastYearOfGateReapair);
@@ -61,6 +73,8 @@ TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
         whitewashBudget=findViewById(R.id.whitewashBudget);
         whitewashStatus=findViewById(R.id.whitewashStatus);
         lastDoneWhiteWashYear=findViewById(R.id.lastDoneWhiteWashYear);
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
@@ -73,6 +87,7 @@ TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
             public void onResponse(Call<CampusWhiteWashDetalsModel> call, Response<CampusWhiteWashDetalsModel> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 CampusWhiteWashDetalsModel campusWhiteWashDetalsModel=response.body();
+                assert campusWhiteWashDetalsModel != null;
                 lastDoneWhiteWashYear.setText(campusWhiteWashDetalsModel.getLastdonefy()==null?" ":campusWhiteWashDetalsModel.getLastdonefy().toString());
                 rampRepairWorkForDiff.setText(campusWhiteWashDetalsModel.getRepairworkoframpfordifferently()==null?"No":campusWhiteWashDetalsModel.getRepairworkoframpfordifferently().toString());
                         isRampAvailableForHandicapt.setText(campusWhiteWashDetalsModel.getRampavailableforthehandicapped()==null?"No":campusWhiteWashDetalsModel.getRampavailableforthehandicapped());
@@ -109,6 +124,52 @@ TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
                 Log.d("TAG", "onFailure: "+t.getMessage());
             }
         });
+        White_Wash_Approve_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(WhiteWashPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
 
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        White_Wash_Reject_Btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(WhiteWashPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
     }
 }

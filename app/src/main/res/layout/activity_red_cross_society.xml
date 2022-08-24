@@ -484,6 +484,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
+            android:id="@+id/redCrossRejectBtn"
             style="@style/btn_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -497,6 +498,7 @@
             />
 
         <Button
+            android:id="@+id/redCrossApproveBtn"
             style="@style/btn_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

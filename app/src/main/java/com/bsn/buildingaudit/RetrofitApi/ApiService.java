@@ -1,5 +1,6 @@
 package com.bsn.buildingaudit.RetrofitApi;
 
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.AttendanceStaff;
 import com.bsn.buildingaudit.Model.AttendanceType;
 import com.bsn.buildingaudit.Model.BoundryType;
@@ -594,6 +595,17 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
    @POST("SchoolGrading/GetReciptExpDetails")
    Call<ArrayList<GetReciptExpDetailsModel>> getReciptExpDetails(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/GetInsAppInspectionParameter")
+   Call<ArrayList<ApproveRejectRemarkModel>> getApproveRejectRemark(@Body JsonObject jsonObject);
+
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/InsertInspectionData")
+   Call<JsonArray> submitRemarkByDios(@Body JsonArray jsonArray);
 
 
 }

@@ -46,7 +46,8 @@ public class DIOSDashboardAdapter extends RecyclerView.Adapter<DIOSDashboardAdap
                 try {
                     Log.d("TAG", "onClick: "+arrayList.get(position).getAppClassName());
                     Intent i=new Intent(context, Class.forName(arrayList.get(position).getAppClassName()));
-                        i.putExtra("ParentID",arrayList.get(position).getMenuid());
+                        i.putExtra("ParentID",arrayList.get(position).getMenuid().toString());
+                        i.putExtra("ParamId",arrayList.get(position).getParamid().toString());
                     context.startActivity(i);
                 } catch (Exception e) {
                     e.printStackTrace();

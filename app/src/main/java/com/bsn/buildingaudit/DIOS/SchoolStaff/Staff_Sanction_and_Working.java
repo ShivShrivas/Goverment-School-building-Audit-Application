@@ -1,6 +1,8 @@
 package com.bsn.buildingaudit.DIOS.SchoolStaff;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bsn.buildingaudit.Adapters.StaffSanctionAndWorkingAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.StaffSanctionAndWorkingModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -31,6 +34,8 @@ public class Staff_Sanction_and_Working extends AppCompatActivity {
 Button btnApprovalStaffSanction,btnRejectStaffSanction;
 RecyclerView staffSanctionRecview;
     ApplicationController applicationController;
+    Intent i;
+    String ParentID;
     List<StaffSanctionAndWorkingModel> arrayList=new ArrayList<>();
     StaffSanctionAndWorkingAdapter staffSanctionAndWorkingAdapter;
     @Override
@@ -43,7 +48,8 @@ RecyclerView staffSanctionRecview;
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         staffSanctionRecview=findViewById(R.id.staffSanctionRecview);
         staffSanctionRecview.setLayoutManager(new LinearLayoutManager(this));
-
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -88,15 +94,46 @@ RecyclerView staffSanctionRecview;
         btnApprovalStaffSanction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogApprove(Staff_Sanction_and_Working.this,myImageNameList);
-            }
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(Staff_Sanction_and_Working.this,arrayList, applicationController.getPeriodID(), applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });            }
         });
 
         btnRejectStaffSanction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                StaticFunctions.showDialogReject(Staff_Sanction_and_Working.this,myImageNameList2);
-            }
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(Staff_Sanction_and_Working.this,arrayList, applicationController.getPeriodID(), applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });            }
         });
     }
 

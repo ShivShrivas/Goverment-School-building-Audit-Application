@@ -1,9 +1,11 @@
 package com.bsn.buildingaudit.DIOS.co_curricular_activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,11 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.ScoutAndGuideImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.DIOS.StudentEnrollment.Student_Enrollment_Details;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ScoutAndGuideModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
+
+import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,7 +35,9 @@ RecyclerView districRallyRecview,stateRallyRecview,nationalRallyRecview,socialWo
 TextView STUDENTENROLLED,SCOUTCOMPREGISTED,SCOUTCOMPRENEW,SCOUTMASTERSTATUS,SCOUTMASTERTRAINING,TRAININGMATERIALSTATUS
         ,SCOUTROOMSTATUS,STOCKEXPREGISTER,SCOUTTRAININGPPSDS,SCOUTPARTIRAJYA,SCOUTPARTIRASHTRAPATI,SCOUTPARTIDISTRICTRALLY,
         SCOUTPARTIREGRALLY,SCOUTPARTINATIONAL,SCOUTPARTISOCIALWORK,EXPSCOUTGUIDE;
-
+    Intent i;
+    Button scout_and_guideApproveBtn,scout_and_guideRejectBtn;
+    String ParentID;
 ApplicationController applicationController;
 
     @Override
@@ -37,6 +46,8 @@ ApplicationController applicationController;
         setContentView(R.layout.activity_scount_and_guide);
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
+        i=getIntent();
+        ParentID=i.getStringExtra("ParamId");
         applicationController= (ApplicationController) getApplication();
         socialWorkRallyRecview=findViewById(R.id.socialWorkRallyRecview);
         expeditureRecview=findViewById(R.id.expeditureRecview);
@@ -46,6 +57,8 @@ ApplicationController applicationController;
         SCOUTMASTERTRAINING=findViewById(R.id.SCOUTMASTERTRAINING);
         SCOUTMASTERSTATUS=findViewById(R.id.SCOUTMASTERSTATUS);
         SCOUTCOMPRENEW=findViewById(R.id.SCOUTCOMPRENEW);
+        scout_and_guideRejectBtn=findViewById(R.id.scout_and_guideRejectBtn);
+        scout_and_guideApproveBtn=findViewById(R.id.scout_and_guideApproveBtn);
         SCOUTCOMPREGISTED=findViewById(R.id.SCOUTCOMPREGISTED);
         TRAININGMATERIALSTATUS=findViewById(R.id.TRAININGMATERIALSTATUS);
         STUDENTENROLLED=findViewById(R.id.STUDENTENROLLED);
@@ -160,7 +173,53 @@ ApplicationController applicationController;
 
             }
         });
+        scout_and_guideApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(Scount_and_Guide.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
 
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        scout_and_guideRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(Scount_and_Guide.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
 
     }
 }
