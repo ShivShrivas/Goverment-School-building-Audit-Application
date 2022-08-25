@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,6 +23,7 @@ import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
@@ -43,6 +45,7 @@ EditText totalClassRooms,edtPodiumClassAfterSubmit,majorRepairingClassroom,
         minorRepairingClassroomAfterSubmit,greenBoardCountAfterSubmit,goodCondtionClassroomAfterSubmit,whiteBoardContAfterSubmit,blackBoardCountAfterSubmit;
 RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmit,recyclerViewThreeTypeOneAfterSubmit;
 String Type;
+ArrayList<String> arrayListRemarks=new ArrayList<>();
 ImageView schoolIcon;
     Call<List<JsonObject>> call;
     String ParentID;
@@ -54,6 +57,8 @@ LinearLayout diosButtonLayout,linearLayout2;
 
         setContentView(R.layout.activity_on_submit_class_room_page);
         applicationController= (ApplicationController) getApplication();
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
         schoolIcon=findViewById(R.id.schoolIcon);
         mobnumberTxt=findViewById(R.id.mobnumberTxt);
         numberOfRoomText=findViewById(R.id.numberOfRoomText);
@@ -71,7 +76,31 @@ LinearLayout diosButtonLayout,linearLayout2;
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
         ParentID=i.getStringExtra("ParamId");
+        JsonObject json =new JsonObject();
+        json.addProperty("SchoolID",applicationController.getSchoolId());
+        json.addProperty("PeriodID",applicationController.getPeriodID());
+        json.addProperty("ParamId",ParentID);
+        Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
+        callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
+            @Override
+            public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
+                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+                if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+                    Toast.makeText(OnSubmitClassRoomPage.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
+                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
+                    }
 
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
+                Log.d("TAG", "onFailure: "+t.getMessage());
+            }
+        });
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,8 +165,7 @@ LinearLayout diosButtonLayout,linearLayout2;
             }
         });
 
-        RestClient restClient=new RestClient();
-        ApiService apiService=restClient.getApiService();
+
         classroomApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,7 +178,7 @@ LinearLayout diosButtonLayout,linearLayout2;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(OnSubmitClassRoomPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogApprove(OnSubmitClassRoomPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks);
 
                     }
 
@@ -174,7 +202,7 @@ LinearLayout diosButtonLayout,linearLayout2;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(OnSubmitClassRoomPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogReject(OnSubmitClassRoomPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks);
 
                     }
 

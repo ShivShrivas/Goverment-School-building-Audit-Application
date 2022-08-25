@@ -9,8 +9,8 @@ android {
         applicationId "com.bsn.buildingaudit"
         minSdk 21
         targetSdk 32
-        versionCode 14
-        versionName "5.1.4"
+        versionCode 16
+        versionName "5.1.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

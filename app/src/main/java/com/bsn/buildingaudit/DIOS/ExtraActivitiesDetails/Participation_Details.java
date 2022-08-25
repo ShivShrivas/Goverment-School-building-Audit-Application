@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -15,6 +16,7 @@ import androidx.core.content.ContextCompat;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
 import com.bsn.buildingaudit.Model.GetNCCParticipationDetailsModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -35,6 +37,8 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
             ,CADETPASSEDB,CADETAPPEREDC,  CADETPASSEDC, BESTCADETAWARDSTATUS, CMSCHOLARSHIPSTATUS, CWCSCHOLARSHIPSTATUS
            , CMMEDALSTATUS;
     Intent i;
+    ArrayList<String> arrayListRemarks=new ArrayList<>();
+
     String ParentID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +84,31 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
         Log.d("TAG", "onCreate: "+jsonObject);
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        JsonObject json =new JsonObject();
+        json.addProperty("SchoolID",applicationController.getSchoolId());
+        json.addProperty("PeriodID",applicationController.getPeriodID());
+        json.addProperty("ParamId",ParentID);
+        Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
+        callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
+            @Override
+            public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
+                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+                if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+                    Toast.makeText(Participation_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
+                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
+                Log.d("TAG", "onFailure: "+t.getMessage());
+            }
+        });
         Call<GetNCCParticipationDetailsModel> call= apiService.getNCCParticipationDetails(jsonObject);
         call.enqueue(new Callback<GetNCCParticipationDetailsModel>() {
             @Override
@@ -123,7 +152,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogReject(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 
@@ -147,7 +176,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogApprove(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 

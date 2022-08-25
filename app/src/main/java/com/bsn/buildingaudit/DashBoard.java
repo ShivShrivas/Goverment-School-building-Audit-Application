@@ -22,7 +22,6 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -143,7 +142,7 @@ public class DashBoard extends AppCompatActivity {
                         if (checkAllPagesIsDone( dataLockeds)){
                             RestClientMsg91 restClientMsg91=new RestClientMsg91();
                             ApiMsg91 apiMsg91=restClientMsg91.getApiService();
-                            Call<JsonObject> call1=apiMsg91.getOtp("627cd1d23f61350c60138c24","91"+applicationController.getPhoneNumber(),"376489AgYgO9FDHy362711b3fP1");
+                            Call<JsonObject> call1=apiMsg91.getOtp("62bc4d2c4952a90d81447fc9","91"+applicationController.getPhoneNumber(),"376489AgYgO9FDHy362711b3fP1");
                             call1.enqueue(new Callback<JsonObject>() {
                                 @Override
                                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {

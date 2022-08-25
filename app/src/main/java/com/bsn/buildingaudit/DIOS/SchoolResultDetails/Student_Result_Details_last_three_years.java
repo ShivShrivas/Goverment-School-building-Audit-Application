@@ -10,6 +10,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +24,7 @@ import com.bsn.buildingaudit.Adapters.StudentResultAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
 import com.bsn.buildingaudit.Model.LastThreeYearsModel;
 import com.bsn.buildingaudit.Model.StudentListModelTopper;
 import com.bsn.buildingaudit.R;
@@ -46,6 +48,8 @@ ConstraintLayout constraintLayout46,lastThreeYearResultLayout;
     ImageView districLevelTopperImg,stateLevelToperImg,comptativeExamSelectionImg;
     TextView districLevelTopper,stateLevelTopper,comptativeExamSelection;
     Intent i;
+    ArrayList<String> arrayListRemarks=new ArrayList<>();
+
     String ParentID;
 Button last_threeYearResultApproveBtn,last_threeYearResultRejectBtn;
 ArrayList<LastThreeYearsModel> result=new ArrayList<>();
@@ -89,6 +93,31 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        JsonObject json =new JsonObject();
+        json.addProperty("SchoolID",applicationController.getSchoolId());
+        json.addProperty("PeriodID",applicationController.getPeriodID());
+        json.addProperty("ParamId",ParentID);
+        Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
+        callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
+            @Override
+            public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
+                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+                if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+                    Toast.makeText(Student_Result_Details_last_three_years.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
+                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
+                Log.d("TAG", "onFailure: "+t.getMessage());
+            }
+        });
         Call<ArrayList<LastThreeYearsModel>> call=apiService.getThreeYearResult(jsonObject);
         call.enqueue(new Callback<ArrayList<LastThreeYearsModel>>() {
             @Override
@@ -160,7 +189,7 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Student_Result_Details_last_three_years.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogApprove(Student_Result_Details_last_three_years.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 
@@ -184,7 +213,7 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Student_Result_Details_last_three_years.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogReject(Student_Result_Details_last_three_years.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 

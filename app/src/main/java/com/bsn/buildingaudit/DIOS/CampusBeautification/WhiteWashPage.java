@@ -6,12 +6,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
 import com.bsn.buildingaudit.Model.CampusWhiteWashDetalsModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -28,7 +30,9 @@ public class WhiteWashPage extends AppCompatActivity {
     ApplicationController applicationController;
     Intent i;
     String ParentID;
-TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
+    ArrayList<String> arrayListRemarks=new ArrayList<>();
+
+    TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
         sanctionAmount,expenditureAmount,mantinamceOfDoorTxt,paintingOfBlackBoard,
         repairingOfFurnitures,cleaningOfWaterTank,cleaningOfDrainageSystem,
         cleningOfToilet,maintenanceofElectricalEquipments,
@@ -81,6 +85,32 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
         Log.d("TAG", "onCreate: "+jsonObject);
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+
+        JsonObject json =new JsonObject();
+        json.addProperty("SchoolID",applicationController.getSchoolId());
+        json.addProperty("PeriodID",applicationController.getPeriodID());
+        json.addProperty("ParamId",ParentID);
+        Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
+        callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
+            @Override
+            public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
+                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+                if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+                    Toast.makeText(WhiteWashPage.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
+                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
+                Log.d("TAG", "onFailure: "+t.getMessage());
+            }
+        });
         Call<CampusWhiteWashDetalsModel> call=apiService.getWhiteWashDetails(jsonObject);
         call.enqueue(new Callback<CampusWhiteWashDetalsModel>() {
             @Override
@@ -136,7 +166,7 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(WhiteWashPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogApprove(WhiteWashPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 
@@ -160,7 +190,7 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(WhiteWashPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogReject(WhiteWashPage.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 

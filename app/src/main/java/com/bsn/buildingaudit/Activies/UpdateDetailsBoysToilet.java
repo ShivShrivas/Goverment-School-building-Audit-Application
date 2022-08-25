@@ -120,7 +120,7 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
         dialog = new Dialog(this);
         dialog.setCancelable(false);
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
-        dialog.setContentView (R.layout.respons_dialog);
+        dialog.setContentView (R.layout.respons_dialog_onsave);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
          dialog2 = new Dialog(this);
         Intent i=getIntent();

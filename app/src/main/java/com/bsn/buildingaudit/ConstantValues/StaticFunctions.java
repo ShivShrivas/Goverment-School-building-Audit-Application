@@ -34,7 +34,7 @@ public class StaticFunctions {
     private static ConstraintLayout remarkTextinputLayout;
     private static ConstraintLayout rejectTextintputLayout;
 
-    public static void showDialogApprove(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList,String periodID, String schoolId, String id) {
+    public static void showDialogApprove(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<String> arrayListRemarks) {
 
         dialog = new Dialog(activity);
         // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -46,6 +46,11 @@ public class StaticFunctions {
          inputRemarksForApproval = (TextInputEditText) dialog.findViewById(R.id.inputRemarksForApproval);
         remarkTextinputLayout = (ConstraintLayout) dialog.findViewById(R.id.remarkTextinputLayout);
         ImageView btndialogClose = (ImageView) dialog.findViewById(R.id.dilogeCloseBtnApprove);
+        RecyclerView recyclerView = dialog.findViewById(R.id.recycleForReason);
+        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList,schoolId,periodID,"A",id);
+        recyclerView.setAdapter(adapterRe);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        dialog.show();
         btndialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,15 +115,11 @@ public class StaticFunctions {
         });
 
 
-        RecyclerView recyclerView = dialog.findViewById(R.id.recycleForReason);
-        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList,schoolId,periodID,"A",id);
-        recyclerView.setAdapter(adapterRe);
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        dialog.show();
+
     }
 
 
-    public static void showDialogReject(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList,String periodID, String schoolId, String id) {
+    public static void showDialogReject(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<String> arrayListRemarks) {
 
         dialog = new Dialog(activity);
         // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -153,6 +154,20 @@ public class StaticFunctions {
 
                 }else {
                     Log.d("TAG", "onClick: "+AdpterResonsApproved.jsonArray);
+                    RestClient restClient=new RestClient();
+                    ApiService apiService=restClient.getApiService();
+                    Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
+                    call.enqueue(new Callback<JsonArray>() {
+                        @Override
+                        public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                            Log.d("TAG", "onResponse: "+response.body());
+                        }
+
+                        @Override
+                        public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                        }
+                    });
                     dialog.dismiss();
 
                 }

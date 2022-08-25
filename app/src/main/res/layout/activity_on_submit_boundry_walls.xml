@@ -594,6 +594,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/layoutBoundry">
 
                 <Button
+                    android:id="@+id/boundryWallRejectBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -607,6 +608,7 @@
                     />
 
                 <Button
+                    android:id="@+id/boundryWallApproveBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

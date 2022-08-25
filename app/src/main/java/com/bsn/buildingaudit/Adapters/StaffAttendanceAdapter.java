@@ -2,7 +2,6 @@ package com.bsn.buildingaudit.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.bsn.buildingaudit.Model.StaffAttendanceSubmitModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
-import com.bsn.staffAttendance.Staff_Face_Recognization_Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,15 +57,15 @@ public class StaffAttendanceAdapter extends RecyclerView.Adapter<StaffAttendance
     @Override
     public void onBindViewHolder(@NonNull StaffAttendanceAdapter.StaffAttendanceViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.staffname.setText(arrayList.get(position).getStaffName());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(context, Staff_Face_Recognization_Activity.class);
-                i.putExtra("UserName",arrayList.get(position).getStaffName());
-                context.startActivity(i);
-
-            }
-        });
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i=new Intent(context, Staff_Face_Recognization_Activity.class);
+//                i.putExtra("UserName",arrayList.get(position).getStaffName());
+//                context.startActivity(i);
+//
+//            }
+//        });
         holder.staffDeg.setText(arrayList.get(position).getStaffDesignation());
         holder.textView5.setText(String.valueOf(position+1));
         holder.spinnerGrantUnderScheme.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

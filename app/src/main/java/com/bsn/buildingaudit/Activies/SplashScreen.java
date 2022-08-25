@@ -66,7 +66,10 @@ TextView versionTxt;
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        showDialogForLang();
+//                        showDialogForLang();
+                        Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                        intent.putExtra("My_notification","2");
+                        startActivity(intent);
                     }
                 }, 2000);
             }

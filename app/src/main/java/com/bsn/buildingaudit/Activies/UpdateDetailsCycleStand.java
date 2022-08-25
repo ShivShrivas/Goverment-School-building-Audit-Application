@@ -119,7 +119,7 @@ public class UpdateDetailsCycleStand extends AppCompatActivity {
         dialog.setCancelable(false);
 
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
-        dialog.setContentView (R.layout.respons_dialog);
+        dialog.setContentView (R.layout.respons_dialog_onsave);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         applicationController= (ApplicationController) getApplication();
 

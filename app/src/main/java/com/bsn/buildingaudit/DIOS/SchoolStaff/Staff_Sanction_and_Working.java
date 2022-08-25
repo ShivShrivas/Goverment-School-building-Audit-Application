@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +18,7 @@ import com.bsn.buildingaudit.Adapters.StaffSanctionAndWorkingAdapter;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
 import com.bsn.buildingaudit.Model.StaffSanctionAndWorkingModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -35,6 +37,8 @@ Button btnApprovalStaffSanction,btnRejectStaffSanction;
 RecyclerView staffSanctionRecview;
     ApplicationController applicationController;
     Intent i;
+    ArrayList<String> arrayListRemarks=new ArrayList<>();
+
     String ParentID;
     List<StaffSanctionAndWorkingModel> arrayList=new ArrayList<>();
     StaffSanctionAndWorkingAdapter staffSanctionAndWorkingAdapter;
@@ -63,6 +67,32 @@ RecyclerView staffSanctionRecview;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+
+        JsonObject json =new JsonObject();
+        json.addProperty("SchoolID",applicationController.getSchoolId());
+        json.addProperty("PeriodID",applicationController.getPeriodID());
+        json.addProperty("ParamId",ParentID);
+        Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
+        callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
+            @Override
+            public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
+                Log.d("TAG", "onResponse: "+response.body());
+                ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
+                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+                if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+                    Toast.makeText(Staff_Sanction_and_Working.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
+                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
+                    }
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
+                Log.d("TAG", "onFailure: "+t.getMessage());
+            }
+        });
         Call<List<StaffSanctionAndWorkingModel>> call=apiService.getSanctionAndWorking(paraStaffSanctionJson(applicationController.getSchoolId(),applicationController.getPeriodID()));
         call.enqueue(new Callback<List<StaffSanctionAndWorkingModel>>() {
             @Override
@@ -103,7 +133,7 @@ RecyclerView staffSanctionRecview;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Staff_Sanction_and_Working.this,arrayList, applicationController.getPeriodID(), applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogApprove(Staff_Sanction_and_Working.this,arrayList, applicationController.getPeriodID(), applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 
@@ -125,7 +155,7 @@ RecyclerView staffSanctionRecview;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Staff_Sanction_and_Working.this,arrayList, applicationController.getPeriodID(), applicationController.getSchoolId(),ParentID);
+                        StaticFunctions.showDialogReject(Staff_Sanction_and_Working.this,arrayList, applicationController.getPeriodID(), applicationController.getSchoolId(),ParentID, arrayListRemarks);
 
                     }
 

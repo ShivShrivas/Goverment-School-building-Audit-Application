@@ -121,7 +121,7 @@ ArrayList<String> aList=new ArrayList<>();
         Intent i1=getIntent();
         action=i1.getStringExtra("Action");
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
-        dialog.setContentView (R.layout.respons_dialog);
+        dialog.setContentView (R.layout.respons_dialog_onsave);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
          dialog2 = new Dialog(this);
 

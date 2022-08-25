@@ -377,6 +377,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayoutPR">
 
                 <Button
+                    android:id="@+id/artAndCraftRejectBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -390,6 +391,7 @@
                     />
 
                 <Button
+                    android:id="@+id/artAndCraftApprovedBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
