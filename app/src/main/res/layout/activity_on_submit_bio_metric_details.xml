@@ -161,15 +161,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
-                android:visibility="gone"
                 android:text="@string/edit_details"
                 android:textColor="@android:color/holo_blue_dark"
                 android:textSize="18dp"
                 android:textStyle="bold"
-                app:layout_constraintBaseline_toBaselineOf="@+id/textView56"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@+id/textView56" />
+                app:layout_constraintStart_toEndOf="@+id/textView56"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <LinearLayout
                 android:id="@+id/linearLayout11"
                 android:layout_width="match_parent"
@@ -204,13 +206,13 @@
 
 
                     <EditText
-                        android:layout_height="30dp"
-                        android:background="@drawable/cardbg"
-android:textColor="@color/textColor1"
                         android:id="@+id/edtBioMetricMachineAvailabelty"
                         android:layout_width="match_parent"
+                        android:layout_height="30dp"
                         android:layout_margin="4dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:background="@drawable/cardbg"
+                        android:textColor="@color/textColor1" />
                 </androidx.cardview.widget.CardView>
 
             </LinearLayout>
@@ -509,6 +511,7 @@ android:textColor="@color/textColor1"
                 app:layout_constraintTop_toBottomOf="@+id/layoutBioMetric">
 
                 <Button
+                    android:id="@+id/bioMetricRejectBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -522,6 +525,7 @@ android:textColor="@color/textColor1"
                     />
 
                 <Button
+                    android:id="@+id/bioMetricApproveBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -534,6 +538,7 @@ android:textColor="@color/textColor1"
 
                     />
             </LinearLayout>
+
             <Button
                 android:id="@+id/buttonBiometricSubmit"
                 android:layout_width="match_parent"
@@ -543,12 +548,13 @@ android:textColor="@color/textColor1"
                 android:layout_marginEnd="8dp"
                 android:text="Submit details"
                 android:textColor="@color/white"
-                android:visibility="gone"
                 android:textSize="18dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                 />
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,8 +41,9 @@ public class OnSubmit_OpenGYmDetails extends AppCompatActivity {
     Call<List<JsonObject>> call;
     ConstraintLayout gymLayout;
     LinearLayout  linearLayout21;
-
+    Button openGymApproveBtn,openGymRejectBtn;
     ApplicationController applicationController;
+    String ParentID;
 
 String Type;
     @Override
@@ -57,6 +62,7 @@ String Type;
         Dialog dialog2 = new Dialog(this);
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
+        ParentID=i.getStringExtra("ParamId");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -72,6 +78,8 @@ String Type;
         gymWorkingStatus=findViewById(R.id.gymWorkingStatus);
         gymLayout=findViewById(R.id.gymLayout);
         gymUploadtxt=findViewById(R.id.gymUploadtxt);
+        openGymApproveBtn=findViewById(R.id.openGymApproveBtn);
+        openGymRejectBtn=findViewById(R.id.openGymRejectBtn);
         editOpenGymDetails=findViewById(R.id.editOpenGymDetails);
         edtGymArea=findViewById(R.id.edtGymArea);
         recyclerViewGymOnSubmit=findViewById(R.id.recyclerViewGymOnSubmit);
@@ -82,6 +90,55 @@ String Type;
         disabledEdtBox();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        openGymApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(OnSubmit_OpenGYmDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        openGymRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(OnSubmit_OpenGYmDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         editOpenGymDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

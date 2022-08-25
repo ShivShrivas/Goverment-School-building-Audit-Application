@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,11 +18,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,6 +45,8 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
     RecyclerView recyclerViewFurnituresOnSub;
     Call<List<JsonObject>> call;
     String Type;
+    String ParentID;
+    Button furnitureApprovedBtn,furnitureRejectedBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +70,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         dialog2.show();
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
+        ParentID=i.getStringExtra("ParamId");
 
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
@@ -94,6 +101,8 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         edtgoodConditionForSingle=findViewById(R.id.edtgoodConditionForSingle);
         edtgoodConditionForTripple=findViewById(R.id.edtgoodConditionForTripple);
         edtgoodConditionForDouble=findViewById(R.id.edtgoodConditionForDoubel);
+        furnitureApprovedBtn=findViewById(R.id.furnitureApprovedBtn);
+        furnitureRejectedBtn=findViewById(R.id.furnitureRejectedBtn);
         if (Type.equals("D")){
             linearLayout21.setVisibility(View.VISIBLE);
         }
@@ -112,6 +121,55 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
         recyclerViewFurnituresOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+
+        furnitureRejectedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(OnSubmit_FurnitureDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+       furnitureApprovedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(OnSubmit_FurnitureDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         if (applicationController.getUsertype().equals("VA")){
             call=apiService.checkFurniture(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"18"));
         }else{

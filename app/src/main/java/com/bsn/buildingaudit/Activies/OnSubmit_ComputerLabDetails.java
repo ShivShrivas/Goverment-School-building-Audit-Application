@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -35,6 +39,9 @@ public class OnSubmit_ComputerLabDetails extends AppCompatActivity {
 RecyclerView recyclerViewComputerLabOnSubmit;
 ConstraintLayout layOutComputerLab;
 LinearLayout linearLayout51;
+Button computerLabApproveBtn,computerLabRejectBtn;
+    String ParentID;
+
     Call<List<JsonObject>> call;
 String Type;
         EditText edtNoOfLab,edtScannerAvailable,edtPrinterAvailable,edtComputerOperator
@@ -55,6 +62,7 @@ String Type;
         });
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
+        ParentID=i.getStringExtra("ParamId");
 
         Dialog dialog2 = new Dialog(this);
 
@@ -66,6 +74,8 @@ String Type;
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
+        computerLabApproveBtn=findViewById(R.id.computerLabApproveBtn);
+        computerLabRejectBtn=findViewById(R.id.computerLabRejectBtn);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
 
@@ -102,6 +112,55 @@ String Type;
 
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        computerLabRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(OnSubmit_ComputerLabDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        computerLabApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(OnSubmit_ComputerLabDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         if (applicationController.getUsertype().equals("VA")){
             call=apiService.checkComputerLab(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"19"));
         }else{

@@ -719,6 +719,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout13">
 
                 <Button
+                    android:id="@+id/vocationalRoomRejectBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -732,6 +733,7 @@
                     />
 
                 <Button
+                    android:id="@+id/vocationalRoomApproveBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

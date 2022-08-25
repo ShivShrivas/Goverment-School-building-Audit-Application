@@ -19,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -38,7 +41,8 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
     RecyclerView recyclerViewTwoTypeSolarpanelAndOnSub;
     LinearLayout linearLayout21;
     Call<List<JsonObject>> call;
-    String Type;
+    Button solarPanelApproveBtn,solarPanelRejectBtn;
+    String Type,ParentID;
     ConstraintLayout constraintLayout23;
     Button buttonSolarePanelOnSub;
     @Override
@@ -57,6 +61,8 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
         Dialog dialog2 = new Dialog(this);
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
+        ParentID=i.getStringExtra("ParamId");
+
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -64,6 +70,8 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
         dialog2.show();
         applicationController= (ApplicationController) getApplication();
         schoolAddress=findViewById(R.id.schoolAddress);
+        solarPanelRejectBtn=findViewById(R.id.solarPanelRejectBtn);
+        solarPanelApproveBtn=findViewById(R.id.solarPanelApproveBtn);
         schoolName=findViewById(R.id.schoolName);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
@@ -86,6 +94,55 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
         disableEditbox();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        solarPanelApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(OnSubmit_SolarPanel.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        solarPanelRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(OnSubmit_SolarPanel.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         editSolarPanelDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

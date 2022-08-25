@@ -46,6 +46,11 @@ public class StaticFunctions {
          inputRemarksForApproval = (TextInputEditText) dialog.findViewById(R.id.inputRemarksForApproval);
         remarkTextinputLayout = (ConstraintLayout) dialog.findViewById(R.id.remarkTextinputLayout);
         ImageView btndialogClose = (ImageView) dialog.findViewById(R.id.dilogeCloseBtnApprove);
+        RecyclerView recyclerView = dialog.findViewById(R.id.recycleForReason);
+        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList,schoolId,periodID,"A",id);
+        recyclerView.setAdapter(adapterRe);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        dialog.show();
         btndialog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -110,11 +115,7 @@ public class StaticFunctions {
         });
 
 
-        RecyclerView recyclerView = dialog.findViewById(R.id.recycleForReason);
-        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList,schoolId,periodID,"A",id);
-        recyclerView.setAdapter(adapterRe);
-        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
-        dialog.show();
+
     }
 
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.Adapters.SmartClassAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.SmartClassesCard;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -40,6 +43,9 @@ RecyclerView recyclerViewSmartClassONSubmit;
     private TextView schoolAddress,schoolName,editSmartClassDetails;
     ConstraintLayout layoutSmartClass;
     String Type;
+    String ParentID;
+
+    Button smartClassRejectBtn,smartClassApproveBtn;
     Call<List<JsonObject>> call;
     EditText edtsmartClassAvailabilty,edtDigitalBoardSmartClass,edtLearningContentSmartClass,edtProjectorSmartClass,edtTeacherAvailbilitySmartClass;
     @Override
@@ -58,6 +64,7 @@ RecyclerView recyclerViewSmartClassONSubmit;
         dialog2.show();
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
+        ParentID=i.getStringExtra("ParamId");
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,11 +72,13 @@ RecyclerView recyclerViewSmartClassONSubmit;
             }
         });
         schoolName=findViewById(R.id.schoolName);
+        smartClassRejectBtn=findViewById(R.id.smartClassRejectBtn);
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         edtsmartClassAvailabilty=findViewById(R.id.edtsmartClassAvailabilty);
         linearLayout21=findViewById(R.id.linearLayout21);
+        smartClassApproveBtn=findViewById(R.id.smartClassApproveBtn);
         edtDigitalBoardSmartClass=findViewById(R.id.edtDigitalBoardSmartClass);
         edtLearningContentSmartClass=findViewById(R.id.edtLearningContentSmartClass);
         edtProjectorSmartClass=findViewById(R.id.edtProjectorSmartClass);
@@ -94,6 +103,56 @@ RecyclerView recyclerViewSmartClassONSubmit;
         disableEditBox();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+
+        smartClassApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(OnSubmit_SmartClassDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        smartClassRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(OnSubmit_SmartClassDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         if (applicationController.getUsertype().equals("VA")){
             call=apiService.checkSmartClassDetails(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"8"));
         }else{

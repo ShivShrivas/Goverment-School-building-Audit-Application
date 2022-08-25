@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,11 +19,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapter;
 import com.bsn.buildingaudit.ApplicationController;
+import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
+import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -34,7 +38,8 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName;
     LinearLayout linearLayout21;
-    String Type;
+    String Type,ParentID;
+    Button cycleStandApproveBtn,cycleStandRejectBtn;
     Call<List<JsonObject>> call;
     ConstraintLayout constraintLayout32;
     TextView uploadCYcleStand,editCycleStandDetails;
@@ -54,7 +59,7 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
         Dialog dialog2 = new Dialog(this);
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
-
+        ParentID=i.getStringExtra("ParamId");
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -69,6 +74,8 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
         edtCycleStandFunctionalStatus=findViewById(R.id.edtCycleStandFunctionalStatus);
         edtCycyleStandCapacity=findViewById(R.id.edtCycyleStandCapacity);
         recyclerCycleStandOnSub=findViewById(R.id.recyclerCycleStandOnSub);
+        cycleStandRejectBtn=findViewById(R.id.cycleStandRejectBtn);
+        cycleStandApproveBtn=findViewById(R.id.cycleStandApproveBtn);
         linearLayout21=findViewById(R.id.linearLayout21);
         uploadCYcleStand=findViewById(R.id.uploadCYcleStand);
         constraintLayout32=findViewById(R.id.constraintLayout32);
@@ -90,6 +97,55 @@ EditText edtCycleStandRepairingStatus,edtCycleStandFunctionalStatus,edtCycyleSta
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        cycleStandApproveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","A");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogApprove(OnSubmit_CycleStand.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        cycleStandRejectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("TAG", "onClick: "+ParentID);
+                JsonObject jsonObject1=new JsonObject();
+                jsonObject1.addProperty("InsType","R");
+                jsonObject1.addProperty("ParamId",ParentID);
+                Log.d("TAG", "onClick: "+jsonObject1);
+                Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
+                call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
+                        ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
+                        StaticFunctions.showDialogReject(OnSubmit_CycleStand.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID);
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<ApproveRejectRemarkModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         if (applicationController.getUsertype().equals("VA")){
             call=apiService.checkCycleStand(paraGetDetails2("2",applicationController.getSchoolId(), applicationController.getPeriodID(),"21"));
         }else{

@@ -788,6 +788,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/layOutComputerLab">
 
                 <Button
+                    android:id="@+id/computerLabRejectBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -801,6 +802,7 @@
                     />
 
                 <Button
+                    android:id="@+id/computerLabApproveBtn"
                     style="@style/btn_style"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

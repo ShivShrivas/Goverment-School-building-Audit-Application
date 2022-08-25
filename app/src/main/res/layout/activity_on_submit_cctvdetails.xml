@@ -537,6 +537,7 @@
         app:layout_constraintTop_toBottomOf="@+id/layoutCCTV">
 
         <Button
+            android:id="@+id/onSubmitCCTVrejectBtn"
             style="@style/btn_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -550,6 +551,7 @@
             />
 
         <Button
+            android:id="@+id/onSubmitCCTVApproveBtn"
             style="@style/btn_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
