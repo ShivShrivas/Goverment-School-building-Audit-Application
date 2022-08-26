@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -27,16 +28,17 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
     String type;
     String periodID;
     String id;
-    String[] arrayRemark={"Total Class Room number is wrong"," Good condition Class Room number is wrong", "Major repairing Class Room number is wrong"," Minor repairing Class Room number is wrong", "Black Board number is wrong", "White Board number is wrong, Green Board number is wrong"};
+    ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 
 
-    public AdpterResonsApproved(Context context, ArrayList<ApproveRejectRemarkModel> myImageNameList, String schoolId, String periodID, String type, String id) {
+    public AdpterResonsApproved(Context context, ArrayList<ApproveRejectRemarkModel> myImageNameList, String schoolId, String periodID, String type, String id, ArrayList<Datum> arrayListRemarks) {
         this.context=context;
         this.myImageNameList=myImageNameList;
         this.schoolId=schoolId;
         this.periodID=periodID;
         this.type=type;
         this.id=id;
+        this.arrayListRemarks=arrayListRemarks;
 
     }
 
@@ -52,8 +54,8 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
     public void onBindViewHolder(@NonNull ApproverdViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.resontext.setText(myImageNameList.get(position).getInsName());
 
-        for (int i=0;i<arrayRemark.length;i++){
-            if (holder.resontext.getText().toString().equals(arrayRemark[i])){
+        for (int i=0;i<arrayListRemarks.size();i++){
+            if (holder.resontext.getText().toString().equals(arrayListRemarks.get(i).getInsName().toString())){
                 holder.reasonCheck.setChecked(true);
             }
         }

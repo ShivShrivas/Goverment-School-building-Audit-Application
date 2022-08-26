@@ -23,6 +23,7 @@ import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
@@ -38,7 +39,7 @@ import retrofit2.Response;
 public class OnSubmit_SolarPanel extends AppCompatActivity {
     ApplicationController applicationController;
     TextView userName,schoolAddress,schoolName,editSolarPanelDetails;
-    ArrayList<String> arrayListRemarks=new ArrayList<>();
+    ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 
     EditText edtTypeOfSolarPanel,edtcapacityOfSolarPanel,edtSolarPanelScheme,edtSolarPaneltWorkingStatus,edtSolraPanelInstallationYear,edtSolarPanel;
     RecyclerView recyclerViewTwoTypeSolarpanelAndOnSub;
@@ -110,9 +111,8 @@ public class OnSubmit_SolarPanel extends AppCompatActivity {
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
                     Toast.makeText(OnSubmit_SolarPanel.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
-                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
-                    }
+                    arrayListRemarks=approveRejectRemarksDataModel.getData();
+
 
                 }
             }

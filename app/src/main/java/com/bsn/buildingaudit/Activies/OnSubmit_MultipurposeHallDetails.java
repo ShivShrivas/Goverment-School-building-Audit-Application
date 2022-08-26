@@ -22,6 +22,7 @@ import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
@@ -41,7 +42,7 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
     LinearLayout linearLayout21;
     Button multipurposeApproveBtn,multipurposeRejectBtn;
     String ParentID;
-    ArrayList<String> arrayListRemarks=new ArrayList<>();
+    ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 
     Call<List<JsonObject>> call;
     String Type;
@@ -115,9 +116,8 @@ RecyclerView recyclerViewMultipurposeHallOnSubmit;
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
                     Toast.makeText(OnSubmit_MultipurposeHallDetails.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
-                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
-                    }
+                    arrayListRemarks=approveRejectRemarksDataModel.getData();
+
 
                 }
             }

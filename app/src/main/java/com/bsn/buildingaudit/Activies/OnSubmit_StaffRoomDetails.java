@@ -25,6 +25,7 @@ import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
@@ -40,7 +41,7 @@ import retrofit2.Response;
 public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
     private TextView schoolAddress,schoolName,editStaffRoomDetails;
     ApplicationController applicationController;
-    ArrayList<String> arrayListRemarks=new ArrayList<>();
+    ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     EditText edtAlmiraAndRacksAvailabiltyOnSubmit,edtFurnitureAvailabiltyOnSubmit,edtStaffRoomStatusOnSubmit,edtStaffRoomAvailabilityOnSubmit;
     RecyclerView recyclerViewStafroomtwoOnSubmit;
     ConstraintLayout constraintLayout22;
@@ -129,9 +130,8 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
                     Toast.makeText(OnSubmit_StaffRoomDetails.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
-                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
-                    }
+                    arrayListRemarks=approveRejectRemarksDataModel.getData();
+
 
                 }
             }

@@ -24,6 +24,7 @@ import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
@@ -45,7 +46,7 @@ EditText totalClassRooms,edtPodiumClassAfterSubmit,majorRepairingClassroom,
         minorRepairingClassroomAfterSubmit,greenBoardCountAfterSubmit,goodCondtionClassroomAfterSubmit,whiteBoardContAfterSubmit,blackBoardCountAfterSubmit;
 RecyclerView recyclerViewTwoTypeOneAfterSubmit,recyclerViewFourTypeOneAfterSubmit,recyclerViewThreeTypeOneAfterSubmit;
 String Type;
-ArrayList<String> arrayListRemarks=new ArrayList<>();
+ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 ImageView schoolIcon;
     Call<List<JsonObject>> call;
     String ParentID;
@@ -89,9 +90,8 @@ LinearLayout diosButtonLayout,linearLayout2;
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
                     Toast.makeText(OnSubmitClassRoomPage.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
-                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
-                    }
+                    arrayListRemarks=approveRejectRemarksDataModel.getData();
+
 
                 }
             }

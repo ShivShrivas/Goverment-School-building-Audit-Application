@@ -18,6 +18,7 @@ import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.Model.GetExtraActivitiesModel;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
@@ -44,7 +45,7 @@ public class Extra_Activities_Details extends AppCompatActivity {
     Button extraActivitiesApproveBtn,extraActivitiesRejectBtn;
     Intent i;
     String ParentID;
-    ArrayList<String> arrayListRemarks=new ArrayList<>();
+    ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +122,8 @@ public class Extra_Activities_Details extends AppCompatActivity {
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
                     Toast.makeText(Extra_Activities_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
-                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
-                    }
+                    arrayListRemarks=approveRejectRemarksDataModel.getData();
+
 
                 }
             }

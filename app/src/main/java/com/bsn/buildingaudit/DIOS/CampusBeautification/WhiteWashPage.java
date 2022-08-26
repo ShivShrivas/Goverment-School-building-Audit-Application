@@ -15,6 +15,7 @@ import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
 import com.bsn.buildingaudit.Model.CampusWhiteWashDetalsModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
@@ -30,7 +31,7 @@ public class WhiteWashPage extends AppCompatActivity {
     ApplicationController applicationController;
     Intent i;
     String ParentID;
-    ArrayList<String> arrayListRemarks=new ArrayList<>();
+    ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 
     TextView lastDoneWhiteWashYear,whitewashStatus,whitewashBudget,
         sanctionAmount,expenditureAmount,mantinamceOfDoorTxt,paintingOfBlackBoard,
@@ -99,9 +100,8 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
                     Toast.makeText(WhiteWashPage.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
-                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
-                    }
+                    arrayListRemarks=approveRejectRemarksDataModel.getData();
+
 
                 }
             }

@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.Adapters.AdpterResonsApproved;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
@@ -34,7 +35,7 @@ public class StaticFunctions {
     private static ConstraintLayout remarkTextinputLayout;
     private static ConstraintLayout rejectTextintputLayout;
 
-    public static void showDialogApprove(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<String> arrayListRemarks) {
+    public static void showDialogApprove(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<Datum> arrayListRemarks) {
 
         dialog = new Dialog(activity);
         // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -47,7 +48,7 @@ public class StaticFunctions {
         remarkTextinputLayout = (ConstraintLayout) dialog.findViewById(R.id.remarkTextinputLayout);
         ImageView btndialogClose = (ImageView) dialog.findViewById(R.id.dilogeCloseBtnApprove);
         RecyclerView recyclerView = dialog.findViewById(R.id.recycleForReason);
-        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList,schoolId,periodID,"A",id);
+        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList,schoolId,periodID,"A",id,arrayListRemarks);
         recyclerView.setAdapter(adapterRe);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         dialog.show();
@@ -119,7 +120,7 @@ public class StaticFunctions {
     }
 
 
-    public static void showDialogReject(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<String> arrayListRemarks) {
+    public static void showDialogReject(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<Datum> arrayListRemarks) {
 
         dialog = new Dialog(activity);
         // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -188,7 +189,7 @@ public class StaticFunctions {
 
 
         RecyclerView recyclerView = dialog.findViewById(R.id.recycleForReasonreject);
-        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList, schoolId, periodID,"R",id);
+        AdpterResonsApproved adapterRe = new AdpterResonsApproved(activity, myImageNameList, schoolId, periodID,"R",id,arrayListRemarks);
         recyclerView.setAdapter(adapterRe);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         dialog.show();

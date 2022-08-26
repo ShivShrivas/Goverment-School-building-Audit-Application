@@ -25,6 +25,7 @@ import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.ConstantValues.StaticFunctions;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
+import com.bsn.buildingaudit.Model.Datum;
 import com.bsn.buildingaudit.Model.LastThreeYearsModel;
 import com.bsn.buildingaudit.Model.StudentListModelTopper;
 import com.bsn.buildingaudit.R;
@@ -48,7 +49,7 @@ ConstraintLayout constraintLayout46,lastThreeYearResultLayout;
     ImageView districLevelTopperImg,stateLevelToperImg,comptativeExamSelectionImg;
     TextView districLevelTopper,stateLevelTopper,comptativeExamSelection;
     Intent i;
-    ArrayList<String> arrayListRemarks=new ArrayList<>();
+    ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 
     String ParentID;
 Button last_threeYearResultApproveBtn,last_threeYearResultRejectBtn;
@@ -106,9 +107,8 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
                     Toast.makeText(Student_Result_Details_last_three_years.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    for (int i=0;i<approveRejectRemarksDataModel.getData().size();i++){
-                        arrayListRemarks.add(approveRejectRemarksDataModel.getData().get(i).getInsName().toString());
-                    }
+                    arrayListRemarks=approveRejectRemarksDataModel.getData();
+
 
                 }
             }
