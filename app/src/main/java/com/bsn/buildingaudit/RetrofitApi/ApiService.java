@@ -609,10 +609,20 @@ public  interface ApiService {
    Call<JsonArray> submitRemarkByDios(@Body JsonArray jsonArray);
 
 
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/UpdateInspectionData")
+    Call<JsonArray> updateRemarkByDios(@Body JsonArray jsonArray);
+
+
 
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
    @POST("SchoolGrading/GetPreviousInspectionData")
    Call<ApproveRejectRemarksDataModel> getpriviousSubmittedDataByDIOS(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/CheckInspectionAppValid")
+   Call<JsonObject> getFinalButtonStatus(@Body JsonObject jsonObject);
 
 
 }

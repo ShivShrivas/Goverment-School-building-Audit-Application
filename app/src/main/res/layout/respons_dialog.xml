@@ -25,24 +25,26 @@
                 android:layout_marginTop="16dp"
                 android:textAlignment="center"
                 android:textColor="@color/gray"
-                android:textSize="20dp"
+                android:textSize="19dp"
+                app:layout_constraintBottom_toTopOf="@+id/linearLayout58"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
+                android:id="@+id/linearLayout58"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent">
 
                 <Button
                     android:id="@+id/BtnYesDialoge"
-                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:text="Yes"
                     android:layout_margin="4dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_weight="1"
+                    android:text="Yes"
                     android:textColor="@color/white"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -51,12 +53,12 @@
                     app:layout_constraintVertical_bias="0.802" />
 
                 <Button
-                    android:layout_weight="1"
-android:layout_margin="4dp"
                     android:id="@+id/BtnResponseDialoge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
                     android:layout_marginBottom="16dp"
+                    android:layout_weight="1"
                     android:text="No"
                     android:textColor="@color/white"
                     android:textSize="16dp"

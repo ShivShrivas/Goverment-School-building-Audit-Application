@@ -47,6 +47,7 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
     String Type;
     String ParentID;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
+    Boolean remarkAlreadyDoneFlag=false;
 
     Button fireFightingApproveBtn,fireFightingRejectBtn;
         ConstraintLayout constraintLayout30;
@@ -68,6 +69,7 @@ TextView uploadtextFireFighting;
         Dialog dialog2 = new Dialog(this);
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
+        ParentID=i.getStringExtra("ParamId");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -117,18 +119,44 @@ TextView uploadtextFireFighting;
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        Log.d("TAG", "onCreate: "+json);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+
                     Toast.makeText(OnSubmit_FireFighting.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
+                    Dialog dialogForRemark=new Dialog(OnSubmit_FireFighting.this);
+                    dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
+                    dialogForRemark.setContentView (R.layout.respons_dialog);
+                    dialogForRemark.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+                    dialogForRemark.setCancelable(false);
 
+                    TextView textView=dialogForRemark.findViewById(R.id.dialogtextResponse);
+                    textView.setText(approveRejectRemarksDataModel.getStatus()+"\n Do you want to change it?");
+                    Button buttonNo=dialogForRemark.findViewById(R.id.BtnResponseDialoge);
+                    Button buttonYes=dialogForRemark.findViewById(R.id.BtnYesDialoge);
+                    buttonNo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialogForRemark.dismiss();
 
+                        }
+                    });
+                    buttonYes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            remarkAlreadyDoneFlag=true;
+                            dialogForRemark.dismiss();
+                        }
+                    });
+                    dialogForRemark.show();
                 }
             }
 
@@ -150,7 +178,7 @@ TextView uploadtextFireFighting;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks);
+                        StaticFunctions.showDialogReject(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
 
                     }
 
@@ -174,7 +202,7 @@ TextView uploadtextFireFighting;
                 @Override
                 public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                     ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                    StaticFunctions.showDialogApprove(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks);
+                    StaticFunctions.showDialogApprove(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
 
                 }
 

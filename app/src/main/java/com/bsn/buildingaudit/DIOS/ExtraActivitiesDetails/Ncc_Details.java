@@ -1,5 +1,6 @@
 package com.bsn.buildingaudit.DIOS.ExtraActivitiesDetails;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ ConstraintLayout constraintLayout40;
     Intent i;
     String ParentID;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
+    Boolean remarkAlreadyDoneFlag=false;
 
     Button nccDetailsRejectedBtn,nccDetatilsApproveBtn;
 TextView NCCRUNNINGSTATUS,NCCYEARRAISINGSTATUS,NCCGROUNDSTATUS,TRAINEDANOSTATUS,SSCDPARTICIPATION,
@@ -97,10 +99,36 @@ CheckBox WINGARMYSTATUS, WINGNAVALSTATUS, WINGAIRSTATUS;
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+
                     Toast.makeText(Ncc_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
+                    Dialog dialogForRemark=new Dialog(Ncc_Details.this);
+                    dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
+                    dialogForRemark.setContentView (R.layout.respons_dialog);
+                    dialogForRemark.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+                    dialogForRemark.setCancelable(false);
 
+                    TextView textView=dialogForRemark.findViewById(R.id.dialogtextResponse);
+                    textView.setText(approveRejectRemarksDataModel.getStatus()+"\n Do you want to change it?");
+                    Button buttonNo=dialogForRemark.findViewById(R.id.BtnResponseDialoge);
+                    Button buttonYes=dialogForRemark.findViewById(R.id.BtnYesDialoge);
+                    buttonNo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialogForRemark.dismiss();
 
+                        }
+                    });
+                    buttonYes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            remarkAlreadyDoneFlag=true;
+                            dialogForRemark.dismiss();
+                        }
+                    });
+                    dialogForRemark.show();
                 }
             }
 
@@ -171,7 +199,7 @@ CheckBox WINGARMYSTATUS, WINGNAVALSTATUS, WINGAIRSTATUS;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
+                        StaticFunctions.showDialogApprove(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
 
                     }
 
@@ -194,7 +222,7 @@ CheckBox WINGARMYSTATUS, WINGNAVALSTATUS, WINGAIRSTATUS;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
+                        StaticFunctions.showDialogReject(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
 
                     }
 

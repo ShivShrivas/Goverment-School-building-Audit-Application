@@ -46,6 +46,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
     RecyclerView recyclerViewStafroomtwoOnSubmit;
     ConstraintLayout constraintLayout22;
     String Type;
+    Boolean remarkAlreadyDoneFlag=false;
     LinearLayout linearLayout11;
     TextView mobnumberTxt,uploadedImagetxt;
     ImageView schoolIcon;
@@ -129,10 +130,36 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
                 Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
+
                     Toast.makeText(OnSubmit_StaffRoomDetails.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
+                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
+                    Dialog dialogForRemark=new Dialog(OnSubmit_StaffRoomDetails.this);
+                    dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
+                    dialogForRemark.setContentView (R.layout.respons_dialog);
+                    dialogForRemark.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
+                    dialogForRemark.setCancelable(false);
 
+                    TextView textView=dialogForRemark.findViewById(R.id.dialogtextResponse);
+                    textView.setText(approveRejectRemarksDataModel.getStatus()+"\n Do you want to change it?");
+                    Button buttonNo=dialogForRemark.findViewById(R.id.BtnResponseDialoge);
+                    Button buttonYes=dialogForRemark.findViewById(R.id.BtnYesDialoge);
+                    buttonNo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            onBackPressed();
+                            dialogForRemark.dismiss();
 
+                        }
+                    });
+                    buttonYes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            remarkAlreadyDoneFlag=true;
+                            dialogForRemark.dismiss();
+                        }
+                    });
+                    dialogForRemark.show();
                 }
             }
 
@@ -196,7 +223,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                             ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                            StaticFunctions.showDialogApprove(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
+                            StaticFunctions.showDialogApprove(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
 
                         }
 
@@ -220,7 +247,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                             ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                            StaticFunctions.showDialogReject(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks);
+                            StaticFunctions.showDialogReject(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
 
                         }
 

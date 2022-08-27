@@ -2,6 +2,7 @@ package com.bsn.buildingaudit.Adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +39,26 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
         this.periodID=periodID;
         this.type=type;
         this.id=id;
-        this.arrayListRemarks=arrayListRemarks;
+        try{
+            if (type.equals(arrayListRemarks.get(0).getInsType())){
+                this.arrayListRemarks=arrayListRemarks;
+
+                for (int i=0;i<arrayListRemarks.size();i++){
+
+                    JsonObject jsonObject=new JsonObject();
+                    jsonObject.addProperty("SchoolId",arrayListRemarks.get(i).getSchoolId());
+                    jsonObject.addProperty("PeriodId",arrayListRemarks.get(i).getPeriodId());
+                    jsonObject.addProperty("ParamId",arrayListRemarks.get(i).getParamId());
+                    jsonObject.addProperty("OtherRemarks",arrayListRemarks.get(i).getOtherRemarks());
+                    jsonObject.addProperty("InsId",arrayListRemarks.get(i).getInsId());
+                    jsonObject.addProperty("CreatedBy","");
+                    jsonArray.add(jsonObject);
+                }
+            }
+        }catch (Exception e){
+
+        }
+
 
     }
 
@@ -52,32 +72,54 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
 
     @Override
     public void onBindViewHolder(@NonNull ApproverdViewHolder holder, @SuppressLint("RecyclerView") int position) {
+
         holder.resontext.setText(myImageNameList.get(position).getInsName());
 
         for (int i=0;i<arrayListRemarks.size();i++){
-            if (holder.resontext.getText().toString().equals(arrayListRemarks.get(i).getInsName().toString())){
+            if (holder.resontext.getText().toString().equals(arrayListRemarks.get(i).getInsName())){
                 holder.reasonCheck.setChecked(true);
+
+            }
+            if (arrayListRemarks.get(i).getInsName().equals("Other")){
+
+                    StaticFunctions.setText(type,arrayListRemarks.get(i).getOtherRemarks());
+
+
             }
         }
         holder.reasonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (holder.resontext.getText().equals("Other")){
-                    if (holder.reasonCheck.isChecked()){
-                        StaticFunctions.showTextBox(type);
-                    }else {
-                        StaticFunctions.hideTextBox(type);
+                if (holder.reasonCheck.isChecked()){
+                    if (holder.resontext.getText().equals("Other")){
+                        if (holder.reasonCheck.isChecked()){
+                            StaticFunctions.showTextBox(type);
+                        }else {
+                            StaticFunctions.hideTextBox(type);
 
+                        }
+                    }else{
+
+                        JsonObject jsonObject=new JsonObject();
+                        jsonObject.addProperty("SchoolId",schoolId);
+                        jsonObject.addProperty("PeriodId",periodID);
+                        jsonObject.addProperty("ParamId",id);
+                        jsonObject.addProperty("OtherRemarks","");
+                        jsonObject.addProperty("InsId",myImageNameList.get(position).getInsId());
+                        jsonObject.addProperty("CreatedBy","");
+                        jsonArray.add(jsonObject);
                     }
-                }else{
-                    JsonObject jsonObject=new JsonObject();
-                    jsonObject.addProperty("SchoolId",schoolId);
-                    jsonObject.addProperty("PeriodId",periodID);
-                    jsonObject.addProperty("ParamId",id);
-                    jsonObject.addProperty("OtherRemarks","");
-                    jsonObject.addProperty("InsId",myImageNameList.get(position).getInsId());
-                    jsonObject.addProperty("CreatedBy","");
-                    jsonArray.add(jsonObject);
+
+                }else {
+                    for (int i=0;i<jsonArray.size();i++){
+                        Log.d("TAG", "onClick: "+jsonArray.get(i).getAsJsonObject().get("InsId"));
+                        if(jsonArray.get(i).getAsJsonObject().get("InsId").toString().equals(myImageNameList.get(position).getInsId().toString())){
+                            jsonArray.remove(i);
+                            Log.d("TAG", "onClick: "+"removed");
+                        }
+                    }
+
+
                 }
 
             }

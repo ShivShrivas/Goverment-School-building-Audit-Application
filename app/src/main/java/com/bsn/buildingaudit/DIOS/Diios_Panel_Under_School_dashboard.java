@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,6 +36,7 @@ RecyclerView dashBoardmenuRecview;
 TextView textView8,schoolAddress,schoolName;
 String localSchoolId;
 ImageView schoolDetailsBtn;
+Button btnDIOSBottom;
 DIOSDashboardAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,7 @@ DIOSDashboardAdapter adapter;
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         dashBoardmenuRecview=findViewById(R.id.dashBoardmenuRecview);
+        btnDIOSBottom=findViewById(R.id.btnDIOSBottom);
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         textView8=findViewById(R.id.textView8);
@@ -72,6 +75,24 @@ DIOSDashboardAdapter adapter;
         jsonObject.addProperty("UserRole",applicationController.getUsertype());
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        JsonObject jsonObjectForFinalButto=new JsonObject();
+        jsonObjectForFinalButto.addProperty("SchoolID",applicationController.getSchoolId());
+        jsonObjectForFinalButto.addProperty("PeriodID",applicationController.getPeriodID());
+        Call<JsonObject> callForButton=apiService.getFinalButtonStatus(jsonObjectForFinalButto);
+        callForButton.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.body().get("StatusCode").toString().equals("1")){
+                    btnDIOSBottom.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
+
         Call<ArrayList<GetDashboardMenuDataModel>> call=apiService.getDiosDashboardCardsData(jsonObject);
         call.enqueue(new Callback<ArrayList<GetDashboardMenuDataModel>>() {
             @Override

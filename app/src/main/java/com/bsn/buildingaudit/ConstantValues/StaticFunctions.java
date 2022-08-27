@@ -32,11 +32,11 @@ public class StaticFunctions {
 
     private static Dialog dialog;
     private static TextInputEditText inputRemarksForApproval;
+    private static TextInputEditText inputRejectRemark;
     private static ConstraintLayout remarkTextinputLayout;
     private static ConstraintLayout rejectTextintputLayout;
 
-    public static void showDialogApprove(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<Datum> arrayListRemarks) {
-
+    public static void showDialogApprove(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<Datum> arrayListRemarks, Boolean remarkAlreadyDoneFlag) {
         dialog = new Dialog(activity);
         // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
@@ -69,11 +69,59 @@ public class StaticFunctions {
                         jsonObject.addProperty("CreatedBy", schoolId);
                         AdpterResonsApproved.jsonArray.add(jsonObject);
                         Log.d("TAG", "onClick: " + AdpterResonsApproved.jsonArray);
-                        Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
+                        if (remarkAlreadyDoneFlag){
+                            Call<JsonArray> call=apiService.updateRemarkByDios(AdpterResonsApproved.jsonArray);
+                            call.enqueue(new Callback<JsonArray>() {
+                                @Override
+                                public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                    Log.d("TAG", "onResponse: "+response.body());
+                                    if (response.isSuccessful()){
+                                        Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                        activity.onBackPressed();
+                                    }
+
+                                        }
+
+                                @Override
+                                public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                                }
+                            });
+                        }else{
+                            Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
+                            call.enqueue(new Callback<JsonArray>() {
+                                @Override
+                                public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                    Log.d("TAG", "onResponse: "+response.body());
+                                    if (response.isSuccessful()){
+                                        Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                        activity.onBackPressed();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                                }
+                            });
+                        }
+
+
+                        dialog.dismiss();
+                    }
+                }else {
+                    if (remarkAlreadyDoneFlag){
+                        Call<JsonArray> call=apiService.updateRemarkByDios(AdpterResonsApproved.jsonArray);
                         call.enqueue(new Callback<JsonArray>() {
                             @Override
                             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                                 Log.d("TAG", "onResponse: "+response.body());
+                                if (response.isSuccessful()){
+                                    Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                    activity.onBackPressed();
+                                }
+
                             }
 
                             @Override
@@ -81,23 +129,24 @@ public class StaticFunctions {
 
                             }
                         });
+                    }else{
+                        Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
+                        call.enqueue(new Callback<JsonArray>() {
+                            @Override
+                            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                Log.d("TAG", "onResponse: "+response.body());
+                                if (response.isSuccessful()){
+                                    Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                    activity.onBackPressed();
+                                }
+                            }
 
-                        dialog.dismiss();
+                            @Override
+                            public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                            }
+                        });
                     }
-                }else {
-                    Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
-                    call.enqueue(new Callback<JsonArray>() {
-                        @Override
-                        public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                            Log.d("TAG", "onResponse: "+response.body());
-                        }
-
-                        @Override
-                        public void onFailure(Call<JsonArray> call, Throwable t) {
-
-                        }
-                    });
-                    Log.d("TAG", "onClick: "+AdpterResonsApproved.jsonArray);
                     dialog.dismiss();
                 }
                 AdpterResonsApproved.jsonArray=new JsonArray();
@@ -120,15 +169,17 @@ public class StaticFunctions {
     }
 
 
-    public static void showDialogReject(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<Datum> arrayListRemarks) {
+    public static void showDialogReject(Activity activity, ArrayList<ApproveRejectRemarkModel> myImageNameList, String periodID, String schoolId, String id, ArrayList<Datum> arrayListRemarks, Boolean remarkAlreadyDoneFlag) {
 
         dialog = new Dialog(activity);
         // dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.rejection_button_card);
-
+        RestClient restClient=new RestClient();
+        ApiService apiService=restClient.getApiService();
         Button btndialog = (Button) dialog.findViewById(R.id.rejectdBtnDialoge);
-        TextInputEditText inputRejectRemark = (TextInputEditText) dialog.findViewById(R.id.inputRejectRemark);
+        Log.d("TAG", "showDialogReject: "+remarkAlreadyDoneFlag);
+         inputRejectRemark = (TextInputEditText) dialog.findViewById(R.id.inputRejectRemark);
          rejectTextintputLayout = dialog.findViewById(R.id.rejectTextintputLayout);
         ImageView btndialogClose = (ImageView) dialog.findViewById(R.id.dilogeCloseBtn);
         btndialog.setOnClickListener(new View.OnClickListener() {
@@ -149,26 +200,88 @@ public class StaticFunctions {
                         jsonObject.addProperty("CreatedBy",schoolId);
                         AdpterResonsApproved.jsonArray.add(jsonObject);
                         Log.d("TAG", "onClick: "+AdpterResonsApproved.jsonArray);
+                        Log.d("TAG", "onClick: " +remarkAlreadyDoneFlag);
+                        if (remarkAlreadyDoneFlag){
+                            Call<JsonArray> call=apiService.updateRemarkByDios(AdpterResonsApproved.jsonArray);
+                            call.enqueue(new Callback<JsonArray>() {
+                                @Override
+                                public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                    Log.d("TAG", "onResponse: "+response.body());
+                                    if (response.isSuccessful()){
+                                        Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                        activity.onBackPressed();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                                }
+                            });
+                        }else{
+                            Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
+                            call.enqueue(new Callback<JsonArray>() {
+                                @Override
+                                public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                    Log.d("TAG", "onResponse: "+response.body());
+                                    if (response.isSuccessful()){
+                                        Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                        activity.onBackPressed();
+                                    }
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                                }
+                            });
+                        }
                         dialog.dismiss();
                     }
 
 
                 }else {
                     Log.d("TAG", "onClick: "+AdpterResonsApproved.jsonArray);
-                    RestClient restClient=new RestClient();
-                    ApiService apiService=restClient.getApiService();
-                    Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
-                    call.enqueue(new Callback<JsonArray>() {
-                        @Override
-                        public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                            Log.d("TAG", "onResponse: "+response.body());
-                        }
 
-                        @Override
-                        public void onFailure(Call<JsonArray> call, Throwable t) {
+                    if (remarkAlreadyDoneFlag){
+                        Call<JsonArray> call=apiService.updateRemarkByDios(AdpterResonsApproved.jsonArray);
+                        call.enqueue(new Callback<JsonArray>() {
+                            @Override
+                            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                Log.d("TAG", "onResponse: "+response.body());
+                                if (response.isSuccessful()){
+                                    Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                    activity.onBackPressed();
+                                }
 
-                        }
-                    });
+                            }
+
+                            @Override
+                            public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                            }
+                        });
+                    }else{
+                        Call<JsonArray> call=apiService.submitRemarkByDios(AdpterResonsApproved.jsonArray);
+                        call.enqueue(new Callback<JsonArray>() {
+                            @Override
+                            public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
+                                Log.d("TAG", "onResponse: "+response.body());
+                                if (response.isSuccessful()){
+                                    Toast.makeText(activity, ""+response.body().get(0).getAsJsonObject().get("Status"), Toast.LENGTH_SHORT).show();
+                                    activity.onBackPressed();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<JsonArray> call, Throwable t) {
+
+                            }
+                        });
+                    }
                     dialog.dismiss();
 
                 }
@@ -201,6 +314,16 @@ public class StaticFunctions {
 
         }else{
             rejectTextintputLayout.setVisibility(View.VISIBLE);
+
+        }
+    }   public static void setText(String type,String remark) {
+        if(type.equals("A")){
+            remarkTextinputLayout.setVisibility(View.VISIBLE);
+            inputRemarksForApproval.setText(remark);
+
+        }else{
+            rejectTextintputLayout.setVisibility(View.VISIBLE);
+            inputRejectRemark.setText(remark);
 
         }
     }
