@@ -96,6 +96,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_on_submit_wifi_details.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_onsubmit_geofenching_details.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_other_extra_activities_details.xml" value="0.25" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_page_for_inspection_history.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_participation_details.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_physical_status_dios_dashboard.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_principal_dashboard.xml" value="0.25" />
@@ -159,6 +160,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/history_image_card.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/image_card_layout.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/item_card_for_absent_details.xml" value="0.33" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/item_card_inspection_history.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/language_card.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/list_group.xml" value="0.13072916666666667" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/list_item.xml" value="0.41718555417185554" />

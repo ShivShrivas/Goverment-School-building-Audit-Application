@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.DIOS.DIOS_Dashboard;
-import com.bsn.buildingaudit.DIOS.Diios_Panel_Under_School_dashboard;
+import com.bsn.buildingaudit.DIOS.Page_For_InspectionHistory;
 import com.bsn.buildingaudit.Model.SchoolListModel;
 import com.bsn.buildingaudit.R;
 
@@ -66,14 +66,14 @@ public class DIOS_DashboardAdapter extends RecyclerView.Adapter<DIOS_DashboardAd
                     if ((arrayListSchool.get(position).getJdstatus()==1)){
                         Toast.makeText(context, "this School inspection is done", Toast.LENGTH_SHORT).show();
 
-                        Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
+                        Intent i=new Intent(context, Page_For_InspectionHistory.class);
                         applicationController.setSchoolName(arrayListSchool.get(position).getSchoolname());
                         applicationController.setSchoolAddress(arrayListSchool.get(position).getBlockname()+" "+arrayListSchool.get(position).getDistrictname()+" "+arrayListSchool.get(position).getDivisionname());
                         applicationController.setSchoolId(arrayListSchool.get(position).getSchoolid().toString());
                         context.startActivity(i);
                     }else{
                         if ( DIOS_Dashboard.setSchoolIdInContoller(arrayListSchool.get(position).getSchoolid())){
-                            Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
+                            Intent i=new Intent(context, Page_For_InspectionHistory.class);
                             context.startActivity(i);
                         }
 
@@ -82,7 +82,7 @@ public class DIOS_DashboardAdapter extends RecyclerView.Adapter<DIOS_DashboardAd
                     }
                 }catch (Exception e){
                     if ( DIOS_Dashboard.setSchoolIdInContoller(arrayListSchool.get(position).getSchoolid())){
-                        Intent i=new Intent(context, Diios_Panel_Under_School_dashboard.class);
+                        Intent i=new Intent(context, Page_For_InspectionHistory.class);
                         context.startActivity(i);
                     }
                 }

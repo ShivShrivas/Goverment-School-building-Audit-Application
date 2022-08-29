@@ -940,8 +940,7 @@ public class dashboardRecviewAdapter extends RecyclerView.Adapter<dashboardRecvi
                     Intent i=new Intent(context, OnSubmit_OpenGYmDetails.class);
                     i.putExtra("Type","P");
                     i.putExtra("ParamId","1");
-                                       context.startActivity(i);
-
+                    context.startActivity(i);
                 }
             }
 
