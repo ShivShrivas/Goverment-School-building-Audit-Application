@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
                     Log.d("TAG", "onClick: "+applicationController.getUsertype());
-                    if (applicationController.getUsertype().equals("AA")){
+                    if (applicationController.getUsertype().equals("AAA")){
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
                         Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));

@@ -239,10 +239,10 @@ TextView uploadtextFireFighting;
                 }else{
                     edtFireFightWorkingStatus.setText(response.body().get(0).get("WorkingStatus").getAsString());
 
-                    int totalRo=Integer.parseInt(response.body().get(0).get("NonWorkingCount").getAsString())+Integer.parseInt(response.body().get(0).get("WorkingCount").getAsString());
+                    int totalRo=Integer.parseInt(response.body().get(0).get("NonWorkingCount")==null?"0":response.body().get(0).get("NonWorkingCount").getAsString())+Integer.parseInt(response.body().get(0).get("WorkingCount")==null?"0":response.body().get(0).get("WorkingCount").getAsString());
 
-                    edtNotWorkingFF.setText(response.body().get(0).get("NonWorkingCount").getAsString());
-                    edtWorkingFF.setText(response.body().get(0).get("WorkingCount").getAsString());
+                    edtNotWorkingFF.setText(response.body().get(0).get("NonWorkingCount")==null?"0":response.body().get(0).get("NonWorkingCount").getAsString());
+                    edtWorkingFF.setText(response.body().get(0).get("WorkingCount")==null?"0":response.body().get(0).get("WorkingCount").getAsString());
                     edtTotalFF.setText(String.valueOf(totalRo));
                     edtFireFightTraining.setText(response.body().get(0).get("Training").getAsString());
                     String[] time=(response.body().get(0).get("RenewalDateStatus").getAsString()).split("T");

@@ -81,7 +81,7 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
         schoolAddress.setText(applicationController.getSchoolAddress());
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
-        ParentID=i.getStringExtra("ParentID");
+        ParentID=i.getStringExtra("ParamId");
 
         edtWallCondition=findViewById(R.id.edtWallCondition);
         uploadBoundary=findViewById(R.id.uploadBoundary);
@@ -115,6 +115,7 @@ EditText edtWallCondition,edtBoundryScheme,edtWhiteWash,edtTypeBoundaryWall,edtL
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        Log.d("TAG", "onCreate: "+json);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
