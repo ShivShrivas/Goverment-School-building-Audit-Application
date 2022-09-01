@@ -30,6 +30,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
         <activity
+            android:name=".DIOS.DIOS_Final_Submission"
+            android:exported="false" />
+        <activity
             android:name=".DIOS.Page_For_InspectionHistory"
             android:exported="false" />
         <activity

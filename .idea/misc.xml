@@ -26,6 +26,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/cross_buton.xml" value="0.1755" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/custom_checkbox.xml" value="0.1705" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_calendar.xml" value="0.1515" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_camera.xml" value="0.1795" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_dios_welcome.xml" value="0.179" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_eye.xml" value="0.102" />
         <entry key="..\:/BuildingAudit/app/src/main/res/drawable/ic_manual.xml" value="0.1445" />
@@ -56,6 +57,7 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_date_wise_attendance.xml" value="0.18" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_diios_panel_under_school_dashboard.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_dashboard.xml" value="0.12" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_final_submission.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_inner_dashboard.xml" value="0.2" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_dios_staff_details.xml" value="0.22" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/activity_extra_activities_details.xml" value="0.2" />
@@ -193,6 +195,8 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/training_card.xml" value="0.25" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/tree_item_card.xml" value="0.33" />
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/update_details_three_item_card.xml" value="0.1859375" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/menu/dios_image_verification.xml" value="0.19739583333333333" />
+        <entry key="..\:/BuildingAudit/app/src/main/res/menu/nav_menu.xml" value="0.19739583333333333" />
       </map>
     </option>
   </component>

@@ -82,9 +82,9 @@ DIOSDashboardAdapter adapter;
         callForButton.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                if (response.body().get("StatusCode").toString().equals("1")){
-                    btnDIOSBottom.setVisibility(View.VISIBLE);
-                }
+//                if (response.body().get("StatusCode").toString().equals("1")){
+//                    btnDIOSBottom.setVisibility(View.VISIBLE);
+//                }
             }
 
             @Override
@@ -92,7 +92,12 @@ DIOSDashboardAdapter adapter;
 
             }
         });
-
+        btnDIOSBottom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Diios_Panel_Under_School_dashboard.this,DIOS_Final_Submission.class));
+            }
+        });
         Call<ArrayList<GetDashboardMenuDataModel>> call=apiService.getDiosDashboardCardsData(jsonObject);
         call.enqueue(new Callback<ArrayList<GetDashboardMenuDataModel>>() {
             @Override

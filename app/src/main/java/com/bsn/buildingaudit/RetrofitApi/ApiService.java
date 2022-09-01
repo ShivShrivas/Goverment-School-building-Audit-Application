@@ -625,4 +625,10 @@ public  interface ApiService {
    Call<JsonObject> getFinalButtonStatus(@Body JsonObject jsonObject);
 
 
+    @Multipart
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+    @POST("SchoolGrading/InsertInsAppFinalSubmit")
+    Call<JsonObject> uploadFinalSubmisionDetailsDIOS(@Part MultipartBody.Part parts,@Part("RequestData") RequestBody requestBody);
+
+
 }
