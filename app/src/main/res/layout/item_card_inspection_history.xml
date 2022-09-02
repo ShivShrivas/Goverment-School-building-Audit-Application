@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView63"
         android:layout_width="0dp"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -28,7 +28,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView64"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 app:cardElevation="0dp"
                 android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -41,28 +41,127 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/textView22"
+                        android:id="@+id/inspectionNoTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:text="1st Inspection"
+                        android:layout_marginTop="4dp"
+                        android:text="Inspection No.1"
                         android:textColor="#434343"
-                        android:textSize="20dp"
+                        android:textSize="16dp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
+                        android:id="@+id/inspectionIdTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
+                        android:layout_marginTop="4dp"
+                        android:text="Id: INS167291"
+                        android:textSize="13dp"
+                        android:textColor="@color/black"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inspectionNoTxt" />
+
+                    <TextView
+                        android:id="@+id/textView25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Start on:"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/inspectionIdTxt" />
+
+                    <TextView
+                        android:id="@+id/startOnTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:text="20-03-2022 02:30PM"
-                        android:textSize="18dp"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView25"
+                        app:layout_constraintStart_toEndOf="@+id/textView25"
+                        app:layout_constraintTop_toTopOf="@+id/textView25"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <TextView
+                        android:id="@+id/textView26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:text="End on:"
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+
+
+                    <TextView
+                        android:id="@+id/endsOnTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20-03-2022 02:30PM"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView26"
+                        app:layout_constraintEnd_toEndOf="@+id/startOnTxt"
+                        app:layout_constraintStart_toStartOf="@+id/startOnTxt"
+                        app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+                    <TextView
+                        android:id="@+id/textView29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Total Duration: "
+                        android:textColor="@color/black"
+                        android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView22"
-                        app:layout_constraintVertical_bias="0.687" />
+                        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+                    <TextView
+                        android:id="@+id/timeDurationTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="20:07hr"
+                        android:textSize="14dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView29"
+                        app:layout_constraintStart_toEndOf="@+id/textView29"
+                        app:layout_constraintTop_toTopOf="@+id/textView29" />
+
+                    <TextView
+                        android:id="@+id/completeTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="12 Completed"
+                        app:layout_constraintEnd_toEndOf="@+id/statusTxt"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/imageView4"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/pendingTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="14 Pending"
+                        app:layout_constraintBottom_toTopOf="@+id/imageView4"
+                        app:layout_constraintEnd_toEndOf="@+id/statusTxt"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="@+id/imageView4"
+                        app:layout_constraintTop_toBottomOf="@+id/completeTxt"
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <ImageView
                         android:id="@+id/imageView4"
@@ -71,11 +170,12 @@
                         android:layout_marginStart="124dp"
                         android:src="@drawable/complete_ic_green"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/textView22"
+                        app:layout_constraintStart_toEndOf="@+id/inspectionNoTxt"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.6" />
+                        app:layout_constraintVertical_bias="0.721" />
 
                     <TextView
+                        android:id="@+id/statusTxt"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"

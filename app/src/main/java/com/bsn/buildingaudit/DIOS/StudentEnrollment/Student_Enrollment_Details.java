@@ -40,7 +40,7 @@ public class Student_Enrollment_Details extends AppCompatActivity {
     RecyclerView recyclerViewStudentpresence;
     ApplicationController applicationController;
     Intent i;
-    String ParentID;
+    String ParentID,InspectionId;
     Button btnApprovalStudentpresence,btnRejectStudentpresence;
     ArrayList<StudentEnrollmentListModel> arrayList=new ArrayList<>();
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
@@ -53,6 +53,7 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         applicationController= (ApplicationController) getApplication();
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
 
         Window window = getWindow();
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
@@ -77,13 +78,14 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
+        Log.d("TAG", "onCreate: "+json);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(Student_Enrollment_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();

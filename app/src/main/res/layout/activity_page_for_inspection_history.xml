@@ -179,239 +179,25 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/chemistryLabBodyCard"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/inspectionHistoryRecView"
                 android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="#3CFF00"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="5dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView25">
+                app:layout_constraintTop_toBottomOf="@+id/cardView25" />
 
-                <LinearLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
-                    android:background="@color/white"
-                    android:gravity="center"
-
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/roomTypetxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/open_sans_herbew_bold"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:text="1st Inspection"
-                            android:textColor="#5A5A5A"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/updateOntxt"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="15dp"
-                            android:text="13 Mar 2022 02:42 PM"
-                            android:textAlignment="textStart"
-                            android:textColor="#6E6E6E"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3.2"
-                        android:gravity="end|center_vertical"
-                        android:padding="6dp">
-
-                        <ImageView
-                            android:id="@+id/penddingAndSDoneBtn"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_right_icon" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/chemistryLabBodyCard1"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="#3CFF00"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
+            <Button
+                android:id="@+id/addNewInspectioBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/white"
+                android:text="Add New Inspection+"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chemistryLabBodyCard">
-
-                <LinearLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
-                    android:background="@color/white"
-                    android:gravity="center"
-
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/roomTypetxt1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/open_sans_herbew_bold"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:text="2nd Inspection"
-                            android:textColor="#5A5A5A"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/updateOntxt1"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="15dp"
-                            android:text="13 Mar 2022 02:42 PM"
-                            android:textAlignment="textStart"
-                            android:textColor="#6E6E6E"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3.2"
-                        android:gravity="end|center_vertical"
-                        android:padding="6dp">
-
-                        <ImageView
-                            android:id="@+id/penddingAndSDoneBtn1"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_right_icon" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/chemistryLabBodyCard2"
-                android:layout_width="match_parent"
-                android:layout_height="65dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:backgroundTint="#FF0000"
-                app:cardCornerRadius="4dp"
-                app:cardElevation="5dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chemistryLabBodyCard1">
-
-                <LinearLayout
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="2dp"
-                    android:background="@color/white"
-                    android:gravity="center"
-
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/roomTypetxt2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/open_sans_herbew_bold"
-                            android:gravity="center_vertical"
-                            android:paddingStart="14dp"
-                            android:text="3rd Inspection"
-                            android:textColor="#5A5A5A"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/updateOntxt2"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingStart="15dp"
-                            android:text="Pending..."
-                            android:textAlignment="textStart"
-                            android:textColor="#6E6E6E"
-                            android:textSize="15dp" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="3.2"
-                        android:gravity="end|center_vertical"
-                        android:padding="6dp">
-
-                        <ImageView
-                            android:id="@+id/penddingAndSDoneBtn2"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:src="@drawable/ic_wron_icon" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
+                app:layout_constraintTop_toBottomOf="@+id/inspectionHistoryRecView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

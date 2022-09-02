@@ -1,5 +1,6 @@
 package com.bsn.buildingaudit.RetrofitApi;
 
+import com.bsn.buildingaudit.Model.AllInspectionDataModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarkModel;
 import com.bsn.buildingaudit.Model.ApproveRejectRemarksDataModel;
 import com.bsn.buildingaudit.Model.AttendanceStaff;
@@ -623,6 +624,15 @@ public  interface ApiService {
     @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
    @POST("SchoolGrading/CheckInspectionAppValid")
    Call<JsonObject> getFinalButtonStatus(@Body JsonObject jsonObject);
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/StartNewInspection")
+   Call<JsonObject> addnewInspection(@Body JsonObject jsonObject);
+
+
+    @Headers("ApiKey:A1413083489FA750112FEE859535F76CF7086151344535324538")
+   @POST("SchoolGrading/GetInspectionList")
+   Call<ArrayList<AllInspectionDataModel>> getListOfOldInspection(@Body JsonObject jsonObject);
 
 
     @Multipart

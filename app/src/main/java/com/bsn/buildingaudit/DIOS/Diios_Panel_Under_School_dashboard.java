@@ -35,6 +35,8 @@ public class Diios_Panel_Under_School_dashboard extends AppCompatActivity {
 RecyclerView dashBoardmenuRecview;
 TextView textView8,schoolAddress,schoolName;
 String localSchoolId;
+Intent i;
+String InspectionId;
 ImageView schoolDetailsBtn;
 Button btnDIOSBottom;
 DIOSDashboardAdapter adapter;
@@ -53,6 +55,8 @@ DIOSDashboardAdapter adapter;
                 onBackPressed();
             }
         });
+        i=getIntent();
+        InspectionId=i.getStringExtra("InspectionId");
         Log.d("TAG", "onCreate: "+localSchoolId);
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
@@ -103,7 +107,7 @@ DIOSDashboardAdapter adapter;
             @Override
             public void onResponse(Call<ArrayList<GetDashboardMenuDataModel>> call, Response<ArrayList<GetDashboardMenuDataModel>> response) {
                 ArrayList<GetDashboardMenuDataModel> arrayList=response.body();
-                adapter=new DIOSDashboardAdapter(Diios_Panel_Under_School_dashboard.this,arrayList);
+                adapter=new DIOSDashboardAdapter(Diios_Panel_Under_School_dashboard.this,arrayList,InspectionId);
                 dashBoardmenuRecview.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }

@@ -21,12 +21,22 @@ import java.util.ArrayList;
 
 public class DIOSDashboardAdapter extends RecyclerView.Adapter<DIOSDashboardAdapter.DiosMenuViewHolder> {
     Context context;
+    String InspectionId;
     ArrayList<GetDashboardMenuDataModel> arrayList;
+    public DIOSDashboardAdapter(Context context, ArrayList<GetDashboardMenuDataModel> arrayList,String InspectionId) {
+        this.context=context;
+        this.arrayList=arrayList;
+        this.InspectionId=InspectionId;
+
+    }
+
     public DIOSDashboardAdapter(Context context, ArrayList<GetDashboardMenuDataModel> arrayList) {
         this.context=context;
         this.arrayList=arrayList;
 
     }
+
+
 
     @NonNull
     @Override
@@ -48,6 +58,7 @@ public class DIOSDashboardAdapter extends RecyclerView.Adapter<DIOSDashboardAdap
                     Intent i=new Intent(context, Class.forName(arrayList.get(position).getAppClassName()));
                         i.putExtra("ParentID",arrayList.get(position).getMenuid().toString());
                         i.putExtra("ParamId",arrayList.get(position).getParamid().toString());
+                        i.putExtra("InspectionId",InspectionId.toString());
                     context.startActivity(i);
                 } catch (Exception e) {
                     e.printStackTrace();
