@@ -45,7 +45,7 @@ public class Extra_Activities_Details extends AppCompatActivity {
             ,TXTSPORTSCHIEFTITLELAYOUT,    INVITEDCGSPORTDAYLAYOUT;
     Button extraActivitiesApproveBtn,extraActivitiesRejectBtn;
     Intent i;
-    String ParentID;
+    String ParentID,InspectionId;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
@@ -75,6 +75,7 @@ public class Extra_Activities_Details extends AppCompatActivity {
         WEBSITEURLLAYOUT=findViewById(R.id.WEBSITEURLLAYOUT);
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
         INVITEDCGADATELAYOUT=findViewById(R.id.INVITEDCGADATELAYOUT);
         INVITEDCGANNUALTITLELAYOUT=findViewById(R.id.INVITEDCGANNUALTITLELAYOUT);
         INVITEDCGANNUALDAYLAYOUT=findViewById(R.id.INVITEDCGANNUALDAYLAYOUT);
@@ -115,6 +116,7 @@ public class Extra_Activities_Details extends AppCompatActivity {
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -315,7 +317,7 @@ public class Extra_Activities_Details extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -338,7 +340,7 @@ public class Extra_Activities_Details extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

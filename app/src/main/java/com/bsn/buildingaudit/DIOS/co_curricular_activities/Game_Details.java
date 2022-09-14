@@ -52,7 +52,7 @@ public class Game_Details extends AppCompatActivity {
     TextView countD,countS,countN;
     Dialog dialog;
     Intent i;
-    String ParentID;
+    String ParentID,InspectionId;
     Button game_details_Approve_Btn,game_details_rejectBtn;
     ArrayList<GameStudentName> studentListDistricLevel = new ArrayList<>();
     ArrayList<GameStudentName> studentListStateLevel = new ArrayList<>();
@@ -69,6 +69,7 @@ public class Game_Details extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
 
         countD=findViewById(R.id.countD);
         countS=findViewById(R.id.countS);
@@ -105,6 +106,7 @@ public class Game_Details extends AppCompatActivity {
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -294,7 +296,7 @@ public class Game_Details extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Game_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Game_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -320,7 +322,7 @@ public class Game_Details extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Game_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Game_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

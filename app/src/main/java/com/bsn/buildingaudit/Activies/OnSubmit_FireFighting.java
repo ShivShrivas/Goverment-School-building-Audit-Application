@@ -45,7 +45,7 @@ public class OnSubmit_FireFighting extends AppCompatActivity {
     LinearLayout linearLayout21;
     Call<List<JsonObject>> call;
     String Type;
-    String ParentID;
+    String ParentID,InspectionId;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
@@ -70,6 +70,7 @@ TextView uploadtextFireFighting;
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
 
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
@@ -119,6 +120,7 @@ TextView uploadtextFireFighting;
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Log.d("TAG", "onCreate: "+json);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
@@ -178,7 +180,7 @@ TextView uploadtextFireFighting;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -202,7 +204,7 @@ TextView uploadtextFireFighting;
                 @Override
                 public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                     ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                    StaticFunctions.showDialogApprove(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
+                    StaticFunctions.showDialogApprove(OnSubmit_FireFighting.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                 }
 

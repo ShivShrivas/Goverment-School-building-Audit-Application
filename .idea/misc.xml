@@ -198,6 +198,13 @@
         <entry key="..\:/BuildingAudit/app/src/main/res/layout/update_details_three_item_card.xml" value="0.1859375" />
         <entry key="..\:/BuildingAudit/app/src/main/res/menu/dios_image_verification.xml" value="0.19739583333333333" />
         <entry key="..\:/BuildingAudit/app/src/main/res/menu/nav_menu.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/drawable/incompleted_card_bg.xml" value="0.162" />
+        <entry key="app/src/main/res/drawable/verfied_card_bg.xml" value="0.161" />
+        <entry key="app/src/main/res/layout/activity_extra_activities_details.xml" value="0.32135416666666666" />
+        <entry key="app/src/main/res/layout/activity_staff_sanction_and_working.xml" value="0.32135416666666666" />
+        <entry key="app/src/main/res/layout/dashboard_dios_itemcard.xml" value="0.32135416666666666" />
+        <entry key="app/src/main/res/layout/staff_sanction_working_item_card.xml" value="0.32135416666666666" />
+        <entry key="app/src/main/res/layout/subject_syllabus_item_card.xml" value="0.7144736842105263" />
       </map>
     </option>
   </component>

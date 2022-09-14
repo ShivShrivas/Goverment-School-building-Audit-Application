@@ -51,7 +51,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
     TextView mobnumberTxt,uploadedImagetxt;
     ImageView schoolIcon;
     Button staff_Room_Dios_ApproveBtn,staff_Room_Dios_rejectedBtn;
-    String ParentID;
+    String ParentID,InspectionId;
     Call<List<JsonObject>> call;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +67,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
         edtAlmiraAndRacksAvailabiltyOnSubmit=findViewById(R.id.edtAlmiraAndRacksAvailabiltyOnSubmit);
         edtFurnitureAvailabiltyOnSubmit=findViewById(R.id.edtFurnitureAvailabiltyOnSubmit);
         edtStaffRoomStatusOnSubmit=findViewById(R.id.edtStaffRoomStatusOnSubmit);
@@ -122,6 +123,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -223,7 +225,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                             ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                            StaticFunctions.showDialogApprove(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                            StaticFunctions.showDialogApprove(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                         }
 
@@ -247,7 +249,7 @@ public class OnSubmit_StaffRoomDetails extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                             ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                            StaticFunctions.showDialogReject(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                            StaticFunctions.showDialogReject(OnSubmit_StaffRoomDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                         }
 

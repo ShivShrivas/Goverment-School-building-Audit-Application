@@ -40,7 +40,7 @@ ApplicationController applicationController;
 TreeDetailsAdapter adapter;
 RecyclerView treeDetailsRecview;
     Intent i;
-    String ParentID;
+    String ParentID,InspectionId;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
@@ -63,6 +63,7 @@ TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWa
         spinnerPlant1=findViewById(R.id.spinnerPlant1);
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
         campusBeautificationApproveBtn=findViewById(R.id.campusBeautificationApproveBtn);
         campusBeautificationRejectBtn=findViewById(R.id.campusBeautificationRejectBtn);
         PlantED=findViewById(R.id.PlantED);
@@ -91,6 +92,7 @@ TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWa
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -176,7 +178,7 @@ TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWa
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Campus_Beautification_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Campus_Beautification_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -200,7 +202,7 @@ TextView spinnerDisplayBoard,spinnerEcoClub,spinnerAvailabilityDustbin,spinnerWa
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Campus_Beautification_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Campus_Beautification_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

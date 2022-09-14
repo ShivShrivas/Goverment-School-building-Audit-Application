@@ -44,7 +44,7 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
-    String ParentID;
+    String ParentID,InspectionId;
     private ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +53,7 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
         applicationController= (ApplicationController) getApplication();
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
         viewPager =  findViewById(R.id.viewPager);
         btnRejectStudentpresence=findViewById(R.id.btnRejectStaffSanction);
         btnApprovalStudentpresence=findViewById(R.id.btnApprovalStaffSanction);
@@ -76,6 +77,8 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
+        Log.d("TAG" , "onCreate: "+json);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -180,7 +183,7 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Syllabus_Details_page.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Syllabus_Details_page.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -205,7 +208,7 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Syllabus_Details_page.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Syllabus_Details_page.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

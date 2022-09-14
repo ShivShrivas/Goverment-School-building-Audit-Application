@@ -1,6 +1,7 @@
 package com.bsn.buildingaudit.Adapters;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
     String type;
     String periodID;
     String id;
+    String inspectionId;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
 
 
@@ -52,6 +54,7 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
                     jsonObject.addProperty("OtherRemarks",arrayListRemarks.get(i).getOtherRemarks());
                     jsonObject.addProperty("InsId",arrayListRemarks.get(i).getInsId());
                     jsonObject.addProperty("CreatedBy","");
+                    jsonObject.addProperty("InsRecordId",inspectionId);
                     jsonArray.add(jsonObject);
                 }
             }
@@ -60,6 +63,37 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
         }
 
 
+    }
+
+    public AdpterResonsApproved(Context context, ArrayList<ApproveRejectRemarkModel> arrayList, String schoolId, String periodID, String type, String parentID, ArrayList<Datum> arrayListRemarks, String inspectionId) {
+        this.context=context;
+        this.myImageNameList=arrayList;
+        this.schoolId=schoolId;
+        this.periodID=periodID;
+        this.type=type;
+        this.inspectionId=inspectionId;
+        this.id=parentID;
+        try{
+            if (type.equals(arrayListRemarks.get(0).getInsType())){
+                this.arrayListRemarks=arrayListRemarks;
+
+                for (int i=0;i<arrayListRemarks.size();i++){
+
+                    JsonObject jsonObject=new JsonObject();
+                    jsonObject.addProperty("SchoolId",arrayListRemarks.get(i).getSchoolId());
+                    jsonObject.addProperty("PeriodId",arrayListRemarks.get(i).getPeriodId());
+                    jsonObject.addProperty("ParamId",arrayListRemarks.get(i).getParamId());
+                    jsonObject.addProperty("OtherRemarks",arrayListRemarks.get(i).getOtherRemarks());
+                    jsonObject.addProperty("InsId",arrayListRemarks.get(i).getInsId());
+                    jsonObject.addProperty("CreatedBy","");
+                    jsonObject.addProperty("InsRecordId",inspectionId);
+                    jsonArray.add(jsonObject);
+                }
+            }
+        }catch (Exception e){
+            Log.d("TAG", "AdpterResonsApproved: "+e.getMessage());
+
+        }
     }
 
     @NonNull
@@ -107,6 +141,7 @@ public class AdpterResonsApproved  extends RecyclerView.Adapter<AdpterResonsAppr
                         jsonObject.addProperty("OtherRemarks","");
                         jsonObject.addProperty("InsId",myImageNameList.get(position).getInsId());
                         jsonObject.addProperty("CreatedBy","");
+                        jsonObject.addProperty("InsRecordId",inspectionId);
                         jsonArray.add(jsonObject);
                     }
 

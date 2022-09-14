@@ -1,5 +1,6 @@
 package com.bsn.buildingaudit.DIOS.physicalStatus;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -23,6 +24,8 @@ RecyclerView recyclerViewForDiosDashboardPhysicalStatus;
     TextView textView8,schoolAddress,schoolName;
     ApplicationController applicationController;
     dashboardRoomListAdapterDIOS adapter;
+    String InspectionId;
+    Intent i;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,8 @@ RecyclerView recyclerViewForDiosDashboardPhysicalStatus;
         applicationController= (ApplicationController) getApplication();
         recyclerViewForDiosDashboardPhysicalStatus=findViewById(R.id.recyclerViewForDiosDashboardPhysicalStatus);
         Window window = getWindow();
+        i=getIntent();
+        InspectionId=i.getStringExtra("InspectionId");
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -103,7 +108,7 @@ RecyclerView recyclerViewForDiosDashboardPhysicalStatus;
         arrayList.add(getAllRoomsList26);
 
         recyclerViewForDiosDashboardPhysicalStatus.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new dashboardRoomListAdapterDIOS(this,arrayList,"2057","26");
+        adapter=new dashboardRoomListAdapterDIOS(this,arrayList,"2057","26",InspectionId);
         recyclerViewForDiosDashboardPhysicalStatus.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

@@ -31,7 +31,7 @@ public class Dios_InnerDashboard extends AppCompatActivity {
     public static ApplicationController applicationController;
     TextView textView8,schoolAddress,schoolName;
     RecyclerView diosSubMenuRecView;
-    String ParentID;
+    String ParentID,InspectionId;
     DiosSubMenuDashboardAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +49,7 @@ public class Dios_InnerDashboard extends AppCompatActivity {
         });
         Intent i=getIntent();
         ParentID=i.getStringExtra("ParentID");
+        InspectionId=i.getStringExtra("InspectionId");
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         textView8=findViewById(R.id.textView8);
         textView8.setText(getString(R.string.welcome_string)+"\n \t\t\t"+applicationController.getUsername());
@@ -70,7 +71,7 @@ public class Dios_InnerDashboard extends AppCompatActivity {
             public void onResponse(Call<ArrayList<GetDashboardMenuDataModel>> call, Response<ArrayList<GetDashboardMenuDataModel>> response) {
                 ArrayList<GetDashboardMenuDataModel> arrayList=response.body();
                 Log.d("TAG", "onResponse: "+arrayList);
-                adapter=new DiosSubMenuDashboardAdapter(Dios_InnerDashboard.this,arrayList);
+                adapter=new DiosSubMenuDashboardAdapter(Dios_InnerDashboard.this,arrayList,InspectionId);
                 diosSubMenuRecView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
             }

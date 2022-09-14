@@ -40,7 +40,7 @@ TextView STUDENTENROLLED,SCOUTCOMPREGISTED,SCOUTCOMPRENEW,SCOUTMASTERSTATUS,SCOU
         SCOUTPARTIREGRALLY,SCOUTPARTINATIONAL,SCOUTPARTISOCIALWORK,EXPSCOUTGUIDE;
     Intent i;
     Button scout_and_guideApproveBtn,scout_and_guideRejectBtn;
-    String ParentID;
+    String ParentID,InspectionId;
 ApplicationController applicationController;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
@@ -53,6 +53,7 @@ ApplicationController applicationController;
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
         applicationController= (ApplicationController) getApplication();
         socialWorkRallyRecview=findViewById(R.id.socialWorkRallyRecview);
         expeditureRecview=findViewById(R.id.expeditureRecview);
@@ -91,6 +92,7 @@ ApplicationController applicationController;
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -240,7 +242,7 @@ ApplicationController applicationController;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Scount_and_Guide.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Scount_and_Guide.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -264,7 +266,7 @@ ApplicationController applicationController;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Scount_and_Guide.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Scount_and_Guide.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

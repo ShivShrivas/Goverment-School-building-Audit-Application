@@ -1436,38 +1436,6 @@
                     />
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/linearLayout22"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="16dp"
-                android:padding="5dp"
-                android:gravity="center_horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout48">
-
-
-
-                <Button
-                    android:id="@+id/checked_btn_JD"
-                    style="@style/btn_style"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
-                    android:paddingStart="80dp"
-                    android:paddingEnd="80dp"
-                    android:background="@drawable/bg_light_blue"
-                    android:text="Checked"
-                    android:textColor="@color/white"
-                    android:textSize="14dp"
-
-                    />
-            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

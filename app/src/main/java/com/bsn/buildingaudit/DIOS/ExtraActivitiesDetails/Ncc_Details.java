@@ -39,7 +39,7 @@ ApplicationController applicationController;
 LinearLayout nccDetailLayout;
 ConstraintLayout constraintLayout40;
     Intent i;
-    String ParentID;
+    String ParentID,InsRecordId;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
@@ -57,6 +57,7 @@ CheckBox WINGARMYSTATUS, WINGNAVALSTATUS, WINGAIRSTATUS;
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InsRecordId=i.getStringExtra("InsRecordId");
      NCCRUNNINGSTATUS=findViewById(R.id.NCCRUNNINGSTATUS);
         nccDetailLayout=findViewById(R.id.nccDetailLayout);
         constraintLayout40=findViewById(R.id.constraintLayout40);
@@ -91,6 +92,7 @@ CheckBox WINGARMYSTATUS, WINGNAVALSTATUS, WINGAIRSTATUS;
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InsRecordId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -199,7 +201,7 @@ CheckBox WINGARMYSTATUS, WINGNAVALSTATUS, WINGAIRSTATUS;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InsRecordId);
 
                     }
 
@@ -222,7 +224,7 @@ CheckBox WINGARMYSTATUS, WINGNAVALSTATUS, WINGAIRSTATUS;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Ncc_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InsRecordId);
 
                     }
 

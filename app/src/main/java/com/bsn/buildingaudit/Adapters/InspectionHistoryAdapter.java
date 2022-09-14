@@ -3,6 +3,7 @@ package com.bsn.buildingaudit.Adapters;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,10 @@ public class InspectionHistoryAdapter extends RecyclerView.Adapter<InspectionHis
     @Override
     public void onBindViewHolder(@NonNull InspectionHistoryViewHolder holder, @SuppressLint ("RecyclerView") int position) {
         holder.startOnTxt.setText(arrayList.get(position).getStartDate());
-        if (arrayList.get(position).getStatus().equals("Pending")){
+        if (arrayList.get(position).getStatus().toString().equals("Pending")){
             holder.imageView4.setImageDrawable(context.getDrawable(R.drawable.ic_wron_icon));
         }else{
             holder.imageView4.setImageDrawable(context.getDrawable(R.drawable.ic_right_icon));
-
         }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +50,7 @@ public class InspectionHistoryAdapter extends RecyclerView.Adapter<InspectionHis
                 context.startActivity(i);
             }
         });
+        Log.d("TAG", "onBindViewHolder: "+arrayList.get(position).getStatus());
         holder.statusTxt.setText(arrayList.get(position).getStatus());
         holder.inspectionIdTxt.setText(arrayList.get(position).getInsId());
         holder.timeDurationTxt.setText(arrayList.get(position).getTotalDuration());

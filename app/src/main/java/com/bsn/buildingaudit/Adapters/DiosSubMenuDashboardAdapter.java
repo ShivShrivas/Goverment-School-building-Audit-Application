@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bsn.buildingaudit.DIOS.Dios_InnerDashboard;
 import com.bsn.buildingaudit.Model.GetDashboardMenuDataModel;
 import com.bsn.buildingaudit.R;
 
@@ -20,9 +21,16 @@ import java.util.ArrayList;
 public class DiosSubMenuDashboardAdapter extends RecyclerView.Adapter<DiosSubMenuDashboardAdapter.DiosSubmenuViewHolder> {
     Context context;
     ArrayList<GetDashboardMenuDataModel> arrayList;
+    String inspectionId;
     public DiosSubMenuDashboardAdapter(Context context, ArrayList<GetDashboardMenuDataModel> arrayList) {
         this.context=context;
         this.arrayList=arrayList;
+    }
+
+    public DiosSubMenuDashboardAdapter(Context context, ArrayList<GetDashboardMenuDataModel> arrayList, String inspectionId) {
+        this.context=context;
+        this.arrayList=arrayList;
+        this.inspectionId=inspectionId;
     }
 
     @NonNull
@@ -44,6 +52,7 @@ public class DiosSubMenuDashboardAdapter extends RecyclerView.Adapter<DiosSubMen
                     Log.d("TAG", "onClick: "+arrayList.get(position).getAppClassName());
                     Intent i=new Intent(context, Class.forName(arrayList.get(position).getAppClassName()));
                     i.putExtra("ParamId",arrayList.get(position).getParamid().toString());
+                    i.putExtra("InspectionId",inspectionId.toString());
                     context.startActivity(i);
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/chemistryLabBodyCard"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="2dp"
         android:backgroundTint="@color/DIOS_ColorPrimary"
@@ -36,16 +36,15 @@
     android:layout_weight="1"
     android:orientation="vertical"
     android:gravity="center_vertical"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <TextView
         android:id="@+id/roomTypetxt"
         android:layout_width="match_parent"
         android:paddingStart="14dp"
         android:gravity="center_vertical"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:fontFamily="@font/open_sans_herbew_bold"
-        android:text="Classroom Details"
+        android:text="Classroom DetailsClassroom DetailsClassroom DetailsClassroom Details"
         android:textColor="#5A5A5A"
         android:textSize="15dp"
         android:textStyle="bold" />

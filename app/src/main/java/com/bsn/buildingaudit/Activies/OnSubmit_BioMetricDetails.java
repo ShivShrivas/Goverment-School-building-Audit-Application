@@ -44,7 +44,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
     LinearLayout linearLayout21;
     String Type;
     Button bioMetricApproveBtn,bioMetricRejectBtn;
-    String ParentID;
+    String ParentID,InspectionId;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
@@ -66,6 +66,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
         dialog2.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog2.setContentView (R.layout.progress_dialog);
         dialog2.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
@@ -111,6 +112,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -170,7 +172,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(OnSubmit_BioMetricDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(OnSubmit_BioMetricDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -195,7 +197,7 @@ public class OnSubmit_BioMetricDetails extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(OnSubmit_BioMetricDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(OnSubmit_BioMetricDetails.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

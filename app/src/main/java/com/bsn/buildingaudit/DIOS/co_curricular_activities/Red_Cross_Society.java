@@ -37,7 +37,7 @@ public class Red_Cross_Society extends AppCompatActivity {
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
-    String ParentID;
+    String ParentID,InspectionId;
     Button redCrossApproveBtn,redCrossRejectBtn;
     TextView SCHOOLBALANCEAMT,DISTRICTLAMT,CURRENTDEPAMTWITHREGNO,AMTAVAIINACC,PROJECTACTIVITYSTATUS,
             INCOMEEXPSTATUS,STOCKREGISTERSTATUS,TRAININGCAMPSTATUS,OFFICEFACILITIESSTATUS,FORMATIONSTATUS;
@@ -50,6 +50,7 @@ public class Red_Cross_Society extends AppCompatActivity {
         window.setStatusBarColor(ContextCompat.getColor(this,R.color.DIOS_ColorPrimaryDark));
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         SCHOOLBALANCEAMT=findViewById(R.id.SCHOOLBALANCEAMT);
         DISTRICTLAMT=findViewById(R.id.DISTRICTLAMT);
@@ -73,6 +74,7 @@ public class Red_Cross_Society extends AppCompatActivity {
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -162,7 +164,7 @@ public class Red_Cross_Society extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Red_Cross_Society.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Red_Cross_Society.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -186,7 +188,7 @@ public class Red_Cross_Society extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Red_Cross_Society.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Red_Cross_Society.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

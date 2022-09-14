@@ -42,7 +42,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
-    String ParentID;
+    String ParentID,InspectionId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +59,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
       MOUNTCAMPSTATUS=findViewById(R.id.MOUNTCAMPSTATUS);
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
       TREKINGCAMPSTATUS=findViewById(R.id.TREKINGCAMPSTATUS);
       EKBHARATSTATUS=findViewById(R.id.EKBHARATSTATUS);
       SPECIALNICSTATUS=findViewById(R.id.SPECIALNICSTATUS);
@@ -91,6 +92,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -180,7 +182,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -204,7 +206,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Participation_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

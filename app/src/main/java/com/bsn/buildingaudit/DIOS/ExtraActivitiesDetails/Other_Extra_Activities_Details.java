@@ -38,7 +38,7 @@ TextView Exhibition,Inspired,StudentNational, SkillDev, InnovationEdu, Others, I
     ApplicationController applicationController;
     Button OtherExtraActivitiesRejectBtn,OtherExtraActivitiesApproveBtn;
     Intent i;
-    String ParentID;
+    String ParentID,InsRecordId;
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
     Boolean remarkAlreadyDoneFlag=false;
 
@@ -57,6 +57,7 @@ TextView Exhibition,Inspired,StudentNational, SkillDev, InnovationEdu, Others, I
         applicationController= (ApplicationController) getApplication();
         i=getIntent();
         ParentID=i.getStringExtra("ParamId");
+        InsRecordId=i.getStringExtra("InsRecordId");
        Exhibition=findViewById(R.id.Exhibition);
        Inspired=findViewById(R.id.Inspired);
        StudentNational=findViewById(R.id.StudentNational);
@@ -91,6 +92,7 @@ TextView Exhibition,Inspired,StudentNational, SkillDev, InnovationEdu, Others, I
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InsRecordId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -184,7 +186,7 @@ TextView Exhibition,Inspired,StudentNational, SkillDev, InnovationEdu, Others, I
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(Other_Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(Other_Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InsRecordId);
 
                     }
 
@@ -208,7 +210,7 @@ TextView Exhibition,Inspired,StudentNational, SkillDev, InnovationEdu, Others, I
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(Other_Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(Other_Extra_Activities_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InsRecordId);
 
                     }
 

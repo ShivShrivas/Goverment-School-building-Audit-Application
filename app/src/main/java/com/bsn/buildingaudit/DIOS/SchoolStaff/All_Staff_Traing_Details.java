@@ -47,7 +47,7 @@ PrincipalAndTeacherTrainingModel arrayList;
     ArrayList<T> arrayListTeacher=new ArrayList<>();
     StaffTrainingAdapter adapter;
     Intent i;
-    String ParentID;
+    String ParentID,InspectionId;
     Boolean remarkAlreadyDoneFlag=false;
 
     ArrayList<Datum> arrayListRemarks=new ArrayList<>();
@@ -69,6 +69,7 @@ PrincipalAndTeacherTrainingModel arrayList;
             }
         });
         i=getIntent();
+        InspectionId=i.getStringExtra("InspectionId");
         ParentID=i.getStringExtra("ParamId");
         recyclerView=findViewById(R.id.recyclerView);
         recyclerView2=findViewById(R.id.recyclerView2);
@@ -102,13 +103,13 @@ PrincipalAndTeacherTrainingModel arrayList;
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
                 Log.d("TAG", "onResponse: "+response.body());
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(All_Staff_Traing_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
@@ -208,7 +209,7 @@ PrincipalAndTeacherTrainingModel arrayList;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(All_Staff_Traing_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(All_Staff_Traing_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -232,7 +233,7 @@ PrincipalAndTeacherTrainingModel arrayList;
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(All_Staff_Traing_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(All_Staff_Traing_Details.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID, arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 

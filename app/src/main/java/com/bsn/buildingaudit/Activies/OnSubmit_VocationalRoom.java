@@ -45,7 +45,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
     Button vocationalRoomApproveBtn,vocationalRoomRejectBtn;
     RecyclerView recyclerViewVocalIS,recyclerViewVocalHs;
     CardView scienceLabBodyCard, physicsLabImageCard,physicsLabBodyCard,scienceLabImageCard;
-    String ParentID;
+    String ParentID,InspectionId;
     Boolean remarkAlreadyDoneFlag=false;
 
     ArrayList<Datum> arrayListRemarks;
@@ -76,6 +76,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         Intent i=getIntent();
         Type=i.getStringExtra("Type");
         ParentID=i.getStringExtra("ParamId");
+        InspectionId=i.getStringExtra("InspectionId");
 
         schoolName=findViewById(R.id.schoolName);
         schoolAddress=findViewById(R.id.schoolAddress);
@@ -125,6 +126,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
+        json.addProperty("InsRecordId",InspectionId);
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
@@ -183,7 +185,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogApprove(OnSubmit_VocationalRoom.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogApprove(OnSubmit_VocationalRoom.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
@@ -207,7 +209,7 @@ public class OnSubmit_VocationalRoom extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<ArrayList<ApproveRejectRemarkModel>> call, Response<ArrayList<ApproveRejectRemarkModel>> response) {
                         ArrayList<ApproveRejectRemarkModel> arrayList=response.body();
-                        StaticFunctions.showDialogReject(OnSubmit_VocationalRoom.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag);
+                        StaticFunctions.showDialogReject(OnSubmit_VocationalRoom.this,arrayList,applicationController.getPeriodID(),applicationController.getSchoolId(),ParentID,arrayListRemarks,remarkAlreadyDoneFlag,InspectionId);
 
                     }
 
