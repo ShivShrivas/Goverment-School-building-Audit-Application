@@ -88,11 +88,12 @@ TextView wifiUploadImageTxt;
         edtWifiPresent.setEnabled(false);
 
         recyclerViewExtraThingsOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        if (Type.equals("D")){
-            linearLayout21.setVisibility(View.VISIBLE);
-        }
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
+        if (Type.equals("D")){
+            linearLayout21.setVisibility(View.VISIBLE);
+
+
         JsonObject json =new JsonObject();
         json.addProperty("SchoolID",applicationController.getSchoolId());
         json.addProperty("PeriodID",applicationController.getPeriodID());
@@ -144,6 +145,7 @@ TextView wifiUploadImageTxt;
                 Log.d("TAG", "onFailure: "+t.getMessage());
             }
         });
+        }
         wifiDetailsApprovedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
