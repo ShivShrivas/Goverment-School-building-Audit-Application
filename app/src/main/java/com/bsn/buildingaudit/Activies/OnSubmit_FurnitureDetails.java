@@ -123,6 +123,7 @@ public class OnSubmit_FurnitureDetails extends AppCompatActivity {
                 finish();
             }
 
+
         });
 
         recyclerViewFurnituresOnSub.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));

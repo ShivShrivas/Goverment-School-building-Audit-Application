@@ -281,9 +281,11 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 dialog2.show();
                 if (action.equals("3")){
                     if (!spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
-                        if (arrayListImages1.size()==0 && aList.size()==0){
-                            Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
+                        Log.d("TAG", "onClick: "+arrayListImages1.size()+"//"+ aList.size());
+                        if (arrayListImages1.size()==0){
+                            Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture one more Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
+
 
                         }else {
                             runSpinner();
@@ -338,13 +340,15 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 noOfTubeLight.setText(response.body().get(0).get("NoOfBulbsTLight").getAsString());
 
                 recyclerViewElectricityArrangmentFromServer.setLayoutManager(new LinearLayoutManager(UpdateDetailsElectricityArrangment.this,LinearLayoutManager.HORIZONTAL,false));
+                if (!response.body().get(0).get("PhotoPath").getAsString().split(",").equals("")){
+                    StaffPhotoPathList=response.body().get(0).get("PhotoPath").getAsString().split(",");
+                    aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
+                    UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
+                    if (!aList.get(0).isEmpty()){
+                        OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsElectricityArrangment.this,aList);
+                        recyclerViewElectricityArrangmentFromServer.setAdapter(onlineImageRecViewAdapter);
+                }
 
-                StaffPhotoPathList=response.body().get(0).get("PhotoPath").getAsString().split(",");
-                aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
-                UpdateDetailsOfExtraThings obj=new UpdateDetailsOfExtraThings();
-                if (!aList.get(0).isEmpty()){
-                OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsElectricityArrangment.this,aList);
-                recyclerViewElectricityArrangmentFromServer.setAdapter(onlineImageRecViewAdapter);
             }
             }
 
