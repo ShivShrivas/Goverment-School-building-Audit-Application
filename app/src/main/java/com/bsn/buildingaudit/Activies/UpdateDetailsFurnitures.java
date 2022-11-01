@@ -408,7 +408,7 @@ dialog2.show();
                 arrayList.add(furnitureDetailsDouble);
                 arrayList.add(furnitureDetailsTriple);
 
-                Log.d("TAG", "onClick: "+   arrayList.get(1).getFurnitureType());
+
                 if ( Integer.parseInt(edtTrippelSeated.getText().toString().trim())==0 && Integer.parseInt(edtTotalFurnirtureStrenght.getText().toString().trim())==0 && Integer.parseInt(edtFurnitureRequired.getText().toString().trim())==0 && Integer.parseInt(edtSingleSeated.getText().toString().trim())==0 && Integer.parseInt(edtDoubleSeated.getText().toString().trim())==0){
                     runService();
                 }else{ if (!checkValidationOnCondition(Integer.valueOf(edtSingleSeated.getText().toString().trim()),Integer.valueOf(edtgoodConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMinorConditionForSingle.getText().toString().trim()),Integer.valueOf(edtMajorConditionForSingle.getText().toString().trim())))
@@ -468,8 +468,8 @@ dialog2.show();
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+
+
                 int spinnerPositionForCondition0 = arrayAdapter2.getPosition(response.body().get(0).get("Condition").getAsString());
                 int spinnerPositionForCondition1 = arrayAdapter2.getPosition(response.body().get(1).get("Condition").getAsString());
                 int spinnerPositionForCondition2 = arrayAdapter2.getPosition(response.body().get(2).get("Condition").getAsString());
@@ -528,7 +528,7 @@ dialog2.show();
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+
         return imageFile;
     }
     private void runService() {
@@ -536,7 +536,7 @@ dialog2.show();
         ApiService apiService=restClient.getApiService();
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+
             File compressedImage = new Compressor.Builder(UpdateDetailsFurnitures.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -552,19 +552,19 @@ dialog2.show();
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+
         if (action.equals("3")){
             deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
         }else {
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraFurniture(action,"18","FurniturePhoto", applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayList,edtTotalFurnirtureStrenght.getText().toString(),edtFurnitureRequired.getText().toString(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraFurniture(action,"18","FurniturePhoto", applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayList,edtTotalFurnirtureStrenght.getText().toString(),edtFurnitureRequired.getText().toString(),arrayListImages1));
+
         Call<List<JsonObject>> call=apiService.uploadFurniture(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response+response.body());
+
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -603,11 +603,11 @@ dialog2.show();
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -618,7 +618,7 @@ dialog2.show();
     }
     private String paraFurniture(String s, String s1, String furniturePhoto, String latitude, String longitude, String schoolId, String periodID, String usertypeid, String userid, ArrayList<FurnitureDetails> furnitureDetailsarray, String toString, String toString1, ArrayList<File> arrayListImages1) {
         JsonObject jsonObject=new JsonObject();
-        Log.d("TAG", "paraFurniture: "+furnitureDetailsarray.get(2).getFurnitureType());
+
         jsonObject.addProperty("Action",s);
         jsonObject.addProperty("ParamId",s1);
         jsonObject.addProperty("ParamName",furniturePhoto);
@@ -732,7 +732,7 @@ dialog2.show();
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//
         } catch (Exception e) {
             e.printStackTrace();
         }

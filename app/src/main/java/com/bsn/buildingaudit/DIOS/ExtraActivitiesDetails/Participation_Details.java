@@ -3,7 +3,6 @@ package com.bsn.buildingaudit.DIOS.ExtraActivitiesDetails;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -85,7 +84,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
         JsonObject json =new JsonObject();
@@ -97,13 +96,13 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+               
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(Participation_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(Participation_Details.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -136,7 +135,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
         Call<GetNCCParticipationDetailsModel> call= apiService.getNCCParticipationDetails(jsonObject);
@@ -173,7 +172,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
         participationsRejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -197,7 +196,7 @@ TextView REPUBLICDAYSTATUS,THALSENASTATUS,NAUSENASTATUS,   VAYUSENASTATUS,MOUNTC
         participationsApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);

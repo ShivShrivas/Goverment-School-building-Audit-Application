@@ -420,8 +420,8 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 if (response.body().get(0).get("RoomAvailable").getAsString().equals("No")){
                     int spinnerPositionForSeperateRoomsAvlHS = arrayAdapter.getPosition(response.body().get(0).get("RoomAvailable").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("RoomAvailable").getAsString());
                     spinnerVocalRoomHSAvailability.setSelection(spinnerPositionForSeperateRoomsAvlHS);
@@ -524,7 +524,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
 
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListFinalImage.size()];
         for (int i = 0; i < arrayListFinalImage.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListFinalImage.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetails_VocationalEducationRoom.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -540,7 +540,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
 
                 deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
@@ -549,12 +549,12 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraVocal(action,"26","VocationalRoom",arrayList,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraVocal(action,"26","VocationalRoom",arrayList,applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+       
         Call<List<JsonObject>> call=apiService.uploadVocalRoom(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -628,7 +628,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
 
         for (int i = 0; i < deleteUrlsFinal.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=deleteUrlsFinal.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
@@ -645,7 +645,7 @@ public class UpdateDetails_VocationalEducationRoom extends AppCompatActivity {
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     @Override

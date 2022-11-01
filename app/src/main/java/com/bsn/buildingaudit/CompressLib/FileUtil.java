@@ -111,11 +111,11 @@ public class FileUtil {
         if (!newFile.equals(file)) {
             if (newFile.exists()) {
                 if (newFile.delete()) {
-                    Log.d("FileUtil", "Delete old " + newName + " file");
+                   
                 }
             }
             if (file.renameTo(newFile)) {
-                Log.d("FileUtil", "Rename file to " + newName);
+               
             }
         }
         return newFile;

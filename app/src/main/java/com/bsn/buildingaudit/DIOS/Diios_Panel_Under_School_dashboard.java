@@ -2,7 +2,6 @@ package com.bsn.buildingaudit.DIOS;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -57,7 +56,7 @@ DIOSDashboardAdapter adapter;
         });
         i=getIntent();
         InspectionId=i.getStringExtra("InspectionId");
-        Log.d("TAG", "onCreate: "+localSchoolId);
+       
         schoolAddress=findViewById(R.id.schoolAddress);
         schoolName=findViewById(R.id.schoolName);
         dashBoardmenuRecview=findViewById(R.id.dashBoardmenuRecview);

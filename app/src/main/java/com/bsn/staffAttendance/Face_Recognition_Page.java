@@ -65,13 +65,13 @@ public class Face_Recognition_Page extends AppCompatActivity {
     private void getStaffData() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "getStaffData: "+paraGetStaff(formattedDate,applicationController.getSchoolId()));
+       
         Call<List<AttendanceStaff>> listCall=apiService.getStaff(paraGetStaff(formattedDate,applicationController.getSchoolId()));
        listCall.enqueue(new Callback<List<AttendanceStaff>>() {
            @Override
            public void onResponse(Call<List<AttendanceStaff>> call, Response<List<AttendanceStaff>> response) {
                List<AttendanceStaff> attendanceStaff=response.body();
-               Log.d("TAG", "onResponse: "+attendanceStaff);
+              
                adapter= new FacerecognizationStaffAdapter(Face_Recognition_Page.this,attendanceStaff);
                recyclerViewStaffFaceRecognization.setAdapter(adapter);
                adapter.notifyDataSetChanged();

@@ -255,7 +255,7 @@ Button submitWIFIBtn;
                         dialog2.dismiss();
 
                     }else {
-                        Log.d("TAG", "onClick: "+arrayListImages1.size()+OnlineImageRecViewAdapterEditable.deletedUrls.size()+action.equals("3"));
+                       
                         if (arrayListImages1.size()==0 && action.equals("3") && aList.size()==0){
                             Toast.makeText(UpdateDetailsOfExtraThings.this, "Please Capture minimum one Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
@@ -280,8 +280,8 @@ Button submitWIFIBtn;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPosition = arrayAdapter.getPosition(response.body().get(0).get("WiFiInternetAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("WiFiInternetAvl").getAsString());
                 spinnerWifiPresent.setSelection(spinnerPosition);
                 recyclerViewFromServerExtraThings.setLayoutManager(new LinearLayoutManager(UpdateDetailsOfExtraThings.this,LinearLayoutManager.HORIZONTAL,false));
@@ -316,7 +316,7 @@ Button submitWIFIBtn;
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void runService() {
@@ -324,7 +324,7 @@ Button submitWIFIBtn;
         ApiService apiService=restClient.getApiService();
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsOfExtraThings.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -342,7 +342,7 @@ Button submitWIFIBtn;
 
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraWifi(action,"20","WifiPhoto",spinnerWifiPresent.getSelectedItem().toString(),applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerWifiPresent.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -353,13 +353,13 @@ Button submitWIFIBtn;
         }else {
             deletUrl=null;
         }
-        Log.d("TAG", "onClick: "+paraWifi(action,"20","WifiPhoto",spinnerWifiPresent.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+       
 
         Call<List<JsonObject>> call=apiService.uploadWifiDetails(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response+response.body());
+               
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -412,11 +412,11 @@ Button submitWIFIBtn;
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-                Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+               
                 String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
                 jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -447,7 +447,7 @@ Button submitWIFIBtn;
 //        }
 //        jsonObject.add("WifiPhoto", (JsonElement) jsonArray2);
 
-        Log.d("TAG", "paraWifi: "+  jsonObject.toString());
+       
         return jsonObject.toString();
     }
     public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
@@ -478,7 +478,7 @@ Button submitWIFIBtn;
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

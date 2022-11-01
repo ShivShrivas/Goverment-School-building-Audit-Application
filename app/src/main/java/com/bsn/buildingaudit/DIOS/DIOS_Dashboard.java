@@ -60,7 +60,7 @@ SearchView searchView;
         call.enqueue(new Callback<List<SchoolListModel>>() {
             @Override
             public void onResponse(Call<List<SchoolListModel>> call, Response<List<SchoolListModel>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 arrayListSchool.addAll(response.body());
                 adapter=new DIOS_DashboardAdapter(DIOS_Dashboard.this,arrayListSchool);
                 recyclerViewForDiosDashboard.setAdapter(adapter);

@@ -95,8 +95,8 @@ CardView cardViewDataPicker;
     private void getStaffListWithAttendance() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+fromdate);
-        Log.d("TAG", "onClick: "+paraGetStaff(fromdate,applicationController.getSchoolId()));
+       
+       
         Call<List<AttendanceStaff>> listCall=apiService.getStaff(paraGetStaff(fromdate,applicationController.getSchoolId()));
         listCall.enqueue(new Callback<List<AttendanceStaff>>() {
             @Override

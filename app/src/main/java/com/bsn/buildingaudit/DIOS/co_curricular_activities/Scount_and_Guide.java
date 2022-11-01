@@ -97,13 +97,13 @@ ApplicationController applicationController;
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+               
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(Scount_and_Guide.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(Scount_and_Guide.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -136,7 +136,7 @@ ApplicationController applicationController;
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
         Call<ScoutAndGuideModel> call=apiService.getScoutAndGuide(jsonObject);
@@ -144,7 +144,7 @@ ApplicationController applicationController;
             @Override
             public void onResponse(Call<ScoutAndGuideModel> call, Response<ScoutAndGuideModel> response) {
                 ScoutAndGuideModel scoutAndGuideModel=response.body();
-                Log.d("TAG", "onResponse: "+scoutAndGuideModel);
+               
                 SCOUTMASTERTRAINING.setText(scoutAndGuideModel.getScoutmastertraining()==null?"No":scoutAndGuideModel.getScoutmastertraining().toString());
                 SCOUTMASTERSTATUS.setText(scoutAndGuideModel.getScoutmasterstatus()==null?"No":scoutAndGuideModel.getScoutmasterstatus().toString());
                 SCOUTCOMPRENEW.setText(scoutAndGuideModel.getScoutcomprenew()==null?"No":scoutAndGuideModel.getScoutcomprenew().toString());
@@ -233,7 +233,7 @@ ApplicationController applicationController;
         scout_and_guideApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -257,7 +257,7 @@ ApplicationController applicationController;
         scout_and_guideRejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);

@@ -1,7 +1,6 @@
 package com.bsn.buildingaudit.DIOS.reciept_and_expenditure;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 
@@ -47,7 +46,7 @@ ApplicationController applicationController;
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
         recyclerViewRecieptAndExpenditure=findViewById(R.id.recyclerViewRecieptAndExpenditure);
         recyclerViewRecieptAndExpenditure.setLayoutManager(new LinearLayoutManager(this));
         RestClient restClient=new RestClient();

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -111,13 +110,13 @@ public class Game_Details extends AppCompatActivity {
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+               
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(Game_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(Game_Details.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -150,10 +149,10 @@ public class Game_Details extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
         Call<GameDetailsModel> call=apiService.getGameDetails(jsonObject);
         call.enqueue(new Callback<GameDetailsModel>() {
             @Override
@@ -285,7 +284,7 @@ public class Game_Details extends AppCompatActivity {
         game_details_Approve_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -311,7 +310,7 @@ public class Game_Details extends AppCompatActivity {
         game_details_rejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);

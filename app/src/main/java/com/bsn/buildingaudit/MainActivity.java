@@ -458,7 +458,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         });
                     }else{
-                        Snackbar.make(loginLayout,"Something wenr wrong please, Restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
+                        Snackbar.make(loginLayout,"Something went wrong please, Restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
                                 .setAction("OK", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
@@ -468,7 +468,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                 }else{
-                    Snackbar.make(loginLayout,"Something wenr wrong please, Restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
+                    Snackbar.make(loginLayout,"Something went wrong please, Restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
                             .setAction("OK", new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {

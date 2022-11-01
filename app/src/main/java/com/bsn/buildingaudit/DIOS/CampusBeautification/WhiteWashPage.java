@@ -3,7 +3,6 @@ package com.bsn.buildingaudit.DIOS.CampusBeautification;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -87,7 +86,7 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
 
@@ -100,13 +99,13 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+               
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(WhiteWashPage.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(WhiteWashPage.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -139,14 +138,14 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
         Call<CampusWhiteWashDetalsModel> call=apiService.getWhiteWashDetails(jsonObject);
         call.enqueue(new Callback<CampusWhiteWashDetalsModel>() {
             @Override
             public void onResponse(Call<CampusWhiteWashDetalsModel> call, Response<CampusWhiteWashDetalsModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 CampusWhiteWashDetalsModel campusWhiteWashDetalsModel=response.body();
                 assert campusWhiteWashDetalsModel != null;
                 lastDoneWhiteWashYear.setText(campusWhiteWashDetalsModel.getLastdonefy()==null?" ":campusWhiteWashDetalsModel.getLastdonefy().toString());
@@ -182,13 +181,13 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
 
             @Override
             public void onFailure(Call<CampusWhiteWashDetalsModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
         White_Wash_Approve_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -212,7 +211,7 @@ Button White_Wash_Approve_Btn,White_Wash_Reject_Btn;
         White_Wash_Reject_Btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);

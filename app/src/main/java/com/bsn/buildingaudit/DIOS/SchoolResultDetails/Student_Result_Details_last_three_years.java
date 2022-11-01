@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -101,18 +100,18 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
         json.addProperty("InsRecordId",InspectionId);
-        Log.d("TAG", "onCreate: "+json);
+       
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+               
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(Student_Result_Details_last_three_years.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(Student_Result_Details_last_three_years.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -145,7 +144,7 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
         Call<ArrayList<LastThreeYearsModel>> call=apiService.getThreeYearResult(jsonObject);
@@ -153,7 +152,7 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
             @Override
             public void onResponse(Call<ArrayList<LastThreeYearsModel>> call, Response<ArrayList<LastThreeYearsModel>> response) {
                 result=response.body();
-                Log.d("TAG", "onResponse: "+response.body());
+               
 //               try{
                    adapter=new StudentResultAdapter(Student_Result_Details_last_three_years.this,result);
                    recyclerViewFOrStudentResult.setAdapter(adapter);
@@ -210,7 +209,7 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
         last_threeYearResultApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -234,7 +233,7 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
         last_threeYearResultRejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -275,12 +274,12 @@ ArrayList<LastThreeYearsModel> result=new ArrayList<>();
         jsonObject.addProperty("LevelType",resultDetailsID);
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "showDialog: "+jsonObject);
+       
         Call<ArrayList<StudentListModelTopper>> call=apiService.getStudentDataExamWise(jsonObject);
         call.enqueue(new Callback<ArrayList<StudentListModelTopper>>() {
             @Override
             public void onResponse(Call<ArrayList<StudentListModelTopper>> call, Response<ArrayList<StudentListModelTopper>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 myImageNameList=response.body();
                 RecyclerView recyclerView = dialog.findViewById(R.id.recycler);
                 recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));

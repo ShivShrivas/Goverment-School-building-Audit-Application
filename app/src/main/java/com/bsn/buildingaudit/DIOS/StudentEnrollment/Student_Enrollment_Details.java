@@ -3,7 +3,6 @@ package com.bsn.buildingaudit.DIOS.StudentEnrollment;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -79,17 +78,17 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
         json.addProperty("InsRecordId",InspectionId);
-        Log.d("TAG", "onCreate: "+json);
+       
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(Student_Enrollment_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(Student_Enrollment_Details.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -122,15 +121,15 @@ public class Student_Enrollment_Details extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
         Call<List<StudentEnrollmentListModel>> call=apiService.getStudentEnrollmentDetails(jsonObject);
         call.enqueue(new Callback<List<StudentEnrollmentListModel>>() {
             @Override
             public void onResponse(Call<List<StudentEnrollmentListModel>> call, Response<List<StudentEnrollmentListModel>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                     arrayList.addAll(response.body());
 
                 adapter=new Student_PresenceAdapter(Student_Enrollment_Details.this,arrayList);
@@ -150,7 +149,7 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         btnApprovalStudentpresence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -175,7 +174,7 @@ public class Student_Enrollment_Details extends AppCompatActivity {
         btnRejectStudentpresence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);

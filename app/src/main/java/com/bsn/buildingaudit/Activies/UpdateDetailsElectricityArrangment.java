@@ -11,7 +11,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -281,7 +280,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
                 dialog2.show();
                 if (action.equals("3")){
                     if (!spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
-                        Log.d("TAG", "onClick: "+arrayListImages1.size()+"//"+ aList.size());
+                       
                         if (arrayListImages1.size()==0){
                             Toast.makeText(UpdateDetailsElectricityArrangment.this, "Please Capture one more Image!!", Toast.LENGTH_SHORT).show();
                             dialog2.dismiss();
@@ -323,8 +322,8 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnforInternalElectrification= adapter.getPosition(response.body().get(0).get("InternalElectrification").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("InternalElectrification").getAsString());
                 int spinnerPositionForSource = arrayAdapter2.getPosition(response.body().get(0).get("Source").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Source").getAsString());
@@ -374,7 +373,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void runSpinner() {
@@ -382,7 +381,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         ApiService apiService=restClient.getApiService();
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsElectricityArrangment.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -398,7 +397,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerElectricityAvailabelty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -410,7 +409,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paramElectricityDetails(action,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paramElectricityDetails(action,"11","ElectricityArrangement",applicationController.getSchoolId(),applicationController.getPeriodID(),spinnerInternalElectrification.getSelectedItem().toString(),spinnerSource.getSelectedItem().toString(),spinnerElectricStatus.getSelectedItem().toString(), noOfTubeLight.getText().toString(),noOfFans.getText().toString(),spinnerElectricityAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+       
         Call<List<JsonObject>> call=apiService.uploadElectricityArrangement(surveyImagesParts,description,deletUrl);
 
         call.enqueue(new Callback<List<JsonObject>>() {
@@ -470,11 +469,11 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -564,7 +563,7 @@ public class UpdateDetailsElectricityArrangment extends AppCompatActivity {
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

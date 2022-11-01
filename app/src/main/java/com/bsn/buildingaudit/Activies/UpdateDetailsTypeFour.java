@@ -11,7 +11,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -379,8 +378,8 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForSeperateRoomsAvl = arrayAdapter3.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnNewsMagzine = arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("SubscribeNewsMagazines").getAsString());
                 int spinnerPositionForReadingCorner = arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("ReadingCorner").getAsString());
@@ -431,11 +430,11 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -451,7 +450,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void runService() {
@@ -472,7 +471,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
 
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsTypeFour.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -488,7 +487,7 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerRoomAvailabelty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -499,21 +498,18 @@ EditText edtExpenditure,edtNumberOfBooksLibrary,numberOfAlmira,edtLibraryGrantIn
         }else {
             deletUrl=null;
         }
-        Log.d("TAG", "onClick: "+ paraLibraryDetails(action,"4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
-                ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
-                sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+       
+
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraLibraryDetails(action,"4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
                 ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
                 sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraLibraryDetails(action,"4","LibraryDetails",spinnerRoomAvailabelty.getSelectedItem().toString(),spinnerPhysicalStatus.getSelectedItem().toString(),spinnerFurnitureAvailabiltyInLibrary.getSelectedItem().toString()
-                ,numberOfAlmira.getText().toString(),edtNumberOfBooksLibrary.getText().toString(),spinnerWorkingStatus.getSelectedItem().toString(),spinnerReadingCorner.getSelectedItem().toString(),spinnerNewsPaperAndMzin.getSelectedItem().toString(),
-                sheme,OtherScheme,edtTotalLibraryGrant.getText().toString(),edtLibraryGrantInFY.getText().toString(),edtExpenditure.getText().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+
         Call<List<JsonObject>> call=apiService.uploadLibraryDetails(surveyImagesParts,description,deletUrl);
 
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -655,7 +651,7 @@ if (availabilty.equals("No")){
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -10,7 +10,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -114,8 +113,8 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity implements 
         recyclerViewStaffAttendance.setLayoutManager(new LinearLayoutManager(this));
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+formattedDate);
-        Log.d("TAG", "onCreate: "+paraGetStaff(formattedDate,applicationController.getSchoolId()));
+       
+       
         getStaffData();
 
 
@@ -125,8 +124,8 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity implements 
             public void onClick(View view) {
                 dialog2.show();
                 getLocationLatLong();
-                Log.d("TAG", "onClick: "+geoFencheLattitude+"////Geo fenching////"+getGeoFencheLongitude);
-                Log.d("TAG", "onClick: "+applicationController.getLatitude()+"////Geo fenching////"+applicationController.getLongitude());
+               
+               
 //
 
             }
@@ -138,18 +137,18 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity implements 
         if (getLocation()){
             if (lattitude!=0.0 && longitude!=0.0){
             try{
-                Log.d("TAG", "getLocationLatLong: "+calculateLocationDifference(geoFencheLattitude,getGeoFencheLongitude,lattitude,longitude));
+               
                 if (arrayList.size()==StaffAttendanceAdapter.staffAttendanceSubmitModels.size()){
                     if (calculateLocationDifference(geoFencheLattitude,getGeoFencheLongitude,lattitude,longitude)<100) {
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
                         Call<JsonArray> call=  apiService.submitAttendance(paraAttendance(StaffAttendanceAdapter.staffAttendanceSubmitModels));
 
-                        Log.d("TAG", "onClick: "+paraAttendance(StaffAttendanceAdapter.staffAttendanceSubmitModels));
+                       
                         call.enqueue(new Callback<JsonArray>() {
                             @Override
                             public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
-                                Log.d("TAG", "onResponse: "+response.body());
+                               
                                 JsonObject jsonObject=response.body().get(0).getAsJsonObject();
                                 dialog2.dismiss();
                                 dialog3 = new Dialog(UpdateDetails_StaffAttendance.this);
@@ -176,7 +175,7 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity implements 
                             }
                             @Override
                             public void onFailure(Call<JsonArray> call, Throwable t) {
-                                Log.d("TAG", "onFailure: "+t.getMessage());
+                               
                                 dialog2.dismiss();
                             }
                         });
@@ -220,7 +219,7 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity implements 
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER ,1000,1, UpdateDetails_StaffAttendance.this);
             return true;
         }catch (Exception e){
-            Log.d("TAG", "getLocation: "+e);
+           
             dialog.dismiss();
             return false;
         }
@@ -410,7 +409,7 @@ public class UpdateDetails_StaffAttendance extends AppCompatActivity implements 
         if (location!=null){
             lattitude= (float) location.getLatitude();
             longitude= (float) location.getLongitude();
-            Log.d("TAG", "onLocationChanged: "+lattitude+"/////"+longitude);
+           
         }else{
             Toast.makeText(this, "not getting location", Toast.LENGTH_SHORT).show();
         }

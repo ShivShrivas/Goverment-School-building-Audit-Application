@@ -16,7 +16,6 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -40,9 +39,9 @@ import com.bsn.buildingaudit.Adapters.OnlineImageRecViewAdapterEditable;
 import com.bsn.buildingaudit.ApplicationController;
 import com.bsn.buildingaudit.CompressLib.Compressor;
 import com.bsn.buildingaudit.ConstantValues.ConstantFile;
+import com.bsn.buildingaudit.R;
 import com.bsn.buildingaudit.RetrofitApi.ApiService;
 import com.bsn.buildingaudit.RetrofitApi.RestClient;
-import com.bsn.buildingaudit.R;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.karumi.dexter.Dexter;
@@ -360,8 +359,8 @@ ConstraintLayout constraintLayout35;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForSeperateRoomsAvl = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnerPositionForBioStaff = adapter.getPosition(response.body().get(0).get("BiometricUseStaff").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("BiometricUseStaff").getAsString());
                 int spinnerPositionForBioStu = adapter.getPosition(response.body().get(0).get("BiometricUseStudent").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("BiometricUseStudent").getAsString());
@@ -408,7 +407,7 @@ ConstraintLayout constraintLayout35;
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void runService() {
@@ -420,7 +419,7 @@ ConstraintLayout constraintLayout35;
 //        MultipartBody.Part body = MultipartBody.Part.createFormData("FileData", compressedImage.getName(), requestFile);
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages2.size()];
         for (int i = 0; i < arrayListImages2.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages2.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsBioMetric.this)
                                                     .setMaxWidth(720)
                                                     .setMaxHeight(720)
@@ -436,7 +435,7 @@ ConstraintLayout constraintLayout35;
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerBioMetricMachineAvailabelty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -447,13 +446,13 @@ ConstraintLayout constraintLayout35;
         }else {
             deletUrl=null;
         }
-        Log.d("TAG", "onClick: "+ paraBioMetric(action, "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
+       
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraBioMetric(action, "9", "BiometricPhoto", spinnerBioMetricMachineAvailabelty.getSelectedItem().toString(), spinnerBioMetricInstallationYear.getSelectedItem().toString(), spinnerBiometricWorkingStatus.getSelectedItem().toString(), spinneruserbiometricStaff.getSelectedItem().toString(), spinneruserbiometricStudent.getSelectedItem().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), edtBioMetricMachineCount.getText().toString(), arrayListImages2));
         Call<List<JsonObject>> call=apiService.uploadBiometricv2(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+response);
+               
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -506,11 +505,11 @@ ConstraintLayout constraintLayout35;
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -607,7 +606,7 @@ ConstraintLayout constraintLayout35;
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(bitmap));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -720,10 +719,10 @@ ConstraintLayout constraintLayout35;
         File newFile = new File(file.getParent(), newName);
         if (!newFile.equals(file)) {
             if (newFile.exists() && newFile.delete()) {
-                Log.d("FileUtil", "Delete old " + newName + " file");
+               
             }
             if (file.renameTo(newFile)) {
-                Log.d("FileUtil", "Rename file to " + newName);
+               
             }
         }
         return newFile;
@@ -757,8 +756,8 @@ ConstraintLayout constraintLayout35;
         // Create the storage directory if it does not exist
         if (!mediaStorageDir.exists()) {
             if (!mediaStorageDir.mkdirs()) {
-                Log.d("TAG", "Oops! Failed create "
-                        + IMAGE_DIRECTORY_NAME + " directory");
+
+
                 return null;
             }
         }

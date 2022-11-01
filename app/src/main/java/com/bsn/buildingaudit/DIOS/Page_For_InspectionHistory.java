@@ -52,7 +52,7 @@ Button addNewInspectioBtn;
                 onBackPressed();
             }
         });
-        Log.d("TAG", "onCreate: "+localSchoolId);
+       
         schoolAddress=findViewById(R.id.schoolAddress);
         addNewInspectioBtn=findViewById(R.id.addNewInspectioBtn);
         schoolName=findViewById(R.id.schoolName);
@@ -65,7 +65,7 @@ Button addNewInspectioBtn;
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
 
         Call<ArrayList<AllInspectionDataModel>>  call=apiService.getListOfOldInspection(jsonObject);
         call.enqueue(new Callback<ArrayList<AllInspectionDataModel>>() {

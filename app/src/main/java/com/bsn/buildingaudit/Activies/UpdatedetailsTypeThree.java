@@ -11,7 +11,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -658,7 +657,7 @@ dialog2.show();
         call.enqueue(new Callback<List<LabDetailsResponse>>() {
             @Override
             public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
 
                 int spinnerAvalabiltyScience = arrayAdapter7.getPosition(response.body().get(0).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(0).getLabYN());
                 int spinnerAvalabiltyPhysics = arrayAdapter7.getPosition(response.body().get(1).getLabYN())==-1?0:arrayAdapter.getPosition(response.body().get(1).getLabYN());
@@ -825,7 +824,7 @@ dialog2.show();
         arrayListImagesFinal.addAll(arrayListImages7);
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImagesFinal.size()];
         for (int i = 0; i < arrayListImagesFinal.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImagesFinal.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdatedetailsTypeThree.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -841,19 +840,19 @@ dialog2.show();
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
         }else {
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraLabDetails(action,"3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
-        Log.d("TAG", "onClick: "+paraLabDetails(action,"3","PracticalLabsDetail",scienceLabCondition,physicsLabCondition,chemistryLabCondition,biologyLabCondition,homeScienceLabCondition,musicLabCondition,geographyLabCondition, applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUsertype(),arrayListImages7,arrayListImages1,arrayListImages2,arrayListImages3,arrayListImages4,arrayListImages5,arrayListImages6));
+       
         Call<List<JsonObject>> call=apiService.uploadLabDetails(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
 //                        Toast.makeText(UpdatedetailsTypeThree.this, ""+response.body(), Toast.LENGTH_SHORT).show();
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
@@ -937,16 +936,16 @@ dialog2.show();
           if (spinnerSociallabAvailability.getSelectedItem().toString().equals("No")){
             deleteUrlsFinal.addAll(hList); }else{ deleteUrlsFinal.addAll(OnlineImageRecViewAdapterEditable7.deletedUrls); }
 
-        Log.d("TAG", "paraDeletUlrs: "+ deleteUrlsFinal.size());
+       
 
         for (int i = 0; i < deleteUrlsFinal.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+deleteUrlsFinal.get(i));
+           
             String newUrl2=deleteUrlsFinal.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
         }
-        Log.d("TAG", "paraDeletUlrs: "+jsonArray.toString());
+       
 
         return jsonArray.toString();
     }
@@ -1018,7 +1017,7 @@ dialog2.show();
                 jsonObject.addProperty("photos", "BitMapToString(getResizedBitmap(arrayListImages7.get(i), 300))"+i);
                 jsonObject.addProperty("LabName", name_lab);
 
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1037,7 +1036,7 @@ dialog2.show();
                 jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(arrayListImages7, 300)));
                 jsonObject.addProperty("LabName", name_lab);
 
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -1075,7 +1074,7 @@ dialog2.show();
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -1235,7 +1234,7 @@ dialog2.show();
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     @Override

@@ -339,8 +339,8 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnforInstallationYear= arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
                 int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
@@ -384,7 +384,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void runService() {
@@ -393,7 +393,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages2.size()];
         for (int i = 0; i < arrayListImages2.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages2.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsCCTV.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -409,7 +409,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerCCTVAvailabelty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -425,7 +425,7 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
 
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
@@ -483,11 +483,11 @@ public class UpdateDetailsCCTV extends AppCompatActivity {
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -595,7 +595,7 @@ if (availabilty.equals("No")){
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

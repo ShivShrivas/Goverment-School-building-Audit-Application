@@ -76,17 +76,17 @@ public class Final_OTP_Submission extends AppCompatActivity {
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        Log.d("TAG", "onResponse: "+response.body().get("message"));
+
                         if (response.body().get("type").getAsString().equals("success")){
                             RestClient restClient=new RestClient();
                             ApiService apiService=restClient.getApiService();
-                            Log.d("TAG", "onResponse: "+paraLocakedData("2",applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUserid()));
+
                             Call<List<DataLocked>> call2=apiService.checkLockedData(paraLocakedData("2",applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUserid()));
                             call2.enqueue(new Callback<List<DataLocked>>() {
                                 @Override
                                 public void onResponse(Call<List<DataLocked>> call, Response<List<DataLocked>> response) {
                                     List<DataLocked> lockeds=response.body();
-                                    Log.d("TAG", "onResponse: "+response.body());
+
                                     if (lockeds.get(0).getSTATUS()==1){
                                         TextView textView = dialog.findViewById(R.id.dialogtextResponse);
                                         Button button = dialog.findViewById(R.id.BtnResponseDialoge);
@@ -169,7 +169,7 @@ public class Final_OTP_Submission extends AppCompatActivity {
             call.enqueue(new Callback<JsonObject>() {
                 @Override
                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                    Log.d("TAG", "onResponse: "+response.body().get("type"));
+
                     dialog2.dismiss();
                     Toast.makeText(Final_OTP_Submission.this, ""+response.body().get("message").getAsString(), Toast.LENGTH_LONG).show();
 

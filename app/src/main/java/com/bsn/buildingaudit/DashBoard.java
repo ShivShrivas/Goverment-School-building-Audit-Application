@@ -146,7 +146,7 @@ public class DashBoard extends AppCompatActivity {
                             call1.enqueue(new Callback<JsonObject>() {
                                 @Override
                                 public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                                    Log.d("TAG", "onResponse: "+response.body().get("type"));
+                                   
                                     if (response.body().get("type").getAsString().equals("success")){
                                         startActivity(new Intent(DashBoard.this, Final_OTP_Submission.class));
                                     }else{
@@ -178,11 +178,11 @@ public class DashBoard extends AppCompatActivity {
 
         dashboardRecview.setLayoutManager(new LinearLayoutManager(DashBoard.this));
 
-        Log.d("TAG", "onCreate: " + applicationController.getUsername() + applicationController.getSchoolName());
+       
         schoolName.setText(applicationController.getSchoolName());
         schoolAddress.setText(applicationController.getSchoolAddress());
         userName.setText(applicationController.getUsername());
-        Log.d("TAG", "onCreate: " + latitude+longitude);
+       
         dialog.show();
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
@@ -190,7 +190,7 @@ public class DashBoard extends AppCompatActivity {
         call.enqueue(new Callback<List<GetAllRoomsList>>() {
             @Override
             public void onResponse(Call<List<GetAllRoomsList>> call, Response<List<GetAllRoomsList>> response) {
-                Log.d("TAG", "onResponse: getAllrooms "+response.body());
+               
                 arrayList=response.body();
 
 
@@ -275,9 +275,9 @@ public class DashBoard extends AppCompatActivity {
         call.enqueue(new Callback<List<InstallationYear>>() {
             @Override
             public void onResponse(Call<List<InstallationYear>> call, Response<List<InstallationYear>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 applicationController.setInstallationYears(response.body());
-                Log.d("TAG", "onResponse: "+applicationController.getInstallationYears().get(0).getYear());
+               
             }
 
             @Override
@@ -297,9 +297,9 @@ public class DashBoard extends AppCompatActivity {
         call.enqueue(new Callback<List<BoundryType>>() {
             @Override
             public void onResponse(Call<List<BoundryType>> call, Response<List<BoundryType>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 applicationController.setBoundryTypes(response.body());
-                Log.d("TAG", "onResponse: "+applicationController.getBoundryTypes().get(0).getBWTypeName());
+               
             }
 
             @Override
@@ -362,7 +362,7 @@ public class DashBoard extends AppCompatActivity {
         call.enqueue(new Callback<List<GetAllRoomsList>>() {
             @Override
             public void onResponse(Call<List<GetAllRoomsList>> call, Response<List<GetAllRoomsList>> response) {
-                Log.d("TAG", "onResponse: getAllrooms "+response.body());
+               
                 arrayList=response.body();
 
                 dashboardRecview.setLayoutManager(new LinearLayoutManager(DashBoard.this));
@@ -392,7 +392,7 @@ public class DashBoard extends AppCompatActivity {
 
                         longitude = String.valueOf(location.getLongitude());
                         latitude = String.valueOf(location.getLatitude());
-                        Log.d("TAG", "onSuccess: "+latitude+longitude);
+                       
                         if (longitude.equals(null) || latitude.equals(null) || longitude.equals("") || latitude.equals("")){
                             AlertDialog.Builder builder = new AlertDialog.Builder(DashBoard.this);
                             builder.setMessage("Device Location is not found please check ");

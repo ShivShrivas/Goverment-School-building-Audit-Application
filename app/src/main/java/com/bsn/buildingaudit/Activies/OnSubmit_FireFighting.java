@@ -164,18 +164,18 @@ TextView uploadtextFireFighting;
 
                 @Override
                 public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                    Log.d("TAG", "onFailure: " + t.getMessage());
+
                 }
             });
         }
         fireFightingRejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);
-                Log.d("TAG", "onClick: "+jsonObject1);
+
                 Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
                 call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
                     @Override
@@ -195,11 +195,11 @@ TextView uploadtextFireFighting;
     fireFightingApproveBtn.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Log.d("TAG", "onClick: "+ParentID);
+
             JsonObject jsonObject1=new JsonObject();
             jsonObject1.addProperty("InsType","A");
             jsonObject1.addProperty("ParamId",ParentID);
-            Log.d("TAG", "onClick: "+jsonObject1);
+
             Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
             call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
                 @Override
@@ -225,7 +225,7 @@ TextView uploadtextFireFighting;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
                     if (Type.equals("D")){
                         editFirefightingDetails.setVisibility(View.GONE);

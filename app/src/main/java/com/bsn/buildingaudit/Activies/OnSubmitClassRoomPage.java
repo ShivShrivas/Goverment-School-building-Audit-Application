@@ -3,7 +3,6 @@ package com.bsn.buildingaudit.Activies;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -90,13 +89,13 @@ LinearLayout diosButtonLayout,linearLayout2;
             callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
                 @Override
                 public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                    Log.d("TAG", "onResponse: "+response.body());
+                   
                     ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+                   
                     if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                         Toast.makeText(OnSubmitClassRoomPage.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                       
                         arrayListRemarks=approveRejectRemarksDataModel.getData();
                         Dialog dialogForRemark=new Dialog(OnSubmitClassRoomPage.this);
                         dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -129,7 +128,7 @@ LinearLayout diosButtonLayout,linearLayout2;
 
                 @Override
                 public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                    Log.d("TAG", "onFailure: "+t.getMessage());
+                   
                 }
             });
         }
@@ -202,7 +201,7 @@ LinearLayout diosButtonLayout,linearLayout2;
         classroomApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -225,11 +224,11 @@ LinearLayout diosButtonLayout,linearLayout2;
         classroomRejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);
-                Log.d("TAG", "onClick: "+jsonObject1);
+               
                 Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
                 call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
                     @Override
@@ -246,7 +245,7 @@ LinearLayout diosButtonLayout,linearLayout2;
                 });
             }
         });
-        Log.d("TAG", "onCreate: "+paraGetDetails("12",applicationController.getSchoolId(), applicationController.getPeriodID())+applicationController.getUsertype());
+       
         if (applicationController.getUsertype().equals("VA")){
             call=apiService.checkDetailsOfRooms(paraGetDetails("2",applicationController.getSchoolId(), applicationController.getPeriodID()));
         }else{
@@ -290,9 +289,9 @@ LinearLayout diosButtonLayout,linearLayout2;
                 whiteBoardContAfterSubmit.setText(response.body().get(0).get("WhiteBoard").toString());
                 greenBoardCountAfterSubmit.setText(response.body().get(0).get("GreenBoard").toString());
                 goodCondtionClassroomAfterSubmit.setText(response.body().get(0).get("GoodCondition").toString());
-                Log.d("TAG", "onResponse: "+response.body().get(0).get("GoodConditionPhotos").toString());
-                Log.d("TAG", "onResponse: "+response.body().get(0).get("MajorRepairingPhotos").toString());
-                Log.d("TAG", "onResponse: "+response.body().get(0).get("MinorRepairingPhotos").toString());
+               
+               
+               
                 String goodRoomsList=response.body().get(0).get("GoodConditionPhotos").toString();
                 String[] goodConditionsList=goodRoomsList.split(",");
                 String majorRepairing=response.body().get(0).get("MajorRepairingPhotos").toString();

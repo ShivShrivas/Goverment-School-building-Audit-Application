@@ -3,7 +3,6 @@ package com.bsn.buildingaudit.DIOS.SubjectWiseSyllabus;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -78,18 +77,18 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
         json.addProperty("PeriodID",applicationController.getPeriodID());
         json.addProperty("ParamId",ParentID);
         json.addProperty("InsRecordId",InspectionId);
-        Log.d("TAG" , "onCreate: "+json);
+       
         Call<ApproveRejectRemarksDataModel> callz=apiService.getpriviousSubmittedDataByDIOS(json);
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
-                Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getStatus());
+               
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(Syllabus_Details_page.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(Syllabus_Details_page.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -122,7 +121,7 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
         Call<ArrayList<SubjectWiseSyllabusModel>> call= apiService.getSubjectSyllabus(jsonObject);
@@ -174,7 +173,7 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
         btnApprovalStudentpresence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -199,7 +198,7 @@ ArrayList<SubjectWiseSyllabusModel> arrayList=new ArrayList<>();
         btnRejectStudentpresence.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);

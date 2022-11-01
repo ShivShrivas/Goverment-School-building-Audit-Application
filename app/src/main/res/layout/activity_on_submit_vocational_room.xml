@@ -428,7 +428,7 @@
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/scienceLabBodyCard">
+                   >
 
                     <ImageView
                         android:id="@+id/imageUpoadVocalHS"
@@ -694,7 +694,7 @@
                     app:cardCornerRadius="50dp"
                     app:cardElevation="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/physicsLabBodyCard">
+      >
 
                     <ImageView
                         android:id="@+id/imageUpoadeViewVocalIS"

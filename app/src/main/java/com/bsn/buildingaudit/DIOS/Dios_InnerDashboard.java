@@ -2,7 +2,6 @@ package com.bsn.buildingaudit.DIOS;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
@@ -64,13 +63,13 @@ public class Dios_InnerDashboard extends AppCompatActivity {
         jsonObject.addProperty("ParentID",ParentID);
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
         Call<ArrayList<GetDashboardMenuDataModel>> call=apiService.getDiosSubmenuCardsData(jsonObject);
         call.enqueue(new Callback<ArrayList<GetDashboardMenuDataModel>>() {
             @Override
             public void onResponse(Call<ArrayList<GetDashboardMenuDataModel>> call, Response<ArrayList<GetDashboardMenuDataModel>> response) {
                 ArrayList<GetDashboardMenuDataModel> arrayList=response.body();
-                Log.d("TAG", "onResponse: "+arrayList);
+               
                 adapter=new DiosSubMenuDashboardAdapter(Dios_InnerDashboard.this,arrayList,InspectionId);
                 diosSubMenuRecView.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

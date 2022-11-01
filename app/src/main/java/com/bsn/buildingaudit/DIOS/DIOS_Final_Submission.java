@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -66,7 +65,7 @@ CardView cardView66,cardView65;
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     @Override
@@ -191,7 +190,7 @@ CardView cardView66,cardView65;
                 call.enqueue(new Callback<JsonObject>() {
                     @Override
                     public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                        Log.d("TAG", "onResponse: "+response.body());
+                       
 
                         Toast.makeText(DIOS_Final_Submission.this, ""+response.body().get("Status"), Toast.LENGTH_SHORT).show();
                         onBackPressed();

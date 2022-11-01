@@ -316,7 +316,7 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
 
@@ -327,8 +327,8 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForRainHarvestingAvl = adapter.getPosition(response.body().get(0).get("RainHarvestingAvl").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("RainHarvestingAvl").getAsString());
                 int spinnerPositionForWorkingStatus = arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("WorkingStatus").getAsString());
 
@@ -369,7 +369,7 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
 
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsRainHarvest.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -385,7 +385,7 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerRainharvestingAvailabilty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -397,12 +397,12 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraRainHarvest(action,"13","RainHarvesting",spinnerRainharvestingAvailabilty.getSelectedItem().toString(),spinnerRainHavestingWorkStatus.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraRainHarvest(action,"13","RainHarvesting",spinnerRainharvestingAvailabilty.getSelectedItem().toString(),spinnerRainHavestingWorkStatus.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+       
         Call<List<JsonObject>> call=apiService.uploadRainHarvest(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response+response.body());
+               
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -456,11 +456,11 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -543,7 +543,7 @@ Spinner spinnerRainHavestingWorkStatus,spinnerRainharvestingAvailabilty;
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

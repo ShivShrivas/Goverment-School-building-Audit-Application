@@ -186,13 +186,13 @@ ImageView schoolIcon;
             callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
                 @Override
                 public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                    Log.d("TAG", "onResponse: " + response.body());
+                   
                     ApproveRejectRemarksDataModel approveRejectRemarksDataModel = response.body();
-                    Log.d("TAG", "onResponse: " + approveRejectRemarksDataModel.getStatus());
+                   
                     if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")) {
 
                         Toast.makeText(OnSubmit_PracticalLabsDetails.this, "" + approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", "onResponse: " + approveRejectRemarksDataModel.getData());
+                       
                         arrayListRemarks = approveRejectRemarksDataModel.getData();
                         Dialog dialogForRemark = new Dialog(OnSubmit_PracticalLabsDetails.this);
                         dialogForRemark.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -225,7 +225,7 @@ ImageView schoolIcon;
 
                 @Override
                 public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                    Log.d("TAG", "onFailure: " + t.getMessage());
+                   
                 }
             });
         }
@@ -237,7 +237,7 @@ ImageView schoolIcon;
         call.enqueue(new Callback<List<LabDetailsResponse>>() {
             @Override
             public void onResponse(Call<List<LabDetailsResponse>> call, Response<List<LabDetailsResponse>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 if (response.body().get(0).getDataLocked().equals("0")){
                     if (Type.equals("D")){
                         editPracticalLabDetails.setVisibility(View.GONE);
@@ -372,7 +372,7 @@ ImageView schoolIcon;
 
 
             try {
-                Log.d("TAG", "onResponse: "+list.get(0).getLabPhotoPath());
+               
                 String[] scinceLabPhotoPathList=list.get(0).getLabPhotoPath().split(",");
                 OnlineImageRecViewAdapter onlineImageRecViewAdapter=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,scinceLabPhotoPathList, applicationController.getUsertype());
                 recyclerViewScienceLab.setAdapter(onlineImageRecViewAdapter);
@@ -381,7 +381,7 @@ ImageView schoolIcon;
             }
 
                 try {
-                    Log.d("TAG", "onResponse: "+list.get(1).getLabPhotoPath());
+                   
 
                     String[] physicsLabPhotoPathList=list.get(1).getLabPhotoPath().split(",");
                     OnlineImageRecViewAdapter onlineImageRecViewAdapter1=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,physicsLabPhotoPathList, applicationController.getUsertype());
@@ -391,7 +391,7 @@ ImageView schoolIcon;
             }
 
                 try {
-                    Log.d("TAG", "onResponse: "+list.get(2).getLabPhotoPath());
+                   
 
                     String[] chemistryLabPhotoPathLis2=list.get(2).getLabPhotoPath().split(",");
                     OnlineImageRecViewAdapter onlineImageRecViewAdapter3=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,chemistryLabPhotoPathLis2, applicationController.getUsertype());
@@ -401,7 +401,7 @@ ImageView schoolIcon;
             }
 
                 try {
-                    Log.d("TAG", "onResponse: "+list.get(3).getLabPhotoPath());
+                   
 
                     String[] biologyLAbList=list.get(3).getLabPhotoPath().split(",");
                     OnlineImageRecViewAdapter onlineImageRecViewAdapter4=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,biologyLAbList, applicationController.getUsertype());
@@ -413,7 +413,7 @@ ImageView schoolIcon;
 
 
                 try {
-                    Log.d("TAG", "onResponse: "+list.get(4).getLabPhotoPath());
+                   
 
                     String[] homscienceLabList=list.get(4).getLabPhotoPath().split(",");
                         OnlineImageRecViewAdapter onlineImageRecViewAdapter5=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,homscienceLabList, applicationController.getUsertype());
@@ -423,7 +423,7 @@ ImageView schoolIcon;
                     }
 
                try {
-                   Log.d("TAG", "onResponse: "+list.get(5).getLabPhotoPath());
+                  
 
                    String[] muscilabList=list.get(5).getLabPhotoPath().split(",");
                    OnlineImageRecViewAdapter onlineImageRecViewAdapter6=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,muscilabList, applicationController.getUsertype());
@@ -433,7 +433,7 @@ ImageView schoolIcon;
                }
 
               try {
-                  Log.d("TAG", "onResponse: "+list.get(6).getLabPhotoPath());
+                 
 
                   String[] geoGraphyList=list.get(6).getLabPhotoPath().split(",");
                   OnlineImageRecViewAdapter onlineImageRecViewAdapter7=new OnlineImageRecViewAdapter(OnSubmit_PracticalLabsDetails.this,geoGraphyList, applicationController.getUsertype());
@@ -456,7 +456,7 @@ ImageView schoolIcon;
         practicalLabApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -481,11 +481,11 @@ ImageView schoolIcon;
         practicalLabRejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);
-                Log.d("TAG", "onClick: "+jsonObject1);
+               
                 Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
                 call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
                     @Override

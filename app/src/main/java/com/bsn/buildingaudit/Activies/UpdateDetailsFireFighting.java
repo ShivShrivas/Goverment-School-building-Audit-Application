@@ -12,7 +12,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -393,8 +392,8 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+
+
                 int spinnerPositionForAvailabilty = adapter.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnforTraining= adapter.getPosition(response.body().get(0).get("Training").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("Training").getAsString());
                 int spinnerPositionForRenewalStatus = arrayAdapter3.getPosition(response.body().get(0).get("RenewalStatus").getAsString())==-1?0:arrayAdapter3.getPosition(response.body().get(0).get("RenewalStatus").getAsString());
@@ -450,7 +449,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+
         return imageFile;
     }
     private void runService() {
@@ -458,7 +457,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         ApiService apiService=restClient.getApiService();
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+
             File compressedImage = new Compressor.Builder(UpdateDetailsFireFighting.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -474,7 +473,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+
         if (action.equals("3")){
             if (spinnerFireFightAvailabelty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -487,13 +486,12 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraFireFight(action,"12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
                 spinnerFireFightRenewalStatus.getSelectedItem().toString(),edtrenewalDate.getText().toString(),spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
-        Log.d("TAG", "onClick: "+paraFireFight(action,"12","FireFighting",spinnerFireFightWorkingStatus.getSelectedItem().toString(),
-                spinnerFireFightRenewalStatus.getSelectedItem().toString(),edtrenewalDate.getText().toString(),spinnerFireFightTraining.getSelectedItem().toString(),spinnerFireFightingInstallationYear.getSelectedItem().toString(),spinnerFireFightAvailabelty.getSelectedItem().toString(), applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
+
         Call<List<JsonObject>> call=apiService.uploadFireFighting(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+response);
+
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -547,11 +545,11 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -647,7 +645,7 @@ public class UpdateDetailsFireFighting extends AppCompatActivity {
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//
         } catch (Exception e) {
             e.printStackTrace();
         }

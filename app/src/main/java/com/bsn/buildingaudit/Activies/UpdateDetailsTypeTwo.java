@@ -12,7 +12,6 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -325,8 +324,8 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForSeperateRoomsAvl = arrayAdapter8.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString())==-1?0:arrayAdapter8.getPosition(response.body().get(0).get("SeperateRoomsAvl").getAsString());
                 int spinnerPositionForFurnitureAvl = arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("FurnitureAvl").getAsString());
                 int spinnerPositionForAlmirahRacksAvl = arrayAdapter.getPosition(response.body().get(0).get("AlmirahRacksAvl").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("AlmirahRacksAvl").getAsString());
@@ -340,7 +339,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
                 StaffPhotoPathList=response.body().get(0).get("StaffPhotoPath").getAsString().split(",");
 
                 aList = new ArrayList<String>(Arrays.asList(StaffPhotoPathList));
-                Log.d("TAG", "onResponse:size "+aList.size());
+               
                 if (!aList.get(0).isEmpty()){
                     OnlineImageRecViewAdapterEditable onlineImageRecViewAdapter=new OnlineImageRecViewAdapterEditable(UpdateDetailsTypeTwo.this,aList);
                     recyclerViewTwoTypetwoFromServer.setAdapter(onlineImageRecViewAdapter);
@@ -370,17 +369,17 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void runService() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-//        Log.d("TAG", "onClick: "+paramStaffDetails("1","2","StaffRoomDetails",spinnerRoomAvailabel.getSelectedItem().toString(),spinnerRoomStatus.getSelectedItem().toString(),spinnerFurnitureAvailabilty.getSelectedItem().toString(),spinnerAlmiraAndRacksAvailabilty.getSelectedItem().toString(),
+//       
 //                applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(),applicationController.getUsertypeid(),applicationController.getUserid(),arrayListImages1));
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsTypeTwo.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -396,7 +395,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerRoomAvailabel.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -455,7 +454,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
 
         for (int i = 0; i < aList.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+aList.get(i));
+           
             String newUrl2=aList.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
@@ -468,11 +467,11 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -564,7 +563,7 @@ public class UpdateDetailsTypeTwo extends AppCompatActivity {
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

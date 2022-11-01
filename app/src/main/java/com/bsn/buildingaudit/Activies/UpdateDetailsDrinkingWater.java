@@ -471,7 +471,7 @@ LinearLayout linearLayout31;
                                 public void onClick(View view) { }}).show();
                 }else {
                     if ( spinnerOverheadTankAvailabiltyDW.getSelectedItem().equals("No") && spinnerWaterSupplyAvailabiltyDW.getSelectedItem().toString().equals("No") && Integer.valueOf(edtTotalDrinkingwaterTaps.getText().toString().trim())==0&& Integer.valueOf(edtTotalRO.getText().toString().trim())==0&& Integer.valueOf(edtTotalHandpump.getText().toString().trim())==0&& Integer.valueOf(edtTotalSummerSible.getText().toString().trim())==0){
-                        Log.d("TAG", "onClick: all no and 0");
+                       
                         runService();
                     }else{
                         if (action.equals("3")){
@@ -517,8 +517,8 @@ LinearLayout linearLayout31;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
 //                int spinnerPositionForHandPumpAvl = adapter.getPosition(response.body().get(0).get("HandPumpAvl").getAsString());
 //                int spinnforSubmersibleAvl= adapter.getPosition(response.body().get(0).get("SubmersibleAvl").getAsString());
                 int spinnerPositionForNNPalikaWaterSupplyAvl = adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString())==-1?0:adapter.getPosition(response.body().get(0).get("NNPalikaWaterSupplyAvl").getAsString());
@@ -595,7 +595,7 @@ LinearLayout linearLayout31;
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void runService() {
@@ -616,7 +616,7 @@ LinearLayout linearLayout31;
 
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsDrinkingWater.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -632,7 +632,7 @@ LinearLayout linearLayout31;
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
         }else {
@@ -685,11 +685,11 @@ LinearLayout linearLayout31;
                     private String paraDeletUlrs() {
                         JsonArray jsonArray=new JsonArray();
 
-                        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+                       
 
                         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
                             JsonObject jsonObject=new JsonObject();
-                            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+                           
                             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
                             jsonObject.addProperty("PhotoUrl",newUrl2);
                             jsonArray.add(jsonObject);
@@ -826,7 +826,7 @@ if (Integer.valueOf(edtTotalRO.getText().toString().trim())==0){
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

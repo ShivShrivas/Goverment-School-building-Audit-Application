@@ -9,7 +9,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -120,25 +119,25 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
                 }else{
                     RestClient restClient=new RestClient();
                     ApiService apiService=restClient.getApiService();
-                    Log.d("TAG", "onClick: "+paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                   
                     Call<JsonArray> call=apiService.uploadGeoFenchingDetails(paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
                   call.enqueue(new Callback<JsonArray>() {
                       @Override
                       public void onResponse(Call<JsonArray> call, Response<JsonArray> response) {
                           JsonObject jsonObject= (JsonObject) response.body().get(0);
-                          Log.d("TAG", "onResponse: "+jsonObject.get("StatusCode"));
+                         
                           TextView textView=dialog2.findViewById(R.id.dialogtextResponse);
                           Button button=dialog2.findViewById(R.id.BtnResponseDialoge);
                           try {
                               if (jsonObject.get("StatusCode").toString().equals("1")){
-                                  Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                 
                                 textView.setText("Data Submitted Successfully!!");
                               }else if(jsonObject.get("StatusCode").toString().equals("2")){
-                                  Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                 
                                   textView.setText("Data already submitted");
 
                               }else{
-                                  Log.d("TAG", "onClick: "+ paraGetJsonOfGeos(applicationController.getSchoolId(),arrayList));
+                                 
                                   textView.setText("Something went wrong!!");
 
                               }
@@ -255,7 +254,7 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER ,1000,1 ,UpdateDetails_GeofenchingDetails.this);
             return true;
         }catch (Exception e){
-            Log.d("TAG", "getLocation: "+e);
+           
             dialog.dismiss();
             return false;
         }
@@ -266,7 +265,7 @@ public class UpdateDetails_GeofenchingDetails extends AppCompatActivity implemen
        if (location!=null){
            lattitude=location.getLatitude();
            longitude=location.getLongitude();
-           Log.d("TAG", "onLocationChanged: "+lattitude+"/////"+longitude);
+          
        }else{
            Toast.makeText(this, "not getting location", Toast.LENGTH_SHORT).show();
        }

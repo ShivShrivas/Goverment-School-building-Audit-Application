@@ -3,7 +3,6 @@ package com.bsn.buildingaudit.DIOS.SchoolStaff;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -82,7 +81,7 @@ PrincipalAndTeacherTrainingModel arrayList;
         JsonObject jsonObject=new JsonObject();
         jsonObject.addProperty("SchoolID",applicationController.getSchoolId());
         jsonObject.addProperty("PeriodID",applicationController.getPeriodID());
-        Log.d("TAG", "onCreate: "+jsonObject);
+       
         recyclerView.setLayoutManager(new LinearLayoutManager(this){
             @Override
             public boolean canScrollVertically() {
@@ -108,12 +107,12 @@ PrincipalAndTeacherTrainingModel arrayList;
         callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
             @Override
             public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 ApproveRejectRemarksDataModel approveRejectRemarksDataModel=response.body();
                 if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")){
 
                     Toast.makeText(All_Staff_Traing_Details.this, ""+approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                    Log.d("TAG", "onResponse: "+approveRejectRemarksDataModel.getData());
+                   
                     arrayListRemarks=approveRejectRemarksDataModel.getData();
                     Dialog dialogForRemark=new Dialog(All_Staff_Traing_Details.this);
                     dialogForRemark.requestWindowFeature (Window.FEATURE_NO_TITLE);
@@ -146,20 +145,20 @@ PrincipalAndTeacherTrainingModel arrayList;
 
             @Override
             public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
         Call<PrincipalAndTeacherTrainingModel> call=apiService.getPrincipalAndTeacherTraining(jsonObject);
         call.enqueue(new Callback<PrincipalAndTeacherTrainingModel>() {
             @Override
             public void onResponse(Call<PrincipalAndTeacherTrainingModel> call, Response<PrincipalAndTeacherTrainingModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
                 arrayList=response.body();
                 arrayListPrincipal=arrayList.getP();
 
                 arrayListTeacher=arrayList.getT();
-                Log.d("TAG", "onResponse: "+arrayListTeacher);
-                Log.d("TAG", "onResponse: "+arrayListPrincipal);
+               
+               
                 adapter=new StaffTrainingAdapter(All_Staff_Traing_Details.this,arrayListTeacher);
                 adapter1=new PrincipalTrainingAdapter(All_Staff_Traing_Details.this,arrayListPrincipal);
                 recyclerView.setAdapter(adapter1);
@@ -200,7 +199,7 @@ PrincipalAndTeacherTrainingModel arrayList;
         approveAllStaffTraing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
@@ -224,7 +223,7 @@ PrincipalAndTeacherTrainingModel arrayList;
         rejectAllStaffTraing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);

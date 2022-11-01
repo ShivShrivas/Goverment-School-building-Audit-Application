@@ -389,7 +389,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private void fetchAllDataFromServer() {
@@ -399,8 +399,8 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForAvailabilty = arrayAdapter9.getPosition(response.body().get(0).get("Availabilty").getAsString())==-1?0:arrayAdapter9.getPosition(response.body().get(0).get("Availabilty").getAsString());
                 int spinnerPositionForInstallationYear = arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString())==-1?0:arrayAdapter1.getPosition(response.body().get(0).get("InstallationYear").getAsString());
                 int spinnerPositionForScheme = arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString())==-1?0:arrayAdapter2.getPosition(response.body().get(0).get("Scheme").getAsString());
@@ -469,7 +469,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
 
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsComputerlab.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -485,7 +485,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             if (spinnerComputeLabAvailabelty.getSelectedItem().toString().equals("No")){
                 deletUrl=RequestBody.create(MediaType.parse("multipart/form-data"),paraAllDeleteUrls());
@@ -497,12 +497,12 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
             deletUrl=null;
         }
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"),paraComputerLab(action,"19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),sheme,OtherScheme,spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
-                Log.d("TAG", "onClick: "+paraComputerLab(action,"19","ComputerLab",applicationController.getLatitude(),applicationController.getLongitude(),applicationController.getSchoolId(),applicationController.getPeriodID(), applicationController.getUsertypeid(),applicationController.getUserid(),spinnerInstallationYear.getSelectedItem().toString(),edtNoOfComputer.getText().toString(),edtNoOfWorkingComputer.getText().toString(),sheme,OtherScheme,spinnerinternet.getSelectedItem().toString(),spinnerPowerBackup.getSelectedItem().toString(),spinnerFurniture.getSelectedItem().toString(),spinnerComputerOperator.getSelectedItem().toString(),edtNoOfLab.getText().toString(),spinnerPrinterAvailable.getSelectedItem().toString(),spinnerScannerAvailable.getSelectedItem().toString(),spinnerComputeLabAvailabelty.getSelectedItem().toString(),arrayListImages1));
+               
         Call<List<JsonObject>> call=apiService.uploadComputerLab(surveyImagesParts,description,deletUrl);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+response);
+               
                 TextView textView=dialog.findViewById(R.id.dialogtextResponse);
                 Button button=dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -555,11 +555,11 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -668,7 +668,7 @@ Spinner spinnerPrinterAvailable,spinnerScannerAvailable,spinnerComputeLabAvailab
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

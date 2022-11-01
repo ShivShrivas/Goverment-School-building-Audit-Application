@@ -106,13 +106,13 @@ String Type;
             callz.enqueue(new Callback<ApproveRejectRemarksDataModel>() {
                 @Override
                 public void onResponse(Call<ApproveRejectRemarksDataModel> call, Response<ApproveRejectRemarksDataModel> response) {
-                    Log.d("TAG", "onResponse: " + response.body());
+                   
                     ApproveRejectRemarksDataModel approveRejectRemarksDataModel = response.body();
-                    Log.d("TAG", "onResponse: " + approveRejectRemarksDataModel.getStatus());
+                   
                     if (!approveRejectRemarksDataModel.getStatus().equals("No Record Found")) {
 
                         Toast.makeText(OnSubmit_OpenGYmDetails.this, "" + approveRejectRemarksDataModel.getStatus(), Toast.LENGTH_SHORT).show();
-                        Log.d("TAG", "onResponse: " + approveRejectRemarksDataModel.getData());
+                       
                         arrayListRemarks = approveRejectRemarksDataModel.getData();
                         Dialog dialogForRemark = new Dialog(OnSubmit_OpenGYmDetails.this);
                         dialogForRemark.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -145,18 +145,18 @@ String Type;
 
                 @Override
                 public void onFailure(Call<ApproveRejectRemarksDataModel> call, Throwable t) {
-                    Log.d("TAG", "onFailure: " + t.getMessage());
+                   
                 }
             });
         }
         openGymApproveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","A");
                 jsonObject1.addProperty("ParamId",ParentID);
-                Log.d("TAG", "onClick: "+jsonObject1);
+               
                 Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
                 call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
                     @Override
@@ -177,11 +177,11 @@ String Type;
         openGymRejectBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("TAG", "onClick: "+ParentID);
+               
                 JsonObject jsonObject1=new JsonObject();
                 jsonObject1.addProperty("InsType","R");
                 jsonObject1.addProperty("ParamId",ParentID);
-                Log.d("TAG", "onClick: "+jsonObject1);
+               
                 Call<ArrayList<ApproveRejectRemarkModel>> call1=apiService.getApproveRejectRemark(jsonObject1);
                 call1.enqueue(new Callback<ArrayList<ApproveRejectRemarkModel>>() {
                     @Override
@@ -215,7 +215,7 @@ String Type;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                    Log.d("TAG", "onResponse: "+response.body()+"///////");
+                   
                 if (response.body().get(0).get("DataLocked").getAsString().equals("0")){
                     if (Type.equals("D")){
                         editOpenGymDetails.setVisibility(View.GONE);

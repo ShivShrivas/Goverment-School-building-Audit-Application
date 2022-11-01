@@ -14,7 +14,6 @@ import android.provider.Settings;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.ArrayAdapter;
@@ -252,7 +251,7 @@ int cameraType;
                     int totalClassRoom=Integer.parseInt(goodCondtionClassroom.getText().toString())+Integer.parseInt(minorRepairingClassroom.getText().toString())+Integer.parseInt(majorRepairingClassroom.getText().toString());
                     if (totalClassRoom!=Integer.parseInt(totalClassRooms.getText().toString().trim())){
                         dialog2.dismiss();
-                        Log.d("TAG", "onClick: "+totalClassRoom+"//////"+totalClassRooms.getText().toString());
+                       
                         Snackbar.make(constratinflayout, "Please provide correct number of rooms", Snackbar.LENGTH_INDEFINITE)
                                 .setAction("Ok", new View.OnClickListener() {
                                     @Override
@@ -292,7 +291,7 @@ int cameraType;
 
 
                 }catch (Exception e){
-                    Log.d("TAG", "onClick: "+e.getMessage());
+                   
                     Toast.makeText(UpdateDetailTypeOne.this, "please fill all room count properly", Toast.LENGTH_SHORT).show();
                     dialog2.dismiss();
 
@@ -630,11 +629,11 @@ int cameraType;
 
         MultipartBody.Part[] fileDataGood = new MultipartBody.Part[arrayListImages2.size()];
         for (int i = 0; i < arrayListImages2.size(); i++) {
-            Log.d("TAG", "requestUploadSurvey: survey image " + i + "  " + arrayListImages2.get(i).getPath());
+           
             File compressFile = filrCompressor(arrayListImages2.get(i));
             RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
                     compressFile);
-            Log.d("TAG", "runService:FileDataGood "+compressFile.getName());
+           
 
             fileDataGood[i] = MultipartBody.Part.createFormData("FileDataGood", compressFile.getName(), surveyBody);
 
@@ -643,31 +642,31 @@ int cameraType;
 
         MultipartBody.Part[] fileDataMinor = new MultipartBody.Part[arrayListImages3.size()];
         for (int i = 0; i < arrayListImages3.size(); i++) {
-            Log.d("TAG", "requestUploadSurvey: survey image " + i + "  " + arrayListImages3.get(i).getPath());
+           
             File compressFile = filrCompressor(arrayListImages3.get(i));
             RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
                     compressFile);
-            Log.d("TAG", "runService:FileDataMinor "+compressFile.getName());
+           
             fileDataMinor[i] = MultipartBody.Part.createFormData("FileDataMinor", compressFile.getName(), surveyBody);
 
         }
 
         MultipartBody.Part[] fileDataMajor = new MultipartBody.Part[arrayListImages4.size()];
         for (int i = 0; i < arrayListImages4.size(); i++) {
-            Log.d("TAG", "requestUploadSurvey: survey image " + i + "  " + arrayListImages4.get(i).getPath());
+           
             File compressFile = filrCompressor(arrayListImages4.get(i));
             RequestBody surveyBody = RequestBody.create(MediaType.parse("image/*"),
                     compressFile);
-            Log.d("TAG", "runService:FileDataMajor "+compressFile.getName());
+           
             fileDataMajor[i] = MultipartBody.Part.createFormData("FileDataMajor", compressFile.getName(), surveyBody);
 
         }
         RequestBody PhotoDeleteGood, PhotoDeleteMajor, PhotoDeleteMinor;
         if (action.equals("3")) {
 
-            Log.d("TAG", "onClick:photoDeleteGood "+paraDeletUlrs());
-            Log.d("TAG", "onClick:photoDeleteMajor "+paraDeletUlrs1());
-            Log.d("TAG", "onClick:photoDeleteMinor "+paraDeletUlrs2());
+           
+           
+           
             PhotoDeleteGood = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs());
             PhotoDeleteMinor = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs1());
             PhotoDeleteMajor = RequestBody.create(MediaType.parse("multipart/form-data"), paraDeletUlrs2());
@@ -679,13 +678,12 @@ int cameraType;
 
         RequestBody description = RequestBody.create(MediaType.parse("multipart/form-data"), paraClassRoomDetails(action, "1", "ClassRoomDetails", totalClassRoom, goodCondtionClassroom.getText().toString(), majorRepairingClassroom.getText().toString(), minorRepairingClassroom.getText().toString(), edtPodiumClass.getText().toString(),
                 blackBoardCount.getText().toString(), whiteBoardCont.getText().toString(), greenBoardCount.getText().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), "GoodConditionPhotos", arrayListImages2, "MajorRepairingPhotos", arrayListImages3, "MinorRepairingPhotos", arrayListImages4));
-        Log.d("TAG", "onClick: " + paraClassRoomDetails(action, "1", "ClassRoomDetails", totalClassRoom, goodCondtionClassroom.getText().toString(), majorRepairingClassroom.getText().toString(), minorRepairingClassroom.getText().toString(), edtPodiumClass.getText().toString(),
-                blackBoardCount.getText().toString(), whiteBoardCont.getText().toString(), greenBoardCount.getText().toString(), applicationController.getLatitude(), applicationController.getLongitude(), applicationController.getSchoolId(), applicationController.getPeriodID(), applicationController.getUsertypeid(), applicationController.getUserid(), "GoodConditionPhotos", arrayListImages2, "MajorRepairingPhotos", arrayListImages3, "MinorRepairingPhotos", arrayListImages4));
+
         Call<List<JsonObject>> call = apiService.uploadClassRoomDetails(fileDataGood, fileDataMinor, fileDataMajor, description,PhotoDeleteGood,PhotoDeleteMajor,PhotoDeleteMinor);
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: " + response.body()+response);
+               
                 TextView textView = dialog.findViewById(R.id.dialogtextResponse);
                 Button button = dialog.findViewById(R.id.BtnResponseDialoge);
                 try {
@@ -714,7 +712,7 @@ int cameraType;
 
             @Override
             public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                Log.d("TAG", "onFailure: " + t.getMessage());
+               
                 dialog2.dismiss();
 
             }
@@ -724,11 +722,11 @@ int cameraType;
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
@@ -740,11 +738,11 @@ int cameraType;
     private String paraDeletUlrs1() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable1.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable1.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable1.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable1.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
@@ -756,11 +754,11 @@ int cameraType;
     private String paraDeletUlrs2() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable2.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable2.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable2.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable2.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2.trim());
             jsonArray.add(jsonObject);
@@ -776,8 +774,8 @@ int cameraType;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                blackBoardCount.setText(response.body().get(0).get("BlackBoard").getAsString());
                whiteBoardCont.setText(response.body().get(0).get("WhiteBoard").getAsString());
                greenBoardCount.setText(response.body().get(0).get("GreenBoard").getAsString());
@@ -855,7 +853,7 @@ int cameraType;
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
     private String paraClassRoomDetails(String action, String paramId, String paramName, int totalClassRoom, String goodConRoom, String majorRooms, String minorRoom, String podium, String blackBoard,
@@ -931,7 +929,7 @@ int cameraType;
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }

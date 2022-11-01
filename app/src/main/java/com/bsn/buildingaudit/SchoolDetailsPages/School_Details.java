@@ -1,7 +1,6 @@
 package com.bsn.buildingaudit.SchoolDetailsPages;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -104,12 +103,12 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
         });
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "onCreate: "+paraSchoolRequestJson("2033",applicationController.getPeriodID()));
+       
         Call<SchoolDetailsModel> call=apiService.getSchoolDetailsForDIOS(paraSchoolRequestJson(applicationController.getSchoolId(),applicationController.getPeriodID()));
         call.enqueue(new Callback<SchoolDetailsModel>() {
             @Override
             public void onResponse(Call<SchoolDetailsModel> call, Response<SchoolDetailsModel> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+               
 
 
                  schoolDetailsList=response.body();
@@ -134,7 +133,7 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
                         subjectEleventhToTwelveth.clear();
                         subjectEleventhToTwelveth.addAll(hs);
                         recViewForPermittedSubjectsElevenTwelve.setLayoutManager(layoutManager1);
-                        Log.d("TAG", "onResponse: "+subjectEleventhToTwelveth.size()+"//");
+                       
                         if (subjectEleventhToTwelveth.isEmpty()){
                             cardView36.setVisibility(View.GONE);
                         }else{
@@ -186,7 +185,7 @@ RecyclerView recViewForPermittedSubjects,recViewForRunningClasses,recViewForPerm
 
             @Override
             public void onFailure(Call<SchoolDetailsModel> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+               
             }
         });
 

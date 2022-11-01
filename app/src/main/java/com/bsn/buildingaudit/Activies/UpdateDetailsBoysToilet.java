@@ -509,8 +509,8 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
         call.enqueue(new Callback<List<JsonObject>>() {
             @Override
             public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                Log.d("TAG", "onResponse: "+response.body()+"///////");
-                Log.d("TAG", "onResponse: "+response.body());
+               
+               
                 int spinnerPositionForAvailabilityCWSN = arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("AvailabilityCWSN").getAsString());
                 int spinnerPositionForDoor= arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Door").getAsString());
                 int spinnerPositionForDustbin= arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString())==-1?0:arrayAdapter.getPosition(response.body().get(0).get("Dustbin").getAsString());
@@ -555,7 +555,7 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
         ApiService apiService=restClient.getApiService();
         MultipartBody.Part[] surveyImagesParts = new MultipartBody.Part[arrayListImages1.size()];
         for (int i = 0; i < arrayListImages1.size(); i++) {
-            Log.d("TAG","requestUploadSurvey: survey image " + i +"  " + arrayListImages1.get(i).getPath());
+           
             File compressedImage = new Compressor.Builder(UpdateDetailsBoysToilet.this)
                     .setMaxWidth(720)
                     .setMaxHeight(720)
@@ -571,7 +571,7 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
 
         }
         RequestBody deletUrl;
-        Log.d("TAG", "runService: "+paraDeletUlrs());
+       
         if (action.equals("3")){
             deletUrl = RequestBody.create(MediaType.parse("multipart/form-data"),paraDeletUlrs());
         }else {
@@ -620,11 +620,11 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
     private String paraDeletUlrs() {
         JsonArray jsonArray=new JsonArray();
 
-        Log.d("TAG", "paraDeletUlrs: "+ OnlineImageRecViewAdapterEditable.deletedUrls.size());
+       
 
         for (int i = 0; i < OnlineImageRecViewAdapterEditable.deletedUrls.size(); i++) {
             JsonObject jsonObject=new JsonObject();
-            Log.d("TAG", "paraDeletUlrs: "+OnlineImageRecViewAdapterEditable.deletedUrls.get(i));
+           
             String newUrl2=OnlineImageRecViewAdapterEditable.deletedUrls.get(i).replaceAll("\"","");
             jsonObject.addProperty("PhotoUrl",newUrl2);
             jsonArray.add(jsonObject);
@@ -640,7 +640,7 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
         File imageFile=File.createTempFile(imageName,".jpg",storageDir);
 
         currentImagePath=imageFile.getAbsolutePath();
-        Log.d("TAG", "getImageFile: "+currentImagePath);
+       
         return imageFile;
     }
 
@@ -720,7 +720,7 @@ RecyclerView recyclerViewBoysToilet,recyclerViewBoysToiletFromServer;
         try {
             jsonObject.addProperty("id", String.valueOf(i + 1));
             jsonObject.addProperty("photos", BitMapToString(getResizedBitmap(bitmap, 300)));
-//            Log.d("TAG", "paraGetImageBase64: "+BitMapToString(bitmap));
+//           
         } catch (Exception e) {
             e.printStackTrace();
         }
