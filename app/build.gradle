@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.bsn.buildingaudit"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 19
         versionName "5.1.9"
@@ -86,4 +86,7 @@ dependencies {
 
     //use gif
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.24'
+
+
+    implementation "androidx.security:security-crypto:1.0.0-alpha02"
 }

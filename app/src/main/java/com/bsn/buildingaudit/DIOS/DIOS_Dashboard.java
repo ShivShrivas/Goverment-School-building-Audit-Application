@@ -1,7 +1,6 @@
 package com.bsn.buildingaudit.DIOS;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
 
@@ -86,6 +85,8 @@ SearchView searchView;
                 return true;
             }
         });
+
+
 
     }
 

@@ -25,6 +25,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.security.crypto.EncryptedSharedPreferences;
+import androidx.security.crypto.MasterKeys;
 
 import com.bsn.buildingaudit.Activies.NoInternetConnection;
 import com.bsn.buildingaudit.Adapters.QuaterTypeAdapter;
@@ -39,6 +41,8 @@ import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.JsonObject;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +53,9 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     Button SubmitBtn;
     ApplicationController applicationController;
-    SharedPreferences sharedpreferences;
+//    SharedPreferences sharedpreferences;
     EditText password,username;
+    EncryptedSharedPreferences sharedpreferences;
     Spinner spinnerUserType,spinnerFinancialQuarter;
     RestClient restClient;
     ApiService apiService;
@@ -122,7 +127,16 @@ public class MainActivity extends AppCompatActivity {
         dialog.setContentView (R.layout.progress_dialog);
         dialog.getWindow ().setBackgroundDrawableResource (android.R.color.transparent);
         dialog.setCancelable(false);
-        sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
+        try {
+            String masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC);
+            sharedpreferences= (EncryptedSharedPreferences) EncryptedSharedPreferences.create("prefrences",masterKeyAlias,getApplicationContext(),EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV, EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM);
+        } catch (GeneralSecurityException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        sharedpreferences = getSharedPreferences("APPDATA", Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
         SubmitBtn=findViewById(R.id.SubmitBtnStaffRoom);
         applicationController= (ApplicationController) getApplication();

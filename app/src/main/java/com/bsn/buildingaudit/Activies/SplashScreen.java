@@ -1,7 +1,9 @@
 package com.bsn.buildingaudit.Activies;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.res.Configuration;
@@ -21,6 +23,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bsn.buildingaudit.BuildConfig;
 import com.bsn.buildingaudit.MainActivity;
 import com.bsn.buildingaudit.R;
+import com.bsn.buildingaudit.Utils.DeviceUtils;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
@@ -39,6 +42,34 @@ TextView versionTxt;
     private static final int IMMEDIATE_APP_UPDATE_REQ_CODE = 124;
     ArrayAdapter<String> arrayAdapter;
     private static Dialog dialog;
+    @Override
+    protected void onResume() {
+        // TODO Auto-generated method stub
+        super.onResume();
+        if(DeviceUtils.isDeviceRooted()){
+            showAlertDialogAndExitApp("This device is rooted. You can't use this app.");
+        }
+    }
+
+    public void showAlertDialogAndExitApp(String message) {
+
+        AlertDialog alertDialog = new AlertDialog.Builder(SplashScreen.this).create();
+        alertDialog.setTitle("Alert");
+        alertDialog.setMessage(message);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        Intent intent = new Intent(Intent.ACTION_MAIN);
+                        intent.addCategory(Intent.CATEGORY_HOME);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+
+        alertDialog.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,10 +96,15 @@ TextView versionTxt;
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        if(DeviceUtils.isDeviceRooted()){
+                            showAlertDialogAndExitApp("This device is rooted. You can't use this app.");
+                        }else{
+                            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                            intent.putExtra("My_notification","2");
+                            startActivity(intent);
+                        }
 //                        showDialogForLang();
-                        Intent intent = new Intent(SplashScreen.this, MainActivity.class);
-                        intent.putExtra("My_notification","2");
-                        startActivity(intent);
+
                     }
                 }, 2000);
             }
@@ -133,6 +169,7 @@ TextView versionTxt;
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     finish();
                     dialog.dismiss();
+
                 }else{
                     String languageToLoad  = "en"; // your language code
                     Locale locale = new Locale(languageToLoad);
