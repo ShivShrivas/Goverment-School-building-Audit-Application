@@ -37,6 +37,7 @@ String blockid;
 String  schoolName;
 String schoolAddress;
 String phoneNumber;
+public  static  String bearertooken;
 int DataLocked;
 public  static List<AttendanceType> attendanceTypeList;
     public static HashMap<String, SimilarityClassifier.Recognition> registered = new HashMap<>(); //saved Faces
@@ -200,5 +201,13 @@ public  static List<AttendanceType> attendanceTypeList;
 
     public void setDiosLocalSchoolId(String diosLocalSchoolId) {
         DiosLocalSchoolId = diosLocalSchoolId;
+    }
+
+    public static String getBearertooken() {
+        return bearertooken;
+    }
+
+    public void setBearertooken(String bearertooken) {
+        this.bearertooken = bearertooken;
     }
 }

@@ -12,7 +12,6 @@ import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -72,32 +71,32 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d("TAG", "onStart: runn");
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("TAG", "onStop: runn");
+
 
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d("TAG", "onRestart: runn");
+
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        Log.d("TAG", "onPostResume: runnn");
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d("TAG", "onPause: runn");
+
     }
     public boolean isConnected() {
         boolean connected = false;
@@ -110,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             connected = (nInfo != null && nInfo.isAvailable() && nInfo.isConnected()) ||wifiManager.isWifiEnabled();
             return connected;
         } catch (Exception e) {
-            Log.e("Connectivity Exception", e.getMessage());
+
         }
         return connected;
     }
@@ -121,7 +120,8 @@ public class MainActivity extends AppCompatActivity {
         if (isConnected()==false){
             startActivity(new Intent(MainActivity.this, NoInternetConnection.class));
         }
-        dialog = new Dialog(this);
+        SslCertificateAuthority.setCustomCertificateAuthority(getApplication().getResources().openRawResource(R.raw.bsninfotech_org));
+                dialog = new Dialog(this);
 
         dialog.requestWindowFeature (Window.FEATURE_NO_TITLE);
         dialog.setContentView (R.layout.progress_dialog);
@@ -219,32 +219,34 @@ public class MainActivity extends AppCompatActivity {
                 dialog.show();
 
                 if (password.getText().toString().length()>0 && username.getText().length()>0){
-                    Log.d("TAG", "onClick: "+applicationController.getUsertype());
+
                     if (applicationController.getUsertype().equals("AA")){
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
-                        Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
-                        Call<List<JsonObject>> call=apiService.getLogin(paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
-                        call.enqueue(new Callback<List<JsonObject>>() {
+
+                        Call<JsonObject> call=apiService.getLogin(paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
+                        call.enqueue(new Callback<JsonObject>() {
                             @Override
-                            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                                Log.d("TAG", "onResponse: "+response.body());
-                                if (response.body().size()!=0){
+                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
+
+                                if (response.body().size()!=0 && response.code()==200){
                                     try {
-                                        if (response.body().get(0).get("pswd").getAsString().equals("0")){
+                                        if (response.body().get("pswd").getAsString().equals("0")){
                                             Toast.makeText(MainActivity.this, "Please Enter Correct Username And Password!!", Toast.LENGTH_SHORT).show();
                                             dialog.dismiss();
                                         }
                                     }catch (Exception e){
 
                                     }
-                                    if(response.body().get(0).get("userid")!=null) {
-                                        applicationController.setUserid(response.body().get(0).get("userid")==null?"":response.body().get(0).get("userid").getAsString());
-                                        applicationController.setUsername(response.body().get(0).get("username")==null?"":response.body().get(0).get("username").getAsString());
-                                        applicationController.setSchoolId(response.body().get(0).get("schoolid")==null?"":response.body().get(0).get("schoolid").getAsString());
-                                        applicationController.setBlockid(response.body().get(0).get("blockid")==null?"":response.body().get(0).get("blockid").getAsString());
-                                        applicationController.setDistid(response.body().get(0).get("distid")==null?"":response.body().get(0).get("distid").getAsString());
-                                        applicationController.setDivid(response.body().get(0).get("divid")==null?"":response.body().get(0).get("divid").getAsString());
+                                    if(response.body().get("status").getAsInt()!=0) {
+                                        applicationController.setBearertooken(response.body().get("token")==null?"":response.body().get("token").getAsString());
+                                        applicationController.setUserid(response.body().get("userId")==null?"":response.body().get("userId").getAsString());
+                                        applicationController.setUsername(response.body().get("userName")==null?"":response.body().get("userName").getAsString());
+                                        applicationController.setSchoolId(response.body().get("schoolId")==null?"":response.body().get("schoolId").getAsString());
+                                        applicationController.setBlockid(response.body().get("blockId")==null?"":response.body().get("blockId").getAsString());
+                                        applicationController.setDistid(response.body().get("distId")==null?"":response.body().get("distId").getAsString());
+                                        applicationController.setDivid(response.body().get("divId")==null?"":response.body().get("divId").getAsString());
                                         applicationController.setPeriodID("29");
                                         startActivity(new Intent(MainActivity.this, DIOS_Dashboard.class));
                                         finish();
@@ -252,15 +254,15 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                     else {
-                                        Toast.makeText(MainActivity.this, "Something went wrong!!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(MainActivity.this, "Please Check Your Login Id and Password!!", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
                                     }
                                 }
                             }
 
                             @Override
-                            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                                Log.d("TAG", "onFailure: "+t);
+                            public void onFailure(Call<JsonObject> call, Throwable t) {
+
                                 dialog.dismiss();
                                 Snackbar.make(loginLayout,"Restart App or Check your internet Connection", BaseTransientBottomBar.LENGTH_INDEFINITE)
                                         .setAction("Retry", new View.OnClickListener() {
@@ -277,25 +279,26 @@ public class MainActivity extends AppCompatActivity {
                     }else{
                         RestClient restClient=new RestClient();
                         ApiService apiService=restClient.getApiService();
-                        Log.d("TAG", "onClick: "+paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
-                        Call<List<JsonObject>> call=apiService.getLogin(paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
-                        call.enqueue(new Callback<List<JsonObject>>() {
+
+                        Call<JsonObject> call=apiService.getLogin(paraLogin(username.getText().toString(),applicationController.getUsertype(),password.getText().toString()));
+                        call.enqueue(new Callback<JsonObject>() {
                             @Override
-                            public void onResponse(Call<List<JsonObject>> call, Response<List<JsonObject>> response) {
-                                Log.d("TAG", "onResponse: "+response.body());
+                            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+
                                 if (response.body().size()!=0){
                                     try {
-                                        if (response.body().get(0).get("pswd").getAsString().equals("0")){
+                                        if (response.body().get("pswd").getAsString().equals("0")){
                                             Toast.makeText(MainActivity.this, "Please Enter Correct Username And Password!!", Toast.LENGTH_SHORT).show();
                                             dialog.dismiss();
                                         }
                                     }catch (Exception e){
 
                                     }
-                                    if(response.body().get(0).get("userid")!=null) {
-                                        applicationController.setUserid(response.body().get(0).get("userid").getAsString());
-                                        applicationController.setUsername(response.body().get(0).get("username").getAsString());
-                                        applicationController.setSchoolId(response.body().get(0).get("schoolid").getAsString());
+                                    if(response.body().get("token")!=null) {
+                                        applicationController.setBearertooken(response.body().get("token").getAsString());
+                                        applicationController.setUserid(response.body().get("userId").getAsString());
+                                        applicationController.setUsername(response.body().get("userName").getAsString());
+                                        applicationController.setSchoolId(response.body().get("schoolId").getAsString());
                                         applicationController.setPeriodID("26");
                                         getSchoolDetails();
 
@@ -308,8 +311,8 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onFailure(Call<List<JsonObject>> call, Throwable t) {
-                                Log.d("TAG", "onFailure: "+t);
+                            public void onFailure(Call<JsonObject> call, Throwable t) {
+
                                 dialog.dismiss();
                                 Snackbar.make(loginLayout,"Restart App or Check your internet Connection", BaseTransientBottomBar.LENGTH_INDEFINITE)
                                         .setAction("Retry", new View.OnClickListener() {
@@ -334,7 +337,7 @@ public class MainActivity extends AppCompatActivity {
     private void getSchoolDetails() {
         RestClient restClient=new RestClient();
         ApiService apiService=restClient.getApiService();
-        Log.d("TAG", "getSchoolDetails: "+paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
+
         Call<List<GetSchoolDetails>> call=apiService.getSchoolDetails(paraSchoolDetails("4",applicationController.getPeriodID(),applicationController.getSchoolId()));
         call.enqueue(new Callback<List<GetSchoolDetails>>() {
             @Override
@@ -342,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response != null && response.body().size()>=1) {
                     if (response.code() == 200 && response.body() != null) {
                         getSchoolDetails=response.body();
-                        Log.d("TAG", "onResponse: "+response.body());
+
                         applicationController.setSchoolName(getSchoolDetails.get(0).getSCHOOL_NAME());
                         applicationController.setSchoolAddress(getSchoolDetails.get(0).getADDRESS());
                         applicationController.setUsername(getSchoolDetails.get(0).getDESIGNATION());
@@ -445,10 +448,11 @@ public class MainActivity extends AppCompatActivity {
         RestClient restClient=new RestClient();
         ApiService service= restClient.getApiService();
         Call<List<GetUserType>> call=service.getUserType(paraGetActionObject("4"));
+
         call.enqueue(new Callback<List<GetUserType>>() {
             @Override
             public void onResponse(Call<List<GetUserType>> call, Response<List<GetUserType>> response) {
-                Log.d("TAG", "onResponse: "+response.body());
+
                 if (response != null || response.body().toString()!="null") {
                     if (response.code() == 200 && response.body() != null) {
 
@@ -495,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<GetUserType>> call, Throwable t) {
-                Log.d("TAG", "onFailure: "+t);
+
 
                 Snackbar.make(loginLayout,"Please check internet and restart you app!!",BaseTransientBottomBar.LENGTH_INDEFINITE)
                         .setAction("OK", new View.OnClickListener() {
